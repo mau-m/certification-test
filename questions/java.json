@@ -1,0 +1,2410 @@
+[
+  {
+    "id": "java-001",
+    "category": "java",
+    "topic": "JDK/JRE/JVM",
+    "question": "¿Qué herramienta compila código fuente Java (.java) a bytecode (.class)?",
+    "options": [
+      "java",
+      "javac",
+      "jshell",
+      "jlink"
+    ],
+    "correctIndex": 1,
+    "explanation": "javac es el compilador, parte del JDK. 'java' ejecuta bytecode, no lo compila."
+  },
+  {
+    "id": "java-002",
+    "category": "java",
+    "topic": "JDK/JRE/JVM",
+    "question": "¿Cuál de estos componentes ejecuta directamente el bytecode Java?",
+    "options": [
+      "El JDK",
+      "El JRE",
+      "La JVM",
+      "javac"
+    ],
+    "correctIndex": 2,
+    "explanation": "La JVM (Java Virtual Machine) es la que interpreta/compila el bytecode a código nativo en tiempo de ejecución."
+  },
+  {
+    "id": "java-003",
+    "category": "java",
+    "topic": "JDK/JRE/JVM",
+    "question": "¿Puede un JRE, por sí solo, compilar un archivo .java?",
+    "options": [
+      "Sí, siempre pudo",
+      "No, el JRE no incluye javac",
+      "Solo si se usa jshell",
+      "Solo en Java 21+"
+    ],
+    "correctIndex": 1,
+    "explanation": "El JRE trae la JVM y las librerías estándar para EJECUTAR programas, pero no el compilador javac (eso es del JDK)."
+  },
+  {
+    "id": "java-004",
+    "category": "java",
+    "topic": "JDK/JRE/JVM",
+    "question": "¿Qué relación describe mejor a JDK, JRE y JVM?",
+    "options": [
+      "Son tres nombres distintos para la misma cosa",
+      "JDK ⊃ JRE ⊃ JVM (el JDK incluye al JRE, que incluye a la JVM)",
+      "La JVM incluye al JDK",
+      "JRE y JDK son independientes entre sí"
+    ],
+    "correctIndex": 1,
+    "explanation": "El JDK contiene el JRE (para ejecutar) más herramientas de desarrollo (javac, jar, etc.); el JRE contiene la JVM más las librerías estándar."
+  },
+  {
+    "id": "java-005",
+    "category": "java",
+    "topic": "JDK/JRE/JVM",
+    "question": "¿Qué significa la frase 'write once, run anywhere' (WORA) aplicada a Java?",
+    "options": [
+      "Que el código fuente Java corre igual en cualquier IDE",
+      "Que el mismo bytecode compilado puede ejecutarse en cualquier plataforma que tenga una JVM",
+      "Que no hace falta instalar nada para ejecutar Java",
+      "Que Java no necesita compilarse"
+    ],
+    "correctIndex": 1,
+    "explanation": "El bytecode es portable: cualquier JVM (Windows, Linux, macOS) sabe interpretarlo, aunque internamente cada JVM esté compilada para su plataforma."
+  },
+  {
+    "id": "java-006",
+    "category": "java",
+    "topic": "JDK/JRE/JVM",
+    "question": "¿Cuál de las siguientes NO es una distribución/implementación de OpenJDK usada en la industria?",
+    "options": [
+      "Eclipse Temurin (Adoptium)",
+      "Amazon Corretto",
+      "Azul Zulu",
+      "Apache Tomcat"
+    ],
+    "correctIndex": 3,
+    "explanation": "Apache Tomcat es un servidor de aplicaciones (contenedor de servlets), no una distribución de JDK."
+  },
+  {
+    "id": "java-007",
+    "category": "java",
+    "topic": "JDK/JRE/JVM",
+    "question": "Desde Java 11, ¿qué cambió respecto a la distribución del JRE por parte de Oracle?",
+    "options": [
+      "Se volvió gratuito por primera vez",
+      "Oracle dejó de distribuir un JRE descargable por separado",
+      "El JRE pasó a incluir javac",
+      "Se eliminó por completo la JVM"
+    ],
+    "correctIndex": 1,
+    "explanation": "Desde Java 11 ya no hay un 'JRE' descargable independiente de Oracle; se usa jlink para generar runtimes a medida."
+  },
+  {
+    "id": "java-008",
+    "category": "java",
+    "topic": "Historia de versiones",
+    "question": "¿Qué versión de Java se considera el cambio más grande en la historia del lenguaje por introducir lambdas y Streams?",
+    "options": [
+      "Java 5",
+      "Java 7",
+      "Java 8",
+      "Java 11"
+    ],
+    "correctIndex": 2,
+    "explanation": "Java 8 (2014) introdujo lambdas, Streams, Optional y el nuevo API java.time — el salto más grande de la historia del lenguaje."
+  },
+  {
+    "id": "java-009",
+    "category": "java",
+    "topic": "Historia de versiones",
+    "question": "¿Qué característica NO se introdujo en Java 5?",
+    "options": [
+      "Generics",
+      "Enums",
+      "Autoboxing",
+      "Lambdas"
+    ],
+    "correctIndex": 3,
+    "explanation": "Las lambdas llegaron en Java 8. Java 5 introdujo generics, enums, anotaciones, autoboxing, enhanced for-loop y varargs."
+  },
+  {
+    "id": "java-010",
+    "category": "java",
+    "topic": "Historia de versiones",
+    "question": "Desde Java 9, ¿cada cuánto tiempo se lanza una nueva versión mayor del lenguaje?",
+    "options": [
+      "Cada año",
+      "Cada 6 meses",
+      "Cada 2 años",
+      "Sin fecha fija"
+    ],
+    "correctIndex": 1,
+    "explanation": "Desde Java 9, Oracle adoptó un ciclo de 6 meses (marzo y septiembre), con features que salen cuando están listas."
+  },
+  {
+    "id": "java-011",
+    "category": "java",
+    "topic": "Historia de versiones",
+    "question": "¿Qué significa que una versión de Java sea 'LTS' (Long-Term Support)?",
+    "options": [
+      "Que es la última versión disponible",
+      "Que recibe parches de seguridad por años, a diferencia de las versiones intermedias",
+      "Que solo se puede usar en LTS de Linux",
+      "Que no tiene nuevas features"
+    ],
+    "correctIndex": 1,
+    "explanation": "Las versiones LTS (8, 11, 17, 21...) reciben soporte y parches por años; las no-LTS solo hasta la siguiente versión (6 meses)."
+  },
+  {
+    "id": "java-012",
+    "category": "java",
+    "topic": "Historia de versiones",
+    "question": "¿Cuáles son, en orden, las versiones LTS clásicas de Java mencionadas como hitos hasta 2023?",
+    "options": [
+      "8, 9, 10, 11",
+      "8, 11, 17, 21",
+      "7, 9, 11, 13",
+      "6, 8, 10, 12"
+    ],
+    "correctIndex": 1,
+    "explanation": "Las LTS son 8, 11, 17 y 21 (y en adelante cada 2 años: 25, etc.)."
+  },
+  {
+    "id": "java-013",
+    "category": "java",
+    "topic": "Historia de versiones",
+    "question": "¿Qué feature estabilizó Java 21 que había estado en preview en versiones anteriores, permitiendo miles de hilos ligeros?",
+    "options": [
+      "Records",
+      "Sealed classes",
+      "Virtual threads (Project Loom)",
+      "Módulos (JPMS)"
+    ],
+    "correctIndex": 2,
+    "explanation": "Java 21 estabilizó los virtual threads de Project Loom, además del pattern matching completo para switch."
+  },
+  {
+    "id": "java-014",
+    "category": "java",
+    "topic": "Historia de versiones",
+    "question": "¿En qué versión se estabilizaron los records, las sealed classes y el pattern matching para instanceof?",
+    "options": [
+      "Java 8",
+      "Java 11",
+      "Java 17",
+      "Java 21"
+    ],
+    "correctIndex": 2,
+    "explanation": "Java 17 (LTS) marcó la estabilización de records, sealed classes y pattern matching para instanceof, tras haber sido preview desde Java 14-16."
+  },
+  {
+    "id": "java-015",
+    "category": "java",
+    "topic": "Historia de versiones",
+    "question": "¿Qué introdujo Java 10 como novedad principal?",
+    "options": [
+      "Records",
+      "Inferencia de tipo local con 'var'",
+      "Sistema de módulos",
+      "Virtual threads"
+    ],
+    "correctIndex": 1,
+    "explanation": "Java 10 introdujo 'var' para inferencia de tipo local en variables locales."
+  },
+  {
+    "id": "java-016",
+    "category": "java",
+    "topic": "JVM interna",
+    "question": "¿Qué componente de la JVM se encarga de leer y registrar las clases .class en memoria antes de usarlas?",
+    "options": [
+      "El Garbage Collector",
+      "El Class Loader",
+      "El JIT Compiler",
+      "El Verifier"
+    ],
+    "correctIndex": 1,
+    "explanation": "El Class Loader carga las clases de forma perezosa (lazy), la primera vez que se referencian."
+  },
+  {
+    "id": "java-017",
+    "category": "java",
+    "topic": "JVM interna",
+    "question": "¿Qué hace el JIT (Just-In-Time compiler)?",
+    "options": [
+      "Compila el código fuente .java a bytecode",
+      "Compila en tiempo real el bytecode más usado ('hot code') a código máquina nativo para acelerar la ejecución",
+      "Verifica la sintaxis del código fuente",
+      "Administra la memoria del heap"
+    ],
+    "correctIndex": 1,
+    "explanation": "El JIT detecta el código ejecutado frecuentemente y lo compila a código nativo en tiempo de ejecución, en vez de solo interpretarlo."
+  },
+  {
+    "id": "java-018",
+    "category": "java",
+    "topic": "JVM interna",
+    "question": "¿Por qué un programa Java típicamente 'arranca más lento pero corre rápido' con el tiempo?",
+    "options": [
+      "Porque el disco duro se calienta",
+      "Porque el JIT necesita tiempo para detectar y compilar el código más ejecutado a nativo",
+      "Porque la JVM se reinicia sola",
+      "Porque javac recompila en cada ejecución"
+    ],
+    "correctIndex": 1,
+    "explanation": "El intérprete ejecuta bytecode desde el inicio; el JIT compila a nativo las rutas 'calientes' según se van detectando, ganando velocidad progresivamente."
+  },
+  {
+    "id": "java-019",
+    "category": "java",
+    "topic": "JVM interna",
+    "question": "¿Qué verifica la JVM antes de ejecutar cualquier bytecode cargado?",
+    "options": [
+      "Que el código tenga comentarios",
+      "Que el bytecode sea válido y seguro (tipos correctos, sin accesos fuera de rango)",
+      "Que el archivo .java exista",
+      "Que el usuario tenga permisos de administrador"
+    ],
+    "correctIndex": 1,
+    "explanation": "La verificación de bytecode es una de las razones por las que Java es más resistente a corrupción de memoria que C/C++."
+  },
+  {
+    "id": "java-020",
+    "category": "java",
+    "topic": "JVM interna",
+    "question": "¿Cuándo se carga una clase en la JVM?",
+    "options": [
+      "Todas al iniciar el programa, sin excepción",
+      "De forma perezosa (lazy), la primera vez que se referencia realmente",
+      "Solo si se declara 'public'",
+      "Nunca, se interpretan directamente desde el .java"
+    ],
+    "correctIndex": 1,
+    "explanation": "El Class Loader carga las clases de forma perezosa: no se cargan hasta que el programa realmente las necesita."
+  },
+  {
+    "id": "java-021",
+    "category": "java",
+    "topic": "JVM interna",
+    "question": "¿Qué es el bytecode en el contexto de Java?",
+    "options": [
+      "Código máquina específico de Windows",
+      "Un conjunto de instrucciones portables e intermedias que genera javac, ejecutadas por la JVM",
+      "El código fuente .java sin comentarios",
+      "Un tipo de dato primitivo"
+    ],
+    "correctIndex": 1,
+    "explanation": "El bytecode no es código máquina de ningún procesador específico: es intermedio y portable, interpretado/compilado por la JVM."
+  },
+  {
+    "id": "java-022",
+    "category": "java",
+    "topic": "JVM interna",
+    "question": "¿Qué diferencia principal hay entre HotSpot, GraalVM y Eclipse OpenJ9?",
+    "options": [
+      "Ninguna, son el mismo producto con distinto nombre",
+      "Son implementaciones distintas de la especificación de la JVM",
+      "Solo GraalVM puede ejecutar bytecode Java",
+      "OpenJ9 no soporta Garbage Collection"
+    ],
+    "correctIndex": 1,
+    "explanation": "La JVM es una especificación; HotSpot (Oracle/OpenJDK), GraalVM y OpenJ9 son implementaciones distintas de esa misma especificación."
+  },
+  {
+    "id": "java-023",
+    "category": "java",
+    "topic": "JVM interna",
+    "question": "Un programa Java compilado en Linux, ¿puede ejecutarse sin recompilar en Windows?",
+    "options": [
+      "No, hay que recompilar en cada sistema operativo",
+      "Sí, siempre que exista una JVM instalada en Windows capaz de interpretar ese bytecode",
+      "Solo si se usa la misma versión exacta de Windows",
+      "Solo con Java 8"
+    ],
+    "correctIndex": 1,
+    "explanation": "Esa es la esencia de WORA: el .class es portable entre JVMs de distintos sistemas operativos."
+  },
+  {
+    "id": "java-024",
+    "category": "java",
+    "topic": "Memoria y GC",
+    "question": "¿Qué zona de memoria de la JVM guarda las variables locales primitivas y las referencias a objetos?",
+    "options": [
+      "El Heap",
+      "El Stack",
+      "El Metaspace",
+      "El Method Area compartido"
+    ],
+    "correctIndex": 1,
+    "explanation": "Cada hilo tiene su propio Stack, donde viven las variables locales primitivas y las referencias (no los objetos en sí)."
+  },
+  {
+    "id": "java-025",
+    "category": "java",
+    "topic": "Memoria y GC",
+    "question": "¿Dónde vive el objeto real creado con 'new Estudiante(...)'?",
+    "options": [
+      "En el Stack",
+      "En el Heap",
+      "En el Metaspace",
+      "En el registro del CPU"
+    ],
+    "correctIndex": 1,
+    "explanation": "Los objetos (instancias, arrays, el contenido de un String) viven en el Heap, compartido entre todos los hilos."
+  },
+  {
+    "id": "java-026",
+    "category": "java",
+    "topic": "Memoria y GC",
+    "question": "¿Qué causa típicamente un StackOverflowError?",
+    "options": [
+      "Un heap demasiado pequeño",
+      "Una recursión sin caso base (o incorrecto) que apila stack frames indefinidamente",
+      "Un archivo muy grande al leerlo",
+      "Una consulta SQL sin WHERE"
+    ],
+    "correctIndex": 1,
+    "explanation": "Cada llamada a método crea un stack frame nuevo; sin un caso base que la detenga, la recursión agota el stack del hilo."
+  },
+  {
+    "id": "java-027",
+    "category": "java",
+    "topic": "Memoria y GC",
+    "question": "¿Qué hace el Garbage Collector en Java?",
+    "options": [
+      "Compila el bytecode a código nativo",
+      "Libera automáticamente la memoria de objetos del Heap que ya nadie referencia",
+      "Verifica la sintaxis del código",
+      "Gestiona las conexiones de red"
+    ],
+    "correctIndex": 1,
+    "explanation": "A diferencia de C/C++, Java no requiere liberar memoria manualmente (free()/delete); el GC lo hace automáticamente."
+  },
+  {
+    "id": "java-028",
+    "category": "java",
+    "topic": "Memoria y GC",
+    "question": "¿Qué le ocurre a un stack frame cuando el método que lo creó retorna?",
+    "options": [
+      "Se mueve al Heap",
+      "Se destruye automáticamente, liberando sus variables locales",
+      "Permanece indefinidamente en el Stack",
+      "Se convierte en un objeto"
+    ],
+    "correctIndex": 1,
+    "explanation": "Los stack frames se destruyen automáticamente al retornar del método — es una liberación rápida y determinista, a diferencia del Heap."
+  },
+  {
+    "id": "java-029",
+    "category": "java",
+    "topic": "Memoria y GC",
+    "question": "Si un objeto del Heap ya no tiene ninguna referencia apuntándole, ¿qué ocurre?",
+    "options": [
+      "Sigue ocupando memoria para siempre",
+      "Queda elegible para ser recolectado por el Garbage Collector",
+      "Se copia automáticamente al Stack",
+      "Lanza una excepción inmediatamente"
+    ],
+    "correctIndex": 1,
+    "explanation": "Un objeto sin referencias vivas es 'basura' y el GC lo recolectará en algún momento futuro, liberando esa memoria."
+  },
+  {
+    "id": "java-030",
+    "category": "java",
+    "topic": "Memoria y GC",
+    "question": "¿Qué tienen en común OutOfMemoryError y StackOverflowError?",
+    "options": [
+      "Ambos son excepciones checked",
+      "Ambos son subclases de Error, no de Exception",
+      "Ambos ocurren solo en tiempo de compilación",
+      "Ambos se deben siempre a bugs de sintaxis"
+    ],
+    "correctIndex": 1,
+    "explanation": "Ambos extienden java.lang.Error: representan problemas graves del entorno/JVM, no errores de lógica de negocio recuperables normalmente."
+  },
+  {
+    "id": "java-031",
+    "category": "java",
+    "topic": "Tipos de datos",
+    "question": "¿Cuál es el resultado de 'int r = 7 / 2;' en Java?",
+    "options": [
+      "3.5",
+      "3",
+      "4",
+      "Error de compilación"
+    ],
+    "correctIndex": 1,
+    "explanation": "Con ambos operandos int, la división es entera y trunca el decimal: 7 / 2 = 3."
+  },
+  {
+    "id": "java-032",
+    "category": "java",
+    "topic": "Tipos de datos",
+    "question": "¿Cuál es el resultado de 'double r = 7 / 2;' en Java?",
+    "options": [
+      "3.5",
+      "3.0",
+      "4.0",
+      "Error de compilación"
+    ],
+    "correctIndex": 1,
+    "explanation": "'7 / 2' se evalúa PRIMERO como división entera (3), y luego ese 3 se convierte a double (3.0) al asignarse — no da 3.5."
+  },
+  {
+    "id": "java-033",
+    "category": "java",
+    "topic": "Tipos de datos",
+    "question": "¿Cómo se obtiene correctamente 3.5 al dividir dos enteros a=7, b=2?",
+    "options": [
+      "(double) a / b",
+      "a / (double) b",
+      "(double) (a / b)",
+      "Tanto la opción A como la B son correctas"
+    ],
+    "correctIndex": 3,
+    "explanation": "Convertir cualquiera de los dos operandos a double ANTES de la división evita el truncamiento entero; convertir el resultado ya truncado (opción C) no sirve."
+  },
+  {
+    "id": "java-034",
+    "category": "java",
+    "topic": "Tipos de datos",
+    "question": "¿Qué imprime 'System.out.println(10 % 3);'?",
+    "options": [
+      "3",
+      "1",
+      "3.33",
+      "0"
+    ],
+    "correctIndex": 1,
+    "explanation": "% es el operador módulo (resto): 10 dividido 3 da 3 con resto 1."
+  },
+  {
+    "id": "java-035",
+    "category": "java",
+    "topic": "Tipos de datos",
+    "question": "¿Cuál de estos NO es un tipo primitivo en Java?",
+    "options": [
+      "int",
+      "boolean",
+      "String",
+      "char"
+    ],
+    "correctIndex": 2,
+    "explanation": "String es una clase (tipo referencia), no un tipo primitivo — a diferencia de int, boolean, char, double, etc."
+  },
+  {
+    "id": "java-036",
+    "category": "java",
+    "topic": "Tipos de datos",
+    "question": "¿Qué ocurre al ejecutar 'int x = 2147483647; x = x + 1;' (el máximo valor de int)?",
+    "options": [
+      "Lanza una excepción ArithmeticException",
+      "x se desborda (overflow) y pasa a ser un número negativo (-2147483648)",
+      "El compilador lo rechaza",
+      "x queda en 2147483647 sin cambiar"
+    ],
+    "correctIndex": 1,
+    "explanation": "Los enteros en Java hacen overflow silenciosamente (aritmética modular), sin lanzar excepción: el máximo +1 se convierte en el mínimo negativo."
+  },
+  {
+    "id": "java-037",
+    "category": "java",
+    "topic": "Tipos de datos",
+    "question": "¿Por qué se recomienda BigDecimal en vez de double para cálculos monetarios?",
+    "options": [
+      "Porque double no puede almacenar números negativos",
+      "Porque double usa representación binaria de punto flotante, que introduce errores de redondeo en decimales exactos",
+      "Porque BigDecimal es más rápido",
+      "Porque double no soporta más de 2 decimales"
+    ],
+    "correctIndex": 1,
+    "explanation": "Los double no pueden representar exactamente muchos decimales (ej. 0.1), acumulando errores de redondeo — crítico en dinero."
+  },
+  {
+    "id": "java-038",
+    "category": "java",
+    "topic": "Tipos de datos",
+    "question": "¿Qué es el 'autoboxing' en Java?",
+    "options": [
+      "La conversión automática entre un tipo primitivo y su clase wrapper (ej. int a Integer)",
+      "La conversión automática de String a int",
+      "Un tipo de excepción",
+      "Un patrón de diseño estructural"
+    ],
+    "correctIndex": 0,
+    "explanation": "Autoboxing convierte automáticamente, por ejemplo, un 'int' en un 'Integer' cuando se necesita un objeto (ej. en una colección genérica)."
+  },
+  {
+    "id": "java-039",
+    "category": "java",
+    "topic": "Tipos de datos",
+    "question": "¿Qué imprime 'char c = 'A'; System.out.println((int) c);'?",
+    "options": [
+      "A",
+      "65",
+      "Error de compilación",
+      "0"
+    ],
+    "correctIndex": 1,
+    "explanation": "El char 'A' corresponde al código Unicode/ASCII 65; el cast (int) convierte el carácter a su valor numérico."
+  },
+  {
+    "id": "java-040",
+    "category": "java",
+    "topic": "Tipos de datos",
+    "question": "¿Qué palabra reservada convierte explícitamente un tipo de dato a otro en Java?",
+    "options": [
+      "convert",
+      "as",
+      "un cast entre paréntesis, ej. (double) x",
+      "transform"
+    ],
+    "correctIndex": 2,
+    "explanation": "Java usa la sintaxis de cast: (tipoDestino) expresión, ej. (double) x, (int) y."
+  },
+  {
+    "id": "java-041",
+    "category": "java",
+    "topic": "POO: clases e interfaces",
+    "question": "¿Cuántas clases puede extender directamente una clase en Java (herencia simple)?",
+    "options": [
+      "Ninguna",
+      "Una sola",
+      "Hasta dos",
+      "Tantas como interfaces implemente"
+    ],
+    "correctIndex": 1,
+    "explanation": "Java solo permite herencia simple de clases (extends una sola clase), aunque una clase puede implementar varias interfaces."
+  },
+  {
+    "id": "java-042",
+    "category": "java",
+    "topic": "POO: clases e interfaces",
+    "question": "¿Qué diferencia principal hay entre una clase abstracta y una interfaz (desde Java 8)?",
+    "options": [
+      "Las interfaces nunca pueden tener métodos con cuerpo",
+      "Una clase abstracta puede tener estado (campos) y constructor; una interfaz no puede tener campos de instancia ni constructor",
+      "Las clases abstractas no pueden tener métodos abstractos",
+      "No hay ninguna diferencia real"
+    ],
+    "correctIndex": 1,
+    "explanation": "Una clase abstracta modela un 'es-un' con estado compartido; una interfaz modela un contrato/capacidad, sin estado propio ni constructor."
+  },
+  {
+    "id": "java-043",
+    "category": "java",
+    "topic": "POO: clases e interfaces",
+    "question": "¿Qué palabra clave usa una clase para declarar que implementa una interfaz?",
+    "options": [
+      "extends",
+      "implements",
+      "inherits",
+      "uses"
+    ],
+    "correctIndex": 1,
+    "explanation": "'implements' se usa para interfaces; 'extends' se usa para heredar de una clase (o para que una interfaz extienda otra interfaz)."
+  },
+  {
+    "id": "java-044",
+    "category": "java",
+    "topic": "POO: clases e interfaces",
+    "question": "¿Qué tipo de método permite que una interfaz tenga un método con cuerpo, desde Java 8?",
+    "options": [
+      "abstract",
+      "default",
+      "final",
+      "static void"
+    ],
+    "correctIndex": 1,
+    "explanation": "Los métodos 'default' en interfaces (desde Java 8) permiten proveer una implementación por defecto sin romper a las clases que ya la implementaban."
+  },
+  {
+    "id": "java-045",
+    "category": "java",
+    "topic": "POO: clases e interfaces",
+    "question": "¿Qué es 'dynamic dispatch' (despacho dinámico) en el contexto del polimorfismo?",
+    "options": [
+      "Que el compilador decide en compilación qué método sobrecargado llamar",
+      "Que la JVM decide en tiempo de ejecución qué versión sobrescrita (@Override) de un método ejecutar, según el tipo real del objeto",
+      "Un mecanismo de red para distribuir carga",
+      "Una técnica de recolección de basura"
+    ],
+    "correctIndex": 1,
+    "explanation": "El despacho dinámico decide en EJECUCIÓN, según el objeto real (no la variable declarada), qué versión sobrescrita del método se invoca."
+  },
+  {
+    "id": "java-046",
+    "category": "java",
+    "topic": "POO: clases e interfaces",
+    "question": "Dado 'Figura f = new Circulo(3.0);' donde Circulo sobrescribe calcularArea(), ¿qué versión de calcularArea() se ejecuta al llamar f.calcularArea()?",
+    "options": [
+      "La de Figura, porque la variable es de tipo Figura",
+      "La de Circulo, porque el objeto real es un Circulo (dynamic dispatch)",
+      "Ninguna, produce un error de compilación",
+      "Depende del orden de declaración"
+    ],
+    "correctIndex": 1,
+    "explanation": "Aunque la variable esté declarada como Figura, la JVM ejecuta la versión sobrescrita del tipo REAL del objeto: Circulo."
+  },
+  {
+    "id": "java-047",
+    "category": "java",
+    "topic": "POO: clases e interfaces",
+    "question": "¿Qué es la sobrecarga de métodos (overloading)?",
+    "options": [
+      "Redefinir en una subclase el comportamiento de un método heredado",
+      "Definir varios métodos con el mismo nombre pero distinta lista de parámetros en la misma clase",
+      "Declarar un método como 'final'",
+      "Usar el mismo nombre de variable en dos métodos distintos"
+    ],
+    "correctIndex": 1,
+    "explanation": "El overloading (sobrecarga) es polimorfismo en TIEMPO DE COMPILACIÓN: mismo nombre, distinta firma de parámetros, decidido por el compilador."
+  },
+  {
+    "id": "java-048",
+    "category": "java",
+    "topic": "POO: clases e interfaces",
+    "question": "¿Qué significa @Override en Java?",
+    "options": [
+      "Que el método es privado",
+      "Una anotación que indica que el método sobrescribe uno heredado, permitiendo que el compilador verifique la firma",
+      "Que el método no puede lanzar excepciones",
+      "Que el método es estático"
+    ],
+    "correctIndex": 1,
+    "explanation": "@Override no es obligatoria mecánicamente, pero permite que el compilador detecte errores (ej. una firma mal escrita que no sobrescribe nada realmente)."
+  },
+  {
+    "id": "java-049",
+    "category": "java",
+    "topic": "POO: clases e interfaces",
+    "question": "¿Puede una interfaz en Java (desde Java 8) tener métodos estáticos?",
+    "options": [
+      "No, nunca",
+      "Sí, con la palabra clave 'static'",
+      "Solo si la interfaz no tiene otros métodos",
+      "Solo en clases abstractas, no en interfaces"
+    ],
+    "correctIndex": 1,
+    "explanation": "Desde Java 8, las interfaces pueden tener métodos 'static' (utilitarios, invocados sobre la interfaz misma) además de 'default'."
+  },
+  {
+    "id": "java-050",
+    "category": "java",
+    "topic": "POO: clases e interfaces",
+    "question": "¿Qué error de diseño describe mejor 'una subclase que sobrescribe un método heredado solo para lanzar UnsupportedOperationException'?",
+    "options": [
+      "Cumple perfectamente con la herencia",
+      "Es una señal típica de violación del Liskov Substitution Principle (LSP)",
+      "Es obligatorio en Java para todo @Override",
+      "Es la forma correcta de deshabilitar un método heredado"
+    ],
+    "correctIndex": 1,
+    "explanation": "Si la subclase no puede cumplir el contrato del método heredado, probablemente no debería ser subclase de esa jerarquía (viola LSP)."
+  },
+  {
+    "id": "java-051",
+    "category": "java",
+    "topic": "Encapsulación y modificadores",
+    "question": "¿Cuál es el modificador de acceso MÁS restrictivo en Java?",
+    "options": [
+      "public",
+      "protected",
+      "private",
+      "el paquete por defecto (sin modificador)"
+    ],
+    "correctIndex": 2,
+    "explanation": "private solo permite acceso desde dentro de la misma clase; es el más restrictivo de los 4 niveles."
+  },
+  {
+    "id": "java-052",
+    "category": "java",
+    "topic": "Encapsulación y modificadores",
+    "question": "¿Qué nivel de acceso tiene un miembro declarado SIN ningún modificador explícito?",
+    "options": [
+      "public",
+      "private",
+      "protected",
+      "acceso de paquete (package-private): visible solo dentro del mismo paquete"
+    ],
+    "correctIndex": 3,
+    "explanation": "La ausencia de modificador implica visibilidad de paquete: accesible desde cualquier clase del mismo paquete, pero no desde fuera."
+  },
+  {
+    "id": "java-053",
+    "category": "java",
+    "topic": "Encapsulación y modificadores",
+    "question": "¿Por qué se considera mala práctica declarar todos los campos como 'public' con getters/setters triviales sin validación?",
+    "options": [
+      "Porque Java no permite compilar así",
+      "Porque no aporta encapsulación real: cualquiera puede poner el objeto en un estado inválido sin control",
+      "Porque hace el código más rápido",
+      "No es mala práctica, es el estándar recomendado"
+    ],
+    "correctIndex": 1,
+    "explanation": "La encapsulación real no es solo 'usar getters/setters' — requiere que los setters validen invariantes (ej. rechazar un promedio fuera de 0-10)."
+  },
+  {
+    "id": "java-054",
+    "category": "java",
+    "topic": "Encapsulación y modificadores",
+    "question": "¿Qué significa que un campo sea 'protected'?",
+    "options": [
+      "Solo accesible dentro de la misma clase",
+      "Accesible desde el mismo paquete Y desde subclases en otros paquetes",
+      "Accesible desde cualquier parte del programa",
+      "Solo accesible desde métodos static"
+    ],
+    "correctIndex": 1,
+    "explanation": "protected amplía el acceso de paquete para incluir también a las subclases, aunque estén en otro paquete."
+  },
+  {
+    "id": "java-055",
+    "category": "java",
+    "topic": "Encapsulación y modificadores",
+    "question": "¿Qué palabra clave impide que una clase sea heredada (extendida)?",
+    "options": [
+      "static",
+      "final",
+      "private",
+      "sealed (únicamente)"
+    ],
+    "correctIndex": 1,
+    "explanation": "'final' aplicada a una clase impide que otra clase la extienda; aplicada a un método impide que se sobrescriba."
+  },
+  {
+    "id": "java-056",
+    "category": "java",
+    "topic": "Encapsulación y modificadores",
+    "question": "¿Para qué sirve 'this' dentro de un constructor como 'this.nombre = nombre;'?",
+    "options": [
+      "Para llamar al constructor de la superclase",
+      "Para distinguir el campo de instancia del parámetro que tiene el mismo nombre",
+      "Para declarar una variable estática",
+      "Para lanzar una excepción"
+    ],
+    "correctIndex": 1,
+    "explanation": "Cuando el parámetro tiene el mismo nombre que el campo, 'this.nombre' se refiere explícitamente al campo de la instancia, no al parámetro."
+  },
+  {
+    "id": "java-057",
+    "category": "java",
+    "topic": "Encapsulación y modificadores",
+    "question": "¿Qué instrucción se usa en un constructor de subclase para invocar el constructor de la superclase?",
+    "options": [
+      "this(...)",
+      "super(...)",
+      "extends(...)",
+      "base(...)"
+    ],
+    "correctIndex": 1,
+    "explanation": "super(...) invoca el constructor de la clase padre; debe ser la primera instrucción del constructor de la subclase si se usa."
+  },
+  {
+    "id": "java-058",
+    "category": "java",
+    "topic": "Java 8",
+    "question": "¿Qué es una expresión lambda en Java?",
+    "options": [
+      "Una anotación especial",
+      "Una forma compacta de escribir una implementación de una interfaz funcional (un solo método abstracto)",
+      "Un nuevo tipo primitivo",
+      "Un tipo de excepción checked"
+    ],
+    "correctIndex": 1,
+    "explanation": "Las lambdas son azúcar sintáctico para implementar interfaces funcionales (como Runnable, Comparator, o las de java.util.function) sin una clase anónima verbosa."
+  },
+  {
+    "id": "java-059",
+    "category": "java",
+    "topic": "Java 8",
+    "question": "¿Qué método de Stream transforma cada elemento aplicando una función, produciendo un nuevo Stream?",
+    "options": [
+      "filter",
+      "map",
+      "reduce",
+      "forEach"
+    ],
+    "correctIndex": 1,
+    "explanation": "map() aplica una función a cada elemento y devuelve un nuevo Stream con los resultados transformados."
+  },
+  {
+    "id": "java-060",
+    "category": "java",
+    "topic": "Java 8",
+    "question": "¿Qué método de Stream selecciona solo los elementos que cumplen una condición?",
+    "options": [
+      "map",
+      "filter",
+      "sorted",
+      "collect"
+    ],
+    "correctIndex": 1,
+    "explanation": "filter() recibe un Predicate y conserva únicamente los elementos que lo cumplen (devuelve true)."
+  },
+  {
+    "id": "java-061",
+    "category": "java",
+    "topic": "Java 8",
+    "question": "¿Qué produce 'lista.stream().collect(Collectors.toList())'?",
+    "options": [
+      "Un array",
+      "Una nueva List con los elementos del stream",
+      "Un Optional",
+      "Un Map"
+    ],
+    "correctIndex": 1,
+    "explanation": "Collectors.toList() es una operación terminal que acumula los elementos del stream en una nueva List."
+  },
+  {
+    "id": "java-062",
+    "category": "java",
+    "topic": "Java 8",
+    "question": "¿Para qué se introdujo la clase Optional<T> en Java 8?",
+    "options": [
+      "Para reemplazar por completo a las excepciones",
+      "Para representar explícitamente la posible ausencia de un valor, evitando NullPointerException accidentales",
+      "Para acelerar el rendimiento de los streams",
+      "Para reemplazar a los arrays"
+    ],
+    "correctIndex": 1,
+    "explanation": "Optional obliga al código llamador a considerar explícitamente el caso 'sin valor', en vez de arriesgarse a un NullPointerException silencioso."
+  },
+  {
+    "id": "java-063",
+    "category": "java",
+    "topic": "Java 8",
+    "question": "¿Qué método de Optional devuelve el valor si existe, o un valor por defecto si está vacío?",
+    "options": [
+      "get()",
+      "orElse(valorPorDefecto)",
+      "isPresent()",
+      "of(valor)"
+    ],
+    "correctIndex": 1,
+    "explanation": "orElse(valorPorDefecto) devuelve el valor contenido si existe, o el valor por defecto indicado si el Optional está vacío."
+  },
+  {
+    "id": "java-064",
+    "category": "java",
+    "topic": "Java 8",
+    "question": "¿Qué paquete introdujo Java 8 para reemplazar a las antiguas Date/Calendar, mucho más consistente e inmutable?",
+    "options": [
+      "java.util.time",
+      "java.time",
+      "java.date",
+      "java.util.date8"
+    ],
+    "correctIndex": 1,
+    "explanation": "java.time (con clases como LocalDate, LocalDateTime, Instant) reemplazó a la problemática API antigua de Date/Calendar."
+  },
+  {
+    "id": "java-065",
+    "category": "java",
+    "topic": "Java 8",
+    "question": "¿Cuál de estas es una operación TERMINAL de un Stream (dispara la ejecución de toda la cadena)?",
+    "options": [
+      "map",
+      "filter",
+      "collect",
+      "sorted"
+    ],
+    "correctIndex": 2,
+    "explanation": "collect() es una operación terminal; map, filter y sorted son operaciones intermedias (lazy, no se ejecutan hasta que hay una terminal)."
+  },
+  {
+    "id": "java-066",
+    "category": "java",
+    "topic": "Java 8",
+    "question": "¿Qué característica tienen las operaciones intermedias de un Stream como map() o filter()?",
+    "options": [
+      "Se ejecutan inmediatamente al llamarlas",
+      "Son perezosas (lazy): no hacen nada hasta que se invoca una operación terminal",
+      "Modifican la colección original",
+      "Solo pueden usarse una vez por programa"
+    ],
+    "correctIndex": 1,
+    "explanation": "Las operaciones intermedias construyen una 'receta' que solo se ejecuta cuando aparece una operación terminal como collect(), forEach() o reduce()."
+  },
+  {
+    "id": "java-067",
+    "category": "java",
+    "topic": "Java 8",
+    "question": "¿Qué interfaz funcional de java.util.function representa una función que recibe un argumento y devuelve un boolean?",
+    "options": [
+      "Function<T,R>",
+      "Supplier<T>",
+      "Predicate<T>",
+      "Consumer<T>"
+    ],
+    "correctIndex": 2,
+    "explanation": "Predicate<T> tiene un método test(T t) que devuelve boolean — se usa típicamente en filter()."
+  },
+  {
+    "id": "java-068",
+    "category": "java",
+    "topic": "Java 8",
+    "question": "¿Qué hace 'lista.stream().reduce(0, (a, b) -> a + b)'?",
+    "options": [
+      "Filtra los elementos mayores que 0",
+      "Suma todos los elementos del stream, empezando desde 0",
+      "Ordena la lista",
+      "Elimina duplicados"
+    ],
+    "correctIndex": 1,
+    "explanation": "reduce() combina los elementos usando la función dada, acumulando desde el valor inicial (0) — en este caso, una suma."
+  },
+  {
+    "id": "java-069",
+    "category": "java",
+    "topic": "Java 8",
+    "question": "¿Qué interfaz de método permite a una interfaz proveer una implementación de método SIN cuerpo obligatorio para las clases que la implementan?",
+    "options": [
+      "abstract (obligatorio implementar)",
+      "default (opcional sobrescribir)",
+      "static",
+      "private"
+    ],
+    "correctIndex": 1,
+    "explanation": "Un método 'default' en una interfaz ya trae implementación; las clases implementadoras pueden usarla tal cual o sobrescribirla."
+  },
+  {
+    "id": "java-070",
+    "category": "java",
+    "topic": "Java 9-11",
+    "question": "¿Qué sistema introdujo Java 9 para dividir la plataforma en módulos (Project Jigsaw)?",
+    "options": [
+      "Maven",
+      "JPMS (Java Platform Module System)",
+      "Gradle",
+      "JNDI"
+    ],
+    "correctIndex": 1,
+    "explanation": "JPMS permite declarar módulos explícitos con 'module-info.java', mejorando encapsulación a nivel de plataforma."
+  },
+  {
+    "id": "java-071",
+    "category": "java",
+    "topic": "Java 9-11",
+    "question": "¿Qué permite hacer 'var' desde Java 10?",
+    "options": [
+      "Declarar una variable sin especificar su tipo explícito, que el compilador infiere del valor asignado",
+      "Declarar una variable que puede cambiar de tipo en tiempo de ejecución",
+      "Crear variables globales",
+      "Evitar la inicialización de variables"
+    ],
+    "correctIndex": 0,
+    "explanation": "'var' es inferencia de tipo en tiempo de COMPILACIÓN (Java sigue siendo fuertemente tipado) — no es un tipo dinámico como en JavaScript/Python."
+  },
+  {
+    "id": "java-072",
+    "category": "java",
+    "topic": "Java 9-11",
+    "question": "¿Qué herramienta interactiva (REPL) introdujo Java 9 para probar código Java línea por línea?",
+    "options": [
+      "jlink",
+      "jshell",
+      "javac -i",
+      "jdb"
+    ],
+    "correctIndex": 1,
+    "explanation": "jshell permite ejecutar expresiones y sentencias Java de forma interactiva, sin crear un proyecto completo."
+  },
+  {
+    "id": "java-073",
+    "category": "java",
+    "topic": "Java 9-11",
+    "question": "¿Qué API estándar (sin librerías externas) se agregó en Java 11 para hacer peticiones HTTP?",
+    "options": [
+      "java.net.http.HttpClient",
+      "java.io.HttpConnection",
+      "javax.ws.rs.Client",
+      "org.apache.http.HttpClient"
+    ],
+    "correctIndex": 0,
+    "explanation": "Java 11 estandarizó HttpClient en java.net.http, reemplazando la necesidad de librerías externas para casos simples."
+  },
+  {
+    "id": "java-074",
+    "category": "java",
+    "topic": "Java 9-11",
+    "question": "¿Qué permite hacer Java 11 respecto a ejecutar un archivo .java sin compilación explícita previa?",
+    "options": [
+      "Nada nuevo, siempre se pudo",
+      "Ejecutar directamente 'java MiClase.java' sin invocar javac por separado, para scripts de un solo archivo",
+      "Compilar automáticamente todo un proyecto Maven",
+      "Ejecutar código Python embebido"
+    ],
+    "correctIndex": 1,
+    "explanation": "Java 11 permite lanzar directamente un archivo fuente de un solo .java con 'java Archivo.java', útil para scripts rápidos."
+  },
+  {
+    "id": "java-075",
+    "category": "java",
+    "topic": "Java 17",
+    "question": "¿Qué son los 'records' introducidos (estables) en Java 17?",
+    "options": [
+      "Una forma de guardar logs",
+      "Una forma compacta de declarar clases inmutables de solo datos, generando automáticamente constructor, getters, equals/hashCode y toString",
+      "Un nuevo tipo de colección",
+      "Un reemplazo de las interfaces"
+    ],
+    "correctIndex": 1,
+    "explanation": "Un record como 'record Punto(int x, int y) {}' genera automáticamente el boilerplate típico de una clase de datos inmutable."
+  },
+  {
+    "id": "java-076",
+    "category": "java",
+    "topic": "Java 17",
+    "question": "¿Qué controlan las 'sealed classes' introducidas en Java 17?",
+    "options": [
+      "El acceso a internet de la clase",
+      "Qué clases específicas pueden extender o implementar un tipo, mediante la cláusula 'permits'",
+      "El tamaño máximo del heap",
+      "La cantidad de hilos concurrentes"
+    ],
+    "correctIndex": 1,
+    "explanation": "Una clase/interfaz 'sealed' declara explícitamente (con 'permits') qué subtipos están autorizados a extenderla — útil para jerarquías cerradas y exhaustivas."
+  },
+  {
+    "id": "java-077",
+    "category": "java",
+    "topic": "Java 17",
+    "question": "¿Qué permite hacer el pattern matching para 'instanceof' (estable desde Java 16/17)?",
+    "options": [
+      "Verificar el tipo Y hacer el cast automáticamente en una sola expresión: 'if (obj instanceof String s)'",
+      "Reemplazar por completo al operador '=='",
+      "Ejecutar código en paralelo automáticamente",
+      "Evitar el uso de excepciones"
+    ],
+    "correctIndex": 0,
+    "explanation": "'if (obj instanceof String s)' verifica el tipo y, si es verdadero, ya deja disponible la variable 's' con el cast hecho, sin cast manual adicional."
+  },
+  {
+    "id": "java-078",
+    "category": "java",
+    "topic": "Java 17",
+    "question": "¿Qué relación tienen las 'sealed classes' con el principio Open/Closed (OCP) de SOLID?",
+    "options": [
+      "Ninguna relación",
+      "Las sealed classes van deliberadamente en contra de OCP puro: agregar un subtipo nuevo obliga a revisar los switch exhaustivos existentes",
+      "Las sealed classes son la implementación exacta de OCP",
+      "OCP prohíbe usar sealed classes"
+    ],
+    "correctIndex": 1,
+    "explanation": "Es una tensión consciente: se cambia 'cerrado a modificación' por la garantía del compilador de que ningún caso se olvida — útil cuando el conjunto de variantes es conceptualmente fijo."
+  },
+  {
+    "id": "java-079",
+    "category": "java",
+    "topic": "Java 17",
+    "question": "¿Un record puede tener métodos adicionales además de los generados automáticamente?",
+    "options": [
+      "No, un record solo puede tener los campos declarados",
+      "Sí, puede declarar métodos propios, incluyendo validación en un constructor compacto",
+      "Solo métodos static",
+      "Solo si implementa Serializable"
+    ],
+    "correctIndex": 1,
+    "explanation": "Los records permiten agregar métodos y hasta un constructor compacto para validar invariantes al construirse."
+  },
+  {
+    "id": "java-080",
+    "category": "java",
+    "topic": "Java 17",
+    "question": "¿Qué palabra clave usa una clase sealed para declarar qué subtipos están permitidos?",
+    "options": [
+      "allows",
+      "extends only",
+      "permits",
+      "restricted to"
+    ],
+    "correctIndex": 2,
+    "explanation": "La sintaxis es 'sealed class Figura permits Circulo, Cuadrado { ... }'."
+  },
+  {
+    "id": "java-081",
+    "category": "java",
+    "topic": "Java 17",
+    "question": "¿Son los campos de un record modificables (mutables) después de construido?",
+    "options": [
+      "Sí, con setters generados automáticamente",
+      "No, los campos de un record son implícitamente 'final' — son inmutables",
+      "Solo si se declara 'mutable'",
+      "Depende del tipo de dato"
+    ],
+    "correctIndex": 1,
+    "explanation": "Los records están diseñados para ser inmutables: sus campos son final y no se generan setters, solo accesores de lectura."
+  },
+  {
+    "id": "java-082",
+    "category": "java",
+    "topic": "Java 21",
+    "question": "¿Qué son los 'virtual threads' estabilizados en Java 21 (Project Loom)?",
+    "options": [
+      "Hilos que solo existen en simulación, sin ejecutar código real",
+      "Hilos ligeros gestionados por la JVM (no por el sistema operativo), que permiten crear miles/millones de ellos con bajo costo",
+      "Un reemplazo de los hilos del sistema operativo que elimina la concurrencia",
+      "Una forma de ejecutar Java sin JVM"
+    ],
+    "correctIndex": 1,
+    "explanation": "Los virtual threads permiten un modelo de concurrencia mucho más económico que los hilos de plataforma (respaldados 1:1 por hilos del SO)."
+  },
+  {
+    "id": "java-083",
+    "category": "java",
+    "topic": "Java 21",
+    "question": "¿Qué feature de Java 21 permite un 'switch' que compara tanto el TIPO como el contenido de un objeto de forma exhaustiva?",
+    "options": [
+      "Records",
+      "Pattern matching completo para switch",
+      "Virtual threads",
+      "Sequenced collections"
+    ],
+    "correctIndex": 1,
+    "explanation": "El pattern matching para switch (estable en Java 21) permite casos por tipo y por patrón de forma exhaustiva, con soporte para sealed types."
+  },
+  {
+    "id": "java-084",
+    "category": "java",
+    "topic": "Java 21",
+    "question": "¿Qué introdujo Java 21 para dar una interfaz común de 'primero/último elemento' a listas, sets y otras colecciones ordenadas?",
+    "options": [
+      "JPMS",
+      "Sequenced Collections",
+      "Virtual threads",
+      "Records patterns"
+    ],
+    "correctIndex": 1,
+    "explanation": "Las Sequenced Collections agregan métodos como getFirst(), getLast(), reversed() de forma uniforme a colecciones con orden definido."
+  },
+  {
+    "id": "java-085",
+    "category": "java",
+    "topic": "Java 21",
+    "question": "¿Los virtual threads reemplazan la necesidad de escribir código concurrente correctamente (sincronización, etc.)?",
+    "options": [
+      "Sí, eliminan por completo la necesidad de pensar en concurrencia",
+      "No, siguen requiriendo las mismas precauciones de concurrencia; solo cambian el costo de crear/mantener hilos",
+      "Solo aplican a bases de datos",
+      "Solo funcionan con Spring Boot"
+    ],
+    "correctIndex": 1,
+    "explanation": "Los virtual threads abaratan la CREACIÓN de hilos masivos, pero la lógica de sincronización, condiciones de carrera, etc. sigue aplicando igual."
+  },
+  {
+    "id": "java-086",
+    "category": "java",
+    "topic": "Java 21",
+    "question": "¿Qué son los 'record patterns' (estabilizados junto con Java 21)?",
+    "options": [
+      "Una forma de deconstruir un record directamente en un patrón de instanceof/switch, extrayendo sus componentes",
+      "Un tipo de excepción",
+      "Un algoritmo de ordenamiento",
+      "Una anotación de testing"
+    ],
+    "correctIndex": 0,
+    "explanation": "Un record pattern como 'case Punto(int x, int y)' permite extraer x e y directamente al hacer match, sin llamar a los accesores manualmente."
+  },
+  {
+    "id": "java-087",
+    "category": "java",
+    "topic": "Colecciones",
+    "question": "¿Cuál es la diferencia principal entre un array (int[]) y un ArrayList<Integer>?",
+    "options": [
+      "No hay ninguna diferencia real",
+      "El array tiene tamaño fijo desde su creación; el ArrayList puede crecer o encogerse dinámicamente",
+      "ArrayList es más rápido para todo",
+      "Los arrays no pueden contener números"
+    ],
+    "correctIndex": 1,
+    "explanation": "Un array se crea con tamaño fijo; ArrayList maneja internamente un array que redimensiona automáticamente al usar add()/remove()."
+  },
+  {
+    "id": "java-088",
+    "category": "java",
+    "topic": "Colecciones",
+    "question": "¿Cuál es la complejidad típica de acceder a un elemento por índice en un ArrayList?",
+    "options": [
+      "O(n)",
+      "O(1)",
+      "O(log n)",
+      "O(n²)"
+    ],
+    "correctIndex": 1,
+    "explanation": "ArrayList se respalda en un array interno, por lo que el acceso por índice es directo y constante: O(1)."
+  },
+  {
+    "id": "java-089",
+    "category": "java",
+    "topic": "Colecciones",
+    "question": "¿Cuál es la complejidad típica de acceder a un elemento por índice en un LinkedList?",
+    "options": [
+      "O(1)",
+      "O(n), porque hay que recorrer nodo por nodo desde el principio o el final",
+      "O(log n)",
+      "Siempre falla, LinkedList no soporta acceso por índice"
+    ],
+    "correctIndex": 1,
+    "explanation": "LinkedList es una lista doblemente enlazada: para llegar al índice k hay que recorrer nodos secuencialmente, a diferencia del acceso directo de ArrayList."
+  },
+  {
+    "id": "java-090",
+    "category": "java",
+    "topic": "Colecciones",
+    "question": "¿Qué estructura NO garantiza ningún orden particular al iterar sus elementos?",
+    "options": [
+      "TreeMap",
+      "LinkedHashMap",
+      "HashMap",
+      "Una List cualquiera"
+    ],
+    "correctIndex": 2,
+    "explanation": "HashMap no garantiza orden de iteración; TreeMap ordena por clave, LinkedHashMap mantiene el orden de inserción."
+  },
+  {
+    "id": "java-091",
+    "category": "java",
+    "topic": "Colecciones",
+    "question": "¿Qué estructura mantiene los elementos ORDENADOS según su orden natural o un Comparator?",
+    "options": [
+      "HashSet",
+      "ArrayList",
+      "TreeSet",
+      "LinkedList"
+    ],
+    "correctIndex": 2,
+    "explanation": "TreeSet (respaldado por un árbol) mantiene sus elementos siempre ordenados, con complejidad O(log n) para inserción/búsqueda."
+  },
+  {
+    "id": "java-092",
+    "category": "java",
+    "topic": "Colecciones",
+    "question": "¿Qué diferencia a un Set de una List en Java?",
+    "options": [
+      "Set no permite elementos duplicados; List sí los permite",
+      "List no permite null; Set sí",
+      "Set siempre está ordenado; List nunca",
+      "No hay diferencia, son sinónimos"
+    ],
+    "correctIndex": 0,
+    "explanation": "La característica definitoria de Set es que no admite duplicados (según equals()); List sí permite elementos repetidos y mantiene orden de inserción/índice."
+  },
+  {
+    "id": "java-093",
+    "category": "java",
+    "topic": "Colecciones",
+    "question": "¿Qué devuelve 'mapa.getOrDefault(\"clave\", 0)' si \"clave\" no existe en el Map?",
+    "options": [
+      "null",
+      "El valor por defecto indicado (0 en este caso), sin modificar el mapa",
+      "Lanza NoSuchElementException",
+      "Inserta la clave automáticamente con valor 0"
+    ],
+    "correctIndex": 1,
+    "explanation": "getOrDefault devuelve el valor por defecto si la clave no existe, evitando un NullPointerException al usar el resultado, y sin modificar el mapa."
+  },
+  {
+    "id": "java-094",
+    "category": "java",
+    "topic": "Colecciones",
+    "question": "¿Qué hace 'mapa.putIfAbsent(\"a\", 5)' si la clave \"a\" ya existía con el valor 3?",
+    "options": [
+      "Sobrescribe el valor con 5",
+      "No hace nada: como la clave ya existía, el valor permanece en 3",
+      "Lanza una excepción",
+      "Elimina la clave"
+    ],
+    "correctIndex": 1,
+    "explanation": "putIfAbsent solo inserta el valor si la clave AÚN NO existe (o está asociada a null); si ya tenía un valor, lo deja intacto."
+  },
+  {
+    "id": "java-095",
+    "category": "java",
+    "topic": "Colecciones",
+    "question": "¿Cuál sería la estructura más adecuada para implementar una cola (FIFO) con inserciones/eliminaciones frecuentes en ambos extremos?",
+    "options": [
+      "ArrayList",
+      "LinkedList (implementa Deque)",
+      "TreeSet",
+      "HashMap"
+    ],
+    "correctIndex": 1,
+    "explanation": "LinkedList implementa la interfaz Deque, ofreciendo operaciones O(1) para agregar/quitar en ambos extremos, ideal para colas/pilas."
+  },
+  {
+    "id": "java-096",
+    "category": "java",
+    "topic": "Colecciones",
+    "question": "¿Qué estructura conviene si necesitas búsquedas por clave lo más rápidas posible y NO te importa el orden?",
+    "options": [
+      "TreeMap",
+      "HashMap",
+      "LinkedList",
+      "ArrayList recorrido linealmente"
+    ],
+    "correctIndex": 1,
+    "explanation": "HashMap ofrece O(1) promedio para get/put por clave; TreeMap es O(log n) pero mantiene orden, más costoso si el orden no importa."
+  },
+  {
+    "id": "java-097",
+    "category": "java",
+    "topic": "Colecciones",
+    "question": "¿Qué interfaz implementan tanto ArrayList como LinkedList?",
+    "options": [
+      "Set",
+      "List",
+      "Map",
+      "Queue únicamente"
+    ],
+    "correctIndex": 1,
+    "explanation": "Ambas implementan la interfaz List, aunque con estructuras internas e implicaciones de rendimiento muy distintas."
+  },
+  {
+    "id": "java-098",
+    "category": "java",
+    "topic": "Colecciones",
+    "question": "¿Qué mantiene distinto a LinkedHashMap respecto a un HashMap normal?",
+    "options": [
+      "LinkedHashMap no permite null",
+      "LinkedHashMap conserva el orden de INSERCIÓN al iterar, a diferencia de HashMap",
+      "LinkedHashMap es más lento para get() en todos los casos por mucho margen",
+      "No hay ninguna diferencia"
+    ],
+    "correctIndex": 1,
+    "explanation": "LinkedHashMap añade una lista enlazada interna que preserva el orden en que se insertaron las claves, algo que HashMap no garantiza."
+  },
+  {
+    "id": "java-099",
+    "category": "java",
+    "topic": "Streams y funcional",
+    "question": "¿Modifica una operación como stream().filter(...) la colección original?",
+    "options": [
+      "Sí, siempre la modifica in-place",
+      "No, los Streams son inmutables respecto a la fuente: producen un nuevo flujo de datos sin alterar la colección original",
+      "Solo si la colección es una List",
+      "Solo si se usa map() en vez de filter()"
+    ],
+    "correctIndex": 1,
+    "explanation": "Un Stream no modifica la fuente de datos; produce una nueva secuencia derivada, dejando la colección original intacta."
+  },
+  {
+    "id": "java-100",
+    "category": "java",
+    "topic": "Streams y funcional",
+    "question": "¿Qué ocurre si intentas reutilizar (consumir dos veces) el mismo Stream ya usado en una operación terminal?",
+    "options": [
+      "Funciona normalmente, como una colección reutilizable",
+      "Lanza IllegalStateException: un Stream solo puede consumirse una vez",
+      "Se reinicia automáticamente",
+      "Devuelve una copia del stream anterior"
+    ],
+    "correctIndex": 1,
+    "explanation": "Un Stream es de un solo uso: tras una operación terminal, queda 'consumido' y cualquier reutilización lanza IllegalStateException."
+  },
+  {
+    "id": "java-101",
+    "category": "java",
+    "topic": "Streams y funcional",
+    "question": "¿Qué hace Collectors.groupingBy(...) sobre un Stream?",
+    "options": [
+      "Ordena los elementos",
+      "Agrupa los elementos del stream en un Map, según una función clasificadora",
+      "Elimina duplicados",
+      "Cuenta el total de elementos"
+    ],
+    "correctIndex": 1,
+    "explanation": "groupingBy produce un Map<K, List<T>> (u otra colección) agrupando los elementos según el resultado de la función clasificadora dada."
+  },
+  {
+    "id": "java-102",
+    "category": "java",
+    "topic": "Streams y funcional",
+    "question": "¿Cuál es la interfaz funcional adecuada para una operación que recibe un valor y no devuelve nada (efecto secundario, como imprimir)?",
+    "options": [
+      "Function<T,R>",
+      "Supplier<T>",
+      "Consumer<T>",
+      "Predicate<T>"
+    ],
+    "correctIndex": 2,
+    "explanation": "Consumer<T> tiene un método accept(T t) sin retorno — usado típicamente en forEach()."
+  },
+  {
+    "id": "java-103",
+    "category": "java",
+    "topic": "Streams y funcional",
+    "question": "¿Qué hace 'IntStream.rangeClosed(1, 5)'?",
+    "options": [
+      "Genera 1, 2, 3, 4 (excluye el 5)",
+      "Genera 1, 2, 3, 4, 5 (incluye ambos extremos)",
+      "Genera solo 1 y 5",
+      "Lanza una excepción"
+    ],
+    "correctIndex": 1,
+    "explanation": "rangeClosed incluye AMBOS extremos, a diferencia de range() que excluye el límite superior."
+  },
+  {
+    "id": "java-104",
+    "category": "java",
+    "topic": "Streams y funcional",
+    "question": "¿Qué devuelve 'stream.anyMatch(x -> x > 10)' sobre una lista vacía?",
+    "options": [
+      "true",
+      "false",
+      "Lanza una excepción",
+      "null"
+    ],
+    "correctIndex": 1,
+    "explanation": "anyMatch sobre un stream vacío devuelve false por definición: no hay ningún elemento que pueda cumplir la condición."
+  },
+  {
+    "id": "java-105",
+    "category": "java",
+    "topic": "Streams y funcional",
+    "question": "¿Qué devuelve 'stream.allMatch(x -> x > 10)' sobre una lista vacía?",
+    "options": [
+      "false",
+      "true (vacuously true: no hay ningún elemento que la incumpla)",
+      "Lanza una excepción",
+      "Depende del tipo de dato"
+    ],
+    "correctIndex": 1,
+    "explanation": "allMatch sobre un stream vacío es 'verdadero por vacuidad': no existe ningún contraejemplo que la haga falsa."
+  },
+  {
+    "id": "java-106",
+    "category": "java",
+    "topic": "Streams y funcional",
+    "question": "¿Qué tipo de interfaz funcional es Comparator<T>, usada por ejemplo en Collections.sort()?",
+    "options": [
+      "Una interfaz con un solo método abstracto: compare(T o1, T o2)",
+      "Una clase concreta, no una interfaz",
+      "Un tipo primitivo especial",
+      "Una anotación"
+    ],
+    "correctIndex": 0,
+    "explanation": "Comparator es una interfaz funcional cuyo método abstracto compare(T, T) define el criterio de orden, usable con una lambda o referencia a método."
+  },
+  {
+    "id": "java-107",
+    "category": "java",
+    "topic": "Streams y funcional",
+    "question": "¿Qué método de Stream permite limitar el flujo a los primeros N elementos?",
+    "options": [
+      "skip(n)",
+      "limit(n)",
+      "take(n)",
+      "first(n)"
+    ],
+    "correctIndex": 1,
+    "explanation": "limit(n) trunca el stream a como máximo n elementos; skip(n) hace lo contrario, descarta los primeros n."
+  },
+  {
+    "id": "java-108",
+    "category": "java",
+    "topic": "SOLID",
+    "question": "¿Qué principio SOLID establece que 'una clase debe tener una, y solo una, razón para cambiar'?",
+    "options": [
+      "Open/Closed",
+      "Single Responsibility Principle",
+      "Liskov Substitution",
+      "Dependency Inversion"
+    ],
+    "correctIndex": 1,
+    "explanation": "SRP (Single Responsibility Principle) es la 'S' de SOLID: evita mezclar responsabilidades que cambian por motivos distintos en la misma clase."
+  },
+  {
+    "id": "java-109",
+    "category": "java",
+    "topic": "SOLID",
+    "question": "Una clase con métodos calcularTotal(), generarPdf() y guardarEnBaseDeDatos() todos en la misma clase, ¿qué principio viola típicamente?",
+    "options": [
+      "Liskov Substitution",
+      "Single Responsibility Principle",
+      "Interface Segregation",
+      "Ninguno, es una buena práctica"
+    ],
+    "correctIndex": 1,
+    "explanation": "Mezcla cálculo de negocio, formato de presentación y persistencia: 3 razones de cambio distintas en la misma clase, violando SRP."
+  },
+  {
+    "id": "java-110",
+    "category": "java",
+    "topic": "SOLID",
+    "question": "¿Qué principio dice que 'una entidad debe estar abierta a extensión, pero cerrada a modificación'?",
+    "options": [
+      "Single Responsibility",
+      "Open/Closed Principle",
+      "Interface Segregation",
+      "Dependency Inversion"
+    ],
+    "correctIndex": 1,
+    "explanation": "OCP: agregar un caso nuevo debería ser agregar código (ej. una clase nueva), no editar código existente y ya probado."
+  },
+  {
+    "id": "java-111",
+    "category": "java",
+    "topic": "SOLID",
+    "question": "Un método con un 'if/else' o 'switch' largo sobre un campo 'tipo', que crece cada vez que aparece un caso nuevo, es señal típica de violar:",
+    "options": [
+      "Liskov Substitution",
+      "Open/Closed Principle",
+      "Single Responsibility únicamente",
+      "Ningún principio SOLID"
+    ],
+    "correctIndex": 1,
+    "explanation": "La solución típica es reemplazar el condicional por polimorfismo (una interfaz + una clase por caso), permitiendo extender sin modificar código existente."
+  },
+  {
+    "id": "java-112",
+    "category": "java",
+    "topic": "SOLID",
+    "question": "¿Qué garantiza el Liskov Substitution Principle (LSP)?",
+    "options": [
+      "Que toda clase tenga un único constructor",
+      "Que un objeto de una subclase pueda sustituir a uno de la superclase sin alterar la corrección del programa",
+      "Que las interfaces sean pequeñas",
+      "Que no existan clases abstractas"
+    ],
+    "correctIndex": 1,
+    "explanation": "LSP exige que la sustitución de un tipo padre por un subtipo no rompa las expectativas de comportamiento que el código que lo usa ya tenía."
+  },
+  {
+    "id": "java-113",
+    "category": "java",
+    "topic": "SOLID",
+    "question": "Una subclase Pinguino que sobrescribe volar() para lanzar UnsupportedOperationException, heredando de Ave (que sí implementa volar()), viola:",
+    "options": [
+      "Interface Segregation Principle",
+      "Liskov Substitution Principle",
+      "Single Responsibility Principle",
+      "Ninguno, es código correcto"
+    ],
+    "correctIndex": 1,
+    "explanation": "Pinguino no puede sustituir a Ave en código que asuma que toda Ave vuela — rompe la expectativa de comportamiento del padre, violando LSP."
+  },
+  {
+    "id": "java-114",
+    "category": "java",
+    "topic": "SOLID",
+    "question": "¿Qué recomienda el Interface Segregation Principle (ISP)?",
+    "options": [
+      "Usar una única interfaz grande para todo el sistema",
+      "Preferir varias interfaces pequeñas y específicas sobre una interfaz 'gorda' con métodos irrelevantes para algunos clientes",
+      "Evitar el uso de interfaces por completo",
+      "Que toda clase implemente Serializable"
+    ],
+    "correctIndex": 1,
+    "explanation": "ISP busca que ningún cliente se vea forzado a depender de (o implementar) métodos que no necesita."
+  },
+  {
+    "id": "java-115",
+    "category": "java",
+    "topic": "SOLID",
+    "question": "¿Qué principio dice que 'los módulos de alto nivel no deben depender de módulos de bajo nivel; ambos deben depender de abstracciones'?",
+    "options": [
+      "Dependency Inversion Principle",
+      "Open/Closed Principle",
+      "Single Responsibility Principle",
+      "Interface Segregation Principle"
+    ],
+    "correctIndex": 0,
+    "explanation": "DIP: la lógica de negocio (alto nivel) debe depender de una interfaz, no de una implementación concreta (bajo nivel) instanciada con 'new' directamente."
+  },
+  {
+    "id": "java-116",
+    "category": "java",
+    "topic": "Patrones de diseño",
+    "question": "¿Qué patrón de diseño reemplaza un 'if/else' largo sobre un tipo por una familia de clases intercambiables que implementan la misma interfaz?",
+    "options": [
+      "Singleton",
+      "Strategy",
+      "Observer",
+      "Factory Method"
+    ],
+    "correctIndex": 1,
+    "explanation": "Strategy encapsula distintos algoritmos/comportamientos intercambiables detrás de una interfaz común, evitando condicionales rígidos (conecta con OCP)."
+  },
+  {
+    "id": "java-117",
+    "category": "java",
+    "topic": "Patrones de diseño",
+    "question": "¿Qué garantiza el patrón Singleton?",
+    "options": [
+      "Que una clase tenga múltiples subclases",
+      "Que exista una única instancia de una clase en toda la aplicación, con un punto de acceso global",
+      "Que una clase no pueda ser instanciada",
+      "Que dos objetos sean siempre iguales"
+    ],
+    "correctIndex": 1,
+    "explanation": "Singleton restringe la instanciación de una clase a un único objeto compartido, accesible globalmente."
+  },
+  {
+    "id": "java-118",
+    "category": "java",
+    "topic": "Patrones de diseño",
+    "question": "¿Qué patrón se usa típicamente para notificar automáticamente a varios objetos ('suscriptores') cuando cambia el estado de otro objeto ('sujeto')?",
+    "options": [
+      "Observer",
+      "Builder",
+      "Adapter",
+      "Decorator"
+    ],
+    "correctIndex": 0,
+    "explanation": "El patrón Observer define una relación uno-a-muchos: cuando el sujeto cambia, notifica a todos sus observadores registrados."
+  },
+  {
+    "id": "java-119",
+    "category": "java",
+    "topic": "Patrones de diseño",
+    "question": "¿Qué patrón centraliza la lógica de creación de objetos, delegando la decisión de qué clase concreta instanciar?",
+    "options": [
+      "Factory Method",
+      "Observer",
+      "Strategy",
+      "Decorator"
+    ],
+    "correctIndex": 0,
+    "explanation": "Factory Method encapsula la lógica de 'qué implementación concreta crear', desacoplando al código cliente de las clases concretas."
+  },
+  {
+    "id": "java-120",
+    "category": "java",
+    "topic": "Patrones de diseño",
+    "question": "¿Con qué principio SOLID se relaciona más directamente el patrón Strategy?",
+    "options": [
+      "Single Responsibility Principle únicamente",
+      "Open/Closed Principle",
+      "Interface Segregation Principle únicamente",
+      "No se relaciona con SOLID"
+    ],
+    "correctIndex": 1,
+    "explanation": "Strategy permite agregar un algoritmo/comportamiento nuevo (una clase nueva) sin modificar el código que ya usa la interfaz — la esencia de OCP."
+  },
+  {
+    "id": "java-121",
+    "category": "java",
+    "topic": "Patrones de diseño",
+    "question": "¿Qué patrón permite añadir funcionalidad a un objeto dinámicamente, envolviéndolo, sin modificar su clase original?",
+    "options": [
+      "Decorator",
+      "Singleton",
+      "Factory Method",
+      "Template Method"
+    ],
+    "correctIndex": 0,
+    "explanation": "Decorator envuelve un objeto con otro que implementa la misma interfaz, añadiendo comportamiento antes/después de delegar al objeto envuelto."
+  },
+  {
+    "id": "java-122",
+    "category": "java",
+    "topic": "Patrones de diseño",
+    "question": "¿Qué mecanismo de la inyección de dependencias (DI) automatiza el contenedor IoC de Spring?",
+    "options": [
+      "La compilación del bytecode",
+      "Conectar automáticamente las implementaciones concretas a las abstracciones que un componente declara necesitar (ej. en su constructor)",
+      "La generación de reportes PDF",
+      "El manejo de memoria del heap"
+    ],
+    "correctIndex": 1,
+    "explanation": "En vez de que el desarrollador conecte manualmente 'new ServicioX(new ImplementacionY())', el contenedor de Spring decide qué implementación inyectar según configuración — DIP llevado a escala de framework."
+  },
+  {
+    "id": "java-123",
+    "category": "java",
+    "topic": "Excepciones",
+    "question": "¿Cuál es la superclase de TODAS las excepciones y errores en Java?",
+    "options": [
+      "Exception",
+      "RuntimeException",
+      "Throwable",
+      "Error"
+    ],
+    "correctIndex": 2,
+    "explanation": "Throwable es la raíz de la jerarquía; de ella heredan tanto Error como Exception (y de esta última, RuntimeException)."
+  },
+  {
+    "id": "java-124",
+    "category": "java",
+    "topic": "Excepciones",
+    "question": "¿Qué distingue a una excepción 'checked' de una 'unchecked'?",
+    "options": [
+      "Las checked son más rápidas de lanzar",
+      "El compilador OBLIGA a manejar (try/catch o throws) las checked; las unchecked (RuntimeException y subclases) no lo exige",
+      "Las unchecked nunca pueden capturarse",
+      "No hay diferencia real, es solo terminología"
+    ],
+    "correctIndex": 1,
+    "explanation": "Toda excepción que NO extiende RuntimeException es checked y el compilador exige manejarla explícitamente; RuntimeException y sus subclases son unchecked."
+  },
+  {
+    "id": "java-125",
+    "category": "java",
+    "topic": "Excepciones",
+    "question": "¿Es NullPointerException una excepción checked o unchecked?",
+    "options": [
+      "Checked",
+      "Unchecked (extiende RuntimeException)",
+      "Ninguna de las dos, es un Error",
+      "Depende de la versión de Java"
+    ],
+    "correctIndex": 1,
+    "explanation": "NullPointerException extiende RuntimeException — es unchecked, típicamente indica un bug de programación, no un problema recuperable del entorno."
+  },
+  {
+    "id": "java-126",
+    "category": "java",
+    "topic": "Excepciones",
+    "question": "¿Qué excepción lanza 'arr[arr.length]' sobre un array de longitud 3?",
+    "options": [
+      "NullPointerException",
+      "ArrayIndexOutOfBoundsException",
+      "ClassCastException",
+      "ArithmeticException"
+    ],
+    "correctIndex": 1,
+    "explanation": "Los índices válidos van de 0 a length-1; arr[length] está un lugar más allá del final, lanzando ArrayIndexOutOfBoundsException."
+  },
+  {
+    "id": "java-127",
+    "category": "java",
+    "topic": "Excepciones",
+    "question": "¿Qué diferencia hay entre 'throw' y 'throws' en Java?",
+    "options": [
+      "Son sinónimos intercambiables",
+      "'throw' lanza una excepción concreta en un punto del código; 'throws' declara en la firma qué excepciones checked puede propagar el método",
+      "'throws' lanza la excepción; 'throw' la declara",
+      "Ambos solo aplican a excepciones unchecked"
+    ],
+    "correctIndex": 1,
+    "explanation": "'throw new IllegalArgumentException(...)' lanza; 'public void metodo() throws IOException' declara que el método puede propagar esa excepción checked."
+  },
+  {
+    "id": "java-128",
+    "category": "java",
+    "topic": "Excepciones",
+    "question": "¿Qué bloque se ejecuta SIEMPRE, haya o no excepción, tras un try/catch?",
+    "options": [
+      "else",
+      "finally",
+      "ensure",
+      "always"
+    ],
+    "correctIndex": 1,
+    "explanation": "El bloque finally se ejecuta siempre (salvo casos extremos como System.exit()), tanto si hubo excepción como si no."
+  },
+  {
+    "id": "java-129",
+    "category": "java",
+    "topic": "Excepciones",
+    "question": "¿Qué ocurre si un método recursivo nunca alcanza su caso base?",
+    "options": [
+      "Se detiene automáticamente tras 1000 llamadas",
+      "Lanza StackOverflowError al agotar el espacio de pila del hilo",
+      "Devuelve null silenciosamente",
+      "El compilador lo rechaza"
+    ],
+    "correctIndex": 1,
+    "explanation": "Cada llamada recursiva apila un stack frame nuevo; sin caso base que detenga la recursión, se agota el stack y se lanza StackOverflowError."
+  },
+  {
+    "id": "java-130",
+    "category": "java",
+    "topic": "Excepciones",
+    "question": "¿Qué tipo de excepción representa típicamente 'un problema esperable del entorno externo, del que el programa puede intentar recuperarse' (ej. archivo no encontrado)?",
+    "options": [
+      "Una excepción unchecked como NullPointerException",
+      "Una excepción checked como IOException",
+      "Un Error como OutOfMemoryError",
+      "Ninguna excepción, se maneja con un if"
+    ],
+    "correctIndex": 1,
+    "explanation": "IOException es checked precisamente porque representa un fallo externo esperable (archivo ausente, red caída) del que vale la pena intentar recuperarse."
+  },
+  {
+    "id": "java-131",
+    "category": "java",
+    "topic": "Excepciones",
+    "question": "¿Qué principio de buena práctica se rompe si se captura 'catch (Exception e) {}' dejando el bloque vacío?",
+    "options": [
+      "Se silencia el error sin manejarlo ni registrarlo, ocultando fallos reales del sistema",
+      "Es la forma correcta y recomendada de manejar cualquier excepción",
+      "Mejora el rendimiento de la aplicación",
+      "Convierte la excepción en checked automáticamente"
+    ],
+    "correctIndex": 0,
+    "explanation": "Un catch vacío ('swallow' de la excepción) oculta el problema en vez de resolverlo o registrarlo — dificulta enormemente el diagnóstico de fallos."
+  },
+  {
+    "id": "java-132",
+    "category": "java",
+    "topic": "Concurrencia",
+    "question": "¿Qué es una 'condición de carrera' (race condition)?",
+    "options": [
+      "Un error de sintaxis del compilador",
+      "Un escenario donde el resultado de un programa depende del orden/tiempo impredecible en que se intercalan operaciones de hilos concurrentes",
+      "Un tipo de excepción checked",
+      "Un algoritmo de ordenamiento"
+    ],
+    "correctIndex": 1,
+    "explanation": "Las condiciones de carrera ocurren cuando múltiples hilos acceden/modifican datos compartidos sin la sincronización adecuada, produciendo resultados no deterministas."
+  },
+  {
+    "id": "java-133",
+    "category": "java",
+    "topic": "Concurrencia",
+    "question": "¿Para qué sirve la palabra clave 'synchronized' en Java?",
+    "options": [
+      "Para declarar una variable constante",
+      "Para garantizar que solo un hilo a la vez pueda ejecutar un bloque/método sobre un mismo objeto de bloqueo (mutex)",
+      "Para acelerar la ejecución de un bucle",
+      "Para convertir un método en estático"
+    ],
+    "correctIndex": 1,
+    "explanation": "'synchronized' adquiere un lock intrínseco del objeto indicado, serializando el acceso de hilos concurrentes a la sección crítica."
+  },
+  {
+    "id": "java-134",
+    "category": "java",
+    "topic": "Concurrencia",
+    "question": "¿Qué diferencia principal hay entre un hilo de plataforma tradicional y un virtual thread (Java 21)?",
+    "options": [
+      "No hay ninguna diferencia funcional",
+      "El virtual thread es gestionado por la JVM (no 1:1 con un hilo del SO), permitiendo crear muchísimos más con menor costo",
+      "Los virtual threads no pueden ejecutar código bloqueante",
+      "Los virtual threads solo sirven para testing"
+    ],
+    "correctIndex": 1,
+    "explanation": "Los hilos de plataforma están respaldados 1:1 por hilos del sistema operativo (costosos); los virtual threads son mucho más ligeros y gestionados por la JVM."
+  },
+  {
+    "id": "java-135",
+    "category": "java",
+    "topic": "Concurrencia",
+    "question": "¿Qué interfaz representa una tarea que se puede ejecutar en otro hilo y devuelve un resultado (a diferencia de Runnable)?",
+    "options": [
+      "Runnable",
+      "Callable<V>",
+      "Thread",
+      "Executor"
+    ],
+    "correctIndex": 1,
+    "explanation": "Callable<V> tiene un método call() que devuelve un valor de tipo V y puede lanzar excepciones checked, a diferencia de run() en Runnable."
+  },
+  {
+    "id": "java-136",
+    "category": "java",
+    "topic": "Concurrencia",
+    "question": "¿Qué es un ExecutorService en el paquete java.util.concurrent?",
+    "options": [
+      "Una excepción especial de concurrencia",
+      "Un framework que gestiona un pool de hilos para ejecutar tareas de forma administrada, sin crear hilos manualmente",
+      "Una anotación de Spring",
+      "Un tipo de colección"
+    ],
+    "correctIndex": 1,
+    "explanation": "ExecutorService abstrae la creación/gestión de hilos, reutilizando un pool en vez de crear un Thread nuevo por cada tarea."
+  },
+  {
+    "id": "java-137",
+    "category": "java",
+    "topic": "Concurrencia",
+    "question": "¿Qué garantiza la palabra clave 'volatile' aplicada a un campo?",
+    "options": [
+      "Que el campo sea privado",
+      "Que las lecturas/escrituras de ese campo sean visibles inmediatamente entre hilos, evitando que cada hilo use una copia cacheada obsoleta",
+      "Que el campo no pueda modificarse nunca",
+      "Que el campo sea thread-local (exclusivo por hilo)"
+    ],
+    "correctIndex": 1,
+    "explanation": "'volatile' resuelve problemas de VISIBILIDAD entre hilos (no de atomicidad compuesta) al forzar lecturas/escrituras directas a memoria principal."
+  },
+  {
+    "id": "java-138",
+    "category": "java",
+    "topic": "Concurrencia",
+    "question": "¿Qué clase de java.util.concurrent.atomic permite incrementar un contador de forma atómica sin usar 'synchronized' explícito?",
+    "options": [
+      "AtomicInteger",
+      "Integer",
+      "volatile int",
+      "SynchronizedInt"
+    ],
+    "correctIndex": 0,
+    "explanation": "AtomicInteger (y similares) ofrece operaciones atómicas como incrementAndGet() sin necesidad de bloqueos explícitos, usando operaciones a nivel de hardware (CAS)."
+  },
+  {
+    "id": "java-139",
+    "category": "java",
+    "topic": "Concurrencia",
+    "question": "¿Qué colección de java.util.concurrent está diseñada para ser segura ante acceso concurrente sin bloquear todo el mapa en cada operación?",
+    "options": [
+      "HashMap",
+      "ConcurrentHashMap",
+      "TreeMap",
+      "LinkedHashMap"
+    ],
+    "correctIndex": 1,
+    "explanation": "ConcurrentHashMap permite lecturas/escrituras concurrentes con mucho mejor rendimiento que sincronizar manualmente un HashMap completo."
+  },
+  {
+    "id": "java-140",
+    "category": "java",
+    "topic": "Concurrencia",
+    "question": "¿Qué problema previene principalmente adquirir siempre los locks en el MISMO orden en distintos hilos?",
+    "options": [
+      "Los NullPointerException",
+      "Los deadlocks (bloqueos mutuos donde dos o más hilos esperan indefinidamente locks que el otro tiene)",
+      "Los StackOverflowError",
+      "Los errores de compilación"
+    ],
+    "correctIndex": 1,
+    "explanation": "Un deadlock clásico ocurre cuando el Hilo A tiene el Lock 1 y espera el Lock 2, mientras el Hilo B tiene el Lock 2 y espera el Lock 1 — adquirir en orden consistente lo evita."
+  },
+  {
+    "id": "java-141",
+    "category": "java",
+    "topic": "Archivos y E/S",
+    "question": "¿Qué ventaja ofrece 'try-with-resources' al trabajar con un archivo (ej. un BufferedReader)?",
+    "options": [
+      "Hace el código más lento a propósito",
+      "Cierra automáticamente el recurso al salir del bloque try, incluso si ocurre una excepción",
+      "Evita tener que declarar el recurso como 'final'",
+      "Permite abrir el archivo sin manejar IOException"
+    ],
+    "correctIndex": 1,
+    "explanation": "try-with-resources llama automáticamente a close() sobre cualquier recurso que implemente AutoCloseable, sin necesitar un finally explícito."
+  },
+  {
+    "id": "java-142",
+    "category": "java",
+    "topic": "Archivos y E/S",
+    "question": "¿Qué excepción checked es común al trabajar con archivos que pueden no existir o fallar al leer/escribir?",
+    "options": [
+      "NullPointerException",
+      "IOException",
+      "ArithmeticException",
+      "ClassCastException"
+    ],
+    "correctIndex": 1,
+    "explanation": "IOException (y sus subclases como FileNotFoundException) es checked, obligando a manejarla o declararla con throws."
+  },
+  {
+    "id": "java-143",
+    "category": "java",
+    "topic": "Archivos y E/S",
+    "question": "¿Qué clase moderna del paquete java.nio.file se prefiere hoy sobre la antigua java.io.File para operaciones de archivo?",
+    "options": [
+      "Path (junto con Files)",
+      "String",
+      "Scanner únicamente",
+      "InputStream sin Path"
+    ],
+    "correctIndex": 0,
+    "explanation": "java.nio.file.Path junto con la clase utilitaria Files ofrece una API más moderna y completa que la antigua java.io.File."
+  },
+  {
+    "id": "java-144",
+    "category": "java",
+    "topic": "Archivos y E/S",
+    "question": "¿Qué interfaz deben implementar los recursos usados dentro de un try-with-resources?",
+    "options": [
+      "Serializable",
+      "AutoCloseable (o su subinterfaz Closeable)",
+      "Comparable",
+      "Runnable"
+    ],
+    "correctIndex": 1,
+    "explanation": "try-with-resources llama automáticamente al método close() definido por la interfaz AutoCloseable al finalizar el bloque."
+  },
+  {
+    "id": "java-145",
+    "category": "java",
+    "topic": "Archivos y E/S",
+    "question": "¿Qué método de la clase utilitaria Files permite leer todas las líneas de un archivo de texto en una List<String> de una vez?",
+    "options": [
+      "Files.readAllLines(path)",
+      "Files.open(path)",
+      "Files.scan(path)",
+      "Files.toList(path)"
+    ],
+    "correctIndex": 0,
+    "explanation": "Files.readAllLines(Path) lee el archivo completo y devuelve sus líneas como una List<String>, ideal para archivos de tamaño moderado."
+  },
+  {
+    "id": "java-146",
+    "category": "java",
+    "topic": "JDBC",
+    "question": "¿Por qué se recomienda SIEMPRE usar PreparedStatement en vez de concatenar Strings para construir SQL con datos de entrada?",
+    "options": [
+      "Porque PreparedStatement es más lento pero más 'elegante'",
+      "Porque previene inyección SQL: el valor se envía como dato, nunca se interpreta como parte del comando SQL",
+      "Porque Statement no permite SELECT",
+      "No hay diferencia real de seguridad"
+    ],
+    "correctIndex": 1,
+    "explanation": "Con PreparedStatement y parámetros (?), el driver envía el valor como DATO puro, imposibilitando que un atacante altere la estructura de la consulta."
+  },
+  {
+    "id": "java-147",
+    "category": "java",
+    "topic": "JDBC",
+    "question": "¿Cuál es el valor por defecto de 'autoCommit' en una Connection de JDBC recién obtenida?",
+    "options": [
+      "false: hay que confirmar manualmente cada sentencia",
+      "true: cada sentencia se confirma (COMMIT) automáticamente por sí sola",
+      "Depende del driver, nunca tiene un default",
+      "No existe el concepto de autoCommit en JDBC"
+    ],
+    "correctIndex": 1,
+    "explanation": "JDBC inicia con autoCommit=true; para agrupar varias sentencias en una transacción atómica hay que desactivarlo con setAutoCommit(false)."
+  },
+  {
+    "id": "java-148",
+    "category": "java",
+    "topic": "JDBC",
+    "question": "¿Qué método de Connection se usa para deshacer los cambios pendientes de una transacción?",
+    "options": [
+      "conn.commit()",
+      "conn.rollback()",
+      "conn.close()",
+      "conn.undo()"
+    ],
+    "correctIndex": 1,
+    "explanation": "rollback() revierte todos los cambios pendientes desde el último commit (o desde el inicio de la transacción)."
+  },
+  {
+    "id": "java-149",
+    "category": "java",
+    "topic": "JDBC",
+    "question": "¿Qué interfaz de JDBC representa el resultado de ejecutar una consulta SELECT?",
+    "options": [
+      "Statement",
+      "Connection",
+      "ResultSet",
+      "DriverManager"
+    ],
+    "correctIndex": 2,
+    "explanation": "ResultSet representa el cursor sobre las filas devueltas por una consulta, recorrido típicamente con rs.next()."
+  },
+  {
+    "id": "java-150",
+    "category": "java",
+    "topic": "JDBC",
+    "question": "¿Qué método se usa en un PreparedStatement para asignar el primer parámetro '?' a un valor entero?",
+    "options": [
+      "ps.setInt(1, valor)",
+      "ps.setInt(0, valor)",
+      "ps.bindInt(1, valor)",
+      "ps.param(1, valor)"
+    ],
+    "correctIndex": 0,
+    "explanation": "Los índices de parámetros en JDBC empiezan en 1 (no en 0), a diferencia de los índices de array/lista en Java."
+  },
+  {
+    "id": "java-151",
+    "category": "java",
+    "topic": "JDBC",
+    "question": "¿Qué patrón de código es indispensable para no agotar las conexiones disponibles a la base de datos?",
+    "options": [
+      "Nunca cerrar la Connection explícitamente",
+      "Cerrar Connection/Statement/ResultSet (idealmente con try-with-resources) tan pronto como ya no se necesiten",
+      "Abrir una Connection nueva por cada fila procesada",
+      "Usar solo Statement, nunca PreparedStatement"
+    ],
+    "correctIndex": 1,
+    "explanation": "Las conexiones son un recurso limitado; no cerrarlas provoca fugas de recursos (connection leaks) que eventualmente agotan el pool disponible."
+  },
+  {
+    "id": "java-152",
+    "category": "java",
+    "topic": "JDBC",
+    "question": "¿Qué configura conn.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED) desde Java?",
+    "options": [
+      "El tamaño del pool de conexiones",
+      "El nivel de aislamiento de la transacción para esa conexión",
+      "El timeout de la consulta",
+      "El driver JDBC a usar"
+    ],
+    "correctIndex": 1,
+    "explanation": "Permite controlar, desde código Java, qué nivel de aislamiento (READ_COMMITTED, SERIALIZABLE, etc.) tendrá la transacción de esa conexión."
+  },
+  {
+    "id": "java-153",
+    "category": "java",
+    "topic": "ORM / Hibernate",
+    "question": "¿Qué problema principal resuelve un ORM (Object-Relational Mapping) como Hibernate/JPA?",
+    "options": [
+      "Reemplazar por completo a SQL sin necesidad de una base de datos",
+      "El 'impedance mismatch': mapear automáticamente objetos Java a filas/tablas relacionales y viceversa",
+      "Acelerar la red",
+      "Sustituir a JDBC como protocolo de bajo nivel"
+    ],
+    "correctIndex": 1,
+    "explanation": "Un ORM automatiza la traducción entre el modelo de objetos de Java y el modelo relacional de tablas/filas, reduciendo código repetitivo de mapeo manual."
+  },
+  {
+    "id": "java-154",
+    "category": "java",
+    "topic": "ORM / Hibernate",
+    "question": "¿Qué anotación de JPA marca una clase Java como mapeada a una tabla de base de datos?",
+    "options": [
+      "@Table únicamente, sin @Entity",
+      "@Entity",
+      "@Repository",
+      "@Component"
+    ],
+    "correctIndex": 1,
+    "explanation": "@Entity marca la clase como una entidad JPA gestionada; @Table (opcional) especifica el nombre de tabla si difiere del nombre de la clase."
+  },
+  {
+    "id": "java-155",
+    "category": "java",
+    "topic": "ORM / Hibernate",
+    "question": "¿Qué riesgo de rendimiento es clásico en Hibernate al recorrer una colección de entidades con relaciones asociadas sin cuidado?",
+    "options": [
+      "El problema N+1: una consulta adicional por cada entidad para cargar su asociación, en vez de una sola consulta con JOIN",
+      "Un StackOverflowError garantizado",
+      "Una fuga de memoria en el Stack",
+      "Ninguno, Hibernate siempre optimiza automáticamente"
+    ],
+    "correctIndex": 0,
+    "explanation": "El problema N+1 ocurre cuando cargar N entidades dispara N consultas adicionales para sus relaciones, en vez de resolverlo con un JOIN o fetch adecuado."
+  },
+  {
+    "id": "java-156",
+    "category": "java",
+    "topic": "ORM / Hibernate",
+    "question": "¿Qué representa el 'Persistence Context' (o Session) en Hibernate/JPA?",
+    "options": [
+      "Una conexión de red permanente",
+      "Una caché de primer nivel que rastrea las entidades gestionadas dentro de una unidad de trabajo/transacción",
+      "Un archivo de configuración XML",
+      "Un tipo de excepción"
+    ],
+    "correctIndex": 1,
+    "explanation": "El Persistence Context mantiene el estado de las entidades 'gestionadas', detectando cambios automáticamente (dirty checking) para sincronizarlos con la base de datos."
+  },
+  {
+    "id": "java-157",
+    "category": "java",
+    "topic": "ORM / Hibernate",
+    "question": "¿Qué estrategia de carga ('fetch') trae también las asociaciones inmediatamente al cargar la entidad principal, en vez de retrasarlo hasta que se acceda a ellas?",
+    "options": [
+      "LAZY",
+      "EAGER",
+      "NONE",
+      "DEFERRED"
+    ],
+    "correctIndex": 1,
+    "explanation": "FetchType.EAGER carga la asociación de inmediato; LAZY la retrasa hasta que realmente se accede a ella (pudiendo causar el problema N+1 si se usa sin cuidado)."
+  },
+  {
+    "id": "java-158",
+    "category": "java",
+    "topic": "Transacciones (Java)",
+    "question": "¿Qué ocurre si un método anotado con @Transactional en Spring se invoca desde DENTRO de la misma clase (this.metodo())?",
+    "options": [
+      "Funciona exactamente igual que si viniera de otro bean",
+      "La anotación NO se aplica: al no pasar por el proxy de Spring, no hay demarcación transaccional",
+      "Lanza una excepción de compilación",
+      "Spring lo detecta y lo corrige automáticamente"
+    ],
+    "correctIndex": 1,
+    "explanation": "@Transactional se implementa con un proxy (AOP); una llamada interna (this.metodo()) evita el proxy y la anotación se ignora silenciosamente."
+  },
+  {
+    "id": "java-159",
+    "category": "java",
+    "topic": "Transacciones (Java)",
+    "question": "Por defecto, ¿ante qué tipo de excepción hace rollback automático @Transactional de Spring?",
+    "options": [
+      "Ante cualquier Throwable, sin excepción",
+      "Ante excepciones unchecked (RuntimeException y sus subclases), no ante checked por defecto",
+      "Nunca hace rollback automático",
+      "Solo ante SQLException"
+    ],
+    "correctIndex": 1,
+    "explanation": "Por defecto, @Transactional solo revierte ante RuntimeException; para checked hay que ser explícito con rollbackFor."
+  },
+  {
+    "id": "java-160",
+    "category": "java",
+    "topic": "Transacciones (Java)",
+    "question": "¿Cuándo se justifica usar JTA (Java Transaction API) en vez de transacciones locales simples?",
+    "options": [
+      "Siempre, por si acaso se necesita en el futuro",
+      "Solo cuando una operación de negocio debe ser atómica a través de más de un recurso transaccional heterogéneo distinto (ej. dos bases de datos, o BD + cola de mensajes)",
+      "Solo para aplicaciones de un solo usuario",
+      "JTA reemplazó por completo a JDBC"
+    ],
+    "correctIndex": 1,
+    "explanation": "JTA introduce complejidad real (2PC) que solo se justifica cuando de verdad se cruzan múltiples recursos transaccionales heterogéneos a la vez."
+  },
+  {
+    "id": "java-161",
+    "category": "java",
+    "topic": "Transacciones (Java)",
+    "question": "¿Qué protocolo clásico coordina JTA para garantizar atomicidad entre varios recursos (Two-Phase Commit)?",
+    "options": [
+      "Round-robin",
+      "2PC: fase de 'prepare' seguida de fase de 'commit' solo si todos los recursos confirmaron poder comprometerse",
+      "TCP handshake de 3 vías",
+      "OAuth2"
+    ],
+    "correctIndex": 1,
+    "explanation": "En 2PC, el coordinador pregunta primero a todos los recursos si pueden comprometerse (prepare); solo si todos dicen que sí, ordena el commit final a todos."
+  },
+  {
+    "id": "java-162",
+    "category": "java",
+    "topic": "Transacciones (Java)",
+    "question": "¿Qué nivel de aislamiento en Java/Spring, siendo el más estricto, previene dirty reads, non-repeatable reads Y phantom reads simultáneamente?",
+    "options": [
+      "READ_UNCOMMITTED",
+      "READ_COMMITTED",
+      "REPEATABLE_READ",
+      "SERIALIZABLE"
+    ],
+    "correctIndex": 3,
+    "explanation": "SERIALIZABLE es el nivel más estricto, previniendo los 3 fenómenos, típicamente a costa de mayor contención y menor throughput."
+  },
+  {
+    "id": "java-163",
+    "category": "java",
+    "topic": "Testing",
+    "question": "¿Qué anotación de JUnit 5 marca un método que debe ejecutarse ANTES de cada prueba individual?",
+    "options": [
+      "@BeforeAll",
+      "@BeforeEach",
+      "@Test",
+      "@AfterEach"
+    ],
+    "correctIndex": 1,
+    "explanation": "@BeforeEach se ejecuta antes de CADA método @Test, típicamente para reiniciar el estado (ej. crear un objeto nuevo bajo prueba)."
+  },
+  {
+    "id": "java-164",
+    "category": "java",
+    "topic": "Testing",
+    "question": "¿Qué diferencia hay entre un Stub y un Mock, como dobles de prueba?",
+    "options": [
+      "Son sinónimos exactos",
+      "Un Stub solo devuelve respuestas predefinidas; un Mock además permite VERIFICAR que fue invocado correctamente (con qué argumentos, cuántas veces)",
+      "Un Mock nunca puede devolver un valor",
+      "Un Stub siempre lanza excepciones"
+    ],
+    "correctIndex": 1,
+    "explanation": "La distinción clave: 'when(...).thenReturn(...)' es modo stub (solo respuesta); 'verify(...)' es lo que confirma la interacción, propio de un mock."
+  },
+  {
+    "id": "java-165",
+    "category": "java",
+    "topic": "Testing",
+    "question": "¿Qué hace @Mock de Mockito?",
+    "options": [
+      "Crea una instancia real de la clase, ejecutando su lógica real",
+      "Crea un doble de prueba (objeto simulado) de una dependencia, sin lógica real por defecto",
+      "Marca un método como prueba a ejecutar",
+      "Configura la base de datos de prueba"
+    ],
+    "correctIndex": 1,
+    "explanation": "@Mock crea un objeto simulado (sin comportamiento real) que se puede programar con when()/thenReturn() y verificar con verify()."
+  },
+  {
+    "id": "java-166",
+    "category": "java",
+    "topic": "Testing",
+    "question": "¿Qué principio de la pirámide de pruebas indica que debe haber MUCHAS pruebas unitarias y POCAS pruebas E2E?",
+    "options": [
+      "Porque las E2E son gratis de mantener",
+      "Porque las E2E son las más lentas y frágiles ante cambios, mientras las unitarias son rápidas y baratas de mantener",
+      "Porque JUnit no soporta pruebas E2E",
+      "No es una recomendación real"
+    ],
+    "correctIndex": 1,
+    "explanation": "Invertir la pirámide (pocas unitarias, muchas E2E) produce suites lentas y llenas de falsos negativos ante cualquier cambio de UI."
+  },
+  {
+    "id": "java-167",
+    "category": "java",
+    "topic": "Testing",
+    "question": "En el ciclo TDD (Rojo-Verde-Refactor), ¿qué ocurre en el paso 'Verde'?",
+    "options": [
+      "Se escribe una prueba que falla",
+      "Se escribe el código de producción MÍNIMO necesario para que la prueba pase",
+      "Se mejora el diseño sin cambiar el comportamiento",
+      "Se elimina la prueba"
+    ],
+    "correctIndex": 1,
+    "explanation": "El paso Verde consiste en escribir solo el código mínimo que hace pasar la prueba que acababa de fallar en el paso Rojo — nada más."
+  },
+  {
+    "id": "java-168",
+    "category": "java",
+    "topic": "Testing",
+    "question": "¿Qué letra del principio FIRST de buenas pruebas exige que el resultado de una prueba NO dependa de que otra se haya ejecutado antes?",
+    "options": [
+      "Fast",
+      "Independent",
+      "Repeatable",
+      "Timely"
+    ],
+    "correctIndex": 1,
+    "explanation": "Independent exige que cada prueba sea aislada del resto: su resultado no debe depender del orden de ejecución ni del estado dejado por otra prueba."
+  },
+  {
+    "id": "java-169",
+    "category": "java",
+    "topic": "Testing",
+    "question": "¿Qué mide la cobertura de código (code coverage) con herramientas como JaCoCo?",
+    "options": [
+      "Qué tan buenas son las aserciones de las pruebas",
+      "Qué porcentaje de líneas/ramas del código de producción se EJECUTAN al correr la suite de pruebas",
+      "El tiempo total que tarda la suite en correr",
+      "La cantidad de bugs encontrados"
+    ],
+    "correctIndex": 1,
+    "explanation": "100% de cobertura solo significa que cada línea se ejecutó al menos una vez, NO que se verificó correctamente con una aserción significativa."
+  },
+  {
+    "id": "java-170",
+    "category": "java",
+    "topic": "Testing",
+    "question": "¿Qué anotación de Spring permite probar un controlador REST sin levantar un servidor HTTP real?",
+    "options": [
+      "@SpringBootTest completo",
+      "@WebMvcTest junto con MockMvc",
+      "@Entity",
+      "@Autowired sin más contexto"
+    ],
+    "correctIndex": 1,
+    "explanation": "@WebMvcTest levanta solo la capa web y permite usar MockMvc para simular peticiones HTTP directamente contra los controladores, sin un puerto real."
+  },
+  {
+    "id": "java-171",
+    "category": "java",
+    "topic": "Testing",
+    "question": "¿Qué usa Testcontainers para las pruebas de integración con una base de datos?",
+    "options": [
+      "Una base de datos en memoria como H2, simulando el motor real",
+      "Docker, para levantar una base de datos REAL (ej. PostgreSQL) durante las pruebas y destruirla al terminar",
+      "Mocks de Mockito para simular JDBC",
+      "Un archivo de texto plano"
+    ],
+    "correctIndex": 1,
+    "explanation": "Testcontainers evita el problema de 'en las pruebas pasaba, en producción falló' al usar el motor real (vía Docker) en vez de uno simulado como H2."
+  },
+  {
+    "id": "java-172",
+    "category": "java",
+    "topic": "Testing",
+    "question": "¿Qué estructura de 3 bloques se recomienda para organizar claramente cada prueba unitaria?",
+    "options": [
+      "Import, Class, Method",
+      "Arrange, Act, Assert (AAA)",
+      "Setup, Run, Teardown únicamente sin aserciones",
+      "Given, When, Then, And, But"
+    ],
+    "correctIndex": 1,
+    "explanation": "AAA divide la prueba en: preparar el escenario (Arrange), ejecutar la acción bajo prueba (Act), y verificar el resultado (Assert), en ese orden."
+  }
+]

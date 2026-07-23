@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Simulador de Certificación — Java, SQL &amp; Fundamentos</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --blue: #1e40af;
+    --blue-light: #2563eb;
+    --orange: #f97316;
+    --red: #dc2626;
+  }
+
+  html, body {
+    height: 100%;
+  }
+
+  body {
+    font-family: 'Inter', system-ui, sans-serif;
+    min-height: 100vh;
+    background: linear-gradient(120deg, #1e3a8a 0%, #1d4ed8 20%, #2563eb 32%, #f97316 50%, #ea580c 58%, #dc2626 78%, #b91c1c 100%);
+    background-attachment: fixed;
+    background-size: 200% 200%;
+    animation: gradientShift 18s ease infinite;
+  }
+
+  @keyframes gradientShift {
+    0%   { background-position: 0% 50%; }
+    50%  { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+
+  .font-mono-code { font-family: 'JetBrains Mono', ui-monospace, monospace; }
+
+  .glass {
+    background: rgba(255, 255, 255, 0.94);
+    backdrop-filter: blur(10px);
+  }
+
+  .code-block {
+    white-space: pre-wrap;
+    word-break: break-word;
+    background: #0f172a;
+    color: #e2e8f0;
+    border-radius: 0.75rem;
+    padding: 1rem 1.1rem;
+    font-size: 0.92rem;
+    line-height: 1.55;
+  }
+
+  .option-btn {
+    transition: all 0.15s ease;
+  }
+  .option-btn:hover:not(:disabled) {
+    transform: translateY(-1px);
+  }
+
+  .progress-fill {
+    transition: width 0.35s ease;
+  }
+
+  ::-webkit-scrollbar { width: 10px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.35); border-radius: 999px; }
+
+  .badge-java { background: linear-gradient(135deg,#f97316,#ea580c); }
+  .badge-sql { background: linear-gradient(135deg,#2563eb,#1d4ed8); }
+  .badge-certificacion { background: linear-gradient(135deg,#dc2626,#b91c1c); }
+
+  .fade-in { animation: fadeIn 0.28s ease; }
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(6px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .pop { animation: pop 0.35s cubic-bezier(.34,1.56,.64,1); }
+  @keyframes pop {
+    0% { transform: scale(0.92); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+  }
+
+  input[type="checkbox"].chk {
+    accent-color: #ea580c;
+  }
+</style>
+</head>
+<body class="text-slate-800">
+
+  <div class="min-h-screen flex flex-col items-center px-4 py-8 sm:py-12">
+
+    <header class="w-full max-w-4xl mb-6 sm:mb-8 text-center">
+      <div class="inline-flex items-center gap-2 bg-white/15 text-white text-xs sm:text-sm font-medium px-3 py-1 rounded-full backdrop-blur-sm border border-white/20 mb-3">
+        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+        Banco de preguntas: Java · SQL · Guía de Certificación
+      </div>
+      <h1 class="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white drop-shadow-lg tracking-tight">
+        Simulador de Certificación Técnica
+      </h1>
+      <p class="text-white/90 mt-2 text-sm sm:text-base max-w-2xl mx-auto">
+        Practica con preguntas de opción múltiple, recibe retroalimentación inmediata con explicación, y revisa tu puntaje final por categoría.
+      </p>
+    </header>
+
+    <main id="app" class="w-full max-w-4xl"></main>
+
+    <footer class="mt-10 text-white/70 text-xs text-center px-4">
+      Contenido basado en <span class="font-mono-code">java-guide.md</span>, <span class="font-mono-code">sql-oracle-guide.md</span> y <span class="font-mono-code">certificacion-guide.md</span>.
+    </footer>
+  </div>
+
+  <script src="questions.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

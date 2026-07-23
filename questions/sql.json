@@ -1,0 +1,2704 @@
+[
+  {
+    "id": "sql-001",
+    "category": "sql",
+    "topic": "Introducción a SQL",
+    "question": "¿Qué significa SQL?",
+    "options": [
+      "Structured Query Language",
+      "Sequential Query Logic",
+      "System Query Language",
+      "Standard Question Language"
+    ],
+    "correctIndex": 0,
+    "explanation": "SQL (Structured Query Language) es el lenguaje estándar para gestionar y consultar bases de datos relacionales."
+  },
+  {
+    "id": "sql-002",
+    "category": "sql",
+    "topic": "Introducción a SQL",
+    "question": "¿En qué categoría se clasifica el comando SELECT?",
+    "options": [
+      "DDL (Data Definition Language)",
+      "DQL (Data Query Language)",
+      "DCL (Data Control Language)",
+      "TCL (Transaction Control Language)"
+    ],
+    "correctIndex": 1,
+    "explanation": "SELECT pertenece a DQL: el lenguaje para consultar/extraer datos, sin modificar estructura ni datos."
+  },
+  {
+    "id": "sql-003",
+    "category": "sql",
+    "topic": "Introducción a SQL",
+    "question": "¿En qué categoría se clasifican CREATE, ALTER y DROP?",
+    "options": [
+      "DML",
+      "DDL (Data Definition Language)",
+      "DQL",
+      "TCL"
+    ],
+    "correctIndex": 1,
+    "explanation": "DDL define la ESTRUCTURA de los objetos de la base de datos (tablas, índices, vistas), a diferencia de DML que manipula datos."
+  },
+  {
+    "id": "sql-004",
+    "category": "sql",
+    "topic": "Introducción a SQL",
+    "question": "¿En qué categoría se clasifican INSERT, UPDATE y DELETE?",
+    "options": [
+      "DML (Data Manipulation Language)",
+      "DDL",
+      "DCL",
+      "TCL"
+    ],
+    "correctIndex": 0,
+    "explanation": "DML manipula los DATOS dentro de estructuras ya existentes, sin cambiar la estructura de las tablas."
+  },
+  {
+    "id": "sql-005",
+    "category": "sql",
+    "topic": "Introducción a SQL",
+    "question": "¿Qué categoría de comandos SQL controla quién puede hacer qué dentro de la base de datos (GRANT/REVOKE)?",
+    "options": [
+      "DDL",
+      "DML",
+      "DCL (Data Control Language)",
+      "DQL"
+    ],
+    "correctIndex": 2,
+    "explanation": "DCL (Data Control Language) gestiona privilegios y permisos: GRANT otorga, REVOKE quita."
+  },
+  {
+    "id": "sql-006",
+    "category": "sql",
+    "topic": "Arquitectura Oracle",
+    "question": "En Oracle, ¿qué representa un 'schema' (esquema)?",
+    "options": [
+      "Un archivo de configuración del sistema operativo",
+      "La colección de objetos (tablas, vistas, secuencias, etc.) que pertenecen a un usuario específico",
+      "Un tipo de índice",
+      "Una sola tabla"
+    ],
+    "correctIndex": 1,
+    "explanation": "En Oracle, cada usuario tiene su propio schema: el conjunto de objetos que le pertenecen y que puede crear/gestionar."
+  },
+  {
+    "id": "sql-007",
+    "category": "sql",
+    "topic": "Arquitectura Oracle",
+    "question": "¿Qué tabla especial de Oracle se usa para hacer SELECT de expresiones que no dependen de ninguna tabla real (ej. SELECT SYSDATE FROM dual)?",
+    "options": [
+      "SYSTEM",
+      "DUAL",
+      "TEMP",
+      "DEFAULT"
+    ],
+    "correctIndex": 1,
+    "explanation": "DUAL es una tabla ficticia de una sola fila y columna, usada por convención para evaluar expresiones/funciones sin necesitar una tabla real."
+  },
+  {
+    "id": "sql-008",
+    "category": "sql",
+    "topic": "Arquitectura Oracle",
+    "question": "¿Qué usuario administrador de Oracle tiene privilegios totales sobre toda la base de datos?",
+    "options": [
+      "RRHH",
+      "SYSTEM/SYS",
+      "PUBLIC",
+      "DUAL"
+    ],
+    "correctIndex": 1,
+    "explanation": "SYS y SYSTEM son las cuentas administrativas por defecto de Oracle, con privilegios extensos sobre toda la instancia."
+  },
+  {
+    "id": "sql-009",
+    "category": "sql",
+    "topic": "Arquitectura Oracle",
+    "question": "¿Qué es un 'tablespace' en Oracle?",
+    "options": [
+      "Un tipo de dato numérico",
+      "Una unidad lógica de almacenamiento que agrupa archivos físicos donde se guardan los datos de los objetos",
+      "Un tipo de JOIN",
+      "Una vista del diccionario de datos"
+    ],
+    "correctIndex": 1,
+    "explanation": "Un tablespace es la unidad lógica de almacenamiento en Oracle; los objetos (tablas, índices) se crean 'dentro' de un tablespace, que a su vez mapea a archivos físicos."
+  },
+  {
+    "id": "sql-010",
+    "category": "sql",
+    "topic": "Arquitectura Oracle",
+    "question": "¿Qué comando otorga a un usuario nuevo el privilegio mínimo para poder simplemente conectarse a la base de datos?",
+    "options": [
+      "GRANT CREATE TABLE",
+      "GRANT CREATE SESSION",
+      "GRANT DBA",
+      "GRANT SELECT"
+    ],
+    "correctIndex": 1,
+    "explanation": "CREATE SESSION es el privilegio de sistema mínimo indispensable para que un usuario pueda iniciar sesión en la base de datos."
+  },
+  {
+    "id": "sql-011",
+    "category": "sql",
+    "topic": "Esquema RRHH",
+    "question": "En el esquema de práctica RRHH, ¿qué tipo de relación existe entre DEPARTAMENTOS y EMPLEADOS?",
+    "options": [
+      "Muchos a muchos (N:M)",
+      "Uno a muchos (1:N): un departamento tiene muchos empleados",
+      "Uno a uno (1:1)",
+      "No existe relación entre esas tablas"
+    ],
+    "correctIndex": 1,
+    "explanation": "Un departamento puede tener muchos empleados, pero cada empleado pertenece (típicamente) a un solo departamento — relación 1:N."
+  },
+  {
+    "id": "sql-012",
+    "category": "sql",
+    "topic": "Esquema RRHH",
+    "question": "¿Qué tabla intermedia resuelve la relación muchos-a-muchos entre EMPLEADOS y PROYECTOS?",
+    "options": [
+      "DEPARTAMENTOS",
+      "PUESTOS",
+      "EMPLEADO_PROYECTO",
+      "No hace falta tabla intermedia"
+    ],
+    "correctIndex": 2,
+    "explanation": "EMPLEADO_PROYECTO tiene una clave primaria compuesta (id_empleado, id_proyecto) que resuelve la relación N:M entre EMPLEADOS y PROYECTOS."
+  },
+  {
+    "id": "sql-013",
+    "category": "sql",
+    "topic": "Esquema RRHH",
+    "question": "¿Qué representa la columna id_jefe dentro de la propia tabla EMPLEADOS?",
+    "options": [
+      "Una clave foránea que apunta a la tabla DEPARTAMENTOS",
+      "Una auto-referencia: una clave foránea que apunta a otra fila de la MISMA tabla EMPLEADOS",
+      "Un campo calculado automáticamente",
+      "Un tipo de índice"
+    ],
+    "correctIndex": 1,
+    "explanation": "id_jefe referencia a id_empleado de la misma tabla (auto-referencia), modelando que el jefe de un empleado también es un empleado."
+  },
+  {
+    "id": "sql-014",
+    "category": "sql",
+    "topic": "Esquema RRHH",
+    "question": "¿Qué tabla del esquema RRHH funciona como catálogo de cargos con su rango salarial (salario_minimo/salario_maximo)?",
+    "options": [
+      "DEPARTAMENTOS",
+      "PUESTOS",
+      "PROYECTOS",
+      "EMPLEADO_PROYECTO"
+    ],
+    "correctIndex": 1,
+    "explanation": "PUESTOS es el catálogo de puestos de trabajo, con id_puesto, titulo_puesto, salario_minimo y salario_maximo."
+  },
+  {
+    "id": "sql-015",
+    "category": "sql",
+    "topic": "Esquema RRHH",
+    "question": "¿Qué columnas forman la clave primaria compuesta de EMPLEADO_PROYECTO?",
+    "options": [
+      "Solo id_empleado",
+      "Solo id_proyecto",
+      "id_empleado + id_proyecto juntos",
+      "id_empleado + rol"
+    ],
+    "correctIndex": 2,
+    "explanation": "La combinación (id_empleado, id_proyecto) identifica de forma única cada asignación de un empleado a un proyecto — típico de tablas intermedias N:M."
+  },
+  {
+    "id": "sql-016",
+    "category": "sql",
+    "topic": "Esquema RRHH",
+    "question": "¿Qué tipo de relación existe entre DEPARTAMENTOS y PROYECTOS en el esquema RRHH?",
+    "options": [
+      "Muchos a muchos",
+      "Uno a muchos: un departamento puede tener muchos proyectos",
+      "Uno a uno",
+      "No hay relación"
+    ],
+    "correctIndex": 1,
+    "explanation": "PROYECTOS tiene una FK id_departamento hacia DEPARTAMENTOS: un departamento puede impulsar varios proyectos (1:N)."
+  },
+  {
+    "id": "sql-017",
+    "category": "sql",
+    "topic": "Tipos de datos numéricos",
+    "question": "¿Qué representan 'p' y 's' en NUMBER(p, s)?",
+    "options": [
+      "p = página, s = sección",
+      "p = precisión total de dígitos, s = escala (dígitos decimales)",
+      "p = precio, s = stock",
+      "No tienen significado especial"
+    ],
+    "correctIndex": 1,
+    "explanation": "p es la precisión total (cantidad máxima de dígitos), s es la escala (cuántos de esos dígitos van después del punto decimal)."
+  },
+  {
+    "id": "sql-018",
+    "category": "sql",
+    "topic": "Tipos de datos numéricos",
+    "question": "¿Qué ocurre al insertar 123456.789 en una columna definida como NUMBER(8,2)?",
+    "options": [
+      "Se inserta sin problema, truncando a 123456.78",
+      "Lanza un error: ORA-01438, el valor excede la precisión especificada para la columna",
+      "Se convierte automáticamente a NUMBER(10,2)",
+      "Se guarda como texto"
+    ],
+    "correctIndex": 1,
+    "explanation": "NUMBER(8,2) permite máximo 8 dígitos totales (6 enteros + 2 decimales) = hasta 999999.99; 123456.789 tiene 6 enteros pero requiere redondeo, y valores mayores exceden la precisión."
+  },
+  {
+    "id": "sql-019",
+    "category": "sql",
+    "topic": "Tipos de datos numéricos",
+    "question": "¿Qué hace una escala NEGATIVA en NUMBER(12,-3)?",
+    "options": [
+      "Produce un error de sintaxis",
+      "Redondea el valor a la centena/millar más cercana según el exponente indicado (en este caso, miles)",
+      "Convierte el número en negativo",
+      "No tiene ningún efecto"
+    ],
+    "correctIndex": 1,
+    "explanation": "Una escala negativa redondea hacia la izquierda del punto decimal: NUMBER(12,-3) redondea a miles (1234567 se guarda como 1235000)."
+  },
+  {
+    "id": "sql-020",
+    "category": "sql",
+    "topic": "Tipos de datos numéricos",
+    "question": "¿Cuál es 'el tipo numérico universal' de Oracle, usado tanto para enteros como decimales?",
+    "options": [
+      "INT",
+      "FLOAT",
+      "NUMBER",
+      "BINARY_DOUBLE"
+    ],
+    "correctIndex": 2,
+    "explanation": "NUMBER(p,s) es el tipo numérico de propósito general en Oracle; INTEGER es solo un alias de NUMBER(38) por compatibilidad con el estándar SQL."
+  },
+  {
+    "id": "sql-021",
+    "category": "sql",
+    "topic": "Tipos de datos numéricos",
+    "question": "¿Qué tipo numérico de Oracle está optimizado para cálculos científicos de punto flotante IEEE 754 de 64 bits?",
+    "options": [
+      "NUMBER",
+      "BINARY_DOUBLE",
+      "INTEGER",
+      "CHAR"
+    ],
+    "correctIndex": 1,
+    "explanation": "BINARY_DOUBLE implementa IEEE 754 de doble precisión, más rápido que NUMBER para cálculos científicos intensivos."
+  },
+  {
+    "id": "sql-022",
+    "category": "sql",
+    "topic": "Tipos de datos numéricos",
+    "question": "Al insertar 0.12345 en una columna NUMBER(5,4), ¿qué valor queda almacenado?",
+    "options": [
+      "0.1234 (trunca)",
+      "0.1235 (Oracle redondea al insertar, no trunca)",
+      "Error de precisión",
+      "0.12345 sin cambios"
+    ],
+    "correctIndex": 1,
+    "explanation": "Oracle redondea automáticamente al insertar un valor que excede la escala definida, en vez de truncarlo."
+  },
+  {
+    "id": "sql-023",
+    "category": "sql",
+    "topic": "Tipos de datos texto",
+    "question": "¿Cuál es el tipo de texto recomendado por defecto para el 95% de los casos en Oracle?",
+    "options": [
+      "CHAR(n)",
+      "VARCHAR2(n)",
+      "LONG",
+      "CLOB siempre"
+    ],
+    "correctIndex": 1,
+    "explanation": "VARCHAR2 almacena longitud VARIABLE (solo ocupa lo que realmente se escribe); CHAR rellena con espacios hasta su longitud fija, lo cual rara vez es lo que se quiere."
+  },
+  {
+    "id": "sql-024",
+    "category": "sql",
+    "topic": "Tipos de datos texto",
+    "question": "Si insertas 'Ana' en una columna CHAR(5), ¿cuál es el resultado de LENGTH(columna)?",
+    "options": [
+      "3",
+      "5 (rellenado con espacios a la derecha)",
+      "0",
+      "Error, no cabe"
+    ],
+    "correctIndex": 1,
+    "explanation": "CHAR(n) siempre ocupa exactamente n caracteres, rellenando con espacios a la derecha si el valor es más corto."
+  },
+  {
+    "id": "sql-025",
+    "category": "sql",
+    "topic": "Tipos de datos texto",
+    "question": "¿Qué tipo se usa para almacenar texto de gran tamaño (documentos, JSON como texto) sin límite práctico?",
+    "options": [
+      "VARCHAR2(4000)",
+      "CHAR(2000)",
+      "CLOB",
+      "RAW(2000)"
+    ],
+    "correctIndex": 2,
+    "explanation": "CLOB (Character Large Object) soporta hasta 4 GB de texto, muy por encima del límite de VARCHAR2 (4000 bytes o 32767 con MAX_STRING_SIZE=EXTENDED)."
+  },
+  {
+    "id": "sql-026",
+    "category": "sql",
+    "topic": "Tipos de datos texto",
+    "question": "¿Qué diferencia hay entre VARCHAR2 y NVARCHAR2?",
+    "options": [
+      "Ninguna diferencia real",
+      "NVARCHAR2 se almacena en el juego de caracteres nacional (Unicode) para soporte multi-idioma garantizado",
+      "NVARCHAR2 no permite texto en español",
+      "VARCHAR2 no puede indexarse"
+    ],
+    "correctIndex": 1,
+    "explanation": "NVARCHAR2 garantiza almacenamiento en Unicode independientemente del character set de la base, útil para aplicaciones verdaderamente multi-idioma."
+  },
+  {
+    "id": "sql-027",
+    "category": "sql",
+    "topic": "Tipos de datos texto",
+    "question": "¿Por qué se considera obsoleto el tipo LONG en código nuevo?",
+    "options": [
+      "Porque no puede almacenar texto",
+      "Porque fue reemplazado por CLOB, que es más flexible y con menos restricciones de uso",
+      "Porque Oracle lo eliminó por completo",
+      "No es obsoleto, se recomienda su uso"
+    ],
+    "correctIndex": 1,
+    "explanation": "LONG es el predecesor de CLOB, con muchas restricciones (solo una columna LONG por tabla, no se puede usar en WHERE, etc.) — se evita en desarrollo nuevo."
+  },
+  {
+    "id": "sql-028",
+    "category": "sql",
+    "topic": "Tipos de datos fecha/hora",
+    "question": "A diferencia de otros motores de base de datos, ¿qué característica tiene siempre el tipo DATE en Oracle?",
+    "options": [
+      "Solo almacena la fecha, nunca la hora",
+      "Siempre incluye hora (día, mes, año, hora, minuto, segundo), aunque no se especifique al insertar",
+      "No puede usarse en cálculos",
+      "Es un alias de VARCHAR2"
+    ],
+    "correctIndex": 1,
+    "explanation": "DATE en Oracle SIEMPRE incluye componente de hora con precisión de segundos, aunque solo insertes la fecha (la hora queda en 00:00:00)."
+  },
+  {
+    "id": "sql-029",
+    "category": "sql",
+    "topic": "Tipos de datos fecha/hora",
+    "question": "¿Qué diferencia principal hay entre DATE y TIMESTAMP?",
+    "options": [
+      "No hay ninguna diferencia",
+      "TIMESTAMP añade precisión de fracciones de segundo, que DATE no tiene",
+      "DATE es más preciso que TIMESTAMP",
+      "TIMESTAMP no puede compararse con DATE"
+    ],
+    "correctIndex": 1,
+    "explanation": "TIMESTAMP(p) extiende DATE con fracciones de segundo (hasta 9 dígitos decimales), útil cuando se necesita mayor granularidad temporal."
+  },
+  {
+    "id": "sql-030",
+    "category": "sql",
+    "topic": "Tipos de datos fecha/hora",
+    "question": "¿Qué devuelve 'SELECT SYSDATE + 7 FROM dual'?",
+    "options": [
+      "Un error, no se puede sumar a una fecha",
+      "La fecha actual más 7 días",
+      "El número 7",
+      "SYSDATE multiplicado por 7"
+    ],
+    "correctIndex": 1,
+    "explanation": "Oracle permite aritmética directa de fechas: sumar/restar un número a una DATE representa días."
+  },
+  {
+    "id": "sql-031",
+    "category": "sql",
+    "topic": "Tipos de datos fecha/hora",
+    "question": "¿Qué tipo almacena además el offset de zona horaria junto con la fecha/hora?",
+    "options": [
+      "DATE",
+      "TIMESTAMP (sin más)",
+      "TIMESTAMP WITH TIME ZONE",
+      "INTERVAL DAY TO SECOND"
+    ],
+    "correctIndex": 2,
+    "explanation": "TIMESTAMP WITH TIME ZONE guarda explícitamente el offset de zona horaria del valor almacenado."
+  },
+  {
+    "id": "sql-032",
+    "category": "sql",
+    "topic": "Tipos de datos fecha/hora",
+    "question": "¿Qué representa el tipo INTERVAL DAY TO SECOND?",
+    "options": [
+      "Una fecha absoluta",
+      "Un intervalo/diferencia de tiempo expresado en días, horas, minutos y segundos",
+      "Un tipo de índice",
+      "Un tipo de restricción CHECK"
+    ],
+    "correctIndex": 1,
+    "explanation": "INTERVAL DAY TO SECOND modela DURACIONES (diferencias de tiempo), no fechas/instantes absolutos como DATE o TIMESTAMP."
+  },
+  {
+    "id": "sql-033",
+    "category": "sql",
+    "topic": "Tipos de datos fecha/hora",
+    "question": "¿Qué diferencia hay entre SYSDATE y SYSTIMESTAMP?",
+    "options": [
+      "Son exactamente lo mismo",
+      "SYSDATE tiene precisión de segundo; SYSTIMESTAMP incluye fracciones de segundo y zona horaria",
+      "SYSTIMESTAMP no incluye la hora",
+      "SYSDATE es más preciso que SYSTIMESTAMP"
+    ],
+    "correctIndex": 1,
+    "explanation": "SYSTIMESTAMP ofrece mayor precisión (fracciones de segundo) y además la zona horaria de la sesión, a diferencia de SYSDATE."
+  },
+  {
+    "id": "sql-034",
+    "category": "sql",
+    "topic": "Tipos binarios y otros",
+    "question": "¿Qué tipo se usa para almacenar archivos binarios grandes (imágenes, PDFs) directamente dentro de la base de datos?",
+    "options": [
+      "RAW(2000)",
+      "BLOB",
+      "VARCHAR2",
+      "ROWID"
+    ],
+    "correctIndex": 1,
+    "explanation": "BLOB (Binary Large Object) soporta hasta 4 GB de datos binarios, adecuado para archivos grandes; RAW tiene un límite mucho menor."
+  },
+  {
+    "id": "sql-035",
+    "category": "sql",
+    "topic": "Tipos binarios y otros",
+    "question": "¿Qué representa un BFILE?",
+    "options": [
+      "Un archivo binario almacenado dentro de la tabla",
+      "Una referencia/puntero a un archivo binario almacenado FUERA de la base de datos, en el sistema de archivos del servidor",
+      "Un tipo de índice binario",
+      "Un booleano"
+    ],
+    "correctIndex": 1,
+    "explanation": "BFILE no almacena el archivo en sí dentro de la BD; solo guarda una referencia a su ubicación en el sistema de archivos del servidor."
+  },
+  {
+    "id": "sql-036",
+    "category": "sql",
+    "topic": "Tipos binarios y otros",
+    "question": "¿Cómo se simula típicamente un tipo BOOLEAN en una columna de tabla SQL de Oracle (versiones sin tipo nativo)?",
+    "options": [
+      "No es posible representar booleanos en Oracle",
+      "Con NUMBER(1) restringido a 0/1, o CHAR(1) con 'S'/'N', usando un CHECK",
+      "Con el tipo BOOLEAN nativo de SQL, igual que en PL/SQL",
+      "Con VARCHAR2(100)"
+    ],
+    "correctIndex": 1,
+    "explanation": "BOOLEAN solo existe de forma nativa en PL/SQL, no como tipo de columna en SQL puro (en versiones no muy recientes); se simula con NUMBER(1) o CHAR(1) más un CHECK."
+  },
+  {
+    "id": "sql-037",
+    "category": "sql",
+    "topic": "Tipos binarios y otros",
+    "question": "¿Qué es el ROWID de una fila en Oracle?",
+    "options": [
+      "Un campo que el usuario debe definir manualmente",
+      "El identificador físico único e interno de esa fila, su 'dirección' física en el almacenamiento",
+      "Un tipo de JOIN",
+      "Un sinónimo de PRIMARY KEY"
+    ],
+    "correctIndex": 1,
+    "explanation": "ROWID es un identificador interno gestionado por Oracle, que permite acceso directo ultra-rápido a la fila física exacta."
+  },
+  {
+    "id": "sql-038",
+    "category": "sql",
+    "topic": "Formatos de fecha/número",
+    "question": "¿Por qué es riesgoso escribir 'WHERE fecha = '2026-07-14'' comparando directamente contra un texto?",
+    "options": [
+      "Porque Oracle no permite comparar fechas nunca",
+      "Porque depende del NLS_DATE_FORMAT de la sesión y puede interpretarse distinto (o fallar) en otro entorno",
+      "Porque las fechas no pueden usarse en WHERE",
+      "No es riesgoso, es la forma recomendada"
+    ],
+    "correctIndex": 1,
+    "explanation": "La forma segura es usar TO_DATE(...) explícito o un literal ANSI como DATE '2026-07-14', independiente de la configuración regional de la sesión."
+  },
+  {
+    "id": "sql-039",
+    "category": "sql",
+    "topic": "Formatos de fecha/número",
+    "question": "¿Qué elemento del modelo de formato de fecha representa el año con 4 dígitos?",
+    "options": [
+      "YY",
+      "YYYY",
+      "RR",
+      "MM"
+    ],
+    "correctIndex": 1,
+    "explanation": "YYYY representa el año completo con 4 dígitos (ej. 2026); YY solo usa 2 dígitos, ambiguo entre siglos."
+  },
+  {
+    "id": "sql-040",
+    "category": "sql",
+    "topic": "Formatos de fecha/número",
+    "question": "¿Qué diferencia hay entre 'YY' y 'RR' al interpretar años de 2 dígitos como '70'?",
+    "options": [
+      "Son exactamente equivalentes",
+      "'RR' aplica una regla de 'pivote' más inteligente sobre el siglo (interpreta 1970); 'YY' asume simplemente el siglo actual (2070)",
+      "'YY' siempre es más preciso que 'RR'",
+      "Ninguno de los dos funciona con TO_DATE"
+    ],
+    "correctIndex": 1,
+    "explanation": "RR usa una regla de pivote (años 50-99 se asumen del siglo pasado, 00-49 del siglo actual) diseñada para manejar mejor la ambigüedad de siglo que YY."
+  },
+  {
+    "id": "sql-041",
+    "category": "sql",
+    "topic": "Formatos de fecha/número",
+    "question": "¿Qué produce TO_CHAR(SYSDATE, 'YYYY-MM-DD')?",
+    "options": [
+      "La fecha actual en formato ISO, como texto, ej. '2026-07-22'",
+      "Un NUMBER",
+      "Un error de sintaxis",
+      "La hora actual solamente"
+    ],
+    "correctIndex": 0,
+    "explanation": "TO_CHAR convierte una fecha/número al formato de TEXTO indicado por la máscara — aquí, formato ISO 'YYYY-MM-DD'."
+  },
+  {
+    "id": "sql-042",
+    "category": "sql",
+    "topic": "Formatos de fecha/número",
+    "question": "¿Qué elemento de formato numérico rellena con CEROS a la izquierda, a diferencia de '9' que no rellena?",
+    "options": [
+      "'0'",
+      "'.'",
+      "'L'",
+      "'FM'"
+    ],
+    "correctIndex": 0,
+    "explanation": "'0' rellena con ceros (ej. '01234.50'); '9' deja espacios en blanco en las posiciones no usadas (ej. ' 1234.50')."
+  },
+  {
+    "id": "sql-043",
+    "category": "sql",
+    "topic": "Formatos de fecha/número",
+    "question": "¿Qué hace el modificador 'FM' en un formato numérico como 'FM9999'?",
+    "options": [
+      "Formatea como moneda",
+      "Elimina (fill mode) espacios/ceros de relleno sobrantes del resultado",
+      "Fuerza el resultado a mayúsculas",
+      "Convierte el número en fecha"
+    ],
+    "correctIndex": 1,
+    "explanation": "'FM' ('fill mode') produce una salida más compacta, sin el padding de espacios que Oracle añade por defecto para alinear resultados."
+  },
+  {
+    "id": "sql-044",
+    "category": "sql",
+    "topic": "Formatos de fecha/número",
+    "question": "¿Qué elemento de formato numérico produce el formato contable, mostrando los negativos entre '< >'?",
+    "options": [
+      "'MI'",
+      "'S'",
+      "'PR'",
+      "'EEEE'"
+    ],
+    "correctIndex": 2,
+    "explanation": "'PR' formatea los valores negativos entre corchetes angulares, ej. '<1234.50>', típico de reportes contables."
+  },
+  {
+    "id": "sql-045",
+    "category": "sql",
+    "topic": "Formatos de fecha/número",
+    "question": "¿Qué función convierte un texto a un valor DATE interpretándolo según una máscara explícita?",
+    "options": [
+      "TO_CHAR",
+      "TO_DATE",
+      "TO_NUMBER",
+      "CAST únicamente"
+    ],
+    "correctIndex": 1,
+    "explanation": "TO_DATE(texto, 'formato') interpreta un string como fecha según el patrón indicado, ej. TO_DATE('14/07/2026', 'DD/MM/YYYY')."
+  },
+  {
+    "id": "sql-046",
+    "category": "sql",
+    "topic": "Formatos de fecha/número",
+    "question": "¿Qué representa el elemento 'HH24' en un formato de fecha?",
+    "options": [
+      "Hora en formato 12 horas",
+      "Hora en formato 24 horas (00-23)",
+      "Los minutos",
+      "El día del año"
+    ],
+    "correctIndex": 1,
+    "explanation": "HH24 muestra la hora en formato de 24 horas; HH/HH12 usa el formato de 12 horas con AM/PM."
+  },
+  {
+    "id": "sql-047",
+    "category": "sql",
+    "topic": "Formatos de fecha/número",
+    "question": "¿Cuál es la forma recomendada de escribir un valor de fecha CONSTANTE (literal) en un script SQL, independiente del NLS de la sesión?",
+    "options": [
+      "'2026-07-14' entre comillas simples, sin más",
+      "DATE '2026-07-14' (literal ANSI)",
+      "TO_CHAR('2026-07-14')",
+      "SYSDATE - 'texto'"
+    ],
+    "correctIndex": 1,
+    "explanation": "Los literales ANSI como DATE '2026-07-14' son interpretados de forma consistente por Oracle, sin depender del NLS_DATE_FORMAT configurado en la sesión."
+  },
+  {
+    "id": "sql-048",
+    "category": "sql",
+    "topic": "DDL",
+    "question": "¿Qué característica tienen los comandos DDL respecto a COMMIT/ROLLBACK?",
+    "options": [
+      "Se pueden revertir siempre con ROLLBACK",
+      "Cada DDL hace COMMIT automático antes y después de ejecutarse, no se puede revertir con ROLLBACK",
+      "Nunca afectan la base de datos hasta hacer COMMIT manual",
+      "Los DDL no existen en Oracle"
+    ],
+    "correctIndex": 1,
+    "explanation": "A diferencia de DML, cualquier sentencia DDL (CREATE, ALTER, DROP) confirma automáticamente los cambios pendientes — un ROLLBACK posterior no la deshace."
+  },
+  {
+    "id": "sql-049",
+    "category": "sql",
+    "topic": "DDL",
+    "question": "¿Qué hace 'CREATE TABLE empleados_backup AS SELECT * FROM empleados WHERE 1 = 0;'?",
+    "options": [
+      "Copia la tabla completa con todos los datos",
+      "Crea una tabla nueva con la MISMA estructura que empleados, pero sin ninguna fila (WHERE 1=0 nunca es verdadero)",
+      "Lanza un error de sintaxis",
+      "Borra la tabla empleados"
+    ],
+    "correctIndex": 1,
+    "explanation": "'WHERE 1=0' es un truco clásico de CTAS (CREATE TABLE AS SELECT) para copiar solo la ESTRUCTURA de una tabla, sin copiar ningún dato."
+  },
+  {
+    "id": "sql-050",
+    "category": "sql",
+    "topic": "DDL",
+    "question": "¿Qué diferencia hay entre DELETE FROM tabla (sin WHERE) y TRUNCATE TABLE tabla?",
+    "options": [
+      "Son exactamente equivalentes en todo sentido",
+      "DELETE es DML (reversible con ROLLBACK antes del COMMIT, dispara triggers); TRUNCATE es DDL (no reversible, no dispara triggers, más rápido)",
+      "TRUNCATE borra también la estructura de la tabla",
+      "DELETE siempre es más rápido que TRUNCATE"
+    ],
+    "correctIndex": 1,
+    "explanation": "TRUNCATE es una operación DDL que libera el espacio inmediatamente y no puede revertirse con ROLLBACK; DELETE es DML, más lento pero reversible antes del COMMIT."
+  },
+  {
+    "id": "sql-051",
+    "category": "sql",
+    "topic": "DDL",
+    "question": "¿Qué diferencia hay entre DROP TABLE y TRUNCATE TABLE?",
+    "options": [
+      "Son sinónimos",
+      "DROP TABLE elimina también la ESTRUCTURA de la tabla (deja de existir); TRUNCATE solo vacía los datos, la tabla sigue existiendo vacía",
+      "TRUNCATE elimina la estructura y DROP solo los datos",
+      "Ninguno de los dos es DDL"
+    ],
+    "correctIndex": 1,
+    "explanation": "DROP TABLE borra la tabla por completo (estructura + datos); TRUNCATE TABLE vacía los datos mantiendo la estructura, columnas, índices, etc."
+  },
+  {
+    "id": "sql-052",
+    "category": "sql",
+    "topic": "DDL",
+    "question": "¿Cómo se recupera una tabla recién borrada con DROP TABLE (sin PURGE), mientras siga en la papelera de reciclaje de Oracle?",
+    "options": [
+      "No se puede recuperar bajo ninguna circunstancia",
+      "Con FLASHBACK TABLE nombre_tabla TO BEFORE DROP;",
+      "Con un simple ROLLBACK",
+      "Volviendo a ejecutar el CREATE TABLE original"
+    ],
+    "correctIndex": 1,
+    "explanation": "Oracle mueve las tablas borradas con DROP a una 'papelera de reciclaje'; FLASHBACK TABLE ... TO BEFORE DROP las restaura mientras sigan ahí."
+  },
+  {
+    "id": "sql-053",
+    "category": "sql",
+    "topic": "DDL",
+    "question": "¿Qué hace la cláusula PURGE en 'DROP TABLE empleados_backup PURGE;'?",
+    "options": [
+      "Vacía solo los datos, sin borrar la tabla",
+      "Borra la tabla de forma DEFINITIVA, sin pasar por la papelera de reciclaje (no se puede recuperar después)",
+      "Crea un respaldo automático antes de borrar",
+      "Es sinónimo de TRUNCATE"
+    ],
+    "correctIndex": 1,
+    "explanation": "PURGE evita que la tabla borrada quede en la papelera de reciclaje, haciendo el borrado irreversible de inmediato."
+  },
+  {
+    "id": "sql-054",
+    "category": "sql",
+    "topic": "DDL",
+    "question": "¿Qué comando se usa para AGREGAR una columna nueva a una tabla ya existente?",
+    "options": [
+      "ALTER TABLE tabla ADD (columna tipo)",
+      "CREATE COLUMN columna ON tabla",
+      "UPDATE TABLE tabla ADD columna",
+      "INSERT COLUMN columna INTO tabla"
+    ],
+    "correctIndex": 0,
+    "explanation": "La sintaxis correcta es ALTER TABLE tabla ADD (nombre_columna tipo_de_dato);"
+  },
+  {
+    "id": "sql-055",
+    "category": "sql",
+    "topic": "DDL",
+    "question": "¿Qué comando renombra una columna existente en Oracle?",
+    "options": [
+      "ALTER TABLE tabla RENAME COLUMN viejo TO nuevo;",
+      "RENAME COLUMN viejo TO nuevo;",
+      "UPDATE COLUMN tabla SET nombre = nuevo;",
+      "MODIFY COLUMN tabla RENAME nuevo;"
+    ],
+    "correctIndex": 0,
+    "explanation": "ALTER TABLE tabla RENAME COLUMN nombre_viejo TO nombre_nuevo; es la sintaxis correcta en Oracle."
+  },
+  {
+    "id": "sql-056",
+    "category": "sql",
+    "topic": "DDL",
+    "question": "¿Qué diferencia hay entre GLOBAL TEMPORARY TABLE con 'ON COMMIT DELETE ROWS' y con 'ON COMMIT PRESERVE ROWS'?",
+    "options": [
+      "No hay diferencia real",
+      "DELETE ROWS borra los datos automáticamente al hacer COMMIT; PRESERVE ROWS los mantiene hasta el fin de la SESIÓN",
+      "PRESERVE ROWS borra los datos al hacer COMMIT",
+      "Ambas opciones eliminan la tabla completa al hacer COMMIT"
+    ],
+    "correctIndex": 1,
+    "explanation": "Son las dos variantes de tablas temporales globales de Oracle: una limpia los datos en cada COMMIT, la otra los conserva mientras dure la sesión."
+  },
+  {
+    "id": "sql-057",
+    "category": "sql",
+    "topic": "DDL",
+    "question": "¿Qué hace 'ALTER TABLE empleados MODIFY (telefono VARCHAR2(30));'?",
+    "options": [
+      "Agrega una columna nueva llamada telefono",
+      "Cambia el tipo/tamaño de la columna telefono ya existente",
+      "Borra la columna telefono",
+      "Renombra la tabla empleados"
+    ],
+    "correctIndex": 1,
+    "explanation": "MODIFY cambia las características (tipo de dato, tamaño, nulabilidad, default) de una columna que ya existe en la tabla."
+  },
+  {
+    "id": "sql-058",
+    "category": "sql",
+    "topic": "DDL",
+    "question": "¿Qué comando otorga a un usuario los privilegios mínimos para conectarse y crear objetos propios?",
+    "options": [
+      "GRANT CREATE SESSION, RESOURCE TO usuario;",
+      "GRANT DBA TO usuario;",
+      "CREATE USER usuario;",
+      "ALTER USER usuario;"
+    ],
+    "correctIndex": 0,
+    "explanation": "CREATE SESSION permite conectarse; RESOURCE permite crear objetos propios como tablas y secuencias — juntos son el mínimo típico para un usuario funcional."
+  },
+  {
+    "id": "sql-059",
+    "category": "sql",
+    "topic": "DDL",
+    "question": "¿Qué comando DDL permite bloquear (impedir el login de) un usuario existente sin borrarlo?",
+    "options": [
+      "DROP USER usuario;",
+      "ALTER USER usuario ACCOUNT LOCK;",
+      "REVOKE CREATE SESSION FROM usuario;",
+      "TRUNCATE USER usuario;"
+    ],
+    "correctIndex": 1,
+    "explanation": "ALTER USER usuario ACCOUNT LOCK; bloquea la cuenta sin eliminar al usuario ni sus objetos; ACCOUNT UNLOCK la reactiva."
+  },
+  {
+    "id": "sql-060",
+    "category": "sql",
+    "topic": "Constraints",
+    "question": "¿Qué garantiza una restricción PRIMARY KEY?",
+    "options": [
+      "Que la columna pueda repetirse libremente",
+      "Que cada fila tenga un identificador único y NO NULO (combina UNIQUE + NOT NULL)",
+      "Que la columna sea siempre de tipo NUMBER",
+      "Que exista un índice de texto completo"
+    ],
+    "correctIndex": 1,
+    "explanation": "PRIMARY KEY es la combinación de NOT NULL + UNIQUE: identifica de forma única e ineludible cada fila de la tabla."
+  },
+  {
+    "id": "sql-061",
+    "category": "sql",
+    "topic": "Constraints",
+    "question": "¿Qué garantiza una restricción FOREIGN KEY?",
+    "options": [
+      "Que la columna sea siempre positiva",
+      "Que el valor de la columna deba existir como clave primaria/única en OTRA tabla (integridad referencial)",
+      "Que la columna no admita valores NULL nunca",
+      "Que la tabla tenga como máximo una fila"
+    ],
+    "correctIndex": 1,
+    "explanation": "FOREIGN KEY garantiza integridad referencial: no puedes insertar un valor que no exista en la tabla/columna referenciada."
+  },
+  {
+    "id": "sql-062",
+    "category": "sql",
+    "topic": "Constraints",
+    "question": "¿Qué diferencia hay entre ON DELETE CASCADE y ON DELETE SET NULL en una FOREIGN KEY?",
+    "options": [
+      "Son exactamente lo mismo",
+      "CASCADE borra también las filas hijas al borrar el padre; SET NULL deja la FK en NULL en las filas hijas, sin borrarlas",
+      "SET NULL borra las filas hijas; CASCADE las conserva",
+      "Ninguna opción afecta a las filas hijas"
+    ],
+    "correctIndex": 1,
+    "explanation": "ON DELETE CASCADE propaga el borrado a los hijos; ON DELETE SET NULL conserva los hijos pero anula su referencia al padre borrado."
+  },
+  {
+    "id": "sql-063",
+    "category": "sql",
+    "topic": "Constraints",
+    "question": "Si una FOREIGN KEY se declara SIN especificar ninguna cláusula ON DELETE, ¿cuál es el comportamiento por defecto al intentar borrar el padre con hijos existentes?",
+    "options": [
+      "CASCADE automático",
+      "RESTRICT: Oracle NO permite borrar el padre mientras existan filas hijas que lo referencien",
+      "SET NULL automático",
+      "Se borra el padre y los hijos quedan huérfanos sin control"
+    ],
+    "correctIndex": 1,
+    "explanation": "Por defecto (sin ON DELETE explícito), Oracle protege la integridad referencial impidiendo el borrado del padre si aún tiene hijos dependientes (RESTRICT)."
+  },
+  {
+    "id": "sql-064",
+    "category": "sql",
+    "topic": "Constraints",
+    "question": "¿Qué tipo de restricción permite validar una condición lógica arbitraria sobre una columna, como 'salario > 0'?",
+    "options": [
+      "UNIQUE",
+      "CHECK",
+      "DEFAULT",
+      "FOREIGN KEY"
+    ],
+    "correctIndex": 1,
+    "explanation": "CHECK valida que el valor cumpla una expresión booleana arbitraria definida al crear la restricción."
+  },
+  {
+    "id": "sql-065",
+    "category": "sql",
+    "topic": "Constraints",
+    "question": "¿Puede una PRIMARY KEY estar compuesta por más de una columna?",
+    "options": [
+      "No, siempre debe ser una sola columna",
+      "Sí, una PRIMARY KEY compuesta combina varias columnas para identificar de forma única cada fila (típico en tablas intermedias N:M)",
+      "Solo en MySQL, no en Oracle",
+      "Solo si todas las columnas son NUMBER"
+    ],
+    "correctIndex": 1,
+    "explanation": "Las claves primarias compuestas son comunes en tablas intermedias como EMPLEADO_PROYECTO: (id_empleado, id_proyecto) juntas identifican la fila."
+  },
+  {
+    "id": "sql-066",
+    "category": "sql",
+    "topic": "Constraints",
+    "question": "¿Qué diferencia hay entre UNIQUE y PRIMARY KEY?",
+    "options": [
+      "Son exactamente lo mismo en todo sentido",
+      "UNIQUE permite valores NULL (varios, según el motor) y puede haber varias UNIQUE por tabla; PRIMARY KEY no permite NULL y solo puede haber una por tabla",
+      "PRIMARY KEY permite duplicados, UNIQUE no",
+      "UNIQUE solo aplica a columnas de texto"
+    ],
+    "correctIndex": 1,
+    "explanation": "Una tabla puede tener múltiples restricciones UNIQUE (que sí toleran NULL), pero solo una PRIMARY KEY, que además implica NOT NULL."
+  },
+  {
+    "id": "sql-067",
+    "category": "sql",
+    "topic": "Constraints",
+    "question": "¿Qué hace 'ALTER TABLE puestos ADD CONSTRAINT ck_rango CHECK (salario_maximo >= salario_minimo);'?",
+    "options": [
+      "Agrega un índice sobre salario_maximo",
+      "Agrega una restricción CHECK que exige que el salario máximo del puesto sea siempre mayor o igual al mínimo",
+      "Borra la columna salario_minimo",
+      "Crea una vista"
+    ],
+    "correctIndex": 1,
+    "explanation": "Esta restricción CHECK compuesta valida una relación lógica entre dos columnas de la misma fila."
+  },
+  {
+    "id": "sql-068",
+    "category": "sql",
+    "topic": "Constraints",
+    "question": "¿Se puede tener una restricción UNIQUE compuesta (sobre la combinación de varias columnas)?",
+    "options": [
+      "No, UNIQUE solo aplica a una columna",
+      "Sí: la COMBINACIÓN no puede repetirse, aunque cada columna individualmente sí pueda tener valores repetidos",
+      "Solo si las columnas son de tipo texto",
+      "Solo en la clave primaria"
+    ],
+    "correctIndex": 1,
+    "explanation": "Ej. UNIQUE (id_empleado, rol) permite que un empleado tenga varios roles y que un rol se repita entre empleados, pero no la MISMA combinación dos veces."
+  },
+  {
+    "id": "sql-069",
+    "category": "sql",
+    "topic": "Constraints",
+    "question": "¿Qué restricción se usa para asignar automáticamente un valor cuando no se especifica uno al insertar?",
+    "options": [
+      "CHECK",
+      "DEFAULT",
+      "UNIQUE",
+      "FOREIGN KEY"
+    ],
+    "correctIndex": 1,
+    "explanation": "DEFAULT define un valor que se usa automáticamente si la sentencia INSERT no especifica un valor explícito para esa columna."
+  },
+  {
+    "id": "sql-070",
+    "category": "sql",
+    "topic": "Usuarios y schemas",
+    "question": "¿Qué comando crea un usuario nuevo en Oracle con un tablespace por defecto?",
+    "options": [
+      "CREATE USER usuario IDENTIFIED BY \"clave\" DEFAULT TABLESPACE users;",
+      "NEW USER usuario;",
+      "INSERT USER usuario;",
+      "CREATE SCHEMA usuario;"
+    ],
+    "correctIndex": 0,
+    "explanation": "La sintaxis estándar de Oracle es CREATE USER nombre IDENTIFIED BY \"contraseña\" DEFAULT TABLESPACE ...;"
+  },
+  {
+    "id": "sql-071",
+    "category": "sql",
+    "topic": "Usuarios y schemas",
+    "question": "¿Qué hace 'DROP USER app_user CASCADE;'?",
+    "options": [
+      "Solo bloquea al usuario, sin borrarlo",
+      "Borra al usuario Y TODOS los objetos que le pertenecen (sus tablas, vistas, etc.)",
+      "Solo borra los objetos del usuario, dejando la cuenta activa",
+      "Cambia la contraseña del usuario"
+    ],
+    "correctIndex": 1,
+    "explanation": "CASCADE extiende el borrado del usuario a todo su schema (todos los objetos que posee); sin CASCADE, el DROP falla si el usuario tiene objetos."
+  },
+  {
+    "id": "sql-072",
+    "category": "sql",
+    "topic": "Usuarios y schemas",
+    "question": "¿Qué controla un PROFILE en Oracle, asignado a un usuario?",
+    "options": [
+      "El color de la interfaz gráfica",
+      "Límites de recursos y políticas de seguridad, como intentos fallidos de login o vida útil de la contraseña",
+      "El tablespace donde se guardan los datos",
+      "El nivel de aislamiento de las transacciones"
+    ],
+    "correctIndex": 1,
+    "explanation": "Un PROFILE agrupa políticas como FAILED_LOGIN_ATTEMPTS o PASSWORD_LIFE_TIME, aplicables a uno o varios usuarios."
+  },
+  {
+    "id": "sql-073",
+    "category": "sql",
+    "topic": "Usuarios y schemas",
+    "question": "¿Qué comando cambia la contraseña de un usuario ya existente?",
+    "options": [
+      "ALTER USER usuario IDENTIFIED BY \"nueva_clave\";",
+      "UPDATE USER usuario SET password = 'nueva';",
+      "CHANGE PASSWORD usuario TO 'nueva';",
+      "SET PASSWORD FOR usuario = 'nueva';"
+    ],
+    "correctIndex": 0,
+    "explanation": "ALTER USER nombre IDENTIFIED BY \"nueva_contraseña\"; es la sintaxis correcta para cambiar la contraseña de un usuario existente."
+  },
+  {
+    "id": "sql-074",
+    "category": "sql",
+    "topic": "DML - INSERT",
+    "question": "Si listas explícitamente las columnas en un INSERT, ¿en qué orden deben ir los valores en VALUES?",
+    "options": [
+      "En el orden físico real de columnas de la tabla, sin importar el INSERT",
+      "En el MISMO orden en que se listaron las columnas en el INSERT (no necesariamente el orden físico de la tabla)",
+      "El orden no importa en absoluto",
+      "Siempre en orden alfabético"
+    ],
+    "correctIndex": 1,
+    "explanation": "Si escribes INSERT INTO tabla (colB, colA) VALUES (v1, v2), v1 va a colB y v2 va a colA — el orden de VALUES sigue al de la lista de columnas declarada, no al de la tabla."
+  },
+  {
+    "id": "sql-075",
+    "category": "sql",
+    "topic": "DML - INSERT",
+    "question": "¿Qué ocurre con una columna que se OMITE al hacer un INSERT parcial (sin listarla)?",
+    "options": [
+      "Provoca siempre un error de sintaxis",
+      "Toma su valor DEFAULT si tiene uno definido, o queda NULL si no lo tiene (y no es NOT NULL sin default)",
+      "Se rellena automáticamente con 0 o cadena vacía siempre",
+      "La fila no se inserta"
+    ],
+    "correctIndex": 1,
+    "explanation": "Las columnas no listadas en un INSERT usan su DEFAULT si existe, o quedan NULL — a menos que tengan NOT NULL sin default, en cuyo caso el INSERT falla."
+  },
+  {
+    "id": "sql-076",
+    "category": "sql",
+    "topic": "DML - INSERT",
+    "question": "¿Qué hace 'INSERT INTO empleados_backup SELECT * FROM empleados WHERE id_departamento = 10;'?",
+    "options": [
+      "Crea la tabla empleados_backup desde cero",
+      "Inserta en empleados_backup (ya existente) las filas resultado de la consulta SELECT",
+      "Borra empleados_backup",
+      "Actualiza empleados_backup"
+    ],
+    "correctIndex": 1,
+    "explanation": "INSERT INTO ... SELECT ... inserta el resultado de una consulta en una tabla ya existente, sin necesitar VALUES explícitos."
+  },
+  {
+    "id": "sql-077",
+    "category": "sql",
+    "topic": "DML - UPDATE",
+    "question": "¿Qué ocurre exactamente al ejecutar 'UPDATE empleados SET salario = salario * 1.05;' SIN cláusula WHERE?",
+    "options": [
+      "No hace nada porque falta el WHERE",
+      "Sube el salario un 5% a TODAS las filas de la tabla, sin excepción",
+      "Da error de sintaxis obligando a poner un WHERE",
+      "Solo afecta a la primera fila"
+    ],
+    "correctIndex": 1,
+    "explanation": "Sin WHERE, un UPDATE afecta absolutamente todas las filas de la tabla — la trampa más clásica de SQL básico."
+  },
+  {
+    "id": "sql-078",
+    "category": "sql",
+    "topic": "DML - UPDATE",
+    "question": "¿Qué hace un UPDATE con subconsulta correlacionada como 'SET salario = (SELECT salario_maximo FROM puestos p WHERE p.id_puesto = e.id_puesto)'?",
+    "options": [
+      "Asigna a cada empleado el salario_maximo del PUESTO al que pertenece, calculado individualmente por fila",
+      "Asigna el mismo valor fijo a todos los empleados",
+      "Produce un error porque no se permiten subconsultas en SET",
+      "Borra la columna salario"
+    ],
+    "correctIndex": 0,
+    "explanation": "La subconsulta se correlaciona con la fila externa (e.id_puesto) y se reevalúa para cada empleado, según su propio puesto."
+  },
+  {
+    "id": "sql-079",
+    "category": "sql",
+    "topic": "DML - UPDATE",
+    "question": "¿Cuál es la disciplina recomendada antes de correr un UPDATE masivo en producción?",
+    "options": [
+      "Ejecutarlo directamente y revisar después",
+      "Ejecutar primero un SELECT con el MISMO WHERE, revisar qué filas se verían afectadas, y solo entonces convertir el SELECT en UPDATE",
+      "Nunca usar WHERE en un UPDATE",
+      "Hacer TRUNCATE antes del UPDATE"
+    ],
+    "correctIndex": 1,
+    "explanation": "Verificar con un SELECT idéntico en su condición WHERE antes de ejecutar el UPDATE/DELETE evita afectar filas no deseadas por error."
+  },
+  {
+    "id": "sql-080",
+    "category": "sql",
+    "topic": "DML - DELETE",
+    "question": "Al borrar filas relacionadas por integridad referencial (padre-hijo), ¿en qué orden deben ejecutarse los DELETE?",
+    "options": [
+      "Primero el padre, luego los hijos",
+      "Primero las filas HIJAS (tabla dependiente), luego las filas PADRE, para no violar la FOREIGN KEY",
+      "El orden no importa nunca",
+      "Solo se puede borrar el padre con CASCADE, nunca manualmente"
+    ],
+    "correctIndex": 1,
+    "explanation": "Si existe una FK del hijo hacia el padre (sin ON DELETE CASCADE), intentar borrar primero el padre falla mientras existan hijos que lo referencien."
+  },
+  {
+    "id": "sql-081",
+    "category": "sql",
+    "topic": "DML - DELETE",
+    "question": "¿Qué le ocurre a 'DELETE FROM empleados WHERE departamento = NULL;' (usando '=' contra NULL)?",
+    "options": [
+      "Borra todos los empleados sin departamento asignado",
+      "No borra NINGUNA fila: NULL nunca es igual a nada, ni siquiera comparado con '='",
+      "Lanza un error de sintaxis",
+      "Borra toda la tabla"
+    ],
+    "correctIndex": 1,
+    "explanation": "La comparación correcta para NULL es 'IS NULL', no '='. Con '= NULL', la condición nunca se evalúa como verdadera para ninguna fila."
+  },
+  {
+    "id": "sql-082",
+    "category": "sql",
+    "topic": "DML - DELETE",
+    "question": "¿Cuál es la diferencia de rendimiento y reversibilidad entre DELETE FROM tabla (sin WHERE) y TRUNCATE TABLE tabla?",
+    "options": [
+      "Son idénticos en rendimiento y reversibilidad",
+      "DELETE registra cada fila en el log de redo/undo (más lento, reversible con ROLLBACK antes de COMMIT); TRUNCATE es DDL, libera espacio de inmediato y no es reversible",
+      "TRUNCATE es más lento porque borra la estructura",
+      "DELETE nunca puede revertirse"
+    ],
+    "correctIndex": 1,
+    "explanation": "DELETE es DML fila por fila (más costoso pero reversible antes del COMMIT); TRUNCATE es una operación DDL mucho más rápida pero irreversible."
+  },
+  {
+    "id": "sql-083",
+    "category": "sql",
+    "topic": "DML - MERGE",
+    "question": "¿Para qué se usa principalmente la sentencia MERGE en Oracle?",
+    "options": [
+      "Solo para borrar filas duplicadas",
+      "Para sincronizar una tabla destino contra una tabla origen: insertar si no existe, actualizar si ya existe ('UPSERT')",
+      "Para crear una tabla nueva combinando dos existentes",
+      "Para cambiar el tipo de una columna"
+    ],
+    "correctIndex": 1,
+    "explanation": "MERGE combina en una sola sentencia la lógica de 'si coincide, actualiza; si no coincide, inserta', evitando tener que programar esa lógica con IF/ELSE manual."
+  },
+  {
+    "id": "sql-084",
+    "category": "sql",
+    "topic": "DML - MERGE",
+    "question": "En una sentencia MERGE, ¿qué cláusula ejecuta un INSERT cuando NO existe una fila coincidente en el destino?",
+    "options": [
+      "WHEN MATCHED THEN",
+      "WHEN NOT MATCHED THEN",
+      "ON DELETE",
+      "WHERE NOT EXISTS"
+    ],
+    "correctIndex": 1,
+    "explanation": "WHEN NOT MATCHED THEN INSERT ... se ejecuta cuando la condición ON no encuentra una fila correspondiente ya existente en la tabla destino."
+  },
+  {
+    "id": "sql-085",
+    "category": "sql",
+    "topic": "DML - MERGE",
+    "question": "¿Qué cláusula del MERGE ejecuta un UPDATE cuando SÍ existe una fila coincidente entre origen y destino?",
+    "options": [
+      "WHEN NOT MATCHED THEN",
+      "WHEN MATCHED THEN UPDATE SET ...",
+      "ON (condición) únicamente",
+      "GROUP BY"
+    ],
+    "correctIndex": 1,
+    "explanation": "WHEN MATCHED THEN UPDATE SET ... se ejecuta cuando la condición de la cláusula ON encuentra coincidencia entre la fila origen y una fila ya existente en destino."
+  },
+  {
+    "id": "sql-086",
+    "category": "sql",
+    "topic": "DQL básico",
+    "question": "¿Cuál es el orden lógico REAL de evaluación de una consulta SELECT con todas sus cláusulas?",
+    "options": [
+      "SELECT → FROM → WHERE → ORDER BY",
+      "FROM → WHERE → GROUP BY → HAVING → SELECT → ORDER BY",
+      "WHERE → SELECT → FROM → GROUP BY",
+      "ORDER BY → SELECT → FROM → WHERE"
+    ],
+    "correctIndex": 1,
+    "explanation": "Aunque se ESCRIBE SELECT primero, Oracle lo EVALÚA después de FROM/WHERE/GROUP BY/HAVING — por eso no puedes usar un alias del SELECT en el WHERE."
+  },
+  {
+    "id": "sql-087",
+    "category": "sql",
+    "topic": "DQL básico",
+    "question": "¿Por qué NO puedes usar un alias de columna definido en el SELECT dentro de la cláusula WHERE de la misma consulta?",
+    "options": [
+      "Porque Oracle no soporta alias en absoluto",
+      "Porque WHERE se evalúa ANTES que SELECT en el orden lógico de ejecución, así que el alias todavía no existe en ese punto",
+      "Porque los alias solo funcionan con GROUP BY",
+      "Es solo una limitación de la sintaxis, sin razón lógica"
+    ],
+    "correctIndex": 1,
+    "explanation": "El orden lógico es FROM → WHERE → ... → SELECT, así que cualquier alias creado en el SELECT aún no existe cuando se evalúa el WHERE."
+  },
+  {
+    "id": "sql-088",
+    "category": "sql",
+    "topic": "DQL básico",
+    "question": "¿Puedes usar un alias del SELECT dentro de la cláusula ORDER BY?",
+    "options": [
+      "No, nunca",
+      "Sí, porque ORDER BY se evalúa DESPUÉS de SELECT en el orden lógico",
+      "Solo si el alias es un número",
+      "Solo en subconsultas"
+    ],
+    "correctIndex": 1,
+    "explanation": "ORDER BY es de las últimas cláusulas en evaluarse, después de que el SELECT ya calculó sus alias — por eso sí puede referenciarlos."
+  },
+  {
+    "id": "sql-089",
+    "category": "sql",
+    "topic": "DQL básico",
+    "question": "¿Qué hace DISTINCT en 'SELECT DISTINCT id_departamento FROM empleados;'?",
+    "options": [
+      "Ordena los resultados",
+      "Elimina valores duplicados, devolviendo cada id_departamento una sola vez",
+      "Cuenta cuántos departamentos hay",
+      "Filtra los departamentos con más de un empleado"
+    ],
+    "correctIndex": 1,
+    "explanation": "DISTINCT elimina filas duplicadas del resultado, considerando la(s) columna(s) indicadas."
+  },
+  {
+    "id": "sql-090",
+    "category": "sql",
+    "topic": "DQL básico",
+    "question": "¿Qué patrón describe correctamente 'WHERE nombres LIKE '_na''?",
+    "options": [
+      "Nombres que contienen 'na' en cualquier posición",
+      "Nombres de EXACTAMENTE 3 caracteres donde el tercer carácter es 'a' y el segundo es 'n' (el '_' representa un único carácter cualquiera)",
+      "Nombres que terminan en 'na', sin importar longitud",
+      "Un error de sintaxis"
+    ],
+    "correctIndex": 1,
+    "explanation": "'_' en LIKE representa exactamente UN carácter cualquiera (a diferencia de '%' que representa cero o más); '_na' calza con 'Ana', 'Ina', pero no con 'Adriana'."
+  },
+  {
+    "id": "sql-091",
+    "category": "sql",
+    "topic": "DQL básico",
+    "question": "¿Qué devuelve 'SELECT * FROM empleados WHERE salario BETWEEN 30000 AND 60000;' respecto a los límites 30000 y 60000?",
+    "options": [
+      "Excluye ambos extremos",
+      "Incluye AMBOS extremos (30000 y 60000 califican)",
+      "Solo incluye el límite inferior",
+      "Solo incluye el límite superior"
+    ],
+    "correctIndex": 1,
+    "explanation": "BETWEEN en SQL es inclusivo en ambos extremos: equivale a 'salario >= 30000 AND salario <= 60000'."
+  },
+  {
+    "id": "sql-092",
+    "category": "sql",
+    "topic": "DQL básico",
+    "question": "¿Qué devuelve 'SELECT nombres FROM empleados WHERE id_departamento NOT IN (10, 20);'?",
+    "options": [
+      "Empleados de los departamentos 10 y 20",
+      "Empleados que NO pertenecen a los departamentos 10 ni 20 (excluye ambos)",
+      "Todos los empleados sin excepción",
+      "Error de sintaxis"
+    ],
+    "correctIndex": 1,
+    "explanation": "NOT IN excluye las filas cuyo valor coincida con cualquiera de los valores listados."
+  },
+  {
+    "id": "sql-093",
+    "category": "sql",
+    "topic": "DQL básico",
+    "question": "¿Cómo se combinan correctamente dos condiciones OR con una condición AND adicional, dando precedencia explícita al OR?",
+    "options": [
+      "depto = 'TI' OR depto = 'RRHH' AND salario > 40000, sin paréntesis",
+      "(depto = 'TI' OR depto = 'RRHH') AND salario > 40000, con paréntesis explícitos",
+      "depto = 'TI' AND OR depto = 'RRHH'",
+      "No se pueden combinar AND y OR en la misma condición"
+    ],
+    "correctIndex": 1,
+    "explanation": "AND tiene mayor precedencia que OR por defecto; para agrupar el OR primero hace falta paréntesis explícitos, evitando ambigüedad."
+  },
+  {
+    "id": "sql-094",
+    "category": "sql",
+    "topic": "DQL básico",
+    "question": "¿Qué es FETCH FIRST n ROWS ONLY (Oracle 12c+)?",
+    "options": [
+      "Un tipo de JOIN",
+      "El equivalente moderno de LIMIT: restringe el resultado a como máximo n filas",
+      "Una función de agregación",
+      "Una restricción de integridad"
+    ],
+    "correctIndex": 1,
+    "explanation": "FETCH FIRST n ROWS ONLY es la forma moderna y estándar (ANSI) de limitar filas en Oracle 12c en adelante, reemplazando el patrón antiguo con ROWNUM."
+  },
+  {
+    "id": "sql-095",
+    "category": "sql",
+    "topic": "DQL básico",
+    "question": "¿Por qué la consulta clásica pre-12c con ROWNUM necesita envolver el SELECT ordenado en una subconsulta, en vez de aplicar 'WHERE ROWNUM <= 5' directo sobre una consulta con ORDER BY?",
+    "options": [
+      "No hace falta, ROWNUM siempre respeta el ORDER BY",
+      "Porque ROWNUM se asigna ANTES de que se aplique el ORDER BY si se usa directo en el WHERE externo, dando resultados incorrectos",
+      "Porque ROWNUM no existe en Oracle",
+      "Porque ORDER BY no puede usarse con ROWNUM bajo ninguna circunstancia"
+    ],
+    "correctIndex": 1,
+    "explanation": "ROWNUM se calcula sobre el orden de recuperación de filas, no sobre el orden final deseado; hay que ordenar PRIMERO en una subconsulta y luego filtrar ROWNUM sobre ese resultado ya ordenado."
+  },
+  {
+    "id": "sql-096",
+    "category": "sql",
+    "topic": "Agregación y GROUP BY",
+    "question": "¿Qué diferencia hay entre WHERE y HAVING?",
+    "options": [
+      "Son exactamente intercambiables",
+      "WHERE filtra FILAS individuales antes de agrupar; HAVING filtra GRUPOS ya calculados (después de GROUP BY)",
+      "HAVING filtra filas; WHERE filtra grupos",
+      "WHERE no puede usarse junto con GROUP BY"
+    ],
+    "correctIndex": 1,
+    "explanation": "WHERE actúa sobre filas crudas antes de agrupar; HAVING actúa sobre el resultado ya agregado por grupo (ej. HAVING AVG(salario) > 45000)."
+  },
+  {
+    "id": "sql-097",
+    "category": "sql",
+    "topic": "Agregación y GROUP BY",
+    "question": "¿Qué devuelve COUNT(*) sobre una tabla vacía?",
+    "options": [
+      "NULL",
+      "0",
+      "Lanza una excepción",
+      "-1"
+    ],
+    "correctIndex": 1,
+    "explanation": "COUNT(*) siempre devuelve un número, incluso 0 si no hay filas; a diferencia de otras funciones de agregación que pueden devolver NULL sobre conjuntos vacíos."
+  },
+  {
+    "id": "sql-098",
+    "category": "sql",
+    "topic": "Agregación y GROUP BY",
+    "question": "¿Qué devuelve AVG(salario) si TODOS los valores de salario en el conjunto son NULL?",
+    "options": [
+      "0",
+      "NULL",
+      "Lanza una excepción",
+      "Un error de división por cero"
+    ],
+    "correctIndex": 1,
+    "explanation": "Las funciones de agregación como AVG, SUM, MAX, MIN ignoran los NULL; si todos los valores son NULL, no hay nada que promediar y el resultado es NULL."
+  },
+  {
+    "id": "sql-099",
+    "category": "sql",
+    "topic": "Agregación y GROUP BY",
+    "question": "En 'SELECT id_departamento, COUNT(*) FROM empleados GROUP BY id_departamento;', ¿por qué NO se puede agregar 'nombres' al SELECT sin agruparlo o agregarlo?",
+    "options": [
+      "Sí se puede sin restricción alguna",
+      "Porque cada grupo puede tener VARIOS empleados con distintos nombres — SQL no sabría cuál nombre individual mostrar por grupo",
+      "Porque nombres es un tipo de dato incompatible con GROUP BY",
+      "Porque GROUP BY solo permite una columna en el SELECT"
+    ],
+    "correctIndex": 1,
+    "explanation": "Toda columna en el SELECT de una consulta con GROUP BY debe estar en el GROUP BY o dentro de una función de agregación — de lo contrario, sería ambiguo qué valor mostrar por grupo."
+  },
+  {
+    "id": "sql-100",
+    "category": "sql",
+    "topic": "Agregación y GROUP BY",
+    "question": "¿Qué hace GROUP BY ROLLUP(id_departamento, id_puesto)?",
+    "options": [
+      "Es idéntico a un GROUP BY normal, sin ninguna diferencia",
+      "Genera el detalle por combinación, más subtotales por id_departamento, más un gran total general",
+      "Elimina las columnas repetidas",
+      "Solo agrupa por id_puesto, ignorando id_departamento"
+    ],
+    "correctIndex": 1,
+    "explanation": "ROLLUP añade automáticamente filas de subtotal (por el primer nivel de agrupación) y una fila de gran total, útil para reportes jerárquicos."
+  },
+  {
+    "id": "sql-101",
+    "category": "sql",
+    "topic": "Agregación y GROUP BY",
+    "question": "¿Qué error produce 'SELECT id_departamento, salario FROM empleados GROUP BY id_departamento;' (sin agregar salario)?",
+    "options": [
+      "Ningún error, funciona perfectamente",
+      "Error: 'salario' no es una expresión GROUP BY válida — debe estar en el GROUP BY o envuelta en una función de agregación",
+      "Se muestra el salario del primer empleado de cada grupo automáticamente sin avisar",
+      "Solo funciona si hay un único empleado por departamento"
+    ],
+    "correctIndex": 1,
+    "explanation": "Oracle exige que toda columna del SELECT esté o bien en el GROUP BY, o bien dentro de una función de agregación — de lo contrario lanza un error de sintaxis, no un resultado ambiguo silencioso."
+  },
+  {
+    "id": "sql-102",
+    "category": "sql",
+    "topic": "Agregación y GROUP BY",
+    "question": "¿Es válido usar HAVING sin GROUP BY en la misma consulta?",
+    "options": [
+      "No, siempre es un error de sintaxis",
+      "Sí, es válido: trata toda la tabla como un único grupo implícito",
+      "Solo en MySQL, no en Oracle",
+      "Solo si hay más de una tabla"
+    ],
+    "correctIndex": 1,
+    "explanation": "HAVING puede usarse sin GROUP BY explícito, tratando el resultado completo como un solo grupo — aunque es poco común, es sintácticamente válido."
+  },
+  {
+    "id": "sql-103",
+    "category": "sql",
+    "topic": "Agregación y GROUP BY",
+    "question": "¿Qué devuelve la consulta 'SELECT id_departamento, AVG(salario) FROM empleados WHERE fecha_contratacion > DATE '2020-01-01' GROUP BY id_departamento HAVING AVG(salario) > 45000;'?",
+    "options": [
+      "El promedio de salario de TODOS los empleados de cada departamento, sin filtrar por fecha",
+      "El promedio de salario por departamento, considerando solo empleados contratados después de 2020-01-01, mostrando solo los departamentos cuyo promedio resultante supera 45000",
+      "Solo empleados con salario mayor a 45000, sin agrupar",
+      "Un error de sintaxis por combinar WHERE con HAVING"
+    ],
+    "correctIndex": 1,
+    "explanation": "El WHERE filtra filas individuales ANTES de agrupar (por fecha); el GROUP BY agrupa por departamento; el HAVING filtra los GRUPOS resultantes cuyo promedio supera 45000."
+  },
+  {
+    "id": "sql-104",
+    "category": "sql",
+    "topic": "Agregación y GROUP BY",
+    "question": "¿Cuál de estas funciones de agregación IGNORA los valores NULL al calcularse?",
+    "options": [
+      "Ninguna de las funciones de agregación ignora NULL",
+      "SUM, AVG, MAX, MIN y COUNT(columna) ignoran los NULL de esa columna (COUNT(*) es la excepción, cuenta filas)",
+      "Solo COUNT(*) ignora NULL",
+      "Solo SUM ignora NULL, las demás fallan con NULL"
+    ],
+    "correctIndex": 1,
+    "explanation": "Las funciones de agregación estándar excluyen los NULL del cálculo; COUNT(*) es diferente porque cuenta FILAS, no valores de una columna específica."
+  },
+  {
+    "id": "sql-105",
+    "category": "sql",
+    "topic": "Agregación y GROUP BY",
+    "question": "¿Qué agrupa 'GROUP BY id_departamento, id_puesto' (dos columnas)?",
+    "options": [
+      "Solo por id_departamento, ignorando id_puesto",
+      "Por cada combinación ÚNICA de (id_departamento, id_puesto)",
+      "Produce un error de sintaxis, GROUP BY solo acepta una columna",
+      "Agrupa todo en un solo grupo"
+    ],
+    "correctIndex": 1,
+    "explanation": "GROUP BY con varias columnas agrupa por cada combinación distinta de esos valores, no por cada columna de forma independiente."
+  },
+  {
+    "id": "sql-106",
+    "category": "sql",
+    "topic": "JOIN",
+    "question": "¿Qué filas devuelve un INNER JOIN entre dos tablas?",
+    "options": [
+      "Todas las filas de ambas tablas, coincidan o no",
+      "Solo las filas que tienen coincidencia en AMBAS tablas según la condición ON",
+      "Solo las filas de la tabla izquierda",
+      "Un producto cartesiano completo"
+    ],
+    "correctIndex": 1,
+    "explanation": "INNER JOIN (el tipo más común) solo conserva las combinaciones de filas donde la condición de unión (ON) se cumple en ambos lados."
+  },
+  {
+    "id": "sql-107",
+    "category": "sql",
+    "topic": "JOIN",
+    "question": "¿Qué devuelve un LEFT JOIN entre empleados y departamentos si un empleado tiene id_departamento = NULL?",
+    "options": [
+      "El empleado desaparece del resultado por completo",
+      "El empleado SÍ aparece, con las columnas de departamentos mostrando NULL (sin coincidencia)",
+      "Se lanza un error",
+      "El JOIN se comporta igual que un INNER JOIN"
+    ],
+    "correctIndex": 1,
+    "explanation": "LEFT JOIN conserva TODAS las filas de la tabla izquierda (empleados), aunque no haya coincidencia en la derecha — en ese caso, las columnas de la derecha salen NULL."
+  },
+  {
+    "id": "sql-108",
+    "category": "sql",
+    "topic": "JOIN",
+    "question": "¿Qué tipo de JOIN devuelve TODAS las filas de ambas tablas, coincidan o no, rellenando con NULL donde falte coincidencia?",
+    "options": [
+      "INNER JOIN",
+      "LEFT JOIN únicamente",
+      "FULL OUTER JOIN",
+      "CROSS JOIN"
+    ],
+    "correctIndex": 2,
+    "explanation": "FULL OUTER JOIN combina el comportamiento de LEFT y RIGHT JOIN: conserva las filas sin coincidencia de AMBOS lados."
+  },
+  {
+    "id": "sql-109",
+    "category": "sql",
+    "topic": "JOIN",
+    "question": "¿Qué produce un CROSS JOIN entre dos tablas de 5 y 3 filas respectivamente?",
+    "options": [
+      "8 filas (5+3)",
+      "15 filas: el producto cartesiano de todas las combinaciones posibles (5×3)",
+      "3 filas, el mínimo de ambas",
+      "0 filas, requiere una condición ON"
+    ],
+    "correctIndex": 1,
+    "explanation": "CROSS JOIN combina cada fila de una tabla con CADA fila de la otra, sin condición de coincidencia — el resultado es multiplicativo, no aditivo."
+  },
+  {
+    "id": "sql-110",
+    "category": "sql",
+    "topic": "JOIN",
+    "question": "¿Qué es un 'self join' y para qué se usa típicamente en el esquema RRHH?",
+    "options": [
+      "Un JOIN entre dos tablas completamente distintas",
+      "Una tabla unida CONSIGO MISMA, típico para mostrar la relación empleado-jefe usando id_jefe",
+      "Un JOIN que siempre falla",
+      "Sinónimo de INNER JOIN"
+    ],
+    "correctIndex": 1,
+    "explanation": "Un self join usa alias distintos para la MISMA tabla (ej. 'emp' y 'jefe'), permitiendo relacionar filas de una tabla entre sí, como empleados con sus propios jefes."
+  },
+  {
+    "id": "sql-111",
+    "category": "sql",
+    "topic": "JOIN",
+    "question": "En 'FROM empleados emp LEFT JOIN empleados jefe ON emp.id_jefe = jefe.id_empleado;', ¿qué pasa con los empleados que NO tienen jefe (id_jefe IS NULL)?",
+    "options": [
+      "Desaparecen del resultado",
+      "Aparecen en el resultado, con las columnas de 'jefe' en NULL",
+      "Producen un error de auto-referencia",
+      "Se muestran duplicados"
+    ],
+    "correctIndex": 1,
+    "explanation": "El LEFT JOIN conserva a todos los empleados (tabla izquierda 'emp'), aunque no tengan jefe asignado — el 'jefe' correspondiente sale NULL."
+  },
+  {
+    "id": "sql-112",
+    "category": "sql",
+    "topic": "JOIN",
+    "question": "¿Cuántas tablas como MÁXIMO se pueden combinar en una sola consulta con múltiples JOIN?",
+    "options": [
+      "Solo 2, es el límite de Oracle",
+      "No hay un límite práctico fijo — se pueden encadenar tantos JOIN como se necesiten (3, 4, o más tablas)",
+      "Máximo 3",
+      "Depende de la versión de Windows"
+    ],
+    "correctIndex": 1,
+    "explanation": "SQL permite encadenar tantos JOIN como haga falta para combinar múltiples tablas relacionadas, como se ve en el ejemplo de empleados+departamentos+puestos."
+  },
+  {
+    "id": "sql-113",
+    "category": "sql",
+    "topic": "JOIN",
+    "question": "¿Cuál es la sintaxis MODERNA (ANSI, recomendada) para un JOIN, frente a la sintaxis antigua de 'join implícito' en el WHERE?",
+    "options": [
+      "FROM tabla1, tabla2 WHERE tabla1.col = tabla2.col",
+      "FROM tabla1 JOIN tabla2 ON tabla1.col = tabla2.col",
+      "Ambas son igual de recomendadas hoy en día",
+      "JOIN tabla1 WITH tabla2"
+    ],
+    "correctIndex": 1,
+    "explanation": "La sintaxis ANSI con JOIN...ON explícito es más clara y menos propensa a errores (como olvidar la condición y generar un producto cartesiano accidental) que el join implícito en el WHERE."
+  },
+  {
+    "id": "sql-114",
+    "category": "sql",
+    "topic": "JOIN",
+    "question": "¿Qué riesgo tiene la sintaxis antigua 'FROM empleados e, departamentos d WHERE ...' si accidentalmente se OLVIDA la condición de unión?",
+    "options": [
+      "Ningún riesgo, Oracle la agrega automáticamente",
+      "Se produce silenciosamente un CROSS JOIN (producto cartesiano) con muchísimas más filas de las esperadas",
+      "La consulta simplemente no devuelve resultados",
+      "Lanza un error de sintaxis inmediato"
+    ],
+    "correctIndex": 1,
+    "explanation": "Sin la condición de unión en el WHERE, la sintaxis antigua degenera en un producto cartesiano accidental — uno de los motivos por los que se prefiere la sintaxis ANSI JOIN...ON explícita."
+  },
+  {
+    "id": "sql-115",
+    "category": "sql",
+    "topic": "JOIN",
+    "question": "Para obtener empleados de un proyecto específico junto con su rol, ¿qué tablas hay que unir en el esquema RRHH?",
+    "options": [
+      "Solo EMPLEADOS y PROYECTOS directamente",
+      "EMPLEADOS, EMPLEADO_PROYECTO y PROYECTOS (la tabla intermedia es indispensable para la relación N:M)",
+      "Solo DEPARTAMENTOS y PROYECTOS",
+      "Solo EMPLEADOS y DEPARTAMENTOS"
+    ],
+    "correctIndex": 1,
+    "explanation": "Como la relación EMPLEADOS-PROYECTOS es N:M, hay que pasar necesariamente por la tabla intermedia EMPLEADO_PROYECTO para conectar ambas."
+  },
+  {
+    "id": "sql-116",
+    "category": "sql",
+    "topic": "JOIN",
+    "question": "¿Qué produce 'SELECT e.nombres, d.nombre_departamento FROM empleados e RIGHT JOIN departamentos d ON e.id_departamento = d.id_departamento;' respecto a departamentos SIN empleados asignados?",
+    "options": [
+      "Los departamentos sin empleados desaparecen del resultado",
+      "Los departamentos sin empleados SÍ aparecen, con nombres de empleado en NULL",
+      "Produce un error",
+      "Se comporta igual que INNER JOIN"
+    ],
+    "correctIndex": 1,
+    "explanation": "RIGHT JOIN conserva todas las filas de la tabla derecha (departamentos), incluso sin coincidencia en la izquierda (empleados) — mostrando NULL donde falte."
+  },
+  {
+    "id": "sql-117",
+    "category": "sql",
+    "topic": "JOIN",
+    "question": "¿Qué diferencia hay, en resultado final, entre 'A LEFT JOIN B' y 'B RIGHT JOIN A' (mismas tablas, condición ON equivalente)?",
+    "options": [
+      "Producen resultados completamente distintos e incompatibles",
+      "Producen conceptualmente el MISMO resultado: ambas conservan todas las filas de A y agregan coincidencias de B",
+      "RIGHT JOIN no existe en Oracle",
+      "LEFT JOIN siempre tiene más filas que RIGHT JOIN"
+    ],
+    "correctIndex": 1,
+    "explanation": "LEFT JOIN de A hacia B es equivalente a RIGHT JOIN de B hacia A (con la misma condición) — solo cambia qué tabla se escribe primero en la sintaxis."
+  },
+  {
+    "id": "sql-118",
+    "category": "sql",
+    "topic": "JOIN",
+    "question": "¿Qué tipo de JOIN usarías para listar TODOS los empleados, muestren o no un proyecto asignado?",
+    "options": [
+      "INNER JOIN entre empleados y empleado_proyecto",
+      "LEFT JOIN desde empleados hacia empleado_proyecto (y proyectos)",
+      "CROSS JOIN",
+      "RIGHT JOIN desde proyectos hacia empleados"
+    ],
+    "correctIndex": 1,
+    "explanation": "Un LEFT JOIN desde empleados conserva a TODOS los empleados, muestren o no una fila coincidente en empleado_proyecto/proyectos."
+  },
+  {
+    "id": "sql-119",
+    "category": "sql",
+    "topic": "JOIN",
+    "question": "Si dos tablas se unen con INNER JOIN y NINGUNA fila cumple la condición ON, ¿qué devuelve la consulta?",
+    "options": [
+      "Un error",
+      "Un resultado vacío (cero filas), sin fallar",
+      "Todas las filas de ambas tablas igualmente",
+      "NULL como único valor"
+    ],
+    "correctIndex": 1,
+    "explanation": "INNER JOIN simplemente no incluye ninguna fila si no hay coincidencias — el resultado es un conjunto vacío, no un error."
+  },
+  {
+    "id": "sql-120",
+    "category": "sql",
+    "topic": "Subconsultas y EXISTS",
+    "question": "¿Qué verifica 'WHERE EXISTS (SELECT 1 FROM empleado_proyecto ep WHERE ep.id_empleado = e.id_empleado)'?",
+    "options": [
+      "Que el empleado tenga salario mayor a 1",
+      "Que exista AL MENOS una fila en empleado_proyecto relacionada con ese empleado (tiene algún proyecto asignado)",
+      "Que el empleado no tenga ningún proyecto",
+      "Cuenta cuántos proyectos tiene cada empleado"
+    ],
+    "correctIndex": 1,
+    "explanation": "EXISTS solo comprueba si la subconsulta devuelve AL MENOS una fila; el 'SELECT 1' es una convención, el valor seleccionado no importa para EXISTS."
+  },
+  {
+    "id": "sql-121",
+    "category": "sql",
+    "topic": "Subconsultas y EXISTS",
+    "question": "¿Qué es una 'subconsulta correlacionada'?",
+    "options": [
+      "Una subconsulta que no depende de la consulta externa en absoluto",
+      "Una subconsulta que referencia columnas de la consulta EXTERNA, y por eso se re-ejecuta conceptualmente por cada fila externa",
+      "Una subconsulta que siempre devuelve un solo valor",
+      "Un sinónimo de CTE"
+    ],
+    "correctIndex": 1,
+    "explanation": "A diferencia de una subconsulta independiente (se ejecuta una sola vez), una correlacionada depende de la fila externa actual, como en 'WHERE e2.id_departamento = e.id_departamento'."
+  },
+  {
+    "id": "sql-122",
+    "category": "sql",
+    "topic": "Subconsultas y EXISTS",
+    "question": "¿Cuál es la trampa clásica de usar 'NOT IN' con una subconsulta cuyo resultado puede incluir NULL?",
+    "options": [
+      "No hay ninguna trampa, funciona siempre igual que NOT EXISTS",
+      "Si la subconsulta devuelve al menos un NULL, 'NOT IN' NO devuelve NINGUNA fila en absoluto",
+      "NOT IN lanza un error de sintaxis con NULL",
+      "NOT IN ignora automáticamente los NULL de la subconsulta"
+    ],
+    "correctIndex": 1,
+    "explanation": "Debido a la lógica de tres valores de SQL con NULL, un solo NULL en la lista de NOT IN hace que la comparación completa sea indeterminada para todas las filas, devolviendo un resultado vacío."
+  },
+  {
+    "id": "sql-123",
+    "category": "sql",
+    "topic": "Subconsultas y EXISTS",
+    "question": "¿Qué alternativa se recomienda usar en vez de NOT IN cuando la subconsulta puede contener NULL?",
+    "options": [
+      "IN en su lugar",
+      "NOT EXISTS, que no sufre el mismo problema con NULL",
+      "UNION",
+      "GROUP BY"
+    ],
+    "correctIndex": 1,
+    "explanation": "NOT EXISTS evalúa la existencia de coincidencias fila por fila y no se ve afectado por NULL de la misma forma que NOT IN."
+  },
+  {
+    "id": "sql-124",
+    "category": "sql",
+    "topic": "Subconsultas y EXISTS",
+    "question": "¿Qué tipo de subconsulta se coloca dentro del propio SELECT, devolviendo un único valor por fila, como '(SELECT AVG(salario) FROM empleados) AS promedio_general'?",
+    "options": [
+      "Subconsulta en FROM (inline view)",
+      "Subconsulta escalar",
+      "Subconsulta con EXISTS",
+      "CTE recursivo"
+    ],
+    "correctIndex": 1,
+    "explanation": "Una subconsulta escalar devuelve exactamente un valor (una fila, una columna) y puede usarse directamente como si fuera una expresión dentro del SELECT."
+  },
+  {
+    "id": "sql-125",
+    "category": "sql",
+    "topic": "Subconsultas y EXISTS",
+    "question": "¿Qué es una 'inline view' (subconsulta en el FROM)?",
+    "options": [
+      "Una vista permanente guardada en el diccionario de datos",
+      "Una subconsulta usada directamente como si fuera una tabla dentro de la cláusula FROM de la consulta externa",
+      "Un tipo de índice",
+      "Un sinónimo de trigger"
+    ],
+    "correctIndex": 1,
+    "explanation": "Una inline view es una subconsulta temporal usada solo dentro de esa consulta, en el FROM, tratada como si fuera una tabla derivada."
+  },
+  {
+    "id": "sql-126",
+    "category": "sql",
+    "topic": "Subconsultas y EXISTS",
+    "question": "¿Qué obtiene la consulta 'SELECT e.nombres FROM empleados e WHERE e.salario > (SELECT AVG(e2.salario) FROM empleados e2 WHERE e2.id_departamento = e.id_departamento);'?",
+    "options": [
+      "Empleados que ganan más que el promedio GENERAL de toda la empresa",
+      "Empleados que ganan más que el promedio de SU PROPIO departamento (subconsulta correlacionada)",
+      "Todos los empleados sin excepción",
+      "Un error de sintaxis"
+    ],
+    "correctIndex": 1,
+    "explanation": "La subconsulta se correlaciona por id_departamento con la fila externa 'e', calculando un promedio distinto para cada departamento, no un promedio global."
+  },
+  {
+    "id": "sql-127",
+    "category": "sql",
+    "topic": "Subconsultas y EXISTS",
+    "question": "¿Qué diferencia principal hay entre usar IN con una subconsulta y usar un INNER JOIN para el mismo propósito de filtrado?",
+    "options": [
+      "IN nunca puede reemplazar a un JOIN",
+      "Ambos pueden lograr resultados equivalentes en muchos casos, pero JOIN además permite traer columnas de la tabla relacionada en el SELECT, cosa que IN con subconsulta no permite directamente",
+      "JOIN siempre es más lento que IN",
+      "No hay ninguna diferencia en ningún caso"
+    ],
+    "correctIndex": 1,
+    "explanation": "IN con subconsulta solo sirve para FILTRAR filas según pertenencia; si además necesitas mostrar columnas de la tabla relacionada, un JOIN es la herramienta adecuada."
+  },
+  {
+    "id": "sql-128",
+    "category": "sql",
+    "topic": "Subconsultas y EXISTS",
+    "question": "¿Qué devuelve 'SELECT nombres FROM empleados WHERE id_departamento IN (SELECT id_departamento FROM departamentos WHERE ubicacion LIKE '%México%');'?",
+    "options": [
+      "Empleados de TODOS los departamentos",
+      "Empleados cuyos departamentos tienen una ubicación que contiene la palabra 'México'",
+      "Solo los nombres de los departamentos",
+      "Un error de sintaxis por anidar SELECT"
+    ],
+    "correctIndex": 1,
+    "explanation": "La subconsulta obtiene primero los IDs de los departamentos cuya ubicación contiene 'México'; la consulta externa filtra empleados que pertenezcan a esos departamentos."
+  },
+  {
+    "id": "sql-129",
+    "category": "sql",
+    "topic": "Subconsultas y EXISTS",
+    "question": "¿Puede una subconsulta escalar en el SELECT devolver MÁS de una fila sin causar error?",
+    "options": [
+      "Sí, siempre sin problema",
+      "No: si una subconsulta escalar devuelve más de una fila, Oracle lanza un error en tiempo de ejecución (ORA-01427: single-row subquery returns more than one row)",
+      "Solo si se usa DISTINCT",
+      "Depende del tipo de dato"
+    ],
+    "correctIndex": 1,
+    "explanation": "Una subconsulta usada como valor escalar debe devolver como máximo una fila y una columna; si devuelve más de una fila, Oracle lanza un error explícito."
+  },
+  {
+    "id": "sql-130",
+    "category": "sql",
+    "topic": "CTE y jerarquías",
+    "question": "¿Qué palabra clave introduce un Common Table Expression (CTE) en Oracle?",
+    "options": [
+      "WITH",
+      "AS TABLE",
+      "DEFINE",
+      "USING"
+    ],
+    "correctIndex": 0,
+    "explanation": "La cláusula WITH nombre_cte AS (subconsulta) define un CTE, que luego se referencia como si fuera una tabla en la consulta principal."
+  },
+  {
+    "id": "sql-131",
+    "category": "sql",
+    "topic": "CTE y jerarquías",
+    "question": "¿Qué ventaja principal ofrece un CTE frente a repetir la misma subconsulta varias veces en una consulta compleja?",
+    "options": [
+      "Ninguna, son exactamente equivalentes en todo sentido",
+      "Mejora la legibilidad al dar un nombre reutilizable a la subconsulta, evitando repetir la misma lógica varias veces",
+      "Los CTE siempre son más rápidos automáticamente",
+      "Los CTE no pueden usar JOIN"
+    ],
+    "correctIndex": 1,
+    "explanation": "Un CTE le da un nombre legible a una subconsulta compleja, permitiendo reutilizarla dentro de la misma sentencia sin repetir su definición."
+  },
+  {
+    "id": "sql-132",
+    "category": "sql",
+    "topic": "CTE y jerarquías",
+    "question": "¿Qué caso de uso clásico resuelve un CTE RECURSIVO, como alternativa moderna a CONNECT BY?",
+    "options": [
+      "Ordenar resultados alfabéticamente",
+      "Recorrer jerarquías (ej. empleado-jefe) combinando un caso base con un paso recursivo que se une consigo mismo",
+      "Calcular promedios simples",
+      "Insertar datos masivamente"
+    ],
+    "correctIndex": 1,
+    "explanation": "Un CTE recursivo define un caso base (UNION ALL) y un paso recursivo que se referencia a sí mismo, ideal para árboles/jerarquías como la cadena de mando."
+  },
+  {
+    "id": "sql-133",
+    "category": "sql",
+    "topic": "CTE y jerarquías",
+    "question": "¿Qué hace la cláusula 'START WITH id_jefe IS NULL' en una consulta CONNECT BY?",
+    "options": [
+      "Define el paso recursivo",
+      "Define el punto de PARTIDA (raíz) de la jerarquía: los empleados sin jefe asignado",
+      "Ordena el resultado",
+      "Filtra empleados con salario nulo"
+    ],
+    "correctIndex": 1,
+    "explanation": "START WITH indica desde qué fila(s) arranca el recorrido jerárquico — en este caso, los 'top' de la jerarquía que no tienen jefe."
+  },
+  {
+    "id": "sql-134",
+    "category": "sql",
+    "topic": "CTE y jerarquías",
+    "question": "¿Qué representa PRIOR en 'CONNECT BY PRIOR id_empleado = id_jefe'?",
+    "options": [
+      "Un tipo de índice",
+      "Hace referencia a la fila 'padre' (anterior en el recorrido) dentro de la cláusula de jerarquía",
+      "Un operador de comparación de fechas",
+      "Una función de agregación"
+    ],
+    "correctIndex": 1,
+    "explanation": "PRIOR indica cuál de las dos columnas de la condición corresponde a la fila padre ya procesada en el recorrido jerárquico, definiendo la dirección del árbol."
+  },
+  {
+    "id": "sql-135",
+    "category": "sql",
+    "topic": "CTE y jerarquías",
+    "question": "¿Para qué sirve la pseudo-columna LEVEL en una consulta con CONNECT BY?",
+    "options": [
+      "Indica el salario del empleado",
+      "Indica la profundidad/nivel jerárquico de cada fila dentro del árbol recorrido (1 para la raíz, 2 para sus hijos directos, etc.)",
+      "Cuenta cuántas filas tiene la tabla",
+      "Es sinónimo de ROWNUM"
+    ],
+    "correctIndex": 1,
+    "explanation": "LEVEL es una pseudo-columna exclusiva de consultas jerárquicas que indica en qué profundidad del árbol está cada fila devuelta."
+  },
+  {
+    "id": "sql-136",
+    "category": "sql",
+    "topic": "CTE y jerarquías",
+    "question": "¿Qué función construye una ruta textual completa (como 'A > B > C') mostrando el camino jerárquico hasta cada fila?",
+    "options": [
+      "SYS_CONNECT_BY_PATH",
+      "CONNECT_BY_ROOT",
+      "LEVEL",
+      "PRIOR"
+    ],
+    "correctIndex": 0,
+    "explanation": "SYS_CONNECT_BY_PATH(columna, separador) concatena los valores desde la raíz hasta la fila actual, formando una ruta legible."
+  },
+  {
+    "id": "sql-137",
+    "category": "sql",
+    "topic": "CTE y jerarquías",
+    "question": "En un CTE recursivo con 'UNION ALL', ¿qué representa la primera parte (antes de UNION ALL) y qué representa la segunda?",
+    "options": [
+      "Ambas partes son el caso base, ejecutado dos veces",
+      "La primera es el CASO BASE (punto de partida); la segunda es el PASO RECURSIVO, que se une consigo mismo repetidamente",
+      "La primera es el paso recursivo; la segunda el caso base",
+      "No tiene un orden definido, son intercambiables"
+    ],
+    "correctIndex": 1,
+    "explanation": "La estructura estándar de un CTE recursivo es: caso_base UNION ALL paso_recursivo (que referencia al propio CTE), continuando hasta que el paso recursivo no produzca más filas."
+  },
+  {
+    "id": "sql-138",
+    "category": "sql",
+    "topic": "Funciones analíticas",
+    "question": "¿Qué diferencia principal hay entre una función de ventana (OVER) y GROUP BY?",
+    "options": [
+      "Son exactamente lo mismo",
+      "GROUP BY COLAPSA el resultado en un valor por grupo; una función de ventana calcula un valor por CADA FILA, sin colapsar el detalle",
+      "Las funciones de ventana no pueden usar agregaciones",
+      "GROUP BY siempre es más rápido"
+    ],
+    "correctIndex": 1,
+    "explanation": "Con OVER(), cada fila conserva su propio detalle mientras 've' el resultado calculado sobre un conjunto de filas relacionadas (la 'ventana'), a diferencia de GROUP BY que reduce el número de filas del resultado."
+  },
+  {
+    "id": "sql-139",
+    "category": "sql",
+    "topic": "Funciones analíticas",
+    "question": "¿Qué diferencia hay entre RANK() y DENSE_RANK() ante un EMPATE en el criterio de orden?",
+    "options": [
+      "Son exactamente idénticas siempre",
+      "RANK() deja 'huecos' en la numeración tras un empate (ej. 1,2,2,4); DENSE_RANK() no deja huecos (ej. 1,2,2,3)",
+      "DENSE_RANK() siempre empieza en 0",
+      "RANK() no puede usarse con PARTITION BY"
+    ],
+    "correctIndex": 1,
+    "explanation": "Ante un empate en la posición 2, RANK() salta directamente al 4 para la siguiente fila distinta; DENSE_RANK() continúa consecutivamente en 3."
+  },
+  {
+    "id": "sql-140",
+    "category": "sql",
+    "topic": "Funciones analíticas",
+    "question": "¿Qué hace la cláusula PARTITION BY dentro de una función de ventana?",
+    "options": [
+      "Ordena el resultado final de la consulta completa",
+      "Divide las filas en grupos independientes, calculando la función de ventana por separado DENTRO de cada grupo",
+      "Elimina duplicados",
+      "Filtra filas antes del cálculo"
+    ],
+    "correctIndex": 1,
+    "explanation": "PARTITION BY reinicia el cálculo de la función de ventana para cada partición — ej. RANK() reinicia el ranking en cada departamento por separado."
+  },
+  {
+    "id": "sql-141",
+    "category": "sql",
+    "topic": "Funciones analíticas",
+    "question": "¿Para qué sirven las funciones LAG() y LEAD()?",
+    "options": [
+      "Para calcular sumas acumuladas únicamente",
+      "Para acceder al valor de una fila ANTERIOR (LAG) o SIGUIENTE (LEAD) según un orden definido, sin necesidad de un self-join",
+      "Para eliminar filas duplicadas",
+      "Para convertir tipos de datos"
+    ],
+    "correctIndex": 1,
+    "explanation": "LAG/LEAD permiten comparar cada fila con la fila 'vecina' (anterior/siguiente) según el ORDER BY de la ventana, sin escribir un self-join manual."
+  },
+  {
+    "id": "sql-142",
+    "category": "sql",
+    "topic": "Funciones analíticas",
+    "question": "¿Qué calcula 'SUM(salario) OVER (ORDER BY fecha_contratacion)' sin PARTITION BY?",
+    "options": [
+      "El total general fijo, repetido en cada fila",
+      "Un total ACUMULADO (running total): la suma de todos los salarios desde el inicio del orden hasta la fila actual",
+      "El promedio de salarios",
+      "Un error de sintaxis"
+    ],
+    "correctIndex": 1,
+    "explanation": "Sin un marco explícito, ORDER BY dentro de OVER() por defecto acumula desde el principio hasta la fila actual — produciendo un total corriente (running total)."
+  },
+  {
+    "id": "sql-143",
+    "category": "sql",
+    "topic": "Funciones analíticas",
+    "question": "¿Qué obtiene esta consulta? 'SELECT * FROM (SELECT nombres, salario, id_departamento, RANK() OVER (PARTITION BY id_departamento ORDER BY salario DESC) AS puesto FROM empleados) WHERE puesto = 1;'",
+    "options": [
+      "Todos los empleados ordenados por salario",
+      "El empleado (o empleados empatados) mejor pagado de CADA departamento",
+      "El empleado peor pagado de toda la empresa",
+      "Un error, no se puede filtrar sobre una función de ventana en el WHERE directamente sin subconsulta"
+    ],
+    "correctIndex": 1,
+    "explanation": "RANK() particionado por departamento asigna el puesto 1 al salario más alto DENTRO de cada departamento; filtrar puesto=1 en la subconsulta externa aísla al mejor pagado de cada uno."
+  },
+  {
+    "id": "sql-144",
+    "category": "sql",
+    "topic": "Funciones analíticas",
+    "question": "¿Qué calcula RATIO_TO_REPORT(salario) OVER (PARTITION BY id_departamento)?",
+    "options": [
+      "El salario absoluto de cada empleado",
+      "La proporción (fracción) que representa el salario de cada empleado respecto al TOTAL de su propio departamento",
+      "El ranking del empleado",
+      "La diferencia respecto al salario anterior"
+    ],
+    "correctIndex": 1,
+    "explanation": "RATIO_TO_REPORT calcula qué fracción del total de la partición representa cada fila — típicamente multiplicado por 100 para expresarlo como porcentaje."
+  },
+  {
+    "id": "sql-145",
+    "category": "sql",
+    "topic": "Funciones analíticas",
+    "question": "¿Qué controla la cláusula 'ROWS BETWEEN 2 PRECEDING AND CURRENT ROW' dentro de una función de ventana?",
+    "options": [
+      "Ordena de forma descendente",
+      "Define un MARCO explícito: solo considera la fila actual y las 2 filas anteriores para el cálculo (ej. un promedio móvil)",
+      "Excluye la fila actual del cálculo",
+      "Es sinónimo de PARTITION BY"
+    ],
+    "correctIndex": 1,
+    "explanation": "Este marco explícito acota la ventana a un rango específico de filas relativas a la actual, típico para calcular promedios/sumas móviles."
+  },
+  {
+    "id": "sql-146",
+    "category": "sql",
+    "topic": "Operadores de conjunto",
+    "question": "¿Qué diferencia hay entre UNION y UNION ALL?",
+    "options": [
+      "Son exactamente lo mismo",
+      "UNION elimina filas duplicadas del resultado combinado; UNION ALL las conserva (y es más rápido al no tener que comparar/eliminar duplicados)",
+      "UNION ALL elimina duplicados, UNION no",
+      "UNION solo funciona con una tabla"
+    ],
+    "correctIndex": 1,
+    "explanation": "UNION hace un paso adicional de deduplicación (más costoso); UNION ALL simplemente concatena ambos resultados sin comparar filas entre sí."
+  },
+  {
+    "id": "sql-147",
+    "category": "sql",
+    "topic": "Operadores de conjunto",
+    "question": "¿Qué operador de conjuntos usa Oracle para 'filas del primer resultado que NO están en el segundo' (a diferencia del estándar EXCEPT de otros motores)?",
+    "options": [
+      "EXCEPT",
+      "MINUS",
+      "DIFFERENCE",
+      "NOT IN"
+    ],
+    "correctIndex": 1,
+    "explanation": "Oracle usa MINUS con esta semántica; otros motores (SQL Server, PostgreSQL) usan la palabra EXCEPT para lo mismo."
+  },
+  {
+    "id": "sql-148",
+    "category": "sql",
+    "topic": "Operadores de conjunto",
+    "question": "¿Qué devuelve INTERSECT entre dos consultas?",
+    "options": [
+      "Todas las filas de ambas consultas combinadas",
+      "Solo las filas que aparecen en AMBOS resultados simultáneamente",
+      "Las filas que están en la primera pero no en la segunda",
+      "Un producto cartesiano"
+    ],
+    "correctIndex": 1,
+    "explanation": "INTERSECT conserva únicamente las filas presentes en ambos conjuntos de resultados a la vez."
+  },
+  {
+    "id": "sql-149",
+    "category": "sql",
+    "topic": "Operadores de conjunto",
+    "question": "¿Qué requisito estructural deben cumplir dos consultas para poder combinarse con UNION/INTERSECT/MINUS?",
+    "options": [
+      "Deben usar exactamente las mismas tablas en el FROM",
+      "Deben devolver el MISMO número de columnas, con tipos de datos compatibles entre sí, en el mismo orden",
+      "Deben tener el mismo número de filas",
+      "No hay ningún requisito"
+    ],
+    "correctIndex": 1,
+    "explanation": "La 'regla de oro' de los operadores de conjuntos: mismo número de columnas y tipos compatibles posición a posición, sin importar los nombres de columna originales."
+  },
+  {
+    "id": "sql-150",
+    "category": "sql",
+    "topic": "Operadores de conjunto",
+    "question": "¿Qué obtiene 'SELECT id_departamento FROM empleados MINUS SELECT id_departamento FROM proyectos;'?",
+    "options": [
+      "Departamentos que tienen tanto empleados como proyectos",
+      "Departamentos que tienen empleados pero NO tienen ningún proyecto asociado",
+      "Todos los departamentos sin excepción",
+      "Un error de sintaxis"
+    ],
+    "correctIndex": 1,
+    "explanation": "MINUS conserva los valores del primer conjunto que NO aparecen en el segundo — departamentos con empleados que carecen de proyectos."
+  },
+  {
+    "id": "sql-151",
+    "category": "sql",
+    "topic": "Operadores de conjunto",
+    "question": "¿Cuál de estos operadores de conjunto es generalmente más RÁPIDO, al no requerir un paso de eliminación de duplicados?",
+    "options": [
+      "UNION",
+      "UNION ALL",
+      "INTERSECT",
+      "MINUS"
+    ],
+    "correctIndex": 1,
+    "explanation": "UNION ALL simplemente concatena resultados sin comparar filas para deduplicar, por lo que suele ser más eficiente que UNION cuando los duplicados no son un problema."
+  },
+  {
+    "id": "sql-152",
+    "category": "sql",
+    "topic": "Funciones escalares",
+    "question": "¿Qué hace la función NVL(telefono, 'Sin teléfono')?",
+    "options": [
+      "Convierte telefono a mayúsculas",
+      "Devuelve el valor de telefono si NO es NULL, o el texto 'Sin teléfono' si telefono ES NULL",
+      "Elimina la columna telefono",
+      "Cuenta cuántos teléfonos hay"
+    ],
+    "correctIndex": 1,
+    "explanation": "NVL(expresión, valor_si_null) es la función clásica de Oracle para sustituir NULL por un valor alternativo."
+  },
+  {
+    "id": "sql-153",
+    "category": "sql",
+    "topic": "Funciones escalares",
+    "question": "¿Qué diferencia hay entre NVL y NVL2?",
+    "options": [
+      "Son exactamente iguales",
+      "NVL solo ofrece UN valor alternativo si es NULL; NVL2 permite un valor SI es NULL y otro DISTINTO si NO es NULL",
+      "NVL2 no existe en Oracle",
+      "NVL solo funciona con números"
+    ],
+    "correctIndex": 1,
+    "explanation": "NVL2(expr, valor_si_no_null, valor_si_null) da más flexibilidad al permitir un resultado distinto según si la expresión es NULL o no, no solo un reemplazo del NULL."
+  },
+  {
+    "id": "sql-154",
+    "category": "sql",
+    "topic": "Funciones escalares",
+    "question": "¿Qué hace COALESCE(telefono, email, 'Sin datos de contacto')?",
+    "options": [
+      "Concatena los tres valores en un solo texto",
+      "Devuelve el PRIMER valor no-NULL de la lista, en orden: telefono, si es NULL prueba email, si también es NULL usa el texto por defecto",
+      "Siempre devuelve 'Sin datos de contacto'",
+      "Solo funciona con dos argumentos, no con tres"
+    ],
+    "correctIndex": 1,
+    "explanation": "COALESCE generaliza a NVL para más de dos argumentos, devolviendo el primero que no sea NULL en la lista, evaluados en orden."
+  },
+  {
+    "id": "sql-155",
+    "category": "sql",
+    "topic": "Funciones escalares",
+    "question": "¿Qué produce SUBSTR('García', 1, 3)?",
+    "options": [
+      "'ía'",
+      "'Gar' (los primeros 3 caracteres, empezando en la posición 1)",
+      "'arc'",
+      "Un error, SUBSTR necesita 4 argumentos"
+    ],
+    "correctIndex": 1,
+    "explanation": "SUBSTR(texto, posición_inicio, longitud) extrae una subcadena; en Oracle, la posición inicial es 1 (no 0)."
+  },
+  {
+    "id": "sql-156",
+    "category": "sql",
+    "topic": "Funciones escalares",
+    "question": "¿Qué hace la función INITCAP('maría lópez')?",
+    "options": [
+      "Convierte todo a mayúsculas: 'MARÍA LÓPEZ'",
+      "Pone en mayúscula la primera letra de CADA palabra: 'María López'",
+      "Convierte todo a minúsculas",
+      "Elimina los espacios"
+    ],
+    "correctIndex": 1,
+    "explanation": "INITCAP capitaliza (pone en mayúscula) la primera letra de cada palabra del texto, dejando el resto en minúscula."
+  },
+  {
+    "id": "sql-157",
+    "category": "sql",
+    "topic": "Funciones escalares",
+    "question": "¿Qué diferencia hay entre ROUND(salario, -3) y TRUNC(salario, -3) para el valor 1234567?",
+    "options": [
+      "Ambos devuelven exactamente 1234000",
+      "ROUND redondea a la unidad de mil más cercana (1235000); TRUNC simplemente corta sin redondear (1234000)",
+      "TRUNC redondea y ROUND trunca (comportamiento invertido)",
+      "Ambos producen un error con escala negativa"
+    ],
+    "correctIndex": 1,
+    "explanation": "ROUND aplica redondeo matemático estándar; TRUNC simplemente descarta los dígitos sin considerar si deberían redondear hacia arriba."
+  },
+  {
+    "id": "sql-158",
+    "category": "sql",
+    "topic": "Funciones escalares",
+    "question": "¿Qué devuelve MOD(salario, 1000) para salario = 45500?",
+    "options": [
+      "45",
+      "500 (el resto de dividir 45500 entre 1000)",
+      "45.5",
+      "45000"
+    ],
+    "correctIndex": 1,
+    "explanation": "MOD(a, b) devuelve el resto de la división entera de a entre b: 45500 / 1000 = 45 con resto 500."
+  },
+  {
+    "id": "sql-159",
+    "category": "sql",
+    "topic": "Funciones escalares",
+    "question": "¿Qué hace CASE en una consulta SQL, comparado con IF/ELSE en un lenguaje de programación?",
+    "options": [
+      "No tiene equivalente, es exclusivo de PL/SQL",
+      "Evalúa condiciones en orden y devuelve el primer resultado cuya condición WHEN sea verdadera, similar a un if/else if/else encadenado",
+      "Solo puede usarse en el WHERE, nunca en el SELECT",
+      "Reemplaza por completo a GROUP BY"
+    ],
+    "correctIndex": 1,
+    "explanation": "CASE WHEN condicion1 THEN valor1 WHEN condicion2 THEN valor2 ELSE valor_default END funciona como una cadena de if/else if/else dentro de una expresión SQL."
+  },
+  {
+    "id": "sql-160",
+    "category": "sql",
+    "topic": "Funciones escalares",
+    "question": "¿Qué hace DECODE(id_departamento, 10, 'Tecnología', 20, 'Ventas', 'Otro')?",
+    "options": [
+      "Es equivalente a un CASE de igualdad simple: compara id_departamento contra cada valor listado y devuelve el resultado correspondiente, o 'Otro' si no coincide con ninguno",
+      "Solo funciona con fechas",
+      "Convierte el número a texto codificado en base64",
+      "Es sinónimo exacto de NVL"
+    ],
+    "correctIndex": 0,
+    "explanation": "DECODE es la forma clásica (pre-CASE) de Oracle para comparaciones de igualdad simples: valor, comparación1, resultado1, comparación2, resultado2, ..., default."
+  },
+  {
+    "id": "sql-161",
+    "category": "sql",
+    "topic": "Funciones escalares",
+    "question": "¿Qué devuelve TRIM('  hola  ')?",
+    "options": [
+      "'  hola  ' sin cambios",
+      "'hola' (elimina los espacios en blanco de ambos extremos)",
+      "'holahola'",
+      "Un error de sintaxis"
+    ],
+    "correctIndex": 1,
+    "explanation": "TRIM elimina espacios en blanco (u otro carácter especificado) del inicio y del final de un texto, sin afectar espacios internos."
+  },
+  {
+    "id": "sql-162",
+    "category": "sql",
+    "topic": "DCL",
+    "question": "¿Qué diferencia hay entre un privilegio de SISTEMA y un privilegio de OBJETO en Oracle?",
+    "options": [
+      "Son exactamente lo mismo",
+      "Los privilegios de sistema controlan acciones a nivel de toda la base de datos (ej. CREATE TABLE); los de objeto controlan acciones sobre un objeto específico (ej. SELECT sobre una tabla concreta)",
+      "Los privilegios de objeto son siempre más poderosos",
+      "Solo existen privilegios de sistema en Oracle"
+    ],
+    "correctIndex": 1,
+    "explanation": "CREATE SESSION/CREATE TABLE son privilegios de sistema (alcance global); SELECT/INSERT/UPDATE sobre 'rrhh.empleados' son privilegios de objeto (alcance específico)."
+  },
+  {
+    "id": "sql-163",
+    "category": "sql",
+    "topic": "DCL",
+    "question": "¿Qué hace 'GRANT SELECT ON rrhh.empleados TO PUBLIC;'?",
+    "options": [
+      "Otorga el privilegio SELECT únicamente al usuario 'PUBLIC'",
+      "Otorga el privilegio SELECT sobre esa tabla a TODOS los usuarios de la base de datos",
+      "Revoca el privilegio SELECT de todos",
+      "Crea una vista pública"
+    ],
+    "correctIndex": 1,
+    "explanation": "PUBLIC es una palabra clave especial que representa a TODOS los usuarios de la base — otorgar un privilegio a PUBLIC lo concede globalmente."
+  },
+  {
+    "id": "sql-164",
+    "category": "sql",
+    "topic": "DCL",
+    "question": "¿Qué permite hacer la cláusula WITH GRANT OPTION al otorgar un privilegio?",
+    "options": [
+      "Que el privilegio expire automáticamente en 30 días",
+      "Que el usuario que RECIBE el privilegio pueda, a su vez, otorgárselo a otros usuarios",
+      "Que el privilegio sea de solo lectura",
+      "Que el privilegio aplique solo los fines de semana"
+    ],
+    "correctIndex": 1,
+    "explanation": "WITH GRANT OPTION propaga la capacidad de conceder ese mismo privilegio, no solo de usarlo — hay que otorgarla con cuidado, ya que delega poder adicional."
+  },
+  {
+    "id": "sql-165",
+    "category": "sql",
+    "topic": "DCL",
+    "question": "¿Qué hace REVOKE en Oracle?",
+    "options": [
+      "Otorga un privilegio nuevo",
+      "Retira/quita un privilegio previamente otorgado a un usuario o rol",
+      "Elimina un usuario completo",
+      "Crea una copia de seguridad"
+    ],
+    "correctIndex": 1,
+    "explanation": "REVOKE es el comando inverso de GRANT: quita un privilegio de sistema u objeto que había sido concedido anteriormente."
+  },
+  {
+    "id": "sql-166",
+    "category": "sql",
+    "topic": "DCL",
+    "question": "¿Para qué sirve crear un ROLE (rol) en vez de otorgar privilegios individualmente a cada usuario?",
+    "options": [
+      "Los roles no tienen ninguna utilidad real en Oracle",
+      "Agrupar varios privilegios bajo un solo nombre, para asignarlos/revocarlos en bloque a muchos usuarios de forma más manejable",
+      "Los roles reemplazan por completo a los usuarios",
+      "Solo sirven para privilegios de sistema, nunca de objeto"
+    ],
+    "correctIndex": 1,
+    "explanation": "Un ROLE agrupa privilegios relacionados (ej. rol_analista con varios SELECT) que luego se asignan de una sola vez a múltiples usuarios, simplificando la administración."
+  },
+  {
+    "id": "sql-167",
+    "category": "sql",
+    "topic": "DCL",
+    "question": "¿Qué rol predefinido de Oracle otorga privilegios TOTALES de administrador, y por qué se debe usar con extremo cuidado?",
+    "options": [
+      "CONNECT",
+      "RESOURCE",
+      "DBA",
+      "PUBLIC"
+    ],
+    "correctIndex": 2,
+    "explanation": "El rol DBA concede prácticamente todos los privilegios sobre la base de datos — otorgarlo sin necesidad real representa un riesgo grave de seguridad."
+  },
+  {
+    "id": "sql-168",
+    "category": "sql",
+    "topic": "DCL",
+    "question": "¿Qué vista del diccionario de datos consultarías para ver los privilegios de OBJETO otorgados al usuario actual?",
+    "options": [
+      "user_tab_privs",
+      "dba_users",
+      "v$session",
+      "all_objects"
+    ],
+    "correctIndex": 0,
+    "explanation": "user_tab_privs muestra los privilegios de objeto (SELECT, INSERT, etc.) que el usuario actual tiene sobre distintas tablas/vistas."
+  },
+  {
+    "id": "sql-169",
+    "category": "sql",
+    "topic": "DCL",
+    "question": "¿Qué otorga el rol predefinido CONNECT de Oracle?",
+    "options": [
+      "Privilegios totales de DBA",
+      "Privilegios básicos para poder conectarse a la base de datos",
+      "Privilegios para crear tablas y secuencias propias",
+      "Acceso de solo lectura a todas las tablas del sistema"
+    ],
+    "correctIndex": 1,
+    "explanation": "CONNECT es un rol predefinido con privilegios mínimos orientados a permitir la conexión; RESOURCE es el que típicamente se combina para permitir crear objetos propios."
+  },
+  {
+    "id": "sql-170",
+    "category": "sql",
+    "topic": "TCL",
+    "question": "¿Qué hace COMMIT en una transacción SQL?",
+    "options": [
+      "Deshace todos los cambios pendientes",
+      "Confirma de forma PERMANENTE todos los cambios pendientes de la transacción actual",
+      "Crea un punto de control intermedio",
+      "Bloquea la tabla para otros usuarios"
+    ],
+    "correctIndex": 1,
+    "explanation": "COMMIT hace permanentes los cambios de DML pendientes; después de un COMMIT, ya no se pueden deshacer con ROLLBACK."
+  },
+  {
+    "id": "sql-171",
+    "category": "sql",
+    "topic": "TCL",
+    "question": "¿Qué hace ROLLBACK (sin especificar un SAVEPOINT)?",
+    "options": [
+      "Confirma los cambios pendientes",
+      "Deshace TODOS los cambios pendientes desde el último COMMIT (o desde el inicio de la transacción)",
+      "Solo deshace la última sentencia ejecutada",
+      "Elimina la tabla completa"
+    ],
+    "correctIndex": 1,
+    "explanation": "ROLLBACK sin SAVEPOINT revierte absolutamente todo lo pendiente de confirmar en la transacción actual, no solo el cambio más reciente."
+  },
+  {
+    "id": "sql-172",
+    "category": "sql",
+    "topic": "TCL",
+    "question": "¿Qué permite hacer un SAVEPOINT dentro de una transacción?",
+    "options": [
+      "Confirmar cambios de forma permanente e irreversible",
+      "Crear un punto de control intermedio al que se puede volver con ROLLBACK TO, deshaciendo solo lo posterior a ese punto",
+      "Bloquear la tabla completa",
+      "Cambiar el nivel de aislamiento"
+    ],
+    "correctIndex": 1,
+    "explanation": "SAVEPOINT marca un punto intermedio; 'ROLLBACK TO SAVEPOINT nombre' deshace solo los cambios posteriores a ese punto, conservando lo anterior."
+  },
+  {
+    "id": "sql-173",
+    "category": "sql",
+    "topic": "TCL",
+    "question": "Si se ejecuta un DDL (como CREATE TABLE) en medio de una transacción con cambios DML pendientes, ¿qué ocurre con esos cambios pendientes?",
+    "options": [
+      "Se deshacen automáticamente",
+      "Se confirman (COMMIT implícito) automáticamente ANTES de que el DDL se ejecute",
+      "No pasa nada, quedan pendientes igual que antes",
+      "El DDL falla si hay cambios DML pendientes"
+    ],
+    "correctIndex": 1,
+    "explanation": "Cualquier sentencia DDL hace un COMMIT implícito de todo lo pendiente antes de ejecutarse — un ROLLBACK posterior ya no podría deshacer esos cambios DML."
+  },
+  {
+    "id": "sql-174",
+    "category": "sql",
+    "topic": "TCL",
+    "question": "¿Qué alcance tiene un COMMIT o ROLLBACK: afecta solo a la última sentencia ejecutada, o a toda la transacción?",
+    "options": [
+      "Solo a la última sentencia ejecutada",
+      "A TODA la transacción activa: todas las sentencias DML pendientes desde el último COMMIT/ROLLBACK, no solo la última",
+      "Depende de si se usa DELETE o UPDATE",
+      "Solo afecta sentencias SELECT"
+    ],
+    "correctIndex": 1,
+    "explanation": "COMMIT/ROLLBACK operan sobre toda la transacción en curso, confirmando o revirtiendo TODAS las sentencias DML pendientes, sin importar cuántas fueron."
+  },
+  {
+    "id": "sql-175",
+    "category": "sql",
+    "topic": "TCL",
+    "question": "¿Qué hace 'SET TRANSACTION READ ONLY;'?",
+    "options": [
+      "Impide cualquier consulta SELECT en la sesión",
+      "Garantiza una 'foto' (snapshot) consistente de los datos durante toda la transacción, sin permitir escrituras",
+      "Borra todos los datos de solo lectura",
+      "Es sinónimo de ROLLBACK"
+    ],
+    "correctIndex": 1,
+    "explanation": "Una transacción de solo lectura asegura que todas las consultas dentro de ella vean el mismo snapshot consistente de los datos, sin permitir modificaciones."
+  },
+  {
+    "id": "sql-176",
+    "category": "sql",
+    "topic": "TCL",
+    "question": "¿Qué controla 'SET TRANSACTION ISOLATION LEVEL SERIALIZABLE;'?",
+    "options": [
+      "El tamaño máximo de la transacción",
+      "El nivel de aislamiento respecto a otras transacciones concurrentes, siendo SERIALIZABLE el más estricto",
+      "El tiempo máximo de espera de un bloqueo",
+      "El usuario que ejecuta la transacción"
+    ],
+    "correctIndex": 1,
+    "explanation": "SERIALIZABLE es el nivel de aislamiento más estricto disponible, previniendo dirty reads, non-repeatable reads y phantom reads."
+  },
+  {
+    "id": "sql-177",
+    "category": "sql",
+    "topic": "TCL",
+    "question": "¿Qué controla la configuración AUTOCOMMIT en una herramienta cliente como SQL*Plus?",
+    "options": [
+      "El formato de fecha por defecto",
+      "Si cada sentencia DML se confirma (COMMIT) automáticamente por sí sola, o si el usuario decide cuándo confirmar manualmente",
+      "El nivel de privilegios del usuario",
+      "El tamaño de los resultados mostrados"
+    ],
+    "correctIndex": 1,
+    "explanation": "Con AUTOCOMMIT ON, cada DML se confirma solo, perdiendo el control manual de la transacción; el comportamiento recomendado suele ser AUTOCOMMIT OFF."
+  },
+  {
+    "id": "sql-178",
+    "category": "sql",
+    "topic": "TCL",
+    "question": "Tras ejecutar 'SAVEPOINT punto_control;' dos veces (reutilizando el mismo nombre), ¿a qué punto exacto apunta un ROLLBACK TO SAVEPOINT punto_control posterior?",
+    "options": [
+      "Al PRIMER SAVEPOINT con ese nombre",
+      "Al SEGUNDO (más reciente) SAVEPOINT con ese nombre: el nombre reutilizado 'mueve' el punto de control",
+      "Produce un error por nombre duplicado",
+      "Al inicio de la transacción, ignorando ambos SAVEPOINT"
+    ],
+    "correctIndex": 1,
+    "explanation": "Al reutilizar el mismo nombre de SAVEPOINT, este se reposiciona al punto más reciente donde se declaró, y el ROLLBACK TO usa esa última posición."
+  },
+  {
+    "id": "sql-179",
+    "category": "sql",
+    "topic": "TCL",
+    "question": "¿Qué hace RELEASE SAVEPOINT nombre?",
+    "options": [
+      "Ejecuta un ROLLBACK hasta ese punto",
+      "Libera/elimina ese punto de control, de forma que ya no se puede hacer ROLLBACK TO ese SAVEPOINT después",
+      "Confirma la transacción completa",
+      "Crea un nuevo SAVEPOINT"
+    ],
+    "correctIndex": 1,
+    "explanation": "RELEASE SAVEPOINT simplemente descarta la referencia a ese punto de control, sin deshacer ni confirmar ningún cambio por sí mismo."
+  },
+  {
+    "id": "sql-180",
+    "category": "sql",
+    "topic": "Índices",
+    "question": "¿Qué estructura de datos usa típicamente un índice de Oracle para acelerar búsquedas?",
+    "options": [
+      "Una lista enlazada",
+      "Un árbol B-tree",
+      "Una tabla hash pura únicamente",
+      "Un array sin ordenar"
+    ],
+    "correctIndex": 1,
+    "explanation": "Los índices B-tree son la estructura por defecto en Oracle, eficientes para búsquedas por igualdad y por rango."
+  },
+  {
+    "id": "sql-181",
+    "category": "sql",
+    "topic": "Índices",
+    "question": "¿En qué orden importa declarar las columnas de un ÍNDICE COMPUESTO (varias columnas)?",
+    "options": [
+      "El orden nunca importa",
+      "Sí importa: el índice es más útil cuando el filtro usa las columnas en el MISMO orden en que fueron declaradas en el índice (empezando por la primera)",
+      "Solo importa si son del mismo tipo de dato",
+      "Los índices compuestos no existen en Oracle"
+    ],
+    "correctIndex": 1,
+    "explanation": "Un índice sobre (id_departamento, salario) es óptimo para 'WHERE id_departamento = X AND salario > Y', pero mucho menos útil si solo filtras por salario sin id_departamento."
+  },
+  {
+    "id": "sql-182",
+    "category": "sql",
+    "topic": "Índices",
+    "question": "¿Cuándo NO conviene crear un índice sobre una columna?",
+    "options": [
+      "Siempre conviene indexar cualquier columna, sin excepciones",
+      "Cuando la columna tiene muy pocos valores distintos (baja cardinalidad, ej. 'M'/'F'), en tablas muy pequeñas, o en columnas rara vez filtradas",
+      "Solo cuando la tabla tiene más de un millón de filas",
+      "Nunca se debe indexar una clave primaria"
+    ],
+    "correctIndex": 1,
+    "explanation": "Un índice ocupa espacio y ralentiza INSERT/UPDATE/DELETE (hay que mantenerlo actualizado); en columnas de baja cardinalidad o poco filtradas, el costo supera el beneficio."
+  },
+  {
+    "id": "sql-183",
+    "category": "sql",
+    "topic": "Índices",
+    "question": "¿Qué permite hacer un índice BASADO EN FUNCIÓN, como CREATE INDEX ... ON empleados (LOWER(email))?",
+    "options": [
+      "Indexar solo columnas numéricas",
+      "Que una búsqueda como WHERE LOWER(email) = '...' pueda usar el índice, algo que un índice normal sobre 'email' no permitiría de forma eficiente",
+      "Eliminar la necesidad de una PRIMARY KEY",
+      "Ordenar automáticamente toda la tabla"
+    ],
+    "correctIndex": 1,
+    "explanation": "Un índice basado en función precalcula el resultado de esa expresión (ej. LOWER(email)) para poder usarlo eficientemente en búsquedas case-insensitive."
+  },
+  {
+    "id": "sql-184",
+    "category": "sql",
+    "topic": "Vistas (VIEW)",
+    "question": "¿Qué es una VIEW (vista) en SQL?",
+    "options": [
+      "Una copia física de los datos, actualizada periódicamente por defecto",
+      "Una consulta guardada que se comporta como una tabla virtual, ejecutándose de nuevo cada vez que se consulta",
+      "Un tipo de índice especial",
+      "Un sinónimo de tabla temporal"
+    ],
+    "correctIndex": 1,
+    "explanation": "Una vista NO almacena datos por sí misma (salvo que sea materializada); es una consulta guardada que se re-ejecuta contra las tablas base cada vez que se consulta la vista."
+  },
+  {
+    "id": "sql-185",
+    "category": "sql",
+    "topic": "Vistas (VIEW)",
+    "question": "¿Qué diferencia hay entre una VIEW normal y una MATERIALIZED VIEW?",
+    "options": [
+      "Son exactamente lo mismo",
+      "La VIEW normal recalcula su consulta en cada acceso; la MATERIALIZED VIEW guarda físicamente el resultado, que debe refrescarse manualmente o programado",
+      "MATERIALIZED VIEW no puede usar JOIN",
+      "Una VIEW normal es siempre más lenta que una tabla física"
+    ],
+    "correctIndex": 1,
+    "explanation": "Las vistas materializadas son útiles para reportes pesados: evitan recalcular la consulta completa cada vez, a cambio de que los datos puedan quedar 'desactualizados' hasta el próximo REFRESH."
+  },
+  {
+    "id": "sql-186",
+    "category": "sql",
+    "topic": "Vistas (VIEW)",
+    "question": "¿Qué evita la cláusula 'WITH READ ONLY' al crear una vista?",
+    "options": [
+      "Que la vista se pueda consultar con SELECT",
+      "Que alguien intente INSERT/UPDATE/DELETE datos 'a través' de la vista hacia las tablas base",
+      "Que la vista use JOIN",
+      "Que la vista se elimine accidentalmente"
+    ],
+    "correctIndex": 1,
+    "explanation": "WITH READ ONLY convierte la vista en estrictamente de solo consulta, previniendo modificaciones indirectas sobre las tablas subyacentes a través de ella."
+  },
+  {
+    "id": "sql-187",
+    "category": "sql",
+    "topic": "Secuencias e IDENTITY",
+    "question": "¿Por qué Oracle usa SEQUENCE en vez de un AUTO_INCREMENT como MySQL?",
+    "options": [
+      "Oracle no soporta generar valores automáticos de ningún tipo",
+      "Oracle históricamente implementa la generación de valores únicos como un objeto INDEPENDIENTE (la secuencia), no ligado directamente a una columna específica de una tabla",
+      "SEQUENCE es una función, no un objeto de base de datos",
+      "AUTO_INCREMENT y SEQUENCE son sinónimos exactos en Oracle"
+    ],
+    "correctIndex": 1,
+    "explanation": "Una SEQUENCE es un objeto de base de datos separado que genera valores únicos consecutivos, reutilizable por cualquier tabla, a diferencia del AUTO_INCREMENT ligado directamente a una columna."
+  },
+  {
+    "id": "sql-188",
+    "category": "sql",
+    "topic": "Secuencias e IDENTITY",
+    "question": "¿Qué diferencia hay entre seq.NEXTVAL y seq.CURRVAL?",
+    "options": [
+      "Son exactamente lo mismo",
+      "NEXTVAL genera y devuelve el SIGUIENTE valor de la secuencia (avanzándola); CURRVAL devuelve el ÚLTIMO valor ya generado en la sesión actual, sin avanzar",
+      "CURRVAL siempre devuelve 1",
+      "NEXTVAL solo puede usarse una vez por sesión"
+    ],
+    "correctIndex": 1,
+    "explanation": "CURRVAL requiere haber llamado a NEXTVAL al menos una vez en esa misma sesión; NEXTVAL siempre avanza la secuencia a un valor nuevo cada vez que se invoca."
+  },
+  {
+    "id": "sql-189",
+    "category": "sql",
+    "topic": "Secuencias e IDENTITY",
+    "question": "¿Qué diferencia hay entre GENERATED ALWAYS AS IDENTITY y GENERATED BY DEFAULT AS IDENTITY en una columna (Oracle 12c+)?",
+    "options": [
+      "Son exactamente iguales",
+      "ALWAYS no permite insertar un valor manual para esa columna (siempre usa la secuencia interna); BY DEFAULT sí permite un valor manual explícito si hace falta",
+      "BY DEFAULT nunca genera un valor automático",
+      "ALWAYS solo funciona con VARCHAR2"
+    ],
+    "correctIndex": 1,
+    "explanation": "GENERATED ALWAYS rechaza un INSERT que especifique manualmente esa columna; GENERATED BY DEFAULT permite tanto el valor automático como uno manual explícito cuando se necesita (ej. migrar datos con IDs preexistentes)."
+  },
+  {
+    "id": "sql-190",
+    "category": "sql",
+    "topic": "Sinónimos",
+    "question": "¿Para qué sirve un SYNONYM (sinónimo) en Oracle?",
+    "options": [
+      "Para cifrar los datos de una tabla",
+      "Para crear un alias alternativo con el que referenciar un objeto (tabla, vista, etc.), simplificando el nombre o el schema al que pertenece",
+      "Para crear una copia física de una tabla",
+      "Para definir una restricción de integridad"
+    ],
+    "correctIndex": 1,
+    "explanation": "Un SYNONYM permite referenciar 'empleados' en vez de escribir 'rrhh.empleados' completo cada vez, o exponer un alias público entre distintos schemas."
+  },
+  {
+    "id": "sql-191",
+    "category": "sql",
+    "topic": "PL/SQL básico",
+    "question": "¿Qué es PL/SQL en relación con SQL?",
+    "options": [
+      "Un motor de base de datos completamente distinto a Oracle",
+      "El lenguaje PROCEDURAL propio de Oracle, que extiende SQL con variables, control de flujo (IF, LOOP) y estructuras reutilizables (procedimientos, funciones, triggers)",
+      "Un sinónimo exacto de T-SQL de SQL Server",
+      "Un tipo de índice"
+    ],
+    "correctIndex": 1,
+    "explanation": "PL/SQL agrega capacidades procedurales (variables, condicionales, bucles) que el SQL puro no tiene, permitiendo escribir lógica de negocio compleja dentro de la base de datos."
+  },
+  {
+    "id": "sql-192",
+    "category": "sql",
+    "topic": "PL/SQL básico",
+    "question": "¿Qué diferencia hay entre un PROCEDURE y una FUNCTION en PL/SQL?",
+    "options": [
+      "Son exactamente lo mismo",
+      "Una FUNCTION siempre debe devolver un valor con RETURN (usable directamente en una expresión SQL); un PROCEDURE no necesariamente devuelve un valor",
+      "Un PROCEDURE siempre es más rápido que una FUNCTION",
+      "Las FUNCTION no pueden recibir parámetros"
+    ],
+    "correctIndex": 1,
+    "explanation": "Una FUNCTION está diseñada para devolver un único valor y poder usarse dentro de una consulta SQL (ej. SELECT mi_funcion(x) FROM dual); un PROCEDURE ejecuta una acción sin ese requisito."
+  },
+  {
+    "id": "sql-193",
+    "category": "sql",
+    "topic": "PL/SQL básico",
+    "question": "¿Cuándo se ejecuta automáticamente un TRIGGER como 'AFTER UPDATE OF salario ON empleados'?",
+    "options": [
+      "Cuando un usuario ejecuta manualmente el trigger con EXEC",
+      "Automáticamente, cada vez que se actualiza la columna salario de la tabla empleados, sin que nadie lo invoque explícitamente",
+      "Solo una vez al día, de forma programada",
+      "Nunca, los triggers son solo documentación"
+    ],
+    "correctIndex": 1,
+    "explanation": "Los triggers se disparan AUTOMÁTICAMENTE en respuesta al evento declarado (aquí, un UPDATE sobre la columna salario), sin invocación manual — útiles para auditoría automática."
+  }
+]

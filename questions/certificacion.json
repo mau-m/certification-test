@@ -1,0 +1,2466 @@
+[
+  {
+    "id": "cert-001",
+    "category": "certificacion",
+    "topic": "Módulo 1 - SQL I",
+    "question": "Sobre la tabla empleados(id, nombre, departamento, salario, fecha_ingreso), ¿qué devuelve 'SELECT nombre FROM empleados WHERE salario IS NULL;'?",
+    "options": [
+      "Un error de sintaxis",
+      "Los nombres de empleados cuyo salario no tiene ningún valor asignado",
+      "Los nombres de empleados con salario igual a 0",
+      "Todos los empleados"
+    ],
+    "correctIndex": 1,
+    "explanation": "NULL representa ausencia de valor; se compara con IS NULL, nunca con '=', porque NULL nunca es igual a nada, ni siquiera a sí mismo."
+  },
+  {
+    "id": "cert-002",
+    "category": "certificacion",
+    "topic": "Módulo 1 - SQL I",
+    "question": "¿Qué hace 'UPDATE empleados SET salario = 47000;' SIN cláusula WHERE?",
+    "options": [
+      "No hace nada porque falta el WHERE",
+      "Actualiza el salario de TODOS los empleados de la tabla a 47000",
+      "Da un error de sintaxis obligatorio",
+      "Solo actualiza la primera fila"
+    ],
+    "correctIndex": 1,
+    "explanation": "Un UPDATE sin WHERE afecta todas las filas de la tabla — la trampa #1 de todo examen de SQL básico."
+  },
+  {
+    "id": "cert-003",
+    "category": "certificacion",
+    "topic": "Módulo 1 - SQL I",
+    "question": "¿Cuál es la disciplina recomendada antes de ejecutar un DELETE o UPDATE con condición sobre datos reales?",
+    "options": [
+      "Ejecutarlo directamente, sin verificación previa",
+      "Escribir primero un SELECT con el MISMO WHERE, revisar qué filas afectaría, y solo entonces cambiar a UPDATE/DELETE",
+      "Hacer un TRUNCATE de la tabla antes",
+      "Nunca usar WHERE en producción"
+    ],
+    "correctIndex": 1,
+    "explanation": "Verificar con un SELECT idéntico en su condición evita afectar accidentalmente filas no deseadas."
+  },
+  {
+    "id": "cert-004",
+    "category": "certificacion",
+    "topic": "Módulo 1 - SQL I",
+    "question": "¿Es válido escribir 'SELECT nombre FROM empleados ORDER BY salario;' aunque 'salario' no aparezca en el SELECT?",
+    "options": [
+      "No, es un error de sintaxis",
+      "Sí, es válido: ORDER BY puede usar columnas que no aparecen en el SELECT",
+      "Solo es válido si se usa DISTINCT",
+      "Solo es válido en Oracle, no en otros motores"
+    ],
+    "correctIndex": 1,
+    "explanation": "Un error común es creer que ORDER BY solo puede usar columnas ya seleccionadas — en realidad puede ordenar por cualquier columna de la tabla origen."
+  },
+  {
+    "id": "cert-005",
+    "category": "certificacion",
+    "topic": "Módulo 1 - SQL I",
+    "question": "¿Cuál es el error en 'WHERE nombre = \"Ana\"' en la mayoría de motores SQL?",
+    "options": [
+      "No hay ningún error",
+      "La mayoría de motores usan comillas SIMPLES para texto ('Ana'); las comillas dobles suelen reservarse para nombres de columna/tabla",
+      "Debe escribirse en mayúsculas",
+      "Falta un punto y coma"
+    ],
+    "correctIndex": 1,
+    "explanation": "El estándar SQL usa comillas simples para literales de texto; las comillas dobles identifican objetos (columnas/tablas) en muchos motores, incluido Oracle."
+  },
+  {
+    "id": "cert-006",
+    "category": "certificacion",
+    "topic": "Módulo 1 - SQL I",
+    "question": "¿Qué devuelve 'SELECT * FROM empleados WHERE departamento = 'TI' OR departamento = 'RRHH' AND salario > 40000;' respecto a la precedencia de operadores?",
+    "options": [
+      "(departamento = 'TI' OR departamento = 'RRHH') se evalúa primero como conjunto, luego se aplica el AND a ambos",
+      "AND tiene mayor precedencia que OR, así que se evalúa como: departamento='TI' OR (departamento='RRHH' AND salario>40000)",
+      "Es un error de sintaxis por combinar AND y OR",
+      "OR siempre se evalúa antes que AND en SQL"
+    ],
+    "correctIndex": 1,
+    "explanation": "AND tiene mayor precedencia que OR — todos los empleados de TI aparecen sin importar su salario, mientras que los de RRHH solo si además ganan más de 40000. Usar paréntesis explícitos evita esta ambigüedad."
+  },
+  {
+    "id": "cert-007",
+    "category": "certificacion",
+    "topic": "Módulo 1 - SQL I",
+    "question": "Si se listan las columnas explícitamente en un INSERT, ¿debe el orden de VALUES coincidir con el orden físico real de la tabla?",
+    "options": [
+      "Sí, siempre debe coincidir con el orden físico de la tabla",
+      "No, debe coincidir con el ORDEN en que se listaron las columnas en el propio INSERT, no necesariamente con el de la tabla",
+      "El orden nunca importa",
+      "Solo importa en UPDATE, no en INSERT"
+    ],
+    "correctIndex": 1,
+    "explanation": "El orden de VALUES debe corresponder al orden de columnas indicado explícitamente en el INSERT — puede diferir del orden físico real de columnas de la tabla."
+  },
+  {
+    "id": "cert-008",
+    "category": "certificacion",
+    "topic": "Módulo 1 - SQL I",
+    "question": "Dada la tabla empleados con Ana(45000,TI), Luis(38000,Ventas), Carla(52000,TI), Marco(30000,RRHH), Sofía(41000,Ventas): ¿cuántas filas afecta 'DELETE FROM empleados WHERE salario < 35000;'?",
+    "options": [
+      "0 filas",
+      "1 fila (solo Marco, con 30000)",
+      "2 filas",
+      "Todas las filas"
+    ],
+    "correctIndex": 1,
+    "explanation": "Solo Marco tiene salario menor a 35000 (30000); los demás (45000, 38000, 52000, 41000) no cumplen la condición."
+  },
+  {
+    "id": "cert-009",
+    "category": "certificacion",
+    "topic": "Módulo 1 - SQL I",
+    "question": "¿Qué sentencia aumenta un 5% el salario únicamente a los empleados del departamento 'TI'?",
+    "options": [
+      "UPDATE empleados SET salario = salario * 1.05;",
+      "UPDATE empleados SET salario = salario * 1.05 WHERE departamento = 'TI';",
+      "UPDATE empleados SET salario * 1.05 WHERE departamento = 'TI';",
+      "SELECT salario * 1.05 FROM empleados WHERE departamento = 'TI';"
+    ],
+    "correctIndex": 1,
+    "explanation": "Se necesita la cláusula SET con la expresión de aumento Y el WHERE para acotar el cambio solo al departamento TI; la opción A afecta a todos, sin excepción."
+  },
+  {
+    "id": "cert-010",
+    "category": "certificacion",
+    "topic": "Módulo 1 - SQL I",
+    "question": "¿Qué hace 'SELECT DISTINCT departamento FROM empleados;'?",
+    "options": [
+      "Devuelve todos los empleados sin repetir filas completas",
+      "Devuelve la lista de departamentos, cada uno una sola vez, sin duplicados",
+      "Ordena los departamentos alfabéticamente",
+      "Cuenta cuántos empleados hay por departamento"
+    ],
+    "correctIndex": 1,
+    "explanation": "DISTINCT elimina duplicados del resultado — aquí, cada nombre de departamento aparece una sola vez, sin importar cuántos empleados tenga."
+  },
+  {
+    "id": "cert-011",
+    "category": "certificacion",
+    "topic": "Módulo 1 - SQL I",
+    "question": "¿Qué comando SQL, entre los cubiertos en el Módulo 1 (SELECT/INSERT/UPDATE/DELETE/ORDER BY), NO modifica los datos de la tabla?",
+    "options": [
+      "INSERT",
+      "UPDATE",
+      "SELECT",
+      "DELETE"
+    ],
+    "correctIndex": 2,
+    "explanation": "SELECT solo consulta/extrae datos (DQL); INSERT, UPDATE y DELETE son sentencias DML que sí modifican el contenido de la tabla."
+  },
+  {
+    "id": "cert-012",
+    "category": "certificacion",
+    "topic": "Módulo 1 - SQL I",
+    "question": "¿Qué produce 'SELECT nombre, salario FROM empleados WHERE departamento = 'Ventas' ORDER BY salario DESC;'?",
+    "options": [
+      "Los empleados de Ventas ordenados de menor a mayor salario",
+      "Los empleados de Ventas ordenados de MAYOR a menor salario",
+      "Todos los empleados ordenados por departamento",
+      "Un error de sintaxis por combinar WHERE y ORDER BY"
+    ],
+    "correctIndex": 1,
+    "explanation": "DESC ordena de forma descendente (mayor a menor); WHERE ya filtró previamente solo a los empleados del departamento Ventas."
+  },
+  {
+    "id": "cert-013",
+    "category": "certificacion",
+    "topic": "Módulo 2 - Diagramas de flujo",
+    "question": "En la simbología ANSI de diagramas de flujo, ¿qué figura representa una DECISIÓN con exactamente 2 salidas (Sí/No)?",
+    "options": [
+      "Un rectángulo",
+      "Un rombo",
+      "Un óvalo",
+      "Un paralelogramo"
+    ],
+    "correctIndex": 1,
+    "explanation": "El rombo (notación de texto '< >' en esta guía) representa siempre una pregunta con dos salidas posibles: Sí y No (o Verdadero/Falso)."
+  },
+  {
+    "id": "cert-014",
+    "category": "certificacion",
+    "topic": "Módulo 2 - Diagramas de flujo",
+    "question": "¿Qué figura ANSI representa el Inicio o el Fin de un diagrama de flujo?",
+    "options": [
+      "Un rombo",
+      "Un rectángulo",
+      "Un óvalo (terminal)",
+      "Un hexágono"
+    ],
+    "correctIndex": 2,
+    "explanation": "El símbolo Terminal (óvalo o rectángulo de bordes redondeados) marca siempre el Inicio o el Fin — siempre hay exactamente un Inicio, puede haber varios Fin."
+  },
+  {
+    "id": "cert-015",
+    "category": "certificacion",
+    "topic": "Módulo 2 - Diagramas de flujo",
+    "question": "¿Qué figura ANSI se usa para leer un dato de entrada o mostrar un resultado?",
+    "options": [
+      "Rectángulo (Proceso)",
+      "Paralelogramo (Entrada/Salida)",
+      "Rombo (Decisión)",
+      "Círculo (Conector)"
+    ],
+    "correctIndex": 1,
+    "explanation": "El paralelogramo representa operaciones de Entrada/Salida: leer un dato o mostrar/imprimir un resultado."
+  },
+  {
+    "id": "cert-016",
+    "category": "certificacion",
+    "topic": "Módulo 2 - Diagramas de flujo",
+    "question": "¿Cuál es la técnica más confiable para resolver '¿qué hace este diagrama?' o '¿cuál es la salida para esta entrada?'",
+    "options": [
+      "Adivinar el resultado final leyendo por encima",
+      "Construir una tabla de trazado: una columna por variable, actualizada paso a paso exactamente como lo haría la computadora",
+      "Ejecutar el diagrama mentalmente sin anotar nada",
+      "Buscar la respuesta en internet"
+    ],
+    "correctIndex": 1,
+    "explanation": "La tabla de trazado (trace table) es la técnica sistemática que evita 'adivinar' y garantiza seguir el flujo de control exactamente como la máquina lo haría."
+  },
+  {
+    "id": "cert-017",
+    "category": "certificacion",
+    "topic": "Módulo 2 - Diagramas de flujo",
+    "question": "Dado un diagrama que inicializa 'resultado ← 0, i ← 1', repite mientras 'i <= N' haciendo 'resultado ← resultado + i' e 'i ← i + 1', ¿qué calcula para N=4?",
+    "options": [
+      "El factorial de 4 (24)",
+      "La suma de los primeros N números naturales: 1+2+3+4 = 10",
+      "El promedio de 1 a 4",
+      "Un bucle infinito"
+    ],
+    "correctIndex": 1,
+    "explanation": "Es el patrón de acumulador con suma: resultado pasa por 0→1→3→6→10, calculando 1+2+3+4=10."
+  },
+  {
+    "id": "cert-018",
+    "category": "certificacion",
+    "topic": "Módulo 2 - Diagramas de flujo",
+    "question": "En un diagrama pensado para contar negativos, el proceso dice '[ contador ← 1 ]' dentro de la rama Sí de 'lista[i] < 0 ?', en vez de '[ contador ← contador + 1 ]'. ¿Qué error de lógica representa esto?",
+    "options": [
+      "Un error de sintaxis que impide ejecutar el diagrama",
+      "El proceso REEMPLAZA el valor de contador en vez de INCREMENTARLO — contador termina en 1 si hubo al menos un negativo, o 0 si no hubo ninguno, nunca cuenta correctamente",
+      "Es correcto, cuenta bien los negativos",
+      "El error está en la condición, no en el proceso"
+    ],
+    "correctIndex": 1,
+    "explanation": "Asignar un valor fijo en vez de sumar sobre el valor anterior es un error clásico de 'acumulador roto': el contador nunca refleja el conteo real acumulado."
+  },
+  {
+    "id": "cert-019",
+    "category": "certificacion",
+    "topic": "Módulo 2 - Diagramas de flujo",
+    "question": "¿Qué patrón describe 'una variable de control que empieza en un valor, se compara contra un límite, y se incrementa en cada vuelta', equivalente a un 'for' en Java?",
+    "options": [
+      "Decisión anidada",
+      "Bucle controlado por contador",
+      "Búsqueda de máximo/mínimo",
+      "Bucle controlado por condición"
+    ],
+    "correctIndex": 1,
+    "explanation": "El bucle controlado por contador usa una variable de control (i) inicializada, comparada, e incrementada en cada iteración — el equivalente exacto de un for."
+  },
+  {
+    "id": "cert-020",
+    "category": "certificacion",
+    "topic": "Módulo 2 - Diagramas de flujo",
+    "question": "Para hallar el máximo de 3 números (a, b, c), el diagrama primero compara 'a > b ?' asignando max ← a o max ← b, y LUEGO compara 'c > max ?'. Con a=5, b=5, c=5, ¿qué valor final tiene max?",
+    "options": [
+      "max queda indefinido, error",
+      "5 (el patrón funciona correctamente incluso con valores todos iguales)",
+      "0",
+      "15 (la suma de los tres)"
+    ],
+    "correctIndex": 1,
+    "explanation": "'5 > 5' es falso, así que max ← b = 5; luego 'c > max' → '5 > 5' también falso, max se queda en 5 — el resultado correcto."
+  },
+  {
+    "id": "cert-021",
+    "category": "certificacion",
+    "topic": "Módulo 2 - Diagramas de flujo",
+    "question": "¿Qué diferencia hay entre un 'bucle controlado por contador' y un 'bucle controlado por condición'?",
+    "options": [
+      "Son exactamente lo mismo",
+      "El controlado por contador cuenta vueltas con una variable incremental (equivalente a 'for'); el controlado por condición se repite mientras/hasta que se cumpla una condición que no depende de contar vueltas (equivalente a 'while')",
+      "El controlado por condición siempre se ejecuta una sola vez",
+      "El controlado por contador nunca termina"
+    ],
+    "correctIndex": 1,
+    "explanation": "Ambos son formas de repetición, pero difieren en QUÉ determina cuándo parar: un conteo de vueltas fijo, o una condición arbitraria evaluada en cada vuelta."
+  },
+  {
+    "id": "cert-022",
+    "category": "certificacion",
+    "topic": "Módulo 2 - Diagramas de flujo",
+    "question": "En el diagrama del factorial (fact ← 1, i ← 1, mientras i <= N: fact ← fact*i, i ← i+1), ¿cuántas veces se ejecuta el proceso 'fact ← fact * i' si N = 0?",
+    "options": [
+      "Una vez",
+      "Cero veces: la condición 'i <= N' (1 <= 0) es falsa desde el inicio, el bucle nunca entra a su cuerpo",
+      "N veces",
+      "Un bucle infinito"
+    ],
+    "correctIndex": 1,
+    "explanation": "Como es un bucle tipo 'mientras' (evalúa la condición ANTES de ejecutar), si la condición ya es falsa en la primera evaluación, el cuerpo nunca se ejecuta — fact queda en su valor inicial, 1."
+  },
+  {
+    "id": "cert-023",
+    "category": "certificacion",
+    "topic": "Módulo 2 - Diagramas de flujo",
+    "question": "¿Qué ocurre en un diagrama con un bucle '< i <= N ? >' que inicializa i ← 1 pero NUNCA incrementa i dentro del cuerpo del bucle?",
+    "options": [
+      "El bucle se ejecuta exactamente una vez",
+      "Un bucle INFINITO: la condición de salida nunca cambia, jamás se alcanza el camino 'No'",
+      "El diagrama produce un error de compilación",
+      "Termina automáticamente tras 100 iteraciones"
+    ],
+    "correctIndex": 1,
+    "explanation": "Sin incrementar la variable de control, la condición de parada nunca se vuelve falsa — el diagrama repite indefinidamente el mismo ciclo."
+  },
+  {
+    "id": "cert-024",
+    "category": "certificacion",
+    "topic": "Módulo 2 - Diagramas de flujo",
+    "question": "¿Qué representa el símbolo hexágono ('Preparación') en la simbología ANSI?",
+    "options": [
+      "El fin del diagrama",
+      "La inicialización de una variable de control de bucle, como un contador antes de empezar a iterar",
+      "Una llamada a una subrutina",
+      "Una operación de entrada de datos"
+    ],
+    "correctIndex": 1,
+    "explanation": "El símbolo de Preparación se usa típicamente para inicializar variables de control antes de entrar a un bucle, como 'i ← 1' o 'suma ← 0'."
+  },
+  {
+    "id": "cert-025",
+    "category": "certificacion",
+    "topic": "Módulo 2 - Diagramas de flujo",
+    "question": "¿Qué representa el símbolo de 'Proceso predefinido' (rectángulo con doble barra vertical)?",
+    "options": [
+      "Una decisión con múltiples salidas",
+      "Una llamada a una subrutina/función ya definida en otro diagrama",
+      "El inicio del programa",
+      "Una variable global"
+    ],
+    "correctIndex": 1,
+    "explanation": "El proceso predefinido indica que se invoca una subrutina/función completa, ya definida en otro diagrama, sin repetir aquí su lógica interna."
+  },
+  {
+    "id": "cert-026",
+    "category": "certificacion",
+    "topic": "Módulo 2 - Diagramas de flujo",
+    "question": "Para el patrón 'suma de los números pares del 1 al N', ¿qué estructura de control adicional se necesita DENTRO del bucle, respecto a un simple acumulador de todos los números?",
+    "options": [
+      "Ninguna estructura adicional",
+      "Una decisión (filtro) que verifique 'i % 2 == 0' antes de sumar al acumulador",
+      "Un segundo bucle anidado",
+      "Una variable de tipo texto"
+    ],
+    "correctIndex": 1,
+    "explanation": "El patrón combina un bucle con acumulador MÁS un filtro (decisión) dentro del cuerpo: solo se suma al acumulador cuando la condición de paridad se cumple."
+  },
+  {
+    "id": "cert-027",
+    "category": "certificacion",
+    "topic": "Módulo 2 - Diagramas de flujo",
+    "question": "¿Cuál es la relación explícita entre la técnica de 'trazado' del Módulo 2 y el Módulo 4 (Análisis de Código Java)?",
+    "options": [
+      "No tienen ninguna relación",
+      "Es la MISMA técnica (tabla de variables paso a paso), aplicada primero sobre un diagrama de flujo y luego directamente sobre código Java",
+      "El Módulo 4 reemplaza por completo al Módulo 2",
+      "Los diagramas de flujo ya no se usan en la industria"
+    ],
+    "correctIndex": 1,
+    "explanation": "Trazar un diagrama paso a paso y trazar código Java línea por línea son la misma habilidad fundamental de seguir el flujo de control sin asumir nada."
+  },
+  {
+    "id": "cert-028",
+    "category": "certificacion",
+    "topic": "Módulo 2 - Diagramas de flujo",
+    "question": "En una 'decisión anidada' (una decisión dentro de otra rama de decisión), ¿a qué estructura de Java equivale?",
+    "options": [
+      "Un bucle for anidado dentro de otro for",
+      "Un if dentro de otro if/else",
+      "Un switch sin break",
+      "Una llamada recursiva"
+    ],
+    "correctIndex": 1,
+    "explanation": "Una decisión anidada en un diagrama corresponde exactamente a anidar un if (o if/else) dentro de una rama de otro if/else en Java."
+  },
+  {
+    "id": "cert-029",
+    "category": "certificacion",
+    "topic": "Módulo 2 - Diagramas de flujo",
+    "question": "¿Qué representa un 'Conector' (círculo pequeño) dentro de un diagrama de flujo de una sola página?",
+    "options": [
+      "El fin definitivo del programa",
+      "Une dos puntos del mismo diagrama sin necesidad de cruzar líneas, muy usado para cerrar el ciclo de un bucle",
+      "Una decisión con 3 salidas",
+      "Una variable de tipo booleano"
+    ],
+    "correctIndex": 1,
+    "explanation": "El conector permite 'saltar' visualmente de un punto a otro del mismo diagrama sin que las líneas de flujo se crucen entre sí, típico al cerrar el ciclo de vuelta a la condición de un bucle."
+  },
+  {
+    "id": "cert-030",
+    "category": "certificacion",
+    "topic": "Módulo 2 - Diagramas de flujo",
+    "question": "¿Por qué los diagramas de flujo siguen siendo útiles en un examen de lógica de programación, aunque en la industria se usen hoy sobre todo para documentar procesos de negocio?",
+    "options": [
+      "Porque son más rápidos de dibujar que escribir código",
+      "Porque obligan a razonar el flujo de control de forma visual y explícita, sin poder 'saltarse' mentalmente una condición como a veces ocurre leyendo código directamente",
+      "Porque reemplazan por completo la necesidad de aprender a programar",
+      "No tienen ninguna utilidad real hoy en día"
+    ],
+    "correctIndex": 1,
+    "explanation": "El valor pedagógico de un diagrama es que fuerza a seguir CADA paso explícitamente, sin dar nada por sentado — la misma disciplina que luego se necesita para depurar código real."
+  },
+  {
+    "id": "cert-031",
+    "category": "certificacion",
+    "topic": "Módulo 3 - Java básico",
+    "question": "¿Qué resultado tiene 'int division = 7 / 2;' en Java?",
+    "options": [
+      "3.5",
+      "3 (división entera, trunca el decimal)",
+      "4",
+      "Error de compilación"
+    ],
+    "correctIndex": 1,
+    "explanation": "Con ambos operandos int, Java realiza división entera y trunca cualquier parte decimal: 7/2 = 3, no 3.5."
+  },
+  {
+    "id": "cert-032",
+    "category": "certificacion",
+    "topic": "Módulo 3 - Java básico",
+    "question": "¿Qué imprime 'System.out.println(numeros.length);' para un array int[] numeros = {10,20,30}?",
+    "options": [
+      "Un error, porque length necesita paréntesis",
+      "3 (length es un CAMPO del array, se usa sin paréntesis, a diferencia de String.length())",
+      "30 (el último elemento)",
+      "0"
+    ],
+    "correctIndex": 1,
+    "explanation": "En arrays, 'length' es un campo (sin paréntesis); en String, 'length()' es un método (con paréntesis) — una distinción que confunde a muchos principiantes."
+  },
+  {
+    "id": "cert-033",
+    "category": "certificacion",
+    "topic": "Módulo 3 - Java básico",
+    "question": "¿Qué hace un 'do-while' que no tiene un 'while' equivalente?",
+    "options": [
+      "Nunca ejecuta su cuerpo",
+      "Garantiza ejecutar el cuerpo AL MENOS UNA VEZ, porque la condición se evalúa al FINAL del ciclo",
+      "Se ejecuta exactamente 2 veces siempre",
+      "Es idéntico a un for"
+    ],
+    "correctIndex": 1,
+    "explanation": "A diferencia de while (evalúa antes), do-while ejecuta el cuerpo primero y evalúa la condición después, garantizando al menos una ejecución."
+  },
+  {
+    "id": "cert-034",
+    "category": "certificacion",
+    "topic": "Módulo 3 - Java básico",
+    "question": "¿Qué caracteriza a la sobrecarga (overloading) de métodos, como en el ejemplo de varios métodos 'sumar' en la guía?",
+    "options": [
+      "Mismo nombre de método, MISMA lista exacta de parámetros",
+      "Mismo nombre de método, pero distinta lista de parámetros (en tipo y/o cantidad)",
+      "Distinto nombre de método, mismos parámetros",
+      "Solo aplica a métodos static"
+    ],
+    "correctIndex": 1,
+    "explanation": "La sobrecarga permite múltiples métodos con el mismo nombre siempre que su firma (tipos y/o cantidad de parámetros) sea distinta — tanto sumar(int,int) como sumar(double,double) o sumar(int,int,int) son válidos."
+  },
+  {
+    "id": "cert-035",
+    "category": "certificacion",
+    "topic": "Módulo 3 - Java básico",
+    "question": "¿Qué permite hacer un parámetro varargs como 'int... numeros' en un método?",
+    "options": [
+      "Recibir exactamente un argumento, nunca más",
+      "Recibir un número VARIABLE de argumentos, incluido cero, tratándolos internamente como un array",
+      "Recibir solo argumentos de tipo String",
+      "Es exclusivo de métodos constructores"
+    ],
+    "correctIndex": 1,
+    "explanation": "Varargs permite llamar al método con cualquier cantidad de argumentos del tipo indicado (incluso ninguno), que se reciben internamente como un array."
+  },
+  {
+    "id": "cert-036",
+    "category": "certificacion",
+    "topic": "Módulo 3 - Java básico",
+    "question": "En el ejemplo de la clase Estudiante con setPromedio(double promedio) que valida el rango 0-10, ¿qué demuestra sobre encapsulación 'real'?",
+    "options": [
+      "Que basta con declarar los campos como private",
+      "Que la encapsulación real requiere que los setters VALIDEN invariantes (ej. rechazar un promedio fuera de rango), no solo ocultar el campo",
+      "Que los getters nunca deben usarse",
+      "Que Java no permite validar datos en setters"
+    ],
+    "correctIndex": 1,
+    "explanation": "Un setter 'de nombre' solo asigna sin verificar nada; la encapsulación real usa el setter como punto de control para mantener el objeto en un estado válido, lanzando una excepción si no lo está."
+  },
+  {
+    "id": "cert-037",
+    "category": "certificacion",
+    "topic": "Módulo 3 - Java básico",
+    "question": "En la jerarquía Persona → Empleado (herencia), ¿qué hace 'super(nombre);' dentro del constructor de Empleado?",
+    "options": [
+      "Crea una nueva instancia de Persona independiente",
+      "Invoca el constructor de la superclase Persona, pasándole el parámetro nombre",
+      "Sobrescribe el método presentarse()",
+      "Es opcional y no tiene ningún efecto"
+    ],
+    "correctIndex": 1,
+    "explanation": "super(...) invoca explícitamente el constructor de la clase padre, debe ser la primera instrucción del constructor de la subclase si se usa explícitamente."
+  },
+  {
+    "id": "cert-038",
+    "category": "certificacion",
+    "topic": "Módulo 3 - Java básico",
+    "question": "¿Qué hace 'nombres.contains(\"Ana\")' sobre una List<String>?",
+    "options": [
+      "Cuenta cuántas veces aparece 'Ana'",
+      "Devuelve true o false según si 'Ana' está presente en la lista",
+      "Elimina 'Ana' de la lista",
+      "Ordena la lista alfabéticamente"
+    ],
+    "correctIndex": 1,
+    "explanation": "contains() devuelve un boolean indicando si el elemento existe en la colección, usando equals() para comparar contenido."
+  },
+  {
+    "id": "cert-039",
+    "category": "certificacion",
+    "topic": "Módulo 3 - Java teoría profunda (JVM)",
+    "question": "¿Qué hace javac exactamente, según la teoría ampliada del Módulo 3?",
+    "options": [
+      "Ejecuta directamente el bytecode",
+      "Compila el código fuente .java a bytecode portable (.class), sin ejecutar nada",
+      "Interpreta el código línea por línea en tiempo real",
+      "Administra la memoria del heap"
+    ],
+    "correctIndex": 1,
+    "explanation": "javac es el compilador: traduce .java a bytecode .class, un formato intermedio y portable que luego la JVM interpreta/compila a código nativo."
+  },
+  {
+    "id": "cert-040",
+    "category": "certificacion",
+    "topic": "Módulo 3 - Java teoría profunda (JVM)",
+    "question": "¿Qué hace el JIT (Just-In-Time compiler) dentro de la JVM?",
+    "options": [
+      "Compila el código fuente a bytecode",
+      "Detecta el bytecode ejecutado con más frecuencia ('hot code') y lo compila a código máquina nativo en tiempo de ejecución para ganar velocidad",
+      "Verifica la sintaxis del código Java",
+      "Gestiona los privilegios de acceso a archivos"
+    ],
+    "correctIndex": 1,
+    "explanation": "El JIT es responsable de que un programa Java 'arranque más lento pero corra rápido': compila a nativo las rutas más ejecutadas según se detectan durante la ejecución."
+  },
+  {
+    "id": "cert-041",
+    "category": "certificacion",
+    "topic": "Módulo 3 - Java teoría profunda (Memoria)",
+    "question": "Según el modelo de memoria Stack vs Heap, ¿dónde vive la REFERENCIA de un objeto (ej. la variable 'e' en 'Estudiante e = new Estudiante(...)')?",
+    "options": [
+      "En el Heap, junto con el objeto",
+      "En el Stack del hilo que ejecuta el método (la referencia, no el objeto en sí)",
+      "En el Metaspace",
+      "En un archivo temporal en disco"
+    ],
+    "correctIndex": 1,
+    "explanation": "La referencia (la 'dirección' hacia el objeto) vive en el Stack como variable local; el objeto real al que apunta esa referencia vive en el Heap."
+  },
+  {
+    "id": "cert-042",
+    "category": "certificacion",
+    "topic": "Módulo 3 - Java teoría profunda (Memoria)",
+    "question": "Dado 'static void modificarContenido(Estudiante e) { e.setPromedio(10.0); }', ¿el cambio de promedio se refleja en el objeto del llamador?",
+    "options": [
+      "No, nunca se refleja",
+      "Sí: como 'e' es una copia de la REFERENCIA al mismo objeto en el Heap, modificar su CONTENIDO (vía setPromedio) sí afecta al objeto original",
+      "Solo si el método es 'public'",
+      "Solo si Estudiante es una clase abstracta"
+    ],
+    "correctIndex": 1,
+    "explanation": "Java pasa la referencia POR VALOR: la copia local sigue apuntando al mismo objeto en el Heap, así que modificar su contenido (no reasignar la variable) sí se ve reflejado afuera."
+  },
+  {
+    "id": "cert-043",
+    "category": "certificacion",
+    "topic": "Módulo 3 - Java teoría profunda (Memoria)",
+    "question": "Dado 'static void reasignarParametro(Estudiante e) { e = new Estudiante(\"Otro\", 5.0); }', ¿se refleja este cambio en la variable del llamador?",
+    "options": [
+      "Sí, siempre se refleja",
+      "No: reasignar el parámetro local solo cambia la copia local de la referencia, sin afectar a la variable original del llamador",
+      "Solo si Estudiante implementa Cloneable",
+      "Produce un error de compilación"
+    ],
+    "correctIndex": 1,
+    "explanation": "Reasignar 'e' dentro del método apunta la copia LOCAL a un objeto nuevo, pero la variable original del llamador sigue apuntando al objeto original — 'paso por valor de la referencia'."
+  },
+  {
+    "id": "cert-044",
+    "category": "certificacion",
+    "topic": "Módulo 3 - Java teoría profunda (Excepciones)",
+    "question": "En la jerarquía de excepciones, ¿qué distingue a una excepción CHECKED de una UNCHECKED?",
+    "options": [
+      "Las checked son más lentas de lanzar",
+      "El compilador OBLIGA a manejar (try/catch o throws) las checked; las unchecked (RuntimeException y subclases) no lo exige",
+      "Las unchecked no pueden capturarse nunca",
+      "No hay ninguna diferencia real"
+    ],
+    "correctIndex": 1,
+    "explanation": "Toda excepción que NO extiende RuntimeException es checked y exige manejo explícito en compilación; las unchecked compilan igual aunque nunca se capturen."
+  },
+  {
+    "id": "cert-045",
+    "category": "certificacion",
+    "topic": "Módulo 3 - Java teoría profunda (Excepciones)",
+    "question": "¿StackOverflowError es una Exception o un Error?",
+    "options": [
+      "Una Exception checked",
+      "Una Exception unchecked (RuntimeException)",
+      "Un Error, no una Exception",
+      "Ninguna de las dos, es un warning"
+    ],
+    "correctIndex": 2,
+    "explanation": "StackOverflowError extiende Error, no Exception — representa un problema grave del entorno/JVM (agotamiento del stack), no una condición de negocio recuperable normalmente."
+  },
+  {
+    "id": "cert-046",
+    "category": "certificacion",
+    "topic": "Módulo 3 - Java teoría profunda (POO)",
+    "question": "¿Cuál es la diferencia clave entre una clase abstracta y una interfaz respecto a la herencia múltiple?",
+    "options": [
+      "Ambas permiten herencia múltiple igual",
+      "Una clase solo puede EXTENDER una clase abstracta (herencia simple), pero puede IMPLEMENTAR varias interfaces a la vez",
+      "Las interfaces no pueden implementarse múltiples veces",
+      "Las clases abstractas siempre permiten herencia múltiple"
+    ],
+    "correctIndex": 1,
+    "explanation": "Java restringe la herencia de clases a una sola superclase, pero permite implementar cualquier cantidad de interfaces — una de las razones por las que las interfaces son más flexibles para modelar capacidades."
+  },
+  {
+    "id": "cert-047",
+    "category": "certificacion",
+    "topic": "Módulo 3 - Java teoría profunda (POO)",
+    "question": "Con 'Figura f = new Circulo(3.0);' donde Circulo sobrescribe calcularArea(), ¿qué versión se ejecuta al llamar f.calcularArea()?",
+    "options": [
+      "La de Figura, porque la variable está declarada como Figura",
+      "La de Circulo, decidido en tiempo de EJECUCIÓN según el tipo real del objeto (dynamic dispatch)",
+      "Ninguna, produce un error",
+      "Depende del orden de los imports"
+    ],
+    "correctIndex": 1,
+    "explanation": "El despacho dinámico (polimorfismo en tiempo de ejecución) usa el tipo REAL del objeto, no el tipo de la variable declarada, para decidir qué versión sobrescrita ejecutar."
+  },
+  {
+    "id": "cert-048",
+    "category": "certificacion",
+    "topic": "Módulo 3 - Java teoría profunda (equals/hashCode)",
+    "question": "Si sobrescribes equals() en una clase propia, ¿qué otro método DEBES sobrescribir de forma consistente?",
+    "options": [
+      "toString()",
+      "hashCode()",
+      "clone()",
+      "No hace falta sobrescribir nada más"
+    ],
+    "correctIndex": 1,
+    "explanation": "El contrato exige que dos objetos iguales según equals() tengan siempre el mismo hashCode(); romper esto hace que estructuras como HashSet/HashMap se comporten de forma incorrecta e impredecible."
+  },
+  {
+    "id": "cert-049",
+    "category": "certificacion",
+    "topic": "Módulo 3 - Java teoría profunda (String)",
+    "question": "¿Qué resultado tiene 'String a = \"hola\"; String b = \"hola\"; System.out.println(a == b);'?",
+    "options": [
+      "false, porque son objetos distintos",
+      "true, porque ambos literales apuntan al MISMO objeto reutilizado del String Pool",
+      "Un error de compilación",
+      "Depende de la versión de Java"
+    ],
+    "correctIndex": 1,
+    "explanation": "Los literales de texto idénticos se reutilizan desde el String Pool: 'a' y 'b' apuntan al mismo objeto en memoria, por eso '==' (comparación de referencia) da true."
+  },
+  {
+    "id": "cert-050",
+    "category": "certificacion",
+    "topic": "Módulo 3 - Java teoría profunda (String)",
+    "question": "¿Qué resultado tiene 'String a = \"hola\"; String c = new String(\"hola\"); System.out.println(a == c);'?",
+    "options": [
+      "true, porque el contenido es igual",
+      "false: new String(...) siempre crea un objeto NUEVO fuera del String Pool, así que las referencias son distintas aunque el contenido sea idéntico",
+      "Un error de compilación",
+      "true solo en Java 21+"
+    ],
+    "correctIndex": 1,
+    "explanation": "new String(...) fuerza la creación de un objeto nuevo en el heap, fuera del pool — '==' compara referencias (identidad), no contenido, por eso da false aunque a.equals(c) sí seria true."
+  },
+  {
+    "id": "cert-051",
+    "category": "certificacion",
+    "topic": "Módulo 3 - Java teoría profunda (Generics)",
+    "question": "¿Qué ventaja principal aportan los generics (ej. List<String>) frente a usar colecciones sin tipar (List a secas)?",
+    "options": [
+      "Hacen el código más lento",
+      "Detectan errores de tipo incorrecto en TIEMPO DE COMPILACIÓN, en vez de descubrirlos como un ClassCastException en tiempo de ejecución",
+      "Eliminan la necesidad de usar colecciones",
+      "Solo funcionan con tipos primitivos"
+    ],
+    "correctIndex": 1,
+    "explanation": "Con generics, intentar agregar un tipo incorrecto a una List<String> es un error de COMPILACIÓN; sin generics, el error solo aparece al hacer un cast fallido en tiempo de ejecución."
+  },
+  {
+    "id": "cert-052",
+    "category": "certificacion",
+    "topic": "Módulo 3 - Java teoría profunda (Colecciones)",
+    "question": "¿Cuál es la complejidad típica de acceder a un elemento por índice en un ArrayList, comparado con un LinkedList?",
+    "options": [
+      "Ambas son O(1)",
+      "ArrayList es O(1) (acceso directo); LinkedList es O(n) (hay que recorrer nodo por nodo)",
+      "ArrayList es O(n); LinkedList es O(1)",
+      "Ambas son O(log n)"
+    ],
+    "correctIndex": 1,
+    "explanation": "ArrayList se respalda en un array interno con acceso directo; LinkedList es una lista enlazada donde llegar al índice k requiere recorrer nodos secuencialmente."
+  },
+  {
+    "id": "cert-053",
+    "category": "certificacion",
+    "topic": "Módulo 3 - Java teoría profunda (Colecciones)",
+    "question": "¿Qué estructura conviene si necesitas búsquedas por clave muy rápidas y NO te importa mantener ningún orden particular?",
+    "options": [
+      "TreeMap",
+      "HashMap",
+      "LinkedList recorrida linealmente",
+      "ArrayList recorrida linealmente"
+    ],
+    "correctIndex": 1,
+    "explanation": "HashMap ofrece O(1) promedio para get/put por clave, más rápido que TreeMap (O(log n)) cuando el orden no es un requisito."
+  },
+  {
+    "id": "cert-054",
+    "category": "certificacion",
+    "topic": "Módulo 4 - Análisis de código",
+    "question": "¿Qué devuelve 'sumarHasta(5)' con 'for (int i = 0; i < n; i++) { suma += i; } return suma;'?",
+    "options": [
+      "15",
+      "10 (el bucle va de i=0 a i=4, la condición i<n EXCLUYE a n)",
+      "Un error de compilación",
+      "5"
+    ],
+    "correctIndex": 1,
+    "explanation": "La condición 'i < n' excluye a n=5, así que suma 0+1+2+3+4=10, no 1+2+3+4+5=15 — un error off-by-one clásico si se pretendía incluir el 5."
+  },
+  {
+    "id": "cert-055",
+    "category": "certificacion",
+    "topic": "Módulo 4 - Análisis de código",
+    "question": "¿Qué devuelve 'promedio(3, 4)' con 'return (a + b) / 2;' donde a y b son int?",
+    "options": [
+      "3.5",
+      "3.0 (división entera ANTES de convertir a double en el retorno)",
+      "7.0",
+      "Error de compilación"
+    ],
+    "correctIndex": 1,
+    "explanation": "'(a+b)' es 7 (int), y '7/2' con ambos operandos enteros se evalúa como división entera (3) antes de convertirse a double para el retorno — la corrección es '(a+b)/2.0'."
+  },
+  {
+    "id": "cert-056",
+    "category": "certificacion",
+    "topic": "Módulo 4 - Análisis de código",
+    "question": "¿Qué devuelve 'sonIguales(new String(\"hola\"), new String(\"hola\"))' si el método hace 'return a == b;'?",
+    "options": [
+      "true, porque el contenido es igual",
+      "false: new String(...) crea objetos nuevos fuera del pool, '==' compara referencias, no contenido",
+      "Un error de compilación",
+      "Depende del recolector de basura"
+    ],
+    "correctIndex": 1,
+    "explanation": "Cada 'new String(...)' crea un objeto distinto en el heap; '==' compara identidad de objeto, no contenido — la corrección es usar a.equals(b)."
+  },
+  {
+    "id": "cert-057",
+    "category": "certificacion",
+    "topic": "Módulo 4 - Análisis de código",
+    "question": "En un switch sin ningún 'break' entre sus case, con 'case 9: resultado = \"Excelente\"; case 8: case 7: resultado = \"Bueno\"; default: resultado = \"Regular\";', ¿qué devuelve clasificar(9)?",
+    "options": [
+      "\"Excelente\"",
+      "\"Regular\" (fall-through: la ejecución cae por todos los case siguientes hasta el default, que es el último valor asignado)",
+      "\"Bueno\"",
+      "Un error de compilación"
+    ],
+    "correctIndex": 1,
+    "explanation": "Sin break, la ejecución 'cae' (fall-through) de case en case; el último valor que queda asignado a 'resultado' es el de 'default', que se ejecuta al final del recorrido."
+  },
+  {
+    "id": "cert-058",
+    "category": "certificacion",
+    "topic": "Módulo 4 - Análisis de código",
+    "question": "¿Qué ocurre al ejecutar 'ultimoElemento(new int[]{1,2,3})' con 'return arr[arr.length];'?",
+    "options": [
+      "Devuelve 3 correctamente",
+      "Lanza ArrayIndexOutOfBoundsException: el último índice válido es arr.length - 1, no arr.length",
+      "Devuelve 0",
+      "Devuelve null"
+    ],
+    "correctIndex": 1,
+    "explanation": "Un arreglo de longitud 3 tiene índices válidos 0,1,2; arr[3] (arr.length) está un lugar más allá del final del arreglo."
+  },
+  {
+    "id": "cert-059",
+    "category": "certificacion",
+    "topic": "Módulo 4 - Análisis de código",
+    "question": "Dado 'esValido(int edad) { if (!(edad >= 18 && edad <= 65)) return true; return false; }', ¿qué devuelve esValido(30)?",
+    "options": [
+      "true",
+      "false (el comportamiento está invertido respecto a lo que el nombre del método sugiere)",
+      "Un error de compilación",
+      "Lanza una excepción"
+    ],
+    "correctIndex": 1,
+    "explanation": "La condición es verdadera precisamente cuando la edad NO está en el rango 18-65; para edad=30 (que SÍ está en rango), la condición es falsa, así que se devuelve false — pese a que el nombre 'esValido' sugeriría lo contrario."
+  },
+  {
+    "id": "cert-060",
+    "category": "certificacion",
+    "topic": "Módulo 4 - Análisis de código",
+    "question": "Tras 'agregarSufijo(nombre)' donde el método hace 'texto = texto + \"_v2\";' internamente, ¿qué imprime 'System.out.println(nombre)' después?",
+    "options": [
+      "\"archivo_v2\"",
+      "\"archivo\" (sin el sufijo): la reasignación local no afecta a la variable del llamador",
+      "Un error de compilación",
+      "null"
+    ],
+    "correctIndex": 1,
+    "explanation": "Java pasa la referencia por valor; reasignar 'texto' dentro del método crea un String nuevo local, pero 'nombre' en el llamador sigue apuntando al String original sin modificar."
+  },
+  {
+    "id": "cert-061",
+    "category": "certificacion",
+    "topic": "Módulo 4 - Análisis de código",
+    "question": "En 'contarPares', dentro del if se escribe 'int contador2 = contador + 1;' en vez de reasignar 'contador'. ¿Qué devuelve la función sobre cualquier arreglo?",
+    "options": [
+      "El conteo correcto de números pares",
+      "0, siempre, sin importar el arreglo: se declara una variable NUEVA (contador2) que muere en cada iteración, en vez de modificar la variable externa contador",
+      "Un error de compilación",
+      "El total de elementos del arreglo"
+    ],
+    "correctIndex": 1,
+    "explanation": "Declarar 'int contador2' crea una variable local nueva por iteración que se descarta inmediatamente, sin nunca modificar realmente la variable 'contador' externa — el código parece incrementar pero no lo hace."
+  },
+  {
+    "id": "cert-062",
+    "category": "certificacion",
+    "topic": "Módulo 4 - Análisis de código",
+    "question": "¿Qué calcula 'misterio(6)' con 'if (n <= 1) return n; return misterio(n-1) + misterio(n-2);'?",
+    "options": [
+      "El factorial de 6",
+      "La sucesión de Fibonacci: misterio(6) = 8",
+      "6 al cuadrado",
+      "Un StackOverflowError, porque no tiene caso base"
+    ],
+    "correctIndex": 1,
+    "explanation": "El caso base 'n<=1 return n' cubre n=0 y n=1 correctamente; la recursión implementa Fibonacci, y misterio(6)=8 (secuencia 0,1,1,2,3,5,8)."
+  },
+  {
+    "id": "cert-063",
+    "category": "certificacion",
+    "topic": "Módulo 4 - Análisis de código",
+    "question": "¿Qué ocurre al ejecutar 'factorial(5)' definido como 'return n * factorial(n - 1);' SIN ningún caso base?",
+    "options": [
+      "Devuelve 120 correctamente",
+      "Lanza StackOverflowError: la recursión nunca se detiene, apilando un stack frame nuevo por cada llamada hasta agotar el stack",
+      "Devuelve 0",
+      "Produce un error de compilación"
+    ],
+    "correctIndex": 1,
+    "explanation": "Sin un 'if (n <= 1) return 1;' que detenga la recursión, la función se sigue llamando indefinidamente (5,4,3,2,1,0,-1,...), agotando el stack del hilo."
+  },
+  {
+    "id": "cert-064",
+    "category": "certificacion",
+    "topic": "Módulo 4 - Análisis de código",
+    "question": "El método invertir() intercambia arr[i] con arr[arr.length-1-i] recorriendo solo hasta arr.length/2. ¿Qué produce sobre {1,2,3,4,5}?",
+    "options": [
+      "{5,4,3,2,1}: invierte el arreglo correctamente in-place, sin errores",
+      "{1,2,3,4,5}: no cambia nada",
+      "Un ArrayIndexOutOfBoundsException",
+      "{5,4,3,2,1,0}: agrega un elemento"
+    ],
+    "correctIndex": 0,
+    "explanation": "Recorrer solo la primera mitad e intercambiar cada elemento con su 'espejo' desde el final es el patrón correcto y completo para invertir un arreglo in-place — esta función no tiene errores."
+  },
+  {
+    "id": "cert-065",
+    "category": "certificacion",
+    "topic": "Módulo 4 - Análisis de código",
+    "question": "¿Qué devuelve 'signo(0)' con 'return n > 0 ? \"positivo\" : n < 0 ? \"negativo\" : \"cero\";'?",
+    "options": [
+      "\"positivo\"",
+      "\"cero\": el operador ternario es asociativo a la derecha, y para n=0 ambas comparaciones (0>0 y 0<0) son falsas",
+      "\"negativo\"",
+      "Un error de compilación por ternarios anidados"
+    ],
+    "correctIndex": 1,
+    "explanation": "Se lee como 'n>0 ? \"positivo\" : (n<0 ? \"negativo\" : \"cero\")'; para n=0, ambas condiciones fallan y el resultado final es \"cero\" — este patrón de ternarios encadenados es válido y correcto."
+  },
+  {
+    "id": "cert-066",
+    "category": "certificacion",
+    "topic": "Módulo 4 - Análisis de código",
+    "question": "¿Cuál es la técnica recomendada para analizar cualquier función Java 'ya escrita' antes de responder qué hace o si es correcta?",
+    "options": [
+      "Leer por encima y confiar en el nombre del método",
+      "Construir una tabla con las variables relevantes y actualizarla línea por línea, exactamente como lo haría la JVM",
+      "Ejecutar el código mentalmente sin anotar nada",
+      "Asumir que toda función pública es correcta"
+    ],
+    "correctIndex": 1,
+    "explanation": "El 90% de los errores al analizar código ajeno vienen de asumir qué hace una línea en vez de verificarlo con un trazado sistemático, variable por variable."
+  },
+  {
+    "id": "cert-067",
+    "category": "certificacion",
+    "topic": "Módulo 4 - Análisis de código",
+    "question": "¿Qué categoría de error representa comparar dos objetos String con '==' en vez de '.equals()'?",
+    "options": [
+      "Off-by-one",
+      "Comparación de objetos con '==': compara referencias, no contenido",
+      "Fall-through de switch",
+      "Recursión sin caso base"
+    ],
+    "correctIndex": 1,
+    "explanation": "Para tipos referencia como String, '==' compara identidad de objeto (misma dirección de memoria), no el contenido textual — se necesita .equals() para comparar contenido."
+  },
+  {
+    "id": "cert-068",
+    "category": "certificacion",
+    "topic": "Módulo 4 - Análisis de código",
+    "question": "¿Qué categoría de error representa declarar 'int x' DENTRO de un bloque en cada iteración, en vez de acumular en una variable externa?",
+    "options": [
+      "Recursión sin caso base",
+      "Variable nueva en vez de reasignación: la variable local se descarta cada vuelta, sin acumular nada realmente en la variable externa",
+      "División entera",
+      "Índices fuera de rango"
+    ],
+    "correctIndex": 1,
+    "explanation": "Es exactamente el error de la Función 'contarPares': crear una variable local nueva en cada iteración impide que el 'acumulador' externo se actualice de verdad."
+  },
+  {
+    "id": "cert-069",
+    "category": "certificacion",
+    "topic": "Módulo 4 - Análisis de código",
+    "question": "¿Por qué reasignar un parámetro de tipo String o de un objeto DENTRO de un método no cambia lo que ve el código que llamó al método?",
+    "options": [
+      "Porque Java copia el objeto completo en cada llamada",
+      "Porque Java pasa la REFERENCIA por valor: reasignar la variable local del parámetro no afecta a la variable original del llamador",
+      "Porque los Strings son primitivos en Java",
+      "Porque los métodos no pueden recibir parámetros de tipo objeto"
+    ],
+    "correctIndex": 1,
+    "explanation": "Este es el principio central detrás de la Función 7 (agregarSufijo) del Módulo 4: la copia local de la referencia se puede reasignar sin que el llamador se entere."
+  },
+  {
+    "id": "cert-070",
+    "category": "certificacion",
+    "topic": "Módulo 4 - Análisis de código",
+    "question": "¿Qué tipo de error representa 'arr[arr.length]' en vez de 'arr[arr.length - 1]' al buscar el último elemento de un arreglo?",
+    "options": [
+      "División entera",
+      "Índice fuera de rango (off-by-one): arr.length está un lugar más allá del último índice válido",
+      "Fall-through de switch",
+      "Comparación con == en vez de equals()"
+    ],
+    "correctIndex": 1,
+    "explanation": "Los índices válidos de un arreglo van de 0 a length-1; usar 'length' directo como índice apunta un lugar más allá del final, lanzando ArrayIndexOutOfBoundsException."
+  },
+  {
+    "id": "cert-071",
+    "category": "certificacion",
+    "topic": "Módulo 4 - Análisis de código",
+    "question": "¿Qué le falta típicamente a un switch clásico de Java (no un switch expression moderno) para evitar el fall-through accidental entre case?",
+    "options": [
+      "Un default al final",
+      "Un 'break;' al final de cada bloque case que no deba continuar al siguiente",
+      "Llaves {} alrededor de cada case",
+      "Una condición booleana en cada case"
+    ],
+    "correctIndex": 1,
+    "explanation": "Sin 'break', la ejecución de un switch clásico continúa cayendo hacia los siguientes case sin evaluar sus condiciones — la trampa más clásica de examen de análisis de código Java."
+  },
+  {
+    "id": "cert-072",
+    "category": "certificacion",
+    "topic": "Módulo 4 - Análisis de código",
+    "question": "¿Qué indica que una función recursiva SÍ tiene garantizada su terminación, como misterio(n) que calcula Fibonacci?",
+    "options": [
+      "Que use un bucle for en vez de recursión",
+      "Que exista un caso base bien definido, y que cada llamada recursiva se acerque progresivamente a ese caso base (ej. n-1, n-2 hacia n<=1)",
+      "Que la función sea 'static'",
+      "Que no reciba ningún parámetro"
+    ],
+    "correctIndex": 1,
+    "explanation": "misterio(n) reduce el problema en cada llamada (n-1, n-2) hacia el caso base n<=1, garantizando que eventualmente la recursión termine — a diferencia de factorial() sin caso base."
+  },
+  {
+    "id": "cert-073",
+    "category": "certificacion",
+    "topic": "Módulo 4 - Análisis de código",
+    "question": "Si una función Java compila sin errores, ¿garantiza eso que su LÓGICA sea correcta?",
+    "options": [
+      "Sí, si compila es porque la lógica es correcta",
+      "No: el compilador solo verifica sintaxis y tipos, no la corrección lógica (ej. esValido() compila perfectamente pese a tener su lógica invertida)",
+      "Solo garantiza que no hay bucles infinitos",
+      "Solo aplica a métodos privados"
+    ],
+    "correctIndex": 1,
+    "explanation": "Compilar exitosamente solo confirma que el código es sintácticamente válido y respeta el sistema de tipos — errores de lógica (como condiciones invertidas o acumuladores rotos) compilan sin ningún problema."
+  },
+  {
+    "id": "cert-074",
+    "category": "certificacion",
+    "topic": "Módulo 5 - Pirámide de pruebas",
+    "question": "En la Pirámide de Pruebas, ¿qué nivel debe tener la BASE más grande (más cantidad de pruebas)?",
+    "options": [
+      "Pruebas E2E/UI",
+      "Pruebas unitarias",
+      "Pruebas de integración",
+      "Todos deben tener la misma cantidad"
+    ],
+    "correctIndex": 1,
+    "explanation": "La base masiva de pruebas unitarias (rápidas y baratas de mantener) es la recomendación central de la pirámide, con integración moderada y E2E mínima."
+  },
+  {
+    "id": "cert-075",
+    "category": "certificacion",
+    "topic": "Módulo 5 - Pirámide de pruebas",
+    "question": "¿Por qué se recomienda tener POCAS pruebas E2E, comparado con las unitarias?",
+    "options": [
+      "Porque las E2E son gratis de escribir",
+      "Porque son las más lentas y frágiles ante cambios (un ajuste visual de UI puede romperlas sin que la lógica de negocio haya cambiado)",
+      "Porque JUnit no soporta pruebas E2E",
+      "No es una recomendación real"
+    ],
+    "correctIndex": 1,
+    "explanation": "Cada nivel hacia arriba en la pirámide es más lento, más caro de mantener y más frágil — mantener las E2E al mínimo evita una suite lenta y llena de falsos negativos."
+  },
+  {
+    "id": "cert-076",
+    "category": "certificacion",
+    "topic": "Módulo 5 - Pirámide de pruebas",
+    "question": "¿Qué herramienta típica de Java se usa en el nivel de pruebas de INTEGRACIÓN, según la guía?",
+    "options": [
+      "JUnit 5 + Mockito puros",
+      "Spring Boot Test, Testcontainers",
+      "Selenium/Playwright",
+      "Solo assertTrue(true)"
+    ],
+    "correctIndex": 1,
+    "explanation": "Las pruebas de integración prueban varias piezas reales trabajando juntas (BD real, contexto de Spring), típicamente con Spring Boot Test y Testcontainers."
+  },
+  {
+    "id": "cert-077",
+    "category": "certificacion",
+    "topic": "Módulo 5 - TDD",
+    "question": "En el ciclo TDD Rojo-Verde-Refactor, ¿qué ocurre en el paso 'Rojo'?",
+    "options": [
+      "Se escribe el código de producción mínimo",
+      "Se escribe una prueba que FALLA, porque el código que prueba todavía no existe",
+      "Se mejora el diseño sin cambiar el comportamiento",
+      "Se elimina la prueba anterior"
+    ],
+    "correctIndex": 1,
+    "explanation": "El paso Rojo consiste en escribir la prueba PRIMERO, antes de que exista el código de producción — por definición, esa prueba debe fallar inicialmente."
+  },
+  {
+    "id": "cert-078",
+    "category": "certificacion",
+    "topic": "Módulo 5 - TDD",
+    "question": "¿Qué se hace exactamente en el paso 'Verde' del ciclo TDD?",
+    "options": [
+      "Se escribe una prueba nueva que falle",
+      "Se escribe el código de producción MÍNIMO necesario para que la prueba recién escrita pase",
+      "Se optimiza el rendimiento del sistema completo",
+      "Se despliega a producción"
+    ],
+    "correctIndex": 1,
+    "explanation": "El paso Verde exige escribir solo lo mínimo indispensable para pasar la prueba actual — nada de lógica adicional 'por si acaso' antes de que una prueba la exija."
+  },
+  {
+    "id": "cert-079",
+    "category": "certificacion",
+    "topic": "Módulo 5 - TDD",
+    "question": "En el kata de esPrimo(n) de la guía, la primera implementación 'return true;' siempre pasa la única prueba existente (dosEsPrimo). ¿Qué principio de TDD ilustra esto?",
+    "options": [
+      "Que TDD es inútil porque permite trampas",
+      "Que el código de producción crece exactamente lo necesario para satisfacer la prueba que falló, ni más ni menos, en cada vuelta del ciclo",
+      "Que siempre hay que escribir el algoritmo completo desde la primera prueba",
+      "Que las pruebas deben escribirse después del código"
+    ],
+    "correctIndex": 1,
+    "explanation": "Con una sola prueba (dosEsPrimo), 'return true' es honestamente el código MÍNIMO que la satisface; el resto de la lógica surge en iteraciones posteriores, forzada por pruebas nuevas que exponen el hueco."
+  },
+  {
+    "id": "cert-080",
+    "category": "certificacion",
+    "topic": "Módulo 5 - TDD",
+    "question": "¿Qué rol cumple el paso 'Refactorizar' del ciclo TDD, ilustrado en el kata al optimizar esPrimo() para comprobar divisores solo hasta √n?",
+    "options": [
+      "Agregar nuevas funcionalidades no probadas",
+      "Mejorar el diseño/eficiencia del código SIN cambiar el comportamiento observable, con la seguridad de que las pruebas existentes avisan si algo se rompe",
+      "Eliminar las pruebas que ya no se necesitan",
+      "Escribir documentación"
+    ],
+    "correctIndex": 1,
+    "explanation": "El refactor se apoya en las pruebas ya verdes como red de seguridad: se puede optimizar la implementación interna con confianza porque cualquier regresión sería detectada de inmediato."
+  },
+  {
+    "id": "cert-081",
+    "category": "certificacion",
+    "topic": "Módulo 5 - TDD",
+    "question": "¿Cuál es un error común al practicar TDD, entre los mencionados en la guía?",
+    "options": [
+      "Refactorizar después de que las pruebas pasan",
+      "Escribir VARIAS pruebas antes de hacer pasar la primera, rompiendo el ciclo corto Rojo-Verde-Refactor",
+      "Usar nombres descriptivos en las pruebas",
+      "Ejecutar las pruebas frecuentemente"
+    ],
+    "correctIndex": 1,
+    "explanation": "Escribir varias pruebas de golpe antes de satisfacer la primera diluye la retroalimentación inmediata que hace valioso al ciclo corto de TDD."
+  },
+  {
+    "id": "cert-082",
+    "category": "certificacion",
+    "topic": "Módulo 5 - TDD",
+    "question": "¿Por qué 'tener muchas pruebas escritas después del código' NO es lo mismo que practicar TDD?",
+    "options": [
+      "Porque TDD prohíbe tener más de 10 pruebas",
+      "Porque TDD es un PROCESO de diseño donde la prueba nace ANTES que el código; escribir pruebas después solo valida lo que el código YA hace (incluyendo sus bugs), no necesariamente lo que DEBERÍA hacer",
+      "Porque las pruebas después del código son siempre más rápidas",
+      "No hay ninguna diferencia real"
+    ],
+    "correctIndex": 1,
+    "explanation": "El valor de TDD no es solo 'tener pruebas' — es que la prueba, al escribirse primero, define el comportamiento ESPERADO antes de que exista una implementación que sesgue esa definición."
+  },
+  {
+    "id": "cert-083",
+    "category": "certificacion",
+    "topic": "Módulo 5 - BDD",
+    "question": "¿En qué lenguaje estructurado se escriben típicamente los escenarios de BDD (Behavior-Driven Development)?",
+    "options": [
+      "Java puro",
+      "Gherkin (Dado/Cuando/Entonces), en lenguaje natural estructurado",
+      "SQL",
+      "XML"
+    ],
+    "correctIndex": 1,
+    "explanation": "BDD describe el comportamiento observable en Gherkin ('Dado que... Cuando... Entonces...'), comprensible tanto por desarrolladores como por stakeholders no técnicos."
+  },
+  {
+    "id": "cert-084",
+    "category": "certificacion",
+    "topic": "Módulo 5 - BDD",
+    "question": "¿BDD reemplaza a TDD, según la guía?",
+    "options": [
+      "Sí, BDD es la evolución que hace obsoleto a TDD",
+      "No, son complementarios: BDD define QUÉ comportamiento importa al negocio; TDD/pruebas unitarias validan CÓMO se implementa a nivel de código",
+      "TDD reemplaza por completo a BDD",
+      "No tienen ninguna relación"
+    ],
+    "correctIndex": 1,
+    "explanation": "BDD opera a un nivel más alto (comportamiento observable del sistema), mientras TDD guía el diseño detallado del código — ambos coexisten en un mismo proyecto."
+  },
+  {
+    "id": "cert-085",
+    "category": "certificacion",
+    "topic": "Módulo 5 - BDD",
+    "question": "¿Qué herramienta de Java se usa típicamente para implementar BDD, traduciendo Gherkin a métodos Java ejecutables ('step definitions')?",
+    "options": [
+      "JUnit puro, sin herramientas adicionales",
+      "Cucumber",
+      "JaCoCo",
+      "Testcontainers"
+    ],
+    "correctIndex": 1,
+    "explanation": "Cucumber traduce cada línea Gherkin (Dado/Cuando/Entonces) a un método Java anotado que ejecuta pasos concretos de la prueba."
+  },
+  {
+    "id": "cert-086",
+    "category": "certificacion",
+    "topic": "Módulo 5 - Test Doubles",
+    "question": "¿Qué diferencia principal hay entre un Stub y un Mock como dobles de prueba?",
+    "options": [
+      "Son términos sinónimos, sin diferencia real",
+      "Un Stub solo provee respuestas predefinidas ('enlatadas'); un Mock además permite VERIFICAR que fue invocado correctamente",
+      "Un Mock nunca puede devolver un valor",
+      "Un Stub siempre lanza excepciones"
+    ],
+    "correctIndex": 1,
+    "explanation": "'when(...).thenReturn(...)' es modo stub (solo programa la respuesta); 'verify(...)' es lo que convierte ese mismo objeto en un mock en sentido estricto, al comprobar la interacción."
+  },
+  {
+    "id": "cert-087",
+    "category": "certificacion",
+    "topic": "Módulo 5 - Test Doubles",
+    "question": "¿Qué tipo de doble de prueba describe mejor 'una implementación en memoria de un repositorio, respaldada por un Map, usada en pruebas de integración ligeras'?",
+    "options": [
+      "Dummy",
+      "Fake",
+      "Mock",
+      "Spy"
+    ],
+    "correctIndex": 1,
+    "explanation": "Un Fake es una implementación FUNCIONAL simplificada, no apta para producción pero que se comporta razonablemente como la real — típico caso: un repositorio en memoria."
+  },
+  {
+    "id": "cert-088",
+    "category": "certificacion",
+    "topic": "Módulo 5 - Test Doubles",
+    "question": "¿Qué tipo de doble de prueba es más apropiado para 'verificar que un método de envío de correo fue invocado exactamente una vez'?",
+    "options": [
+      "Stub",
+      "Mock, porque se necesita VERIFICAR la interacción, no solo obtener una respuesta predefinida",
+      "Dummy",
+      "Fake"
+    ],
+    "correctIndex": 1,
+    "explanation": "Verificar cuántas veces (y con qué argumentos) se llamó a un método es precisamente la capacidad distintiva de un Mock, mediante verify()."
+  },
+  {
+    "id": "cert-089",
+    "category": "certificacion",
+    "topic": "Módulo 5 - Test Doubles",
+    "question": "¿Qué caracteriza a un Spy, a diferencia de un Mock puro?",
+    "options": [
+      "Un Spy nunca ejecuta código real",
+      "Un Spy es un objeto REAL que además registra cómo fue invocado, permitiendo ejecutar lógica real Y verificar interacciones",
+      "Un Spy solo puede usarse en pruebas E2E",
+      "Un Spy es idéntico a un Dummy"
+    ],
+    "correctIndex": 1,
+    "explanation": "A diferencia de un Mock (totalmente simulado), un Spy envuelve un objeto real, ejecutando su comportamiento genuino mientras registra las llamadas para verificación posterior."
+  },
+  {
+    "id": "cert-090",
+    "category": "certificacion",
+    "topic": "Módulo 5 - Test Doubles",
+    "question": "¿Qué es un Dummy como doble de prueba?",
+    "options": [
+      "Un objeto que verifica llamadas detalladamente",
+      "Un objeto que solo 'rellena' un parámetro requerido, sin usarse realmente dentro de la prueba",
+      "Un objeto que siempre lanza excepciones",
+      "Sinónimo exacto de Mock"
+    ],
+    "correctIndex": 1,
+    "explanation": "Un Dummy solo existe para satisfacer una firma de método que exige un argumento, pero la prueba nunca interactúa realmente con él (ej. pasar null o un objeto vacío)."
+  },
+  {
+    "id": "cert-091",
+    "category": "certificacion",
+    "topic": "Módulo 5 - JUnit y Mockito",
+    "question": "¿Qué anotación de JUnit 5 ejecuta un método de preparación ANTES de cada prueba individual?",
+    "options": [
+      "@AfterEach",
+      "@BeforeEach",
+      "@Test",
+      "@DisplayName"
+    ],
+    "correctIndex": 1,
+    "explanation": "@BeforeEach reinicia el estado necesario antes de CADA @Test, garantizando que las pruebas no compartan estado entre sí (principio Independent de FIRST)."
+  },
+  {
+    "id": "cert-092",
+    "category": "certificacion",
+    "topic": "Módulo 5 - JUnit y Mockito",
+    "question": "¿Qué hace @ParameterizedTest junto con @CsvSource en JUnit 5?",
+    "options": [
+      "Ejecuta la prueba una sola vez con valores fijos",
+      "Ejecuta la MISMA prueba varias veces, una por cada combinación de valores indicada en el CSV",
+      "Desactiva la prueba temporalmente",
+      "Solo funciona con tipos String"
+    ],
+    "correctIndex": 1,
+    "explanation": "@ParameterizedTest permite reutilizar la misma lógica de prueba con múltiples conjuntos de datos de entrada/salida esperada, evitando duplicar código de prueba."
+  },
+  {
+    "id": "cert-093",
+    "category": "certificacion",
+    "topic": "Módulo 5 - JUnit y Mockito",
+    "question": "¿Qué hace '@Mock RepositorioPedidos repositorio;' junto con '@InjectMocks ServicioPedidos servicio;' en una prueba con Mockito?",
+    "options": [
+      "Crea una base de datos real para la prueba",
+      "Crea un doble de prueba del repositorio y lo inyecta automáticamente en el servicio bajo prueba, aislando la lógica de negocio de la persistencia real",
+      "Ejecuta la prueba contra el servidor de producción",
+      "Desactiva todas las demás pruebas"
+    ],
+    "correctIndex": 1,
+    "explanation": "@Mock crea el doble de la dependencia; @InjectMocks inyecta automáticamente esos mocks (vía constructor u otros medios) en la clase bajo prueba (SUT)."
+  },
+  {
+    "id": "cert-094",
+    "category": "certificacion",
+    "topic": "Módulo 5 - JUnit y Mockito",
+    "question": "¿Qué distingue a 'verify(repositorio).buscarPorId(1);' de un simple 'assertEquals(...)' sobre el resultado?",
+    "options": [
+      "No hay ninguna diferencia",
+      "verify() comprueba que una INTERACCIÓN específica ocurrió (que se llamó al método, con qué argumentos), mientras assertEquals comprueba el RESULTADO final",
+      "verify() solo funciona con JUnit 4",
+      "assertEquals reemplaza por completo a verify()"
+    ],
+    "correctIndex": 1,
+    "explanation": "verify() valida el comportamiento de colaboración (cómo se usó el mock), complementando (no reemplazando) las aserciones sobre el resultado final de la lógica bajo prueba."
+  },
+  {
+    "id": "cert-095",
+    "category": "certificacion",
+    "topic": "Módulo 5 - AssertJ",
+    "question": "¿Qué cambia AssertJ respecto a las aserciones 'puras' de JUnit, como assertEquals/assertTrue?",
+    "options": [
+      "AssertJ permite verificar cosas que JUnit no puede verificar en absoluto",
+      "AssertJ no cambia QUÉ se puede verificar, sino CÓMO se lee: permite encadenar aserciones fluidas sobre el mismo objeto, con mensajes de error más descriptivos",
+      "AssertJ reemplaza completamente a Mockito",
+      "AssertJ solo funciona con números"
+    ],
+    "correctIndex": 1,
+    "explanation": "assertThat(lista).isNotNull().hasSize(3).contains(\"Ana\") se lee de forma más natural que múltiples assertEquals/assertTrue independientes, aunque verifique conceptualmente lo mismo."
+  },
+  {
+    "id": "cert-096",
+    "category": "certificacion",
+    "topic": "Módulo 5 - Spring Testing",
+    "question": "¿Qué prueba específicamente @WebMvcTest junto con MockMvc, SIN levantar un servidor HTTP real?",
+    "options": [
+      "La base de datos completa",
+      "Los controladores REST (endpoints), simulando peticiones HTTP directamente contra la capa web",
+      "Solo las clases de servicio, sin nada de la capa web",
+      "El sistema operativo del servidor"
+    ],
+    "correctIndex": 1,
+    "explanation": "@WebMvcTest levanta solo el contexto necesario para la capa web, y MockMvc simula peticiones HTTP sin abrir un puerto de red real — rápido y aislado."
+  },
+  {
+    "id": "cert-097",
+    "category": "certificacion",
+    "topic": "Módulo 5 - Spring Testing",
+    "question": "¿Qué problema evita Testcontainers al usar una base de datos REAL (vía Docker) en vez de una en memoria como H2 para pruebas de integración?",
+    "options": [
+      "Testcontainers es más lento, así que no evita ningún problema",
+      "Evita el escenario de 'en las pruebas pasaba, en producción falló', causado por diferencias de sintaxis SQL, tipos o comportamiento con NULL entre H2 y el motor real de producción",
+      "H2 no puede usarse nunca en pruebas",
+      "Testcontainers reemplaza a JUnit por completo"
+    ],
+    "correctIndex": 1,
+    "explanation": "Una base en memoria como H2 'se comporta distinto' del motor real (Oracle, PostgreSQL, etc.); Testcontainers usa el motor REAL en un contenedor Docker descartable, eliminando esa discrepancia."
+  },
+  {
+    "id": "cert-098",
+    "category": "certificacion",
+    "topic": "Módulo 5 - Buenas prácticas",
+    "question": "¿Qué significan las siglas AAA al estructurar una prueba unitaria?",
+    "options": [
+      "Authentication, Authorization, Accounting",
+      "Arrange, Act, Assert: preparar el escenario, ejecutar la acción, verificar el resultado, en ese orden",
+      "Assume, Analyze, Approve",
+      "Array, Assertion, Assembly"
+    ],
+    "correctIndex": 1,
+    "explanation": "AAA divide cada prueba en 3 bloques claros: preparar datos/mocks (Arrange), ejecutar la acción bajo prueba (Act), y verificar el resultado (Assert)."
+  },
+  {
+    "id": "cert-099",
+    "category": "certificacion",
+    "topic": "Módulo 5 - Buenas prácticas",
+    "question": "¿Qué garantiza la 'I' (Independent) del principio FIRST para pruebas unitarias?",
+    "options": [
+      "Que la prueba se ejecute muy rápido",
+      "Que el resultado de una prueba NUNCA dependa de que otra prueba se haya ejecutado antes, ni del orden de ejecución",
+      "Que la prueba use inteligencia artificial",
+      "Que la prueba tenga un nombre único"
+    ],
+    "correctIndex": 1,
+    "explanation": "Independent exige aislamiento total entre pruebas: compartir estado global (como una lista estática) entre pruebas viola este principio, haciendo el resultado dependiente del orden de ejecución."
+  },
+  {
+    "id": "cert-100",
+    "category": "certificacion",
+    "topic": "Módulo 5 - Buenas prácticas",
+    "question": "¿Qué garantiza la 'R' (Repeatable) del principio FIRST?",
+    "options": [
+      "Que la prueba se pueda repetir infinitas veces sin límite de licencia",
+      "Que la prueba dé el MISMO resultado siempre, en cualquier entorno, sin depender de la hora del sistema, red real, u orden no determinista de un HashMap",
+      "Que la prueba use un bucle repeat()",
+      "Que la prueba se ejecute solo una vez por día"
+    ],
+    "correctIndex": 1,
+    "explanation": "Repeatable exige determinismo: una prueba que a veces pasa y a veces falla sin cambios en el código (flaky test) rompe la confianza en toda la suite."
+  },
+  {
+    "id": "cert-101",
+    "category": "certificacion",
+    "topic": "Módulo 5 - Métricas y CI/CD",
+    "question": "¿Qué mide exactamente la cobertura de código (code coverage) con herramientas como JaCoCo?",
+    "options": [
+      "Qué tan buenas son las aserciones de las pruebas",
+      "Qué porcentaje de líneas/ramas del código de producción se EJECUTAN durante la suite de pruebas — no si se verificaron correctamente",
+      "El número total de bugs detectados",
+      "El tiempo de compilación del proyecto"
+    ],
+    "correctIndex": 1,
+    "explanation": "100% de cobertura solo significa que cada línea se ejecutó al menos una vez; es perfectamente posible tener alta cobertura con pruebas que no verifican nada útil (ej. assertTrue(true))."
+  },
+  {
+    "id": "cert-102",
+    "category": "certificacion",
+    "topic": "Módulo 5 - Métricas y CI/CD",
+    "question": "¿Por qué la guía advierte que '100% de cobertura NO significa cero errores'?",
+    "options": [
+      "Porque JaCoCo tiene bugs conocidos",
+      "Porque cobertura mide EJECUCIÓN de líneas, no VERIFICACIÓN correcta de su resultado con una aserción significativa",
+      "Porque el 100% de cobertura es matemáticamente imposible",
+      "Porque la cobertura solo aplica a código Java, no a SQL"
+    ],
+    "correctIndex": 1,
+    "explanation": "La cobertura es una señal de alerta (líneas sin ninguna prueba son un riesgo real) pero no una garantía de calidad — se puede alcanzar 100% sin validar nada de lógica real."
+  },
+  {
+    "id": "cert-103",
+    "category": "certificacion",
+    "topic": "Módulo 5 - Métricas y CI/CD",
+    "question": "¿Qué transforma la Integración Continua (CI/CD) al ejecutar automáticamente 'mvn test' en cada push?",
+    "options": [
+      "Elimina por completo la necesidad de escribir pruebas",
+      "Convierte las pruebas de 'algo que se corre manualmente antes de un release' en una red de seguridad automática que bloquea la integración de código roto",
+      "Solo sirve para desplegar a producción, no para pruebas",
+      "Hace innecesario el control de versiones"
+    ],
+    "correctIndex": 1,
+    "explanation": "El pipeline de CI corre la suite automáticamente en cada cambio, detectando regresiones de inmediato en vez de descubrirlas manualmente justo antes de un release."
+  },
+  {
+    "id": "cert-104",
+    "category": "certificacion",
+    "topic": "Módulo 5 - Caso completo (PedidoService)",
+    "question": "En el caso trabajado del PedidoService (pasarela de pago mockeada), ¿qué hace 'when(pasarelaPagoMock.cobrar(150.0)).thenReturn(true);'?",
+    "options": [
+      "Verifica que cobrar() fue llamado",
+      "Configura el STUB: define qué debe devolver el mock cuando se le llame con ese argumento específico",
+      "Ejecuta el cobro real contra una pasarela verdadera",
+      "Lanza una excepción simulada"
+    ],
+    "correctIndex": 1,
+    "explanation": "'when(...).thenReturn(...)' es la parte de programar la respuesta simulada (modo stub) del mock, antes de ejecutar la acción bajo prueba."
+  },
+  {
+    "id": "cert-105",
+    "category": "certificacion",
+    "topic": "Módulo 5 - Caso completo (PedidoService)",
+    "question": "En ese mismo caso, si pasarelaPago.cobrar(...) lanza una RuntimeException simulando que el servicio externo está caído, ¿qué le pasa al estado del pedido según el código de procesarPedido()?",
+    "options": [
+      "Cambia a 'RECHAZADO' de todas formas",
+      "Permanece en 'PENDIENTE': la excepción se propaga antes de llegar al 'if' que cambiaría el estado",
+      "Cambia a 'PAGADO' por error",
+      "Lanza un NullPointerException adicional"
+    ],
+    "correctIndex": 1,
+    "explanation": "Como la excepción se lanza dentro de pasarelaPago.cobrar(...), se propaga inmediatamente sin llegar al código que asigna 'PAGADO' o 'RECHAZADO' — el pedido nunca cambia de su estado inicial 'PENDIENTE'."
+  },
+  {
+    "id": "cert-106",
+    "category": "certificacion",
+    "topic": "Módulo 6 - SOLID (SRP)",
+    "question": "¿Qué establece el Single Responsibility Principle (SRP)?",
+    "options": [
+      "Una clase debe implementar una sola interfaz",
+      "Una clase debe tener una, y solo una, razón para cambiar",
+      "Una clase solo puede tener un método público",
+      "Todas las clases deben ser 'final'"
+    ],
+    "correctIndex": 1,
+    "explanation": "SRP no significa 'una clase hace literalmente una sola cosa microscópica' — significa que no debe mezclar responsabilidades que cambian por motivos y ritmos distintos."
+  },
+  {
+    "id": "cert-107",
+    "category": "certificacion",
+    "topic": "Módulo 6 - SOLID (SRP)",
+    "question": "Una clase 'Factura' con métodos calcularTotal(), generarPdf() y guardarEnBaseDeDatos() en un solo lugar, ¿qué principio viola?",
+    "options": [
+      "Open/Closed Principle",
+      "Single Responsibility Principle: mezcla cálculo de negocio, presentación y persistencia, 3 razones de cambio distintas",
+      "Liskov Substitution Principle",
+      "Ninguno, es una buena práctica"
+    ],
+    "correctIndex": 1,
+    "explanation": "Si cambia la regla de cálculo, el formato de salida, o el motor de persistencia, las 3 razones obligan a tocar la MISMA clase — el síntoma clásico de violar SRP."
+  },
+  {
+    "id": "cert-108",
+    "category": "certificacion",
+    "topic": "Módulo 6 - SOLID (OCP)",
+    "question": "¿Qué establece el Open/Closed Principle (OCP)?",
+    "options": [
+      "Una clase debe estar abierta a modificación y cerrada a extensión",
+      "Una clase/entidad debe estar ABIERTA a extensión, pero CERRADA a modificación",
+      "Todas las clases deben ser públicas",
+      "Los métodos deben estar siempre abiertos (no privados)"
+    ],
+    "correctIndex": 1,
+    "explanation": "Agregar un caso nuevo debería significar AGREGAR código (ej. una clase nueva), no EDITAR código ya existente y probado."
+  },
+  {
+    "id": "cert-109",
+    "category": "certificacion",
+    "topic": "Módulo 6 - SOLID (OCP)",
+    "question": "Un método con un 'if/else' largo que evalúa un 'tipo' de figura para calcular su área, y que crece cada vez que se agrega una figura nueva, ¿qué principio viola típicamente y cuál es la solución estándar?",
+    "options": [
+      "Viola SRP; la solución es agregar más comentarios",
+      "Viola OCP; la solución típica es reemplazar el condicional por polimorfismo (una interfaz Figura + una clase por tipo)",
+      "Viola ISP; la solución es usar más interfaces gordas",
+      "No viola ningún principio SOLID"
+    ],
+    "correctIndex": 1,
+    "explanation": "Cada figura nueva obliga a EDITAR el método existente en vez de solo AGREGAR una clase nueva — la señal más clásica de violación de OCP, resuelta con polimorfismo."
+  },
+  {
+    "id": "cert-110",
+    "category": "certificacion",
+    "topic": "Módulo 6 - SOLID (LSP)",
+    "question": "¿Qué garantiza el Liskov Substitution Principle (LSP)?",
+    "options": [
+      "Que todas las clases tengan un constructor vacío",
+      "Que cualquier código que use el tipo T siga funcionando correctamente si se le pasa un subtipo S de T en su lugar",
+      "Que las interfaces sean siempre pequeñas",
+      "Que no se puedan crear subclases de una clase concreta"
+    ],
+    "correctIndex": 1,
+    "explanation": "LSP exige que un subtipo pueda sustituir a su tipo padre sin romper las expectativas de comportamiento que el código que lo usa ya tenía."
+  },
+  {
+    "id": "cert-111",
+    "category": "certificacion",
+    "topic": "Módulo 6 - SOLID (LSP)",
+    "question": "Una clase 'Pinguino extends Ave' que sobrescribe volar() para lanzar UnsupportedOperationException (porque Ave sí implementa volar() concreto), ¿qué principio viola?",
+    "options": [
+      "Interface Segregation Principle",
+      "Liskov Substitution Principle: Pinguino no puede sustituir a Ave en código que asuma que toda Ave vuela",
+      "Single Responsibility Principle",
+      "Dependency Inversion Principle"
+    ],
+    "correctIndex": 1,
+    "explanation": "Cualquier código que reciba una 'Ave' y llame a volar() esperando que funcione, fallará inesperadamente si recibe un Pinguino — rompiendo la sustituibilidad que LSP exige."
+  },
+  {
+    "id": "cert-112",
+    "category": "certificacion",
+    "topic": "Módulo 6 - SOLID (LSP)",
+    "question": "¿Cuál es la corrección típica cuando una jerarquía de herencia viola LSP porque no todos los subtipos pueden cumplir el contrato completo del padre?",
+    "options": [
+      "Agregar más métodos al padre para forzar la implementación",
+      "Repensar la jerarquía: separar la capacidad problemática en una interfaz/abstracción distinta, implementada solo por los subtipos que realmente la cumplen",
+      "Ignorar el problema, no tiene solución",
+      "Convertir todos los métodos del padre en 'final'"
+    ],
+    "correctIndex": 1,
+    "explanation": "En el ejemplo de Ave/Pinguino, la solución es crear una interfaz AveVoladora separada de Ave, implementada solo por las aves que realmente vuelan."
+  },
+  {
+    "id": "cert-113",
+    "category": "certificacion",
+    "topic": "Módulo 6 - SOLID (ISP)",
+    "question": "¿Qué recomienda el Interface Segregation Principle (ISP)?",
+    "options": [
+      "Usar una única interfaz grande y genérica para todo el sistema",
+      "Preferir varias interfaces PEQUEÑAS y específicas, en vez de una interfaz 'gorda' que obligue a implementar métodos irrelevantes",
+      "Nunca usar interfaces, solo clases concretas",
+      "Que toda clase implemente al menos 5 interfaces"
+    ],
+    "correctIndex": 1,
+    "explanation": "ISP busca que ningún cliente (clase implementadora) se vea forzado a depender de o implementar métodos que no le aplican realmente."
+  },
+  {
+    "id": "cert-114",
+    "category": "certificacion",
+    "topic": "Módulo 6 - SOLID (ISP)",
+    "question": "Una interfaz 'Impresora' con métodos imprimir(), escanear() y enviarFax(), implementada por una 'ImpresoraBasica' que lanza UnsupportedOperationException en escanear() y enviarFax() (porque no tiene esas capacidades), ¿qué indica esto?",
+    "options": [
+      "Que la interfaz Impresora está correctamente diseñada",
+      "Que la interfaz es demasiado 'gorda': viola ISP al forzar a ImpresoraBasica a implementar capacidades que no tiene",
+      "Que ImpresoraBasica tiene un bug de sintaxis",
+      "Que se debe eliminar la interfaz por completo"
+    ],
+    "correctIndex": 1,
+    "explanation": "La corrección es segregar la interfaz en Imprimible, Escaneable y Faxeable por separado, para que cada clase implemente solo las capacidades que realmente posee."
+  },
+  {
+    "id": "cert-115",
+    "category": "certificacion",
+    "topic": "Módulo 6 - SOLID (DIP)",
+    "question": "¿Qué establece el Dependency Inversion Principle (DIP)?",
+    "options": [
+      "Los módulos de bajo nivel deben depender de los de alto nivel",
+      "Los módulos de alto nivel NO deben depender de módulos de bajo nivel — ambos deben depender de ABSTRACCIONES",
+      "Toda dependencia debe instanciarse con 'new' directamente",
+      "Las clases nunca deben tener dependencias"
+    ],
+    "correctIndex": 1,
+    "explanation": "DIP invierte la dirección 'natural' de dependencia: en vez de que la lógica de negocio dependa de un detalle concreto, ambos (negocio y detalle) dependen de una interfaz común."
+  },
+  {
+    "id": "cert-116",
+    "category": "certificacion",
+    "topic": "Módulo 6 - SOLID (DIP)",
+    "question": "Una clase 'ServicioRegistro' que hace 'private RepositorioMySQL repositorio = new RepositorioMySQL();' directamente dentro de su código, ¿qué principio viola?",
+    "options": [
+      "Open/Closed Principle únicamente",
+      "Dependency Inversion Principle: el servicio (alto nivel) depende directamente de un detalle concreto (bajo nivel) en vez de una abstracción",
+      "Liskov Substitution Principle",
+      "Ningún principio, es código válido y recomendado"
+    ],
+    "correctIndex": 1,
+    "explanation": "Instanciar 'new RepositorioMySQL()' directamente acopla el servicio a ESA implementación específica; cambiar de motor de base de datos obligaría a editar ServicioRegistro."
+  },
+  {
+    "id": "cert-117",
+    "category": "certificacion",
+    "topic": "Módulo 6 - SOLID (DIP)",
+    "question": "¿Qué técnica corrige la violación de DIP del ejemplo anterior?",
+    "options": [
+      "Hacer RepositorioMySQL una clase 'final'",
+      "Definir una interfaz RepositorioDatos, y hacer que ServicioRegistro reciba esa interfaz inyectada por constructor, en vez de instanciar la implementación concreta directamente",
+      "Eliminar por completo la clase RepositorioMySQL",
+      "Convertir el método en 'static'"
+    ],
+    "correctIndex": 1,
+    "explanation": "Inyectar una abstracción (interfaz) por constructor permite intercambiar la implementación concreta (MySQL, MongoDB, etc.) sin modificar ServicioRegistro en absoluto."
+  },
+  {
+    "id": "cert-118",
+    "category": "certificacion",
+    "topic": "Módulo 6 - SOLID (general)",
+    "question": "¿Qué relación tiene la Inyección de Dependencias (DI) de frameworks como Spring con el principio DIP?",
+    "options": [
+      "No tienen ninguna relación",
+      "El contenedor de Inversión de Control (IoC) de Spring es un mecanismo AUTOMATIZADO para aplicar DIP a escala de toda la aplicación",
+      "DI reemplaza por completo a DIP, son conceptos incompatibles",
+      "DIP solo aplica a bases de datos, DI solo aplica a interfaces gráficas"
+    ],
+    "correctIndex": 1,
+    "explanation": "DIP es el PRINCIPIO (depender de abstracciones); DI es la TÉCNICA (inyectar la dependencia desde afuera); el contenedor de Spring es una HERRAMIENTA que automatiza esa técnica a gran escala."
+  },
+  {
+    "id": "cert-119",
+    "category": "certificacion",
+    "topic": "Módulo 6 - SOLID (general)",
+    "question": "¿Cuál de las siguientes es la señal MÁS directa de que se está violando el Open/Closed Principle?",
+    "options": [
+      "Un método vacío que lanza UnsupportedOperationException",
+      "Un 'switch' o cadena de 'if/else' sobre un campo 'tipo' que crece cada vez que aparece un caso de negocio nuevo",
+      "Una clase con un solo constructor",
+      "Un campo declarado como 'private'"
+    ],
+    "correctIndex": 1,
+    "explanation": "OCP se viola cuando agregar un caso nuevo obliga a EDITAR una estructura condicional existente en vez de simplemente añadir una clase nueva que implemente una interfaz común."
+  },
+  {
+    "id": "cert-120",
+    "category": "certificacion",
+    "topic": "Módulo 6 - SOLID (general)",
+    "question": "¿Qué principio SOLID se relaciona más directamente con el patrón de diseño Strategy?",
+    "options": [
+      "Interface Segregation Principle únicamente",
+      "Open/Closed Principle: Strategy permite agregar un algoritmo/comportamiento nuevo (una clase nueva) sin modificar el código que ya usa la interfaz",
+      "Liskov Substitution Principle exclusivamente",
+      "SOLID no se relaciona con los patrones de diseño"
+    ],
+    "correctIndex": 1,
+    "explanation": "El patrón Strategy encapsula comportamientos intercambiables detrás de una interfaz común, siendo la implementación de código más directa del principio OCP."
+  },
+  {
+    "id": "cert-121",
+    "category": "certificacion",
+    "topic": "Módulo 6 - SOLID (general)",
+    "question": "¿Qué principio SOLID exige que dos objetos considerados 'iguales' por la lógica de una clase se comporten de forma coherente en toda jerarquía de herencia (conectando con equals()/hashCode())?",
+    "options": [
+      "Interface Segregation Principle",
+      "Liskov Substitution Principle: un equals() inconsistente entre padre e hijo también viola LSP",
+      "Dependency Inversion Principle",
+      "Ninguno de los principios SOLID se relaciona con esto"
+    ],
+    "correctIndex": 1,
+    "explanation": "Un equals() roto o inconsistente entre una clase padre y su subclase puede romper la sustituibilidad esperada por LSP, además del contrato normal de equals()/hashCode()."
+  },
+  {
+    "id": "cert-122",
+    "category": "certificacion",
+    "topic": "Módulo 6 - SOLID (general)",
+    "question": "¿Por qué SOLID se describe como 'los principios que explican por qué los patrones de diseño son buenas soluciones'?",
+    "options": [
+      "Porque SOLID fue creado después que los patrones de diseño y no tiene relación",
+      "Porque los patrones de diseño son soluciones concretas y recurrentes; SOLID son los principios subyacentes que explican POR QUÉ esas soluciones funcionan bien",
+      "Porque SOLID reemplaza completamente a los patrones de diseño",
+      "Porque los patrones de diseño solo aplican a bases de datos"
+    ],
+    "correctIndex": 1,
+    "explanation": "Entender SOLID primero hace que muchos patrones de diseño dejen de sentirse como 'recetas mágicas' y se vean como consecuencias naturales de aplicar estos 5 principios."
+  },
+  {
+    "id": "cert-123",
+    "category": "certificacion",
+    "topic": "Módulo 6 - SOLID (general)",
+    "question": "Ordena correctamente las 5 letras de SOLID con su principio correspondiente: S-O-L-I-D",
+    "options": [
+      "Segregation, Open, Liskov, Inversion, Dependency",
+      "Single Responsibility, Open/Closed, Liskov Substitution, Interface Segregation, Dependency Inversion",
+      "Simple, Object, Logic, Interface, Data",
+      "Single, Open, Local, Immutable, Dynamic"
+    ],
+    "correctIndex": 1,
+    "explanation": "S=Single Responsibility, O=Open/Closed, L=Liskov Substitution, I=Interface Segregation, D=Dependency Inversion — los 5 principios formulados por Robert C. Martin."
+  },
+  {
+    "id": "cert-124",
+    "category": "certificacion",
+    "topic": "Módulo 6 - SOLID (general)",
+    "question": "Un método 'UnsupportedOperationException' lanzado dentro de un método sobrescrito con @Override, en general, ¿qué principio SOLID suele señalar como violado?",
+    "options": [
+      "Single Responsibility Principle",
+      "Liskov Substitution Principle: la subclase no puede cumplir el contrato completo que promete su clase/interfaz padre",
+      "Dependency Inversion Principle",
+      "Ningún principio, es una práctica común y recomendada"
+    ],
+    "correctIndex": 1,
+    "explanation": "Cuando una subclase no puede honrar realmente un método heredado y solo lanza una excepción al sobrescribirlo, generalmente indica que la jerarquía de herencia no debería existir tal como está planteada — la señal clásica de violación de LSP."
+  },
+  {
+    "id": "cert-125",
+    "category": "certificacion",
+    "topic": "Módulo 7 - ACID (Atomicity)",
+    "question": "¿Qué garantiza la 'A' (Atomicity/Atomicidad) de ACID?",
+    "options": [
+      "Que las transacciones concurrentes no se vean entre sí",
+      "Que una transacción se aplique COMPLETA o NO se aplique en absoluto (todo o nada)",
+      "Que los cambios confirmados sobrevivan a un apagón",
+      "Que la base de datos respete todas las reglas de negocio"
+    ],
+    "correctIndex": 1,
+    "explanation": "Si una parte de la transacción falla, TODA la transacción se deshace — nunca queda una transferencia bancaria 'a medias' con el dinero restado de un lado sin haber llegado al otro."
+  },
+  {
+    "id": "cert-126",
+    "category": "certificacion",
+    "topic": "Módulo 7 - ACID (Consistency)",
+    "question": "¿Qué garantiza la 'C' (Consistency/Consistencia) de ACID?",
+    "options": [
+      "Que la transacción sea muy rápida",
+      "Que la transacción lleve la base de datos de un estado VÁLIDO a otro estado VÁLIDO, respetando todas las reglas/constraints",
+      "Que dos transacciones nunca se ejecuten al mismo tiempo",
+      "Que los datos se repliquen automáticamente"
+    ],
+    "correctIndex": 1,
+    "explanation": "Consistencia asegura que ninguna transacción deje la base de datos violando sus reglas de integridad (ej. un CHECK saldo >= 0), ni siquiera temporalmente al confirmarse."
+  },
+  {
+    "id": "cert-127",
+    "category": "certificacion",
+    "topic": "Módulo 7 - ACID (Isolation)",
+    "question": "¿Qué garantiza la 'I' (Isolation/Aislamiento) de ACID?",
+    "options": [
+      "Que los datos se cifren automáticamente",
+      "Que las transacciones concurrentes no se 'vean' entre sí a medias, según el nivel de aislamiento configurado",
+      "Que la transacción nunca falle",
+      "Que los índices se reconstruyan automáticamente"
+    ],
+    "correctIndex": 1,
+    "explanation": "El aislamiento controla qué tanto puede una transacción 'ver' de los cambios no confirmados de otra transacción concurrente — regulado por los niveles de aislamiento (READ COMMITTED, SERIALIZABLE, etc.)."
+  },
+  {
+    "id": "cert-128",
+    "category": "certificacion",
+    "topic": "Módulo 7 - ACID (Durability)",
+    "question": "¿Qué garantiza la 'D' (Durability/Durabilidad) de ACID?",
+    "options": [
+      "Que la transacción se pueda deshacer después del COMMIT",
+      "Que, una vez confirmada (COMMIT), la transacción sobreviva incluso a un fallo inmediato del servidor (ej. un apagón)",
+      "Que los datos se muestren más rápido al usuario",
+      "Que dos usuarios nunca editen la misma fila"
+    ],
+    "correctIndex": 1,
+    "explanation": "Un COMMIT exitoso es una promesa real: el motor escribe primero a un log de transacciones (write-ahead log) antes de confirmar como exitosa la operación, garantizando que sobreviva a un fallo posterior inmediato."
+  },
+  {
+    "id": "cert-129",
+    "category": "certificacion",
+    "topic": "Módulo 7 - ACID (ejemplo bancario)",
+    "question": "En la transferencia bancaria (restar de cuenta A, sumar a cuenta B), si el servidor falla justo DESPUÉS de restar de A pero ANTES de sumar a B, ¿qué debe garantizar ACID?",
+    "options": [
+      "Que el dinero quede restado de A permanentemente, sin llegar nunca a B",
+      "Que la transacción completa se revierta (ROLLBACK automático): cuenta A vuelve a su saldo original, como si nada hubiera pasado",
+      "Que se sume automáticamente el doble a B para compensar",
+      "Que la cuenta A quede bloqueada permanentemente"
+    ],
+    "correctIndex": 1,
+    "explanation": "La Atomicidad exige 'todo o nada': si la transacción no puede completarse íntegramente, el motor revierte cualquier cambio parcial ya aplicado, incluyendo el UPDATE de la cuenta A."
+  },
+  {
+    "id": "cert-130",
+    "category": "certificacion",
+    "topic": "Módulo 7 - ACID (ejemplo bancario)",
+    "question": "Si una tabla 'cuentas' tiene la restricción 'CHECK (saldo >= 0)', y un UPDATE deja a una cuenta con saldo negativo, ¿qué ocurre al intentar el COMMIT?",
+    "options": [
+      "El COMMIT se ejecuta exitosamente de todas formas",
+      "El motor RECHAZA el COMMIT: viola el CHECK, y toda la transacción se revierte",
+      "Solo se revierte la parte que viola la restricción",
+      "La restricción se ignora automáticamente en transacciones"
+    ],
+    "correctIndex": 1,
+    "explanation": "Una violación de Consistencia (romper un CHECK) impide que el COMMIT se confirme; el motor rechaza la operación completa para no dejar la base de datos en un estado inválido."
+  },
+  {
+    "id": "cert-131",
+    "category": "certificacion",
+    "topic": "Módulo 7 - Niveles de aislamiento",
+    "question": "¿Cuál es el nivel de aislamiento MÁS ESTRICTO, que previene dirty reads, non-repeatable reads Y phantom reads simultáneamente?",
+    "options": [
+      "READ UNCOMMITTED",
+      "READ COMMITTED",
+      "REPEATABLE READ",
+      "SERIALIZABLE"
+    ],
+    "correctIndex": 3,
+    "explanation": "SERIALIZABLE es el nivel más estricto de la tabla de aislamiento, previniendo los 3 fenómenos, típicamente a costa de mayor contención y menor throughput concurrente."
+  },
+  {
+    "id": "cert-132",
+    "category": "certificacion",
+    "topic": "Módulo 7 - Niveles de aislamiento",
+    "question": "¿Qué es un 'dirty read' (lectura sucia)?",
+    "options": [
+      "Leer un dato que fue borrado accidentalmente",
+      "Leer datos NO CONFIRMADOS de otra transacción que después podría hacer ROLLBACK",
+      "Leer un archivo corrupto",
+      "Un error de sintaxis SQL"
+    ],
+    "correctIndex": 1,
+    "explanation": "Un dirty read ocurre cuando una transacción lee cambios de otra transacción que aún no ha hecho COMMIT — si esa otra transacción luego hace ROLLBACK, los datos leídos nunca 'existieron' realmente."
+  },
+  {
+    "id": "cert-133",
+    "category": "certificacion",
+    "topic": "Módulo 7 - Niveles de aislamiento",
+    "question": "¿Qué nivel de aislamiento típico (el más usado por defecto en muchos motores) previene dirty reads pero SIGUE permitiendo non-repeatable reads?",
+    "options": [
+      "READ UNCOMMITTED",
+      "READ COMMITTED",
+      "SERIALIZABLE únicamente",
+      "Ninguno los previene todos"
+    ],
+    "correctIndex": 1,
+    "explanation": "READ COMMITTED evita leer datos no confirmados de otras transacciones, pero no garantiza que releer la misma fila dentro de la misma transacción devuelva el mismo valor si otra transacción la modificó y confirmó mientras tanto."
+  },
+  {
+    "id": "cert-134",
+    "category": "certificacion",
+    "topic": "Módulo 7 - Niveles de aislamiento",
+    "question": "¿Qué trade-off central existe al elegir un nivel de aislamiento más estricto (ej. SERIALIZABLE)?",
+    "options": [
+      "No existe ningún trade-off, siempre conviene el más estricto",
+      "Más aislamiento da más seguridad frente a condiciones de carrera, pero típicamente implica más contención y menor throughput con muchos usuarios concurrentes",
+      "Más aislamiento siempre mejora el rendimiento",
+      "El nivel de aislamiento no afecta el rendimiento en absoluto"
+    ],
+    "correctIndex": 1,
+    "explanation": "No existe un nivel 'correcto' universal: se elige según qué tan grave sería cada tipo de lectura inconsistente para ese caso de negocio específico, sopesando el costo de rendimiento."
+  },
+  {
+    "id": "cert-135",
+    "category": "certificacion",
+    "topic": "Módulo 7 - ACID desde Java (JDBC)",
+    "question": "¿Cuál es el valor por defecto de 'autoCommit' en una Connection JDBC recién obtenida?",
+    "options": [
+      "false: hay que confirmar manualmente cada sentencia",
+      "true: cada sentencia se confirma sola, automáticamente",
+      "Depende del driver, no tiene default",
+      "No existe el concepto en JDBC"
+    ],
+    "correctIndex": 1,
+    "explanation": "JDBC inicia con autoCommit=true por defecto; para agrupar varias sentencias en una transacción atómica hay que desactivarlo explícitamente con conn.setAutoCommit(false)."
+  },
+  {
+    "id": "cert-136",
+    "category": "certificacion",
+    "topic": "Módulo 7 - ACID desde Java (JDBC)",
+    "question": "En el ejemplo de transferencia con JDBC puro, si se OMITE 'conn.setAutoCommit(false);', y el segundo UPDATE (sumar a B) falla tras haberse ejecutado el primero (restar de A), ¿qué ocurre?",
+    "options": [
+      "conn.rollback() deshace ambos cambios de todas formas",
+      "El primer UPDATE YA quedó confirmado permanentemente (por el autocommit automático); rollback() no tiene nada pendiente que revertir — se rompe la atomicidad",
+      "Ninguno de los dos UPDATE se ejecuta",
+      "Se lanza una excepción de compilación"
+    ],
+    "correctIndex": 1,
+    "explanation": "Con autoCommit en true (el default), cada sentencia se confirma por su cuenta apenas se ejecuta — el dinero quedaría restado de A permanentemente sin haber llegado nunca a B."
+  },
+  {
+    "id": "cert-137",
+    "category": "certificacion",
+    "topic": "Módulo 7 - ACID desde Java (Spring)",
+    "question": "¿Qué hace la anotación @Transactional de Spring sobre un método?",
+    "options": [
+      "Ejecuta el método en un hilo separado",
+      "Abre una transacción antes del método y hace COMMIT o ROLLBACK automáticamente según el resultado, sin necesitar código explícito de conn.commit()/rollback()",
+      "Convierte el método en privado",
+      "Cachea el resultado del método"
+    ],
+    "correctIndex": 1,
+    "explanation": "@Transactional demarca declarativamente el alcance de la transacción: si el método completa normalmente hace COMMIT; si lanza una excepción unchecked, hace ROLLBACK automático."
+  },
+  {
+    "id": "cert-138",
+    "category": "certificacion",
+    "topic": "Módulo 7 - ACID desde Java (Spring)",
+    "question": "¿Qué ocurre si un método anotado con @Transactional se invoca desde DENTRO de la misma clase (this.metodo() o simplemente metodo())?",
+    "options": [
+      "Funciona exactamente igual que si viniera de otro bean externo",
+      "La anotación NO se aplica: al no pasar por el proxy AOP de Spring, la demarcación transaccional se ignora silenciosamente",
+      "Spring lanza una excepción explicando el problema",
+      "El método se ejecuta dos veces"
+    ],
+    "correctIndex": 1,
+    "explanation": "@Transactional se implementa mediante un proxy; una llamada interna dentro de la misma clase evita ese proxy por completo, y la anotación simplemente no tiene efecto, sin ningún aviso."
+  },
+  {
+    "id": "cert-139",
+    "category": "certificacion",
+    "topic": "Módulo 7 - ACID desde Java (Spring)",
+    "question": "Por defecto, ¿ante qué tipo de excepción hace ROLLBACK automático @Transactional de Spring?",
+    "options": [
+      "Ante cualquier Throwable, incluidos Error",
+      "Ante excepciones UNCHECKED (RuntimeException y sus subclases); para checked hay que ser explícito con rollbackFor",
+      "Nunca hace rollback automático bajo ninguna circunstancia",
+      "Solo ante SQLException específicamente"
+    ],
+    "correctIndex": 1,
+    "explanation": "Por defecto solo revierte ante RuntimeException (unchecked); para que también revierta ante una excepción checked personalizada, hay que declarar explícitamente @Transactional(rollbackFor = MiExcepcion.class)."
+  },
+  {
+    "id": "cert-140",
+    "category": "certificacion",
+    "topic": "Módulo 7 - JTA",
+    "question": "¿Cuándo se justifica realmente usar JTA (Java Transaction API) en vez de transacciones locales simples?",
+    "options": [
+      "Siempre, como buena práctica general en cualquier proyecto",
+      "Solo cuando una operación de negocio debe ser atómica a través de MÁS DE UN recurso transaccional heterogéneo (ej. dos bases de datos distintas, o BD + cola de mensajes)",
+      "Solo para aplicaciones de un único usuario",
+      "JTA reemplazó por completo a JDBC en toda circunstancia"
+    ],
+    "correctIndex": 1,
+    "explanation": "JTA introduce complejidad real (protocolo Two-Phase Commit) que solo se justifica cuando de verdad se cruzan múltiples recursos transaccionales distintos como una sola unidad atómica."
+  },
+  {
+    "id": "cert-141",
+    "category": "certificacion",
+    "topic": "Módulo 7 - JTA",
+    "question": "¿Qué protocolo coordina JTA para garantizar atomicidad entre varios recursos, conocido como 2PC?",
+    "options": [
+      "Round-robin scheduling",
+      "Two-Phase Commit: una fase de 'prepare' (¿puedes comprometerte?) seguida de una fase de 'commit' solo si TODOS los recursos respondieron que sí",
+      "TCP three-way handshake",
+      "OAuth2 authorization code flow"
+    ],
+    "correctIndex": 1,
+    "explanation": "En 2PC, el coordinador de transacciones pregunta primero a cada recurso si puede prepararse para comprometerse; solo si todos confirman, se ordena el commit final a todos ellos."
+  },
+  {
+    "id": "cert-142",
+    "category": "certificacion",
+    "topic": "Módulo 8 - OWASP A01",
+    "question": "¿Qué describe la categoría A01:2021 - Broken Access Control?",
+    "options": [
+      "Contraseñas almacenadas sin cifrar",
+      "Un usuario puede acceder a datos/funciones que no debería porque el servidor no verifica permisos en cada operación, confiando solo en ocultar la opción en la interfaz",
+      "Uso de librerías con vulnerabilidades conocidas",
+      "Falta de registro de eventos de seguridad"
+    ],
+    "correctIndex": 1,
+    "explanation": "Ocultar un botón en la UI no es seguridad real; el servidor DEBE verificar en cada endpoint si el usuario autenticado realmente tiene permiso sobre el recurso solicitado."
+  },
+  {
+    "id": "cert-143",
+    "category": "certificacion",
+    "topic": "Módulo 8 - OWASP A01",
+    "question": "Un endpoint '/pedidos/{id}' que devuelve cualquier pedido según el 'id' de la URL, SIN verificar que pertenezca al usuario autenticado, es un ejemplo de:",
+    "options": [
+      "A02 - Cryptographic Failures",
+      "A01 - Broken Access Control",
+      "A06 - Vulnerable Components",
+      "A09 - Logging Failures"
+    ],
+    "correctIndex": 1,
+    "explanation": "Cualquier usuario autenticado podría cambiar el 'id' en la URL y ver pedidos ajenos — la corrección es verificar en el servidor que el recurso pertenezca al usuario que hace la petición."
+  },
+  {
+    "id": "cert-144",
+    "category": "certificacion",
+    "topic": "Módulo 8 - OWASP A02",
+    "question": "¿Por qué usar SHA-256 sin 'sal' (salt) para guardar contraseñas se considera una falla de A02 (Cryptographic Failures), aunque SHA-256 no esté 'roto' criptográficamente?",
+    "options": [
+      "Porque SHA-256 no es un algoritmo real",
+      "Porque SHA-256 es una función RÁPIDA por diseño, vulnerable a fuerza bruta y rainbow tables sin sal; se necesita un algoritmo LENTO a propósito como BCrypt o Argon2",
+      "Porque SHA-256 no puede procesar texto",
+      "Porque SHA-256 requiere una licencia de pago"
+    ],
+    "correctIndex": 1,
+    "explanation": "Los algoritmos de hash rápidos como SHA-256 están diseñados para integridad de archivos, no contraseñas; para contraseñas se necesitan algoritmos deliberadamente lentos y con sal automática (BCrypt, Argon2, scrypt)."
+  },
+  {
+    "id": "cert-145",
+    "category": "certificacion",
+    "topic": "Módulo 8 - OWASP A02",
+    "question": "¿Qué corrección estándar recomienda la guía para almacenar contraseñas de forma segura?",
+    "options": [
+      "Guardarlas en texto plano para facilitar el soporte técnico",
+      "Usar BCryptPasswordEncoder (o Argon2/scrypt): algoritmos lentos a propósito, con sal incluida automáticamente",
+      "Usar MD5 con una sal fija compartida",
+      "Cifrarlas con un algoritmo reversible y guardar la clave en el mismo servidor"
+    ],
+    "correctIndex": 1,
+    "explanation": "BCrypt (y similares) están diseñados específicamente para contraseñas: son lentos a propósito (dificultan fuerza bruta) e incluyen sal automática en cada hash."
+  },
+  {
+    "id": "cert-146",
+    "category": "certificacion",
+    "topic": "Módulo 8 - OWASP A03",
+    "question": "¿Qué categoría del OWASP Top 10 describe construir una consulta SQL concatenando directamente un valor recibido del usuario?",
+    "options": [
+      "A01 - Broken Access Control",
+      "A03 - Injection (SQL Injection)",
+      "A05 - Security Misconfiguration",
+      "A08 - Software and Data Integrity Failures"
+    ],
+    "correctIndex": 1,
+    "explanation": "Concatenar '\"SELECT * FROM usuarios WHERE nombre = '\" + usuario + \"'\"' permite que un atacante altere la estructura de la consulta enviando algo como \"' OR '1'='1\"."
+  },
+  {
+    "id": "cert-147",
+    "category": "certificacion",
+    "topic": "Módulo 8 - OWASP A03",
+    "question": "¿Cuál es la corrección ESTÁNDAR, sin excepciones, para prevenir SQL Injection al usar valores del usuario en una consulta?",
+    "options": [
+      "Escapar manualmente las comillas simples del texto recibido",
+      "Usar SIEMPRE PreparedStatement con parámetros (?), nunca concatenación de Strings dentro del SQL",
+      "Validar que el texto no contenga la palabra 'DROP'",
+      "Usar Statement en vez de PreparedStatement, es más simple"
+    ],
+    "correctIndex": 1,
+    "explanation": "Con PreparedStatement y parámetros, el driver envía el valor como DATO puro al motor de base de datos — nunca se interpreta como parte del comando SQL, sin importar qué contenga el texto."
+  },
+  {
+    "id": "cert-148",
+    "category": "certificacion",
+    "topic": "Módulo 8 - OWASP A03",
+    "question": "¿Qué produce el ataque clásico de enviar como 'usuario' el texto \"' OR '1'='1\" en una consulta SQL concatenada sin PreparedStatement?",
+    "options": [
+      "Un error de sintaxis que detiene la consulta",
+      "La condición WHERE se vuelve siempre verdadera ('1'='1'), devolviendo TODOS los registros, saltándose el filtro original por completo",
+      "El servidor se apaga automáticamente",
+      "No tiene ningún efecto, SQL ignora comillas simples adicionales"
+    ],
+    "correctIndex": 1,
+    "explanation": "'1'='1' es una condición siempre verdadera; al inyectarla vía OR, la cláusula WHERE completa se evalúa como verdadera para TODAS las filas, sin importar el resto de la condición."
+  },
+  {
+    "id": "cert-149",
+    "category": "certificacion",
+    "topic": "Módulo 8 - OWASP A04",
+    "question": "¿Qué describe la categoría A04:2021 - Insecure Design?",
+    "options": [
+      "Un bug puntual de código fácil de corregir",
+      "Vulnerabilidades que vienen de decisiones de ARQUITECTURA/diseño, no de un bug de código puntual — ej. un flujo de recuperación de contraseña sin límite de intentos",
+      "El uso de una librería con una vulnerabilidad conocida",
+      "La falta de un certificado TLS válido"
+    ],
+    "correctIndex": 1,
+    "explanation": "A diferencia de un bug de implementación, el diseño inseguro requiere repensar el FLUJO completo del sistema (ej. agregar rate limiting desde el diseño, no como parche posterior)."
+  },
+  {
+    "id": "cert-150",
+    "category": "certificacion",
+    "topic": "Módulo 8 - OWASP A05",
+    "question": "¿Qué describe la categoría A05:2021 - Security Misconfiguration?",
+    "options": [
+      "Uso de algoritmos criptográficos débiles",
+      "Configuraciones por defecto inseguras, mensajes de error demasiado detallados que exponen información interna, o paneles administrativos expuestos sin necesidad",
+      "Falta de un WAF (firewall de aplicaciones web)",
+      "Un endpoint que hace peticiones a URLs controladas por el usuario"
+    ],
+    "correctIndex": 1,
+    "explanation": "Devolver el stack trace completo al cliente en un error 500 (revelando rutas internas, versiones, estructura del código) es un ejemplo clásico de A05."
+  },
+  {
+    "id": "cert-151",
+    "category": "certificacion",
+    "topic": "Módulo 8 - OWASP A05",
+    "question": "¿Cuál es la corrección estándar para el manejo de errores en un endpoint público, según A05?",
+    "options": [
+      "Mostrar siempre el stack trace completo al cliente para facilitar el debugging",
+      "Registrar el detalle completo del error SOLO en logs internos del servidor, devolviendo al cliente un mensaje GENÉRICO",
+      "Ignorar por completo cualquier excepción sin registrarla en ningún lado",
+      "Enviar el error por correo electrónico al usuario que lo provocó"
+    ],
+    "correctIndex": 1,
+    "explanation": "El detalle técnico completo (stack trace, nombres de clases, rutas) debe quedar solo en logs internos, accesibles al equipo de desarrollo, nunca expuesto directamente al cliente."
+  },
+  {
+    "id": "cert-152",
+    "category": "certificacion",
+    "topic": "Módulo 8 - OWASP A06",
+    "question": "¿Qué describe la categoría A06:2021 - Vulnerable and Outdated Components?",
+    "options": [
+      "Errores de configuración del servidor web",
+      "Usar librerías/frameworks con vulnerabilidades conocidas (CVEs) ya corregidas en versiones más nuevas, sin actualizar",
+      "Falta de autenticación multifactor",
+      "Consultas SQL concatenadas inseguras"
+    ],
+    "correctIndex": 1,
+    "explanation": "El ejemplo clásico es seguir usando una versión de Log4j afectada por Log4Shell mucho después de que el parche estuviera disponible públicamente."
+  },
+  {
+    "id": "cert-153",
+    "category": "certificacion",
+    "topic": "Módulo 8 - OWASP A06",
+    "question": "¿Qué práctica de CI/CD ayuda a detectar automáticamente dependencias con vulnerabilidades conocidas (A06)?",
+    "options": [
+      "Ejecutar un analizador de dependencias (ej. dependency-check, Dependabot, Snyk) como parte del pipeline",
+      "Desactivar las actualizaciones automáticas para evitar cambios inesperados",
+      "Usar siempre la versión 1.0.0 de cada librería",
+      "No usar ninguna librería externa nunca"
+    ],
+    "correctIndex": 0,
+    "explanation": "Integrar un escáner de dependencias en el pipeline detecta automáticamente cuándo una librería usada tiene un CVE publicado, permitiendo actualizar antes de que sea explotado."
+  },
+  {
+    "id": "cert-154",
+    "category": "certificacion",
+    "topic": "Módulo 8 - OWASP A07",
+    "question": "¿Qué describe la categoría A07:2021 - Identification and Authentication Failures?",
+    "options": [
+      "Fallas en la validación de entradas del usuario",
+      "Gestión débil de sesiones (ej. IDs de sesión predecibles), contraseñas débiles permitidas, o ausencia de autenticación multifactor donde el riesgo lo justifica",
+      "Componentes de software desactualizados",
+      "Peticiones HTTP a URLs controladas por el atacante"
+    ],
+    "correctIndex": 1,
+    "explanation": "Un ID de sesión predecible (ej. basado directamente en el ID numérico del usuario) permite a un atacante 'adivinar' sesiones ajenas sin necesitar robar ninguna credencial."
+  },
+  {
+    "id": "cert-155",
+    "category": "certificacion",
+    "topic": "Módulo 8 - OWASP A08",
+    "question": "¿Qué describe la categoría A08:2021 - Software and Data Integrity Failures, con la deserialización insegura como caso clásico?",
+    "options": [
+      "Falta de copias de seguridad de la base de datos",
+      "Confiar en actualizaciones, plugins o datos DESERIALIZADOS sin verificar su integridad/origen, permitiendo ejecutar código arbitrario mediante objetos maliciosos",
+      "Uso de contraseñas cortas",
+      "Falta de un certificado SSL"
+    ],
+    "correctIndex": 1,
+    "explanation": "Deserializar bytes de una fuente no confiable con ObjectInputStream puede permitir a un atacante construir objetos maliciosos que ejecuten código arbitrario al reconstruirse (gadget chains)."
+  },
+  {
+    "id": "cert-156",
+    "category": "certificacion",
+    "topic": "Módulo 8 - OWASP A08",
+    "question": "¿Qué corrección recomienda la guía frente a la deserialización insegura de A08?",
+    "options": [
+      "Usar siempre ObjectInputStream sin ninguna restricción",
+      "Usar formatos de datos sin ejecución de código al parsear (como JSON con una librería segura tipo Jackson), en vez de deserialización binaria de fuentes no confiables",
+      "Aumentar el tamaño máximo de los objetos deserializados",
+      "Deshabilitar por completo la seguridad del servidor para simplificar"
+    ],
+    "correctIndex": 1,
+    "explanation": "JSON es 'datos puros', no código ejecutable al parsearse — preferirlo sobre deserialización Java nativa de fuentes no confiables elimina el vector de ataque de gadget chains."
+  },
+  {
+    "id": "cert-157",
+    "category": "certificacion",
+    "topic": "Módulo 8 - OWASP A09",
+    "question": "¿Qué describe la categoría A09:2021 - Security Logging and Monitoring Failures?",
+    "options": [
+      "Uso de contraseñas débiles",
+      "Sin registro (logs) de eventos de seguridad relevantes (logins fallidos, cambios de permisos, accesos denegados), un ataque puede pasar semanas sin ser detectado",
+      "Consultas SQL sin PreparedStatement",
+      "Falta de un índice en una tabla grande"
+    ],
+    "correctIndex": 1,
+    "explanation": "Sin logging de eventos de seguridad, ni el equipo ni las herramientas de monitoreo pueden detectar patrones sospechosos (como múltiples intentos fallidos de login) a tiempo."
+  },
+  {
+    "id": "cert-158",
+    "category": "certificacion",
+    "topic": "Módulo 8 - OWASP A10",
+    "question": "¿Qué describe la categoría A10:2021 - Server-Side Request Forgery (SSRF)?",
+    "options": [
+      "Un ataque de fuerza bruta contra contraseñas",
+      "La aplicación hace una petición HTTP a una URL que el USUARIO controla, permitiendo que el atacante use al servidor como proxy hacia recursos internos",
+      "La falta de un WAF",
+      "Un JOIN mal escrito en una consulta SQL"
+    ],
+    "correctIndex": 1,
+    "explanation": "Si un endpoint acepta una 'urlImagen' arbitraria del usuario y la consulta directamente, un atacante puede apuntarla hacia metadatos internos de la nube o servicios internos sin autenticación expuesta."
+  },
+  {
+    "id": "cert-159",
+    "category": "certificacion",
+    "topic": "Módulo 8 - OWASP A10",
+    "question": "¿Cuál es la corrección estándar recomendada contra SSRF (A10)?",
+    "options": [
+      "Permitir cualquier URL, ya que HTTP es un protocolo seguro por diseño",
+      "Usar una WHITELIST explícita de dominios/IPs permitidos, rechazando cualquier URL fuera de esa lista",
+      "Aumentar el timeout de las peticiones HTTP salientes",
+      "Desactivar HTTPS para simplificar las validaciones"
+    ],
+    "correctIndex": 1,
+    "explanation": "Restringir explícitamente a qué dominios puede la aplicación hacer peticiones salientes (whitelist) evita que un atacante redirija esas peticiones hacia recursos internos sensibles."
+  },
+  {
+    "id": "cert-160",
+    "category": "certificacion",
+    "topic": "Módulo 8 - OWASP (general)",
+    "question": "¿Qué representa el OWASP Top 10 en la industria del desarrollo de software?",
+    "options": [
+      "Una certificación oficial obligatoria para publicar cualquier aplicación web",
+      "Una referencia estándar publicada por el Open Web Application Security Project, con las 10 categorías de vulnerabilidad más frecuentes y de mayor impacto en aplicaciones reales",
+      "Un lenguaje de programación especializado en seguridad",
+      "Un tipo de base de datos NoSQL"
+    ],
+    "correctIndex": 1,
+    "explanation": "OWASP recopila datos de miles de aplicaciones reales para publicar, cada pocos años, las categorías de vulnerabilidad más comunes — el Top 10 2021 es la edición de referencia usada en esta guía."
+  },
+  {
+    "id": "cert-161",
+    "category": "certificacion",
+    "topic": "Módulo 8 - OWASP (general)",
+    "question": "Según la guía, ¿qué patrón subyacente comparten la mayoría de las categorías del OWASP Top 10?",
+    "options": [
+      "Todas requieren acceso físico al servidor",
+      "En la inmensa mayoría de los casos, confiar en datos que vienen del usuario sin validarlos, verificarlos o escaparlos correctamente",
+      "Todas dependen exclusivamente de errores de red",
+      "Todas se resuelven únicamente actualizando el sistema operativo"
+    ],
+    "correctIndex": 1,
+    "explanation": "Desde SQL Injection hasta SSRF, el hilo común es la confianza excesiva en entradas controladas por el usuario, sin la validación/verificación adecuada del lado del servidor."
+  },
+  {
+    "id": "cert-162",
+    "category": "certificacion",
+    "topic": "Simulacro mixto",
+    "question": "¿Cuál es la diferencia principal entre un arreglo (int[]) y un ArrayList en cuanto a tamaño?",
+    "options": [
+      "No hay diferencia",
+      "El arreglo tiene tamaño FIJO desde su creación; el ArrayList puede crecer o encogerse dinámicamente",
+      "ArrayList siempre es más rápido para todo",
+      "Los arreglos no pueden usarse con enteros"
+    ],
+    "correctIndex": 1,
+    "explanation": "Un array se define con tamaño fijo al crearse; ArrayList administra internamente un array que redimensiona automáticamente según se agregan/quitan elementos."
+  },
+  {
+    "id": "cert-163",
+    "category": "certificacion",
+    "topic": "Simulacro mixto",
+    "question": "¿Qué produce el siguiente código? 'int x = 5; if (x = 6) { System.out.println(\"entra\"); }'",
+    "options": [
+      "Imprime \"entra\"",
+      "No compila: 'x = 6' es una asignación (no una comparación ==), y su tipo es int, no boolean, que es lo que exige el if",
+      "Imprime nada, sin error",
+      "Lanza una excepción en tiempo de ejecución"
+    ],
+    "correctIndex": 1,
+    "explanation": "Java, a diferencia de C/C++, exige que la condición de un if sea estrictamente boolean — una asignación entera no compila ahí, previniendo ese bug clásico a nivel de compilador."
+  },
+  {
+    "id": "cert-164",
+    "category": "certificacion",
+    "topic": "Simulacro mixto",
+    "question": "¿Qué relación tiene la técnica de 'trazado' usada en diagramas de flujo (Módulo 2) con el análisis de código Java (Módulo 4)?",
+    "options": [
+      "Ninguna relación",
+      "Es la MISMA técnica fundamental: seguir el flujo de control paso a paso, variable por variable, sin asumir nada, aplicada primero a un diagrama y luego a código real",
+      "El Módulo 4 no requiere ninguna técnica especial",
+      "Los diagramas de flujo son exclusivos de SQL"
+    ],
+    "correctIndex": 1,
+    "explanation": "Ambos módulos entrenan la misma habilidad de trazado sistemático — la conexión explícita que la guía establece entre lógica de programación y lectura de código Java."
+  },
+  {
+    "id": "cert-165",
+    "category": "certificacion",
+    "topic": "Simulacro mixto",
+    "question": "Combinando Módulo 6 (SOLID) y Módulo 8 (OWASP), ¿qué tienen en común el Dependency Inversion Principle y la corrección de A03 (SQL Injection) con PreparedStatement?",
+    "options": [
+      "No tienen ninguna relación conceptual",
+      "Ambos evitan un acoplamiento/confianza directa y rígida hacia un detalle de bajo nivel (una implementación concreta, o un valor de texto sin validar), prefiriendo una capa de abstracción/control intermedia",
+      "Ambos son exclusivos de bases de datos NoSQL",
+      "Ambos requieren eliminar todas las interfaces del sistema"
+    ],
+    "correctIndex": 1,
+    "explanation": "Aunque de dominios distintos, ambos principios comparten la idea de no confiar/acoplarse directamente a algo variable o no controlado (una implementación concreta vía 'new', o un texto crudo del usuario), interponiendo una capa que da control y seguridad."
+  },
+  {
+    "id": "cert-166",
+    "category": "certificacion",
+    "topic": "Simulacro mixto",
+    "question": "¿Qué principio de ACID se relaciona más directamente con la garantía de FIRST (Independent) al diseñar pruebas unitarias, en el sentido de 'aislamiento entre unidades'?",
+    "options": [
+      "Atomicity",
+      "Isolation (Aislamiento): en ACID aísla transacciones concurrentes; en FIRST aísla pruebas entre sí, evitando que el resultado de una dependa de otra",
+      "Durability",
+      "Consistency"
+    ],
+    "correctIndex": 1,
+    "explanation": "Aunque aplican a dominios distintos (transacciones de BD vs. pruebas de software), ambos 'Isolation'/'Independent' comparten la misma idea central: evitar que una unidad concurrente/independiente 'contamine' el resultado de otra."
+  },
+  {
+    "id": "cert-167",
+    "category": "certificacion",
+    "topic": "Simulacro mixto",
+    "question": "¿Cuál de estas afirmaciones sobre TDD y BDD es correcta según la guía?",
+    "options": [
+      "BDD reemplaza completamente a TDD en proyectos modernos",
+      "TDD y BDD son complementarios: BDD define el comportamiento esperado desde la perspectiva del negocio, TDD guía cómo se implementa ese comportamiento a nivel de código",
+      "TDD solo puede usarse en Java, BDD solo en Python",
+      "BDD no requiere escribir ninguna prueba automatizada"
+    ],
+    "correctIndex": 1,
+    "explanation": "Ambos operan en niveles distintos y se complementan: BDD en Gherkin comunica el QUÉ a stakeholders no técnicos; TDD guía el CÓMO a nivel de implementación de código."
+  },
+  {
+    "id": "cert-168",
+    "category": "certificacion",
+    "topic": "Simulacro mixto",
+    "question": "En el ejemplo del Módulo 4 sobre 'contarPares', ¿qué principio general de buenas prácticas de programación ilustra mejor el error (declarar una variable local nueva en cada iteración)?",
+    "options": [
+      "La importancia de comentar cada línea de código",
+      "La importancia de distinguir claramente entre DECLARAR una variable nueva y REASIGNAR una variable existente, especialmente dentro de bucles/condicionales",
+      "La importancia de usar siempre nombres de variable de una sola letra",
+      "La importancia de evitar el uso de bucles for"
+    ],
+    "correctIndex": 1,
+    "explanation": "El bug de contarPares es sutil precisamente porque el código 'parece' incrementar un contador, pero en realidad crea y descarta una variable nueva cada vez, sin modificar jamás la variable externa."
+  },
+  {
+    "id": "cert-169",
+    "category": "certificacion",
+    "topic": "Simulacro mixto",
+    "question": "¿Qué tienen en común el patrón de 'acumulador' del Módulo 2 (diagramas de flujo) y el patrón de 'reduce()' de Streams en Java 8?",
+    "options": [
+      "No tienen ninguna relación conceptual",
+      "Ambos combinan progresivamente los elementos de una colección/secuencia en un único valor resultante, partiendo de un valor inicial",
+      "reduce() solo funciona con texto, no con números",
+      "El patrón de acumulador es exclusivo de diagramas de flujo, nunca se usa en código real"
+    ],
+    "correctIndex": 1,
+    "explanation": "Tanto el acumulador manual con bucle ('suma = suma + i') como stream.reduce(0, (a,b) -> a+b) expresan la misma idea: combinar elementos secuencialmente hacia un resultado único."
+  },
+  {
+    "id": "cert-170",
+    "category": "certificacion",
+    "topic": "Simulacro mixto",
+    "question": "Un método Java que compila sin errores pero cuya lógica está invertida (como esValido() del Módulo 4), ¿qué nos recuerda sobre la relación entre COMPILAR y ser CORRECTO?",
+    "options": [
+      "Que si compila, necesariamente es correcto",
+      "Que compilar exitosamente solo garantiza corrección SINTÁCTICA y de TIPOS, no corrección LÓGICA — se necesita trazado/pruebas para verificar el comportamiento real",
+      "Que los errores de lógica son imposibles en Java",
+      "Que solo los métodos privados pueden tener errores de lógica"
+    ],
+    "correctIndex": 1,
+    "explanation": "El compilador de Java (como cualquier compilador) no puede detectar que una condición esté 'al revés' respecto a la intención del programador — solo pruebas bien diseñadas o un trazado cuidadoso lo revelan."
+  },
+  {
+    "id": "cert-171",
+    "category": "certificacion",
+    "topic": "Simulacro mixto",
+    "question": "¿Qué tienen en común el 'Fake' (test double) del Módulo 5 y una clase que implementa DIP del Módulo 6, en cuanto a diseño?",
+    "options": [
+      "No tienen relación alguna",
+      "Ambos dependen de que el código de producción esté diseñado contra una ABSTRACCIÓN (interfaz), permitiendo sustituir la implementación real por una alternativa (un Fake en pruebas, u otra implementación concreta en producción) sin modificar el código cliente",
+      "Un Fake siempre debe ser más lento que la implementación real",
+      "DIP prohíbe el uso de test doubles"
+    ],
+    "correctIndex": 1,
+    "explanation": "Poder sustituir una implementación real por un Fake en pruebas es posible precisamente PORQUE el código de producción ya depende de una interfaz (DIP) y no de una clase concreta — ambos conceptos se refuerzan mutuamente."
+  },
+  {
+    "id": "cert-172",
+    "category": "certificacion",
+    "topic": "Simulacro mixto",
+    "question": "¿Cuál de las siguientes NO es una de las 8 áreas cubiertas por la guía de certificación?",
+    "options": [
+      "Diagramas de flujo ANSI (lógica de programación)",
+      "Principios SOLID",
+      "Machine Learning y redes neuronales",
+      "OWASP Top 10"
+    ],
+    "correctIndex": 2,
+    "explanation": "La guía cubre SQL I, Lógica de Programación, Java II, Análisis de Código, Pruebas, SOLID, ACID y OWASP Top 10 — Machine Learning no forma parte de su alcance."
+  },
+  {
+    "id": "cert-173",
+    "category": "certificacion",
+    "topic": "Simulacro mixto",
+    "question": "¿Qué conexión existe entre el Módulo 7 (ACID) y el Módulo 1 (SQL I), respecto al comando UPDATE?",
+    "options": [
+      "Ninguna conexión: son temas completamente independientes",
+      "Ambos módulos advierten sobre el mismo riesgo: un UPDATE sin WHERE afecta TODAS las filas, y en el contexto de una transacción, ese cambio completo se confirma o revierte como una sola unidad atómica",
+      "El Módulo 7 prohíbe el uso de UPDATE por completo",
+      "El Módulo 1 no menciona nunca el comando UPDATE"
+    ],
+    "correctIndex": 1,
+    "explanation": "El Módulo 1 enseña la mecánica de UPDATE y su trampa clásica (olvidar el WHERE); el Módulo 7 explica la garantía transaccional (Atomicidad) que envuelve a ese mismo UPDATE dentro de una unidad de trabajo."
+  },
+  {
+    "id": "cert-174",
+    "category": "certificacion",
+    "topic": "Simulacro mixto",
+    "question": "Según el análisis del Módulo 4, ¿por qué 'misterio(n)' (Fibonacci recursivo) SÍ termina, mientras que 'factorial(n)' sin caso base NO termina?",
+    "options": [
+      "Porque Fibonacci es un algoritmo más simple que factorial",
+      "Porque misterio(n) tiene un caso base (n<=1) que la recursión alcanza progresivamente; factorial(n), tal como está escrito, carece por completo de caso base",
+      "Porque misterio(n) no es realmente recursivo",
+      "Porque factorial(n) usa un tipo de dato distinto"
+    ],
+    "correctIndex": 1,
+    "explanation": "La presencia (o ausencia) de un caso base bien definido y alcanzable es la diferencia determinante entre una recursión que termina correctamente y una que provoca StackOverflowError."
+  },
+  {
+    "id": "cert-175",
+    "category": "certificacion",
+    "topic": "Simulacro mixto",
+    "question": "¿Qué principio de diseño de pruebas (FIRST) se relaciona más directamente con la práctica de usar Testcontainers en vez de mocks para pruebas de integración con base de datos?",
+    "options": [
+      "Fast (rapidez)",
+      "Repeatable: usar el motor de base de datos REAL (vía Docker) en vez de una simulación produce un comportamiento más fiel y consistente entre entornos, evitando 'en pruebas pasaba, en producción falló'",
+      "Timely (oportunidad)",
+      "Self-validating"
+    ],
+    "correctIndex": 1,
+    "explanation": "Aunque Testcontainers puede ser más lento que un mock, su valor principal es la fidelidad del comportamiento real replicado de forma consistente entre distintos entornos de ejecución."
+  },
+  {
+    "id": "cert-176",
+    "category": "certificacion",
+    "topic": "Simulacro mixto",
+    "question": "¿Qué error de la Función 6 del Módulo 4 (esValido) ilustra sobre la relación entre nombres de método y comportamiento real?",
+    "options": [
+      "Que el nombre de un método siempre garantiza su comportamiento correcto",
+      "Que un nombre de método bien elegido NO sustituye la necesidad de trazar/verificar la lógica real: esValido() hace exactamente lo contrario de lo que su nombre sugiere",
+      "Que los nombres de métodos no importan en absoluto",
+      "Que Java revisa automáticamente la coherencia entre nombre y comportamiento"
+    ],
+    "correctIndex": 1,
+    "explanation": "Un lector desprevenido que confía en el nombre 'esValido' sin trazar la condición negada llegaría a la conclusión equivocada — refuerza la importancia de verificar, no asumir, al analizar código."
+  }
+]
