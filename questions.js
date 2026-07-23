@@ -1,4 +1,4 @@
-/* Banco de preguntas del simulador. Generado a partir de java.json, sql.json y certificacion.json. */
+/* Generado por tools/build-question-bank.py. No editar manualmente. */
 window.QUESTION_BANK = [
   {
     "id": "java-001",
@@ -7573,5 +7573,2105 @@ window.QUESTION_BANK = [
     ],
     "correctIndex": 1,
     "explanation": "Un lector desprevenido que confía en el nombre 'esValido' sin trazar la condición negada llegaría a la conclusión equivocada — refuerza la importancia de verificar, no asumir, al analizar código."
+  },
+  {
+    "id": "adv-java-001",
+    "category": "java",
+    "topic": "Generics y type erasure",
+    "question": "¿Qué ocurre al compilar?\nList<Integer> ints = List.of(1, 2);\nList<? extends Number> nums = ints;\nnums.add(null);",
+    "options": [
+      "No compila porque nunca se puede invocar add sobre ? extends Number",
+      "Compila; null es el único valor que puede añadirse sin violar la seguridad de tipos",
+      "Compila y lanza UnsupportedOperationException en add",
+      "Compila solo si nums se declara final"
+    ],
+    "correctIndex": 1,
+    "explanation": "Con ? extends Number no se puede añadir un Number concreto, porque el tipo capturado podría ser Integer, Double, etc.; null es compatible con cualquier tipo de referencia. Si se ejecuta, List.of es inmutable y add(null) lanzaría UnsupportedOperationException."
+  },
+  {
+    "id": "adv-java-002",
+    "category": "java",
+    "topic": "Generics y type erasure",
+    "question": "¿Por qué no se pueden sobrecargar estos dos métodos en la misma clase?\nvoid process(List<String> x) {}\nvoid process(List<Integer> x) {}",
+    "options": [
+      "Porque String e Integer son final",
+      "Porque tras el borrado ambos tienen la firma process(List)",
+      "Porque List no admite sobrecarga",
+      "Porque los genéricos solo existen en tiempo de ejecución"
+    ],
+    "correctIndex": 1,
+    "explanation": "El type erasure elimina los argumentos de tipo para la firma de bytecode; ambos métodos colisionan como process(java.util.List)."
+  },
+  {
+    "id": "adv-java-003",
+    "category": "java",
+    "topic": "Generics y PECS",
+    "question": "Se desea copiar elementos de src a dst. ¿Qué firma expresa correctamente PECS?",
+    "options": [
+      "<T> void copy(List<T> src, List<T> dst)",
+      "<T> void copy(List<? super T> src, List<? extends T> dst)",
+      "<T> void copy(List<? extends T> src, List<? super T> dst)",
+      "void copy(List<?> src, List<?> dst)"
+    ],
+    "correctIndex": 2,
+    "explanation": "El productor usa extends y el consumidor usa super: src produce valores T y dst los consume."
+  },
+  {
+    "id": "adv-java-004",
+    "category": "java",
+    "topic": "Sobrecarga y boxing",
+    "question": "¿Qué imprime?\nstatic void f(long x){System.out.print(\"L\");}\nstatic void f(Integer x){System.out.print(\"I\");}\npublic static void main(String[] a){ f(1); }",
+    "options": [
+      "L",
+      "I",
+      "Error de ambigüedad",
+      "Depende de la JVM"
+    ],
+    "correctIndex": 0,
+    "explanation": "La ampliación primitiva int→long se prefiere a boxing int→Integer durante la resolución de sobrecarga."
+  },
+  {
+    "id": "adv-java-005",
+    "category": "java",
+    "topic": "Sobrecarga y varargs",
+    "question": "¿Qué método se selecciona para g(1, 2)?\nstatic void g(Integer a, Integer b){}\nstatic void g(int... xs){}",
+    "options": [
+      "g(int...) porque evita boxing",
+      "g(Integer,Integer) porque los métodos de aridad fija se consideran antes que varargs",
+      "Es ambiguo",
+      "Ninguno compila"
+    ],
+    "correctIndex": 1,
+    "explanation": "La resolución prueba primero métodos de aridad fija permitiendo boxing; varargs es una fase posterior."
+  },
+  {
+    "id": "adv-java-006",
+    "category": "java",
+    "topic": "Strings",
+    "question": "¿Qué imprime?\nString a = \"ab\";\nString b = \"a\" + \"b\";\nString x = \"a\";\nString c = x + \"b\";\nSystem.out.print((a == b) + \" \" + (a == c));",
+    "options": [
+      "true true",
+      "true false",
+      "false true",
+      "false false"
+    ],
+    "correctIndex": 1,
+    "explanation": "La concatenación de constantes se pliega en compilación y usa el pool; x + \"b\" se evalúa en ejecución y crea otro objeto."
+  },
+  {
+    "id": "adv-java-007",
+    "category": "java",
+    "topic": "Records",
+    "question": "En record Range(int min, int max), ¿qué forma de constructor compacto valida y normaliza correctamente antes de asignar los campos finales?",
+    "options": [
+      "Range { if(min>max){ int t=min; min=max; max=t; } }",
+      "Range { this.min=min; this.max=max; }",
+      "Range(int min,int max){ if(min>max) return; }",
+      "Range { this.min=max; }"
+    ],
+    "correctIndex": 0,
+    "explanation": "En un constructor compacto se pueden reasignar los parámetros; el compilador realiza al final las asignaciones implícitas a los componentes. No se asignan directamente los campos."
+  },
+  {
+    "id": "adv-java-008",
+    "category": "java",
+    "topic": "Sealed classes",
+    "question": "Una clase implementa directamente una interfaz sealed. ¿Cuál es una obligación de su declaración?",
+    "options": [
+      "Debe ser public",
+      "Debe declararse final, sealed o non-sealed, salvo estados implícitos como record/enum",
+      "Debe estar en el mismo paquete incluso si usa módulos nombrados",
+      "Debe incluir siempre una cláusula permits"
+    ],
+    "correctIndex": 1,
+    "explanation": "Todo subtipo directo debe declarar cómo continúa la jerarquía. En un módulo nombrado debe estar en el mismo módulo; la restricción de mismo paquete aplica al módulo no nombrado."
+  },
+  {
+    "id": "adv-java-009",
+    "category": "java",
+    "topic": "Pattern matching",
+    "question": "¿Por qué no compila este código?\nObject o = \"x\";\nif (o instanceof String s || s.isEmpty()) {}",
+    "options": [
+      "instanceof no admite variables de patrón",
+      "s podría usarse cuando el lado izquierdo sea false, por lo que no está definitivamente asignada",
+      "String no tiene isEmpty",
+      "Debe usarse | en vez de ||"
+    ],
+    "correctIndex": 1,
+    "explanation": "Con ||, el operando derecho se evalúa precisamente si el patrón no coincidió; s no estaría asignada. Con && sí sería segura."
+  },
+  {
+    "id": "adv-java-010",
+    "category": "java",
+    "topic": "Excepciones",
+    "question": "¿Qué excepción sale del método?\ntry { throw new IllegalStateException(\"body\"); }\nfinally { throw new IllegalArgumentException(\"finally\"); }",
+    "options": [
+      "IllegalStateException con IllegalArgumentException suprimida",
+      "IllegalArgumentException; la excepción original se pierde",
+      "MultiException con ambas causas",
+      "No compila"
+    ],
+    "correctIndex": 1,
+    "explanation": "Una excepción lanzada explícitamente en finally reemplaza la excepción pendiente del try; no se agrega automáticamente como suppressed."
+  },
+  {
+    "id": "adv-java-011",
+    "category": "java",
+    "topic": "Try-with-resources",
+    "question": "El cuerpo lanza E1 y close() de dos recursos, creados A y luego B, lanza E2 y E3 respectivamente. ¿Cuál es el resultado?",
+    "options": [
+      "E3 es principal; E2 y E1 son suppressed",
+      "E1 es principal; E3 y después E2 quedan suppressed",
+      "E1 es principal; E2 y después E3 quedan suppressed",
+      "Solo E1; close no se ejecuta si falla el cuerpo"
+    ],
+    "correctIndex": 1,
+    "explanation": "Los recursos cierran en orden inverso: B y luego A. La excepción del cuerpo sigue siendo principal y las de cierre se suprimen en ese orden."
+  },
+  {
+    "id": "adv-java-012",
+    "category": "java",
+    "topic": "Colecciones",
+    "question": "¿Qué riesgo contractual aparece si una clave de HashMap cambia un campo usado por equals y hashCode después de insertarse?",
+    "options": [
+      "El mapa reubica automáticamente la entrada",
+      "La entrada puede quedar inencontrable en el bucket calculado para el nuevo hash",
+      "HashMap convierte la clave en inmutable",
+      "Solo afecta el orden de iteración"
+    ],
+    "correctIndex": 1,
+    "explanation": "HashMap no vuelve a indexar claves mutadas; la búsqueda usa el hash actual y puede consultar otro bucket."
+  },
+  {
+    "id": "adv-java-013",
+    "category": "java",
+    "topic": "Colecciones",
+    "question": "¿Cuál es la diferencia crítica entre Collections.unmodifiableList(original) y List.copyOf(original)?",
+    "options": [
+      "Ambas siempre hacen copia profunda",
+      "La primera es una vista que refleja cambios del original; copyOf crea una instantánea superficial y rechaza null",
+      "copyOf permite null pero la vista no",
+      "La vista es mutable mediante set"
+    ],
+    "correctIndex": 1,
+    "explanation": "unmodifiableList bloquea mutaciones a través de la vista, pero comparte el backing list. copyOf produce una colección no modificable separada (salvo optimizaciones) y no admite elementos null."
+  },
+  {
+    "id": "adv-java-014",
+    "category": "java",
+    "topic": "Streams",
+    "question": "¿Qué afirmación sobre peek en un stream es correcta?",
+    "options": [
+      "Garantiza ejecutarse una vez por elemento del origen",
+      "Es una operación terminal",
+      "Puede no ejecutarse para algunos o todos los elementos debido a pereza y optimizaciones; no debe sostener lógica esencial",
+      "Ordena el stream antes de observarlo"
+    ],
+    "correctIndex": 2,
+    "explanation": "peek es intermedia y perezosa. Operaciones como count pueden permitir optimizaciones que eviten recorrer la fuente; se recomienda principalmente para depuración."
+  },
+  {
+    "id": "adv-java-015",
+    "category": "java",
+    "topic": "Streams",
+    "question": "¿Qué sucede?\nvar s = Stream.of(1,2,3);\nlong n = s.count();\nint sum = s.mapToInt(Integer::intValue).sum();",
+    "options": [
+      "n=3 y sum=6",
+      "sum=0 porque el stream quedó vacío",
+      "Se lanza IllegalStateException al reutilizar un stream consumido",
+      "No compila porque count cierra la JVM"
+    ],
+    "correctIndex": 2,
+    "explanation": "Un stream solo admite una operación terminal; tras count queda consumido y reutilizarlo es ilegal."
+  },
+  {
+    "id": "adv-java-016",
+    "category": "java",
+    "topic": "Streams paralelos",
+    "question": "¿Por qué reduce(0, (a,b)->a-b) no es seguro para obtener una resta determinista en parallelStream()?",
+    "options": [
+      "reduce no acepta enteros",
+      "La operación no es asociativa y el resultado depende de cómo se particione y combine",
+      "El identificador debe ser 1",
+      "Los streams paralelos ignoran el acumulador"
+    ],
+    "correctIndex": 1,
+    "explanation": "La reducción paralela requiere identidad y operador asociativo (y compatibilidad del combinador); la resta no es asociativa."
+  },
+  {
+    "id": "adv-java-017",
+    "category": "java",
+    "topic": "Optional",
+    "question": "¿Qué diferencia práctica existe entre optional.orElse(expensive()) y optional.orElseGet(this::expensive) cuando hay valor?",
+    "options": [
+      "Ninguna: ambos son siempre perezosos",
+      "orElse evalúa expensive() de forma anticipada; orElseGet no invoca el supplier",
+      "orElseGet devuelve siempre null",
+      "orElse lanza si expensive falla aunque Optional esté vacío únicamente"
+    ],
+    "correctIndex": 1,
+    "explanation": "Los argumentos normales se evalúan antes de llamar a orElse; el Supplier de orElseGet solo se ejecuta si falta el valor."
+  },
+  {
+    "id": "adv-java-018",
+    "category": "java",
+    "topic": "Memoria y GC",
+    "question": "Un objeto A referencia a B y ambos forman un ciclo, pero ningún GC root alcanza a A ni B. ¿Qué ocurre?",
+    "options": [
+      "El ciclo impide su recolección",
+      "Ambos son elegibles para GC porque la alcanzabilidad, no el conteo de referencias, decide",
+      "Solo B es elegible",
+      "Java requiere cerrar el ciclo manualmente"
+    ],
+    "correctIndex": 1,
+    "explanation": "Los recolectores de Java determinan alcanzabilidad desde raíces; los ciclos aislados no conservan objetos vivos."
+  },
+  {
+    "id": "adv-java-019",
+    "category": "java",
+    "topic": "Java Memory Model",
+    "question": "¿Qué garantiza volatile sobre int counter si varios hilos ejecutan counter++?",
+    "options": [
+      "Visibilidad y atomicidad del incremento compuesto",
+      "Visibilidad de lecturas/escrituras, pero counter++ sigue siendo read-modify-write no atómico",
+      "Solo atomicidad, no visibilidad",
+      "Exclusión mutua equivalente a synchronized"
+    ],
+    "correctIndex": 1,
+    "explanation": "volatile establece orden y visibilidad, pero no convierte una secuencia leer-modificar-escribir en una operación atómica."
+  },
+  {
+    "id": "adv-java-020",
+    "category": "java",
+    "topic": "Java Memory Model",
+    "question": "Tras t.start(), el hilo t lee campos escritos por el creador antes de start. ¿Qué establece el modelo de memoria?",
+    "options": [
+      "No existe garantía sin volatile",
+      "Las acciones anteriores a start happen-before de las acciones del hilo iniciado",
+      "Solo los campos final son visibles",
+      "start equivale a join"
+    ],
+    "correctIndex": 1,
+    "explanation": "La regla de Thread.start crea una relación happens-before desde las acciones previas del hilo iniciador hacia el nuevo hilo."
+  },
+  {
+    "id": "adv-java-021",
+    "category": "java",
+    "topic": "Concurrencia",
+    "question": "¿Qué problema tiene usar ConcurrentHashMap y hacer if(!map.containsKey(k)) map.put(k,v) para inicialización única?",
+    "options": [
+      "ConcurrentHashMap no permite put",
+      "Cada operación es segura, pero la secuencia compuesta no es atómica; debe usarse computeIfAbsent/putIfAbsent",
+      "containsKey bloquea todo el mapa permanentemente",
+      "put convierte el mapa en HashMap"
+    ],
+    "correctIndex": 1,
+    "explanation": "La seguridad individual no hace atómica la operación check-then-act; dos hilos pueden observar ausencia."
+  },
+  {
+    "id": "adv-java-022",
+    "category": "java",
+    "topic": "Concurrencia",
+    "question": "¿Qué semántica tiene CompletableFuture.thenApply frente a thenCompose cuando la función devuelve CompletableFuture<U>?",
+    "options": [
+      "thenApply aplana y thenCompose anida",
+      "thenApply produce CompletableFuture<CompletableFuture<U>>; thenCompose aplana a CompletableFuture<U>",
+      "Son idénticos",
+      "thenCompose solo funciona con errores"
+    ],
+    "correctIndex": 1,
+    "explanation": "thenCompose es el flatMap de CompletionStage y evita futuros anidados."
+  },
+  {
+    "id": "adv-java-023",
+    "category": "java",
+    "topic": "Virtual threads",
+    "question": "¿Cuál es el objetivo principal de los virtual threads en Java 21?",
+    "options": [
+      "Acelerar cálculos CPU-bound individuales",
+      "Aumentar throughput en muchas tareas concurrentes que esperan I/O, manteniendo estilo bloqueante simple",
+      "Reemplazar synchronized por transacciones",
+      "Garantizar menor latencia para toda tarea"
+    ],
+    "correctIndex": 1,
+    "explanation": "Son ligeros y escalables para gran cantidad de tareas bloqueadas; no hacen que el código CPU-bound ejecute más rápido."
+  },
+  {
+    "id": "adv-java-024",
+    "category": "java",
+    "topic": "Virtual threads",
+    "question": "¿Qué práctica contradice el modelo recomendado para virtual threads?",
+    "options": [
+      "Crear un virtual thread por tarea",
+      "Usar llamadas bloqueantes de I/O",
+      "Agrupar y reutilizar un número pequeño de virtual threads como recurso escaso",
+      "Limitar explícitamente un recurso externo con semáforo"
+    ],
+    "correctIndex": 2,
+    "explanation": "Los virtual threads son abundantes y representan tareas; no deben agruparse como platform threads. Los recursos externos sí pueden requerir límites."
+  },
+  {
+    "id": "adv-java-025",
+    "category": "java",
+    "topic": "Módulos JPMS",
+    "question": "En module-info.java, ¿qué diferencia hay entre exports p y opens p?",
+    "options": [
+      "exports permite acceso normal a tipos públicos; opens habilita reflexión profunda en runtime",
+      "opens permite compilación y exports solo reflexión",
+      "No hay diferencia",
+      "exports hace públicos también los miembros private"
+    ],
+    "correctIndex": 0,
+    "explanation": "exports controla acceso de lenguaje a API pública. opens permite a otros módulos acceso reflectivo a miembros no públicos sin exportar la API para compilación."
+  },
+  {
+    "id": "adv-java-026",
+    "category": "java",
+    "topic": "Class loading",
+    "question": "Dos class loaders distintos cargan bytes idénticos de com.acme.Widget. ¿Son el mismo tipo para la JVM?",
+    "options": [
+      "Sí, porque el nombre binario coincide",
+      "No; la identidad incluye nombre binario y class loader definidor",
+      "Sí, si el hash del .class coincide",
+      "Solo difieren en modo debug"
+    ],
+    "correctIndex": 1,
+    "explanation": "La identidad de tipo en la JVM está formada por el nombre y el loader que lo define; esto explica ciertos ClassCastException en contenedores/plugins."
+  },
+  {
+    "id": "adv-java-027",
+    "category": "java",
+    "topic": "Fechas y horas",
+    "question": "¿Por qué LocalDateTime no basta para representar inequívocamente un instante global?",
+    "options": [
+      "Porque es mutable",
+      "Porque carece de offset/zona; durante cambios DST una hora local puede ser ambigua o inexistente",
+      "Porque solo admite fechas anteriores a 2038",
+      "Porque siempre usa UTC"
+    ],
+    "correctIndex": 1,
+    "explanation": "LocalDateTime describe campos civiles sin reglas de zona. Instant o ZonedDateTime resuelven la línea temporal."
+  },
+  {
+    "id": "adv-java-028",
+    "category": "java",
+    "topic": "JDBC",
+    "question": "Con autoCommit=false, una operación falla con SQLException. ¿Qué debe asumir código portable?",
+    "options": [
+      "El driver siempre hizo rollback total",
+      "Debe ejecutar rollback explícito; el estado y alcance tras error dependen del motor/driver",
+      "La conexión se cierra automáticamente",
+      "commit confirmará solo sentencias correctas en todos los motores"
+    ],
+    "correctIndex": 1,
+    "explanation": "JDBC no convierte todo error en rollback automático universal; el dueño de la transacción debe decidir rollback y restaurar autoCommit al devolver conexiones al pool."
+  },
+  {
+    "id": "adv-java-029",
+    "category": "java",
+    "topic": "equals y herencia",
+    "question": "Una clase base usa instanceof en equals y una subclase añade estado significativo. ¿Qué propiedad suele romperse si la subclase restringe equals a su tipo exacto?",
+    "options": [
+      "Reflexividad",
+      "Simetría entre objeto base y subclase",
+      "No nulidad",
+      "Determinismo de hashCode únicamente"
+    ],
+    "correctIndex": 1,
+    "explanation": "La base puede considerar igual a la subclase mientras la subclase rechaza a la base. La composición o clases value final evitan esta trampa."
+  },
+  {
+    "id": "adv-java-030",
+    "category": "java",
+    "topic": "Inicialización",
+    "question": "¿Qué imprime?\nclass X {\n static { System.out.print(\"S\"); }\n { System.out.print(\"I\"); }\n X(){ System.out.print(\"C\"); }\n public static void main(String[] a){ new X(); new X(); }\n}",
+    "options": [
+      "SICIC",
+      "SICSIC",
+      "ICIC",
+      "SSICIC"
+    ],
+    "correctIndex": 0,
+    "explanation": "El inicializador estático corre una vez al inicializar la clase; cada instancia ejecuta el inicializador de instancia antes del cuerpo del constructor."
+  },
+  {
+    "id": "adv-sql-001",
+    "category": "sql",
+    "topic": "NULL y lógica ternaria",
+    "question": "¿Qué devuelve WHERE x NOT IN (1, NULL) para x=2 en SQL estándar?",
+    "options": [
+      "La fila, porque 2 no es 1",
+      "No devuelve la fila: la comparación produce UNKNOWN",
+      "Error de sintaxis",
+      "La fila solo en PostgreSQL"
+    ],
+    "correctIndex": 1,
+    "explanation": "NOT IN equivale a negar una disyunción; 2=NULL es UNKNOWN y NOT(FALSE OR UNKNOWN) sigue siendo UNKNOWN, que WHERE descarta."
+  },
+  {
+    "id": "adv-sql-002",
+    "category": "sql",
+    "topic": "Antijoins",
+    "question": "¿Qué forma es normalmente más segura para buscar padres sin hijos cuando la subconsulta puede devolver NULL?",
+    "options": [
+      "id NOT IN (SELECT parent_id FROM child)",
+      "NOT EXISTS (SELECT 1 FROM child c WHERE c.parent_id=p.id)",
+      "id <> ALL(NULL)",
+      "LEFT JOIN sin condición ON"
+    ],
+    "correctIndex": 1,
+    "explanation": "NOT EXISTS prueba existencia correlacionada y no queda contaminado por un NULL ajeno como NOT IN."
+  },
+  {
+    "id": "adv-sql-003",
+    "category": "sql",
+    "topic": "JOIN",
+    "question": "¿Qué efecto tiene mover c.active=true desde ON a WHERE en un LEFT JOIN de parent p con child c?",
+    "options": [
+      "Ninguno",
+      "Elimina filas sin hijo coincidente y suele convertir semánticamente el outer join en inner join",
+      "Duplica solo padres sin hijos",
+      "Hace la consulta no determinista"
+    ],
+    "correctIndex": 1,
+    "explanation": "Las filas extendidas con NULL fallan c.active=true en WHERE. En ON se conservan los padres aunque no exista hijo activo."
+  },
+  {
+    "id": "adv-sql-004",
+    "category": "sql",
+    "topic": "Agregación",
+    "question": "En un LEFT JOIN, ¿por qué COUNT(*) y COUNT(child.id) pueden diferir por grupo?",
+    "options": [
+      "COUNT(*) ignora NULL y COUNT(id) no",
+      "COUNT(*) cuenta la fila extendida del padre; COUNT(child.id) ignora el NULL cuando no hay hijo",
+      "COUNT(id) cuenta dos veces",
+      "Solo difieren con DISTINCT"
+    ],
+    "correctIndex": 1,
+    "explanation": "COUNT(expresión) ignora NULL; COUNT(*) cuenta filas independientemente de sus valores."
+  },
+  {
+    "id": "adv-sql-005",
+    "category": "sql",
+    "topic": "GROUP BY",
+    "question": "¿Cuál es la diferencia conceptual entre WHERE y HAVING?",
+    "options": [
+      "WHERE filtra grupos después de agregar",
+      "WHERE filtra filas antes de agrupar; HAVING filtra grupos después de la agregación lógica",
+      "HAVING solo admite columnas sin agregación",
+      "Son sinónimos optimizados igual"
+    ],
+    "correctIndex": 1,
+    "explanation": "El orden lógico permite que HAVING use resultados agregados, mientras WHERE determina las filas de entrada."
+  },
+  {
+    "id": "adv-sql-006",
+    "category": "sql",
+    "topic": "Funciones de ventana",
+    "question": "¿Qué diferencia hay entre ROW_NUMBER, RANK y DENSE_RANK ante empates?",
+    "options": [
+      "Las tres asignan lo mismo",
+      "ROW_NUMBER distingue filas; RANK deja huecos después de empates; DENSE_RANK no deja huecos",
+      "DENSE_RANK deja huecos y RANK no",
+      "ROW_NUMBER devuelve NULL en empates"
+    ],
+    "correctIndex": 1,
+    "explanation": "Con valores 100,100,90: ROW_NUMBER 1,2,3; RANK 1,1,3; DENSE_RANK 1,1,2."
+  },
+  {
+    "id": "adv-sql-007",
+    "category": "sql",
+    "topic": "Funciones de ventana",
+    "question": "Para obtener el último valor de toda una partición, ¿por qué LAST_VALUE(x) OVER(ORDER BY ts) puede sorprender?",
+    "options": [
+      "LAST_VALUE no acepta ORDER BY",
+      "El frame por defecto suele terminar en el peer actual; se debe especificar un frame hasta UNBOUNDED FOLLOWING",
+      "Siempre devuelve el primer valor",
+      "Requiere GROUP BY"
+    ],
+    "correctIndex": 1,
+    "explanation": "LAST_VALUE actúa sobre el frame, no necesariamente sobre toda la partición. El frame debe declararse conforme a la intención."
+  },
+  {
+    "id": "adv-sql-008",
+    "category": "sql",
+    "topic": "Funciones de ventana",
+    "question": "¿Cuál consulta conserva cada fila y añade el total del departamento?",
+    "options": [
+      "SELECT dept, SUM(salary) FROM emp GROUP BY dept",
+      "SELECT e.*, SUM(salary) OVER(PARTITION BY dept) total FROM emp e",
+      "SELECT DISTINCT SUM(salary) FROM emp",
+      "SELECT e.*, SUM(salary) FROM emp e"
+    ],
+    "correctIndex": 1,
+    "explanation": "Una función ventana calcula sobre la partición sin colapsar las filas como GROUP BY."
+  },
+  {
+    "id": "adv-sql-009",
+    "category": "sql",
+    "topic": "CTE recursivas",
+    "question": "¿Qué componente evita conceptualmente una recursión infinita en WITH RECURSIVE?",
+    "options": [
+      "ORDER BY obligatorio",
+      "Un caso base y una condición/transformación recursiva que alcance un punto fijo; además conviene detección de ciclos",
+      "DISTINCT siempre obligatorio",
+      "COMMIT entre iteraciones"
+    ],
+    "correctIndex": 1,
+    "explanation": "La recursión debe dejar de producir filas. Jerarquías con ciclos requieren defensa específica del motor o ruta visitada."
+  },
+  {
+    "id": "adv-sql-010",
+    "category": "sql",
+    "topic": "Operadores de conjunto",
+    "question": "¿Qué diferencia principal hay entre UNION y UNION ALL?",
+    "options": [
+      "UNION conserva duplicados",
+      "UNION elimina duplicados, normalmente con trabajo adicional; UNION ALL concatena resultados",
+      "UNION ALL requiere columnas con nombres iguales",
+      "UNION ordena de manera garantizada"
+    ],
+    "correctIndex": 1,
+    "explanation": "UNION aplica semántica de conjunto; ninguna variante garantiza orden sin ORDER BY final."
+  },
+  {
+    "id": "adv-sql-011",
+    "category": "sql",
+    "topic": "Constraints",
+    "question": "¿Puede una FOREIGN KEY referenciar columnas que no sean PRIMARY KEY?",
+    "options": [
+      "Nunca",
+      "Sí, si el conjunto referenciado tiene una restricción UNIQUE/clave candidata compatible según el motor",
+      "Sí, cualquier columna con índice no único",
+      "Solo si admite NULL"
+    ],
+    "correctIndex": 1,
+    "explanation": "La referencia debe identificar de forma única una fila; una clave candidata UNIQUE puede servir, con detalles dependientes del DBMS."
+  },
+  {
+    "id": "adv-sql-012",
+    "category": "sql",
+    "topic": "Constraints",
+    "question": "¿Por qué CHECK (salary > 0) podría permitir NULL en salary?",
+    "options": [
+      "CHECK se evalúa después de COMMIT",
+      "Una restricción CHECK rechaza FALSE; UNKNOWN por NULL no es FALSE. Se necesita además NOT NULL",
+      "NULL se convierte en cero",
+      "CHECK nunca valida INSERT"
+    ],
+    "correctIndex": 1,
+    "explanation": "La lógica ternaria hace que salary > 0 sea UNKNOWN para NULL; NOT NULL expresa la otra regla."
+  },
+  {
+    "id": "adv-sql-013",
+    "category": "sql",
+    "topic": "Claves",
+    "question": "¿Qué ventaja de diseño tiene una clave natural estable frente a una surrogate key?",
+    "options": [
+      "Elimina toda necesidad de índices",
+      "Impone directamente la unicidad del hecho de negocio; aun con surrogate debe conservarse UNIQUE sobre la clave natural",
+      "Nunca cambia y por definición ocupa menos",
+      "Permite duplicados de negocio"
+    ],
+    "correctIndex": 1,
+    "explanation": "Una clave artificial facilita referencias, pero no reemplaza la restricción de unicidad del dominio."
+  },
+  {
+    "id": "adv-sql-014",
+    "category": "sql",
+    "topic": "Normalización",
+    "question": "Una tabla order_line(order_id, product_id, product_name, qty) usa PK(order_id,product_id), y product_name depende solo de product_id. ¿Qué viola?",
+    "options": [
+      "1NF por usar clave compuesta",
+      "2NF por dependencia parcial de una parte de la clave",
+      "3NF únicamente por dependencia transitiva",
+      "BCNF porque qty es numérico"
+    ],
+    "correctIndex": 1,
+    "explanation": "Un atributo no clave depende de parte de la clave compuesta; debe residir en Product."
+  },
+  {
+    "id": "adv-sql-015",
+    "category": "sql",
+    "topic": "Normalización",
+    "question": "Si employee_id→department_id y department_id→department_name dentro de Employee, ¿qué anomalía señala 3NF?",
+    "options": [
+      "Dependencia multivaluada",
+      "Dependencia transitiva de department_name respecto a la clave",
+      "Falta de atomicidad",
+      "Producto cartesiano"
+    ],
+    "correctIndex": 1,
+    "explanation": "department_name depende de la clave a través de department_id, generando redundancia y anomalías de actualización."
+  },
+  {
+    "id": "adv-sql-016",
+    "category": "sql",
+    "topic": "Índices",
+    "question": "Con índice B-tree(a,b,c), ¿qué predicado suele aprovechar mejor el prefijo del índice?",
+    "options": [
+      "WHERE b=2 AND c=3 sin condición sobre a",
+      "WHERE a=1 AND b=2",
+      "WHERE c=3 únicamente",
+      "WHERE function(a)=1 siempre"
+    ],
+    "correctIndex": 1,
+    "explanation": "Los B-tree compuestos suelen ser más eficaces siguiendo el prefijo izquierdo. Capacidades exactas dependen del optimizador."
+  },
+  {
+    "id": "adv-sql-017",
+    "category": "sql",
+    "topic": "Índices",
+    "question": "¿Por qué WHERE LOWER(email)=? puede no usar un índice ordinario sobre email?",
+    "options": [
+      "LOWER solo funciona en SELECT",
+      "La función cambia la expresión indexada; puede requerir índice funcional/de expresión o comparación normalizada",
+      "Los índices no admiten texto",
+      "Los parámetros desactivan índices"
+    ],
+    "correctIndex": 1,
+    "explanation": "La búsqueda se realiza sobre LOWER(email), no directamente sobre email; un índice correspondiente restaura sargabilidad."
+  },
+  {
+    "id": "adv-sql-018",
+    "category": "sql",
+    "topic": "Índices",
+    "question": "¿Por qué añadir muchos índices puede empeorar un sistema OLTP?",
+    "options": [
+      "SELECT deja de funcionar",
+      "INSERT/UPDATE/DELETE deben mantenerlos y aumentan almacenamiento, WAL/redo y contención",
+      "El optimizador usa todos simultáneamente",
+      "Los índices eliminan constraints"
+    ],
+    "correctIndex": 1,
+    "explanation": "Los índices aceleran ciertos accesos a cambio de coste en escrituras y espacio; deben responder a cargas reales."
+  },
+  {
+    "id": "adv-sql-019",
+    "category": "sql",
+    "topic": "Optimización",
+    "question": "¿Qué significa que un predicado sea sargable?",
+    "options": [
+      "Que usa sintaxis estándar únicamente",
+      "Que puede convertirse eficazmente en condición de búsqueda sobre un índice, evitando envolver la columna innecesariamente",
+      "Que contiene GROUP BY",
+      "Que siempre fuerza un full scan"
+    ],
+    "correctIndex": 1,
+    "explanation": "Por ejemplo, un rango sobre created_at suele ser más sargable que aplicar una función a cada created_at."
+  },
+  {
+    "id": "adv-sql-020",
+    "category": "sql",
+    "topic": "Optimización",
+    "question": "¿Por qué SELECT * es desaconsejable en APIs estables?",
+    "options": [
+      "SQL no permite asterisco en producción",
+      "Acopla al esquema, transfiere columnas innecesarias y puede impedir index-only scans",
+      "Siempre devuelve filas duplicadas",
+      "Evita prepared statements"
+    ],
+    "correctIndex": 1,
+    "explanation": "Proyectar explícitamente documenta el contrato y reduce I/O; también evita cambios accidentales cuando evoluciona la tabla."
+  },
+  {
+    "id": "adv-sql-021",
+    "category": "sql",
+    "topic": "Aislamiento",
+    "question": "¿Qué anomalía impide READ COMMITTED pero puede permitir respecto a dos lecturas de la misma fila?",
+    "options": [
+      "Dirty read impedido; non-repeatable read posible",
+      "Dirty read posible; phantom imposible",
+      "Todas las anomalías impedidas",
+      "Lost update siempre imposible por estándar"
+    ],
+    "correctIndex": 0,
+    "explanation": "READ COMMITTED evita leer datos no confirmados, pero otra transacción puede confirmar un cambio entre lecturas."
+  },
+  {
+    "id": "adv-sql-022",
+    "category": "sql",
+    "topic": "Aislamiento",
+    "question": "Dos médicos leen que el otro está de guardia y cada uno se retira, dejando cero, aunque actualizan filas distintas. ¿Qué anomalía MVCC ilustra?",
+    "options": [
+      "Dirty read",
+      "Write skew, que snapshot isolation puede permitir",
+      "Fuzzy checkpoint",
+      "Lectura sucia de índice"
+    ],
+    "correctIndex": 1,
+    "explanation": "Cada transacción conserva la restricción según su snapshot, pero juntas la violan; serializable o bloqueo explícito puede ser necesario."
+  },
+  {
+    "id": "adv-sql-023",
+    "category": "sql",
+    "topic": "Bloqueos",
+    "question": "¿Cuál es la estrategia correcta ante deadlocks detectados por el DBMS?",
+    "options": [
+      "Desactivar transacciones",
+      "El motor aborta una víctima; la aplicación debe poder reintentar la transacción completa de forma segura",
+      "Reintentar solo la última sentencia después de commit",
+      "Usar NOLOCK universalmente"
+    ],
+    "correctIndex": 1,
+    "explanation": "Un deadlock se resuelve abortando una transacción. Reintentar exige límites, backoff e idempotencia apropiada."
+  },
+  {
+    "id": "adv-sql-024",
+    "category": "sql",
+    "topic": "Transacciones",
+    "question": "¿Qué problema tiene mantener una transacción abierta mientras se espera una llamada HTTP externa?",
+    "options": [
+      "HTTP confirma automáticamente la BD",
+      "Prolonga locks/snapshots y aumenta contención; conviene acortar la transacción y coordinar con patrones como outbox",
+      "Convierte SQL en autocommit",
+      "Garantiza exactly-once"
+    ],
+    "correctIndex": 1,
+    "explanation": "Las transacciones de base de datos deben ser cortas. Coordinar sistemas requiere diseños explícitos, no sostener recursos indefinidamente."
+  },
+  {
+    "id": "adv-sql-025",
+    "category": "sql",
+    "topic": "Paginación",
+    "question": "¿Por qué OFFSET 100000 LIMIT 20 puede degradarse y producir páginas inestables bajo escrituras?",
+    "options": [
+      "OFFSET ordena aleatoriamente",
+      "Debe recorrer/descartar muchas filas y los desplazamientos cambian; keyset pagination usa una clave ordenada estable",
+      "LIMIT bloquea toda la tabla",
+      "OFFSET solo admite valores menores de 1000"
+    ],
+    "correctIndex": 1,
+    "explanation": "La paginación por cursor, por ejemplo WHERE (ts,id)>(?,?) ORDER BY ts,id, escala y conserva mejor la continuidad."
+  },
+  {
+    "id": "adv-sql-026",
+    "category": "sql",
+    "topic": "Orden determinista",
+    "question": "¿ORDER BY score DESC garantiza un orden repetible si varias filas comparten score?",
+    "options": [
+      "Sí, siempre por clave primaria implícita",
+      "No; debe añadirse un desempate único, por ejemplo ORDER BY score DESC, id",
+      "Sí, pero solo con LIMIT",
+      "No se puede ordenar empates"
+    ],
+    "correctIndex": 1,
+    "explanation": "El SQL no promete el orden relativo de peers; una clave única crea orden total."
+  },
+  {
+    "id": "adv-sql-027",
+    "category": "sql",
+    "topic": "UPSERT",
+    "question": "¿Qué riesgo general existe en implementar upsert como SELECT de existencia seguido de INSERT/UPDATE?",
+    "options": [
+      "SELECT confirma la transacción",
+      "Hay una carrera TOCTOU; debe usarse operación atómica del motor y una restricción UNIQUE",
+      "UPDATE no admite WHERE",
+      "Solo falla si hay NULL"
+    ],
+    "correctIndex": 1,
+    "explanation": "Dos sesiones pueden observar ausencia. La unicidad en la BD y MERGE/ON CONFLICT equivalente deben arbitrar la concurrencia."
+  },
+  {
+    "id": "adv-sql-028",
+    "category": "sql",
+    "topic": "Seguridad SQL",
+    "question": "¿Pueden los parámetros preparados sustituir dinámicamente un nombre de tabla o una dirección ASC/DESC?",
+    "options": [
+      "Sí, cualquier token SQL es parametrizable",
+      "No; los parámetros representan valores. Los identificadores/keywords dinámicos requieren allowlist y composición controlada",
+      "Solo en DELETE",
+      "Sí si se escapan con comillas simples"
+    ],
+    "correctIndex": 1,
+    "explanation": "Un placeholder no cambia la gramática. Las partes estructurales deben elegirse desde opciones confiables."
+  },
+  {
+    "id": "adv-sql-029",
+    "category": "sql",
+    "topic": "Vistas materializadas",
+    "question": "¿Qué diferencia esencial hay entre una vista ordinaria y una materializada?",
+    "options": [
+      "La ordinaria almacena filas y la materializada no",
+      "La materializada persiste resultados y requiere refresco; la ordinaria normalmente ejecuta su consulta al usarse",
+      "Ambas se refrescan en cada COMMIT por estándar",
+      "La materializada no admite índices"
+    ],
+    "correctIndex": 1,
+    "explanation": "Una materialización intercambia frescura y coste de mantenimiento por lecturas más rápidas; detalles de refresh son específicos del motor."
+  },
+  {
+    "id": "adv-sql-030",
+    "category": "sql",
+    "topic": "Plan de ejecución",
+    "question": "¿Por qué un EXPLAIN estimado puede diferir drásticamente de EXPLAIN ANALYZE?",
+    "options": [
+      "ANALYZE no ejecuta nada",
+      "Estadísticas obsoletas, correlación de columnas o distribución sesgada pueden producir cardinalidades estimadas erróneas; ANALYZE mide ejecución real",
+      "EXPLAIN usa otro lenguaje",
+      "Los planes nunca cambian"
+    ],
+    "correctIndex": 1,
+    "explanation": "Las decisiones del optimizador dependen de estimaciones. Comparar filas estimadas y reales ayuda a diagnosticar el plan, recordando que ANALYZE sí ejecuta."
+  },
+  {
+    "id": "adv-pract-001",
+    "category": "buenas-practicas",
+    "topic": "SOLID — SRP",
+    "question": "Una clase Invoice calcula impuestos, guarda en SQL y genera PDF. ¿Cuál refactor refleja mejor SRP?",
+    "options": [
+      "Dividirla por número de métodos",
+      "Separar reglas de cálculo, persistencia y presentación porque cambian por actores/razones distintas",
+      "Convertir todos los métodos en static",
+      "Crear una interfaz por cada línea"
+    ],
+    "correctIndex": 1,
+    "explanation": "SRP trata de razones de cambio, no de tamaño. Las tres políticas evolucionan independientemente."
+  },
+  {
+    "id": "adv-pract-002",
+    "category": "buenas-practicas",
+    "topic": "SOLID — OCP",
+    "question": "¿Qué diseño suele cumplir mejor OCP al añadir medios de pago?",
+    "options": [
+      "Un switch central creciente por tipo",
+      "Una abstracción PaymentProcessor con implementaciones registrables y contrato estable",
+      "Copiar el servicio por cada pago",
+      "Hacer públicas todas las variables"
+    ],
+    "correctIndex": 1,
+    "explanation": "El nuevo comportamiento se agrega como implementación sin modificar el núcleo ya probado, siempre que la variación sea real."
+  },
+  {
+    "id": "adv-pract-003",
+    "category": "buenas-practicas",
+    "topic": "SOLID — LSP",
+    "question": "Un subtipo sobrescribe withdraw(amount) y rechaza importes que el tipo base permitía. ¿Qué regla de LSP vulnera?",
+    "options": [
+      "Puede fortalecer precondiciones libremente",
+      "Fortalece una precondición y los clientes del contrato base dejan de funcionar",
+      "Debilita una poscondición únicamente",
+      "LSP solo trata de firmas"
+    ],
+    "correctIndex": 1,
+    "explanation": "Un subtipo no debe exigir más que su base ni prometer menos; debe preservar invariantes y comportamiento observable."
+  },
+  {
+    "id": "adv-pract-004",
+    "category": "buenas-practicas",
+    "topic": "SOLID — ISP",
+    "question": "Un cliente solo imprime, pero depende de MultiFunctionDevice con print/scan/fax. ¿Qué coste señala ISP?",
+    "options": [
+      "Más velocidad",
+      "Acoplamiento a métodos irrelevantes y cambios que fuerzan recompilar/adaptar clientes",
+      "Falta de herencia múltiple",
+      "Demasiados objetos runtime necesariamente"
+    ],
+    "correctIndex": 1,
+    "explanation": "Interfaces enfocadas en roles permiten que cada cliente dependa solo de capacidades usadas."
+  },
+  {
+    "id": "adv-pract-005",
+    "category": "buenas-practicas",
+    "topic": "SOLID — DIP",
+    "question": "¿Cuál aplicación de DIP es más precisa?",
+    "options": [
+      "Todo debe tener interfaz aunque exista una sola política estable",
+      "La política de negocio depende de un puerto; adaptadores de SQL/HTTP implementan ese puerto",
+      "Las capas bajas importan las capas altas y también al revés",
+      "Usar un contenedor DI basta aunque se instancien concretos dentro del dominio"
+    ],
+    "correctIndex": 1,
+    "explanation": "DIP orienta las dependencias hacia abstracciones definidas alrededor de la política; un framework de inyección no arregla acoplamiento conceptual."
+  },
+  {
+    "id": "adv-pract-006",
+    "category": "buenas-practicas",
+    "topic": "DRY",
+    "question": "Dos validaciones tienen hoy el mismo código pero representan reglas de negocio distintas y podrían divergir. ¿Qué recomienda una lectura madura de DRY?",
+    "options": [
+      "Unificarlas siempre por similitud textual",
+      "No abstraer coincidencias accidentales; DRY elimina duplicación de conocimiento, no toda repetición sintáctica",
+      "Usar reflexión para compartirlas",
+      "Eliminar una regla"
+    ],
+    "correctIndex": 1,
+    "explanation": "Una abstracción equivocada acopla conceptos independientes; a veces una pequeña duplicación es más honesta."
+  },
+  {
+    "id": "adv-pract-007",
+    "category": "buenas-practicas",
+    "topic": "KISS",
+    "question": "¿KISS implica elegir siempre el código con menos líneas?",
+    "options": [
+      "Sí",
+      "No; busca menor complejidad esencial para comprender y cambiar, aunque una solución explícita pueda ocupar más líneas",
+      "Solo aplica a algoritmos",
+      "Prohíbe patrones"
+    ],
+    "correctIndex": 1,
+    "explanation": "Concisión extrema puede ocultar intención. La simplicidad se evalúa por el modelo y sus costes, no por LOC."
+  },
+  {
+    "id": "adv-pract-008",
+    "category": "buenas-practicas",
+    "topic": "YAGNI",
+    "question": "¿Cuál decisión representa YAGNI sin sacrificar calidad?",
+    "options": [
+      "No escribir tests hasta producción",
+      "Implementar la necesidad actual con diseño refactorizable, sin construir extensiones especulativas",
+      "Ignorar requisitos no funcionales actuales",
+      "Evitar cualquier abstracción"
+    ],
+    "correctIndex": 1,
+    "explanation": "YAGNI rechaza funcionalidad hipotética, no pruebas, seguridad ni una estructura sostenible para requisitos presentes."
+  },
+  {
+    "id": "adv-pract-009",
+    "category": "buenas-practicas",
+    "topic": "Ley de Demeter",
+    "question": "¿Cuál es el problema principal de order.getCustomer().getAddress().getCountry().getTaxRate()?",
+    "options": [
+      "Usa demasiados puntos por una regla sintáctica absoluta",
+      "El cliente conoce y depende de una estructura interna profunda; un método orientado a intención reduce el acoplamiento",
+      "Los getters son siempre ilegales",
+      "Solo afecta rendimiento"
+    ],
+    "correctIndex": 1,
+    "explanation": "LoD limita conocimiento de colaboradores. No toda cadena es mala (p. ej. fluent APIs), importa el acoplamiento estructural."
+  },
+  {
+    "id": "adv-pract-010",
+    "category": "buenas-practicas",
+    "topic": "GRASP — Experto",
+    "question": "¿Quién debería calcular el total de una Order según Information Expert?",
+    "options": [
+      "Un controlador UI porque inicia el caso",
+      "El objeto que posee líneas, cantidades y precios, salvo que la política pertenezca explícitamente a otro servicio de dominio",
+      "Un singleton global",
+      "La base de datos obligatoriamente"
+    ],
+    "correctIndex": 1,
+    "explanation": "La responsabilidad se asigna donde está la información necesaria, equilibrándola con cohesión y reglas externas."
+  },
+  {
+    "id": "adv-pract-011",
+    "category": "buenas-practicas",
+    "topic": "GRASP — Creador",
+    "question": "Según Creator, ¿cuándo es buen candidato Cart para crear CartLine?",
+    "options": [
+      "Nunca; solo factories pueden crear",
+      "Cuando Cart agrega, contiene y registra CartLine y dispone de datos de inicialización",
+      "Cuando CartLine crea Cart",
+      "Solo si Cart es abstract"
+    ],
+    "correctIndex": 1,
+    "explanation": "Creator reduce dependencias al asignar creación a quien ya tiene una relación estrecha con el objeto creado."
+  },
+  {
+    "id": "adv-pract-012",
+    "category": "buenas-practicas",
+    "topic": "GRASP — Controlador",
+    "question": "¿Qué controlador GRASP conviene para PlaceOrder?",
+    "options": [
+      "El botón de la interfaz con toda la lógica",
+      "Un objeto no UI que represente el sistema/caso de uso y coordine colaboradores",
+      "Cada entidad debe conocer HTTP",
+      "Una clase Utils estática"
+    ],
+    "correctIndex": 1,
+    "explanation": "El controlador recibe el evento del sistema y delega; no debe convertirse en un objeto dios."
+  },
+  {
+    "id": "adv-pract-013",
+    "category": "buenas-practicas",
+    "topic": "GRASP — Fabricación pura",
+    "question": "¿Por qué OrderRepository puede ser una Pure Fabrication?",
+    "options": [
+      "Porque modela un objeto físico del dominio",
+      "Porque no es concepto del dominio, pero concentra persistencia para alta cohesión y bajo acoplamiento",
+      "Porque debe heredar de Order",
+      "Porque evita cualquier dependencia"
+    ],
+    "correctIndex": 1,
+    "explanation": "Una fabricación pura introduce una clase de diseño útil aunque no corresponda a un concepto del mundo real."
+  },
+  {
+    "id": "adv-pract-014",
+    "category": "buenas-practicas",
+    "topic": "GRASP — Variaciones protegidas",
+    "question": "¿Cómo protege un sistema ante cambios de proveedor de correo?",
+    "options": [
+      "Distribuyendo llamadas SDK por todo el dominio",
+      "Encapsulando el punto variable detrás de un puerto estable y adaptadores",
+      "Copiando el SDK al repositorio",
+      "Usando variables globales"
+    ],
+    "correctIndex": 1,
+    "explanation": "Protected Variations identifica puntos de inestabilidad y coloca una interfaz estable alrededor."
+  },
+  {
+    "id": "adv-pract-015",
+    "category": "buenas-practicas",
+    "topic": "Clean Code",
+    "question": "Un método booleano se llama checkUser. ¿Qué mejora aporta isEligibleForRenewal?",
+    "options": [
+      "Ninguna, los nombres no son parte del diseño",
+      "Revela intención, naturaleza booleana y decisión de dominio; reduce necesidad de comentarios",
+      "Hace el método más rápido",
+      "Garantiza corrección"
+    ],
+    "correctIndex": 1,
+    "explanation": "Un nombre preciso comunica propósito y nivel de abstracción; no sustituye tests, pero disminuye carga cognitiva."
+  },
+  {
+    "id": "adv-pract-016",
+    "category": "buenas-practicas",
+    "topic": "Clean Code",
+    "question": "¿Qué indica que un comentario explica 'qué hace' un bloque complejo línea por línea?",
+    "options": [
+      "El comentario siempre es la solución final",
+      "Puede ser señal de que conviene extraer funciones y nombres que expresen la intención; comentarios útiles explican contexto o porqué no evidente",
+      "Debe eliminarse sin refactor",
+      "Hay que duplicarlo en tests"
+    ],
+    "correctIndex": 1,
+    "explanation": "Los comentarios envejecen separados del código. La intención estable suele vivir mejor en estructura y nombres."
+  },
+  {
+    "id": "adv-pract-017",
+    "category": "buenas-practicas",
+    "topic": "Code smells",
+    "question": "¿Qué problema sugiere una larga lista de parámetros primitivos repetida entre métodos?",
+    "options": [
+      "Primitive obsession / data clumps; quizá falta un value object con invariantes",
+      "Demasiada encapsulación",
+      "Falta un singleton",
+      "Violación de concurrencia"
+    ],
+    "correctIndex": 0,
+    "explanation": "Agrupar conceptos relacionados como Money, Address o DateRange hace explícitas invariantes y reduce errores de orden."
+  },
+  {
+    "id": "adv-pract-018",
+    "category": "buenas-practicas",
+    "topic": "Code smells",
+    "question": "¿Qué es feature envy?",
+    "options": [
+      "Una clase con muchos constructores",
+      "Un método que consulta más datos de otra clase que de la propia, sugiriendo responsabilidad mal ubicada",
+      "Un método demasiado probado",
+      "Uso de composición"
+    ],
+    "correctIndex": 1,
+    "explanation": "Mover el comportamiento hacia el experto en información suele mejorar cohesión y reducir acoplamiento."
+  },
+  {
+    "id": "adv-pract-019",
+    "category": "buenas-practicas",
+    "topic": "Patrones — Strategy",
+    "question": "¿Cuándo Strategy es preferible a un switch por tipo?",
+    "options": [
+      "Siempre, incluso con dos casos estables triviales",
+      "Cuando algoritmos varían independientemente, se seleccionan/intercambian y cada uno merece pruebas/evolución propia",
+      "Cuando se necesita una única instancia global",
+      "Para construir objetos paso a paso"
+    ],
+    "correctIndex": 1,
+    "explanation": "Strategy encapsula familias de comportamiento; introducirlo sin una variación real puede ser sobreingeniería."
+  },
+  {
+    "id": "adv-pract-020",
+    "category": "buenas-practicas",
+    "topic": "Patrones — Decorator",
+    "question": "¿Qué distingue Decorator de heredar subclases por cada combinación de funcionalidades?",
+    "options": [
+      "Decorator compone responsabilidades envolviendo el mismo contrato en runtime",
+      "Decorator crea una sola instancia global",
+      "Decorator traduce interfaces incompatibles",
+      "Decorator coordina eventos entre colegas"
+    ],
+    "correctIndex": 0,
+    "explanation": "La composición de decoradores evita una explosión combinatoria de subclases y permite apilar comportamiento."
+  },
+  {
+    "id": "adv-pract-021",
+    "category": "buenas-practicas",
+    "topic": "Patrones — Adapter",
+    "question": "Un servicio espera PaymentPort pero un SDK expone chargeCents. ¿Qué patrón traduce entre ambos contratos?",
+    "options": [
+      "Observer",
+      "Adapter",
+      "Memento",
+      "Template Method"
+    ],
+    "correctIndex": 1,
+    "explanation": "Adapter convierte la interfaz de un colaborador existente en la que el cliente necesita."
+  },
+  {
+    "id": "adv-pract-022",
+    "category": "buenas-practicas",
+    "topic": "Patrones — Observer",
+    "question": "¿Qué riesgo operativo común introduce Observer con suscripciones de larga vida?",
+    "options": [
+      "No permite múltiples observadores",
+      "Fugas de memoria o eventos duplicados si no se cancela la suscripción y semántica compleja ante fallos/orden",
+      "Elimina desacoplamiento",
+      "Obliga a usar threads"
+    ],
+    "correctIndex": 1,
+    "explanation": "La relación queda indirecta pero sigue existiendo; lifecycle, backpressure, errores y orden deben diseñarse."
+  },
+  {
+    "id": "adv-pract-023",
+    "category": "buenas-practicas",
+    "topic": "Patrones — Singleton",
+    "question": "¿Cuál crítica sólida aplica a un Singleton global mutable?",
+    "options": [
+      "Java no puede implementarlo",
+      "Oculta dependencias, comparte estado entre tests y complica concurrencia; unicidad de proceso quizá ni coincide con la necesidad distribuida",
+      "Siempre consume demasiada memoria",
+      "No admite métodos"
+    ],
+    "correctIndex": 1,
+    "explanation": "Una única instancia administrada por composición/DI puede ser válida; el acceso global y estado mutable son el problema habitual."
+  },
+  {
+    "id": "adv-pract-024",
+    "category": "buenas-practicas",
+    "topic": "Arquitectura",
+    "question": "¿Qué significa alta cohesión en un módulo?",
+    "options": [
+      "Que depende de muchos módulos",
+      "Que sus responsabilidades están estrechamente relacionadas alrededor de un propósito claro",
+      "Que tiene muchas líneas",
+      "Que no tiene interfaces"
+    ],
+    "correctIndex": 1,
+    "explanation": "La cohesión facilita comprender qué pertenece al módulo; normalmente se busca junto a bajo acoplamiento."
+  },
+  {
+    "id": "adv-pract-025",
+    "category": "buenas-practicas",
+    "topic": "Arquitectura",
+    "question": "¿Qué métrica conceptual importa al evaluar acoplamiento?",
+    "options": [
+      "Solo cantidad de imports",
+      "Número, dirección, estabilidad y naturaleza de las dependencias, incluyendo contratos y conocimiento compartido",
+      "Solo número de clases",
+      "Solo tiempo de compilación"
+    ],
+    "correctIndex": 1,
+    "explanation": "Dos dependencias pueden tener costes muy distintos; depender de una abstracción estable no equivale a conocer detalles volátiles."
+  },
+  {
+    "id": "adv-pract-026",
+    "category": "buenas-practicas",
+    "topic": "Refactoring",
+    "question": "¿Qué prerrequisito reduce más el riesgo antes de un refactor que preserva comportamiento?",
+    "options": [
+      "Reescribir y probar al final",
+      "Una red de tests de caracterización relevante y cambios pequeños verificables",
+      "Cambiar API y comportamiento a la vez",
+      "Eliminar casos límite"
+    ],
+    "correctIndex": 1,
+    "explanation": "Los tests observan el contrato existente y los pasos pequeños localizan regresiones; refactor no debería cambiar conducta observable."
+  },
+  {
+    "id": "adv-pract-027",
+    "category": "buenas-practicas",
+    "topic": "API design",
+    "question": "¿Por qué devolver una colección interna mutable rompe encapsulación?",
+    "options": [
+      "Porque List es lenta",
+      "El cliente puede violar invariantes sin pasar por operaciones del agregado; conviene copia/vista inmutable según semántica",
+      "Porque impide GC",
+      "Porque todos los getters son malos"
+    ],
+    "correctIndex": 1,
+    "explanation": "Encapsular no es solo private; también se controla la mutabilidad transitiva expuesta."
+  },
+  {
+    "id": "adv-pract-028",
+    "category": "buenas-practicas",
+    "topic": "Errores",
+    "question": "¿Qué problema tiene capturar Exception, registrar y continuar devolviendo null?",
+    "options": [
+      "Ninguno si hay log",
+      "Oculta el fallo, pierde semántica y desplaza un error claro hacia un NPE distante; debe recuperarse realmente o propagar contexto",
+      "Exception no puede capturarse",
+      "null siempre representa ausencia válida"
+    ],
+    "correctIndex": 1,
+    "explanation": "Solo se captura donde existe una estrategia de recuperación. Traducir excepciones debe preservar causa y contrato."
+  },
+  {
+    "id": "adv-pract-029",
+    "category": "buenas-practicas",
+    "topic": "Observabilidad",
+    "question": "¿Qué hace a un log útil sin filtrar secretos?",
+    "options": [
+      "Concatenar objetos completos y tokens",
+      "Evento estructurado con contexto/correlation id, resultado y campos permitidos; redactar credenciales y PII",
+      "Registrar cada variable local",
+      "Usar solo mensajes genéricos sin identificadores"
+    ],
+    "correctIndex": 1,
+    "explanation": "La observabilidad requiere contexto consultable, pero minimización y redacción evitan convertir logs en una fuga."
+  },
+  {
+    "id": "adv-pract-030",
+    "category": "buenas-practicas",
+    "topic": "Compatibilidad",
+    "question": "En una API pública, ¿qué cambio suele ser más compatible?",
+    "options": [
+      "Renombrar un campo requerido",
+      "Añadir un campo opcional que consumidores tolerantes puedan ignorar",
+      "Cambiar tipo number a object sin versión",
+      "Reutilizar un código de error con otro significado"
+    ],
+    "correctIndex": 1,
+    "explanation": "La evolución aditiva suele ser más segura, pero debe probarse contra consumidores reales y contratos de serialización."
+  },
+  {
+    "id": "adv-sec-001",
+    "category": "seguridad",
+    "topic": "SQL Injection",
+    "question": "¿Cuál defensa primaria evita que un valor de usuario altere la estructura SQL?",
+    "options": [
+      "Escapar manualmente comillas en toda entrada",
+      "Prepared statements con parámetros para valores y allowlist para partes estructurales",
+      "Codificar Base64",
+      "Ocultar errores de SQL únicamente"
+    ],
+    "correctIndex": 1,
+    "explanation": "La parametrización separa código y datos. Identificadores u orden dinámicos no son valores y deben mapearse desde una lista permitida."
+  },
+  {
+    "id": "adv-sec-002",
+    "category": "seguridad",
+    "topic": "Autorización",
+    "question": "Un endpoint /invoice/{id} valida que el usuario esté autenticado pero no que sea dueño de la factura. ¿Qué vulnerabilidad es?",
+    "options": [
+      "CSRF exclusivamente",
+      "Broken object level authorization/IDOR",
+      "SQL truncation",
+      "Hash collision"
+    ],
+    "correctIndex": 1,
+    "explanation": "Conocer o adivinar un identificador no otorga acceso; la autorización se verifica por objeto en el servidor."
+  },
+  {
+    "id": "adv-sec-003",
+    "category": "seguridad",
+    "topic": "Autenticación",
+    "question": "¿Cómo deben almacenarse contraseñas?",
+    "options": [
+      "Cifradas con una clave global reversible",
+      "Con una función adaptativa específica para contraseñas, salt único y coste calibrado; opcional pepper protegido",
+      "SHA-256 sin salt",
+      "Base64 y TLS"
+    ],
+    "correctIndex": 1,
+    "explanation": "Argon2id, scrypt, bcrypt o PBKDF2 ralentizan ataques offline. Las contraseñas no necesitan recuperarse."
+  },
+  {
+    "id": "adv-sec-004",
+    "category": "seguridad",
+    "topic": "Sesiones",
+    "question": "¿Qué atributos protegen una cookie de sesión web?",
+    "options": [
+      "HttpOnly, Secure y SameSite adecuado, además de alcance mínimo",
+      "Public, Cacheable y CrossDomain",
+      "Solo Max-Age largo",
+      "CORS:*"
+    ],
+    "correctIndex": 0,
+    "explanation": "HttpOnly reduce robo por JS, Secure exige HTTPS y SameSite ayuda contra CSRF; Path/Domain y vida deben minimizarse."
+  },
+  {
+    "id": "adv-sec-005",
+    "category": "seguridad",
+    "topic": "CSRF",
+    "question": "¿Por qué SameSite=Lax no sustituye siempre un token CSRF?",
+    "options": [
+      "Porque SameSite cifra poco",
+      "Hay flujos, navegadores y requisitos cross-site donde se envían cookies; operaciones sensibles necesitan defensa acorde al modelo",
+      "Porque tokens solo sirven para GET",
+      "Porque CSRF no afecta cookies"
+    ],
+    "correctIndex": 1,
+    "explanation": "SameSite es defensa en profundidad. Tokens impredecibles u origen verificado siguen siendo relevantes según arquitectura."
+  },
+  {
+    "id": "adv-sec-006",
+    "category": "seguridad",
+    "topic": "XSS",
+    "question": "¿Cuál defensa es más correcta al insertar datos no confiables en HTML?",
+    "options": [
+      "Una función de escape universal para cualquier contexto",
+      "Codificación contextual según HTML, atributo, URL o JavaScript, más plantillas seguras y CSP como defensa adicional",
+      "Eliminar solo <script>",
+      "Usar HTTPS"
+    ],
+    "correctIndex": 1,
+    "explanation": "Los contextos tienen gramáticas distintas; sanitización se reserva para HTML permitido y CSP no corrige una salida insegura."
+  },
+  {
+    "id": "adv-sec-007",
+    "category": "seguridad",
+    "topic": "CORS",
+    "question": "¿Qué afirmación sobre CORS es correcta?",
+    "options": [
+      "Es un control de autenticación del servidor",
+      "Es una política del navegador sobre lectura cross-origin; no impide que clientes no navegador llamen al API",
+      "Cifra respuestas",
+      "Evita CSRF en toda configuración"
+    ],
+    "correctIndex": 1,
+    "explanation": "El servidor debe autenticar y autorizar independientemente; CORS no es un firewall."
+  },
+  {
+    "id": "adv-sec-008",
+    "category": "seguridad",
+    "topic": "JWT",
+    "question": "¿Qué debe hacer un verificador JWT seguro respecto al algoritmo?",
+    "options": [
+      "Confiar en cualquier alg del token",
+      "Fijar algoritmos esperados y validar firma, issuer, audience, expiración y uso de clave",
+      "Decodificar Base64 equivale a verificar",
+      "Aceptar alg=none en redes internas"
+    ],
+    "correctIndex": 1,
+    "explanation": "Los claims no son confiables hasta verificar integridad y contexto. La configuración evita confusión de algoritmo/clave."
+  },
+  {
+    "id": "adv-sec-009",
+    "category": "seguridad",
+    "topic": "JWT",
+    "question": "¿Qué dificultad introduce un access token JWT de larga duración?",
+    "options": [
+      "No se puede firmar",
+      "La revocación inmediata es compleja; convienen vidas cortas, rotación y controles de sesión/refresh",
+      "No admite claims",
+      "Solo funciona sobre HTTP"
+    ],
+    "correctIndex": 1,
+    "explanation": "Un token válido suele aceptarse sin consulta central; reducir su ventana limita daño por robo."
+  },
+  {
+    "id": "adv-sec-010",
+    "category": "seguridad",
+    "topic": "Criptografía",
+    "question": "¿Por qué AES-GCM requiere nonce único por clave?",
+    "options": [
+      "Para comprimir mejor",
+      "Reutilizar nonce puede destruir confidencialidad e integridad; debe gestionarse sin colisiones",
+      "Para que el ciphertext sea determinista",
+      "Porque el nonce es la contraseña"
+    ],
+    "correctIndex": 1,
+    "explanation": "GCM es AEAD y su seguridad depende críticamente de no repetir nonce con la misma clave."
+  },
+  {
+    "id": "adv-sec-011",
+    "category": "seguridad",
+    "topic": "Criptografía",
+    "question": "¿Qué propiedad aporta una firma digital que un hash sin clave no aporta?",
+    "options": [
+      "Confidencialidad",
+      "Autenticidad e integridad verificables respecto a la clave privada",
+      "Compresión",
+      "Anonimato garantizado"
+    ],
+    "correctIndex": 1,
+    "explanation": "Cualquiera puede recalcular un hash; solo quien controla la clave privada puede producir una firma válida."
+  },
+  {
+    "id": "adv-sec-012",
+    "category": "seguridad",
+    "topic": "TLS",
+    "question": "¿Qué error invalida gran parte de TLS en un cliente Java?",
+    "options": [
+      "Usar TLS 1.3",
+      "Aceptar cualquier certificado o desactivar hostname verification",
+      "Usar un truststore",
+      "Cerrar sockets"
+    ],
+    "correctIndex": 1,
+    "explanation": "Sin validar cadena y nombre, un atacante puede presentar su propio certificado y realizar MITM."
+  },
+  {
+    "id": "adv-sec-013",
+    "category": "seguridad",
+    "topic": "Secretos",
+    "question": "¿Cuál es la práctica más segura para secretos de producción?",
+    "options": [
+      "Hardcodearlos y ofuscar el JAR",
+      "Gestor de secretos, identidad de workload, rotación, alcance mínimo y evitar logs/repositorio",
+      "Variables en un archivo versionado",
+      "Compartir una credencial por todos los servicios"
+    ],
+    "correctIndex": 1,
+    "explanation": "La gestión central permite auditoría y rotación; la aplicación debe minimizar tiempo y superficie de exposición."
+  },
+  {
+    "id": "adv-sec-014",
+    "category": "seguridad",
+    "topic": "SSRF",
+    "question": "Un servidor descarga una URL proporcionada por el usuario. ¿Qué control reduce SSRF?",
+    "options": [
+      "Bloquear solo la cadena localhost",
+      "Allowlist de destinos/esquemas, resolver y validar IP, bloquear rangos internos/metadata y controlar redirecciones/egress",
+      "Codificar URL en Base64",
+      "Añadir CORS"
+    ],
+    "correctIndex": 1,
+    "explanation": "DNS rebinding, notaciones alternativas y redirects hacen insuficiente un filtro textual simple."
+  },
+  {
+    "id": "adv-sec-015",
+    "category": "seguridad",
+    "topic": "Path traversal",
+    "question": "¿Cómo defender una descarga /files?name=...?",
+    "options": [
+      "Eliminar ../ una vez",
+      "Resolver contra un directorio base, normalizar/canonicalizar, comprobar que permanece dentro y usar identificadores indirectos",
+      "Permitir rutas absolutas si existen",
+      "Reemplazar slash por espacio únicamente"
+    ],
+    "correctIndex": 1,
+    "explanation": "La verificación posterior a la resolución evita escapes por secuencias, enlaces o representaciones inesperadas; también se aplican permisos mínimos."
+  },
+  {
+    "id": "adv-sec-016",
+    "category": "seguridad",
+    "topic": "Deserialización",
+    "question": "¿Por qué deserializar Java nativo desde entrada no confiable es peligroso?",
+    "options": [
+      "Porque siempre pierde tipos",
+      "El grafo puede activar gadgets y efectos durante deserialización; preferir formatos simples con DTO/allowlist estricta",
+      "Porque JSON ejecuta bytecode automáticamente",
+      "Solo consume CPU"
+    ],
+    "correctIndex": 1,
+    "explanation": "ObjectInputStream sobre datos hostiles ha habilitado cadenas de gadgets; validar después puede ser demasiado tarde."
+  },
+  {
+    "id": "adv-sec-017",
+    "category": "seguridad",
+    "topic": "XXE",
+    "question": "¿Qué evita XXE al procesar XML no confiable?",
+    "options": [
+      "Habilitar DTD para validar",
+      "Deshabilitar DTD y entidades externas, usar parser endurecido y límites de recursos",
+      "Convertir XML a String primero",
+      "Usar XPath"
+    ],
+    "correctIndex": 1,
+    "explanation": "Entidades externas pueden leer archivos o hacer solicitudes; también existen ataques de expansión que agotan recursos."
+  },
+  {
+    "id": "adv-sec-018",
+    "category": "seguridad",
+    "topic": "Subida de archivos",
+    "question": "¿Qué controles son necesarios al aceptar archivos?",
+    "options": [
+      "Confiar en Content-Type del cliente",
+      "Allowlist de tipo real, límites, nombre generado, almacenamiento fuera del webroot, escaneo según riesgo y autorización",
+      "Guardar con el nombre original en /public",
+      "Ejecutarlo para validar"
+    ],
+    "correctIndex": 1,
+    "explanation": "Extensión y MIME declarados son manipulables; se debe reducir impacto incluso si la detección falla."
+  },
+  {
+    "id": "adv-sec-019",
+    "category": "seguridad",
+    "topic": "Logging",
+    "question": "¿Qué riesgo tiene log.info(\"Login \" + username) con entrada cruda?",
+    "options": [
+      "Solo rendimiento",
+      "Log injection mediante saltos/control y posible exposición; usar logging estructurado, normalización y minimización",
+      "SQL injection directa siempre",
+      "Ninguno si el archivo es privado"
+    ],
+    "correctIndex": 1,
+    "explanation": "Los logs son una interfaz de seguridad y auditoría; entradas manipuladas pueden falsificar eventos o atacar consumidores."
+  },
+  {
+    "id": "adv-sec-020",
+    "category": "seguridad",
+    "topic": "Least privilege",
+    "question": "¿Con qué credenciales debe conectarse una aplicación a la BD?",
+    "options": [
+      "DBA para evitar errores",
+      "Una identidad dedicada con solo permisos requeridos, separada por servicio/entorno",
+      "La cuenta personal del desarrollador",
+      "Una cuenta compartida con todos los esquemas"
+    ],
+    "correctIndex": 1,
+    "explanation": "El mínimo privilegio limita el radio de impacto de inyección o compromiso y mejora trazabilidad."
+  },
+  {
+    "id": "adv-sec-021",
+    "category": "seguridad",
+    "topic": "Supply chain",
+    "question": "¿Qué combinación mejora seguridad de dependencias?",
+    "options": [
+      "Usar siempre latest sin lockfile",
+      "Versiones reproducibles, inventario/SBOM, escaneo, procedencia/verificación y parcheo gobernado",
+      "Copiar binarios de foros",
+      "Ignorar transitivas"
+    ],
+    "correctIndex": 1,
+    "explanation": "No existe un único control; se necesita saber qué se ejecuta, de dónde vino y responder a vulnerabilidades."
+  },
+  {
+    "id": "adv-sec-022",
+    "category": "seguridad",
+    "topic": "Rate limiting",
+    "question": "¿Por qué limitar solo por IP puede ser insuficiente en login?",
+    "options": [
+      "Las IP no existen tras TLS",
+      "Atacantes distribuidos evaden el límite y NAT comparte usuarios; combinar cuenta, IP, riesgo y backoff sin facilitar DoS de bloqueo",
+      "Porque rate limiting solo aplica a SQL",
+      "Porque CAPTCHA reemplaza autenticación"
+    ],
+    "correctIndex": 1,
+    "explanation": "Los controles deben equilibrar credential stuffing, enumeración y disponibilidad de usuarios legítimos."
+  },
+  {
+    "id": "adv-sec-023",
+    "category": "seguridad",
+    "topic": "Errores",
+    "question": "¿Qué debe devolver un API ante un fallo SQL interno?",
+    "options": [
+      "Stack trace, query y parámetros",
+      "Mensaje externo genérico con correlation id; detalles saneados en logs protegidos",
+      "La contraseña de conexión para soporte",
+      "Siempre HTTP 200"
+    ],
+    "correctIndex": 1,
+    "explanation": "La respuesta no debe revelar estructura ni secretos, pero debe conservar trazabilidad operativa."
+  },
+  {
+    "id": "adv-sec-024",
+    "category": "seguridad",
+    "topic": "Mass assignment",
+    "question": "Un endpoint enlaza JSON directamente a UserEntity, incluyendo role e isAdmin. ¿Qué riesgo existe?",
+    "options": [
+      "Clickjacking",
+      "Mass assignment/over-posting; usar DTO con campos permitidos y autorización explícita",
+      "Race condition de GC",
+      "Hash flooding únicamente"
+    ],
+    "correctIndex": 1,
+    "explanation": "El cliente puede establecer propiedades sensibles que la interfaz no muestra; ocultarlas en UI no es control."
+  },
+  {
+    "id": "adv-sec-025",
+    "category": "seguridad",
+    "topic": "Open redirect",
+    "question": "¿Cómo validar un parámetro returnUrl tras login?",
+    "options": [
+      "Aceptar cualquier URL HTTPS",
+      "Usar rutas relativas o allowlist exacta de destinos confiables; evitar validación por contains/sufijo débil",
+      "Codificarla en Base64",
+      "Añadir un token JWT sin validar destino"
+    ],
+    "correctIndex": 1,
+    "explanation": "Un redirect abierto facilita phishing y fuga de tokens; parsers de URL y reglas exactas evitan bypass."
+  },
+  {
+    "id": "adv-sec-026",
+    "category": "seguridad",
+    "topic": "Cache",
+    "question": "¿Qué riesgo existe si una respuesta autenticada personalizada se almacena en caché pública sin variar correctamente?",
+    "options": [
+      "Solo datos obsoletos",
+      "Puede servirse contenido de un usuario a otro; deben configurarse Cache-Control, claves de caché y Vary apropiados",
+      "El navegador borra cookies",
+      "CORS lo corrige"
+    ],
+    "correctIndex": 1,
+    "explanation": "La caché forma parte del límite de autorización; respuestas sensibles suelen requerir private/no-store según caso."
+  },
+  {
+    "id": "adv-sec-027",
+    "category": "seguridad",
+    "topic": "Race conditions",
+    "question": "Un cupón de un solo uso se valida y luego se marca usado en dos sentencias sin transacción/constraint. ¿Qué falla?",
+    "options": [
+      "Confidencialidad",
+      "Atomicidad: dos solicitudes pueden consumirlo; usar update condicional/lock y restricción dentro de transacción",
+      "Disponibilidad de DNS",
+      "Validación de JWT"
+    ],
+    "correctIndex": 1,
+    "explanation": "La autorización/regla debe mantenerse atómicamente en el sistema que arbitra concurrencia."
+  },
+  {
+    "id": "adv-sec-028",
+    "category": "seguridad",
+    "topic": "MFA",
+    "question": "¿Qué mecanismo MFA es generalmente más resistente a phishing?",
+    "options": [
+      "Código SMS reutilizable",
+      "WebAuthn/FIDO2 ligado al origen con criptografía asimétrica",
+      "Pregunta secreta",
+      "Código enviado al mismo email comprometido"
+    ],
+    "correctIndex": 1,
+    "explanation": "El autenticador verifica el origen y no entrega un secreto reutilizable al sitio falso."
+  },
+  {
+    "id": "adv-sec-029",
+    "category": "seguridad",
+    "topic": "Threat modeling",
+    "question": "¿Cuándo aporta más valor un threat model?",
+    "options": [
+      "Solo después de un incidente",
+      "Durante diseño y ante cambios de arquitectura, identificando activos, límites de confianza, amenazas y mitigaciones",
+      "Solo al redactar política legal",
+      "Después de desplegar y nunca actualizarlo"
+    ],
+    "correctIndex": 1,
+    "explanation": "Modelar temprano permite cambiar arquitectura a bajo coste y debe evolucionar con el sistema."
+  },
+  {
+    "id": "adv-sec-030",
+    "category": "seguridad",
+    "topic": "Fail secure",
+    "question": "Si el servicio de autorización no responde, ¿qué comportamiento suele ser seguro para una operación sensible?",
+    "options": [
+      "Permitir por disponibilidad",
+      "Denegar de forma controlada, salvo una política explícita y analizada; registrar sin filtrar secretos",
+      "Asignar rol admin temporal",
+      "Confiar en un parámetro del cliente"
+    ],
+    "correctIndex": 1,
+    "explanation": "Fail closed evita que un fallo de dependencia se convierta en bypass, aunque disponibilidad y emergencias requieren diseño específico."
+  },
+  {
+    "id": "adv-test-001",
+    "category": "testing",
+    "topic": "Diseño de tests",
+    "question": "¿Qué hace valioso a un test más allá de cobertura?",
+    "options": [
+      "Que ejecuta muchas líneas sin assertions",
+      "Que detecta regresiones relevantes, es determinista, legible y falla por una razón diagnóstica",
+      "Que usa muchos mocks",
+      "Que refleja cada método privado"
+    ],
+    "correctIndex": 1,
+    "explanation": "La cobertura es señal incompleta; un test debe observar comportamiento significativo con bajo coste de mantenimiento."
+  },
+  {
+    "id": "adv-test-002",
+    "category": "testing",
+    "topic": "Unit vs integration",
+    "question": "Un test usa la clase real Repository pero reemplaza la BD por mock. ¿Qué demuestra?",
+    "options": [
+      "Compatibilidad real con SQL y esquema",
+      "La colaboración programada, pero no mapeo, dialecto, constraints ni transacciones reales",
+      "Rendimiento de producción",
+      "Que no existen deadlocks"
+    ],
+    "correctIndex": 1,
+    "explanation": "Es útil como test unitario del servicio, no sustituye pruebas de integración con el motor real."
+  },
+  {
+    "id": "adv-test-003",
+    "category": "testing",
+    "topic": "Test doubles",
+    "question": "¿Qué diferencia a un stub de un mock en sentido estricto?",
+    "options": [
+      "El stub proporciona respuestas; el mock además verifica interacciones esperadas",
+      "El mock usa clases reales y el stub no",
+      "Son términos definidos igual por JVM",
+      "El stub siempre llama a red"
+    ],
+    "correctIndex": 0,
+    "explanation": "Ambos son doubles, pero un mock orienta el test a comportamiento/interacciones; el abuso acopla a implementación."
+  },
+  {
+    "id": "adv-test-004",
+    "category": "testing",
+    "topic": "Mockito",
+    "question": "¿Por qué verificar verify(repo).save(entityExacta) puede volver frágil un test?",
+    "options": [
+      "verify nunca funciona",
+      "Acopla a detalles de construcción/interacción; conviene verificar efecto o capturar solo atributos relevantes cuando esa interacción es contrato",
+      "Porque save es privado",
+      "Porque Mockito confirma la BD"
+    ],
+    "correctIndex": 1,
+    "explanation": "La interacción importa en fronteras, pero sobreespecificar pasos internos dificulta refactors inocuos."
+  },
+  {
+    "id": "adv-test-005",
+    "category": "testing",
+    "topic": "TDD",
+    "question": "¿Cuál es el ciclo TDD y su intención?",
+    "options": [
+      "Diseñar todo, implementar, añadir tests",
+      "Red: test pequeño que falla; Green: mínimo para pasar; Refactor: mejorar conservando verde",
+      "Mock, deploy, rollback",
+      "Coverage, benchmark, release"
+    ],
+    "correctIndex": 1,
+    "explanation": "El ciclo corto ofrece feedback de diseño y una red de regresión; 'mínimo' no significa código descuidado permanente."
+  },
+  {
+    "id": "adv-test-006",
+    "category": "testing",
+    "topic": "BDD",
+    "question": "¿Qué aporta Given-When-Then si se usa bien?",
+    "options": [
+      "Reemplaza assertions",
+      "Estructura precondición, acción y resultado observable en lenguaje del dominio",
+      "Obliga a Cucumber",
+      "Hace unit tests end-to-end"
+    ],
+    "correctIndex": 1,
+    "explanation": "Es una forma de comunicar escenarios; herramientas específicas son opcionales."
+  },
+  {
+    "id": "adv-test-007",
+    "category": "testing",
+    "topic": "JUnit 5",
+    "question": "Con @TestInstance(PER_CLASS), ¿qué cambia principalmente?",
+    "options": [
+      "Se crea instancia por método",
+      "Se comparte una instancia entre métodos y @BeforeAll puede ser no static; estado mutable puede filtrar entre tests",
+      "Los tests se ordenan automáticamente",
+      "Se ejecuta siempre en paralelo"
+    ],
+    "correctIndex": 1,
+    "explanation": "El lifecycle compartido puede ser útil, pero exige evitar dependencias de orden y limpiar estado."
+  },
+  {
+    "id": "adv-test-008",
+    "category": "testing",
+    "topic": "JUnit 5",
+    "question": "¿Qué prueba assertAll?",
+    "options": [
+      "Detiene al primer fallo",
+      "Ejecuta un grupo de assertions y reporta conjuntamente múltiples fallos",
+      "Repite el test hasta pasar",
+      "Convierte exceptions en éxito"
+    ],
+    "correctIndex": 1,
+    "explanation": "Es útil para varias propiedades del mismo resultado; no debe mezclar escenarios independientes."
+  },
+  {
+    "id": "adv-test-009",
+    "category": "testing",
+    "topic": "JUnit 5",
+    "question": "Para verificar que una operación lanza exactamente IllegalArgumentException y no una subclase, ¿qué usar?",
+    "options": [
+      "assertThrows(Exception.class, ...)",
+      "assertThrowsExactly(IllegalArgumentException.class, ...)",
+      "assertDoesNotThrow",
+      "fail únicamente"
+    ],
+    "correctIndex": 1,
+    "explanation": "assertThrows acepta subtipos; assertThrowsExactly exige coincidencia exacta."
+  },
+  {
+    "id": "adv-test-010",
+    "category": "testing",
+    "topic": "Tests parametrizados",
+    "question": "¿Cuándo conviene @ParameterizedTest?",
+    "options": [
+      "Cuando varios casos comparten la misma regla y estructura, incluyendo límites y particiones",
+      "Para ejecutar métodos privados",
+      "Para sustituir todos los tests con un CSV enorme",
+      "Solo con números"
+    ],
+    "correctIndex": 0,
+    "explanation": "Reduce duplicación manteniendo cada caso visible; escenarios con comportamiento distinto merecen tests separados."
+  },
+  {
+    "id": "adv-test-011",
+    "category": "testing",
+    "topic": "Propiedades",
+    "question": "¿Qué diferencia a property-based testing de ejemplos parametrizados?",
+    "options": [
+      "Genera muchos casos y busca invariantes generales, reduciendo contraejemplos al fallar",
+      "No usa assertions",
+      "Solo sirve para UI",
+      "Prueba implementación privada"
+    ],
+    "correctIndex": 0,
+    "explanation": "Propiedades como round-trip o idempotencia exploran espacios que pocos ejemplos manuales no cubren."
+  },
+  {
+    "id": "adv-test-012",
+    "category": "testing",
+    "topic": "Mutation testing",
+    "question": "¿Qué revela un mutante sobreviviente?",
+    "options": [
+      "Que el código compila mejor",
+      "Que una modificación artificial no fue detectada: puede faltar assertion, caso o relevancia observable",
+      "Que hay necesariamente un bug en producción",
+      "Que debe borrarse el test"
+    ],
+    "correctIndex": 1,
+    "explanation": "Mutation testing evalúa sensibilidad de la suite, aunque mutantes equivalentes requieren criterio."
+  },
+  {
+    "id": "adv-test-013",
+    "category": "testing",
+    "topic": "Cobertura",
+    "question": "¿100% de cobertura de líneas garantiza corrección?",
+    "options": [
+      "Sí",
+      "No; puede no afirmar resultados, omitir combinaciones, límites, concurrencia y propiedades",
+      "Sí si hay mocks",
+      "Solo para Java"
+    ],
+    "correctIndex": 1,
+    "explanation": "Cobertura indica ejecución, no calidad del oráculo ni suficiencia del espacio de entrada."
+  },
+  {
+    "id": "adv-test-014",
+    "category": "testing",
+    "topic": "Flaky tests",
+    "question": "Un test falla ocasionalmente por usar Thread.sleep(100). ¿Qué mejora es preferible?",
+    "options": [
+      "Aumentar sleep a 30 segundos",
+      "Esperar una condición observable con timeout acotado y controlar scheduler/reloj cuando sea posible",
+      "Reintentar indefinidamente",
+      "Ignorar el test"
+    ],
+    "correctIndex": 1,
+    "explanation": "Dormir presupone timing del entorno; la sincronización por condición reduce lentitud y flakiness."
+  },
+  {
+    "id": "adv-test-015",
+    "category": "testing",
+    "topic": "Tiempo",
+    "question": "¿Cómo probar lógica que depende de Instant.now()?",
+    "options": [
+      "Cambiar el reloj del SO",
+      "Inyectar java.time.Clock y usar Clock.fixed/offset en tests",
+      "Dormir hasta la fecha objetivo",
+      "Mockear todos los métodos static siempre"
+    ],
+    "correctIndex": 1,
+    "explanation": "Clock convierte el tiempo en dependencia explícita y mantiene tests rápidos y deterministas."
+  },
+  {
+    "id": "adv-test-016",
+    "category": "testing",
+    "topic": "Aleatoriedad",
+    "question": "¿Cómo conservar reproducibilidad en un test aleatorio?",
+    "options": [
+      "Usar Math.random sin registrar nada",
+      "Controlar/registrar seed y aislar la fuente Random; al fallar conservar el caso mínimo",
+      "Ejecutarlo una sola vez",
+      "Aceptar que no se reproduce"
+    ],
+    "correctIndex": 1,
+    "explanation": "La aleatoriedad puede explorar más casos, pero un fallo debe poder repetirse y diagnosticarse."
+  },
+  {
+    "id": "adv-test-017",
+    "category": "testing",
+    "topic": "Contratos",
+    "question": "¿Qué valida un consumer-driven contract test?",
+    "options": [
+      "El rendimiento máximo",
+      "Que las interacciones del proveedor satisfacen contratos que sus consumidores realmente usan",
+      "La implementación interna del proveedor",
+      "La red de producción en cada commit necesariamente"
+    ],
+    "correctIndex": 1,
+    "explanation": "Reduce desalineación entre servicios sin sustituir todas las pruebas end-to-end."
+  },
+  {
+    "id": "adv-test-018",
+    "category": "testing",
+    "topic": "Testcontainers",
+    "question": "¿Qué ventaja ofrece Testcontainers para repositorios SQL?",
+    "options": [
+      "Convierte SQL en unit test puro",
+      "Ejecuta pruebas contra un motor real reproducible, detectando dialecto, constraints y comportamiento transaccional",
+      "Elimina Docker y esquema",
+      "Garantiza datos de producción"
+    ],
+    "correctIndex": 1,
+    "explanation": "Mejora fidelidad de integración; migraciones y datos de prueba deben seguir gestionándose."
+  },
+  {
+    "id": "adv-test-019",
+    "category": "testing",
+    "topic": "Datos de prueba",
+    "question": "¿Por qué compartir una BD mutable entre tests paralelos causa problemas?",
+    "options": [
+      "Los tests se vuelven más unitarios",
+      "Aparecen interferencia y dependencia de orden; usar aislamiento por transacción, esquema/contenedor o datos únicos",
+      "SQL no admite paralelismo",
+      "Aumenta cobertura"
+    ],
+    "correctIndex": 1,
+    "explanation": "Cada test debe controlar su estado inicial y no depender de residuos de otro."
+  },
+  {
+    "id": "adv-test-020",
+    "category": "testing",
+    "topic": "Transacciones en tests",
+    "question": "¿Qué bug puede ocultar un test Spring siempre envuelto en transacción con rollback?",
+    "options": [
+      "Errores de sintaxis Java",
+      "Comportamiento que ocurre en commit, flush, callbacks o en otra transacción; el test nunca cruza esa frontera",
+      "Assertions fallidas",
+      "Mocks no configurados"
+    ],
+    "correctIndex": 1,
+    "explanation": "Algunas restricciones y eventos se manifiestan al flush/commit; hay que probar fronteras reales cuando son parte del comportamiento."
+  },
+  {
+    "id": "adv-test-021",
+    "category": "testing",
+    "topic": "Pirámide de pruebas",
+    "question": "¿Qué interpretación correcta tiene la pirámide?",
+    "options": [
+      "Proporción rígida universal",
+      "Mucho feedback rápido y aislado, menos pruebas amplias costosas; la forma se adapta al sistema y riesgo",
+      "Prohibición de end-to-end",
+      "Todos los tests deben mockear I/O"
+    ],
+    "correctIndex": 1,
+    "explanation": "Es una heurística económica de feedback, no una cuota dogmática."
+  },
+  {
+    "id": "adv-test-022",
+    "category": "testing",
+    "topic": "End-to-end",
+    "question": "¿Por qué una suite basada principalmente en E2E suele ser costosa?",
+    "options": [
+      "No ejecuta código real",
+      "Es lenta, frágil, difícil de diagnosticar y combina muchas causas; debe reservarse para recorridos críticos",
+      "No permite assertions",
+      "Solo funciona manualmente"
+    ],
+    "correctIndex": 1,
+    "explanation": "E2E aporta confianza de ensamblaje, pero una base de tests más focalizados localiza fallos mejor."
+  },
+  {
+    "id": "adv-test-023",
+    "category": "testing",
+    "topic": "Snapshot testing",
+    "question": "¿Qué riesgo aparece al actualizar snapshots automáticamente sin inspección?",
+    "options": [
+      "La JVM se detiene",
+      "Se puede aprobar una regresión como nuevo esperado; el snapshot requiere revisión semántica",
+      "Disminuye tamaño del repo siempre",
+      "El test se vuelve unitario"
+    ],
+    "correctIndex": 1,
+    "explanation": "Un snapshot es un oráculo grande. Si el revisor no comprende el diff, su valor cae."
+  },
+  {
+    "id": "adv-test-024",
+    "category": "testing",
+    "topic": "Concurrencia",
+    "question": "¿Por qué repetir 1000 veces un test de carrera no demuestra ausencia de race conditions?",
+    "options": [
+      "Porque repetir nunca ejecuta threads",
+      "La planificación no cubre todos los interleavings y un éxito estadístico no es prueba; usar diseño seguro, herramientas y estrés dirigido",
+      "Porque 1000 es siempre insuficiente pero 1001 sí",
+      "Porque synchronized impide tests"
+    ],
+    "correctIndex": 1,
+    "explanation": "Tests de estrés pueden detectar, no demostrar ausencia. El razonamiento bajo el Java Memory Model sigue siendo esencial."
+  },
+  {
+    "id": "adv-test-025",
+    "category": "testing",
+    "topic": "Idempotencia",
+    "question": "¿Qué propiedad probar en un handler idempotente ante el mismo requestId?",
+    "options": [
+      "Que la segunda llamada duplica efectos",
+      "Que múltiples entregas producen el mismo estado/efecto externo único y una respuesta compatible",
+      "Que siempre lanza error",
+      "Que requestId se ignora"
+    ],
+    "correctIndex": 1,
+    "explanation": "Se deben incluir reintentos concurrentes y fallos parciales, no solo dos llamadas secuenciales felices."
+  },
+  {
+    "id": "adv-test-026",
+    "category": "testing",
+    "topic": "Arquitectura de tests",
+    "question": "¿Qué es un Humble Object?",
+    "options": [
+      "Un objeto sin métodos",
+      "Separar lógica difícil de probar de una capa delgada dependiente de framework/UI, dejando esta última mínima",
+      "Un mock de Object",
+      "Una clase package-private únicamente"
+    ],
+    "correctIndex": 1,
+    "explanation": "La lógica pura recibe pruebas rápidas; la integración delgada necesita pocas pruebas específicas."
+  },
+  {
+    "id": "adv-test-027",
+    "category": "testing",
+    "topic": "Fixtures",
+    "question": "¿Cuál es un síntoma de General Fixture smell?",
+    "options": [
+      "Cada test crea solo datos relevantes",
+      "Un setup enorme crea datos que la mayoría de tests no usa, ocultando intención y acoplando escenarios",
+      "Uso de builders",
+      "Nombres Given-When-Then"
+    ],
+    "correctIndex": 1,
+    "explanation": "Builders/mothers enfocados y defaults explícitos pueden reducir ruido sin compartir estado mutable."
+  },
+  {
+    "id": "adv-test-028",
+    "category": "testing",
+    "topic": "CI/CD",
+    "question": "¿Qué hacer con un test flaky en CI?",
+    "options": [
+      "Reintentar silenciosamente para siempre",
+      "Tratarlo como defecto: medir, asignar dueño, diagnosticar y corregir; cuarentena temporal visible si bloquea, sin perder señal",
+      "Eliminarlo inmediatamente sin registrar",
+      "Marcar todos los fallos como warning"
+    ],
+    "correctIndex": 1,
+    "explanation": "Los reintentos pueden aportar diagnóstico temporal, pero normalizarlos destruye confianza en la suite."
+  },
+  {
+    "id": "adv-test-029",
+    "category": "testing",
+    "topic": "Performance",
+    "question": "¿Qué hace confiable una prueba de rendimiento?",
+    "options": [
+      "Una medición con System.nanoTime sin warmup",
+      "Entorno y carga controlados, warmup cuando aplica, percentiles, múltiples muestras y comparación con baseline",
+      "Solo promedio de una ejecución",
+      "Ejecutarla con debugger"
+    ],
+    "correctIndex": 1,
+    "explanation": "JIT, GC, ruido y colas vuelven engañoso un único promedio; herramientas como JMH sirven para microbenchmarks Java."
+  },
+  {
+    "id": "adv-test-030",
+    "category": "testing",
+    "topic": "Pruebas de seguridad",
+    "question": "¿Qué enfoque integra mejor seguridad en tests?",
+    "options": [
+      "Un pentest al final como único control",
+      "Tests de autorización por rol/objeto, análisis de dependencias/código, casos de abuso e integración, más evaluación especializada según riesgo",
+      "Verificar solo contraseñas válidas",
+      "Mockear todas las decisiones de seguridad"
+    ],
+    "correctIndex": 1,
+    "explanation": "La seguridad necesita controles continuos y pruebas negativas; ninguna técnica aislada cubre todo."
   }
 ];

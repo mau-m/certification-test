@@ -9,6 +9,9 @@
     java: { label: "Java", badgeClass: "badge-java", ring: "ring-orange-400", text: "text-orange-700", bg: "bg-orange-50", border: "border-orange-200" },
     sql: { label: "SQL", badgeClass: "badge-sql", ring: "ring-blue-400", text: "text-blue-700", bg: "bg-blue-50", border: "border-blue-200" },
     certificacion: { label: "Certificación", badgeClass: "badge-certificacion", ring: "ring-red-400", text: "text-red-700", bg: "bg-red-50", border: "border-red-200" },
+    "buenas-practicas": { label: "Buenas prácticas", badgeClass: "badge-buenas-practicas", ring: "ring-violet-400", text: "text-violet-700", bg: "bg-violet-50", border: "border-violet-200" },
+    seguridad: { label: "Seguridad", badgeClass: "badge-seguridad", ring: "ring-rose-400", text: "text-rose-700", bg: "bg-rose-50", border: "border-rose-200" },
+    testing: { label: "Testing", badgeClass: "badge-testing", ring: "ring-emerald-400", text: "text-emerald-700", bg: "bg-emerald-50", border: "border-emerald-200" },
   };
 
   const app = document.getElementById("app");
@@ -26,7 +29,7 @@
   }
 
   function countByCategory(list) {
-    const counts = { java: 0, sql: 0, certificacion: 0 };
+    const counts = Object.fromEntries(Object.keys(CATEGORY_META).map((category) => [category, 0]));
     for (const q of list) {
       if (counts[q.category] !== undefined) counts[q.category]++;
     }
@@ -70,8 +73,8 @@
         <h2 class="text-xl sm:text-2xl font-bold text-slate-800 mb-1">Configura tu simulacro</h2>
         <p class="text-slate-500 text-sm mb-6">Elige cuántas preguntas quieres responder y de qué categorías. Banco total disponible: <strong>${totalAvailable}</strong> preguntas.</p>
 
-        <div class="grid sm:grid-cols-3 gap-3 mb-6">
-          ${["java", "sql", "certificacion"].map((cat) => {
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-3 mb-6">
+          ${Object.keys(CATEGORY_META).map((cat) => {
             const meta = CATEGORY_META[cat];
             return `
               <label class="flex items-center gap-3 border ${meta.border} ${meta.bg} rounded-xl px-4 py-3 cursor-pointer hover:brightness-95 transition">
@@ -360,7 +363,7 @@
           <p class="text-sm text-slate-500 mt-1">${scoreMsg}</p>
         </div>
 
-        <div class="grid sm:grid-cols-3 gap-3 mb-8">
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-3 mb-8">
           ${Object.keys(CATEGORY_META).map((cat) => {
             const meta = CATEGORY_META[cat];
             const stats = byCategory[cat];
