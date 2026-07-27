@@ -8,10 +8,7 @@
   const CATEGORY_META = {
     java: { label: "Java", badgeClass: "badge-java", ring: "ring-orange-400", text: "text-orange-700", bg: "bg-orange-50", border: "border-orange-200" },
     sql: { label: "SQL", badgeClass: "badge-sql", ring: "ring-blue-400", text: "text-blue-700", bg: "bg-blue-50", border: "border-blue-200" },
-    certificacion: { label: "Certificación", badgeClass: "badge-certificacion", ring: "ring-red-400", text: "text-red-700", bg: "bg-red-50", border: "border-red-200" },
-    "buenas-practicas": { label: "Buenas prácticas", badgeClass: "badge-buenas-practicas", ring: "ring-violet-400", text: "text-violet-700", bg: "bg-violet-50", border: "border-violet-200" },
-    seguridad: { label: "Seguridad", badgeClass: "badge-seguridad", ring: "ring-rose-400", text: "text-rose-700", bg: "bg-rose-50", border: "border-rose-200" },
-    testing: { label: "Testing", badgeClass: "badge-testing", ring: "ring-emerald-400", text: "text-emerald-700", bg: "bg-emerald-50", border: "border-emerald-200" },
+    programacion: { label: "Programación", badgeClass: "badge-programacion", ring: "ring-violet-400", text: "text-violet-700", bg: "bg-violet-50", border: "border-violet-200" },
   };
 
   const app = document.getElementById("app");
@@ -34,6 +31,21 @@
       if (counts[q.category] !== undefined) counts[q.category]++;
     }
     return counts;
+  }
+
+  function topicsByCategory(list) {
+    const topics = Object.fromEntries(Object.keys(CATEGORY_META).map((category) => [category, new Map()]));
+    for (const question of list) {
+      const categoryTopics = topics[question.category];
+      if (!categoryTopics) continue;
+      const topic = question.topic || "General";
+      categoryTopics.set(topic, (categoryTopics.get(topic) || 0) + 1);
+    }
+    return topics;
+  }
+
+  function topicKey(category, topic) {
+    return `${category}\u001f${topic || "General"}`;
   }
 
   function escapeHtml(str) {
@@ -60,32 +72,71 @@
     return safe;
   }
 
+  function renderQuestionCode(question, compact = false) {
+    if (!question.code) return "";
+    const language = escapeHtml(question.language || "código");
+    return `
+      <div class="question-code rounded-xl overflow-hidden border border-slate-700 ${compact ? "mb-3" : "mb-6"}">
+        <div class="bg-slate-800 text-slate-300 px-3 py-1.5 text-[10px] font-bold uppercase tracking-widest flex items-center justify-between">
+          <span>Fragmento de código</span>
+          <span>${language}</span>
+        </div>
+        <pre class="font-mono-code bg-slate-950 text-slate-100 overflow-x-auto ${compact ? "text-[11px] p-3" : "text-sm p-4 sm:p-5"} leading-relaxed"><code>${escapeHtml(question.code)}</code></pre>
+      </div>`;
+  }
+
   // ---------------------------------------------------------------------
   // Pantalla 1: configuración del examen
   // ---------------------------------------------------------------------
   function renderSetupScreen() {
     const totals = countByCategory(ALL_QUESTIONS);
+    const topics = topicsByCategory(ALL_QUESTIONS);
     const totalAvailable = ALL_QUESTIONS.length;
-    const presets = [10, 20, 30, 50, 100];
+    const codeAvailable = ALL_QUESTIONS.filter((question) => question.code).length;
+    const presets = [10, 20, 30, 50, 100, 200];
 
     app.innerHTML = `
       <div class="glass rounded-2xl shadow-2xl p-6 sm:p-9 pop">
         <h2 class="text-xl sm:text-2xl font-bold text-slate-800 mb-1">Configura tu simulacro</h2>
-        <p class="text-slate-500 text-sm mb-6">Elige cuántas preguntas quieres responder y de qué categorías. Banco total disponible: <strong>${totalAvailable}</strong> preguntas.</p>
+        <p class="text-slate-500 text-sm mb-6">Elige categorías completas o subtemas concretos. Banco disponible: <strong>${totalAvailable}</strong> preguntas, incluidas <strong>${codeAvailable}</strong> de análisis de código.</p>
 
-        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-3 mb-6">
+        <div class="grid md:grid-cols-3 gap-3 mb-4">
           ${Object.keys(CATEGORY_META).map((cat) => {
             const meta = CATEGORY_META[cat];
+            const topicEntries = Array.from(topics[cat].entries()).sort((a, b) => a[0].localeCompare(b[0], "es"));
             return `
-              <label class="flex items-center gap-3 border ${meta.border} ${meta.bg} rounded-xl px-4 py-3 cursor-pointer hover:brightness-95 transition">
-                <input type="checkbox" class="chk w-4 h-4 cat-checkbox" value="${cat}" checked />
-                <span class="flex-1">
-                  <span class="block font-semibold ${meta.text}">${meta.label}</span>
-                  <span class="block text-xs text-slate-500">${totals[cat]} preguntas</span>
-                </span>
-              </label>`;
+              <div class="border ${meta.border} ${meta.bg} rounded-xl overflow-hidden">
+                <label class="flex items-center gap-3 px-4 py-3 cursor-pointer hover:brightness-95 transition">
+                  <input type="checkbox" class="chk w-4 h-4 cat-checkbox" value="${cat}" checked />
+                  <span class="flex-1">
+                    <span class="block font-semibold ${meta.text}">${meta.label}</span>
+                    <span class="block text-xs text-slate-500">${totals[cat]} preguntas · ${topicEntries.length} temas</span>
+                  </span>
+                </label>
+                <details class="border-t ${meta.border} bg-white/50">
+                  <summary class="px-4 py-2 text-xs font-semibold ${meta.text} cursor-pointer select-none">
+                    Seleccionar subtemas
+                    <span class="font-normal text-slate-500">(<span data-selected-count="${cat}">${topicEntries.length}</span>/${topicEntries.length})</span>
+                  </summary>
+                  <div class="px-3 pb-3">
+                    <div class="flex gap-2 py-2 sticky top-0 bg-white/95 z-10">
+                      <button type="button" class="topic-action flex-1 rounded-md border ${meta.border} bg-white px-2 py-1 text-[10px] font-bold ${meta.text}" data-category="${cat}" data-action="all">Todos</button>
+                      <button type="button" class="topic-action flex-1 rounded-md border border-slate-200 bg-white px-2 py-1 text-[10px] font-bold text-slate-500" data-category="${cat}" data-action="none">Ninguno</button>
+                    </div>
+                    <div class="max-h-52 overflow-y-auto space-y-1 pr-1">
+                      ${topicEntries.map(([topic, count]) => `
+                        <label class="flex items-start gap-2 rounded-md bg-white/70 px-2 py-1.5 text-[11px] cursor-pointer hover:bg-white">
+                          <input type="checkbox" class="topic-checkbox chk mt-0.5" data-category="${cat}" data-topic="${encodeURIComponent(topic)}" checked />
+                          <span class="flex-1 text-slate-600">${escapeHtml(topic)}</span>
+                          <span class="font-bold ${meta.text}">${count}</span>
+                        </label>`).join("")}
+                    </div>
+                  </div>
+                </details>
+              </div>`;
           }).join("")}
         </div>
+        <p class="text-xs text-slate-500 mb-6">Marca una categoría completa o abre “Seleccionar subtemas” para practicar contenidos específicos.</p>
 
         <div class="mb-6">
           <label class="block text-sm font-semibold text-slate-700 mb-2">Cantidad de preguntas</label>
@@ -96,7 +147,7 @@
           <div class="flex items-center gap-3">
             <input type="number" id="question-count" min="1" max="${totalAvailable}" value="20"
               class="w-28 border border-slate-300 rounded-lg px-3 py-2 text-slate-800 font-semibold focus:outline-none focus:ring-2 focus:ring-orange-400" />
-            <span class="text-sm text-slate-500">preguntas (máximo <span id="max-count-label">${totalAvailable}</span> según categorías seleccionadas)</span>
+            <span class="text-sm text-slate-500">preguntas (máximo <span id="max-count-label">${totalAvailable}</span> según subtemas seleccionados)</span>
           </div>
         </div>
 
@@ -110,41 +161,82 @@
 
     const countInput = document.getElementById("question-count");
     const maxLabel = document.getElementById("max-count-label");
-    const checkboxes = Array.from(document.querySelectorAll(".cat-checkbox"));
+    const categoryCheckboxes = Array.from(document.querySelectorAll(".cat-checkbox"));
+    const topicCheckboxes = Array.from(document.querySelectorAll(".topic-checkbox"));
 
-    function currentMax() {
-      const selected = checkboxes.filter((c) => c.checked).map((c) => c.value);
-      return countByCategoryFiltered(selected);
+    function selectedTopicKeys() {
+      return topicCheckboxes
+        .filter((checkbox) => checkbox.checked)
+        .map((checkbox) => topicKey(
+          checkbox.dataset.category,
+          decodeURIComponent(checkbox.dataset.topic)
+        ));
     }
-    function countByCategoryFiltered(selectedCats) {
-      return ALL_QUESTIONS.filter((q) => selectedCats.includes(q.category)).length;
+
+    function countByTopicFiltered(keys) {
+      const selected = new Set(keys);
+      return ALL_QUESTIONS.filter((question) =>
+        selected.has(topicKey(question.category, question.topic))
+      ).length;
+    }
+
+    function syncCategory(category) {
+      const categoryCheckbox = categoryCheckboxes.find((checkbox) => checkbox.value === category);
+      const categoryTopics = topicCheckboxes.filter((checkbox) => checkbox.dataset.category === category);
+      const selectedCount = categoryTopics.filter((checkbox) => checkbox.checked).length;
+      categoryCheckbox.checked = selectedCount > 0;
+      categoryCheckbox.indeterminate = selectedCount > 0 && selectedCount < categoryTopics.length;
+      const countLabel = document.querySelector(`[data-selected-count="${category}"]`);
+      if (countLabel) countLabel.textContent = String(selectedCount);
+    }
+
+    function setCategoryTopics(category, checked) {
+      topicCheckboxes
+        .filter((checkbox) => checkbox.dataset.category === category)
+        .forEach((checkbox) => { checkbox.checked = checked; });
+      syncCategory(category);
+      refreshMax();
     }
 
     function refreshMax() {
-      const max = currentMax();
+      const max = countByTopicFiltered(selectedTopicKeys());
       countInput.max = String(Math.max(max, 1));
       maxLabel.textContent = String(max);
       if (parseInt(countInput.value, 10) > max) countInput.value = String(Math.max(max, 1));
+      document.getElementById("setup-error").classList.add("hidden");
     }
 
-    checkboxes.forEach((c) => c.addEventListener("change", refreshMax));
+    categoryCheckboxes.forEach((checkbox) => {
+      checkbox.addEventListener("change", () => setCategoryTopics(checkbox.value, checkbox.checked));
+    });
+    topicCheckboxes.forEach((checkbox) => {
+      checkbox.addEventListener("change", () => {
+        syncCategory(checkbox.dataset.category);
+        refreshMax();
+      });
+    });
+    document.querySelectorAll(".topic-action").forEach((button) => {
+      button.addEventListener("click", () => {
+        setCategoryTopics(button.dataset.category, button.dataset.action === "all");
+      });
+    });
 
     document.querySelectorAll(".preset-btn").forEach((btn) => {
       btn.addEventListener("click", () => {
-        const max = currentMax();
+        const max = countByTopicFiltered(selectedTopicKeys());
         const preset = btn.dataset.preset;
         countInput.value = preset === "all" ? String(max) : String(Math.min(parseInt(preset, 10), max));
       });
     });
 
     document.getElementById("start-btn").addEventListener("click", () => {
-      const selectedCats = checkboxes.filter((c) => c.checked).map((c) => c.value);
+      const selectedTopics = selectedTopicKeys();
       const errorBox = document.getElementById("setup-error");
-      const max = countByCategoryFiltered(selectedCats);
+      const max = countByTopicFiltered(selectedTopics);
       const requested = parseInt(countInput.value, 10);
 
-      if (selectedCats.length === 0) {
-        errorBox.textContent = "Selecciona al menos una categoría.";
+      if (selectedTopics.length === 0) {
+        errorBox.textContent = "Selecciona al menos un subtema.";
         errorBox.classList.remove("hidden");
         return;
       }
@@ -154,22 +246,26 @@
         return;
       }
       if (requested > max) {
-        errorBox.textContent = `Solo hay ${max} preguntas disponibles para las categorías seleccionadas.`;
+        errorBox.textContent = `Solo hay ${max} preguntas disponibles para los subtemas seleccionados.`;
         errorBox.classList.remove("hidden");
         return;
       }
 
-      startSession(selectedCats, requested);
+      startSession(selectedTopics, requested);
     });
 
+    Object.keys(CATEGORY_META).forEach(syncCategory);
     refreshMax();
   }
 
   // ---------------------------------------------------------------------
   // Sesión de examen
   // ---------------------------------------------------------------------
-  function startSession(selectedCats, count) {
-    const pool = ALL_QUESTIONS.filter((q) => selectedCats.includes(q.category));
+  function startSession(selectedTopics, count) {
+    const topicFilter = new Set(selectedTopics);
+    const pool = ALL_QUESTIONS.filter((question) =>
+      topicFilter.has(topicKey(question.category, question.topic))
+    );
     const chosen = shuffle(pool).slice(0, count).map((q) => {
       // Baraja las opciones y recalcula el índice correcto, para que no siempre esté en el mismo lugar
       const optionOrder = shuffle(q.options.map((_, idx) => idx));
@@ -184,6 +280,7 @@
       answers: [], // { selectedIndex, correct }
       selectedOption: null,
       answered: false,
+      selectedTopics: selectedTopics.slice(),
     };
 
     renderQuestionScreen();
@@ -192,7 +289,7 @@
   function renderQuestionScreen() {
     const { questions, currentIndex } = session;
     const q = questions[currentIndex];
-    const meta = CATEGORY_META[q.category] || CATEGORY_META.certificacion;
+    const meta = CATEGORY_META[q.category] || CATEGORY_META.programacion;
     const total = questions.length;
     const progressPct = Math.round((currentIndex / total) * 100);
     const letters = ["A", "B", "C", "D", "E", "F"];
@@ -201,7 +298,10 @@
       <div class="glass rounded-2xl shadow-2xl p-6 sm:p-8 fade-in">
         <div class="flex items-center justify-between mb-4 gap-3 flex-wrap">
           <span class="badge-${q.category} text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wide">${meta.label}</span>
-          <span class="text-xs text-slate-500 font-medium">${escapeHtml(q.topic || "")}</span>
+          <span class="text-xs text-slate-500 font-medium flex items-center gap-2">
+            ${escapeHtml(q.topic || "")}
+            ${q.code ? `<span class="rounded-full bg-slate-800 text-white px-2 py-0.5 text-[9px] font-bold uppercase">Código</span>` : ""}
+          </span>
           <span class="text-sm font-semibold text-slate-600">Pregunta ${currentIndex + 1} / ${total}</span>
         </div>
 
@@ -210,7 +310,8 @@
         </div>
 
         <div class="mb-6">
-          <h3 class="text-lg sm:text-xl font-bold text-slate-800">${renderTextBlock(q.question)}</h3>
+          ${renderQuestionCode(q)}
+          <div class="text-lg sm:text-xl font-bold text-slate-800">${renderTextBlock(q.question)}</div>
         </div>
 
         <div id="options-container" class="space-y-3 mb-6"></div>
@@ -306,6 +407,7 @@
           ${correct ? "¡Correcto!" : "Incorrecto"}
         </p>
         <p class="text-sm text-slate-700 leading-relaxed">${escapeHtml(q.explanation)}</p>
+        ${q.source ? `<p class="text-[11px] text-slate-500 mt-3 pt-2 border-t border-slate-200"><strong>Fuente de estudio:</strong> ${escapeHtml(q.source)}</p>` : ""}
       </div>
     `;
 
@@ -385,12 +487,13 @@
             ${missed.map(({ q, a }) => `
               <div class="border border-red-200 bg-red-50/60 rounded-xl p-4">
                 <div class="flex items-center gap-2 mb-2">
-                  <span class="badge-${q.category} text-white text-[10px] font-bold px-2 py-0.5 rounded-full uppercase">${CATEGORY_META[q.category].label}</span>
+                  <span class="badge-${q.category} text-white text-[10px] font-bold px-2 py-0.5 rounded-full uppercase">${(CATEGORY_META[q.category] || CATEGORY_META.programacion).label}</span>
                   <span class="text-[11px] text-slate-500">${escapeHtml(q.topic || "")}</span>
                 </div>
+                ${renderQuestionCode(q, true)}
                 <div class="text-sm font-semibold text-slate-800 mb-2">${renderTextBlock(q.question)}</div>
-                <p class="text-xs text-slate-600 mb-1"><strong>Tu respuesta:</strong> ${a.selectedIndex !== null && a.selectedIndex !== undefined ? escapeHtml(String(q.options[a.selectedIndex])) : "(sin respuesta)"}</p>
-                <p class="text-xs text-emerald-700 mb-2"><strong>Correcta:</strong> ${escapeHtml(String(q.options[q.correctIndex]))}</p>
+                <div class="text-xs text-slate-600 mb-2"><strong>Tu respuesta:</strong><div class="mt-1">${a.selectedIndex !== null && a.selectedIndex !== undefined ? renderInlineOrCode(String(q.options[a.selectedIndex])) : "(sin respuesta)"}</div></div>
+                <div class="text-xs text-emerald-700 mb-2"><strong>Correcta:</strong><div class="mt-1">${renderInlineOrCode(String(q.options[q.correctIndex]))}</div></div>
                 <p class="text-xs text-slate-600 bg-white/70 rounded-lg p-2">${escapeHtml(q.explanation)}</p>
               </div>
             `).join("")}
@@ -411,10 +514,10 @@
       </div>
     `;
 
-    const lastCats = [...new Set(questions.map((q) => q.category))];
+    const lastTopics = session.selectedTopics.slice();
     const lastCount = questions.length;
 
-    document.getElementById("retry-same-btn").addEventListener("click", () => startSession(lastCats, lastCount));
+    document.getElementById("retry-same-btn").addEventListener("click", () => startSession(lastTopics, lastCount));
     document.getElementById("new-quiz-btn").addEventListener("click", renderSetupScreen);
   }
 

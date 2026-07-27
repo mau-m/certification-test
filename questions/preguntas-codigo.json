@@ -1,0 +1,1702 @@
+[
+  {
+    "id": "code-java-001-a",
+    "category": "java",
+    "topic": "Código Java: tipos y operadores",
+    "language": "java",
+    "code": "int a = 7;\nint b = 2;\ndouble resultado = a / b;\nSystem.out.println(resultado);",
+    "question": "¿Qué imprime el código?",
+    "options": [
+      "3.0",
+      "3.5",
+      "3",
+      "No compila"
+    ],
+    "correctIndex": 0,
+    "explanation": "La división ocurre entre dos int y produce 3; después ese valor se convierte a double, por eso se imprime 3.0.",
+    "source": "README.md, java-guide.md"
+  },
+  {
+    "id": "code-java-001-b",
+    "category": "java",
+    "topic": "Código Java: tipos y operadores",
+    "language": "java",
+    "code": "int a = 7;\nint b = 2;\ndouble resultado = a / b;\nSystem.out.println(resultado);",
+    "question": "¿Qué cambio obtiene el resultado decimal 3.5?",
+    "options": [
+      "double resultado = (double) a / b;",
+      "double resultado = (double) (a / b);",
+      "int resultado = a / b;",
+      "double resultado = a % b;"
+    ],
+    "correctIndex": 0,
+    "explanation": "Convertir uno de los operandos antes de dividir promueve la operación a división de punto flotante.",
+    "source": "README.md, java-guide.md"
+  },
+  {
+    "id": "code-java-002-a",
+    "category": "java",
+    "topic": "Código Java: String e igualdad",
+    "language": "java",
+    "code": "String a = new String(\"java\");\nString b = new String(\"java\");\nSystem.out.println(a == b);\nSystem.out.println(a.equals(b));",
+    "question": "¿Qué salida produce?",
+    "options": [
+      "false y true",
+      "true y true",
+      "false y false",
+      "true y false"
+    ],
+    "correctIndex": 0,
+    "explanation": "== compara identidad de referencias; equals compara el contenido definido por String.",
+    "source": "README.md, java-guide.md"
+  },
+  {
+    "id": "code-java-002-b",
+    "category": "java",
+    "topic": "Código Java: String e igualdad",
+    "language": "java",
+    "code": "String a = new String(\"java\");\nString b = new String(\"java\");\nSystem.out.println(a == b);\nSystem.out.println(a.equals(b));",
+    "question": "¿Qué expresión compara correctamente el contenido tolerando que a pueda ser null?",
+    "options": [
+      "Objects.equals(a, b)",
+      "a == b",
+      "a.equals(b)",
+      "a.compareTo(b) == null"
+    ],
+    "correctIndex": 0,
+    "explanation": "Objects.equals maneja null y delega en equals cuando ambos valores son no nulos.",
+    "source": "README.md, java-guide.md"
+  },
+  {
+    "id": "code-java-003-a",
+    "category": "java",
+    "topic": "Código Java: sobrecarga y polimorfismo",
+    "language": "java",
+    "code": "class Animal {\n    String sonido() { return \"animal\"; }\n}\nclass Perro extends Animal {\n    @Override String sonido() { return \"guau\"; }\n}\nstatic String elegir(Animal a) { return \"Animal:\" + a.sonido(); }\nstatic String elegir(Perro p)  { return \"Perro:\" + p.sonido(); }\n\nAnimal mascota = new Perro();\nSystem.out.println(elegir(mascota));",
+    "question": "¿Qué imprime el código?",
+    "options": [
+      "Animal:guau",
+      "Perro:guau",
+      "Animal:animal",
+      "No compila"
+    ],
+    "correctIndex": 0,
+    "explanation": "La sobrecarga elegir se resuelve con el tipo declarado Animal; sonido se sobrescribe y se despacha al Perro real.",
+    "source": "README.md"
+  },
+  {
+    "id": "code-java-003-b",
+    "category": "java",
+    "topic": "Código Java: sobrecarga y polimorfismo",
+    "language": "java",
+    "code": "class Animal {\n    String sonido() { return \"animal\"; }\n}\nclass Perro extends Animal {\n    @Override String sonido() { return \"guau\"; }\n}\nstatic String elegir(Animal a) { return \"Animal:\" + a.sonido(); }\nstatic String elegir(Perro p)  { return \"Perro:\" + p.sonido(); }\n\nAnimal mascota = new Perro();\nSystem.out.println(elegir(mascota));",
+    "question": "¿Qué ocurriría al invocar elegir((Perro) mascota)?",
+    "options": [
+      "Imprimiría Perro:guau",
+      "Imprimiría Animal:animal",
+      "El cast siempre lanzaría ClassCastException",
+      "La llamada sería ambigua"
+    ],
+    "correctIndex": 0,
+    "explanation": "El objeto real es Perro, el cast es válido y hace aplicable la sobrecarga más específica.",
+    "source": "README.md"
+  },
+  {
+    "id": "code-java-004-a",
+    "category": "java",
+    "topic": "Código Java: inicialización",
+    "language": "java",
+    "code": "class Base {\n    Base() { imprimir(); }\n    void imprimir() { System.out.println(\"Base\"); }\n}\nclass Hija extends Base {\n    private String valor = \"lista\";\n    @Override void imprimir() { System.out.println(valor); }\n}\nnew Hija();",
+    "question": "¿Qué imprime durante la construcción?",
+    "options": [
+      "null",
+      "lista",
+      "Base",
+      "No compila"
+    ],
+    "correctIndex": 0,
+    "explanation": "El constructor Base llama un método sobrescribible antes de inicializar los campos de Hija; valor conserva temporalmente null.",
+    "source": "README.md"
+  },
+  {
+    "id": "code-java-004-b",
+    "category": "java",
+    "topic": "Código Java: inicialización",
+    "language": "java",
+    "code": "class Base {\n    Base() { imprimir(); }\n    void imprimir() { System.out.println(\"Base\"); }\n}\nclass Hija extends Base {\n    private String valor = \"lista\";\n    @Override void imprimir() { System.out.println(valor); }\n}\nnew Hija();",
+    "question": "¿Cuál es la mejora de diseño más segura?",
+    "options": [
+      "No invocar métodos sobrescribibles desde constructores",
+      "Hacer valor public",
+      "Añadir un segundo constructor vacío a Hija",
+      "Convertir imprimir en static dentro de Hija"
+    ],
+    "correctIndex": 0,
+    "explanation": "Un constructor no debe exponer this parcialmente inicializado mediante despacho dinámico.",
+    "source": "README.md"
+  },
+  {
+    "id": "code-java-005-a",
+    "category": "java",
+    "topic": "Código Java: excepciones",
+    "language": "java",
+    "code": "static int calcular() {\n    try {\n        return 10;\n    } finally {\n        return 20;\n    }\n}\nSystem.out.println(calcular());",
+    "question": "¿Qué imprime?",
+    "options": [
+      "20",
+      "10",
+      "No compila",
+      "Lanza una excepción"
+    ],
+    "correctIndex": 0,
+    "explanation": "El return de finally reemplaza el retorno pendiente del try, una práctica peligrosa que también puede ocultar excepciones.",
+    "source": "README.md, java-guide.md"
+  },
+  {
+    "id": "code-java-005-b",
+    "category": "java",
+    "topic": "Código Java: excepciones",
+    "language": "java",
+    "code": "static int calcular() {\n    try {\n        return 10;\n    } finally {\n        return 20;\n    }\n}\nSystem.out.println(calcular());",
+    "question": "¿Cuál corrección preserva el retorno del try y no oculta fallos?",
+    "options": [
+      "Eliminar el return del bloque finally",
+      "Mover return 20 a un catch genérico",
+      "Añadir otro finally con return 10",
+      "Capturar Throwable y retornar 0"
+    ],
+    "correctIndex": 0,
+    "explanation": "finally debe reservarse para limpieza; no debería cambiar el resultado ni suprimir excepciones.",
+    "source": "README.md, java-guide.md"
+  },
+  {
+    "id": "code-java-006-a",
+    "category": "java",
+    "topic": "Código Java: colecciones",
+    "language": "java",
+    "code": "record ClaveMutable(StringBuilder valor) {}\n\nvar clave = new ClaveMutable(new StringBuilder(\"A\"));\nvar mapa = new HashMap<ClaveMutable, String>();\nmapa.put(clave, \"dato\");\nclave.valor().append(\"B\");\nSystem.out.println(mapa.get(clave));",
+    "question": "¿Qué problema de diseño muestra el código?",
+    "options": [
+      "La clave cambia su hash lógico después de insertarse y la búsqueda puede fallar",
+      "HashMap no admite records",
+      "StringBuilder no puede almacenarse en un record",
+      "put copia defensivamente todas las claves"
+    ],
+    "correctIndex": 0,
+    "explanation": "Una clave de hash debe ser estable mientras permanezca en el mapa; el record es superficialmente inmutable.",
+    "source": "java-guide.md, exercises.md"
+  },
+  {
+    "id": "code-java-006-b",
+    "category": "java",
+    "topic": "Código Java: colecciones",
+    "language": "java",
+    "code": "record ClaveMutable(StringBuilder valor) {}\n\nvar clave = new ClaveMutable(new StringBuilder(\"A\"));\nvar mapa = new HashMap<ClaveMutable, String>();\nmapa.put(clave, \"dato\");\nclave.valor().append(\"B\");\nSystem.out.println(mapa.get(clave));",
+    "question": "¿Qué diseño corrige mejor el problema?",
+    "options": [
+      "Usar un String inmutable como componente de la clave",
+      "Llamar mapa.clear() después de cada append",
+      "Cambiar HashMap por ArrayList sin revisar el acceso",
+      "Sobrescribir hashCode para devolver un valor aleatorio"
+    ],
+    "correctIndex": 0,
+    "explanation": "Una representación inmutable mantiene estable equals/hashCode durante la vida de la entrada.",
+    "source": "java-guide.md, exercises.md"
+  },
+  {
+    "id": "code-java-007-a",
+    "category": "java",
+    "topic": "Código Java: Streams",
+    "language": "java",
+    "code": "var datos = List.of(1, 2, 3, 4);\nvar stream = datos.stream()\n    .filter(n -> {\n        System.out.print(\"F\" + n + \" \");\n        return n % 2 == 0;\n    });\nSystem.out.print(\"antes \");\nSystem.out.println(stream.count());",
+    "question": "¿Cuándo se ejecuta el filter?",
+    "options": [
+      "Al invocar count, después de imprimir antes",
+      "Al construir el stream, antes de imprimir antes",
+      "Nunca, porque count no es terminal",
+      "Solo para el primer elemento"
+    ],
+    "correctIndex": 0,
+    "explanation": "Las operaciones intermedias son perezosas y comienzan cuando la terminal count consume el pipeline.",
+    "source": "README.md, java-guide.md"
+  },
+  {
+    "id": "code-java-007-b",
+    "category": "java",
+    "topic": "Código Java: Streams",
+    "language": "java",
+    "code": "var datos = List.of(1, 2, 3, 4);\nvar stream = datos.stream()\n    .filter(n -> {\n        System.out.print(\"F\" + n + \" \");\n        return n % 2 == 0;\n    });\nSystem.out.print(\"antes \");\nSystem.out.println(stream.count());",
+    "question": "¿Cuántos elementos cuenta el stream?",
+    "options": [
+      "2",
+      "4",
+      "1",
+      "0"
+    ],
+    "correctIndex": 0,
+    "explanation": "Solo 2 y 4 satisfacen n % 2 == 0.",
+    "source": "README.md, java-guide.md"
+  },
+  {
+    "id": "code-java-008-a",
+    "category": "java",
+    "topic": "Código Java: Streams",
+    "language": "java",
+    "code": "var pedidos = List.of(\n    List.of(\"A\", \"B\"),\n    List.of(\"C\"),\n    List.<String>of()\n);\nvar lineas = pedidos.stream()\n    .flatMap(List::stream)\n    .toList();",
+    "question": "¿Qué contiene lineas?",
+    "options": [
+      "[A, B, C]",
+      "[[A, B], [C], []]",
+      "[A, B]",
+      "Un Stream<List<String>> sin consumir"
+    ],
+    "correctIndex": 0,
+    "explanation": "flatMap transforma cada lista en stream y aplana todos sus elementos en un único flujo.",
+    "source": "README.md, java-guide.md"
+  },
+  {
+    "id": "code-java-008-b",
+    "category": "java",
+    "topic": "Código Java: Streams",
+    "language": "java",
+    "code": "var pedidos = List.of(\n    List.of(\"A\", \"B\"),\n    List.of(\"C\"),\n    List.<String>of()\n);\nvar lineas = pedidos.stream()\n    .flatMap(List::stream)\n    .toList();",
+    "question": "¿Qué ocurriría si se usara map(List::stream) en lugar de flatMap?",
+    "options": [
+      "El tipo sería Stream<Stream<String>> antes de recolectar",
+      "El resultado sería idéntico sin diferencia de tipo",
+      "Solo se conservaría C",
+      "No se podrían crear streams desde listas"
+    ],
+    "correctIndex": 0,
+    "explanation": "map conserva un nivel de anidación; flatMap lo elimina.",
+    "source": "README.md, java-guide.md"
+  },
+  {
+    "id": "code-java-009-a",
+    "category": "java",
+    "topic": "Código Java: Optional",
+    "language": "java",
+    "code": "static String cargar() {\n    System.out.print(\"cargar \");\n    return \"respaldo\";\n}\nOptional<String> valor = Optional.of(\"principal\");\nSystem.out.println(valor.orElse(cargar()));",
+    "question": "¿Qué sucede con cargar()?",
+    "options": [
+      "Se ejecuta aunque el Optional tenga valor",
+      "No se ejecuta porque el Optional tiene valor",
+      "Solo se ejecuta si principal es internado",
+      "El código no compila"
+    ],
+    "correctIndex": 0,
+    "explanation": "El argumento de orElse se evalúa de forma eager antes de llamar al método.",
+    "source": "java-guide.md"
+  },
+  {
+    "id": "code-java-009-b",
+    "category": "java",
+    "topic": "Código Java: Optional",
+    "language": "java",
+    "code": "static String cargar() {\n    System.out.print(\"cargar \");\n    return \"respaldo\";\n}\nOptional<String> valor = Optional.of(\"principal\");\nSystem.out.println(valor.orElse(cargar()));",
+    "question": "¿Qué variante evita calcular el respaldo cuando ya existe un valor?",
+    "options": [
+      "valor.orElseGet(() -> cargar())",
+      "valor.orElse(cargar())",
+      "valor.get(cargar())",
+      "valor.map(cargar())"
+    ],
+    "correctIndex": 0,
+    "explanation": "orElseGet recibe un Supplier y lo invoca únicamente cuando el Optional está vacío.",
+    "source": "java-guide.md"
+  },
+  {
+    "id": "code-java-010-a",
+    "category": "java",
+    "topic": "Código Java: concurrencia",
+    "language": "java",
+    "code": "class Contador {\n    volatile int valor = 0;\n    void incrementar() {\n        valor++;\n    }\n}",
+    "question": "Con varios hilos, ¿volatile garantiza que no se pierdan incrementos?",
+    "options": [
+      "No; valor++ es una secuencia read-modify-write no atómica",
+      "Sí; volatile vuelve atómica cualquier expresión",
+      "Sí, pero solo con números positivos",
+      "No compila porque volatile no admite int"
+    ],
+    "correctIndex": 0,
+    "explanation": "volatile aporta visibilidad y orden, pero no atomicidad a una operación compuesta.",
+    "source": "README.md, java-guide.md"
+  },
+  {
+    "id": "code-java-010-b",
+    "category": "java",
+    "topic": "Código Java: concurrencia",
+    "language": "java",
+    "code": "class Contador {\n    volatile int valor = 0;\n    void incrementar() {\n        valor++;\n    }\n}",
+    "question": "¿Qué implementación es adecuada para un contador simple concurrente?",
+    "options": [
+      "AtomicInteger valor = new AtomicInteger();\nvalor.incrementAndGet();",
+      "Integer valor = 0;\nvalor++;",
+      "volatile Integer valor = 0;\nvalor++;",
+      "int valor = 0;\nThread.yield();\nvalor++;"
+    ],
+    "correctIndex": 0,
+    "explanation": "AtomicInteger ofrece una operación de incremento atómica.",
+    "source": "README.md, java-guide.md"
+  },
+  {
+    "id": "code-java-011-a",
+    "category": "java",
+    "topic": "Código Java: concurrencia",
+    "language": "java",
+    "code": "class Cuenta {\n    private int saldo = 100;\n    boolean retirar(int cantidad) {\n        if (saldo >= cantidad) {\n            saldo -= cantidad;\n            return true;\n        }\n        return false;\n    }\n}",
+    "question": "¿Qué fallo puede ocurrir si dos hilos retiran 80 simultáneamente?",
+    "options": [
+      "Ambos pueden observar saldo suficiente y dejar una actualización incorrecta",
+      "Java serializa automáticamente todos los métodos",
+      "El segundo hilo siempre ve saldo 20",
+      "int impide condiciones de carrera"
+    ],
+    "correctIndex": 0,
+    "explanation": "La comprobación y actualización forman un check-then-act que debe ser atómico.",
+    "source": "README.md, java-guide.md"
+  },
+  {
+    "id": "code-java-011-b",
+    "category": "java",
+    "topic": "Código Java: concurrencia",
+    "language": "java",
+    "code": "class Cuenta {\n    private int saldo = 100;\n    boolean retirar(int cantidad) {\n        if (saldo >= cantidad) {\n            saldo -= cantidad;\n            return true;\n        }\n        return false;\n    }\n}",
+    "question": "¿Qué cambio local protege la invariante en una sola JVM?",
+    "options": [
+      "Declarar synchronized el método retirar",
+      "Declarar cantidad como final",
+      "Añadir Thread.sleep antes del if",
+      "Cambiar saldo a String"
+    ],
+    "correctIndex": 0,
+    "explanation": "synchronized serializa la sección crítica y establece garantías de visibilidad.",
+    "source": "README.md, java-guide.md"
+  },
+  {
+    "id": "code-java-012-a",
+    "category": "java",
+    "topic": "Código Java: recursos",
+    "language": "java",
+    "code": "class Recurso implements AutoCloseable {\n    public void close() {\n        throw new IllegalStateException(\"cierre\");\n    }\n}\ntry (var r = new Recurso()) {\n    throw new RuntimeException(\"trabajo\");\n}",
+    "question": "¿Cuál es la excepción principal propagada?",
+    "options": [
+      "RuntimeException(\"trabajo\")",
+      "IllegalStateException(\"cierre\")",
+      "Ambas se pierden",
+      "No compila"
+    ],
+    "correctIndex": 0,
+    "explanation": "La excepción del cuerpo permanece como principal y la de close se agrega como suppressed.",
+    "source": "README.md, java-guide.md"
+  },
+  {
+    "id": "code-java-012-b",
+    "category": "java",
+    "topic": "Código Java: recursos",
+    "language": "java",
+    "code": "class Recurso implements AutoCloseable {\n    public void close() {\n        throw new IllegalStateException(\"cierre\");\n    }\n}\ntry (var r = new Recurso()) {\n    throw new RuntimeException(\"trabajo\");\n}",
+    "question": "¿Cómo se consulta la excepción producida por close?",
+    "options": [
+      "ex.getSuppressed()",
+      "ex.getCause() siempre",
+      "Thread.getAllStackTraces()",
+      "System.getProperties()"
+    ],
+    "correctIndex": 0,
+    "explanation": "Try-with-resources conserva fallos de cierre mediante Throwable.getSuppressed().",
+    "source": "README.md, java-guide.md"
+  },
+  {
+    "id": "code-java-013-a",
+    "category": "java",
+    "topic": "Código Java: sealed y pattern matching",
+    "language": "java",
+    "code": "sealed interface Resultado permits Exito, Error {}\nrecord Exito(int valor) implements Resultado {}\nrecord Error(String mensaje) implements Resultado {}\n\nstatic String describir(Resultado r) {\n    return switch (r) {\n        case Exito(int v) -> \"OK \" + v;\n        case Error(String m) -> \"ERROR \" + m;\n    };\n}",
+    "question": "¿Por qué el switch no necesita default?",
+    "options": [
+      "La jerarquía sealed permite comprobar que todos los subtipos están cubiertos",
+      "Todo switch expression ignora casos no cubiertos",
+      "Los records se convierten automáticamente en enum",
+      "default está prohibido con interfaces"
+    ],
+    "correctIndex": 0,
+    "explanation": "El compilador conoce el conjunto cerrado de implementaciones permitidas.",
+    "source": "README.md, java-guide.md"
+  },
+  {
+    "id": "code-java-013-b",
+    "category": "java",
+    "topic": "Código Java: sealed y pattern matching",
+    "language": "java",
+    "code": "sealed interface Resultado permits Exito, Error {}\nrecord Exito(int valor) implements Resultado {}\nrecord Error(String mensaje) implements Resultado {}\n\nstatic String describir(Resultado r) {\n    return switch (r) {\n        case Exito(int v) -> \"OK \" + v;\n        case Error(String m) -> \"ERROR \" + m;\n    };\n}",
+    "question": "¿Qué ocurre si se añade un subtipo permitido Pendiente sin agregar su case?",
+    "options": [
+      "El método deja de compilar por falta de exhaustividad",
+      "Retorna null automáticamente",
+      "Siempre ejecuta el case Error",
+      "El nuevo subtipo no puede declararse"
+    ],
+    "correctIndex": 0,
+    "explanation": "Un switch expression exhaustivo debe cubrir también el nuevo subtipo.",
+    "source": "README.md, java-guide.md"
+  },
+  {
+    "id": "code-java-014-a",
+    "category": "java",
+    "topic": "Código Java: JDBC y seguridad",
+    "language": "java",
+    "code": "String sql = \"SELECT id, nombre FROM usuarios WHERE email = ?\";\ntry (PreparedStatement ps = conn.prepareStatement(sql)) {\n    ps.setString(1, emailIngresado);\n    try (ResultSet rs = ps.executeQuery()) {\n        // procesar resultados\n    }\n}",
+    "question": "¿Qué propiedad de seguridad aporta el marcador de parámetro?",
+    "options": [
+      "Separa el valor del usuario de la estructura SQL",
+      "Cifra automáticamente el correo en la base",
+      "Autoriza al usuario sobre cada fila",
+      "Evita cualquier error de red"
+    ],
+    "correctIndex": 0,
+    "explanation": "PreparedStatement envía el dato como parámetro y evita que altere la gramática de la consulta.",
+    "source": "java-guide.md"
+  },
+  {
+    "id": "code-java-014-b",
+    "category": "java",
+    "topic": "Código Java: JDBC y seguridad",
+    "language": "java",
+    "code": "String sql = \"SELECT id, nombre FROM usuarios WHERE email = ?\";\ntry (PreparedStatement ps = conn.prepareStatement(sql)) {\n    ps.setString(1, emailIngresado);\n    try (ResultSet rs = ps.executeQuery()) {\n        // procesar resultados\n    }\n}",
+    "question": "¿Cómo debe agregarse un ORDER BY dinámico elegido por el usuario?",
+    "options": [
+      "Mapeando valores permitidos a nombres de columna conocidos",
+      "Usando otro ? para el nombre de columna",
+      "Concatenando cualquier texto recibido",
+      "Codificando el texto en Base64"
+    ],
+    "correctIndex": 0,
+    "explanation": "Los parámetros representan valores, no identificadores; las partes estructurales requieren allowlist.",
+    "source": "java-guide.md"
+  },
+  {
+    "id": "code-java-015-a",
+    "category": "java",
+    "topic": "Código Java: JPA e Hibernate",
+    "language": "java",
+    "code": "var pedidos = entityManager\n    .createQuery(\"select p from Pedido p\", Pedido.class)\n    .getResultList();\n\nfor (Pedido pedido : pedidos) {\n    System.out.println(pedido.getLineas().size());\n}",
+    "question": "Con lineas LAZY, ¿qué problema puede aparecer?",
+    "options": [
+      "Una consulta inicial más una consulta adicional por cada pedido",
+      "El compilador duplica todas las entidades",
+      "LAZY siempre carga todo con un único JOIN",
+      "size elimina las filas de la colección"
+    ],
+    "correctIndex": 0,
+    "explanation": "Acceder a cada asociación perezosa dentro del bucle puede producir el problema N+1.",
+    "source": "java-guide.md"
+  },
+  {
+    "id": "code-java-015-b",
+    "category": "java",
+    "topic": "Código Java: JPA e Hibernate",
+    "language": "java",
+    "code": "var pedidos = entityManager\n    .createQuery(\"select p from Pedido p\", Pedido.class)\n    .getResultList();\n\nfor (Pedido pedido : pedidos) {\n    System.out.println(pedido.getLineas().size());\n}",
+    "question": "¿Qué consulta suele resolver este caso cuando se necesitan las líneas?",
+    "options": [
+      "select distinct p from Pedido p join fetch p.lineas",
+      "delete from Pedido p",
+      "select count(p) from Pedido p",
+      "select p from Pedido p where p.lineas = null"
+    ],
+    "correctIndex": 0,
+    "explanation": "Un fetch join trae la asociación requerida en la consulta planificada, cuidando duplicados y paginación.",
+    "source": "java-guide.md"
+  },
+  {
+    "id": "code-sql-001-a",
+    "category": "sql",
+    "topic": "Código SQL: NULL",
+    "language": "sql",
+    "code": "SELECT nombre\nFROM empleados\nWHERE comision = NULL;",
+    "question": "¿Qué filas devuelve la consulta?",
+    "options": [
+      "Ninguna, porque la comparación produce UNKNOWN",
+      "Todas las filas con comisión ausente",
+      "Todas las filas con comisión cero",
+      "La consulta siempre produce error de sintaxis"
+    ],
+    "correctIndex": 0,
+    "explanation": "NULL no se compara con =; en SQL la expresión produce UNKNOWN y WHERE solo conserva TRUE.",
+    "source": "sql-guide.md, sql-oracle-guide.md"
+  },
+  {
+    "id": "code-sql-001-b",
+    "category": "sql",
+    "topic": "Código SQL: NULL",
+    "language": "sql",
+    "code": "SELECT nombre\nFROM empleados\nWHERE comision = NULL;",
+    "question": "¿Cuál es la condición correcta?",
+    "options": [
+      "WHERE comision IS NULL",
+      "WHERE comision == NULL",
+      "WHERE comision EQUALS NULL",
+      "WHERE NULL(comision)"
+    ],
+    "correctIndex": 0,
+    "explanation": "IS NULL comprueba explícitamente la ausencia de valor.",
+    "source": "sql-guide.md, sql-oracle-guide.md"
+  },
+  {
+    "id": "code-sql-002-a",
+    "category": "sql",
+    "topic": "Código SQL: JOIN",
+    "language": "sql",
+    "code": "SELECT c.id, p.id\nFROM clientes c\nLEFT JOIN pedidos p ON p.cliente_id = c.id\nWHERE p.estado = 'ABIERTO';",
+    "question": "¿Qué ocurre con los clientes sin pedidos?",
+    "options": [
+      "Se eliminan por el filtro de WHERE",
+      "Se conservan con p.id igual a NULL",
+      "Se duplican exactamente dos veces",
+      "LEFT JOIN ignora la cláusula WHERE"
+    ],
+    "correctIndex": 0,
+    "explanation": "Para filas sin coincidencia p.estado es NULL y la condición del WHERE no es TRUE.",
+    "source": "sql-guide.md, sql-oracle-guide.md"
+  },
+  {
+    "id": "code-sql-002-b",
+    "category": "sql",
+    "topic": "Código SQL: JOIN",
+    "language": "sql",
+    "code": "SELECT c.id, p.id\nFROM clientes c\nLEFT JOIN pedidos p ON p.cliente_id = c.id\nWHERE p.estado = 'ABIERTO';",
+    "question": "¿Cómo conservar todos los clientes y unir solo pedidos abiertos?",
+    "options": [
+      "LEFT JOIN pedidos p ON p.cliente_id = c.id AND p.estado = 'ABIERTO'",
+      "LEFT JOIN pedidos p ON p.cliente_id = c.id WHERE p.estado <> 'ABIERTO'",
+      "INNER JOIN pedidos p ON 1 = 1",
+      "CROSS JOIN pedidos p"
+    ],
+    "correctIndex": 0,
+    "explanation": "Mover el criterio de la tabla derecha a ON conserva la semántica externa del LEFT JOIN.",
+    "source": "sql-guide.md, sql-oracle-guide.md"
+  },
+  {
+    "id": "code-sql-003-a",
+    "category": "sql",
+    "topic": "Código SQL: agregación",
+    "language": "sql",
+    "code": "SELECT departamento, AVG(salario) AS promedio\nFROM empleados\nWHERE activo = 1\nGROUP BY departamento\nHAVING AVG(salario) > 50000;",
+    "question": "¿En qué momento lógico se aplica HAVING?",
+    "options": [
+      "Después de formar los grupos",
+      "Antes de FROM",
+      "Antes de WHERE",
+      "Después de ORDER BY"
+    ],
+    "correctIndex": 0,
+    "explanation": "HAVING filtra los grupos ya agregados; WHERE filtra filas antes de agrupar.",
+    "source": "sql-guide.md, sql-oracle-guide.md"
+  },
+  {
+    "id": "code-sql-003-b",
+    "category": "sql",
+    "topic": "Código SQL: agregación",
+    "language": "sql",
+    "code": "SELECT departamento, AVG(salario) AS promedio\nFROM empleados\nWHERE activo = 1\nGROUP BY departamento\nHAVING AVG(salario) > 50000;",
+    "question": "¿Qué representa cada fila del resultado?",
+    "options": [
+      "Un departamento activo cuyo promedio supera 50000",
+      "Un empleado activo con salario superior a 50000",
+      "Todos los departamentos aunque no tengan empleados",
+      "Una actualización del salario promedio"
+    ],
+    "correctIndex": 0,
+    "explanation": "GROUP BY colapsa las filas activas por departamento y HAVING conserva los grupos que cumplen el umbral.",
+    "source": "sql-guide.md, sql-oracle-guide.md"
+  },
+  {
+    "id": "code-sql-004-a",
+    "category": "sql",
+    "topic": "Código SQL: agregación",
+    "language": "sql",
+    "code": "SELECT\n    COUNT(*) AS filas,\n    COUNT(comision) AS comisiones_informadas\nFROM empleados;",
+    "question": "Si hay 10 filas y 3 comisiones NULL, ¿qué devuelve?",
+    "options": [
+      "filas = 10, comisiones_informadas = 7",
+      "filas = 7, comisiones_informadas = 7",
+      "filas = 10, comisiones_informadas = 10",
+      "Ambos valores son NULL"
+    ],
+    "correctIndex": 0,
+    "explanation": "COUNT(*) cuenta filas; COUNT(expresión) ignora resultados NULL.",
+    "source": "sql-guide.md, sql-oracle-guide.md"
+  },
+  {
+    "id": "code-sql-004-b",
+    "category": "sql",
+    "topic": "Código SQL: agregación",
+    "language": "sql",
+    "code": "SELECT\n    COUNT(*) AS filas,\n    COUNT(comision) AS comisiones_informadas\nFROM empleados;",
+    "question": "¿Qué expresión cuenta únicamente comisiones ausentes?",
+    "options": [
+      "SUM(CASE WHEN comision IS NULL THEN 1 ELSE 0 END)",
+      "COUNT(comision)",
+      "COUNT(*) + COUNT(comision)",
+      "AVG(comision IS NULL)"
+    ],
+    "correctIndex": 0,
+    "explanation": "La agregación condicional convierte cada ausencia en 1 y el resto en 0.",
+    "source": "sql-guide.md, sql-oracle-guide.md"
+  },
+  {
+    "id": "code-sql-005-a",
+    "category": "sql",
+    "topic": "Código SQL: funciones de ventana",
+    "language": "sql",
+    "code": "WITH ordenados AS (\n    SELECT p.*,\n           ROW_NUMBER() OVER (\n               PARTITION BY cliente_id\n               ORDER BY fecha DESC, id DESC\n           ) AS rn\n    FROM pedidos p\n)\nSELECT *\nFROM ordenados\nWHERE rn = 1;",
+    "question": "¿Qué obtiene la consulta?",
+    "options": [
+      "El pedido más reciente de cada cliente",
+      "El cliente con más pedidos",
+      "Todos los pedidos numerados globalmente",
+      "Solo el pedido más antiguo de toda la tabla"
+    ],
+    "correctIndex": 0,
+    "explanation": "ROW_NUMBER reinicia por cliente y el orden descendente coloca primero el pedido más reciente.",
+    "source": "sql-guide.md, sql-oracle-guide.md"
+  },
+  {
+    "id": "code-sql-005-b",
+    "category": "sql",
+    "topic": "Código SQL: funciones de ventana",
+    "language": "sql",
+    "code": "WITH ordenados AS (\n    SELECT p.*,\n           ROW_NUMBER() OVER (\n               PARTITION BY cliente_id\n               ORDER BY fecha DESC, id DESC\n           ) AS rn\n    FROM pedidos p\n)\nSELECT *\nFROM ordenados\nWHERE rn = 1;",
+    "question": "¿Por qué se agrega id DESC al orden?",
+    "options": [
+      "Para desempatar fechas iguales de forma determinista",
+      "Para convertir id en una fecha",
+      "Porque ROW_NUMBER exige siempre dos columnas",
+      "Para eliminar duplicados antes de numerar"
+    ],
+    "correctIndex": 0,
+    "explanation": "Un criterio único de desempate evita resultados arbitrarios cuando varias filas comparten fecha.",
+    "source": "sql-guide.md, sql-oracle-guide.md"
+  },
+  {
+    "id": "code-sql-006-a",
+    "category": "sql",
+    "topic": "Código SQL: subconsultas",
+    "language": "sql",
+    "code": "SELECT id\nFROM productos\nWHERE id NOT IN (\n    SELECT producto_id\n    FROM detalle_pedido\n);",
+    "question": "¿Qué riesgo existe si la subconsulta devuelve algún NULL?",
+    "options": [
+      "NOT IN puede producir UNKNOWN para todas las comparaciones y no devolver filas",
+      "NULL se convierte automáticamente en cero",
+      "La consulta elimina productos",
+      "NOT IN ignora siempre los NULL"
+    ],
+    "correctIndex": 0,
+    "explanation": "La lógica ternaria hace que x NOT IN (..., NULL) no sea TRUE.",
+    "source": "sql-guide.md, sql-oracle-guide.md"
+  },
+  {
+    "id": "code-sql-006-b",
+    "category": "sql",
+    "topic": "Código SQL: subconsultas",
+    "language": "sql",
+    "code": "SELECT id\nFROM productos\nWHERE id NOT IN (\n    SELECT producto_id\n    FROM detalle_pedido\n);",
+    "question": "¿Qué alternativa expresa el antijoin de forma segura?",
+    "options": [
+      "SELECT p.id\nFROM productos p\nWHERE NOT EXISTS (\n  SELECT 1 FROM detalle_pedido d\n  WHERE d.producto_id = p.id\n)",
+      "SELECT id FROM productos WHERE id = NULL",
+      "SELECT id FROM productos CROSS JOIN detalle_pedido",
+      "DELETE FROM productos"
+    ],
+    "correctIndex": 0,
+    "explanation": "NOT EXISTS prueba ausencia de filas correlacionadas sin quedar contaminado por un NULL ajeno.",
+    "source": "sql-guide.md, sql-oracle-guide.md"
+  },
+  {
+    "id": "code-sql-007-a",
+    "category": "sql",
+    "topic": "Código SQL: operadores de conjunto",
+    "language": "sql",
+    "code": "SELECT email FROM clientes_2025\nUNION\nSELECT email FROM clientes_2026;",
+    "question": "¿Qué hace UNION con correos repetidos?",
+    "options": [
+      "Los elimina del resultado combinado",
+      "Los conserva siempre dos veces",
+      "Convierte los correos en NULL",
+      "Actualiza ambas tablas"
+    ],
+    "correctIndex": 0,
+    "explanation": "UNION aplica eliminación de duplicados al conjunto combinado.",
+    "source": "sql-guide.md, sql-oracle-guide.md"
+  },
+  {
+    "id": "code-sql-007-b",
+    "category": "sql",
+    "topic": "Código SQL: operadores de conjunto",
+    "language": "sql",
+    "code": "SELECT email FROM clientes_2025\nUNION\nSELECT email FROM clientes_2026;",
+    "question": "¿Qué operador conserva duplicados y suele evitar ese coste?",
+    "options": [
+      "UNION ALL",
+      "INTERSECT",
+      "MINUS",
+      "DISTINCT UNION"
+    ],
+    "correctIndex": 0,
+    "explanation": "UNION ALL concatena los resultados sin deduplicarlos.",
+    "source": "sql-guide.md, sql-oracle-guide.md"
+  },
+  {
+    "id": "code-sql-008-a",
+    "category": "sql",
+    "topic": "Código SQL: funciones de ventana",
+    "language": "sql",
+    "code": "SELECT fecha, importe,\n       SUM(importe) OVER (\n           ORDER BY fecha\n           ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW\n       ) AS acumulado\nFROM movimientos;",
+    "question": "¿Qué calcula acumulado?",
+    "options": [
+      "Una suma progresiva desde la primera fila hasta la actual",
+      "El total de toda la tabla repetido sin orden",
+      "El importe de la fila siguiente",
+      "Un promedio móvil de dos filas"
+    ],
+    "correctIndex": 0,
+    "explanation": "El frame comienza en la primera fila ordenada y termina en la fila actual.",
+    "source": "sql-guide.md, sql-oracle-guide.md"
+  },
+  {
+    "id": "code-sql-008-b",
+    "category": "sql",
+    "topic": "Código SQL: funciones de ventana",
+    "language": "sql",
+    "code": "SELECT fecha, importe,\n       SUM(importe) OVER (\n           ORDER BY fecha\n           ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW\n       ) AS acumulado\nFROM movimientos;",
+    "question": "¿Qué falta para un acumulado independiente por cuenta?",
+    "options": [
+      "PARTITION BY cuenta_id antes de ORDER BY",
+      "GROUP BY fecha después de OVER",
+      "DISTINCT dentro de ROWS",
+      "HAVING cuenta_id"
+    ],
+    "correctIndex": 0,
+    "explanation": "PARTITION BY reinicia la ventana para cada cuenta sin colapsar sus movimientos.",
+    "source": "sql-guide.md, sql-oracle-guide.md"
+  },
+  {
+    "id": "code-sql-009-a",
+    "category": "sql",
+    "topic": "Código SQL: transacciones",
+    "language": "sql",
+    "code": "UPDATE cuentas SET saldo = saldo - 100 WHERE id = 1;\nSAVEPOINT despues_de_debito;\nUPDATE cuentas SET saldo = saldo + 100 WHERE id = 2;\nROLLBACK TO despues_de_debito;\nCOMMIT;",
+    "question": "¿Qué cambio queda confirmado?",
+    "options": [
+      "El débito de la cuenta 1, pero no el crédito de la cuenta 2",
+      "Ambos cambios",
+      "Ningún cambio",
+      "Solo el crédito de la cuenta 2"
+    ],
+    "correctIndex": 0,
+    "explanation": "ROLLBACK TO revierte lo posterior al savepoint; el COMMIT confirma lo anterior.",
+    "source": "sql-guide.md, sql-oracle-guide.md"
+  },
+  {
+    "id": "code-sql-009-b",
+    "category": "sql",
+    "topic": "Código SQL: transacciones",
+    "language": "sql",
+    "code": "UPDATE cuentas SET saldo = saldo - 100 WHERE id = 1;\nSAVEPOINT despues_de_debito;\nUPDATE cuentas SET saldo = saldo + 100 WHERE id = 2;\nROLLBACK TO despues_de_debito;\nCOMMIT;",
+    "question": "¿Por qué este flujo es incorrecto para una transferencia?",
+    "options": [
+      "Rompe atomicidad al confirmar solo una mitad",
+      "SAVEPOINT confirma automáticamente ambos cambios",
+      "UPDATE no puede usarse en transacciones",
+      "COMMIT revierte el débito"
+    ],
+    "correctIndex": 0,
+    "explanation": "Una transferencia debe confirmar o revertir débito y crédito como una sola unidad.",
+    "source": "sql-guide.md, sql-oracle-guide.md"
+  },
+  {
+    "id": "code-sql-010-a",
+    "category": "sql",
+    "topic": "Código SQL: rendimiento",
+    "language": "sql",
+    "code": "SELECT *\nFROM pedidos\nWHERE EXTRACT(YEAR FROM fecha) = 2026;",
+    "question": "¿Por qué el predicado puede desaprovechar un índice normal sobre fecha?",
+    "options": [
+      "Aplica una función a la columna indexada",
+      "SELECT * elimina todos los índices",
+      "EXTRACT modifica las filas",
+      "Los años no pueden indexarse"
+    ],
+    "correctIndex": 0,
+    "explanation": "Transformar la columna puede impedir un acceso por rango salvo que exista un índice funcional apropiado.",
+    "source": "sql-guide.md, sql-oracle-guide.md"
+  },
+  {
+    "id": "code-sql-010-b",
+    "category": "sql",
+    "topic": "Código SQL: rendimiento",
+    "language": "sql",
+    "code": "SELECT *\nFROM pedidos\nWHERE EXTRACT(YEAR FROM fecha) = 2026;",
+    "question": "¿Qué condición suele ser sargable?",
+    "options": [
+      "WHERE fecha >= DATE '2026-01-01' AND fecha < DATE '2027-01-01'",
+      "WHERE TO_CHAR(fecha, 'YYYY') = '2026'",
+      "WHERE fecha + 0 = fecha",
+      "WHERE EXTRACT(YEAR FROM fecha) LIKE '%2026%'"
+    ],
+    "correctIndex": 0,
+    "explanation": "El rango compara directamente la columna y además maneja correctamente horas del último día.",
+    "source": "sql-guide.md, sql-oracle-guide.md"
+  },
+  {
+    "id": "code-sql-011-a",
+    "category": "sql",
+    "topic": "Código SQL: índices",
+    "language": "sql",
+    "code": "CREATE INDEX idx_pedidos_cliente_fecha\n    ON pedidos (cliente_id, fecha);\n\nSELECT *\nFROM pedidos\nWHERE fecha >= DATE '2026-01-01';",
+    "question": "¿Puede el orden del índice limitar su utilidad para esta consulta?",
+    "options": [
+      "Sí; no se filtra la columna líder cliente_id",
+      "No; cualquier columna del índice funciona igual en cualquier orden",
+      "No, porque todos los índices son hash",
+      "Sí, porque un índice nunca sirve para rangos"
+    ],
+    "correctIndex": 0,
+    "explanation": "En un B-tree compuesto la columna líder suele determinar los accesos más eficientes.",
+    "source": "sql-guide.md, sql-oracle-guide.md"
+  },
+  {
+    "id": "code-sql-011-b",
+    "category": "sql",
+    "topic": "Código SQL: índices",
+    "language": "sql",
+    "code": "CREATE INDEX idx_pedidos_cliente_fecha\n    ON pedidos (cliente_id, fecha);\n\nSELECT *\nFROM pedidos\nWHERE fecha >= DATE '2026-01-01';",
+    "question": "¿Qué consulta aprovecha naturalmente el prefijo del índice?",
+    "options": [
+      "WHERE cliente_id = 42 AND fecha >= DATE '2026-01-01'",
+      "WHERE estado = 'ABIERTO'",
+      "WHERE importe * 2 > 100",
+      "WHERE LOWER(descripcion) = 'x'"
+    ],
+    "correctIndex": 0,
+    "explanation": "El filtro usa cliente_id y después un rango sobre fecha siguiendo el orden del índice.",
+    "source": "sql-guide.md, sql-oracle-guide.md"
+  },
+  {
+    "id": "code-sql-012-a",
+    "category": "sql",
+    "topic": "Código SQL: constraints",
+    "language": "sql",
+    "code": "CREATE TABLE cuentas (\n    id NUMBER PRIMARY KEY,\n    saldo NUMBER(12,2) NOT NULL,\n    CONSTRAINT ck_saldo_no_negativo CHECK (saldo >= 0)\n);\n\nINSERT INTO cuentas VALUES (1, -10);",
+    "question": "¿Qué ocurre con el INSERT?",
+    "options": [
+      "Falla por violar ck_saldo_no_negativo",
+      "Inserta -10 y emite solo una advertencia",
+      "Convierte -10 en 0",
+      "Elimina la constraint"
+    ],
+    "correctIndex": 0,
+    "explanation": "CHECK hace cumplir la invariante en la base para toda vía de escritura.",
+    "source": "sql-guide.md, sql-oracle-guide.md"
+  },
+  {
+    "id": "code-sql-012-b",
+    "category": "sql",
+    "topic": "Código SQL: constraints",
+    "language": "sql",
+    "code": "CREATE TABLE cuentas (\n    id NUMBER PRIMARY KEY,\n    saldo NUMBER(12,2) NOT NULL,\n    CONSTRAINT ck_saldo_no_negativo CHECK (saldo >= 0)\n);\n\nINSERT INTO cuentas VALUES (1, -10);",
+    "question": "¿Qué ventaja tiene la constraint frente a validar solo en la interfaz?",
+    "options": [
+      "Protege también scripts, procesos y aplicaciones distintas",
+      "Reemplaza toda autorización",
+      "Cifra automáticamente el saldo",
+      "Hace innecesarias las transacciones"
+    ],
+    "correctIndex": 0,
+    "explanation": "La integridad declarativa se aplica sin importar qué cliente envíe el cambio.",
+    "source": "sql-guide.md, sql-oracle-guide.md"
+  },
+  {
+    "id": "code-sql-013-a",
+    "category": "sql",
+    "topic": "Código SQL: MERGE",
+    "language": "sql",
+    "code": "MERGE INTO inventario i\nUSING carga c\n   ON (i.producto_id = c.producto_id)\nWHEN MATCHED THEN\n    UPDATE SET i.stock = c.stock\nWHEN NOT MATCHED THEN\n    INSERT (producto_id, stock)\n    VALUES (c.producto_id, c.stock);",
+    "question": "¿Qué comportamiento implementa?",
+    "options": [
+      "Actualiza productos existentes e inserta los nuevos",
+      "Elimina productos no presentes en carga",
+      "Solo consulta diferencias",
+      "Confirma automáticamente toda la sesión"
+    ],
+    "correctIndex": 0,
+    "explanation": "MERGE expresa un upsert según la condición de coincidencia.",
+    "source": "sql-guide.md, sql-oracle-guide.md"
+  },
+  {
+    "id": "code-sql-013-b",
+    "category": "sql",
+    "topic": "Código SQL: MERGE",
+    "language": "sql",
+    "code": "MERGE INTO inventario i\nUSING carga c\n   ON (i.producto_id = c.producto_id)\nWHEN MATCHED THEN\n    UPDATE SET i.stock = c.stock\nWHEN NOT MATCHED THEN\n    INSERT (producto_id, stock)\n    VALUES (c.producto_id, c.stock);",
+    "question": "¿Qué condición es esencial para evitar coincidencias ambiguas?",
+    "options": [
+      "Que producto_id identifique de forma única la fila destino relevante",
+      "Que stock sea siempre NULL",
+      "Que carga esté vacía",
+      "Que ON use una constante verdadera"
+    ],
+    "correctIndex": 0,
+    "explanation": "Varias filas fuente o destino para la misma clave pueden volver el MERGE ambiguo o inválido.",
+    "source": "sql-guide.md, sql-oracle-guide.md"
+  },
+  {
+    "id": "code-sql-014-a",
+    "category": "sql",
+    "topic": "Código SQL: Oracle jerárquico",
+    "language": "sql",
+    "code": "SELECT id, manager_id, LEVEL\nFROM empleados\nSTART WITH manager_id IS NULL\nCONNECT BY PRIOR id = manager_id;",
+    "question": "¿Qué representa LEVEL?",
+    "options": [
+      "La profundidad de cada empleado dentro de la jerarquía",
+      "El salario normalizado",
+      "La cantidad total de tablas",
+      "El nivel de aislamiento de la sesión"
+    ],
+    "correctIndex": 0,
+    "explanation": "Oracle asigna LEVEL 1 a las raíces y aumenta el nivel al descender.",
+    "source": "sql-oracle-guide.md"
+  },
+  {
+    "id": "code-sql-014-b",
+    "category": "sql",
+    "topic": "Código SQL: Oracle jerárquico",
+    "language": "sql",
+    "code": "SELECT id, manager_id, LEVEL\nFROM empleados\nSTART WITH manager_id IS NULL\nCONNECT BY PRIOR id = manager_id;",
+    "question": "¿Qué función cumple PRIOR id = manager_id?",
+    "options": [
+      "Relaciona el id del padre con manager_id del hijo",
+      "Ordena empleados por id",
+      "Elimina ciclos automáticamente en todo caso",
+      "Agrupa empleados con el mismo salario"
+    ],
+    "correctIndex": 0,
+    "explanation": "PRIOR marca la expresión correspondiente a la fila padre de la relación jerárquica.",
+    "source": "sql-oracle-guide.md"
+  },
+  {
+    "id": "code-sql-015-a",
+    "category": "sql",
+    "topic": "Código SQL: subconsultas correlacionadas",
+    "language": "sql",
+    "code": "SELECT e.nombre, e.salario\nFROM empleados e\nWHERE e.salario > (\n    SELECT AVG(x.salario)\n    FROM empleados x\n    WHERE x.departamento_id = e.departamento_id\n);",
+    "question": "¿Qué empleados devuelve?",
+    "options": [
+      "Quienes ganan más que el promedio de su propio departamento",
+      "Quienes ganan más que el promedio global",
+      "Solo el empleado mejor pagado de la empresa",
+      "Todos los empleados con salario no nulo"
+    ],
+    "correctIndex": 0,
+    "explanation": "La subconsulta se correlaciona con el departamento de cada fila externa.",
+    "source": "sql-guide.md, sql-oracle-guide.md"
+  },
+  {
+    "id": "code-sql-015-b",
+    "category": "sql",
+    "topic": "Código SQL: subconsultas correlacionadas",
+    "language": "sql",
+    "code": "SELECT e.nombre, e.salario\nFROM empleados e\nWHERE e.salario > (\n    SELECT AVG(x.salario)\n    FROM empleados x\n    WHERE x.departamento_id = e.departamento_id\n);",
+    "question": "¿Qué característica hace correlacionada a la subconsulta?",
+    "options": [
+      "Referencia e.departamento_id de la consulta externa",
+      "Usa AVG",
+      "Tiene un alias interno",
+      "Devuelve una sola columna"
+    ],
+    "correctIndex": 0,
+    "explanation": "La dependencia respecto de e obliga a evaluar el cálculo en el contexto de cada fila o a transformarlo equivalentemente.",
+    "source": "sql-guide.md, sql-oracle-guide.md"
+  },
+  {
+    "id": "code-sql-016-a",
+    "category": "sql",
+    "topic": "Código SQL: vistas",
+    "language": "sql",
+    "code": "CREATE VIEW pedidos_publicos AS\nSELECT id, fecha, total\nFROM pedidos;\n\nGRANT SELECT ON pedidos_publicos TO rol_reportes;",
+    "question": "¿Qué objetivo de seguridad puede cumplir la vista?",
+    "options": [
+      "Exponer solo columnas permitidas sin conceder SELECT directo sobre toda la tabla",
+      "Cifrar físicamente todos los datos",
+      "Impedir cualquier cambio del dueño de la tabla",
+      "Crear una copia independiente y siempre materializada"
+    ],
+    "correctIndex": 0,
+    "explanation": "Una vista puede ofrecer una proyección controlada y convertirse en el objeto autorizado.",
+    "source": "sql-guide.md, sql-oracle-guide.md"
+  },
+  {
+    "id": "code-sql-016-b",
+    "category": "sql",
+    "topic": "Código SQL: vistas",
+    "language": "sql",
+    "code": "CREATE VIEW pedidos_publicos AS\nSELECT id, fecha, total\nFROM pedidos;\n\nGRANT SELECT ON pedidos_publicos TO rol_reportes;",
+    "question": "¿La vista almacena necesariamente una copia de las filas?",
+    "options": [
+      "No; una vista normal representa una consulta",
+      "Sí; toda vista duplica físicamente la tabla",
+      "Sí, pero solo durante COMMIT",
+      "No, porque una vista no puede consultarse"
+    ],
+    "correctIndex": 0,
+    "explanation": "La materialización es una característica diferente de una vista materializada.",
+    "source": "sql-guide.md, sql-oracle-guide.md"
+  },
+  {
+    "id": "code-sql-017-a",
+    "category": "sql",
+    "topic": "Código SQL: DML seguro",
+    "language": "sql",
+    "code": "UPDATE empleados\nSET salario = salario * 1.05;",
+    "question": "¿Qué filas modifica la sentencia?",
+    "options": [
+      "Todas las filas de empleados",
+      "Solo quienes tienen salario mayor que cero",
+      "Solo la primera fila",
+      "Ninguna porque falta WHERE"
+    ],
+    "correctIndex": 0,
+    "explanation": "WHERE es opcional sintácticamente; al omitirlo el UPDATE alcanza todas las filas.",
+    "source": "sql-guide.md, sql-oracle-guide.md"
+  },
+  {
+    "id": "code-sql-017-b",
+    "category": "sql",
+    "topic": "Código SQL: DML seguro",
+    "language": "sql",
+    "code": "UPDATE empleados\nSET salario = salario * 1.05;",
+    "question": "¿Qué práctica reduce el riesgo antes de ejecutar una condición nueva?",
+    "options": [
+      "Probar primero un SELECT con el mismo WHERE dentro de un flujo transaccional controlado",
+      "Añadir LIMIT 1 sin revisar el motor",
+      "Ejecutar COMMIT antes del UPDATE",
+      "Reemplazar UPDATE por DROP"
+    ],
+    "correctIndex": 0,
+    "explanation": "Verificar el conjunto objetivo y contar filas ayuda a detectar condiciones incorrectas antes de modificar.",
+    "source": "sql-guide.md, sql-oracle-guide.md"
+  },
+  {
+    "id": "code-programacion-001-a",
+    "category": "programacion",
+    "topic": "Código: trazado y límites",
+    "language": "pseudocode",
+    "code": "funcion ultimo(a):\n    retornar a[longitud(a)]\n\nultimo([10, 20, 30])",
+    "question": "¿Qué error contiene el algoritmo?",
+    "options": [
+      "Accede una posición después del último índice válido",
+      "Retorna siempre el primer elemento",
+      "La longitud de la lista es 2",
+      "El algoritmo es O(n²)"
+    ],
+    "correctIndex": 0,
+    "explanation": "En una colección indexada desde cero, el último índice es longitud - 1.",
+    "source": "software-engineering-guide.md, preguntas.md"
+  },
+  {
+    "id": "code-programacion-001-b",
+    "category": "programacion",
+    "topic": "Código: trazado y límites",
+    "language": "pseudocode",
+    "code": "funcion ultimo(a):\n    retornar a[longitud(a)]\n\nultimo([10, 20, 30])",
+    "question": "¿Cuál es la corrección?",
+    "options": [
+      "retornar a[longitud(a) - 1]",
+      "retornar a[longitud(a) + 1]",
+      "retornar a[-longitud(a)]",
+      "retornar longitud(a)"
+    ],
+    "correctIndex": 0,
+    "explanation": "Restar uno convierte la cantidad de elementos en el índice final.",
+    "source": "software-engineering-guide.md, preguntas.md"
+  },
+  {
+    "id": "code-programacion-002-a",
+    "category": "programacion",
+    "topic": "Código: acumuladores",
+    "language": "pseudocode",
+    "code": "funcion contarPositivos(datos):\n    contador = 0\n    para cada n en datos:\n        contador = 0\n        si n > 0:\n            contador = contador + 1\n    retornar contador",
+    "question": "¿Qué defecto lógico tiene?",
+    "options": [
+      "Reinicia el acumulador en cada iteración",
+      "Nunca evalúa n > 0",
+      "El bucle es infinito",
+      "contador no se declara"
+    ],
+    "correctIndex": 0,
+    "explanation": "El estado acumulado se pierde antes de procesar cada elemento.",
+    "source": "software-engineering-guide.md, preguntas.md"
+  },
+  {
+    "id": "code-programacion-002-b",
+    "category": "programacion",
+    "topic": "Código: acumuladores",
+    "language": "pseudocode",
+    "code": "funcion contarPositivos(datos):\n    contador = 0\n    para cada n en datos:\n        contador = 0\n        si n > 0:\n            contador = contador + 1\n    retornar contador",
+    "question": "¿Dónde debe inicializarse contador?",
+    "options": [
+      "Una vez antes del bucle",
+      "Dentro del if después de incrementar",
+      "Después de retornar",
+      "En cada rama del if"
+    ],
+    "correctIndex": 0,
+    "explanation": "El acumulador vive durante todo el recorrido y se actualiza solo cuando corresponde.",
+    "source": "software-engineering-guide.md, preguntas.md"
+  },
+  {
+    "id": "code-programacion-003-a",
+    "category": "programacion",
+    "topic": "Código: complejidad",
+    "language": "pseudocode",
+    "code": "para i desde 0 hasta n - 1:\n    j = 1\n    mientras j < n:\n        imprimir(i, j)\n        j = j * 2",
+    "question": "¿Cuál es la complejidad temporal?",
+    "options": [
+      "O(n log n)",
+      "O(n²)",
+      "O(log n)",
+      "O(2ⁿ)"
+    ],
+    "correctIndex": 0,
+    "explanation": "El bucle externo ejecuta n veces y el interno duplica j, por lo que realiza log n iteraciones.",
+    "source": "software-engineering-guide.md"
+  },
+  {
+    "id": "code-programacion-003-b",
+    "category": "programacion",
+    "topic": "Código: complejidad",
+    "language": "pseudocode",
+    "code": "para i desde 0 hasta n - 1:\n    j = 1\n    mientras j < n:\n        imprimir(i, j)\n        j = j * 2",
+    "question": "¿Qué cambio convertiría el bucle interno en O(n)?",
+    "options": [
+      "Reemplazar j = j * 2 por j = j + 1",
+      "Inicializar j = n",
+      "Eliminar el bucle externo",
+      "Reemplazar imprimir por retornar"
+    ],
+    "correctIndex": 0,
+    "explanation": "Incrementar de uno en uno recorre linealmente los valores hasta n.",
+    "source": "software-engineering-guide.md"
+  },
+  {
+    "id": "code-programacion-004-a",
+    "category": "programacion",
+    "topic": "Código: búsqueda binaria",
+    "language": "pseudocode",
+    "code": "mientras bajo <= alto:\n    medio = (bajo + alto) // 2\n    si a[medio] < objetivo:\n        bajo = medio\n    sino si a[medio] > objetivo:\n        alto = medio - 1\n    sino:\n        retornar medio",
+    "question": "¿Por qué puede quedar en un bucle infinito?",
+    "options": [
+      "bajo = medio puede no reducir el intervalo",
+      "alto disminuye demasiado rápido",
+      "La división entera siempre produce cero",
+      "Una búsqueda binaria debe recorrer toda la lista"
+    ],
+    "correctIndex": 0,
+    "explanation": "Cuando medio == bajo y el objetivo es mayor, asignar bajo = medio deja los mismos límites.",
+    "source": "software-engineering-guide.md, preguntas.md"
+  },
+  {
+    "id": "code-programacion-004-b",
+    "category": "programacion",
+    "topic": "Código: búsqueda binaria",
+    "language": "pseudocode",
+    "code": "mientras bajo <= alto:\n    medio = (bajo + alto) // 2\n    si a[medio] < objetivo:\n        bajo = medio\n    sino si a[medio] > objetivo:\n        alto = medio - 1\n    sino:\n        retornar medio",
+    "question": "¿Cuál es la actualización correcta de la rama ascendente?",
+    "options": [
+      "bajo = medio + 1",
+      "bajo = medio - 1",
+      "alto = medio + 1",
+      "medio = objetivo"
+    ],
+    "correctIndex": 0,
+    "explanation": "El elemento medio ya fue descartado, por lo que el siguiente intervalo comienza después.",
+    "source": "software-engineering-guide.md, preguntas.md"
+  },
+  {
+    "id": "code-programacion-005-a",
+    "category": "programacion",
+    "topic": "Código: recursividad",
+    "language": "pseudocode",
+    "code": "funcion factorial(n):\n    retornar n * factorial(n - 1)",
+    "question": "¿Qué ocurre al ejecutar factorial(5)?",
+    "options": [
+      "La recursión no termina correctamente y agota la pila",
+      "Retorna 120",
+      "Retorna 0 inmediatamente",
+      "La función se convierte en iterativa"
+    ],
+    "correctIndex": 0,
+    "explanation": "Falta un caso base que detenga la cadena de llamadas.",
+    "source": "software-engineering-guide.md, preguntas.md"
+  },
+  {
+    "id": "code-programacion-005-b",
+    "category": "programacion",
+    "topic": "Código: recursividad",
+    "language": "pseudocode",
+    "code": "funcion factorial(n):\n    retornar n * factorial(n - 1)",
+    "question": "¿Qué caso base permite definir también 0!?",
+    "options": [
+      "si n <= 1: retornar 1",
+      "si n > 1: retornar 0",
+      "si n == 0: llamar factorial(-1)",
+      "si n < 0: retornar n"
+    ],
+    "correctIndex": 0,
+    "explanation": "Por definición 0! y 1! valen 1; las entradas negativas deben validarse según el contrato.",
+    "source": "software-engineering-guide.md, preguntas.md"
+  },
+  {
+    "id": "code-programacion-006-a",
+    "category": "programacion",
+    "topic": "Código: grafos",
+    "language": "pseudocode",
+    "code": "cola.encolar(origen)\nvisitado.agregar(origen)\nmientras cola no esté vacía:\n    actual = cola.desencolar()\n    para cada vecino de actual:\n        si vecino no está visitado:\n            visitado.agregar(vecino)\n            cola.encolar(vecino)",
+    "question": "¿Qué recorrido implementa?",
+    "options": [
+      "Búsqueda en anchura (BFS)",
+      "Búsqueda en profundidad recursiva",
+      "Ordenamiento quicksort",
+      "Búsqueda binaria"
+    ],
+    "correctIndex": 0,
+    "explanation": "La cola procesa primero los vértices descubiertos a menor distancia en aristas.",
+    "source": "software-engineering-guide.md"
+  },
+  {
+    "id": "code-programacion-006-b",
+    "category": "programacion",
+    "topic": "Código: grafos",
+    "language": "pseudocode",
+    "code": "cola.encolar(origen)\nvisitado.agregar(origen)\nmientras cola no esté vacía:\n    actual = cola.desencolar()\n    para cada vecino de actual:\n        si vecino no está visitado:\n            visitado.agregar(vecino)\n            cola.encolar(vecino)",
+    "question": "En un grafo no ponderado, ¿qué puede obtener BFS?",
+    "options": [
+      "La distancia mínima en número de aristas desde el origen",
+      "El árbol de expansión de peso mínimo para pesos arbitrarios",
+      "El orden topológico de cualquier grafo con ciclos",
+      "La mediana de los identificadores"
+    ],
+    "correctIndex": 0,
+    "explanation": "BFS explora por niveles y descubre primero los caminos con menos aristas.",
+    "source": "software-engineering-guide.md"
+  },
+  {
+    "id": "code-programacion-007-a",
+    "category": "programacion",
+    "topic": "Código: programación dinámica",
+    "language": "pseudocode",
+    "code": "funcion fib(n):\n    dp[0] = 0\n    dp[1] = 1\n    para i desde 2 hasta n:\n        dp[i] = dp[i - 1] + dp[i - 2]\n    retornar dp[n]",
+    "question": "¿Qué técnica usa el algoritmo?",
+    "options": [
+      "Programación dinámica por tabulación",
+      "Backtracking",
+      "Divide y vencerás sin reutilización",
+      "Algoritmo greedy"
+    ],
+    "correctIndex": 0,
+    "explanation": "Los subresultados se calculan de menor a mayor y se almacenan para reutilizarlos.",
+    "source": "software-engineering-guide.md"
+  },
+  {
+    "id": "code-programacion-007-b",
+    "category": "programacion",
+    "topic": "Código: programación dinámica",
+    "language": "pseudocode",
+    "code": "funcion fib(n):\n    dp[0] = 0\n    dp[1] = 1\n    para i desde 2 hasta n:\n        dp[i] = dp[i - 1] + dp[i - 2]\n    retornar dp[n]",
+    "question": "¿Cómo reducir el espacio de O(n) a O(1)?",
+    "options": [
+      "Conservar solo los dos valores anteriores",
+      "Guardar una segunda tabla de tamaño n",
+      "Usar recursión sin memoización",
+      "Ordenar dp en cada iteración"
+    ],
+    "correctIndex": 0,
+    "explanation": "Cada estado depende únicamente de dp[i-1] y dp[i-2].",
+    "source": "software-engineering-guide.md"
+  },
+  {
+    "id": "code-programacion-008-a",
+    "category": "programacion",
+    "topic": "Código: condiciones de carrera",
+    "language": "pseudocode",
+    "code": "si cache.noContiene(clave):\n    valor = calcular(clave)\n    cache.guardar(clave, valor)\nretornar cache.obtener(clave)",
+    "question": "¿Qué riesgo existe con varios hilos?",
+    "options": [
+      "Dos hilos pueden calcular y guardar simultáneamente la misma clave",
+      "El compilador elimina siempre calcular",
+      "La caché se vuelve inmutable",
+      "noContiene y guardar forman una transacción automática"
+    ],
+    "correctIndex": 0,
+    "explanation": "La secuencia check-then-act no es atómica aunque cada operación individual sea thread-safe.",
+    "source": "software-engineering-guide.md, guia-estudio-ampliada.md"
+  },
+  {
+    "id": "code-programacion-008-b",
+    "category": "programacion",
+    "topic": "Código: condiciones de carrera",
+    "language": "pseudocode",
+    "code": "si cache.noContiene(clave):\n    valor = calcular(clave)\n    cache.guardar(clave, valor)\nretornar cache.obtener(clave)",
+    "question": "¿Qué operación expresa mejor la intención si la caché la soporta?",
+    "options": [
+      "cache.computeIfAbsent(clave, calcular)",
+      "cache.clear() antes de consultar",
+      "esperar un tiempo aleatorio",
+      "leer dos veces noContiene"
+    ],
+    "correctIndex": 0,
+    "explanation": "Una operación atómica compuesta evita coordinar manualmente la comprobación y la inserción.",
+    "source": "software-engineering-guide.md, guia-estudio-ampliada.md"
+  },
+  {
+    "id": "code-programacion-009-a",
+    "category": "programacion",
+    "topic": "Código: testing",
+    "language": "java",
+    "code": "@Test\nvoid cobraUnaVez() {\n    var pasarela = mock(Pasarela.class);\n    var servicio = new ServicioPago(pasarela);\n\n    servicio.pagar(new Pedido(100));\n\n    verify(pasarela, times(1)).cobrar(100);\n}",
+    "question": "¿Qué verifica principalmente la prueba?",
+    "options": [
+      "Una interacción del servicio con su colaborador",
+      "El esquema real de la base de datos",
+      "La latencia de producción",
+      "La interfaz gráfica completa"
+    ],
+    "correctIndex": 0,
+    "explanation": "verify sobre un mock comprueba el mensaje enviado a la pasarela.",
+    "source": "software-engineering-guide.md, guia-estudio-ampliada.md"
+  },
+  {
+    "id": "code-programacion-009-b",
+    "category": "programacion",
+    "topic": "Código: testing",
+    "language": "java",
+    "code": "@Test\nvoid cobraUnaVez() {\n    var pasarela = mock(Pasarela.class);\n    var servicio = new ServicioPago(pasarela);\n\n    servicio.pagar(new Pedido(100));\n\n    verify(pasarela, times(1)).cobrar(100);\n}",
+    "question": "¿Qué fragilidad puede aparecer si se verifican demasiados detalles internos?",
+    "options": [
+      "La prueba se rompe por refactors que preservan el comportamiento",
+      "El mock se convierte en una base real",
+      "JUnit deja de ejecutar asserts",
+      "El código de producción siempre se hace más rápido"
+    ],
+    "correctIndex": 0,
+    "explanation": "Las pruebas deben observar contratos relevantes y no acoplarse innecesariamente a la implementación.",
+    "source": "software-engineering-guide.md, guia-estudio-ampliada.md"
+  },
+  {
+    "id": "code-programacion-010-a",
+    "category": "programacion",
+    "topic": "Código: testing",
+    "language": "java",
+    "code": "@Test\nvoid tokenNoHaExpirado() {\n    Token token = servicio.crearToken();\n    Thread.sleep(1000);\n    assertTrue(token.expiraDespuesDe(Instant.now()));\n}",
+    "question": "¿Por qué esta prueba puede ser flaky y lenta?",
+    "options": [
+      "Depende del reloj real y de una espera temporal",
+      "Instant no puede usarse en pruebas",
+      "Thread.sleep congela permanentemente la JVM",
+      "assertTrue siempre devuelve false"
+    ],
+    "correctIndex": 0,
+    "explanation": "Planificación, carga y límites temporales hacen variable el resultado además de añadir espera.",
+    "source": "software-engineering-guide.md, guia-estudio-ampliada.md"
+  },
+  {
+    "id": "code-programacion-010-b",
+    "category": "programacion",
+    "topic": "Código: testing",
+    "language": "java",
+    "code": "@Test\nvoid tokenNoHaExpirado() {\n    Token token = servicio.crearToken();\n    Thread.sleep(1000);\n    assertTrue(token.expiraDespuesDe(Instant.now()));\n}",
+    "question": "¿Qué diseño mejora la prueba?",
+    "options": [
+      "Inyectar un Clock controlable y eliminar Thread.sleep",
+      "Aumentar sleep a un minuto",
+      "Repetir la prueba hasta que pase",
+      "Capturar AssertionError"
+    ],
+    "correctIndex": 0,
+    "explanation": "Un reloj inyectado vuelve determinista el tiempo observado por el servicio.",
+    "source": "software-engineering-guide.md, guia-estudio-ampliada.md"
+  },
+  {
+    "id": "code-programacion-011-a",
+    "category": "programacion",
+    "topic": "Código: Git y recuperación",
+    "language": "shell",
+    "code": "git switch main\ngit revert a1b2c3d\ngit push",
+    "question": "¿Qué hace este flujo?",
+    "options": [
+      "Crea un commit nuevo que invierte a1b2c3d y publica el historial",
+      "Borra a1b2c3d de todos los historiales",
+      "Mueve main sin crear commit",
+      "Descarga cambios sin integrar"
+    ],
+    "correctIndex": 0,
+    "explanation": "revert conserva la historia compartida y registra explícitamente la inversión.",
+    "source": "git-guide.md"
+  },
+  {
+    "id": "code-programacion-011-b",
+    "category": "programacion",
+    "topic": "Código: Git y recuperación",
+    "language": "shell",
+    "code": "git switch main\ngit revert a1b2c3d\ngit push",
+    "question": "¿Por qué suele ser preferible a reset para un commit ya compartido?",
+    "options": [
+      "No reescribe commits que otros pueden haber descargado",
+      "Porque reset nunca puede mover una rama",
+      "Porque revert elimina el repositorio remoto",
+      "Porque push ignora el nuevo commit"
+    ],
+    "correctIndex": 0,
+    "explanation": "Reescribir una rama pública obliga a coordinar copias divergentes; revert es aditivo.",
+    "source": "git-guide.md"
+  },
+  {
+    "id": "code-programacion-012-a",
+    "category": "programacion",
+    "topic": "Código: Git y colaboración",
+    "language": "shell",
+    "code": "git fetch origin\ngit rebase origin/main\ngit push --force-with-lease",
+    "question": "¿Qué sucede con los commits de la rama actual?",
+    "options": [
+      "Se reaplican sobre origin/main y obtienen hashes nuevos",
+      "Se fusionan mediante un merge commit obligatorio",
+      "Se eliminan del working tree sin recuperación",
+      "Se convierten en tags"
+    ],
+    "correctIndex": 0,
+    "explanation": "rebase reescribe los commits sobre una base nueva.",
+    "source": "git-guide.md"
+  },
+  {
+    "id": "code-programacion-012-b",
+    "category": "programacion",
+    "topic": "Código: Git y colaboración",
+    "language": "shell",
+    "code": "git fetch origin\ngit rebase origin/main\ngit push --force-with-lease",
+    "question": "¿Qué protege --force-with-lease?",
+    "options": [
+      "Evita sobrescribir cambios remotos que no estaban en la última referencia conocida",
+      "Garantiza que todos los tests pasen",
+      "Impide cualquier rebase local",
+      "Cifra los commits enviados"
+    ],
+    "correctIndex": 0,
+    "explanation": "El lease falla si el remoto avanzó inesperadamente y reduce el riesgo de borrar trabajo ajeno.",
+    "source": "git-guide.md"
+  },
+  {
+    "id": "code-programacion-013-a",
+    "category": "programacion",
+    "topic": "Código: CI/CD",
+    "language": "yaml",
+    "code": "steps:\n  - run: ./gradlew test\n  - run: ./gradlew build\n  - run: ./scripts/deploy.sh",
+    "question": "¿Qué riesgo existe si deploy se ejecuta aunque test falle?",
+    "options": [
+      "Podría desplegarse un artefacto no validado",
+      "Los tests se convierten en unitarios",
+      "Git elimina el historial",
+      "El build siempre corrige los tests"
+    ],
+    "correctIndex": 0,
+    "explanation": "El pipeline debe detener etapas posteriores cuando una verificación requerida falla.",
+    "source": "software-engineering-guide.md"
+  },
+  {
+    "id": "code-programacion-013-b",
+    "category": "programacion",
+    "topic": "Código: CI/CD",
+    "language": "yaml",
+    "code": "steps:\n  - run: ./gradlew test\n  - run: ./gradlew build\n  - run: ./scripts/deploy.sh",
+    "question": "¿Qué política debe expresar el pipeline?",
+    "options": [
+      "Deploy depende del éxito de test y build",
+      "Deploy siempre se ejecuta primero",
+      "Los errores de test se ignoran",
+      "Build y deploy escriben directamente en main"
+    ],
+    "correctIndex": 0,
+    "explanation": "Las dependencias entre etapas convierten las pruebas en una puerta de calidad real.",
+    "source": "software-engineering-guide.md"
+  },
+  {
+    "id": "code-programacion-014-a",
+    "category": "programacion",
+    "topic": "Código: seguridad",
+    "language": "java",
+    "code": "String sql =\n    \"SELECT * FROM usuarios WHERE nombre = '\" + nombre + \"'\";\nStatement st = conn.createStatement();\nResultSet rs = st.executeQuery(sql);",
+    "question": "¿Qué vulnerabilidad presenta?",
+    "options": [
+      "SQL Injection",
+      "Cross-Site Request Forgery",
+      "Path traversal",
+      "Race condition del GC"
+    ],
+    "correctIndex": 0,
+    "explanation": "El texto no confiable forma parte de la estructura ejecutable de la consulta.",
+    "source": "software-engineering-guide.md, guia-estudio-ampliada.md"
+  },
+  {
+    "id": "code-programacion-014-b",
+    "category": "programacion",
+    "topic": "Código: seguridad",
+    "language": "java",
+    "code": "String sql =\n    \"SELECT * FROM usuarios WHERE nombre = '\" + nombre + \"'\";\nStatement st = conn.createStatement();\nResultSet rs = st.executeQuery(sql);",
+    "question": "¿Cuál es la corrección principal?",
+    "options": [
+      "PreparedStatement ps = conn.prepareStatement(\n  \"SELECT * FROM usuarios WHERE nombre = ?\");\nps.setString(1, nombre);",
+      "nombre = Base64.encode(nombre);",
+      "sql = sql.replace(\"SELECT\", \"select\");",
+      "Thread.sleep(100);"
+    ],
+    "correctIndex": 0,
+    "explanation": "Los parámetros separan código y datos; escapar manualmente no es una defensa general confiable.",
+    "source": "software-engineering-guide.md, guia-estudio-ampliada.md"
+  },
+  {
+    "id": "code-programacion-015-a",
+    "category": "programacion",
+    "topic": "Código: arquitectura",
+    "language": "java",
+    "code": "class RegistrarPedido {\n    private final MySqlPedidoRepository repositorio =\n        new MySqlPedidoRepository();\n\n    void ejecutar(Pedido pedido) {\n        repositorio.guardar(pedido);\n    }\n}",
+    "question": "¿Qué problema arquitectónico muestra?",
+    "options": [
+      "El caso de uso depende directamente de un detalle de infraestructura",
+      "La clase tiene demasiadas interfaces",
+      "El repositorio es inmutable",
+      "guardar debería ser static obligatoriamente"
+    ],
+    "correctIndex": 0,
+    "explanation": "La construcción concreta acopla el caso de uso a MySQL y dificulta sustituir o probar el colaborador.",
+    "source": "software-engineering-guide.md"
+  },
+  {
+    "id": "code-programacion-015-b",
+    "category": "programacion",
+    "topic": "Código: arquitectura",
+    "language": "java",
+    "code": "class RegistrarPedido {\n    private final MySqlPedidoRepository repositorio =\n        new MySqlPedidoRepository();\n\n    void ejecutar(Pedido pedido) {\n        repositorio.guardar(pedido);\n    }\n}",
+    "question": "¿Qué refactor se alinea con arquitectura hexagonal?",
+    "options": [
+      "Recibir un PedidoRepository por el constructor",
+      "Heredar RegistrarPedido desde MySqlPedidoRepository",
+      "Convertir repositorio en variable global mutable",
+      "Mover ejecutar dentro del controlador HTTP"
+    ],
+    "correctIndex": 0,
+    "explanation": "El caso de uso depende de un puerto; un adaptador externo implementa la persistencia concreta.",
+    "source": "software-engineering-guide.md"
+  },
+  {
+    "id": "code-programacion-016-a",
+    "category": "programacion",
+    "topic": "Código: calidad",
+    "language": "pseudocode",
+    "code": "funcion procesarPedido(pedido):\n    validar(pedido)\n    calcularImpuestos(pedido)\n    guardarEnBase(pedido)\n    enviarCorreo(pedido)\n    generarPdf(pedido)\n    actualizarMetricas(pedido)",
+    "question": "¿Qué señal de diseño conviene investigar?",
+    "options": [
+      "El método coordina demasiadas responsabilidades y colaboradores",
+      "Todo método con seis líneas viola automáticamente Big O",
+      "Las funciones no pueden invocar otras funciones",
+      "Las métricas impiden compilar"
+    ],
+    "correctIndex": 0,
+    "explanation": "La mezcla de reglas, persistencia, comunicación y presentación sugiere baja cohesión y múltiples razones de cambio.",
+    "source": "software-engineering-guide.md"
+  },
+  {
+    "id": "code-programacion-016-b",
+    "category": "programacion",
+    "topic": "Código: calidad",
+    "language": "pseudocode",
+    "code": "funcion procesarPedido(pedido):\n    validar(pedido)\n    calcularImpuestos(pedido)\n    guardarEnBase(pedido)\n    enviarCorreo(pedido)\n    generarPdf(pedido)\n    actualizarMetricas(pedido)",
+    "question": "¿Qué mejora es más razonable?",
+    "options": [
+      "Separar responsabilidades detrás de contratos y mantener un orquestador claro",
+      "Copiar el método en cada controlador",
+      "Convertir todas las operaciones en variables globales",
+      "Eliminar validaciones para reducir líneas"
+    ],
+    "correctIndex": 0,
+    "explanation": "Extraer componentes con propósitos definidos mejora pruebas y evolución sin perder la coordinación del caso de uso.",
+    "source": "software-engineering-guide.md"
+  },
+  {
+    "id": "code-programacion-017-a",
+    "category": "programacion",
+    "topic": "Código: estructuras de datos",
+    "language": "pseudocode",
+    "code": "pila.apilar(\"(\")\npila.apilar(\"[\")\ncierre = \"]\"\napertura = pila.desapilar()",
+    "question": "¿Por qué una pila es apropiada para validar delimitadores?",
+    "options": [
+      "El último delimitador abierto debe ser el primero en cerrarse",
+      "Los delimitadores se cierran en orden FIFO",
+      "Una pila ordena alfabéticamente",
+      "La validación requiere acceso aleatorio O(n)"
+    ],
+    "correctIndex": 0,
+    "explanation": "La anidación de paréntesis sigue una disciplina LIFO.",
+    "source": "software-engineering-guide.md, preguntas.md"
+  },
+  {
+    "id": "code-programacion-017-b",
+    "category": "programacion",
+    "topic": "Código: estructuras de datos",
+    "language": "pseudocode",
+    "code": "pila.apilar(\"(\")\npila.apilar(\"[\")\ncierre = \"]\"\napertura = pila.desapilar()",
+    "question": "¿Qué debe comprobarse además de que los tipos coincidan?",
+    "options": [
+      "Que la pila termine vacía y nunca se desapile estando vacía",
+      "Que todos los caracteres sean números",
+      "Que la entrada esté ordenada",
+      "Que la pila permita null"
+    ],
+    "correctIndex": 0,
+    "explanation": "Cierres sin apertura y aperturas sin cierre son ambos inválidos.",
+    "source": "software-engineering-guide.md, preguntas.md"
+  },
+  {
+    "id": "code-programacion-018-a",
+    "category": "programacion",
+    "topic": "Código: algoritmos greedy",
+    "language": "pseudocode",
+    "code": "ordenar actividades por hora_fin ascendente\npara cada actividad:\n    si actividad.inicio >= fin_ultima:\n        seleccionar(actividad)\n        fin_ultima = actividad.fin",
+    "question": "¿Qué problema clásico resuelve esta estrategia?",
+    "options": [
+      "Seleccionar el máximo número de actividades compatibles",
+      "Encontrar cualquier camino más corto con pesos negativos",
+      "Ordenar mediante merge sort",
+      "Calcular Fibonacci"
+    ],
+    "correctIndex": 0,
+    "explanation": "Elegir la actividad que termina antes deja el mayor espacio posible para las siguientes.",
+    "source": "software-engineering-guide.md"
+  },
+  {
+    "id": "code-programacion-018-b",
+    "category": "programacion",
+    "topic": "Código: algoritmos greedy",
+    "language": "pseudocode",
+    "code": "ordenar actividades por hora_fin ascendente\npara cada actividad:\n    si actividad.inicio >= fin_ultima:\n        seleccionar(actividad)\n        fin_ultima = actividad.fin",
+    "question": "¿Por qué no basta aplicar greedy a cualquier problema?",
+    "options": [
+      "La elección local debe demostrarse segura y conducir a una solución óptima",
+      "Greedy siempre usa memoria exponencial",
+      "Solo funciona con strings",
+      "Necesita una base de datos relacional"
+    ],
+    "correctIndex": 0,
+    "explanation": "Sin propiedad de elección voraz y subestructura óptima, una decisión local puede bloquear la solución global.",
+    "source": "software-engineering-guide.md"
+  }
+]
