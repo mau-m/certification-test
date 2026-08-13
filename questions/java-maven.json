@@ -1,0 +1,1544 @@
+[
+  {
+    "id": "javamvn-001",
+    "category": "java",
+    "topic": "JDK, Maven y fundamentos",
+    "question": "¿Qué relación describe correctamente JDK, JRE y JVM?",
+    "options": [
+      "El JRE compila fuentes y el JDK únicamente ejecuta archivos JAR.",
+      "La JVM contiene `javac`; el JDK solo agrega documentación.",
+      "El JDK contiene herramientas de desarrollo y un runtime; la JVM ejecuta bytecode.",
+      "JDK, JRE y JVM son nombres equivalentes desde Java 9."
+    ],
+    "correctIndex": 2,
+    "explanation": "La JVM es el motor especificado para ejecutar bytecode. Conceptualmente, el runtime agrega bibliotecas necesarias para ejecutar y el JDK añade compilador, debugger, `javadoc`, `jcmd` y otras herramientas. Que una distribución moderna no entregue un JRE separado no elimina esa distinción conceptual. Referencia: §2.1.",
+    "source": "README.md"
+  },
+  {
+    "id": "javamvn-002",
+    "category": "java",
+    "topic": "JDK, Maven y fundamentos",
+    "question": "Después de ejecutar `javac Order.java`, ¿qué produce normalmente el compilador?",
+    "options": [
+      "Código máquina exclusivo de la CPU actual.",
+      "Uno o más archivos `.class` con bytecode.",
+      "Un proceso JVM ya iniciado.",
+      "Un JAR ejecutable con todas las dependencias."
+    ],
+    "correctIndex": 1,
+    "explanation": "`javac` genera bytecode en archivos `.class`; pueden ser varios si hay clases anidadas u otras declaraciones. La JVM interpreta o compila ese bytecode mediante JIT. Crear un JAR y resolver dependencias son pasos de empaquetado, no una consecuencia automática de `javac`. Referencia: §2.2.",
+    "source": "README.md"
+  },
+  {
+    "id": "javamvn-003",
+    "category": "java",
+    "topic": "JDK, Maven y fundamentos",
+    "question": "¿Qué ocurre al ejecutar `mvn package` en un proyecto `jar` estándar?",
+    "options": [
+      "Se ejecutan las fases hasta `package`, incluidas compilación y pruebas unitarias.",
+      "Se publica obligatoriamente el artefacto en un repositorio remoto.",
+      "Solo se crea el JAR; no se ejecutan fases anteriores.",
+      "Se elimina primero `target/` aunque no se solicite `clean`."
+    ],
+    "correctIndex": 0,
+    "explanation": "Invocar una fase ejecuta las fases anteriores del mismo ciclo: `validate`, `compile`, `test` y finalmente `package`. `deploy` publica remotamente y `clean` pertenece a otro ciclo, por lo que deben pedirse explícitamente. Referencia: §1A.4.",
+    "source": "README.md"
+  },
+  {
+    "id": "javamvn-004",
+    "category": "java",
+    "topic": "JDK, Maven y fundamentos",
+    "question": "En `mvn dependency:tree`, ¿qué representan `dependency` y `tree`?",
+    "options": [
+      "Plugin y goal.",
+      "Artefacto y classifier.",
+      "Scope y packaging.",
+      "Ciclo y fase."
+    ],
+    "correctIndex": 0,
+    "explanation": "La forma abreviada `prefix:goal` ejecuta un goal concreto de un plugin. Una fase, como `test`, es un punto del ciclo de vida al que Maven vincula goals según packaging y configuración. Referencia: §1A.4.",
+    "source": "README.md"
+  },
+  {
+    "id": "javamvn-005",
+    "category": "java",
+    "topic": "JDK, Maven y fundamentos",
+    "question": "Una biblioteca se necesita para compilar pruebas y ejecutarlas, pero nunca debe formar parte del artefacto de producción. ¿Qué scope corresponde?",
+    "options": [
+      "`runtime`",
+      "`test`",
+      "`provided`",
+      "`compile`"
+    ],
+    "correctIndex": 1,
+    "explanation": "El scope `test` limita la dependencia al classpath de compilación y ejecución de pruebas. `compile` es el predeterminado y se propaga; `runtime` no está para compilar código principal; `provided` supone que el entorno de ejecución la aportará. Referencia: §1A.5.",
+    "source": "README.md"
+  },
+  {
+    "id": "javamvn-006",
+    "category": "java",
+    "topic": "JDK, Maven y fundamentos",
+    "question": "¿Qué efecto tiene declarar una versión dentro de `dependencyManagement` sin añadirla a `dependencies`?",
+    "options": [
+      "La dependencia se añade con scope `compile`.",
+      "Sobrescribe todas las dependencias transitivas aunque nadie use el artefacto.",
+      "Se descarga y se añade únicamente en tests.",
+      "Solo administra valores para declaraciones que realmente la soliciten."
+    ],
+    "correctIndex": 3,
+    "explanation": "`dependencyManagement` centraliza versión, scope u otra información, pero no incorpora por sí solo la biblioteca. Un módulo todavía debe declararla en `dependencies`. Esta diferencia permite un BOM común sin cargar todos sus artefactos. Referencia: §1A.7.",
+    "source": "README.md"
+  },
+  {
+    "id": "javamvn-007",
+    "category": "java",
+    "topic": "JDK, Maven y fundamentos",
+    "question": "Dos rutas transitivas aportan versiones diferentes del mismo artefacto. ¿Qué regla básica usa Maven para mediar?",
+    "options": [
+      "Selecciona siempre la versión numéricamente mayor.",
+      "Falla siempre el build.",
+      "Usa la primera descargada en el repositorio local.",
+      "Prefiere la definición más cercana en el árbol de dependencias."
+    ],
+    "correctIndex": 3,
+    "explanation": "Maven aplica *nearest definition*; si ambas están a la misma profundidad, el orden de declaración puede decidir. No es una selección automática de “la más nueva”. Por eso conviene declarar directamente las bibliotecas usadas y alinear familias mediante `dependencyManagement`/BOM. Referencia: §1A.6.",
+    "source": "README.md"
+  },
+  {
+    "id": "javamvn-008",
+    "category": "java",
+    "topic": "JDK, Maven y fundamentos",
+    "question": "¿Por qué suele preferirse `<maven.compiler.release>17</maven.compiler.release>` a configurar solo `target=17`?",
+    "options": [
+      "Porque obliga a usar Maven 17.",
+      "Porque convierte todas las dependencias al formato modular.",
+      "Porque descarga automáticamente un JDK 17.",
+      "Porque controla sintaxis, bytecode y APIs públicas disponibles para la versión objetivo."
+    ],
+    "correctIndex": 3,
+    "explanation": "`--release` evita compilar accidentalmente contra APIs de un JDK más reciente aunque el bytecode use un target anterior. No instala un JDK ni transforma dependencias. Referencia: §1A.3.",
+    "source": "README.md"
+  },
+  {
+    "id": "javamvn-009",
+    "category": "java",
+    "topic": "JDK, Maven y fundamentos",
+    "question": "¿Cuál afirmación distingue herencia y agregación en un proyecto Maven multimódulo?",
+    "options": [
+      "Un POM padre aporta configuración; un agregador lista módulos para el reactor.",
+      "Solo un POM con packaging `jar` puede ser padre.",
+      "Todo padre debe construir físicamente a sus hijos.",
+      "Agregar un módulo hace que herede automáticamente todas las dependencias."
+    ],
+    "correctIndex": 0,
+    "explanation": "Herencia y agregación son relaciones diferentes aunque un POM raíz pueda cumplir ambas. El padre se declara con `<parent>`; el agregador enumera `<modules>` y suele usar packaging `pom`. Agregar no implica heredar si el hijo no declara ese padre. Referencia: §1A.9.",
+    "source": "README.md"
+  },
+  {
+    "id": "javamvn-010",
+    "category": "java",
+    "topic": "JDK, Maven y fundamentos",
+    "question": "¿Qué comando ayuda a descubrir de dónde proviene una configuración heredada o predeterminada del POM?",
+    "options": [
+      "`mvn java:bytecode`",
+      "`mvn package:explain`",
+      "`mvn help:effective-pom`",
+      "`mvn dependency:purge`"
+    ],
+    "correctIndex": 2,
+    "explanation": "El POM efectivo combina el POM del proyecto, padres, perfiles y defaults. `dependency:tree` responde otra pregunta: el árbol de artefactos. Referencia: §1A.6.",
+    "source": "README.md"
+  },
+  {
+    "id": "javamvn-011",
+    "category": "java",
+    "topic": "JDK, Maven y fundamentos",
+    "question": "¿Qué imprime el siguiente código?",
+    "options": [
+      "`Byte`",
+      "`Short`",
+      "`Integer`",
+      "No compila porque `var` no admite primitivos."
+    ],
+    "correctIndex": 2,
+    "explanation": "La promoción numérica binaria convierte `byte`, `short` y `char` a `int` para la suma. `var` infiere `int`; el cast a `Object` lo boxea como `Integer`. Referencia: §3.",
+    "source": "README.md",
+    "code": "byte a = 10;\nbyte b = 20;\nvar result = a + b;\nSystem.out.println(((Object) result).getClass().getSimpleName());",
+    "language": "java"
+  },
+  {
+    "id": "javamvn-012",
+    "category": "java",
+    "topic": "JDK, Maven y fundamentos",
+    "question": "¿Qué imprime este fragmento?",
+    "options": [
+      "No compila por modificar `value` dentro de la expresión.",
+      "`1:false`",
+      "`1:true`",
+      "`0:false`"
+    ],
+    "correctIndex": 3,
+    "explanation": "`&&` es de cortocircuito: al ser falso el operando izquierdo no evalúa `++value`. Los operadores `&` y `|` sobre booleanos sí evaluarían ambos lados. Referencia: §3.",
+    "source": "README.md",
+    "code": "int value = 0;\nboolean result = false && (++value > 0);\nSystem.out.println(value + \":\" + result);",
+    "language": "java"
+  },
+  {
+    "id": "javamvn-013",
+    "category": "java",
+    "topic": "JDK, Maven y fundamentos",
+    "question": "¿Qué resultado produce?",
+    "options": [
+      "`true:true`",
+      "`false:true`",
+      "`true:false`",
+      "`false:false`"
+    ],
+    "correctIndex": 1,
+    "explanation": "`==` compara identidad de referencias y `new` crea otro objeto. `String.equals` compara la secuencia de caracteres. El string pool no hace que toda instancia con el mismo texto sea la misma referencia. Referencia: §3.",
+    "source": "README.md",
+    "code": "String a = \"java\";\nString b = new String(\"java\");\nSystem.out.println((a == b) + \":\" + a.equals(b));",
+    "language": "java"
+  },
+  {
+    "id": "javamvn-014",
+    "category": "java",
+    "topic": "JDK, Maven y fundamentos",
+    "question": "¿Qué afirmación es correcta sobre este código?",
+    "options": [
+      "Ambas comparaciones con `==` deben ser `false`.",
+      "Ninguna compila porque `Integer` no admite literales.",
+      "Ambas deben ser `true` por autoboxing.",
+      "`a == b` debe ser `true`; no debe dependerse de la identidad de `c` y `d`."
+    ],
+    "correctIndex": 3,
+    "explanation": "El boxing de ciertas expresiones constantes en el rango al menos `-128..127` debe reutilizar identidad. Fuera de ese rango una implementación puede cachear más, por lo que `c == d` no es un contrato de valor. Para valores usa `equals`. Referencia: §3.",
+    "source": "README.md",
+    "code": "Integer a = 127;\nInteger b = 127;\nInteger c = 128;\nInteger d = 128;",
+    "language": "java"
+  },
+  {
+    "id": "javamvn-015",
+    "category": "java",
+    "topic": "JDK, Maven y fundamentos",
+    "question": "¿Cuál declaración con `var` no compila?",
+    "options": [
+      "`var names = new ArrayList<String>();`",
+      "`var count = 10;`",
+      "`for (var name : names) { }`",
+      "`var mapper = (String s) -> s.length();`"
+    ],
+    "correctIndex": 3,
+    "explanation": "Una lambda necesita un tipo objetivo funcional; `var` no puede inferirlo únicamente desde la lambda. En las demás posiciones existe un inicializador o contexto permitido. `var` no hace Java dinámico: el tipo inferido sigue siendo estático. Referencia: §3.",
+    "source": "README.md"
+  },
+  {
+    "id": "javamvn-016",
+    "category": "java",
+    "topic": "JDK, Maven y fundamentos",
+    "question": "¿Qué garantiza `final` aquí?",
+    "options": [
+      "La referencia no puede reasignarse, pero el objeto puede mutar.",
+      "La lista se vuelve automáticamente thread-safe.",
+      "`add` no compila.",
+      "La lista y sus elementos son inmutables."
+    ],
+    "correctIndex": 0,
+    "explanation": "`final` sobre una variable de referencia impide asignarle otra referencia después de inicializarla; no cambia la mutabilidad del objeto apuntado. Inmutabilidad y seguridad concurrente son contratos diferentes. Referencia: §3 y §14.",
+    "source": "README.md",
+    "code": "final List<String> names = new ArrayList<>();\nnames.add(\"Ada\");",
+    "language": "java"
+  },
+  {
+    "id": "javamvn-017",
+    "category": "java",
+    "topic": "JDK, Maven y fundamentos",
+    "question": "¿Qué genera automáticamente un `record Customer(String id, String name)`?",
+    "options": [
+      "Setters públicos para ambos componentes.",
+      "Campos de instancia mutables y constructor vacío.",
+      "Accessors, constructor canónico, `equals`, `hashCode` y `toString` basados en componentes.",
+      "Persistencia y serialización JSON."
+    ],
+    "correctIndex": 2,
+    "explanation": "Un record modela datos transparentes y genera miembros asociados a sus componentes. Sus campos son finales, pero un componente puede referir a un objeto mutable. Ningún record obtiene persistencia o JSON por el lenguaje. Referencia: §5.15.",
+    "source": "README.md"
+  },
+  {
+    "id": "javamvn-018",
+    "category": "java",
+    "topic": "JDK, Maven y fundamentos",
+    "question": "Dado `sealed interface Shape permits Circle, Rectangle`, ¿qué debe cumplir una implementación directa permitida?",
+    "options": [
+      "Ser necesariamente `final`.",
+      "Ser un record.",
+      "Vivir siempre como clase anidada de `Shape`.",
+      "Declararse `final`, `sealed` o `non-sealed`."
+    ],
+    "correctIndex": 3,
+    "explanation": "Un subtipo directo debe declarar cómo continúa o cierra la jerarquía. `final` es una opción, no la única; `sealed` restringe de nuevo y `non-sealed` vuelve a abrir. Referencia: §5.14.",
+    "source": "README.md"
+  },
+  {
+    "id": "javamvn-019",
+    "category": "java",
+    "topic": "JDK, Maven y fundamentos",
+    "question": "¿Por qué no conviene persistir `status.ordinal()` de un enum?",
+    "options": [
+      "Porque `ordinal()` siempre devuelve `-1` fuera de un switch.",
+      "Porque el ordinal cambia si se reordenan o insertan constantes.",
+      "Porque los enums no son objetos.",
+      "Porque `ordinal()` solo existe durante compilación."
+    ],
+    "correctIndex": 1,
+    "explanation": "El ordinal representa la posición declarativa, no un código de negocio estable. Persistirlo acopla datos al orden del fuente. Usa un código explícito o una estrategia de migración por nombre. Referencia: §5.17.",
+    "source": "README.md"
+  },
+  {
+    "id": "javamvn-020",
+    "category": "java",
+    "topic": "JDK, Maven y fundamentos",
+    "question": "Si `a.equals(b)` es `true`, ¿qué exige el contrato de hashing?",
+    "options": [
+      "`a` y `b` deben ser la misma referencia.",
+      "`a.hashCode()` y `b.hashCode()` deben ser iguales.",
+      "Sus hash codes deben ser distintos para evitar colisiones.",
+      "Solo importa si ambos son `String`."
+    ],
+    "correctIndex": 1,
+    "explanation": "Objetos iguales deben producir el mismo hash. El inverso no se exige: dos objetos no iguales pueden colisionar. Romper el contrato hace que `HashMap`/`HashSet` no encuentren correctamente valores lógicamente iguales. Referencia: §4.",
+    "source": "README.md"
+  },
+  {
+    "id": "javamvn-021",
+    "category": "java",
+    "topic": "JDK, Maven y fundamentos",
+    "question": "¿Qué sobrecarga se invoca?",
+    "options": [
+      "Es ambiguo.",
+      "`Integer`",
+      "`long`",
+      "Ninguna; se requiere sufijo `L`."
+    ],
+    "correctIndex": 2,
+    "explanation": "Para un literal `int`, widening primitivo a `long` se prefiere sobre boxing a `Integer` durante resolución de overload. La selección ocurre en compilación. Referencia: §6.",
+    "source": "README.md",
+    "code": "void process(long value)   { System.out.print(\"long\"); }\nvoid process(Integer value){ System.out.print(\"Integer\"); }\n\nprocess(10);",
+    "language": "java"
+  },
+  {
+    "id": "javamvn-022",
+    "category": "java",
+    "topic": "JDK, Maven y fundamentos",
+    "question": "¿Qué imprime?",
+    "options": [
+      "`C`, por despacho dinámico.",
+      "`P`, por el tipo declarado.",
+      "`PC`.",
+      "No compila por asignar `Child` a `Parent`."
+    ],
+    "correctIndex": 0,
+    "explanation": "La firma aplicable se conoce desde el tipo declarado, pero una llamada a método de instancia sobrescribible se despacha según el tipo real. El upcast es implícito y seguro. Referencia: §6 y §7.6.",
+    "source": "README.md",
+    "code": "class Parent { void run() { System.out.print(\"P\"); } }\nclass Child extends Parent { @Override void run() { System.out.print(\"C\"); } }\n\nParent value = new Child();\nvalue.run();",
+    "language": "java"
+  },
+  {
+    "id": "javamvn-023",
+    "category": "java",
+    "topic": "JDK, Maven y fundamentos",
+    "question": "¿Qué imprime este código sobre métodos `static`?",
+    "options": [
+      "`PC`",
+      "`P`",
+      "`C`",
+      "No compila porque un método estático no puede repetirse."
+    ],
+    "correctIndex": 1,
+    "explanation": "Los métodos estáticos se ocultan, no se sobrescriben; la selección depende del tipo declarado de la expresión. Invocarlos mediante una instancia es legal pero confuso: prefiere `Parent.show()`. Referencia: §6.",
+    "source": "README.md",
+    "code": "class Parent { static void show() { System.out.print(\"P\"); } }\nclass Child extends Parent { static void show() { System.out.print(\"C\"); } }\n\nParent value = new Child();\nvalue.show();",
+    "language": "java"
+  },
+  {
+    "id": "javamvn-024",
+    "category": "java",
+    "topic": "JDK, Maven y fundamentos",
+    "question": "Dos interfaces no relacionadas proporcionan el mismo método `default`. ¿Qué debe hacer la clase que implementa ambas?",
+    "options": [
+      "Nada; siempre gana la primera interfaz de la declaración.",
+      "Convertir ambos métodos en `static` durante compilación.",
+      "Sobrescribir el método y resolver explícitamente la ambigüedad.",
+      "Declararse abstracta final."
+    ],
+    "correctIndex": 2,
+    "explanation": "Si ninguna interfaz es más específica y no existe un método de clase que gane, el compilador obliga a resolver. La implementación puede elegir `A.super.method()` o combinar comportamientos. El orden textual de interfaces no decide. Referencia: §5.10–5.12.",
+    "source": "README.md"
+  },
+  {
+    "id": "javamvn-025",
+    "category": "java",
+    "topic": "JDK, Maven y fundamentos",
+    "question": "¿Qué imprime?",
+    "options": [
+      "`7`",
+      "`0`",
+      "`P`",
+      "Lanza `NullPointerException`."
+    ],
+    "correctIndex": 1,
+    "explanation": "El constructor padre llama virtualmente a `Child.print`, pero el inicializador `value = 7` todavía no se ejecutó; el campo conserva su valor predeterminado `0`. Es la razón para no llamar métodos sobrescribibles desde constructores. Referencia: §7.4.",
+    "source": "README.md",
+    "code": "class Parent {\n    Parent() { print(); }\n    void print() { System.out.print(\"P\"); }\n}\nclass Child extends Parent {\n    int value = 7;\n    @Override void print() { System.out.print(value); }\n}\nnew Child();",
+    "language": "java"
+  },
+  {
+    "id": "javamvn-026",
+    "category": "java",
+    "topic": "Genéricos, errores, APIs y diseño",
+    "question": "¿Por qué no puede asignarse `List<Integer>` a `List<Number>`?",
+    "options": [
+      "Porque los genéricos Java son covariantes solo para números.",
+      "Porque `List` solo acepta tipos finales.",
+      "Porque `Integer` no extiende `Number`.",
+      "Porque son invariantes; la asignación permitiría insertar un `Double` en una lista de enteros."
+    ],
+    "correctIndex": 3,
+    "explanation": "La relación entre argumentos no se propaga a los tipos parametrizados: `List<Integer>` no es subtipo de `List<Number>`. Los comodines expresan varianza de uso cuando corresponde. Referencia: §7.8 y §7A.4.",
+    "source": "README.md"
+  },
+  {
+    "id": "javamvn-027",
+    "category": "java",
+    "topic": "Genéricos, errores, APIs y diseño",
+    "question": "¿Qué firma expresa mejor una copia desde una lista productora hacia una consumidora?",
+    "options": [
+      "`<T> void copy(List<T> source, List<T> target)` únicamente.",
+      "`<T> void copy(List<? super T> source, List<? extends T> target)`.",
+      "`<T> void copy(List<? extends T> source, List<? super T> target)`.",
+      "`void copy(List<?> source, List<?> target)` y `target.add(source.get(0))`."
+    ],
+    "correctIndex": 2,
+    "explanation": "PECS: quien produce valores se declara `? extends T`; quien los consume, `? super T`. La firma acepta, por ejemplo, copiar `List<Integer>` hacia `List<Number>`. Referencia: §7A.4.",
+    "source": "README.md"
+  },
+  {
+    "id": "javamvn-028",
+    "category": "java",
+    "topic": "Genéricos, errores, APIs y diseño",
+    "question": "Dada `List<? extends Number> values`, ¿qué operación es segura?",
+    "options": [
+      "`values.add(1)`.",
+      "`values.add(2.5)`.",
+      "`Integer value = values.get(0)` sin cast.",
+      "`Number value = values.get(0)`."
+    ],
+    "correctIndex": 3,
+    "explanation": "La lista real podría ser de `Integer`, `Double` u otro subtipo. Puede leerse como `Number`, pero no agregarse un subtipo concreto porque podría violar el tipo real desconocido. Referencia: §7.9 y §7A.4.",
+    "source": "README.md"
+  },
+  {
+    "id": "javamvn-029",
+    "category": "java",
+    "topic": "Genéricos, errores, APIs y diseño",
+    "question": "¿Cuál comprobación compila por efecto del borrado de tipos?",
+    "options": [
+      "`new T()`.",
+      "`value instanceof T` dentro de `class Box<T>`.",
+      "`value instanceof List<String>`.",
+      "`value instanceof List<?>`."
+    ],
+    "correctIndex": 3,
+    "explanation": "`List<?>` es reificable: no afirma un argumento concreto que se haya borrado. `List<String>` y `T` no están disponibles para esa comprobación runtime; construir `T` también requiere una fábrica o token de tipo. Referencia: §7A.5.",
+    "source": "README.md"
+  },
+  {
+    "id": "javamvn-030",
+    "category": "java",
+    "topic": "Genéricos, errores, APIs y diseño",
+    "question": "¿Por qué estas dos declaraciones no pueden coexistir en la misma clase?",
+    "options": [
+      "Porque los métodos no pueden sobrecargarse con colecciones.",
+      "Porque `String` e `Integer` son finales.",
+      "Porque tras erasure ambas firmas tienen esencialmente `process(List)`.",
+      "Porque faltan comodines."
+    ],
+    "correctIndex": 2,
+    "explanation": "El borrado produce el mismo descriptor de parámetros y causa un *name clash*. Se necesita otro nombre o una diferencia reificable en la firma. Referencia: §7A.5.",
+    "source": "README.md",
+    "code": "void process(List<String> values) { }\nvoid process(List<Integer> values) { }",
+    "language": "java"
+  },
+  {
+    "id": "javamvn-031",
+    "category": "java",
+    "topic": "Genéricos, errores, APIs y diseño",
+    "question": "Un método padre declara `void load() throws IOException`. ¿Qué sobrescritura es válida?",
+    "options": [
+      "`void load() throws Exception`.",
+      "`void load() throws FileNotFoundException`.",
+      "`void load() throws Throwable`.",
+      "`private void load()`."
+    ],
+    "correctIndex": 1,
+    "explanation": "Una sobrescritura puede reducir o eliminar checked exceptions, no ampliarlas. `FileNotFoundException` es subtipo de `IOException`. Tampoco puede reducir visibilidad. Referencia: §6 y §7B.",
+    "source": "README.md"
+  },
+  {
+    "id": "javamvn-032",
+    "category": "java",
+    "topic": "Genéricos, errores, APIs y diseño",
+    "question": "El cuerpo de un `try-with-resources` lanza `ParseException` y `close()` lanza `IOException`. ¿Cómo se conservan normalmente?",
+    "options": [
+      "Solo queda la excepción de cierre.",
+      "Se suman en una `MultiException` automática.",
+      "Ambas se descartan.",
+      "La del cuerpo es principal y la de cierre queda suprimida."
+    ],
+    "correctIndex": 3,
+    "explanation": "El fallo que motivó la salida permanece como excepción principal; los fallos al cerrar se consultan con `getSuppressed()`. Esto evita que la limpieza oculte la causa original. Referencia: §7B.4.",
+    "source": "README.md"
+  },
+  {
+    "id": "javamvn-033",
+    "category": "java",
+    "topic": "Genéricos, errores, APIs y diseño",
+    "question": "¿Cuál multi-catch no compila?",
+    "options": [
+      "`catch (NoSuchFileException | AccessDeniedException e)`.",
+      "`catch (IOException | FileNotFoundException e)`.",
+      "`catch (IOException | SQLException e)`.",
+      "`catch (ParseException | IOException e)`."
+    ],
+    "correctIndex": 1,
+    "explanation": "Las alternativas no pueden tener relación padre-hija; `FileNotFoundException` ya está cubierta por `IOException`. Las demás parejas son tipos hermanos o no relacionados. Referencia: §7B.5.",
+    "source": "README.md"
+  },
+  {
+    "id": "javamvn-034",
+    "category": "java",
+    "topic": "Genéricos, errores, APIs y diseño",
+    "question": "¿Qué devuelve este método?",
+    "options": [
+      "`1`",
+      "`2`",
+      "No compila.",
+      "Lanza `IllegalStateException`."
+    ],
+    "correctIndex": 1,
+    "explanation": "El `return` de `finally` reemplaza el retorno pendiente del `try`; también podría ocultar una excepción. Es legal pero un antipatrón: `finally` debe limpiar, no decidir el resultado. Referencia: §7B.4.",
+    "source": "README.md",
+    "code": "int value() {\n    try {\n        return 1;\n    } finally {\n        return 2;\n    }\n}",
+    "language": "java"
+  },
+  {
+    "id": "javamvn-035",
+    "category": "java",
+    "topic": "Genéricos, errores, APIs y diseño",
+    "question": "Al traducir una excepción técnica a una de dominio, ¿qué práctica conserva mejor el diagnóstico?",
+    "options": [
+      "Incluir contexto seguro y pasar la excepción original como `cause`.",
+      "Guardar solo `exception.getMessage()` en un campo estático.",
+      "Lanzar la nueva excepción sin mensaje ni causa.",
+      "Capturar `Throwable` y continuar."
+    ],
+    "correctIndex": 0,
+    "explanation": "La traducción cambia el vocabulario de la capa sin destruir stack trace ni causa. El contexto debe identificar la operación, pero no filtrar secretos. Referencia: §7B.3 y §7B.6.",
+    "source": "README.md"
+  },
+  {
+    "id": "javamvn-036",
+    "category": "java",
+    "topic": "Genéricos, errores, APIs y diseño",
+    "question": "Un objeto usado como clave de `HashMap` cambia un campo incluido en `hashCode`. ¿Qué riesgo aparece?",
+    "options": [
+      "El mapa reubica automáticamente la entrada.",
+      "La entrada puede permanecer en un bucket que ya no corresponde y no encontrarse.",
+      "La JVM convierte la clave en inmutable.",
+      "Solo cambia el orden de iteración."
+    ],
+    "correctIndex": 1,
+    "explanation": "`HashMap` no observa mutaciones de la clave para reindexarla. Las claves deben mantener estable su identidad lógica mientras estén almacenadas; records u objetos de valor inmutables son buenas opciones. Referencia: §7F.4.",
+    "source": "README.md"
+  },
+  {
+    "id": "javamvn-037",
+    "category": "java",
+    "topic": "Genéricos, errores, APIs y diseño",
+    "question": "¿Qué ocurre aquí?",
+    "options": [
+      "No compila porque `List.of` solo acepta números.",
+      "Crea una lista no modificable que permite `null`.",
+      "Crea una lista modificable de tamaño dos.",
+      "Lanza `NullPointerException` durante la creación."
+    ],
+    "correctIndex": 3,
+    "explanation": "Las fábricas `List.of`, `Set.of` y `Map.of` rechazan null y crean colecciones no modificables. La falla ocurre al construir. Referencia: §7F.7.",
+    "source": "README.md",
+    "code": "List<String> values = List.of(\"A\", null);",
+    "language": "java"
+  },
+  {
+    "id": "javamvn-038",
+    "category": "java",
+    "topic": "Genéricos, errores, APIs y diseño",
+    "question": "¿Qué imprime?",
+    "options": [
+      "`2:1`",
+      "`1:1`",
+      "`2:2`",
+      "Lanza `UnsupportedOperationException` en `source.add`."
+    ],
+    "correctIndex": 0,
+    "explanation": "`unmodifiableList` es una vista que refleja cambios efectuados a través de `source`; `copyOf` toma un snapshot no modificable. `source` continúa siendo mutable. Referencia: §7F.7.",
+    "source": "README.md",
+    "code": "List<String> source = new ArrayList<>(List.of(\"A\"));\nList<String> view = Collections.unmodifiableList(source);\nList<String> copy = List.copyOf(source);\nsource.add(\"B\");\nSystem.out.println(view.size() + \":\" + copy.size());",
+    "language": "java"
+  },
+  {
+    "id": "javamvn-039",
+    "category": "java",
+    "topic": "Genéricos, errores, APIs y diseño",
+    "question": "¿Qué garantiza `PriorityQueue`?",
+    "options": [
+      "Que su iterador recorre todos los elementos ordenados.",
+      "Que conserva orden de inserción.",
+      "Que es thread-safe.",
+      "Que la cabeza obtenida con `peek`/`poll` respeta la prioridad."
+    ],
+    "correctIndex": 3,
+    "explanation": "La estructura mantiene el elemento prioritario en la cabeza, pero su iteración no es un recorrido ordenado total. Para extraer en orden hay que hacer `poll` repetidamente. Referencia: §7F.5.",
+    "source": "README.md"
+  },
+  {
+    "id": "javamvn-040",
+    "category": "java",
+    "topic": "Genéricos, errores, APIs y diseño",
+    "question": "Un `TreeSet<Person>` usa un comparator que compara solo apellido. Dos personas distintas comparten apellido. ¿Qué puede ocurrir?",
+    "options": [
+      "Siempre conserva ambas porque usa `equals` para unicidad.",
+      "Cambia automáticamente a `HashSet`.",
+      "Considera duplicada a la segunda si el comparator devuelve cero.",
+      "Lanza `ClassCastException` por comparar strings."
+    ],
+    "correctIndex": 2,
+    "explanation": "En colecciones ordenadas, un resultado de comparación cero determina equivalencia para el set. Incluye criterios de desempate, como ID, si ambas personas deben coexistir. Referencia: §7F.3 y §7F.6.",
+    "source": "README.md"
+  },
+  {
+    "id": "javamvn-041",
+    "category": "java",
+    "topic": "Genéricos, errores, APIs y diseño",
+    "question": "¿Qué hace esta llamada si `word` no estaba en el mapa?",
+    "options": [
+      "Invoca `Integer::sum` con un argumento null obligatoriamente.",
+      "No modifica el mapa.",
+      "Inserta `word -> 1`.",
+      "Lanza `NoSuchElementException`."
+    ],
+    "correctIndex": 2,
+    "explanation": "`merge` inserta el valor dado cuando no existe uno asociado; si existe, combina viejo y nuevo con la función. Expresa el conteo sin un bloque `containsKey` separado. Referencia: §7F.4.",
+    "source": "README.md",
+    "code": "counts.merge(word, 1, Integer::sum);",
+    "language": "java"
+  },
+  {
+    "id": "javamvn-042",
+    "category": "java",
+    "topic": "Genéricos, errores, APIs y diseño",
+    "question": "¿Qué estructura es la opción general recomendada para usar como pila LIFO moderna?",
+    "options": [
+      "`Stack`",
+      "`CopyOnWriteArrayList`",
+      "`TreeSet`",
+      "`ArrayDeque`"
+    ],
+    "correctIndex": 3,
+    "explanation": "`ArrayDeque` implementa operaciones `push`/`pop` y evita la API histórica sincronizada de `Stack`. No acepta null. Referencia: §7F.5.",
+    "source": "README.md"
+  },
+  {
+    "id": "javamvn-043",
+    "category": "java",
+    "topic": "Genéricos, errores, APIs y diseño",
+    "question": "¿Cuál forma elimina elementos durante una iteración sin violar el contrato del iterador?",
+    "options": [
+      "Llamar siempre `collection.remove(value)` dentro de for-each.",
+      "Usar `iterator.remove()` después de `iterator.next()`.",
+      "Reasignar la variable del for-each a null.",
+      "Modificar la colección desde otro hilo."
+    ],
+    "correctIndex": 1,
+    "explanation": "El iterador conoce la modificación realizada mediante su propio `remove`. Para una condición simple también existe `removeIf`. Modificar estructuralmente por otra ruta puede causar `ConcurrentModificationException` y no aporta sincronización. Referencia: §7F.8.",
+    "source": "README.md"
+  },
+  {
+    "id": "javamvn-044",
+    "category": "java",
+    "topic": "Genéricos, errores, APIs y diseño",
+    "question": "¿Qué afirmación sobre `BigDecimal` es correcta?",
+    "options": [
+      "`new BigDecimal(0.1)` siempre representa decimal 0.1 exacto.",
+      "`new BigDecimal(\"0.1\")` evita arrastrar la aproximación binaria de un `double`.",
+      "`new BigDecimal(\"2.0\").equals(new BigDecimal(\"2.00\"))` es `true`.",
+      "`BigDecimal` elige redondeo automáticamente en toda división."
+    ],
+    "correctIndex": 1,
+    "explanation": "Construir desde texto conserva la representación decimal indicada. `equals` considera valor y escala, por lo que `2.0` y `2.00` difieren; `compareTo` los considera numéricamente iguales. Algunas divisiones requieren escala/modo de redondeo explícitos. Referencia: §7D.4.",
+    "source": "README.md"
+  },
+  {
+    "id": "javamvn-045",
+    "category": "java",
+    "topic": "Genéricos, errores, APIs y diseño",
+    "question": "Se recibe `LocalDateTime` para programar una reunión mundial. ¿Qué información falta para convertirla inequívocamente a `Instant`?",
+    "options": [
+      "Una `ZoneId` y una política para posibles ambigüedades de horario.",
+      "Un `Locale` únicamente.",
+      "Un `Period`.",
+      "Un formatter JSON."
+    ],
+    "correctIndex": 0,
+    "explanation": "`LocalDateTime` no representa zona ni offset. Una zona resuelve reglas históricas, incluidos solapamientos o huecos. `Locale` afecta presentación, no posición en la línea de tiempo. Referencia: §7D.1.",
+    "source": "README.md"
+  },
+  {
+    "id": "javamvn-046",
+    "category": "java",
+    "topic": "Genéricos, errores, APIs y diseño",
+    "question": "¿Por qué debe cerrarse el stream devuelto por `Files.lines(path)`?",
+    "options": [
+      "Porque mantiene un recurso de archivo abierto durante el consumo perezoso.",
+      "Porque los streams Java siempre crean un hilo.",
+      "Porque de otro modo no puede ejecutarse `filter`.",
+      "Porque convierte el archivo a escritura."
+    ],
+    "correctIndex": 0,
+    "explanation": "El stream está respaldado por I/O y debe usarse en `try-with-resources`. Las colecciones convertidas a stream normalmente no requieren cierre, pero las fuentes de recursos sí. Referencia: §7D.2 y §7B.4.",
+    "source": "README.md"
+  },
+  {
+    "id": "javamvn-047",
+    "category": "java",
+    "topic": "Genéricos, errores, APIs y diseño",
+    "question": "¿Qué diferencia principal existe entre `Matcher.matches()` y `Matcher.find()`?",
+    "options": [
+      "`matches` busca una subsecuencia; `find` exige toda la entrada.",
+      "`find` modifica la expresión regular.",
+      "`matches` exige coincidencia completa; `find` busca la siguiente ocurrencia.",
+      "No hay diferencia."
+    ],
+    "correctIndex": 2,
+    "explanation": "`matches()` valida que el patrón cubra toda la región; `find()` recorre coincidencias parciales. Elegir el equivocado puede aceptar texto adicional o rechazar búsquedas válidas. Referencia: §7D.3.",
+    "source": "README.md"
+  },
+  {
+    "id": "javamvn-048",
+    "category": "java",
+    "topic": "Genéricos, errores, APIs y diseño",
+    "question": "En JPMS, ¿qué diferencia resume `exports` y `opens`?",
+    "options": [
+      "`exports` incluye automáticamente todos los subpaquetes.",
+      "`opens` compila el módulo y `exports` lo ejecuta.",
+      "Ambos son alias.",
+      "`exports` habilita acceso público normal; `opens` permite reflexión profunda."
+    ],
+    "correctIndex": 3,
+    "explanation": "Exportar hace accesibles tipos públicos a módulos lectores; abrir permite acceso reflexivo a miembros según la configuración. Los paquetes no son jerárquicos para JPMS: exportar uno no exporta subpaquetes. Referencia: §7E.1.",
+    "source": "README.md"
+  },
+  {
+    "id": "javamvn-049",
+    "category": "java",
+    "topic": "Genéricos, errores, APIs y diseño",
+    "question": "¿Qué pareja de directivas conecta un consumidor y un proveedor mediante `ServiceLoader`?",
+    "options": [
+      "`main-class` y `manifest`.",
+      "`exports` y `opens` solamente.",
+      "`requires static` en ambos.",
+      "`uses` en el consumidor y `provides ... with ...` en el proveedor."
+    ],
+    "correctIndex": 3,
+    "explanation": "`uses` declara consumo de un servicio y `provides Service with Implementation` registra una implementación modular. El consumidor carga proveedores sin conocer la clase concreta. Referencia: §7E.1.",
+    "source": "README.md"
+  },
+  {
+    "id": "javamvn-050",
+    "category": "java",
+    "topic": "Genéricos, errores, APIs y diseño",
+    "question": "¿Qué diseño aplica mejor Dependency Inversion?",
+    "options": [
+      "`OrderService` crea `new StripeGateway()` dentro de cada método.",
+      "Todos los métodos de pago son estáticos globales.",
+      "`OrderService` recibe un `PaymentGateway` por constructor y la composición elige la implementación.",
+      "`StripeGateway` extiende `OrderService`."
+    ],
+    "correctIndex": 2,
+    "explanation": "La política de alto nivel depende de un contrato estable; el ensamblaje suministra un detalle concreto. Esto hace explícita la dependencia y facilita sustitución sin acoplar el servicio a construcción o framework. Referencia: §8.4.",
+    "source": "README.md"
+  },
+  {
+    "id": "javamvn-051",
+    "category": "java",
+    "topic": "Lambdas, Streams y JVM",
+    "question": "¿Por qué esta interfaz continúa siendo funcional?",
+    "options": [
+      "Porque `equals` es `static` dentro de una interfaz.",
+      "Porque `equals(Object)` corresponde a un método público de `Object` y no añade otro contrato funcional independiente.",
+      "Porque toda interfaz con dos métodos es funcional.",
+      "No es funcional y la anotación no compila."
+    ],
+    "correctIndex": 1,
+    "explanation": "Los métodos que corresponden a métodos públicos de `Object` no cuentan como un segundo método abstracto funcional. El descriptor de la lambda es `void run()`. Referencia: §11.",
+    "source": "README.md",
+    "code": "@FunctionalInterface\ninterface Action {\n    void run();\n    boolean equals(Object other);\n}",
+    "language": "java"
+  },
+  {
+    "id": "javamvn-052",
+    "category": "java",
+    "topic": "Lambdas, Streams y JVM",
+    "question": "¿Por qué no compila?",
+    "options": [
+      "`total` no es final ni efectivamente final porque se modifica.",
+      "`List.of` no implementa `Iterable`.",
+      "`forEach` solo acepta métodos estáticos.",
+      "Una lambda no puede recibir enteros."
+    ],
+    "correctIndex": 0,
+    "explanation": "Las variables locales capturadas deben ser finales o efectivamente finales. Mutar un objeto referenciado puede compilar, pero introducir estado compartido mutable en lambdas suele ser una señal para usar reducción o un ciclo. Referencia: §11.",
+    "source": "README.md",
+    "code": "int total = 0;\nList.of(1, 2, 3).forEach(n -> total += n);",
+    "language": "java"
+  },
+  {
+    "id": "javamvn-053",
+    "category": "java",
+    "topic": "Lambdas, Streams y JVM",
+    "question": "Dentro de una lambda declarada en un método de instancia, ¿a qué se refiere `this`?",
+    "options": [
+      "A la instancia envolvente en la que se declaró la lambda.",
+      "A un objeto sintético que representa la lambda.",
+      "Siempre a `Thread.currentThread()`.",
+      "No puede usarse `this` en lambdas."
+    ],
+    "correctIndex": 0,
+    "explanation": "Una lambda no introduce su propio `this`; una clase anónima sí. Esta diferencia afecta resolución de miembros y semántica, aunque ambas puedan implementar una interfaz funcional. Referencia: §5.16 y §11.",
+    "source": "README.md"
+  },
+  {
+    "id": "javamvn-054",
+    "category": "java",
+    "topic": "Lambdas, Streams y JVM",
+    "question": "¿Qué referencia a método es equivalente a `text -> text.trim()`?",
+    "options": [
+      "`text::String`",
+      "`String.trim()`",
+      "`String::trim`",
+      "`Object::new`"
+    ],
+    "correctIndex": 2,
+    "explanation": "Es una referencia a método de instancia de un objeto arbitrario de tipo `String`; el parámetro de la función se convierte en receptor. Su validez final depende del tipo objetivo funcional. Referencia: §11.",
+    "source": "README.md"
+  },
+  {
+    "id": "javamvn-055",
+    "category": "java",
+    "topic": "Lambdas, Streams y JVM",
+    "question": "Para `Function<A,B> first` y `Function<B,C> second`, ¿qué expresa `first.andThen(second)`?",
+    "options": [
+      "Ejecutar `second` y pasar su resultado a `first`.",
+      "Ejecutar ambas en paralelo.",
+      "Ejecutar `first` y pasar su resultado a `second`.",
+      "Combinar sus resultados en una lista."
+    ],
+    "correctIndex": 2,
+    "explanation": "`andThen` sigue el orden de lectura: primero `first`, después `second`. `compose` invierte el orden conceptual. Los tipos de salida/entrada hacen explícita la composición. Referencia: §11.",
+    "source": "README.md"
+  },
+  {
+    "id": "javamvn-056",
+    "category": "java",
+    "topic": "Lambdas, Streams y JVM",
+    "question": "¿Qué imprime antes de llamar a `count()`?",
+    "options": [
+      "`A123`",
+      "Nada, incluso después de `count`.",
+      "`A` únicamente.",
+      "`123A`"
+    ],
+    "correctIndex": 0,
+    "explanation": "Las operaciones intermedias son perezosas; construir el pipeline no recorre la fuente. Primero se imprime `A`; la terminal `count` dispara el filtro y sus efectos en orden secuencial. Referencia: §12.",
+    "source": "README.md",
+    "code": "Stream<Integer> stream = Stream.of(1, 2, 3)\n        .filter(n -> {\n            System.out.print(n);\n            return n > 1;\n        });\nSystem.out.print(\"A\");\nlong count = stream.count();",
+    "language": "java"
+  },
+  {
+    "id": "javamvn-057",
+    "category": "java",
+    "topic": "Lambdas, Streams y JVM",
+    "question": "¿Qué ocurre al ejecutar una segunda operación terminal sobre el mismo stream?",
+    "options": [
+      "Devuelve siempre `Optional.empty()`.",
+      "Se vuelve a recorrer desde el principio.",
+      "La segunda operación normalmente lanza `IllegalStateException` porque el stream ya fue consumido.",
+      "Solo falla si el stream era paralelo."
+    ],
+    "correctIndex": 2,
+    "explanation": "Un stream representa un pipeline de un solo uso. Si se necesita repetir, conserva la fuente o una `Supplier<Stream<T>>` que cree uno nuevo. Referencia: §12.",
+    "source": "README.md",
+    "code": "Stream<String> stream = Stream.of(\"A\", \"B\");\nstream.count();\nstream.findFirst();",
+    "language": "java"
+  },
+  {
+    "id": "javamvn-058",
+    "category": "java",
+    "topic": "Lambdas, Streams y JVM",
+    "question": "¿Qué operación transforma `Stream<List<String>>` en `Stream<String>` con todos los elementos internos?",
+    "options": [
+      "`map(List::stream)`.",
+      "`peek(List::clear)`.",
+      "`filter(List::isEmpty)`.",
+      "`flatMap(List::stream)`."
+    ],
+    "correctIndex": 3,
+    "explanation": "`map` produciría `Stream<Stream<String>>`; `flatMap` mapea y aplana un nivel. Se usa para relaciones uno-a-muchos o resultados opcionales/streams anidados. Referencia: §12.",
+    "source": "README.md"
+  },
+  {
+    "id": "javamvn-059",
+    "category": "java",
+    "topic": "Lambdas, Streams y JVM",
+    "question": "¿De qué depende `stream.distinct()` para objetos normales?",
+    "options": [
+      "Del contrato `equals` y `hashCode`.",
+      "De `Comparable` obligatoriamente.",
+      "Solo de identidad `==`.",
+      "Del orden alfabético de `toString`."
+    ],
+    "correctIndex": 0,
+    "explanation": "La noción de duplicado sigue igualdad lógica. Una implementación incoherente de `equals`/`hashCode` produce resultados sorprendentes igual que en un `HashSet`. Referencia: §4 y §12.",
+    "source": "README.md"
+  },
+  {
+    "id": "javamvn-060",
+    "category": "java",
+    "topic": "Lambdas, Streams y JVM",
+    "question": "¿Por qué esta reducción es problemática en paralelo?",
+    "options": [
+      "La resta no está definida para enteros.",
+      "El identificador debe ser siempre uno.",
+      "La operación no es asociativa y las particiones pueden agruparse de distintas formas.",
+      "`reduce` nunca funciona con streams paralelos."
+    ],
+    "correctIndex": 2,
+    "explanation": "Una reducción paralela necesita identidad compatible y operación asociativa. La resta cambia con el agrupamiento, por lo que el resultado puede diferir del recorrido secuencial. Referencia: §12.",
+    "source": "README.md",
+    "code": "int result = numbers.parallelStream()\n        .reduce(0, (a, b) -> a - b);",
+    "language": "java"
+  },
+  {
+    "id": "javamvn-061",
+    "category": "java",
+    "topic": "Lambdas, Streams y JVM",
+    "question": "¿Qué ocurre si dos elementos generan la misma clave aquí?",
+    "options": [
+      "Se conserva silenciosamente el último.",
+      "Se conserva silenciosamente el primero.",
+      "Se lanza una excepción por clave duplicada si no se da función merge.",
+      "La clave se convierte en lista automáticamente."
+    ],
+    "correctIndex": 2,
+    "explanation": "`toMap` requiere una política explícita para colisiones. Si las repeticiones son parte del modelo, usa una función merge o `groupingBy`; no dependas de pérdida silenciosa. Referencia: §12.",
+    "source": "README.md",
+    "code": "people.stream().collect(Collectors.toMap(Person::name, Person::age));",
+    "language": "java"
+  },
+  {
+    "id": "javamvn-062",
+    "category": "java",
+    "topic": "Lambdas, Streams y JVM",
+    "question": "¿Qué collector crea un mapa de departamento a lista de empleados?",
+    "options": [
+      "`joining(Employee::department)`.",
+      "`groupingBy(Employee::department)`.",
+      "`partitioningBy(Employee::department)`.",
+      "`counting(Employee::department)`."
+    ],
+    "correctIndex": 1,
+    "explanation": "`groupingBy` clasifica por una clave arbitraria y, por defecto, acumula listas. `partitioningBy` solo divide por predicado booleano. Referencia: §12.",
+    "source": "README.md"
+  },
+  {
+    "id": "javamvn-063",
+    "category": "java",
+    "topic": "Lambdas, Streams y JVM",
+    "question": "¿Cuál diferencia existe entre `optional.orElse(expensive())` y `optional.orElseGet(this::expensive)`?",
+    "options": [
+      "Ninguna; ambas son siempre perezosas.",
+      "`orElse` evalúa su argumento aunque el optional tenga valor; `orElseGet` invoca el supplier solo si está vacío.",
+      "`orElseGet` solo funciona con null.",
+      "`orElse` no devuelve el contenido presente."
+    ],
+    "correctIndex": 1,
+    "explanation": "Los argumentos de métodos se evalúan antes de invocar, por lo que `expensive()` se ejecuta con `orElse`. El supplier de `orElseGet` conserva evaluación perezosa. Referencia: §12.",
+    "source": "README.md"
+  },
+  {
+    "id": "javamvn-064",
+    "category": "java",
+    "topic": "Lambdas, Streams y JVM",
+    "question": "¿Qué devuelve `Stream.<Integer>empty().allMatch(n -> n > 0)`?",
+    "options": [
+      "`false`",
+      "Lanza `NoSuchElementException`.",
+      "`null`",
+      "`true`"
+    ],
+    "correctIndex": 3,
+    "explanation": "No existe elemento que contradiga el predicado; es verdad vacía. De forma dual, `anyMatch` sobre vacío es falso y `noneMatch` es verdadero. Referencia: §12.",
+    "source": "README.md"
+  },
+  {
+    "id": "javamvn-065",
+    "category": "java",
+    "topic": "Lambdas, Streams y JVM",
+    "question": "¿Qué problema tiene este código?",
+    "options": [
+      "`ArrayList` recibe mutaciones concurrentes no seguras.",
+      "`forEach` preserva orden y sincroniza automáticamente.",
+      "Un stream paralelo nunca usa más de un hilo.",
+      "`add` es una operación intermedia."
+    ],
+    "correctIndex": 0,
+    "explanation": "El efecto lateral comparte una colección no thread-safe. Usa una reducción/collector diseñado para combinar resultados o mantén el pipeline secuencial si no existe beneficio medido. Referencia: §12 y §14.",
+    "source": "README.md",
+    "code": "List<Integer> target = new ArrayList<>();\nsource.parallelStream().forEach(target::add);",
+    "language": "java"
+  },
+  {
+    "id": "javamvn-066",
+    "category": "java",
+    "topic": "Lambdas, Streams y JVM",
+    "question": "¿Qué propiedad de un `Spliterator` favorece paralelismo eficiente?",
+    "options": [
+      "Que nunca pueda dividir la fuente.",
+      "Que convierta cada elemento en `String`.",
+      "Que todo elemento se sincronice con un monitor global.",
+      "Que `trySplit` produzca particiones razonablemente balanceadas y baratas."
+    ],
+    "correctIndex": 3,
+    "explanation": "Los streams paralelos dependen de dividir el trabajo. Fuentes indexadas como arrays suelen particionarse mejor que estructuras enlazadas o iteradores con división costosa. Referencia: §12.",
+    "source": "README.md"
+  },
+  {
+    "id": "javamvn-067",
+    "category": "java",
+    "topic": "Lambdas, Streams y JVM",
+    "question": "¿Cuál es el propósito de Stream Gatherers finalizados en Java 24?",
+    "options": [
+      "Definir operaciones intermedias personalizadas con estado e integración al pipeline.",
+      "Hacer mutable cualquier stream.",
+      "Sustituir toda la Collections API.",
+      "Ejecutar SQL desde `Stream`."
+    ],
+    "correctIndex": 0,
+    "explanation": "Los gatherers amplían el repertorio de transformaciones intermedias, por ejemplo ventanas o acumulación incremental, sin convertirlas en terminales. No eliminan la necesidad de colecciones ni vuelven seguro cualquier paralelismo. Referencia: §12 y §13.2.",
+    "source": "README.md"
+  },
+  {
+    "id": "javamvn-068",
+    "category": "java",
+    "topic": "Lambdas, Streams y JVM",
+    "question": "¿Qué acción provoca inicialización de una clase, no solo carga/enlace?",
+    "options": [
+      "Copiar un literal `static final` constante inlined desde otra clase.",
+      "Leer un campo `static` no constante por primera vez.",
+      "Declarar una variable de referencia sin crear objeto.",
+      "Mencionar su nombre en un comentario."
+    ],
+    "correctIndex": 1,
+    "explanation": "El uso activo, como crear instancia, invocar método estático o leer/escribir campo estático no constante, dispara `<clinit>`. Una constante de compilación puede quedar inlined y no inicializar al propietario. Referencia: §2.4.",
+    "source": "README.md"
+  },
+  {
+    "id": "javamvn-069",
+    "category": "java",
+    "topic": "Lambdas, Streams y JVM",
+    "question": "¿Qué contiene principalmente el runtime constant pool de una clase?",
+    "options": [
+      "Los stacks de todos los hilos.",
+      "Solo objetos creados con `new`.",
+      "Únicamente strings internados globales.",
+      "Constantes y referencias simbólicas derivadas del archivo `.class`."
+    ],
+    "correctIndex": 3,
+    "explanation": "Incluye literales y referencias simbólicas a tipos, campos y métodos que la JVM resuelve según necesidad. No es equivalente al heap ni al string pool. Referencia: §2.",
+    "source": "README.md"
+  },
+  {
+    "id": "javamvn-070",
+    "category": "java",
+    "topic": "Lambdas, Streams y JVM",
+    "question": "Una recursión sin caso base termina normalmente con:",
+    "options": [
+      "`StackOverflowError` al agotar el stack del hilo.",
+      "`OutOfMemoryError` obligatorio en heap.",
+      "`ConcurrentModificationException`.",
+      "Recolección automática del frame anterior."
+    ],
+    "correctIndex": 0,
+    "explanation": "Cada llamada agrega un frame con variables locales, operand stack y datos de retorno. Si la profundidad excede el stack disponible se produce `StackOverflowError`. Referencia: §2 y §16.",
+    "source": "README.md"
+  },
+  {
+    "id": "javamvn-071",
+    "category": "java",
+    "topic": "Lambdas, Streams y JVM",
+    "question": "¿Qué afirmación describe mejor heap y stacks?",
+    "options": [
+      "Cada objeto vive siempre en el stack del método que lo creó.",
+      "Cada hilo tiene un heap privado completo.",
+      "Los campos estáticos viven dentro del frame de `main`.",
+      "El heap es compartido; cada hilo tiene su propio stack de frames."
+    ],
+    "correctIndex": 3,
+    "explanation": "El modelo de la JVM comparte objetos/estado de heap entre hilos, mientras cada hilo mantiene su pila de ejecución. Optimizaciones pueden eliminar asignaciones, pero no cambian el modelo semántico observable. Referencia: §2.",
+    "source": "README.md"
+  },
+  {
+    "id": "javamvn-072",
+    "category": "java",
+    "topic": "Lambdas, Streams y JVM",
+    "question": "Una aplicación genera clases/proxies dinámicamente y conserva sus class loaders. ¿Qué área puede crecer por una fuga de carga de clases?",
+    "options": [
+      "Metaspace.",
+      "Solo TLAB del hilo principal.",
+      "PC register.",
+      "Operand stack de un método ya terminado."
+    ],
+    "correctIndex": 0,
+    "explanation": "HotSpot almacena metadata de clases en Metaspace. Las clases se descargan con su class loader cuando este deja de ser alcanzable; retener loaders puede producir crecimiento y `OutOfMemoryError: Metaspace`. Referencia: §2.",
+    "source": "README.md"
+  },
+  {
+    "id": "javamvn-073",
+    "category": "java",
+    "topic": "Lambdas, Streams y JVM",
+    "question": "¿Qué afirmación sobre `String.intern()` es correcta?",
+    "options": [
+      "Garantiza menor memoria para cualquier carga sin costo.",
+      "Convierte el string en mutable.",
+      "Copia el string al stack actual.",
+      "Devuelve una representación canónica del pool para contenido igual."
+    ],
+    "correctIndex": 3,
+    "explanation": "`intern` consulta/agrega una referencia canónica. Puede ahorrar duplicación en casos medidos, pero añade tabla global y costo; no es una optimización universal ni cambia inmutabilidad. Referencia: §2.",
+    "source": "README.md"
+  },
+  {
+    "id": "javamvn-074",
+    "category": "java",
+    "topic": "Lambdas, Streams y JVM",
+    "question": "¿Por qué la JVM puede desoptimizar código previamente compilado por JIT?",
+    "options": [
+      "Porque una suposición especulativa, como tipos observados o inlining, deja de ser válida.",
+      "Porque el bytecode se borra después de ejecutarse.",
+      "Porque cada excepción elimina permanentemente el método.",
+      "Porque JIT solo compila métodos `final`."
+    ],
+    "correctIndex": 0,
+    "explanation": "HotSpot optimiza según perfiles y supuestos; si aparece un subtipo o camino no previsto puede volver a una representación menos optimizada y recompilar. Es parte del carácter adaptativo del JIT. Referencia: §2.",
+    "source": "README.md"
+  },
+  {
+    "id": "javamvn-075",
+    "category": "java",
+    "topic": "Lambdas, Streams y JVM",
+    "question": "¿Qué puede permitir el análisis de escape?",
+    "options": [
+      "Hacer accesible un objeto privado desde cualquier módulo.",
+      "Eliminar una asignación o reemplazarla por valores escalares si el objeto no escapa.",
+      "Convertir toda referencia débil en fuerte.",
+      "Evitar verificación de bytecode."
+    ],
+    "correctIndex": 1,
+    "explanation": "Si el JIT demuestra que una instancia no es observable fuera de cierto alcance puede aplicar eliminación de asignación, reemplazo escalar o eliminación de locks. Es una optimización, no una garantía para razonar sobre identidad o memoria exacta. Referencia: §2.",
+    "source": "README.md"
+  },
+  {
+    "id": "javamvn-076",
+    "category": "java",
+    "topic": "Memoria, concurrencia y diagnóstico",
+    "question": "Un objeto solo es alcanzable mediante `WeakReference`. ¿Qué puede hacer el GC?",
+    "options": [
+      "Nunca recolectarlo hasta cerrar la JVM.",
+      "Limpiar la referencia débil y volver elegible el objeto sin esperar agotamiento de heap.",
+      "Promoverlo obligatoriamente a old generation.",
+      "Convertirlo en literal internado."
+    ],
+    "correctIndex": 1,
+    "explanation": "Una referencia débil no conserva fuertemente al referente. El GC puede limpiarla cuando detecta que no hay alcance fuerte/soft apropiado. `WeakHashMap` aprovecha esta propiedad para claves, pero la recolección no tiene tiempo determinista. Referencia: §9.",
+    "source": "README.md"
+  },
+  {
+    "id": "javamvn-077",
+    "category": "java",
+    "topic": "Memoria, concurrencia y diagnóstico",
+    "question": "¿Por qué `SoftReference` no es una política de caché de negocio predecible?",
+    "options": [
+      "Porque solo acepta primitivas.",
+      "Porque su `get()` siempre devuelve null.",
+      "Porque la JVM decide su limpieza según presión y política, sin TTL ni tamaño contractual.",
+      "Porque mantiene objetos para siempre."
+    ],
+    "correctIndex": 2,
+    "explanation": "Una soft reference puede sobrevivir más que una weak, pero no ofrece expiración, capacidad ni comportamiento portable suficiente para una caché controlada. Usa límites y TTL explícitos cuando sean requisitos. Referencia: §9.",
+    "source": "README.md"
+  },
+  {
+    "id": "javamvn-078",
+    "category": "java",
+    "topic": "Memoria, concurrencia y diagnóstico",
+    "question": "¿Qué devuelve `PhantomReference.get()`?",
+    "options": [
+      "El referente mientras no se cierre.",
+      "Siempre `null`.",
+      "Un `Optional`.",
+      "El objeto finalizado."
+    ],
+    "correctIndex": 1,
+    "explanation": "Las phantom references se usan junto con `ReferenceQueue` para notificación/limpieza posterior al alcance, no para resucitar o acceder al objeto. Referencia: §9.",
+    "source": "README.md"
+  },
+  {
+    "id": "javamvn-079",
+    "category": "java",
+    "topic": "Memoria, concurrencia y diagnóstico",
+    "question": "¿Qué intuición explota la hipótesis generacional del GC?",
+    "options": [
+      "Todos los objetos viven exactamente lo mismo.",
+      "Los objetos grandes nunca se recolectan.",
+      "Los campos `final` solo existen en old generation.",
+      "La mayoría de objetos muere joven y pocos sobreviven mucho tiempo."
+    ],
+    "correctIndex": 3,
+    "explanation": "Separar lógicamente generaciones permite recolectar con frecuencia áreas donde muchos objetos ya murieron. Es una observación de cargas comunes, no una regla semántica del lenguaje. Referencia: §10.",
+    "source": "README.md"
+  },
+  {
+    "id": "javamvn-080",
+    "category": "java",
+    "topic": "Memoria, concurrencia y diagnóstico",
+    "question": "Una aplicación tiene heap grande y un objetivo estricto de pausas muy bajas. ¿Qué collector merece evaluación específica?",
+    "options": [
+      "Ninguno; todos tienen pausas idénticas.",
+      "ZGC.",
+      "Serial GC obligatoriamente.",
+      "Epsilon como solución permanente de memoria."
+    ],
+    "correctIndex": 1,
+    "explanation": "ZGC está diseñado para baja latencia y trabajo mayormente concurrente. La selección requiere medir throughput, latencia, memoria y versión; G1 sigue siendo una opción general. Epsilon no recolecta y se usa en escenarios especiales. Referencia: §10.",
+    "source": "README.md"
+  },
+  {
+    "id": "javamvn-081",
+    "category": "java",
+    "topic": "Memoria, concurrencia y diagnóstico",
+    "question": "¿Qué garantiza `volatile int count; count++;`?",
+    "options": [
+      "Exclusión mutua para todo el objeto.",
+      "El incremento completo es atómico.",
+      "Visibilidad/orden de lecturas y escrituras volátiles, pero no atomicidad del read-modify-write.",
+      "Que nunca se pierden actualizaciones."
+    ],
+    "correctIndex": 2,
+    "explanation": "`count++` lee, suma y escribe; dos hilos pueden intercalarse. `volatile` sirve para publicación/visibilidad de un valor, no convierte operaciones compuestas en atómicas. Referencia: §14.10 y §14.14.",
+    "source": "README.md"
+  },
+  {
+    "id": "javamvn-082",
+    "category": "java",
+    "topic": "Memoria, concurrencia y diagnóstico",
+    "question": "¿Qué relación *happens-before* crea un monitor?",
+    "options": [
+      "Todo acceso de cualquier hilo sucede antes de cualquier otro.",
+      "Solo aplica a campos `final`.",
+      "`sleep` sucede antes de todas las escrituras.",
+      "Un unlock sobre un monitor sucede antes de un lock posterior del mismo monitor."
+    ],
+    "correctIndex": 3,
+    "explanation": "La liberación publica los efectos previos para quien adquiere posteriormente el mismo monitor. Usar objetos de lock distintos no crea esa relación. Referencia: §14.11–14.12.",
+    "source": "README.md"
+  },
+  {
+    "id": "javamvn-083",
+    "category": "java",
+    "topic": "Memoria, concurrencia y diagnóstico",
+    "question": "¿Qué opción implementa un contador compartido con incrementos atómicos simples?",
+    "options": [
+      "`volatile int` con `++`.",
+      "`Integer` final reasignado.",
+      "`AtomicInteger.incrementAndGet()`.",
+      "`Thread.sleep` antes de incrementar."
+    ],
+    "correctIndex": 2,
+    "explanation": "`AtomicInteger` implementa operaciones read-modify-write atómicas normalmente mediante CAS. Un lock también podría proteger el contador, pero `volatile ++` no basta. Referencia: §14.16.",
+    "source": "README.md"
+  },
+  {
+    "id": "javamvn-084",
+    "category": "java",
+    "topic": "Memoria, concurrencia y diagnóstico",
+    "question": "¿Qué describe el problema ABA en algoritmos CAS?",
+    "options": [
+      "Una excepción se captura y vuelve a lanzar.",
+      "Un valor cambia A→B→A y CAS no detecta que hubo cambios intermedios.",
+      "Un thread local se hereda dos veces.",
+      "Dos locks se adquieren siempre en el mismo orden."
+    ],
+    "correctIndex": 1,
+    "explanation": "Comparar solo el valor actual puede concluir que “nada cambió” aunque el estado transitó. Versiones, stamps u otra identidad pueden formar parte de la solución cuando el historial importa. Referencia: §14.16.",
+    "source": "README.md"
+  },
+  {
+    "id": "javamvn-085",
+    "category": "java",
+    "topic": "Memoria, concurrencia y diagnóstico",
+    "question": "¿Cuándo suele ser apropiado `LongAdder` frente a `AtomicLong`?",
+    "options": [
+      "Para métricas con muchas actualizaciones contendidas y lecturas de suma ocasionales.",
+      "Cuando se necesita `compareAndSet` linealizable sobre un único valor.",
+      "Para reemplazar cualquier saldo bancario transaccional.",
+      "Cuando solo existe un hilo y se requiere menos objetos."
+    ],
+    "correctIndex": 0,
+    "explanation": "`LongAdder` distribuye contención entre celdas y suma al leer. Su `sum()` no es un snapshot atómico respecto a todas las actualizaciones, por lo que no sustituye un valor linealizable requerido por reglas de negocio. Referencia: §14.17.",
+    "source": "README.md"
+  },
+  {
+    "id": "javamvn-086",
+    "category": "java",
+    "topic": "Memoria, concurrencia y diagnóstico",
+    "question": "¿Qué ocurre al ejecutar `lock.wait()` sin poseer el monitor de `lock`?",
+    "options": [
+      "El hilo espera normalmente.",
+      "Adquiere el monitor implícitamente.",
+      "Lanza `IllegalMonitorStateException`.",
+      "Finaliza la JVM."
+    ],
+    "correctIndex": 2,
+    "explanation": "`wait`, `notify` y `notifyAll` exigen que el hilo sea propietario del monitor, normalmente dentro de `synchronized(lock)`. Además, la condición debe revisarse en un bucle por despertares espurios. Referencia: §14.13.",
+    "source": "README.md"
+  },
+  {
+    "id": "javamvn-087",
+    "category": "java",
+    "topic": "Memoria, concurrencia y diagnóstico",
+    "question": "Un hilo ejecuta `Thread.sleep` dentro de `synchronized(lock)`. ¿Qué pasa con el monitor?",
+    "options": [
+      "Se libera mientras duerme.",
+      "Se transfiere al hilo más antiguo.",
+      "Se conserva; otros hilos que necesitan ese monitor siguen bloqueados.",
+      "El bloque `synchronized` termina."
+    ],
+    "correctIndex": 2,
+    "explanation": "`sleep` pausa el hilo pero no libera locks. `wait` sí libera temporalmente el monitor asociado como parte de su protocolo. Referencia: §14.7 y §14.12–14.13.",
+    "source": "README.md"
+  },
+  {
+    "id": "javamvn-088",
+    "category": "java",
+    "topic": "Memoria, concurrencia y diagnóstico",
+    "question": "¿Qué técnica reduce directamente el riesgo de deadlock al necesitar varios locks?",
+    "options": [
+      "Adquirirlos en un orden global consistente.",
+      "Agregar más llamadas a `sleep` aleatorias.",
+      "Ignorar interrupciones.",
+      "Usar un lock diferente en cada acceso al mismo estado."
+    ],
+    "correctIndex": 0,
+    "explanation": "Un orden total evita el ciclo de espera circular. También ayudan reducir alcance, usar `tryLock` con política, evitar llamadas externas bajo lock y preferir abstracciones de mayor nivel. Referencia: §14.21.",
+    "source": "README.md"
+  },
+  {
+    "id": "javamvn-089",
+    "category": "java",
+    "topic": "Memoria, concurrencia y diagnóstico",
+    "question": "Después de enviar tareas a un `ExecutorService`, ¿qué práctica permite terminar ordenadamente?",
+    "options": [
+      "Invocar `Thread.stop` sobre los workers.",
+      "Olvidar la referencia y esperar al GC.",
+      "Llamar `shutdown`, esperar un límite y escalar a `shutdownNow` si la política lo requiere.",
+      "Crear otro executor para cerrarlo."
+    ],
+    "correctIndex": 2,
+    "explanation": "El pool administra hilos que pueden mantener viva la JVM. Un cierre ordenado deja de aceptar tareas y permite terminar las existentes; la cancelación cooperativa depende de interrupciones y del código de tarea. Referencia: §14.22–14.25.",
+    "source": "README.md"
+  },
+  {
+    "id": "javamvn-090",
+    "category": "java",
+    "topic": "Memoria, concurrencia y diagnóstico",
+    "question": "¿Qué diferencia básica existe entre `Future` y `CompletableFuture`?",
+    "options": [
+      "`Future` no representa resultados.",
+      "`CompletableFuture` añade composición, callbacks y combinación de etapas.",
+      "`CompletableFuture` siempre crea virtual threads.",
+      "`Future.get` nunca bloquea."
+    ],
+    "correctIndex": 1,
+    "explanation": "Un `Future` clásico permite consultar/cancelar/esperar. `CompletableFuture` modela pipelines asincrónicos y manejo de éxito/fallo, pero sus executors, bloqueo y backpressure todavía requieren diseño. Referencia: §14.23 y §14.29.",
+    "source": "README.md"
+  },
+  {
+    "id": "javamvn-091",
+    "category": "java",
+    "topic": "Memoria, concurrencia y diagnóstico",
+    "question": "¿Qué carga suele beneficiarse más de virtual threads?",
+    "options": [
+      "Código que necesita más memoria por tarea deliberadamente.",
+      "Millones de tareas principalmente bloqueadas en I/O con estilo thread-per-task.",
+      "Un único cálculo matricial CPU-bound que ya ocupa todos los núcleos.",
+      "Una operación que exige un único hilo de interfaz gráfica."
+    ],
+    "correctIndex": 1,
+    "explanation": "Los virtual threads abaratan el bloqueo y permiten mantener código secuencial legible para alta concurrencia I/O-bound. No crean CPU ni vuelven paralelo un cálculo por sí solos. Referencia: §13.4–13.8.",
+    "source": "README.md"
+  },
+  {
+    "id": "javamvn-092",
+    "category": "java",
+    "topic": "Memoria, concurrencia y diagnóstico",
+    "question": "¿Por qué no se recomienda crear un pool fijo de virtual threads reutilizables?",
+    "options": [
+      "Porque un virtual thread no puede ejecutar lambdas.",
+      "Porque siempre están fijados a un carrier.",
+      "Porque solo puede existir uno por JVM.",
+      "Porque son baratos y están pensados como una instancia por tarea; el límite debe aplicarse al recurso escaso."
+    ],
+    "correctIndex": 3,
+    "explanation": "Reutilizarlos como workers recupera complejidad de pooling sin necesidad. Si una base acepta 50 conexiones, limita ese recurso con pool de conexiones/semaphore, no el número arbitrario de virtual threads. Referencia: §13.7–13.9.",
+    "source": "README.md"
+  },
+  {
+    "id": "javamvn-093",
+    "category": "java",
+    "topic": "Memoria, concurrencia y diagnóstico",
+    "question": "Se lanzan 10 000 virtual threads, pero un API permite 100 solicitudes concurrentes. ¿Qué mecanismo expresa el límite?",
+    "options": [
+      "Un `WeakReference` al cliente.",
+      "Convertir cada thread en platform thread.",
+      "Un `Semaphore` de 100 permisos alrededor de la llamada.",
+      "Aumentar el heap sin límite."
+    ],
+    "correctIndex": 2,
+    "explanation": "El semaphore modela capacidad real y desacopla concurrencia lógica de recursos limitados. También puede existir un limitador de tasa según el contrato del API. Referencia: §13.9 y §14.31.",
+    "source": "README.md"
+  },
+  {
+    "id": "javamvn-094",
+    "category": "java",
+    "topic": "Memoria, concurrencia y diagnóstico",
+    "question": "¿Qué ventaja conceptual tienen Scoped Values sobre usar `ThreadLocal` mutable para contexto de petición?",
+    "options": [
+      "Ofrecen enlace inmutable y alcance léxico, más razonable con virtual threads y subtareas.",
+      "Permiten compartir datos mutables globalmente sin límites.",
+      "Se persisten automáticamente en base de datos.",
+      "Solo funcionan en platform threads."
+    ],
+    "correctIndex": 0,
+    "explanation": "Un scoped value se enlaza por un alcance controlado y se hereda de forma estructurada según la API. Reduce fugas y costos de miles de copias de thread locals, aunque no reemplaza todos los estados locales. Referencia: §13.11.",
+    "source": "README.md"
+  },
+  {
+    "id": "javamvn-095",
+    "category": "java",
+    "topic": "Memoria, concurrencia y diagnóstico",
+    "question": "En Java 25, ¿cuál es el estado de Structured Concurrency?",
+    "options": [
+      "API final sin flags.",
+      "Eliminada del JDK.",
+      "Quinta preview; requiere habilitar preview y puede cambiar.",
+      "Parte de Maven, no del JDK."
+    ],
+    "correctIndex": 2,
+    "explanation": "JEP 505 mantiene la API como preview en Java 25. Su modelo agrupa subtareas como una unidad para cancelación, error y observabilidad, pero no debe presentarse como contrato permanente. Referencia: §13.12.",
+    "source": "README.md"
+  },
+  {
+    "id": "javamvn-096",
+    "category": "java",
+    "topic": "Memoria, concurrencia y diagnóstico",
+    "question": "¿Qué diferencia resume `exceptionally` y `handle` en `CompletableFuture`?",
+    "options": [
+      "`exceptionally` recupera fallos; `handle` observa y transforma tanto éxito como fallo.",
+      "Ambos solo se ejecutan en éxito.",
+      "`handle` cancela siempre el executor.",
+      "`exceptionally` no puede devolver valor."
+    ],
+    "correctIndex": 0,
+    "explanation": "`exceptionally` proporciona un valor alternativo ante excepción. `handle` recibe resultado y throwable y puede producir un nuevo valor en ambas rutas. La elección debe evitar esconder fallos relevantes. Referencia: §14.29.",
+    "source": "README.md"
+  },
+  {
+    "id": "javamvn-097",
+    "category": "java",
+    "topic": "Memoria, concurrencia y diagnóstico",
+    "question": "En `ConcurrentHashMap`, ¿qué operación expresa de forma segura “crear lista si falta” como acción compuesta?",
+    "options": [
+      "`if (!map.containsKey(k)) map.put(k, value)` sin coordinación.",
+      "`map.computeIfAbsent(k, key -> newValue())`.",
+      "`map.get(k)` seguido siempre de `put`.",
+      "Envolver solo `containsKey` en `volatile`."
+    ],
+    "correctIndex": 1,
+    "explanation": "Las operaciones compuestas del mapa concurrente coordinan la decisión sobre la clave. Aun así, la función debe ser corta y no provocar recursión o efectos bloqueantes inesperados. Referencia: §14.30.",
+    "source": "README.md"
+  },
+  {
+    "id": "javamvn-098",
+    "category": "java",
+    "topic": "Memoria, concurrencia y diagnóstico",
+    "question": "¿Cuál característica es permanente en Java 25?",
+    "options": [
+      "Scoped Values.",
+      "String Templates.",
+      "Structured Concurrency.",
+      "Stable Values."
+    ],
+    "correctIndex": 0,
+    "explanation": "Scoped Values se finalizaron en Java 25. Structured Concurrency y Stable Values permanecen preview; String Templates fue retirada y no debe enseñarse como característica actual. Referencia: §13.",
+    "source": "README.md"
+  },
+  {
+    "id": "javamvn-099",
+    "category": "java",
+    "topic": "Memoria, concurrencia y diagnóstico",
+    "question": "¿Qué herramienta inspecciona instrucciones bytecode y el constant pool de una clase?",
+    "options": [
+      "`javap -c -v Example`",
+      "`jcmd <pid> GC.heap_info`",
+      "`mvn dependency:tree`",
+      "`jar --create`."
+    ],
+    "correctIndex": 0,
+    "explanation": "`javap` desensambla el archivo `.class`; `-c` muestra instrucciones y `-v` información detallada como constant pool, flags y atributos. No perfila ejecución. Referencia: §16.1.",
+    "source": "README.md"
+  },
+  {
+    "id": "javamvn-100",
+    "category": "java",
+    "topic": "Memoria, concurrencia y diagnóstico",
+    "question": "¿Qué combinación asigna la herramienta correcta al problema?",
+    "options": [
+      "JMH para microbenchmarks; JFR para eventos/perfil de ejecución; `jcmd` para diagnóstico de una JVM activa.",
+      "JFR para resolver dependencias Maven; JMH para crear heap dumps.",
+      "`jcmd` para compilar Java; `javac` para medir contención.",
+      "JMH para demostrar corrección del Java Memory Model en todos los interleavings."
+    ],
+    "correctIndex": 0,
+    "explanation": "JMH controla warmup y optimizaciones en microbenchmarks; JFR registra CPU, asignaciones, locks, GC y otros eventos; `jcmd` consulta/comanda una JVM activa. Para pruebas de concurrencia/JMM existe JCStress. Referencia: §16.",
+    "source": "README.md"
+  }
+]

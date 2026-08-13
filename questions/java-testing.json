@@ -1,0 +1,1506 @@
+[
+  {
+    "id": "javatest-001",
+    "category": "java-testing",
+    "topic": "Estrategia y JUnit esencial",
+    "question": "¿Qué propiedad se viola si una prueba pasa sola pero falla después de otra?",
+    "options": [
+      "Legibilidad.",
+      "Aislamiento.",
+      "Cobertura de líneas.",
+      "Parametrización."
+    ],
+    "correctIndex": 1,
+    "explanation": "La prueba depende de estado u orden compartido y no controla sus precondiciones. Cada caso debe poder ejecutarse independientemente; ordenar pruebas rara vez corrige la causa. Referencia: §1 y §6.",
+    "source": "java-testing-guide.md"
+  },
+  {
+    "id": "javatest-002",
+    "category": "java-testing",
+    "topic": "Estrategia y JUnit esencial",
+    "question": "¿Qué pregunta responde principalmente una prueba de integración de repositorio contra PostgreSQL real?",
+    "options": [
+      "Si una regla aritmética pura devuelve el valor correcto.",
+      "Si el nombre de una clase cumple convención.",
+      "Si Mockito puede devolver un `Optional`.",
+      "Si mapping, SQL, constraints, driver y motor colaboran realmente."
+    ],
+    "correctIndex": 3,
+    "explanation": "Una integración cruza una frontera técnica real. Es más lenta y costosa que una unitaria, pero detecta diferencias que un mock o una base distinta no pueden demostrar. Referencia: §2.",
+    "source": "java-testing-guide.md"
+  },
+  {
+    "id": "javatest-003",
+    "category": "java-testing",
+    "topic": "Estrategia y JUnit esencial",
+    "question": "En testing, una “unidad” se define mejor como:",
+    "options": [
+      "Exactamente un método privado.",
+      "Todo el proceso desplegado.",
+      "Cualquier clase creada por Mockito.",
+      "Una porción de comportamiento con una razón clara para fallar."
+    ],
+    "correctIndex": 3,
+    "explanation": "Una clase suele ser buena frontera, pero el comportamiento puede involucrar varios objetos baratos sin perder aislamiento. Forzar “un método” empuja a probar implementación. Referencia: §2.1.",
+    "source": "java-testing-guide.md"
+  },
+  {
+    "id": "javatest-004",
+    "category": "java-testing",
+    "topic": "Estrategia y JUnit esencial",
+    "question": "Un método debe publicar un evento cuando completa una orden. ¿Qué observación es apropiada?",
+    "options": [
+      "Verificar que el publicador recibió el evento, porque esa interacción es el efecto observable.",
+      "Medir cobertura y no hacer aserciones.",
+      "Comprobar el nombre de la clase proxy.",
+      "Verificar todos sus métodos privados."
+    ],
+    "correctIndex": 0,
+    "explanation": "Cuando el contrato es enviar un mensaje a una frontera, verificar la interacción tiene sentido. Para cálculos y objetos devueltos suele preferirse verificar estado. Referencia: §1.2.",
+    "source": "java-testing-guide.md"
+  },
+  {
+    "id": "javatest-005",
+    "category": "java-testing",
+    "topic": "Estrategia y JUnit esencial",
+    "question": "¿Qué componente de JUnit descubre motores y coordina su ejecución desde Maven o un IDE?",
+    "options": [
+      "Jupiter Assertions únicamente.",
+      "Mockito Core.",
+      "JUnit Platform.",
+      "Maven Compiler Plugin."
+    ],
+    "correctIndex": 2,
+    "explanation": "Platform define launcher y descubrimiento de TestEngines. Jupiter es un motor y modelo de programación que aporta `@Test`, lifecycle, aserciones y extensiones. Referencia: §3.",
+    "source": "java-testing-guide.md"
+  },
+  {
+    "id": "javatest-006",
+    "category": "java-testing",
+    "topic": "Estrategia y JUnit esencial",
+    "question": "¿Qué requisito de runtime introduce JUnit 6?",
+    "options": [
+      "Java 8 exactamente.",
+      "Spring Boot obligatorio.",
+      "Java 17 o superior para ejecutar JUnit.",
+      "Solo puede ejecutarse en módulos JPMS."
+    ],
+    "correctIndex": 2,
+    "explanation": "JUnit 6 requiere Java 17 en runtime, aunque puede probar código compilado para targets anteriores. El framework no exige Spring ni module path. Referencia: §3.",
+    "source": "java-testing-guide.md"
+  },
+  {
+    "id": "javatest-007",
+    "category": "java-testing",
+    "topic": "Estrategia y JUnit esencial",
+    "question": "¿Qué import identifica una prueba Jupiter, no JUnit 4?",
+    "options": [
+      "`org.junit.Test`",
+      "`org.mockito.Test`",
+      "`org.junit.jupiter.api.Test`",
+      "`java.testing.Test`"
+    ],
+    "correctIndex": 2,
+    "explanation": "Jupiter conserva `jupiter` en sus paquetes incluso en JUnit 6. Mezclar el import de JUnit 4 puede provocar que otro motor o ninguna configuración descubra la prueba. Referencia: §3.",
+    "source": "java-testing-guide.md"
+  },
+  {
+    "id": "javatest-008",
+    "category": "java-testing",
+    "topic": "Estrategia y JUnit esencial",
+    "question": "¿Por qué se importa `junit-bom` en `dependencyManagement`?",
+    "options": [
+      "Para ejecutar automáticamente todas las pruebas al abrir el IDE.",
+      "Para cambiar el JDK instalado.",
+      "Para alinear versiones compatibles de los módulos JUnit sin repetirlas.",
+      "Para añadir Mockito transitivamente siempre."
+    ],
+    "correctIndex": 2,
+    "explanation": "Un BOM administra versiones; todavía se declaran los módulos usados, como `junit-jupiter`. No inicia pruebas ni instala Java. Referencia: §4.",
+    "source": "java-testing-guide.md"
+  },
+  {
+    "id": "javatest-009",
+    "category": "java-testing",
+    "topic": "Estrategia y JUnit esencial",
+    "question": "¿Qué scope deben usar `junit-jupiter` y `mockito-junit-jupiter`?",
+    "options": [
+      "`import`",
+      "`runtime`",
+      "`compile`",
+      "`test`"
+    ],
+    "correctIndex": 3,
+    "explanation": "Son herramientas de prueba y no deben llegar al classpath/artefacto de producción. El BOM usa `import`, no las dependencias de ejecución de tests. Referencia: §4.",
+    "source": "java-testing-guide.md"
+  },
+  {
+    "id": "javatest-010",
+    "category": "java-testing",
+    "topic": "Estrategia y JUnit esencial",
+    "question": "En el patrón AAA, ¿qué corresponde a **Act**?",
+    "options": [
+      "Ejecutar la única acción principal cuyo comportamiento se prueba.",
+      "Construir datos y dobles.",
+      "Comparar resultados.",
+      "Limpiar reportes de Maven."
+    ],
+    "correctIndex": 0,
+    "explanation": "Arrange prepara, Act ejecuta y Assert observa. Mantener una acción principal reduce ambigüedad sobre qué produjo el fallo. Referencia: §5.",
+    "source": "java-testing-guide.md"
+  },
+  {
+    "id": "javatest-011",
+    "category": "java-testing",
+    "topic": "Estrategia y JUnit esencial",
+    "question": "¿Cuál nombre comunica mejor escenario y resultado?",
+    "options": [
+      "`test1()`",
+      "`testTransfer()`",
+      "`rejectsTransferWhenBalanceIsInsufficient()`",
+      "`methodWorks()`"
+    ],
+    "correctIndex": 2,
+    "explanation": "El nombre funciona como especificación y ayuda a interpretar reportes. No necesita repetir “test”; debe describir condición y comportamiento observable. Referencia: §1.1 y §5.",
+    "source": "java-testing-guide.md"
+  },
+  {
+    "id": "javatest-012",
+    "category": "java-testing",
+    "topic": "Estrategia y JUnit esencial",
+    "question": "¿Qué aporta `assertAll`?",
+    "options": [
+      "Ejecuta automáticamente todas las clases del módulo.",
+      "Agrupa aserciones relacionadas e informa múltiples fallos del mismo resultado.",
+      "Convierte cualquier excepción en éxito.",
+      "Hace atómica una prueba paralela."
+    ],
+    "correctIndex": 1,
+    "explanation": "Las aserciones del grupo se evalúan para presentar varios defectos coherentes. No debe usarse si una aserción depende lógicamente de que otra haya pasado. Referencia: §5.1 y §7.3.",
+    "source": "java-testing-guide.md"
+  },
+  {
+    "id": "javatest-013",
+    "category": "java-testing",
+    "topic": "Estrategia y JUnit esencial",
+    "question": "¿Cuál diferencia existe entre `assertEquals(a, b)` y `assertSame(a, b)`?",
+    "options": [
+      "`assertEquals` solo acepta primitivos.",
+      "Ninguna.",
+      "`assertSame` llama `hashCode`.",
+      "`assertEquals` usa igualdad; `assertSame` exige la misma referencia."
+    ],
+    "correctIndex": 3,
+    "explanation": "Para objetos, `assertEquals` evalúa el contrato `equals`; `assertSame` compara identidad como `==`. Usar identidad para objetos de valor suele afirmar algo más fuerte e irrelevante. Referencia: §7.1.",
+    "source": "java-testing-guide.md"
+  },
+  {
+    "id": "javatest-014",
+    "category": "java-testing",
+    "topic": "Estrategia y JUnit esencial",
+    "question": "¿Cómo se compara normalmente un resultado `double` sujeto a error de punto flotante?",
+    "options": [
+      "`assertSame(expected, actual)`.",
+      "Convertir ambos a `int` siempre.",
+      "`assertEquals(expected, actual, delta)` con tolerancia justificada.",
+      "Comparar sus `toString`."
+    ],
+    "correctIndex": 2,
+    "explanation": "La tolerancia expresa el error aceptable del dominio/cálculo. Para dinero se prefiere modelado decimal, no una tolerancia arbitraria sobre `double`. Referencia: §7.1.",
+    "source": "java-testing-guide.md"
+  },
+  {
+    "id": "javatest-015",
+    "category": "java-testing",
+    "topic": "Estrategia y JUnit esencial",
+    "question": "¿Qué ventaja tiene pasar un `Supplier<String>` como mensaje de aserción?",
+    "options": [
+      "Evita escribir la aserción.",
+      "Hace que la prueba sea paralela.",
+      "El mensaje se calcula solo si la aserción falla.",
+      "Cambia expected por actual."
+    ],
+    "correctIndex": 2,
+    "explanation": "La evaluación perezosa evita construir mensajes costosos en la ruta exitosa. El mensaje debe aportar contexto diagnóstico, no repetir la comparación. Referencia: §7.2.",
+    "source": "java-testing-guide.md"
+  },
+  {
+    "id": "javatest-016",
+    "category": "java-testing",
+    "topic": "Estrategia y JUnit esencial",
+    "question": "¿Qué acepta `assertThrows(IOException.class, executable)`?",
+    "options": [
+      "Únicamente `IOException` exacta.",
+      "Ninguna excepción.",
+      "`IOException` o una subclase.",
+      "Cualquier `Throwable`, incluso si no es IOException."
+    ],
+    "correctIndex": 2,
+    "explanation": "`assertThrows` usa compatibilidad de tipo. Para exigir la clase exacta existe `assertThrowsExactly`. Limita el executable a la operación que debe fallar. Referencia: §8.1.",
+    "source": "java-testing-guide.md"
+  },
+  {
+    "id": "javatest-017",
+    "category": "java-testing",
+    "topic": "Estrategia y JUnit esencial",
+    "question": "¿Cuándo es más apropiado `assertThrowsExactly`?",
+    "options": [
+      "Para medir timeout.",
+      "En toda prueba, sin excepción.",
+      "Para comprobar que nada falla.",
+      "Cuando el contrato distingue la clase concreta y una subclase indicaría otro fallo."
+    ],
+    "correctIndex": 3,
+    "explanation": "La exactitud solo aporta valor si forma parte del contrato. En otros casos acopla la prueba a una implementación innecesariamente específica. Referencia: §8.1.",
+    "source": "java-testing-guide.md"
+  },
+  {
+    "id": "javatest-018",
+    "category": "java-testing",
+    "topic": "Estrategia y JUnit esencial",
+    "question": "¿Qué riesgo particular tiene `assertTimeoutPreemptively`?",
+    "options": [
+      "Nunca detecta un timeout.",
+      "Hace que todo el proceso termine con `System.exit`.",
+      "Solo acepta duraciones de un día.",
+      "Ejecuta en otro hilo y puede perder ThreadLocal/contexto o complicar limpieza."
+    ],
+    "correctIndex": 3,
+    "explanation": "El modo preemptivo intenta abortar trabajo en otro hilo. Esto difiere de `assertTimeout`, que espera terminación y luego evalúa duración. Ninguno sustituye JMH para micro-rendimiento. Referencia: §8.2.",
+    "source": "java-testing-guide.md"
+  },
+  {
+    "id": "javatest-019",
+    "category": "java-testing",
+    "topic": "Estrategia y JUnit esencial",
+    "question": "¿Qué significa una prueba abortada por `assumeTrue`?",
+    "options": [
+      "El comportamiento fue validado correctamente.",
+      "La prueba falló por aserción.",
+      "La precondición ambiental no se cumplió; no cuenta como éxito funcional.",
+      "Mockito no pudo crear un mock."
+    ],
+    "correctIndex": 2,
+    "explanation": "Un supuesto evita ejecutar bajo un entorno no aplicable. Si muchos casos se abortan, la suite puede dar confianza falsa; el reporte debe hacerlo visible. Referencia: §8.3.",
+    "source": "java-testing-guide.md"
+  },
+  {
+    "id": "javatest-020",
+    "category": "java-testing",
+    "topic": "Estrategia y JUnit esencial",
+    "question": "Con lifecycle predeterminado, ¿cuántas instancias de la clase crea Jupiter para tres métodos de prueba?",
+    "options": [
+      "Una por suite completa.",
+      "Depende de Mockito.",
+      "Una por método, normalmente tres.",
+      "Ninguna; todos los métodos son estáticos."
+    ],
+    "correctIndex": 2,
+    "explanation": "`PER_METHOD` ayuda al aislamiento creando una instancia por caso. Campos de instancia no se comparten entre pruebas salvo configuración diferente. Referencia: §6.",
+    "source": "java-testing-guide.md"
+  },
+  {
+    "id": "javatest-021",
+    "category": "java-testing",
+    "topic": "Estrategia y JUnit esencial",
+    "question": "Con lifecycle predeterminado, ¿qué requisito tiene normalmente `@BeforeAll`?",
+    "options": [
+      "Ser `private`.",
+      "Ser `static`.",
+      "Devolver `boolean`.",
+      "Llevar también `@Test`."
+    ],
+    "correctIndex": 1,
+    "explanation": "Se ejecuta antes de que exista una instancia por caso, por lo que es estático en `PER_METHOD`. Con `PER_CLASS` puede ser de instancia. Referencia: §6.",
+    "source": "java-testing-guide.md"
+  },
+  {
+    "id": "javatest-022",
+    "category": "java-testing",
+    "topic": "Estrategia y JUnit esencial",
+    "question": "¿Qué tradeoff introduce `@TestInstance(PER_CLASS)`?",
+    "options": [
+      "Prohíbe `@BeforeEach`.",
+      "Deshabilita Jupiter.",
+      "Reutiliza la instancia y facilita estado compartido accidental.",
+      "Ejecuta siempre en paralelo."
+    ],
+    "correctIndex": 2,
+    "explanation": "Permite `@BeforeAll` no estático y casos específicos, pero los campos persisten entre métodos. Requiere más disciplina de reinicio/aislamiento. Referencia: §6.",
+    "source": "java-testing-guide.md"
+  },
+  {
+    "id": "javatest-023",
+    "category": "java-testing",
+    "topic": "Estrategia y JUnit esencial",
+    "question": "Una suite usa `@Order(1)` para crear un usuario y `@Order(2)` para editarlo. ¿Cuál es el problema central?",
+    "options": [
+      "Jupiter no soporta orden.",
+      "Los usuarios no pueden editarse en pruebas.",
+      "El segundo caso depende del efecto del primero y no es autónomo.",
+      "`@Order` obliga a usar Mockito."
+    ],
+    "correctIndex": 2,
+    "explanation": "La suite es frágil ante selección/reintento/paralelismo. Prepara el usuario en cada caso o expresa el flujo inseparable en un escenario único. Referencia: §6.",
+    "source": "java-testing-guide.md"
+  },
+  {
+    "id": "javatest-024",
+    "category": "java-testing",
+    "topic": "Estrategia y JUnit esencial",
+    "question": "¿Qué uso aporta `@Nested`?",
+    "options": [
+      "Ejecutar únicamente métodos privados.",
+      "Descargar dependencias Maven.",
+      "Expresar contextos relacionados con preparación legible.",
+      "Reemplazar todas las clases de producción."
+    ],
+    "correctIndex": 2,
+    "explanation": "Las clases anidadas organizan escenarios como “cuenta vacía” y comparten setup contextual. Una profundidad excesiva puede ocultar de dónde proviene el estado. Referencia: §10.1.",
+    "source": "java-testing-guide.md"
+  },
+  {
+    "id": "javatest-025",
+    "category": "java-testing",
+    "topic": "Estrategia y JUnit esencial",
+    "question": "¿Qué ventaja principal tiene `@ParameterizedTest` con `@CsvSource`?",
+    "options": [
+      "Simula colaboradores sin Mockito.",
+      "Convierte automáticamente la prueba en integración.",
+      "Permite omitir aserciones.",
+      "Ejecuta un mismo contrato con varios conjuntos de datos y reporta cada invocación."
+    ],
+    "correctIndex": 3,
+    "explanation": "Reduce duplicación al recorrer una tabla de ejemplos, especialmente límites y clases de equivalencia. Cada invocación conserva lifecycle de prueba. Referencia: §9.1.",
+    "source": "java-testing-guide.md"
+  },
+  {
+    "id": "javatest-026",
+    "category": "java-testing",
+    "topic": "JUnit avanzado y pruebas deterministas",
+    "question": "Con lifecycle `PER_METHOD`, ¿cómo se declara normalmente un factory usado por `@MethodSource(\"cases\")`?",
+    "options": [
+      "Como constructor privado únicamente.",
+      "Como método `@Test` que devuelve void.",
+      "Como método `static`.",
+      "Dentro de la clase de producción."
+    ],
+    "correctIndex": 2,
+    "explanation": "La fuente local suele ser estática porque se resuelve sin una instancia persistente de test. `PER_CLASS` permite fuentes no estáticas. Debe devolver un stream/iterable/arreglo compatible de argumentos. Referencia: §9.1.",
+    "source": "java-testing-guide.md"
+  },
+  {
+    "id": "javatest-027",
+    "category": "java-testing",
+    "topic": "JUnit avanzado y pruebas deterministas",
+    "question": "¿Qué casos agrega `@NullAndEmptySource` a un parámetro `String`?",
+    "options": [
+      "Solo `\"null\"` y `\"empty\"` como texto.",
+      "Todos los strings Unicode.",
+      "Un argumento null y otro string vacío.",
+      "Un espacio en blanco y un salto de línea."
+    ],
+    "correctIndex": 2,
+    "explanation": "Combina `@NullSource` y `@EmptySource`. Un string de espacios no es vacío y debe agregarse explícitamente, por ejemplo con `@ValueSource`. Referencia: §9.1.",
+    "source": "java-testing-guide.md"
+  },
+  {
+    "id": "javatest-028",
+    "category": "java-testing",
+    "topic": "JUnit avanzado y pruebas deterministas",
+    "question": "¿Qué particularidad tienen los `DynamicTest` producidos por una `@TestFactory`?",
+    "options": [
+      "Cada dynamic test ejecuta automáticamente un nuevo `@BeforeEach` independiente.",
+      "Se generan en runtime; el lifecycle se aplica a la fábrica, no como métodos `@Test` separados.",
+      "No pueden tener aserciones.",
+      "Solo funcionan con JUnit 4."
+    ],
+    "correctIndex": 1,
+    "explanation": "La fábrica es el nodo de lifecycle y devuelve ejecutables dinámicos. Para tablas fijas, las parametrizadas suelen dar semántica de lifecycle y reportes más sencillos. Referencia: §9.3.",
+    "source": "java-testing-guide.md"
+  },
+  {
+    "id": "javatest-029",
+    "category": "java-testing",
+    "topic": "JUnit avanzado y pruebas deterministas",
+    "question": "¿Por qué repetir veinte veces una prueba concurrente no demuestra ausencia de carreras?",
+    "options": [
+      "Porque toda carrera ocurre en la primera ejecución.",
+      "Porque Jupiter ignora `@RepeatedTest`.",
+      "Porque solo explora algunos interleavings y puede no reproducir el fallo.",
+      "Porque los hilos se vuelven secuenciales en test."
+    ],
+    "correctIndex": 2,
+    "explanation": "El scheduling es enorme y no determinista. Repetir puede aumentar probabilidad, pero no sustituye diseño controlado o herramientas como JCStress para el Java Memory Model. Referencia: §9.2 y §16.4.",
+    "source": "java-testing-guide.md"
+  },
+  {
+    "id": "javatest-030",
+    "category": "java-testing",
+    "topic": "JUnit avanzado y pruebas deterministas",
+    "question": "¿Qué objetivo razonable tiene `@Tag(\"slow\")`?",
+    "options": [
+      "Hacerlas rápidas automáticamente.",
+      "Cambiar su resultado a skipped sin configuración.",
+      "Deshabilitarlas para siempre.",
+      "Clasificar pruebas para definir cuándo ejecutarlas en CI."
+    ],
+    "correctIndex": 3,
+    "explanation": "Tags permiten inclusión/exclusión por costo o propósito. La tubería debe ejecutar también las lentas en una etapa definida; etiquetarlas no corrige lentitud ni las omite por sí solo. Referencia: §10.3.",
+    "source": "java-testing-guide.md"
+  },
+  {
+    "id": "javatest-031",
+    "category": "java-testing",
+    "topic": "JUnit avanzado y pruebas deterministas",
+    "question": "Antes de habilitar ejecución paralela, ¿qué recurso es una señal de riesgo compartido?",
+    "options": [
+      "Una variable local dentro del test.",
+      "Un record inmutable creado por caso.",
+      "Un `List.of` local.",
+      "Un puerto fijo y un archivo con nombre global usados por varias pruebas."
+    ],
+    "correctIndex": 3,
+    "explanation": "Puertos, archivos, propiedades de sistema, bases y estado estático pueden colisionar. Usa recursos únicos/aislados y controla capacidad antes de paralelizar. Referencia: §10.4.",
+    "source": "java-testing-guide.md"
+  },
+  {
+    "id": "javatest-032",
+    "category": "java-testing",
+    "topic": "JUnit avanzado y pruebas deterministas",
+    "question": "¿Cuál es el mecanismo unificado de extensión de Jupiter?",
+    "options": [
+      "Únicamente `Runner`.",
+      "La API `Extension`, registrada por `@ExtendWith`, `@RegisterExtension` o ServiceLoader.",
+      "Heredar de `TestCase`.",
+      "Anotar producción con `@Mock`."
+    ],
+    "correctIndex": 1,
+    "explanation": "Jupiter reemplaza la fragmentación de Runner/Rules de JUnit 4 con callbacks y resolvers bajo `Extension`. MockitoExtension es un ejemplo. Referencia: §3 y §18.",
+    "source": "java-testing-guide.md"
+  },
+  {
+    "id": "javatest-033",
+    "category": "java-testing",
+    "topic": "JUnit avanzado y pruebas deterministas",
+    "question": "¿Qué extensión permite suministrar un objeto a un parámetro de constructor o método de prueba?",
+    "options": [
+      "`ParameterResolver`.",
+      "`Comparator`.",
+      "`ClassLoader`.",
+      "`ItemWriter`."
+    ],
+    "correctIndex": 0,
+    "explanation": "Un `ParameterResolver` decide si soporta el parámetro y crea/resuelve su valor mediante el contexto. No debe confundirse con argumentos indexados de una prueba parametrizada, cuyo orden tiene reglas propias. Referencia: §3.",
+    "source": "java-testing-guide.md"
+  },
+  {
+    "id": "javatest-034",
+    "category": "java-testing",
+    "topic": "JUnit avanzado y pruebas deterministas",
+    "question": "¿Cuándo es preferible `@EnabledOnOs` a un `assumeTrue` escondido dentro del test?",
+    "options": [
+      "Cuando se desea que la prueba pase aunque falle.",
+      "Para ejecutar métodos privados.",
+      "Para crear mocks.",
+      "Cuando la condición de plataforma es estable y conviene hacerla visible declarativamente."
+    ],
+    "correctIndex": 3,
+    "explanation": "Las condiciones declarativas hacen evidente por qué no aplica un caso. Los supuestos siguen siendo útiles para precondiciones dinámicas, pero no deben ocultar permanentemente cobertura ausente. Referencia: §8.3.",
+    "source": "java-testing-guide.md"
+  },
+  {
+    "id": "javatest-035",
+    "category": "java-testing",
+    "topic": "JUnit avanzado y pruebas deterministas",
+    "question": "¿Por qué no hace falta envolver cada llamada normal en `assertDoesNotThrow`?",
+    "options": [
+      "Porque solo Mockito puede detectar excepciones.",
+      "Porque una excepción inesperada ya hace fallar el test.",
+      "Porque Jupiter ignora excepciones.",
+      "Porque `assertDoesNotThrow` siempre falla."
+    ],
+    "correctIndex": 1,
+    "explanation": "Úsalo cuando además necesitas capturar el resultado o expresar explícitamente que la ausencia de excepción es el contrato. Envolver todo agrega ruido sin nueva evidencia. Referencia: §8.1.",
+    "source": "java-testing-guide.md"
+  },
+  {
+    "id": "javatest-036",
+    "category": "java-testing",
+    "topic": "JUnit avanzado y pruebas deterministas",
+    "question": "“Una razón principal para fallar” significa:",
+    "options": [
+      "Exactamente una llamada `assert` por método.",
+      "Un escenario cohesivo; puede contener varias aserciones del mismo resultado.",
+      "Capturar y ocultar todas las excepciones.",
+      "No usar `assertAll`."
+    ],
+    "correctIndex": 1,
+    "explanation": "Tres campos de una factura creada pueden pertenecer al mismo comportamiento. Mezclar creación, edición, borrado y autorización en una prueba produce diagnósticos ambiguos. Referencia: §5.1.",
+    "source": "java-testing-guide.md"
+  },
+  {
+    "id": "javatest-037",
+    "category": "java-testing",
+    "topic": "JUnit avanzado y pruebas deterministas",
+    "question": "`assertEquals(expectedCustomer, actualCustomer)` falla aunque los campos parecen iguales. ¿Cuál causa de diseño debe revisarse primero?",
+    "options": [
+      "El número de CPUs.",
+      "El contrato `equals` del objeto de valor.",
+      "La versión de Git.",
+      "El nombre del método de prueba."
+    ],
+    "correctIndex": 1,
+    "explanation": "Para objetos de valor, igualdad estructural bien definida simplifica producción y pruebas. Comparar campo a campo en toda la suite puede esconder que el dominio carece de un contrato de igualdad. Referencia: §7.1.",
+    "source": "java-testing-guide.md"
+  },
+  {
+    "id": "javatest-038",
+    "category": "java-testing",
+    "topic": "JUnit avanzado y pruebas deterministas",
+    "question": "Una prueba exige terminar en menos de 2 ms en cualquier máquina de CI. ¿Cuál crítica es correcta?",
+    "options": [
+      "Es un microbenchmark estable por definición.",
+      "`assertTimeout` desactiva el JIT.",
+      "Puede ser flaky por hardware, warmup, JIT y carga; el rendimiento debe medirse con herramienta y ambiente apropiados.",
+      "Dos milisegundos siempre equivalen al mismo número de instrucciones."
+    ],
+    "correctIndex": 2,
+    "explanation": "Un timeout amplio puede detectar bloqueo, pero no sustituye JMH ni objetivos de rendimiento con metodología. Mezclar corrección y microtiempo crea falsos negativos. Referencia: §8.2 y §16.4.",
+    "source": "java-testing-guide.md"
+  },
+  {
+    "id": "javatest-039",
+    "category": "java-testing",
+    "topic": "JUnit avanzado y pruebas deterministas",
+    "question": "¿Qué ventaja tiene un Test Data Builder frente a repetir constructores enormes?",
+    "options": [
+      "Elimina la necesidad de aserciones.",
+      "Convierte unitarias en E2E.",
+      "Hace que todo dato sea global.",
+      "Centraliza defaults válidos y permite resaltar solo datos relevantes del escenario."
+    ],
+    "correctIndex": 3,
+    "explanation": "Un builder de prueba reduce ruido y mantiene intención. Debe evitar defaults mágicos que influyan silenciosamente; los campos relevantes siguen visibles. Referencia: §5 y §15.",
+    "source": "java-testing-guide.md"
+  },
+  {
+    "id": "javatest-040",
+    "category": "java-testing",
+    "topic": "JUnit avanzado y pruebas deterministas",
+    "question": "Una prueba genera datos aleatorios. ¿Qué mejora facilita reproducir un fallo?",
+    "options": [
+      "Ocultar la semilla.",
+      "Registrar/fijar la semilla y reducir el caso fallido.",
+      "Reintentar hasta que pase.",
+      "Usar `Math.random` global sin control."
+    ],
+    "correctIndex": 1,
+    "explanation": "La aleatoriedad controlada puede ampliar casos, pero el fallo debe ser reproducible. Inyectar fuente de azar o semilla hace posible investigar y conservar una regresión. Referencia: §15.1 y §16.4.",
+    "source": "java-testing-guide.md"
+  },
+  {
+    "id": "javatest-041",
+    "category": "java-testing",
+    "topic": "JUnit avanzado y pruebas deterministas",
+    "question": "¿Cuándo conviene afirmar el mensaje exacto de una excepción?",
+    "options": [
+      "Siempre, incluso si es texto interno sin contrato.",
+      "Cuando el mensaje o código es parte estable del contrato que consume alguien.",
+      "Nunca.",
+      "Solo cuando no se afirma el tipo."
+    ],
+    "correctIndex": 1,
+    "explanation": "Afirmar texto interno vuelve frágil una refactorización. Si la API promete código/mensaje, sí debe protegerse; con frecuencia es mejor afirmar tipo y propiedades estructuradas. Referencia: §8.1.",
+    "source": "java-testing-guide.md"
+  },
+  {
+    "id": "javatest-042",
+    "category": "java-testing",
+    "topic": "JUnit avanzado y pruebas deterministas",
+    "question": "¿Por qué importa el orden `assertEquals(expected, actual)`?",
+    "options": [
+      "Cambia la igualdad calculada.",
+      "Mejora el diff y el diagnóstico que presenta la herramienta.",
+      "Hace thread-safe el objeto actual.",
+      "Solo es una convención de Mockito."
+    ],
+    "correctIndex": 1,
+    "explanation": "La comparación suele ser simétrica, pero reportes etiquetan expected/actual y generan diffs según ese orden. Invertirlos confunde la interpretación. Referencia: §7.",
+    "source": "java-testing-guide.md"
+  },
+  {
+    "id": "javatest-043",
+    "category": "java-testing",
+    "topic": "JUnit avanzado y pruebas deterministas",
+    "question": "¿Cómo se prueba de manera determinista código que usa la fecha actual?",
+    "options": [
+      "Inyectar `Clock` y usar `Clock.fixed` en la prueba.",
+      "Dormir hasta medianoche.",
+      "Llamar `Instant.now()` tanto en producción como en la aserción y esperar coincidencia.",
+      "Cambiar el reloj global del sistema en paralelo."
+    ],
+    "correctIndex": 0,
+    "explanation": "El reloj se vuelve una dependencia explícita y barata, sin necesidad de mock estático. La prueba controla instante y zona. Referencia: §15.1.",
+    "source": "java-testing-guide.md"
+  },
+  {
+    "id": "javatest-044",
+    "category": "java-testing",
+    "topic": "JUnit avanzado y pruebas deterministas",
+    "question": "¿Qué soporte Jupiter es apropiado para obtener un directorio temporal aislado?",
+    "options": [
+      "`@Spy`.",
+      "`@Order`.",
+      "`@TempDir`.",
+      "`@Timeout`."
+    ],
+    "correctIndex": 2,
+    "explanation": "`@TempDir` inyecta un `Path`/`File` temporal administrado, evita rutas globales y facilita limpieza. Aún se debe controlar nombres, permisos y contenido dentro del caso. Referencia: §10.4 y principios de aislamiento.",
+    "source": "java-testing-guide.md"
+  },
+  {
+    "id": "javatest-045",
+    "category": "java-testing",
+    "topic": "JUnit avanzado y pruebas deterministas",
+    "question": "Una prueba asincrónica usa `Thread.sleep(500)` antes de afirmar. ¿Cuál alternativa es conceptualmente mejor?",
+    "options": [
+      "Esperar una condición observable con timeout o controlar el executor/scheduler.",
+      "Aumentar siempre a 30 segundos.",
+      "Quitar la aserción.",
+      "Ejecutar cien veces y aceptar cualquier resultado."
+    ],
+    "correctIndex": 0,
+    "explanation": "Dormir espera de más cuando el evento es rápido y falla cuando es lento. Sincronizar con una señal, future, latch o scheduler controlado expresa el hecho esperado y conserva un límite. Referencia: §16.4.",
+    "source": "java-testing-guide.md"
+  },
+  {
+    "id": "javatest-046",
+    "category": "java-testing",
+    "topic": "JUnit avanzado y pruebas deterministas",
+    "question": "¿Cuál migración de anotación JUnit 4 → Jupiter es correcta?",
+    "options": [
+      "`@Before` → `@BeforeEach`.",
+      "`@RunWith` → `@BeforeAll`.",
+      "`@Ignore` → `@Order`.",
+      "`@Test(expected=...)` → `@Disabled`."
+    ],
+    "correctIndex": 0,
+    "explanation": "También `@After` pasa a `@AfterEach`, `@Ignore` a `@Disabled` y la expectativa de excepción a `assertThrows`. Runner/Rules se rediseñan con extensiones. Referencia: §18.",
+    "source": "java-testing-guide.md"
+  },
+  {
+    "id": "javatest-047",
+    "category": "java-testing",
+    "topic": "JUnit avanzado y pruebas deterministas",
+    "question": "¿Qué papel tiene Vintage en JUnit 6?",
+    "options": [
+      "Motor de transición para pruebas JUnit 3/4, deprecado y no recomendado como estado permanente.",
+      "Motor obligatorio para Jupiter.",
+      "Plugin de cobertura.",
+      "Reemplazo de Mockito."
+    ],
+    "correctIndex": 0,
+    "explanation": "Permite migración gradual, pero mantener dos modelos indefinidamente aumenta complejidad. Las pruebas nuevas deben usar Jupiter y el motor retirarse al finalizar. Referencia: §3 y §18.",
+    "source": "java-testing-guide.md"
+  },
+  {
+    "id": "javatest-048",
+    "category": "java-testing",
+    "topic": "JUnit avanzado y pruebas deterministas",
+    "question": "Una clase JUnit 4 usa un único `@RunWith`. ¿Qué mejora ofrece el modelo Jupiter?",
+    "options": [
+      "Permite componer múltiples extensiones con puntos coherentes.",
+      "Prohíbe cualquier integración externa.",
+      "Requiere herencia de una clase base única.",
+      "Solo admite extensiones estáticas."
+    ],
+    "correctIndex": 0,
+    "explanation": "El modelo `Extension` evita la limitación de un runner principal y unifica callbacks, resolución de parámetros y postprocesamiento. La migración debe revisar semántica, no solo cambiar imports. Referencia: §18.",
+    "source": "java-testing-guide.md"
+  },
+  {
+    "id": "javatest-049",
+    "category": "java-testing",
+    "topic": "JUnit avanzado y pruebas deterministas",
+    "question": "¿Qué nombre descubre Surefire por convención predeterminada?",
+    "options": [
+      "`PriceCalculatorTest.java`.",
+      "`PriceCalculatorIT.java` únicamente.",
+      "`ProductionService.java`.",
+      "Cualquier archivo sin clase."
+    ],
+    "correctIndex": 0,
+    "explanation": "Surefire reconoce patrones como `*Test`, `*Tests` y `*TestCase`. `*IT` suele reservarse para Failsafe durante integración/verify. Referencia: §17.",
+    "source": "java-testing-guide.md"
+  },
+  {
+    "id": "javatest-050",
+    "category": "java-testing",
+    "topic": "JUnit avanzado y pruebas deterministas",
+    "question": "El código de producción se compila con `--release 11`, pero JUnit 6 se ejecuta con JDK 17. ¿Es conceptualmente posible?",
+    "options": [
+      "No; target y runtime de tests deben ser el mismo número.",
+      "Solo sin Maven.",
+      "Solo si se usa Vintage.",
+      "Sí; JUnit requiere runtime 17 y puede probar bytecode dirigido a una versión anterior compatible."
+    ],
+    "correctIndex": 3,
+    "explanation": "La JVM 17 puede cargar bytecode anterior y JUnit satisface su baseline. Debe cuidarse que el código realmente no use APIs fuera de su release objetivo. Referencia: §3–4.",
+    "source": "java-testing-guide.md"
+  },
+  {
+    "id": "javatest-051",
+    "category": "java-testing",
+    "topic": "Dobles y Mockito",
+    "question": "¿Qué doble es una implementación funcional simplificada, como un repositorio en memoria?",
+    "options": [
+      "Dummy.",
+      "Fake.",
+      "Mock estricto necesariamente.",
+      "Captor."
+    ],
+    "correctIndex": 1,
+    "explanation": "Un fake mantiene comportamiento/estado útil sin infraestructura real. Un stub responde datos preparados; un mock se centra en expectativas de interacción; un dummy solo completa una firma. Referencia: §11.",
+    "source": "java-testing-guide.md"
+  },
+  {
+    "id": "javatest-052",
+    "category": "java-testing",
+    "topic": "Dobles y Mockito",
+    "question": "¿Qué debería usarse normalmente para un record de dominio barato e inmutable?",
+    "options": [
+      "Un mock de cada accessor.",
+      "Una instancia real con valores significativos.",
+      "Un mock estático.",
+      "Un deep stub."
+    ],
+    "correctIndex": 1,
+    "explanation": "Los objetos reales simples conservan invariantes y hacen la prueba legible. Simularlos replica su estructura y acopla sin aislar una frontera costosa. Referencia: §2.2 y §11.",
+    "source": "java-testing-guide.md"
+  },
+  {
+    "id": "javatest-053",
+    "category": "java-testing",
+    "topic": "Dobles y Mockito",
+    "question": "Una prueba ejecuta un servicio con un repositorio mock, prepara `save` para devolver `saved` y comprueba que el servicio devuelve ese objeto. ¿Qué conclusión sigue sin estar respaldada?",
+    "options": [
+      "Que el escenario aislado ejecutó ese camino.",
+      "Que el servicio propagó la respuesta preparada.",
+      "Que el mock proporcionó la respuesta usada por el caso.",
+      "Que el SQL, mapping y base real funcionan."
+    ],
+    "correctIndex": 3,
+    "explanation": "El mock sustituye la integración y solo reproduce lo configurado. Para probar driver, consultas y constraints se necesita una prueba contra la implementación/tecnología real. Referencia: §2 y §11.",
+    "source": "java-testing-guide.md"
+  },
+  {
+    "id": "javatest-054",
+    "category": "java-testing",
+    "topic": "Dobles y Mockito",
+    "question": "¿Qué hace `@ExtendWith(MockitoExtension.class)`?",
+    "options": [
+      "Arranca Spring Boot.",
+      "Convierte todas las clases del classpath en mocks.",
+      "Integra creación/inyección de anotaciones Mockito y validación con lifecycle Jupiter.",
+      "Ejecuta pruebas E2E."
+    ],
+    "correctIndex": 2,
+    "explanation": "La extensión procesa `@Mock`, `@Captor`, `@InjectMocks` y el ciclo relacionado. No es un contenedor de aplicación ni inicia servidor/base. Referencia: §12.1.",
+    "source": "java-testing-guide.md"
+  },
+  {
+    "id": "javatest-055",
+    "category": "java-testing",
+    "topic": "Dobles y Mockito",
+    "question": "¿Cuál limitación debe recordarse sobre `@InjectMocks`?",
+    "options": [
+      "Es un contenedor DI completo equivalente a Spring.",
+      "Solo funciona con métodos estáticos.",
+      "Es una comodidad de construcción/inyección y puede ocultar cómo se creó el objeto.",
+      "Persiste automáticamente los mocks."
+    ],
+    "correctIndex": 2,
+    "explanation": "Para dependencias simples, construir explícitamente la clase bajo prueba suele ser más transparente. `@InjectMocks` no resuelve configuración arbitraria ni valida una arquitectura DI real. Referencia: §12.1.",
+    "source": "java-testing-guide.md"
+  },
+  {
+    "id": "javatest-056",
+    "category": "java-testing",
+    "topic": "Dobles y Mockito",
+    "question": "¿Qué expresa este stubbing?",
+    "options": [
+      "Verifica que el método ya fue llamado.",
+      "Impide cualquier otra llamada al mock.",
+      "Prepara la respuesta cuando coincida esa invocación.",
+      "Ejecuta el repositorio real."
+    ],
+    "correctIndex": 2,
+    "explanation": "Stubbing define comportamiento futuro; `verify` comprueba interacciones después. No demuestra que el método fue invocado ni llama infraestructura real. Referencia: §12.2.",
+    "source": "java-testing-guide.md",
+    "code": "when(repository.findByEmail(\"ada@example.org\"))\n        .thenReturn(Optional.empty());",
+    "language": "java"
+  },
+  {
+    "id": "javatest-057",
+    "category": "java-testing",
+    "topic": "Dobles y Mockito",
+    "question": "En estilo BDDMockito, ¿cuál es equivalente conceptual a `when(x).thenReturn(y)`?",
+    "options": [
+      "`verify(y).calls(x)`.",
+      "`then(x).shouldReturn(y)`.",
+      "`assertThat(x).is(y)`.",
+      "`given(x).willReturn(y)`."
+    ],
+    "correctIndex": 3,
+    "explanation": "`given/willReturn` encaja en Given; la verificación BDD suele usar `then(mock).should()`. Cambia vocabulario, no la naturaleza del doble. Referencia: §12.2.",
+    "source": "java-testing-guide.md"
+  },
+  {
+    "id": "javatest-058",
+    "category": "java-testing",
+    "topic": "Dobles y Mockito",
+    "question": "¿Cómo se prepara una excepción para un método `void`?",
+    "options": [
+      "`when(gateway.send()).thenThrow(...)` siempre.",
+      "No es posible con Mockito.",
+      "`assertThrows` sobre la creación del mock solamente.",
+      "`doThrow(error).when(gateway).send(...)`."
+    ],
+    "correctIndex": 3,
+    "explanation": "La familia `doThrow/doNothing/doAnswer` sirve para métodos void y también para spies cuando no debe invocarse el método real al preparar. Referencia: §12.2.",
+    "source": "java-testing-guide.md"
+  },
+  {
+    "id": "javatest-059",
+    "category": "java-testing",
+    "topic": "Dobles y Mockito",
+    "question": "Un método no configurado de un mock devuelve normalmente:",
+    "options": [
+      "Valores vacíos/default según el tipo, no comportamiento de producción.",
+      "Una excepción de compilación.",
+      "La implementación real completa.",
+      "El resultado de la última prueba."
+    ],
+    "correctIndex": 0,
+    "explanation": "Pueden ser `false`, cero, null, colección u Optional vacío según API/configuración. Una prueba que pasa por default no prueba la implementación real y puede estar omitiendo stubbing relevante. Referencia: §12.3.",
+    "source": "java-testing-guide.md"
+  },
+  {
+    "id": "javatest-060",
+    "category": "java-testing",
+    "topic": "Dobles y Mockito",
+    "question": "¿Qué señala normalmente un stubbing estricto que nunca se usa?",
+    "options": [
+      "Setup excesivo, camino inesperado o residuo de una refactorización.",
+      "Que el método real fue demasiado rápido.",
+      "Que falta un `Thread.sleep`.",
+      "Que Mockito debe ignorarse siempre."
+    ],
+    "correctIndex": 0,
+    "explanation": "La validación estricta mantiene cada escenario enfocado. Marcar todo como lenient oculta señales; primero elimina o corrige el stubbing. Referencia: §12.3.",
+    "source": "java-testing-guide.md"
+  },
+  {
+    "id": "javatest-061",
+    "category": "java-testing",
+    "topic": "Dobles y Mockito",
+    "question": "Sin especificar modo, `verify(repository).save(user)` exige:",
+    "options": [
+      "Una llamada compatible.",
+      "Cero llamadas.",
+      "Al menos diez llamadas.",
+      "Que `save` devuelva void."
+    ],
+    "correctIndex": 0,
+    "explanation": "`times(1)` es el valor implícito. Usa cantidades solo cuando son parte del contrato; una verificación redundante de cada detalle vuelve frágil la prueba. Referencia: §13.1.",
+    "source": "java-testing-guide.md"
+  },
+  {
+    "id": "javatest-062",
+    "category": "java-testing",
+    "topic": "Dobles y Mockito",
+    "question": "En un escenario de email duplicado, debe garantizarse que no se guarde el usuario. ¿Qué verificación es directa?",
+    "options": [
+      "`when(repository.save(any())).thenReturn(null)`.",
+      "`verify(repository, never()).save(any())`.",
+      "`assertSame(repository, repository)`.",
+      "`verify(repository, times(1)).save(any())`."
+    ],
+    "correctIndex": 1,
+    "explanation": "`never()` afirma ausencia de un efecto indebido. Debe acompañar la observación principal, por ejemplo la excepción o resultado que explica por qué no se guarda. Referencia: §13.1.",
+    "source": "java-testing-guide.md"
+  },
+  {
+    "id": "javatest-063",
+    "category": "java-testing",
+    "topic": "Dobles y Mockito",
+    "question": "¿Qué diferencia existe entre `verifyNoInteractions(mock)` y `verifyNoMoreInteractions(mock)`?",
+    "options": [
+      "La primera exige cero llamadas; la segunda exige que no queden llamadas sin verificar.",
+      "La segunda borra todas las llamadas.",
+      "Ninguna.",
+      "La primera solo aplica a spies."
+    ],
+    "correctIndex": 0,
+    "explanation": "`verifyNoMoreInteractions` puede imponer un protocolo completo y acoplar demasiado si se usa rutinariamente. `verifyNoInteractions` expresa que la frontera no debió tocarse en absoluto. Referencia: §13.1.",
+    "source": "java-testing-guide.md"
+  },
+  {
+    "id": "javatest-064",
+    "category": "java-testing",
+    "topic": "Dobles y Mockito",
+    "question": "¿Por qué falla esta verificación?",
+    "options": [
+      "Porque Mockito no acepta strings.",
+      "Porque `verify` requiere retorno.",
+      "Si un argumento usa matcher, los demás deben expresarse con matchers, por ejemplo `eq(\"CREATED\")`.",
+      "Porque `Instant` es final."
+    ],
+    "correctIndex": 2,
+    "explanation": "Mockito registra matchers en un contexto; mezclar un valor crudo con matcher causa uso inválido. `eq` conserva la igualdad exacta dentro del mismo mecanismo. Referencia: §13.2.",
+    "source": "java-testing-guide.md",
+    "code": "verify(audit).record(\"CREATED\", any(Instant.class));",
+    "language": "java"
+  },
+  {
+    "id": "javatest-065",
+    "category": "java-testing",
+    "topic": "Dobles y Mockito",
+    "question": "¿Qué afirmación sobre `anyString()` es correcta?",
+    "options": [
+      "Coincide también con null por definición.",
+      "Coincide con strings no null; si null es válido debe tratarse explícitamente.",
+      "Solo coincide con el string literal `\"any\"`.",
+      "Ejecuta una expresión regular."
+    ],
+    "correctIndex": 1,
+    "explanation": "Los matchers tipados como `anyString` no representan null. Esto puede revelar una precondición no modelada; usa `isNull`, `nullable` o un contrato que evite null según el caso. Referencia: §13.2.",
+    "source": "java-testing-guide.md"
+  },
+  {
+    "id": "javatest-066",
+    "category": "java-testing",
+    "topic": "Dobles y Mockito",
+    "question": "¿Cuándo es útil `argThat`?",
+    "options": [
+      "Para arrancar una base real.",
+      "Para cambiar el bytecode de producción permanentemente.",
+      "Para reemplazar todas las aserciones Jupiter.",
+      "Para expresar una condición semántica sobre un argumento sin capturarlo después."
+    ],
+    "correctIndex": 3,
+    "explanation": "Un matcher personalizado puede decir “usuario activo con ID válido”. Debe producir un diagnóstico comprensible; si se necesitan varias aserciones detalladas, un captor puede ser más claro. Referencia: §13.2.",
+    "source": "java-testing-guide.md"
+  },
+  {
+    "id": "javatest-067",
+    "category": "java-testing",
+    "topic": "Dobles y Mockito",
+    "question": "¿Cuál uso recomienda principalmente la documentación para `ArgumentCaptor`?",
+    "options": [
+      "Decidir stubbing complejo antes de ejecutar.",
+      "Construir el objeto bajo prueba.",
+      "Reemplazar el repositorio real en producción.",
+      "Capturar argumentos durante verificación para inspeccionarlos."
+    ],
+    "correctIndex": 3,
+    "explanation": "El captor ayuda a afirmar el valor que cruzó una frontera. Para elegir respuesta de stubbing, un matcher o fake suele comunicar mejor la condición. Referencia: §13.3.",
+    "source": "java-testing-guide.md"
+  },
+  {
+    "id": "javatest-068",
+    "category": "java-testing",
+    "topic": "Dobles y Mockito",
+    "question": "¿Cuándo debe usarse `InOrder`?",
+    "options": [
+      "Cuando el orden forma parte real del protocolo, como guardar antes de publicar.",
+      "Para medir tiempo.",
+      "Para ordenar métodos JUnit.",
+      "En toda interacción para que la prueba sea “más estricta”."
+    ],
+    "correctIndex": 0,
+    "explanation": "Imponer orden irrelevante acopla a implementación. Si invertir dos llamadas cambia el contrato o integridad, `InOrder` protege una regla observable. Referencia: §13.4.",
+    "source": "java-testing-guide.md"
+  },
+  {
+    "id": "javatest-069",
+    "category": "java-testing",
+    "topic": "Dobles y Mockito",
+    "question": "¿Qué distingue un spy de un mock ordinario?",
+    "options": [
+      "El spy siempre es remoto.",
+      "El spy delega normalmente en un objeto real salvo stubbing; el mock no.",
+      "El mock no puede verificarse.",
+      "No existe diferencia."
+    ],
+    "correctIndex": 1,
+    "explanation": "Un spy es *partial double*: llamadas no preparadas ejecutan código real. Puede producir efectos inesperados y suele requerir más cuidado que un mock. Referencia: §14.1.",
+    "source": "java-testing-guide.md"
+  },
+  {
+    "id": "javatest-070",
+    "category": "java-testing",
+    "topic": "Dobles y Mockito",
+    "question": "¿Por qué se prefiere `doReturn(value).when(spy).method()` al preparar ciertos spies?",
+    "options": [
+      "Porque `doReturn` ejecuta el método dos veces.",
+      "Porque `when(spy.method())` invoca el método real durante stubbing.",
+      "Porque los spies no aceptan valores.",
+      "Porque solo compila con Spring."
+    ],
+    "correctIndex": 1,
+    "explanation": "Si la llamada real tiene efectos, falla o depende de estado aún no preparado, `doReturn` evita ejecutarla al configurar. Referencia: §14.1.",
+    "source": "java-testing-guide.md"
+  },
+  {
+    "id": "javatest-071",
+    "category": "java-testing",
+    "topic": "Dobles y Mockito",
+    "question": "¿Por qué un mock estático debe limitarse con `try-with-resources`?",
+    "options": [
+      "Para acotar la interceptación y restaurar comportamiento al cerrar.",
+      "Para persistirlo después de la suite.",
+      "Para convertirlo en singleton global.",
+      "Porque todo mock implementa `Closeable` permanentemente."
+    ],
+    "correctIndex": 0,
+    "explanation": "El alcance evita contaminar otras pruebas, especialmente en ejecución paralela. Aun así, inyectar `Clock`, fábrica o gateway explícito suele producir mejor diseño. Referencia: §14.3.",
+    "source": "java-testing-guide.md"
+  },
+  {
+    "id": "javatest-072",
+    "category": "java-testing",
+    "topic": "Dobles y Mockito",
+    "question": "¿Qué suele revelar una cadena de deep stubs como `order.customer().address().city()`?",
+    "options": [
+      "Un contrato perfectamente desacoplado.",
+      "Que Mockito ejecutó SQL.",
+      "Una integración real con base.",
+      "Acoplamiento a la estructura interna y posible violación de Demeter."
+    ],
+    "correctIndex": 3,
+    "explanation": "La prueba replica el grafo de getters y se rompe al reorganizarlo. Objetos reales simples o una operación de dominio expresiva suelen ser mejores. Referencia: §14.4.",
+    "source": "java-testing-guide.md"
+  },
+  {
+    "id": "javatest-073",
+    "category": "java-testing",
+    "topic": "Dobles y Mockito",
+    "question": "Un `thenAnswer` contiene cincuenta líneas que reproducen reglas del servicio remoto. ¿Qué alternativa evaluar?",
+    "options": [
+      "Un fake explícito, pequeño y probado, o simplificar el escenario.",
+      "Agregar cien líneas más al lambda.",
+      "Eliminar toda prueba.",
+      "Usar `verifyNoMoreInteractions` como implementación."
+    ],
+    "correctIndex": 0,
+    "explanation": "Una Answer compleja se vuelve una segunda implementación oculta. Un fake con nombre y estado es más legible, pero tampoco demuestra integración real. Referencia: §14.2.",
+    "source": "java-testing-guide.md"
+  },
+  {
+    "id": "javatest-074",
+    "category": "java-testing",
+    "topic": "Dobles y Mockito",
+    "question": "Mockito 5 puede simular muchas clases finales. ¿Qué conclusión de diseño sigue siendo válida?",
+    "options": [
+      "Todo objeto final debe mockearse.",
+      "La capacidad técnica no justifica simular valores baratos ni ocultar dependencias.",
+      "Ya no se necesitan interfaces ni pruebas de integración.",
+      "Los mocks finales ejecutan la base real."
+    ],
+    "correctIndex": 1,
+    "explanation": "Mockear es una decisión sobre frontera y evidencia, no solo sobre posibilidad del framework. Un record final de valor se usa real; un cliente final externo quizá se envuelve tras un puerto. Referencia: §11 y §15.",
+    "source": "java-testing-guide.md"
+  },
+  {
+    "id": "javatest-075",
+    "category": "java-testing",
+    "topic": "Dobles y Mockito",
+    "question": "Un servicio devuelve una factura y también llama internamente a tres métodos del repositorio. ¿Qué conviene afirmar primero?",
+    "options": [
+      "El nombre del mock generado.",
+      "Toda llamada interna aunque pueda refactorizarse.",
+      "El orden alfabético de los métodos.",
+      "El estado/resultado de la factura, si expresa el contrato."
+    ],
+    "correctIndex": 3,
+    "explanation": "Verificar resultado protege comportamiento y permite cambiar implementación. Las interacciones se añaden si son efectos externos o protocolos relevantes, no para duplicar el código línea por línea. Referencia: §1.2 y §13.",
+    "source": "java-testing-guide.md"
+  },
+  {
+    "id": "javatest-076",
+    "category": "java-testing",
+    "topic": "Diseño, TDD, integración y CI",
+    "question": "Una clase llama directamente `Instant.now()` en una regla de expiración. ¿Qué refactor mejora testabilidad?",
+    "options": [
+      "Mockear `String`.",
+      "Aumentar la velocidad del procesador.",
+      "Hacer el método privado.",
+      "Inyectar `Clock` y llamar `Instant.now(clock)`."
+    ],
+    "correctIndex": 3,
+    "explanation": "El tiempo se vuelve una dependencia visible y la prueba usa `Clock.fixed`. También mejora producción al hacer explícita la zona/política temporal. Referencia: §15.1.",
+    "source": "java-testing-guide.md"
+  },
+  {
+    "id": "javatest-077",
+    "category": "java-testing",
+    "topic": "Diseño, TDD, integración y CI",
+    "question": "El código crea `UUID.randomUUID()` dentro del método y la prueba necesita un ID conocido. ¿Qué diseño es más directo?",
+    "options": [
+      "Recibir un `IdGenerator` o `Supplier<UUID>`.",
+      "Comparar solo que el string contiene letras.",
+      "Repetir hasta obtener el UUID esperado.",
+      "Dormir antes de generarlo."
+    ],
+    "correctIndex": 0,
+    "explanation": "La fuente no determinista se inyecta y puede reemplazarse por una lambda fija. No hace falta un framework de mocking para una interfaz funcional simple. Referencia: §15.1.",
+    "source": "java-testing-guide.md"
+  },
+  {
+    "id": "javatest-078",
+    "category": "java-testing",
+    "topic": "Diseño, TDD, integración y CI",
+    "question": "¿Qué significa “núcleo funcional, bordes imperativos”?",
+    "options": [
+      "Hacer todos los métodos `static` aunque compartan estado.",
+      "Concentrar cálculos puros en el núcleo y aislar archivo/red/base en adaptadores.",
+      "Evitar objetos de dominio.",
+      "Poner I/O dentro de cada función pura."
+    ],
+    "correctIndex": 1,
+    "explanation": "Las reglas puras se prueban con valores reales; los bordes requieren pocas pruebas de interacción y sus propias integraciones. La separación reduce combinaciones y flakiness. Referencia: §15.2.",
+    "source": "java-testing-guide.md"
+  },
+  {
+    "id": "javatest-079",
+    "category": "java-testing",
+    "topic": "Diseño, TDD, integración y CI",
+    "question": "Un constructor requiere doce colaboradores. ¿Qué señal ofrece a la prueba?",
+    "options": [
+      "Se necesitan doce deep stubs obligatoriamente.",
+      "La clase puede mezclar demasiadas responsabilidades.",
+      "Deben ocultarse con inyección de campo.",
+      "La clase ya cumple SRP por tener constructor."
+    ],
+    "correctIndex": 1,
+    "explanation": "El setup difícil puede ser feedback de diseño. Agrupar mocks artificialmente no elimina el acoplamiento; revisa casos de uso y responsabilidades antes de buscar una anotación. Referencia: §15.3.",
+    "source": "java-testing-guide.md"
+  },
+  {
+    "id": "javatest-080",
+    "category": "java-testing",
+    "topic": "Diseño, TDD, integración y CI",
+    "question": "Para probar una rama compleja de un método privado, ¿qué primera decisión es preferible?",
+    "options": [
+      "Hacerlo público solo para el test.",
+      "Copiar su código al test.",
+      "Probarla mediante el contrato público o extraer una responsabilidad con contrato propio.",
+      "Usar reflexión en todas las pruebas."
+    ],
+    "correctIndex": 2,
+    "explanation": "Los privados son implementación. Si contienen lógica que merece pruebas independientes, quizá representan otro concepto; extraerlo mejora diseño sin ampliar visibilidad accidentalmente. Referencia: §15.3.",
+    "source": "java-testing-guide.md"
+  },
+  {
+    "id": "javatest-081",
+    "category": "java-testing",
+    "topic": "Diseño, TDD, integración y CI",
+    "question": "En TDD, ¿qué debe demostrar la fase Red?",
+    "options": [
+      "Que Mockito lanzó una excepción interna.",
+      "Que todas las pruebas están deshabilitadas.",
+      "Que la cobertura ya es 100 %.",
+      "Que la prueba nueva falla por la razón esperada antes de implementar."
+    ],
+    "correctIndex": 3,
+    "explanation": "Observar el fallo evita una prueba que pasa sin ejercer el comportamiento. El mensaje debe apuntar a la ausencia/regla nueva, no a setup roto. Referencia: §16.1.",
+    "source": "java-testing-guide.md"
+  },
+  {
+    "id": "javatest-082",
+    "category": "java-testing",
+    "topic": "Diseño, TDD, integración y CI",
+    "question": "¿Qué busca la fase Green?",
+    "options": [
+      "La arquitectura perfecta y todos los casos futuros.",
+      "Optimizar antes de tener comportamiento.",
+      "Eliminar la prueba roja.",
+      "El cambio mínimo correcto que hace pasar el ejemplo actual."
+    ],
+    "correctIndex": 3,
+    "explanation": "Green da feedback rápido. La generalización y limpieza vienen con más ejemplos y Refactor, manteniendo la suite verde. Referencia: §16.1.",
+    "source": "java-testing-guide.md"
+  },
+  {
+    "id": "javatest-083",
+    "category": "java-testing",
+    "topic": "Diseño, TDD, integración y CI",
+    "question": "Durante Refactor en TDD, ¿qué restricción es central?",
+    "options": [
+      "Mejorar diseño conservando todas las pruebas verdes.",
+      "Borrar casos de borde.",
+      "Cambiar comportamiento observable deliberadamente sin prueba.",
+      "Cambiar a E2E todas las unitarias."
+    ],
+    "correctIndex": 0,
+    "explanation": "La suite permite reestructurar con seguridad. Si cambia el contrato, se vuelve a Red con un nuevo ejemplo en lugar de esconder el cambio como refactor. Referencia: §16.1.",
+    "source": "java-testing-guide.md"
+  },
+  {
+    "id": "javatest-084",
+    "category": "java-testing",
+    "topic": "Diseño, TDD, integración y CI",
+    "question": "Una entrada válida está en `0..100`. ¿Qué conjunto cubre límites representativos?",
+    "options": [
+      "`50` únicamente.",
+      "`1, 2, 3`.",
+      "Todos los enteros posibles obligatoriamente.",
+      "`-1, 0, 50, 100, 101`."
+    ],
+    "correctIndex": 3,
+    "explanation": "Incluye clases inválidas bajo/alto, ambos límites y un interior. Se amplía según riesgos y reglas, no por enumeración ciega. Referencia: §16.2.",
+    "source": "java-testing-guide.md"
+  },
+  {
+    "id": "javatest-085",
+    "category": "java-testing",
+    "topic": "Diseño, TDD, integración y CI",
+    "question": "Una suite logra 100 % de cobertura de líneas sin aserciones. ¿Qué concluye?",
+    "options": [
+      "El sistema es correcto.",
+      "El código se ejecutó, pero quizá ningún resultado fue comprobado.",
+      "No puede existir ningún mutante.",
+      "Todas las integraciones reales funcionan."
+    ],
+    "correctIndex": 1,
+    "explanation": "Cobertura es señal de ejecución, no calidad del oráculo. Sirve para detectar zonas nunca ejercitadas, pero no sustituye escenarios ni aserciones significativas. Referencia: §16.3.",
+    "source": "java-testing-guide.md"
+  },
+  {
+    "id": "javatest-086",
+    "category": "java-testing",
+    "topic": "Diseño, TDD, integración y CI",
+    "question": "¿Qué revela un mutante sobreviviente?",
+    "options": [
+      "Que el compilador Java está roto.",
+      "Que toda la suite debe borrarse.",
+      "Posible aserción débil, caso ausente o código sin efecto observable.",
+      "Que el código mutado es necesariamente correcto."
+    ],
+    "correctIndex": 2,
+    "explanation": "Mutation testing cambia condiciones/operadores y espera que una prueba lo detecte. No todos los mutantes son valiosos, pero sobrevivientes útiles cuestionan la fuerza de la suite. Referencia: §16.3.",
+    "source": "java-testing-guide.md"
+  },
+  {
+    "id": "javatest-087",
+    "category": "java-testing",
+    "topic": "Diseño, TDD, integración y CI",
+    "question": "Una prueba falla 1 de cada 50 veces. ¿Cuál respuesta es responsable?",
+    "options": [
+      "Investigar reloj, orden, recursos, asincronía y entorno; un reintento temporal debe quedar visible.",
+      "Declararla exitosa en cualquier resultado.",
+      "Añadir reintentos infinitos y olvidarla.",
+      "Ejecutarla solo en la laptop del autor."
+    ],
+    "correctIndex": 0,
+    "explanation": "Flakiness erosiona confianza. El objetivo es controlar la fuente no determinista; reintentar puede reducir bloqueo temporal, no resolver causalidad. Referencia: §16.4.",
+    "source": "java-testing-guide.md"
+  },
+  {
+    "id": "javatest-088",
+    "category": "java-testing",
+    "topic": "Diseño, TDD, integración y CI",
+    "question": "¿Qué interpretación correcta tiene la pirámide de pruebas?",
+    "options": [
+      "Exige porcentajes universales exactos.",
+      "Expresa que pruebas más amplias suelen costar más y localizar peor una falla, por lo que convienen muchas rápidas y pocas E2E valiosas.",
+      "Prohíbe integraciones.",
+      "Dice que toda unitaria requiere mock."
+    ],
+    "correctIndex": 1,
+    "explanation": "Es un modelo de feedback/costo, no una cuota rígida. La distribución depende del sistema, riesgos y fronteras. Referencia: §2.",
+    "source": "java-testing-guide.md"
+  },
+  {
+    "id": "javatest-089",
+    "category": "java-testing",
+    "topic": "Diseño, TDD, integración y CI",
+    "question": "Dos servicios independientes evolucionan un contrato HTTP. ¿Qué prueba complementa unitarias sin desplegar todo el sistema?",
+    "options": [
+      "Solo cobertura de línea.",
+      "Un assert sobre un método privado.",
+      "Un mock que acepte cualquier JSON sin estructura.",
+      "Una prueba de contrato que valida expectativas compatibles entre proveedor y consumidor."
+    ],
+    "correctIndex": 3,
+    "explanation": "Las pruebas de contrato protegen la forma/protocolo en el límite. No sustituyen por completo una prueba de integración/E2E, pero detectan incompatibilidades antes y con menor costo. Referencia: §2 y estrategia de niveles.",
+    "source": "java-testing-guide.md"
+  },
+  {
+    "id": "javatest-090",
+    "category": "java-testing",
+    "topic": "Diseño, TDD, integración y CI",
+    "question": "¿Qué asociación Maven es correcta?",
+    "options": [
+      "Failsafe → compilación principal; Surefire → deploy.",
+      "Surefire se usa únicamente con JUnit 4.",
+      "Ambos solo generan Javadoc.",
+      "Surefire → unitarias en `test`; Failsafe → integración en `integration-test`/`verify`."
+    ],
+    "correctIndex": 3,
+    "explanation": "Separan ciclos y convenciones de nombres. JUnit Platform funciona con ambos; el tipo de prueba lo determina alcance/infraestructura, no solo el sufijo. Referencia: §17.",
+    "source": "java-testing-guide.md"
+  },
+  {
+    "id": "javatest-091",
+    "category": "java-testing",
+    "topic": "Diseño, TDD, integración y CI",
+    "question": "¿Por qué se recomienda terminar integración con `mvn verify` y no usar `mvn integration-test` como comando final?",
+    "options": [
+      "Porque `verify` incluye fases posteriores de limpieza y evalúa el resultado registrado por Failsafe.",
+      "Porque `integration-test` nunca ejecuta pruebas.",
+      "Porque `verify` omite unitarias.",
+      "Porque Maven no tiene fase `integration-test`."
+    ],
+    "correctIndex": 0,
+    "explanation": "Failsafe está diseñado para no cortar antes de `post-integration-test`; `verify` decide el fallo final tras oportunidad de limpiar infraestructura. Referencia: §17.",
+    "source": "java-testing-guide.md"
+  },
+  {
+    "id": "javatest-092",
+    "category": "java-testing",
+    "topic": "Diseño, TDD, integración y CI",
+    "question": "¿Qué directorios conviene conservar como artefactos cuando CI falla?",
+    "options": [
+      "Ningún reporte, para ahorrar espacio.",
+      "Solo el repositorio local Maven completo.",
+      "`target/surefire-reports` y `target/failsafe-reports`.",
+      "Únicamente `.git/objects`."
+    ],
+    "correctIndex": 2,
+    "explanation": "Sus XML/TXT contienen casos, stack traces y tiempos necesarios para diagnosticar. También pueden alimentar la UI del servidor CI. Referencia: §17.",
+    "source": "java-testing-guide.md"
+  },
+  {
+    "id": "javatest-093",
+    "category": "java-testing",
+    "topic": "Diseño, TDD, integración y CI",
+    "question": "¿Qué mejora la reproducibilidad entre laptop y CI?",
+    "options": [
+      "Usar Maven Wrapper, JDK fijado, locale/zona controlados y `verify` desde checkout limpio.",
+      "Depender del IDE personal.",
+      "Descargar siempre versiones `LATEST`.",
+      "Compartir `target/` manualmente."
+    ],
+    "correctIndex": 0,
+    "explanation": "Fijar herramientas y entorno reduce diferencias no funcionales. El build debe declarar lo que necesita en lugar de heredar configuración accidental del equipo. Referencia: §4 y §17.",
+    "source": "java-testing-guide.md"
+  },
+  {
+    "id": "javatest-094",
+    "category": "java-testing",
+    "topic": "Diseño, TDD, integración y CI",
+    "question": "¿Qué aporta un contenedor de prueba con PostgreSQL frente a mockear `DataSource`?",
+    "options": [
+      "Ejecuta el driver, dialecto, schema y comportamiento reales de PostgreSQL.",
+      "Hace que la prueba sea unitaria pura.",
+      "Elimina necesidad de migraciones.",
+      "Garantiza rendimiento de producción exacto."
+    ],
+    "correctIndex": 0,
+    "explanation": "Aumenta fidelidad de integración, aunque sigue siendo un entorno controlado y más lento. No reproduce automáticamente volumen/hardware de producción. Referencia: §2 y §17.",
+    "source": "java-testing-guide.md"
+  },
+  {
+    "id": "javatest-095",
+    "category": "java-testing",
+    "topic": "Diseño, TDD, integración y CI",
+    "question": "¿Por qué una base H2 embebida puede no validar correctamente una integración PostgreSQL?",
+    "options": [
+      "Dialecto, tipos, constraints, funciones y aislamiento pueden diferir.",
+      "Todas las bases SQL son idénticas por estándar.",
+      "H2 no puede almacenar ninguna fila.",
+      "JUnit prohíbe drivers reales."
+    ],
+    "correctIndex": 0,
+    "explanation": "Una sustitución más rápida puede servir para algunas pruebas, pero no demuestra comportamientos específicos del motor objetivo. El nivel de fidelidad debe corresponder al riesgo. Referencia: §2.",
+    "source": "java-testing-guide.md"
+  },
+  {
+    "id": "javatest-096",
+    "category": "java-testing",
+    "topic": "Diseño, TDD, integración y CI",
+    "question": "El repositorio lanza al guardar. Además de afirmar la excepción, ¿qué interacción negativa protege el caso?",
+    "options": [
+      "Ninguna; los efectos posteriores no importan.",
+      "`verify(eventPublisher, never()).publish(any())`.",
+      "`when(eventPublisher.toString()).thenReturn(...)`.",
+      "`verify(eventPublisher).publish(any())`."
+    ],
+    "correctIndex": 1,
+    "explanation": "Si publicar tras un guardado fallido violaría consistencia, la ausencia del evento es parte del contrato de error. La prueba no necesita verificar cada llamada interna. Referencia: §13 y §19.",
+    "source": "java-testing-guide.md"
+  },
+  {
+    "id": "javatest-097",
+    "category": "java-testing",
+    "topic": "Diseño, TDD, integración y CI",
+    "question": "Una prueba inicia una tarea y afirma inmediatamente un resultado asincrónico. Falla ocasionalmente. ¿Qué falta?",
+    "options": [
+      "Más mocks de strings.",
+      "Una relación observable de finalización/espera con timeout.",
+      "`verifyNoMoreInteractions` antes de iniciar.",
+      "Cambiar todos los métodos a static."
+    ],
+    "correctIndex": 1,
+    "explanation": "Debe esperar el future, latch, señal o condición, no depender de scheduling. La sincronización también establece visibilidad del resultado. Referencia: §16.4.",
+    "source": "java-testing-guide.md"
+  },
+  {
+    "id": "javatest-098",
+    "category": "java-testing",
+    "topic": "Diseño, TDD, integración y CI",
+    "question": "¿Qué riesgo tiene marcar toda la clase Mockito como lenient?",
+    "options": [
+      "Hace que las pruebas no compilen.",
+      "Oculta stubbings innecesarios y caminos no ejercitados.",
+      "Convierte mocks en bases reales.",
+      "Obliga a verificar cada getter."
+    ],
+    "correctIndex": 1,
+    "explanation": "La leniencia debe ser excepcional y localizada. La configuración estricta aporta feedback sobre setup muerto o comportamiento diferente del esperado. Referencia: §12.3.",
+    "source": "java-testing-guide.md"
+  },
+  {
+    "id": "javatest-099",
+    "category": "java-testing",
+    "topic": "Diseño, TDD, integración y CI",
+    "question": "¿Qué frontera conviene simular en una prueba unitaria de `PaymentService`?",
+    "options": [
+      "Un `PaymentGateway` propio que representa la pasarela remota.",
+      "`BigDecimal` y `String`.",
+      "Todos los records de comandos.",
+      "El propio `PaymentService`."
+    ],
+    "correctIndex": 0,
+    "explanation": "El puerto propio expresa lo que el servicio necesita y permite respuestas controladas. Se prueba aparte el adaptador que habla con la pasarela. Referencia: §11 y §15.",
+    "source": "java-testing-guide.md"
+  },
+  {
+    "id": "javatest-100",
+    "category": "java-testing",
+    "topic": "Diseño, TDD, integración y CI",
+    "question": "Una suite tarda 40 minutos y casi todas las pruebas arrancan servidor/base para validar reglas simples. ¿Cuál intervención ofrece mejor feedback?",
+    "options": [
+      "Mover reglas puras a objetos/servicios probables sin contexto, conservar integraciones enfocadas y pocas E2E críticas.",
+      "Eliminar todas las pruebas.",
+      "Añadir `Thread.sleep` para estabilizar.",
+      "Reemplazar toda aserción por cobertura."
+    ],
+    "correctIndex": 0,
+    "explanation": "Reequilibrar niveles mantiene evidencia de fronteras y acelera la mayoría de reglas. El objetivo no es “solo unitarias”, sino usar el alcance mínimo que puede demostrar cada riesgo. Referencia: §2, §15 y §17.",
+    "source": "java-testing-guide.md"
+  }
+]

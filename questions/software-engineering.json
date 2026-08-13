@@ -1,0 +1,2590 @@
+[
+  {
+    "id": "se-001",
+    "category": "software-engineering",
+    "topic": "Metodologías ágiles",
+    "question": "¿Qué fase del SDLC responde específicamente a la pregunta \"¿qué problema resolvemos y para quién?\"?",
+    "options": [
+      "Pruebas",
+      "Mantenimiento",
+      "Diseño",
+      "Requisitos"
+    ],
+    "correctIndex": 3,
+    "explanation": "La fase de Requisitos responde qué problema se resuelve y para quién; Diseño responde cómo se estructura la solución.",
+    "source": "software-engineering-guide.md"
+  },
+  {
+    "id": "se-002",
+    "category": "software-engineering",
+    "topic": "Metodologías ágiles",
+    "question": "Según la guía, ¿en qué escenario tiene más sentido el modelo Cascada (Waterfall) frente a un enfoque ágil?",
+    "options": [
+      "Cuando el equipo necesita entregas frecuentes de valor al negocio",
+      "Cuando los requisitos se van descubriendo progresivamente durante el desarrollo",
+      "Cuando se trabaja con flujo continuo de tickets de soporte impredecibles",
+      "Cuando los requisitos son estables y bien conocidos de antemano, como en software regulado o contratos de alcance fijo"
+    ],
+    "correctIndex": 3,
+    "explanation": "Waterfall encaja cuando los requisitos son estables y conocidos de antemano; las otras opciones describen iterativo/incremental, ágil y Kanban respectivamente.",
+    "source": "software-engineering-guide.md"
+  },
+  {
+    "id": "se-003",
+    "category": "software-engineering",
+    "topic": "Metodologías ágiles",
+    "question": "El modelo iterativo/incremental se distingue del modelo en cascada principalmente porque...",
+    "options": [
+      "Exige que los requisitos estén cerrados antes de iniciar el desarrollo",
+      "No requiere ninguna fase de diseño",
+      "Elimina por completo la fase de pruebas",
+      "Construye versiones parciales del sistema que crecen en funcionalidad, en vez de completar cada fase de una sola vez"
+    ],
+    "correctIndex": 3,
+    "explanation": "El modelo iterativo/incremental construye versiones parciales que crecen en funcionalidad; exigir requisitos cerrados de antemano describe a Waterfall.",
+    "source": "software-engineering-guide.md"
+  },
+  {
+    "id": "se-004",
+    "category": "software-engineering",
+    "topic": "Metodologías ágiles",
+    "question": "Según la guía, Scrum se define como...",
+    "options": [
+      "Un método de gestión de flujo sin roles ni sprints, originado en manufactura",
+      "Un conjunto de métricas de flujo continuo como lead time y throughput",
+      "Una metodología completa que prescribe tanto el \"qué\" como el \"cómo\" técnico de implementación",
+      "Un framework ágil que define el \"qué\" (roles, eventos, artefactos) pero no el \"cómo\" técnico"
+    ],
+    "correctIndex": 3,
+    "explanation": "La guía es explícita: Scrum es un framework (no una metodología completa) que define el qué, no el cómo técnico. Las opciones C y D describen Kanban.",
+    "source": "software-engineering-guide.md"
+  },
+  {
+    "id": "se-005",
+    "category": "software-engineering",
+    "topic": "Metodologías ágiles",
+    "question": "¿Cuáles son los tres pilares empíricos de Scrum?",
+    "options": [
+      "Visualizar el flujo, Limitar el WIP, Gestionar el flujo",
+      "Transparencia, Inspección, Adaptación",
+      "Planificación, Ejecución, Retrospectiva",
+      "Compromiso, Foco, Respeto"
+    ],
+    "correctIndex": 1,
+    "explanation": "Los tres pilares de Scrum son Transparencia, Inspección y Adaptación. Compromiso/Foco/Respeto son valores de Scrum (no pilares), y Visualizar/Limitar WIP/Gestionar el flujo son prácticas de Kanban.",
+    "source": "software-engineering-guide.md"
+  },
+  {
+    "id": "se-006",
+    "category": "software-engineering",
+    "topic": "Metodologías ágiles",
+    "question": "¿Cuál de las siguientes NO forma parte de los cinco valores de Scrum según la guía?",
+    "options": [
+      "Foco",
+      "Transparencia",
+      "Compromiso",
+      "Coraje"
+    ],
+    "correctIndex": 1,
+    "explanation": "Los cinco valores de Scrum son Compromiso, Foco, Apertura, Respeto y Coraje. Transparencia es uno de los tres pilares, no un valor.",
+    "source": "software-engineering-guide.md"
+  },
+  {
+    "id": "se-007",
+    "category": "software-engineering",
+    "topic": "Metodologías ágiles",
+    "question": "¿Cuál es la responsabilidad principal del Product Owner en Scrum?",
+    "options": [
+      "Facilitar el proceso y eliminar impedimentos del equipo",
+      "Medir la velocity del equipo en cada sprint",
+      "Maximizar el valor del producto, decidiendo qué se construye y en qué orden",
+      "Construir el incremento técnico junto con el Development Team"
+    ],
+    "correctIndex": 2,
+    "explanation": "El Product Owner maximiza el valor del producto y decide qué se construye y en qué orden. Facilitar el proceso y eliminar impedimentos es responsabilidad del Scrum Master.",
+    "source": "software-engineering-guide.md"
+  },
+  {
+    "id": "se-008",
+    "category": "software-engineering",
+    "topic": "Metodologías ágiles",
+    "question": "Según la guía, ¿qué distingue al Scrum Master de un \"jefe de proyecto\" clásico?",
+    "options": [
+      "El Scrum Master estima los story points de cada historia",
+      "El Scrum Master facilita el proceso y elimina impedimentos, sin asignar tareas ni dirigir jerárquicamente al equipo",
+      "El Scrum Master es responsable de escribir el código del incremento",
+      "El Scrum Master decide qué elementos del backlog se priorizan"
+    ],
+    "correctIndex": 1,
+    "explanation": "El Scrum Master facilita el proceso y elimina impedimentos; no es un jefe de proyecto clásico. Priorizar el backlog es rol del Product Owner.",
+    "source": "software-engineering-guide.md"
+  },
+  {
+    "id": "se-009",
+    "category": "software-engineering",
+    "topic": "Metodologías ágiles",
+    "question": "El Development Team en Scrum se caracteriza por ser...",
+    "options": [
+      "Un grupo que solo ejecuta las instrucciones técnicas del Scrum Master",
+      "El equipo exclusivo de control de calidad (QA) del proyecto",
+      "Un rol que decide el orden del Product Backlog",
+      "Un equipo multifuncional y autoorganizado que decide cómo se construye el incremento"
+    ],
+    "correctIndex": 3,
+    "explanation": "El Development Team es multifuncional y autoorganizado, y decide cómo se construye el incremento. Decidir el orden del backlog es responsabilidad del Product Owner.",
+    "source": "software-engineering-guide.md"
+  },
+  {
+    "id": "se-010",
+    "category": "software-engineering",
+    "topic": "Metodologías ágiles",
+    "question": "¿Cuánto puede durar como máximo la Sprint Planning para un sprint de un mes, según la guía?",
+    "options": [
+      "15 minutos",
+      "Hasta 4 horas",
+      "Hasta 8 horas",
+      "Hasta 3 horas"
+    ],
+    "correctIndex": 2,
+    "explanation": "La Sprint Planning puede durar hasta 8 horas para un sprint de un mes. 4 horas corresponde a la Sprint Review y 3 horas (hasta) a la Retrospectiva.",
+    "source": "software-engineering-guide.md"
+  },
+  {
+    "id": "se-011",
+    "category": "software-engineering",
+    "topic": "Metodologías ágiles",
+    "question": "¿Cuál es la diferencia principal entre Sprint Review y Sprint Retrospective?",
+    "options": [
+      "Ambos eventos inspeccionan el mismo objeto: el incremento del producto",
+      "La Review ocurre antes de la Sprint Planning y la Retrospectiva después",
+      "La Review inspecciona el incremento con los stakeholders; la Retrospectiva reflexiona sobre el propio proceso del equipo",
+      "La Retrospectiva se realiza con el negocio y la Review internamente con el equipo"
+    ],
+    "correctIndex": 2,
+    "explanation": "La Sprint Review inspecciona el incremento con stakeholders; la Retrospectiva reflexiona sobre el propio proceso del equipo, no sobre el producto.",
+    "source": "software-engineering-guide.md"
+  },
+  {
+    "id": "se-012",
+    "category": "software-engineering",
+    "topic": "Metodologías ágiles",
+    "question": "El Product Backlog está atado a qué compromiso, según la guía?",
+    "options": [
+      "Sprint Goal",
+      "Product Goal",
+      "Velocity",
+      "Definition of Done"
+    ],
+    "correctIndex": 1,
+    "explanation": "El Product Backlog tiene como compromiso asociado el Product Goal, el objetivo a mediano plazo que da coherencia al backlog.",
+    "source": "software-engineering-guide.md"
+  },
+  {
+    "id": "se-013",
+    "category": "software-engineering",
+    "topic": "Metodologías ágiles",
+    "question": "El Sprint Backlog está atado a qué compromiso?",
+    "options": [
+      "Definition of Done",
+      "Story points",
+      "Product Goal",
+      "Sprint Goal"
+    ],
+    "correctIndex": 3,
+    "explanation": "El Sprint Backlog tiene como compromiso asociado el Sprint Goal, el 'por qué' de ese sprint.",
+    "source": "software-engineering-guide.md"
+  },
+  {
+    "id": "se-014",
+    "category": "software-engineering",
+    "topic": "Metodologías ágiles",
+    "question": "La Definition of Done (DoD) es el compromiso asociado a...",
+    "options": [
+      "Incremento",
+      "Daily Scrum",
+      "Product Backlog",
+      "Sprint Backlog"
+    ],
+    "correctIndex": 0,
+    "explanation": "La Definition of Done es el compromiso asociado al Incremento: criterios objetivos que definen cuándo algo está realmente terminado.",
+    "source": "software-engineering-guide.md"
+  },
+  {
+    "id": "se-015",
+    "category": "software-engineering",
+    "topic": "Metodologías ágiles",
+    "question": "Según la guía, los story points representan...",
+    "options": [
+      "Una estimación relativa de esfuerzo/complejidad/incertidumbre, no una medida de tiempo directa",
+      "El número exacto de bugs esperado en una historia",
+      "Una medida directa de tiempo en horas de trabajo",
+      "La cantidad de líneas de código que tendrá la implementación"
+    ],
+    "correctIndex": 0,
+    "explanation": "Los story points son una estimación relativa de esfuerzo, complejidad e incertidumbre (a menudo escala Fibonacci), no una medida directa de tiempo.",
+    "source": "software-engineering-guide.md"
+  },
+  {
+    "id": "se-016",
+    "category": "software-engineering",
+    "topic": "Metodologías ágiles",
+    "question": "El \"planning poker\" se usa principalmente para...",
+    "options": [
+      "Medir el lead time de una tarjeta en el tablero",
+      "Priorizar el Product Backlog por valor de negocio",
+      "Definir la Definition of Done del incremento",
+      "Estimar en grupo evitando el sesgo de anclaje, al votar todos en simultáneo"
+    ],
+    "correctIndex": 3,
+    "explanation": "Planning poker es una técnica de estimación grupal donde todos votan en simultáneo para evitar el sesgo de anclaje.",
+    "source": "software-engineering-guide.md"
+  },
+  {
+    "id": "se-017",
+    "category": "software-engineering",
+    "topic": "Metodologías ágiles",
+    "question": "La velocity de un equipo Scrum es útil principalmente para...",
+    "options": [
+      "Sustituir por completo la necesidad de un Sprint Backlog",
+      "Medir el porcentaje de despliegues fallidos",
+      "Pronosticar cuánto trabajo puede completar el equipo, no para comparar entre equipos",
+      "Comparar objetivamente el desempeño entre distintos equipos"
+    ],
+    "correctIndex": 2,
+    "explanation": "La velocity sirve para pronosticar, no para comparar entre equipos. Medir despliegues fallidos corresponde a la métrica DORA change failure rate.",
+    "source": "software-engineering-guide.md"
+  },
+  {
+    "id": "se-018",
+    "category": "software-engineering",
+    "topic": "Metodologías ágiles",
+    "question": "En Kanban, que el trabajo se \"jale\" (pull) cuando hay capacidad disponible en vez de asignarse sin límite (push) depende directamente de...",
+    "options": [
+      "El Sprint Goal comprometido",
+      "La velocity del equipo",
+      "Los límites de trabajo en curso (WIP) definidos por columna",
+      "El Product Backlog priorizado"
+    ],
+    "correctIndex": 2,
+    "explanation": "Los límites de WIP por columna son los que obligan al sistema pull: no se toma trabajo nuevo hasta liberar espacio.",
+    "source": "software-engineering-guide.md"
+  },
+  {
+    "id": "se-019",
+    "category": "software-engineering",
+    "topic": "POO y modelado UML",
+    "question": "¿Qué tipo de herencia se da cuando varias clases hijas heredan directamente de la misma clase padre (ej. Dog y Cat heredan de Animal)?",
+    "options": [
+      "Jerárquica",
+      "Multinivel",
+      "Híbrida",
+      "Simple"
+    ],
+    "correctIndex": 0,
+    "explanation": "La herencia jerárquica ocurre cuando varias clases hijas heredan de la misma clase padre.",
+    "source": "software-engineering-guide.md"
+  },
+  {
+    "id": "se-020",
+    "category": "software-engineering",
+    "topic": "POO y modelado UML",
+    "question": "`Puppy extends Dog extends Animal` ejemplifica herencia...",
+    "options": [
+      "Multinivel",
+      "Simple, sin relación alguna con Animal",
+      "Múltiple",
+      "Jerárquica"
+    ],
+    "correctIndex": 0,
+    "explanation": "Es herencia multinivel: una cadena de herencia de más de dos niveles (Puppy -> Dog -> Animal).",
+    "source": "software-engineering-guide.md"
+  },
+  {
+    "id": "se-021",
+    "category": "software-engineering",
+    "topic": "POO y modelado UML",
+    "question": "El \"problema del diamante\" surge específicamente cuando...",
+    "options": [
+      "Una clase usa composición en vez de herencia",
+      "Dos clases no relacionadas comparten el mismo nombre de método",
+      "Una clase implementa dos interfaces sin métodos en común",
+      "Una clase hereda de dos clases que a su vez heredan de un ancestro común, y ambas ramas sobrescriben el mismo método de forma distinta"
+    ],
+    "correctIndex": 3,
+    "explanation": "El diamante ocurre cuando FlyingCar hereda de Car y Aircraft, ambas hijas de Vehicle, y cada una sobrescribe start() de forma distinta: ¿cuál versión hereda FlyingCar?",
+    "source": "software-engineering-guide.md"
+  },
+  {
+    "id": "se-022",
+    "category": "software-engineering",
+    "topic": "POO y modelado UML",
+    "question": "¿Cómo evita Java la ambigüedad del diamante al implementar múltiples interfaces con el mismo método `default`?",
+    "options": [
+      "Permite herencia múltiple real de clases para resolverlo automáticamente",
+      "Usa herencia virtual como C++",
+      "Aplica el algoritmo de C3 linearization como Python",
+      "No permite herencia múltiple de clases; si dos interfaces aportan el mismo método default, obliga a resolver la ambigüedad explícitamente"
+    ],
+    "correctIndex": 3,
+    "explanation": "Java no permite herencia múltiple de clases. Si dos interfaces aportan el mismo método default, el compilador obliga a resolver la ambigüedad explícitamente.",
+    "source": "software-engineering-guide.md"
+  },
+  {
+    "id": "se-023",
+    "category": "software-engineering",
+    "topic": "POO y modelado UML",
+    "question": "¿Qué mecanismo usa C++ para evitar que FlyingCar termine con dos copias del subobjeto Vehicle en una herencia en diamante?",
+    "options": [
+      "Method Resolution Order (MRO)",
+      "Herencia virtual (virtual public)",
+      "Composición obligatoria del lenguaje",
+      "Métodos default de interfaz"
+    ],
+    "correctIndex": 1,
+    "explanation": "C++ resuelve el diamante con herencia virtual (class Car : virtual public Vehicle), garantizando un único subobjeto compartido de Vehicle.",
+    "source": "software-engineering-guide.md"
+  },
+  {
+    "id": "se-024",
+    "category": "software-engineering",
+    "topic": "POO y modelado UML",
+    "question": "En Python, cuando FlyingCar(Car, Aircraft) hereda de ambas y las dos heredan de Vehicle, ¿qué determina qué versión de start() se ejecuta?",
+    "options": [
+      "La herencia virtual del lenguaje",
+      "El Method Resolution Order (MRO), calculado con C3 linearization",
+      "El orden alfabético de las clases padre",
+      "Un resolutor de ambigüedad explícito obligatorio como en Java"
+    ],
+    "correctIndex": 1,
+    "explanation": "Python resuelve la ambigüedad mediante el MRO, calculado con el algoritmo C3 linearization.",
+    "source": "software-engineering-guide.md"
+  },
+  {
+    "id": "se-025",
+    "category": "software-engineering",
+    "topic": "POO y modelado UML",
+    "question": "¿Qué imprime esta llamada según el MRO de Python?",
+    "options": [
+      "Lanza una excepción por ambigüedad de método",
+      "\"Aircraft start\", porque Python resuelve alfabéticamente",
+      "\"Vehicle start\", porque Vehicle es el ancestro común",
+      "\"Car start\", porque el MRO prioriza el primer padre listado en la declaración de FlyingCar"
+    ],
+    "correctIndex": 3,
+    "explanation": "El MRO de Python (FlyingCar, Car, Aircraft, Vehicle, object) prioriza el primer padre listado, por lo que imprime \"Car start\".",
+    "source": "software-engineering-guide.md",
+    "code": "class Vehicle:\n    def start(self): print(\"Vehicle start\")\nclass Car(Vehicle):\n    def start(self): print(\"Car start\")\nclass Aircraft(Vehicle):\n    def start(self): print(\"Aircraft start\")\nclass FlyingCar(Car, Aircraft):\n    pass\nFlyingCar().start()",
+    "language": "python"
+  },
+  {
+    "id": "se-026",
+    "category": "software-engineering",
+    "topic": "POO y modelado UML",
+    "question": "Según la guía, ¿por qué se prefiere la composición sobre la herencia múltiple (real o simulada vía interfaces) en diseño moderno?",
+    "options": [
+      "Porque la herencia múltiple tiende a generar jerarquías frágiles a medida que el sistema crece",
+      "Porque la composición elimina la necesidad de pruebas unitarias",
+      "Porque la composición es siempre más rápida en tiempo de ejecución",
+      "Porque los lenguajes modernos ya no soportan interfaces"
+    ],
+    "correctIndex": 0,
+    "explanation": "La herencia múltiple tiende a generar jerarquías frágiles; la composición combina comportamiento por delegación en vez de herencia.",
+    "source": "software-engineering-guide.md"
+  },
+  {
+    "id": "se-027",
+    "category": "software-engineering",
+    "topic": "POO y modelado UML",
+    "question": "Ordene las relaciones UML de más débil (más temporal) a más fuerte (mayor acoplamiento) según la guía.",
+    "options": [
+      "Asociación < Agregación < Dependencia < Herencia < Composición",
+      "Dependencia < Asociación < Agregación < Composición < Herencia",
+      "Composición < Herencia < Agregación < Dependencia < Asociación",
+      "Herencia < Composición < Agregación < Asociación < Dependencia"
+    ],
+    "correctIndex": 1,
+    "explanation": "El orden de más débil a más fuerte es: Dependencia < Asociación < Agregación < Composición < Herencia.",
+    "source": "software-engineering-guide.md"
+  },
+  {
+    "id": "se-028",
+    "category": "software-engineering",
+    "topic": "POO y modelado UML",
+    "question": "Un método `checkout(Order order, Logger logger)` que recibe Logger solo como parámetro, sin que la clase mantenga una referencia permanente a él, representa una relación UML de...",
+    "options": [
+      "Composición",
+      "Agregación",
+      "Dependencia",
+      "Asociación"
+    ],
+    "correctIndex": 2,
+    "explanation": "Es una dependencia: la clase usa a Logger temporalmente (como parámetro) sin mantener una referencia permanente.",
+    "source": "software-engineering-guide.md"
+  },
+  {
+    "id": "se-029",
+    "category": "software-engineering",
+    "topic": "POO y modelado UML",
+    "question": "¿Qué relación UML representa mejor esta clase respecto a Player, y por qué?",
+    "options": [
+      "Composición, porque los jugadores se crean dentro del constructor de Team",
+      "Agregación, porque los jugadores se crean fuera y siguen existiendo si Team se destruye",
+      "Realización, porque Team implementa el contrato de Player",
+      "Dependencia, porque Player solo se usa como parámetro temporal del constructor"
+    ],
+    "correctIndex": 1,
+    "explanation": "Es agregación: los Player se pasan ya construidos desde afuera y siguen existiendo (podrían fichar por otro equipo) si Team se disuelve.",
+    "source": "software-engineering-guide.md",
+    "code": "class Team {\n    private List<Player> players;\n    Team(List<Player> players) { this.players = players; }\n}",
+    "language": "java"
+  },
+  {
+    "id": "se-030",
+    "category": "software-engineering",
+    "topic": "POO y modelado UML",
+    "question": "¿Qué relación UML representa esta clase respecto a Room?",
+    "options": [
+      "Agregación, porque las Room podrían pertenecer a otra House",
+      "Dependencia, porque Room solo se usa temporalmente",
+      "Asociación simple sin acoplamiento de ciclo de vida",
+      "Composición, porque las Room se crean dentro de House y no tienen sentido fuera de ella"
+    ],
+    "correctIndex": 3,
+    "explanation": "Es composición: las Room se crean dentro de House y mueren con ella; no tienen sentido como concepto independiente.",
+    "source": "software-engineering-guide.md",
+    "code": "class House {\n    private final List<Room> rooms = new ArrayList<>();\n    House() {\n        rooms.add(new Room(\"Sala\"));\n        rooms.add(new Room(\"Cocina\"));\n    }\n}",
+    "language": "java"
+  },
+  {
+    "id": "se-031",
+    "category": "software-engineering",
+    "topic": "POO y modelado UML",
+    "question": "Según la guía, ¿cuál es la pregunta clave para distinguir agregación de composición en la práctica?",
+    "options": [
+      "¿La relación involucra una interfaz?",
+      "¿Puede la parte existir y tener sentido sin el todo, o se pasa desde afuera ya construida?",
+      "¿La clase tiene métodos abstractos?",
+      "¿Cuántos atributos privados tiene la clase?"
+    ],
+    "correctIndex": 1,
+    "explanation": "La pregunta clave es si la parte puede existir y tener sentido sin el todo (agregación) o si se crea y muere junto con él (composición).",
+    "source": "software-engineering-guide.md"
+  },
+  {
+    "id": "se-032",
+    "category": "software-engineering",
+    "topic": "POO y modelado UML",
+    "question": "La relación UML de \"realización\" (ej. Dog realiza Comparable) se diferencia de la \"generalización\" en que...",
+    "options": [
+      "La realización siempre implica herencia múltiple",
+      "Ambas son exactamente lo mismo, solo cambia el nombre",
+      "La generalización solo aplica a interfaces, nunca a clases",
+      "La realización implica cumplir el contrato de una interfaz sin heredar implementación; la generalización hereda estructura y comportamiento de una superclase"
+    ],
+    "correctIndex": 3,
+    "explanation": "Realización: una clase se compromete a cumplir el contrato de una interfaz sin heredar implementación. Generalización: la subclase hereda estructura y comportamiento.",
+    "source": "software-engineering-guide.md"
+  },
+  {
+    "id": "se-033",
+    "category": "software-engineering",
+    "topic": "Complejidad algorítmica",
+    "question": "¿Qué describe formalmente la notación Big O?",
+    "options": [
+      "Únicamente la complejidad de espacio, nunca la de tiempo",
+      "El caso promedio exacto entre mejor y peor caso",
+      "La cota superior — el peor caso posible",
+      "La cota inferior — el mejor caso posible"
+    ],
+    "correctIndex": 2,
+    "explanation": "Big O describe la cota superior (peor caso). Big Omega describe el mejor caso y Big Theta el caso ajustado.",
+    "source": "software-engineering-guide.md"
+  },
+  {
+    "id": "se-034",
+    "category": "software-engineering",
+    "topic": "Complejidad algorítmica",
+    "question": "¿Qué notación se usa cuando el mejor y el peor caso de un algoritmo coinciden en el orden de crecimiento?",
+    "options": [
+      "Big Theta (Θ)",
+      "Big O (O)",
+      "Big Omega (Ω)",
+      "Notación amortizada"
+    ],
+    "correctIndex": 0,
+    "explanation": "Big Theta describe el comportamiento típico exacto cuando mejor y peor caso coinciden en el orden de crecimiento.",
+    "source": "software-engineering-guide.md"
+  },
+  {
+    "id": "se-035",
+    "category": "software-engineering",
+    "topic": "Complejidad algorítmica",
+    "question": "Ordene de mejor a peor: O(n²), O(log n), O(n log n), O(1)",
+    "options": [
+      "O(1) < O(n log n) < O(log n) < O(n²)",
+      "O(1) < O(log n) < O(n log n) < O(n²)",
+      "O(n²) < O(n log n) < O(log n) < O(1)",
+      "O(log n) < O(1) < O(n²) < O(n log n)"
+    ],
+    "correctIndex": 1,
+    "explanation": "El orden correcto de mejor a peor es O(1) < O(log n) < O(n) < O(n log n) < O(n²) < O(2ⁿ) < O(n!).",
+    "source": "software-engineering-guide.md"
+  },
+  {
+    "id": "se-036",
+    "category": "software-engineering",
+    "topic": "Complejidad algorítmica",
+    "question": "¿Qué complejidad describe correctamente el algoritmo de búsqueda binaria sobre un arreglo ordenado?",
+    "options": [
+      "O(n)",
+      "O(log n)",
+      "O(n log n)",
+      "O(1)"
+    ],
+    "correctIndex": 1,
+    "explanation": "La búsqueda binaria es O(log n): cada iteración descarta la mitad restante del espacio de búsqueda.",
+    "source": "software-engineering-guide.md"
+  },
+  {
+    "id": "se-037",
+    "category": "software-engineering",
+    "topic": "Complejidad algorítmica",
+    "question": "¿Qué complejidad tiene el cálculo de Fibonacci mediante recursión ingenua, sin memoización?",
+    "options": [
+      "O(n)",
+      "O(n log n)",
+      "O(n²)",
+      "O(2ⁿ)"
+    ],
+    "correctIndex": 3,
+    "explanation": "El Fibonacci recursivo ingenuo es O(2ⁿ) porque recalcula los mismos subproblemas una y otra vez.",
+    "source": "software-engineering-guide.md"
+  },
+  {
+    "id": "se-038",
+    "category": "software-engineering",
+    "topic": "Complejidad algorítmica",
+    "question": "¿Cuál es la complejidad temporal de este fragmento?",
+    "options": [
+      "O(2ⁿ), por la naturaleza recursiva del bucle",
+      "O(n²), por los dos bucles anidados que recorren la misma entrada",
+      "O(n log n), típico de bucles anidados con partición",
+      "O(n), porque solo se recorre el array"
+    ],
+    "correctIndex": 1,
+    "explanation": "Dos bucles anidados que recorren la misma entrada dan O(n²).",
+    "source": "software-engineering-guide.md",
+    "code": "void ejemplo(int[] array) {\n    for (int i = 0; i < array.length; i++) {\n        for (int j = 0; j < array.length; j++) {\n            System.out.println(array[i] + array[j]);\n        }\n    }\n}",
+    "language": "java"
+  },
+  {
+    "id": "se-039",
+    "category": "software-engineering",
+    "topic": "Complejidad algorítmica",
+    "question": "¿Por qué este algoritmo tiene complejidad O(log n)?",
+    "options": [
+      "Porque el bucle while siempre se ejecuta una cantidad constante de veces",
+      "Porque usa una tabla hash internamente para el acceso",
+      "Porque recorre todos los elementos una única vez",
+      "Porque cada iteración descarta la mitad restante del espacio de búsqueda"
+    ],
+    "correctIndex": 3,
+    "explanation": "La búsqueda binaria es O(log n) porque cada iteración descarta la mitad restante del espacio de búsqueda.",
+    "source": "software-engineering-guide.md",
+    "code": "int busquedaBinaria(int[] array, int objetivo) {\n    int izquierda = 0, derecha = array.length - 1;\n    while (izquierda <= derecha) {\n        int medio = (izquierda + derecha) / 2;\n        if (array[medio] == objetivo) return medio;\n        if (array[medio] < objetivo) izquierda = medio + 1;\n        else derecha = medio - 1;\n    }\n    return -1;\n}",
+    "language": "java"
+  },
+  {
+    "id": "se-040",
+    "category": "software-engineering",
+    "topic": "Complejidad algorítmica",
+    "question": "¿Cuál es la complejidad de espacio ADICIONAL de esta función (sin contar la entrada)?",
+    "options": [
+      "O(n²), por la copia elemento a elemento",
+      "O(n), porque se reserva un nuevo arreglo del mismo tamaño que la entrada",
+      "O(1), porque solo se declara una variable",
+      "O(log n), como en la búsqueda binaria"
+    ],
+    "correctIndex": 1,
+    "explanation": "Se reserva un nuevo arreglo del mismo tamaño que el original, por lo que el espacio adicional es O(n).",
+    "source": "software-engineering-guide.md",
+    "code": "int[] copiar(int[] original) {\n    int[] copia = new int[original.length];\n    System.arraycopy(original, 0, copia, 0, original.length);\n    return copia;\n}",
+    "language": "java"
+  },
+  {
+    "id": "se-041",
+    "category": "software-engineering",
+    "topic": "Complejidad algorítmica",
+    "question": "¿Cuál es la complejidad de espacio adicional de esta función?",
+    "options": [
+      "O(1), porque solo usa una variable acumuladora sin importar el tamaño de la entrada",
+      "Depende del contenido del array, no de su tamaño",
+      "O(log n)",
+      "O(n), porque recorre todo el array"
+    ],
+    "correctIndex": 0,
+    "explanation": "Solo usa una variable acumuladora (total), independiente del tamaño de la entrada: O(1) de espacio adicional.",
+    "source": "software-engineering-guide.md",
+    "code": "int sumar(int[] array) {\n    int total = 0;\n    for (int valor : array) total += valor;\n    return total;\n}",
+    "language": "java"
+  },
+  {
+    "id": "se-042",
+    "category": "software-engineering",
+    "topic": "Complejidad algorítmica",
+    "question": "¿Qué significa que ArrayList.add() tenga complejidad amortizada O(1)?",
+    "options": [
+      "Que el arreglo interno nunca necesita redimensionarse",
+      "Que la operación siempre cuesta exactamente lo mismo, sin excepciones",
+      "Que su complejidad de espacio adicional es siempre O(n)",
+      "Que aunque ocasionalmente sea O(n) por un redimensionamiento interno, el costo repartido entre todas las inserciones resulta O(1) en promedio"
+    ],
+    "correctIndex": 3,
+    "explanation": "El costo ocasional O(n) del redimensionamiento, repartido entre todas las inserciones, resulta en O(1) amortizado.",
+    "source": "software-engineering-guide.md"
+  },
+  {
+    "id": "se-043",
+    "category": "software-engineering",
+    "topic": "Complejidad algorítmica",
+    "question": "Merge sort y Quicksort, en su caso promedio, comparten una complejidad temporal de...",
+    "options": [
+      "O(n²)",
+      "O(log n)",
+      "O(n log n)",
+      "O(n)"
+    ],
+    "correctIndex": 2,
+    "explanation": "Ambos tienen complejidad O(n log n) en el caso promedio, aunque Quicksort degrada a O(n²) en el peor caso.",
+    "source": "software-engineering-guide.md"
+  },
+  {
+    "id": "se-044",
+    "category": "software-engineering",
+    "topic": "Complejidad algorítmica",
+    "question": "Según la guía, ¿qué tipo de problema ejemplifica la complejidad O(n!)?",
+    "options": [
+      "Bubble sort en el peor caso",
+      "Recorrer un array una sola vez",
+      "Fuerza bruta probando todas las permutaciones posibles (viajante de comercio sin optimizar)",
+      "Búsqueda binaria sobre un array ordenado"
+    ],
+    "correctIndex": 2,
+    "explanation": "O(n!) corresponde a fuerza bruta probando todas las permutaciones, como el problema del viajante sin optimizar.",
+    "source": "software-engineering-guide.md"
+  },
+  {
+    "id": "se-045",
+    "category": "software-engineering",
+    "topic": "Complejidad algorítmica",
+    "question": "En la práctica de la industria, cuando se habla de la \"complejidad\" de un algoritmo sin más contexto, generalmente se hace referencia a...",
+    "options": [
+      "La complejidad de espacio exclusivamente",
+      "Big Theta (Θ), el caso ajustado",
+      "Big O, el peor caso",
+      "Big Omega (Ω), el mejor caso"
+    ],
+    "correctIndex": 2,
+    "explanation": "En la práctica, 'complejidad' casi siempre se refiere a Big O (peor caso).",
+    "source": "software-engineering-guide.md"
+  },
+  {
+    "id": "se-046",
+    "category": "software-engineering",
+    "topic": "Complejidad algorítmica",
+    "question": "¿Qué complejidad temporal tiene este fragmento y por qué?",
+    "options": [
+      "O(1), porque imprimir es una operación constante",
+      "O(n), porque el bucle se ejecuta una vez por cada elemento del array",
+      "O(log n), porque solo recorre la mitad del array en promedio",
+      "O(n²), porque println internamente recorre el array"
+    ],
+    "correctIndex": 1,
+    "explanation": "Un único bucle que recorre el array una vez es O(n).",
+    "source": "software-engineering-guide.md",
+    "code": "void ejemploLineal(int[] array) {\n    for (int i = 0; i < array.length; i++) {\n        System.out.println(array[i]);\n    }\n}",
+    "language": "java"
+  },
+  {
+    "id": "se-047",
+    "category": "software-engineering",
+    "topic": "Estructuras de datos",
+    "question": "El acceso indexado a un elemento de un array (array[i]) tiene complejidad...",
+    "options": [
+      "O(1)",
+      "O(n²)",
+      "O(log n)",
+      "O(n)"
+    ],
+    "correctIndex": 0,
+    "explanation": "El acceso indexado a un array es O(1): se calcula directamente la dirección de memoria.",
+    "source": "software-engineering-guide.md"
+  },
+  {
+    "id": "se-048",
+    "category": "software-engineering",
+    "topic": "Estructuras de datos",
+    "question": "¿Por qué insertar o eliminar un elemento en medio de un array requiere O(n)?",
+    "options": [
+      "Porque los arrays no soportan esa operación en absoluto",
+      "Porque el array debe ordenarse primero",
+      "Porque hay que recalcular el hash de cada elemento",
+      "Porque hay que desplazar los elementos posteriores para mantener la contigüidad"
+    ],
+    "correctIndex": 3,
+    "explanation": "Al ser un bloque contiguo de memoria, insertar/eliminar en medio requiere desplazar los elementos posteriores: O(n).",
+    "source": "software-engineering-guide.md"
+  },
+  {
+    "id": "se-049",
+    "category": "software-engineering",
+    "topic": "Estructuras de datos",
+    "question": "¿Qué estructura de datos sigue la disciplina LIFO (last in, first out)?",
+    "options": [
+      "Cola de prioridad (heap)",
+      "Cola (Queue)",
+      "Pila (Stack)",
+      "Deque"
+    ],
+    "correctIndex": 2,
+    "explanation": "La pila (Stack) sigue LIFO: push, pop, peek. Ejemplo: la pila de llamadas de un programa.",
+    "source": "software-engineering-guide.md"
+  },
+  {
+    "id": "se-050",
+    "category": "software-engineering",
+    "topic": "Estructuras de datos",
+    "question": "¿Qué estructura de datos sigue la disciplina FIFO (first in, first out)?",
+    "options": [
+      "Cola (Queue)",
+      "Pila (Stack)",
+      "Trie",
+      "Árbol binario de búsqueda"
+    ],
+    "correctIndex": 0,
+    "explanation": "La cola (Queue) sigue FIFO: enqueue, dequeue. Ejemplo: cola de impresión o de tareas.",
+    "source": "software-engineering-guide.md"
+  },
+  {
+    "id": "se-051",
+    "category": "software-engineering",
+    "topic": "Estructuras de datos",
+    "question": "En un Árbol Binario de Búsqueda (BST), la regla fundamental es que, para cada nodo...",
+    "options": [
+      "Todo el subárbol izquierdo es mayor y todo el subárbol derecho es menor",
+      "Todo el subárbol izquierdo es menor y todo el subárbol derecho es mayor",
+      "Solo puede tener un hijo como máximo",
+      "Ambos subárboles deben tener la misma altura exacta"
+    ],
+    "correctIndex": 1,
+    "explanation": "La regla del BST es que el subárbol izquierdo contiene valores menores y el derecho valores mayores que el nodo.",
+    "source": "software-engineering-guide.md"
+  },
+  {
+    "id": "se-052",
+    "category": "software-engineering",
+    "topic": "Estructuras de datos",
+    "question": "¿Qué ocurre con las operaciones de un BST simple (sin balanceo) si se insertan datos ya ordenados?",
+    "options": [
+      "El árbol degenera efectivamente en una lista enlazada, con operaciones O(n)",
+      "Se mantienen en O(log n) gracias a la estructura del árbol",
+      "Las inserciones fallan y lanzan una excepción",
+      "El árbol se autobalancea automáticamente como un AVL"
+    ],
+    "correctIndex": 0,
+    "explanation": "Sin balanceo, insertar datos ya ordenados degenera el BST en una lista enlazada, con operaciones O(n) en el peor caso.",
+    "source": "software-engineering-guide.md"
+  },
+  {
+    "id": "se-053",
+    "category": "software-engineering",
+    "topic": "Estructuras de datos",
+    "question": "¿Qué estructura de árbol autobalanceado usa Java internamente en TreeMap/TreeSet, según la guía?",
+    "options": [
+      "B-tree",
+      "Trie",
+      "AVL",
+      "Rojo-Negro"
+    ],
+    "correctIndex": 3,
+    "explanation": "Java usa árboles Rojo-Negro internamente en TreeMap/TreeSet (y C++ en std::map).",
+    "source": "software-engineering-guide.md"
+  },
+  {
+    "id": "se-054",
+    "category": "software-engineering",
+    "topic": "Estructuras de datos",
+    "question": "¿Qué tipo de árbol se usa típicamente para índices de bases de datos y sistemas de archivos, optimizado para bloques de disco?",
+    "options": [
+      "B-tree / B+tree",
+      "Trie",
+      "BST simple",
+      "AVL"
+    ],
+    "correctIndex": 0,
+    "explanation": "Los B-tree/B+tree están optimizados para bloques de disco y se usan en índices de bases de datos y sistemas de archivos.",
+    "source": "software-engineering-guide.md"
+  },
+  {
+    "id": "se-055",
+    "category": "software-engineering",
+    "topic": "Estructuras de datos",
+    "question": "Un Trie es una estructura especialmente adecuada para...",
+    "options": [
+      "Representar grafos densos de forma compacta",
+      "Resolver colisiones de una tabla hash",
+      "Garantizar balanceo estricto por altura como un AVL",
+      "Autocompletado y diccionarios de prefijos"
+    ],
+    "correctIndex": 3,
+    "explanation": "El Trie no es de búsqueda por comparación; se usa para autocompletado y diccionarios de prefijos.",
+    "source": "software-engineering-guide.md"
+  },
+  {
+    "id": "se-056",
+    "category": "software-engineering",
+    "topic": "Estructuras de datos",
+    "question": "¿Qué representación de grafo resulta más eficiente en espacio para grafos dispersos (la mayoría de casos reales)?",
+    "options": [
+      "Matriz de adyacencia, con O(V²) de espacio",
+      "Lista de adyacencia, con O(V+E) de espacio",
+      "Ambas son equivalentes en espacio para cualquier grafo",
+      "Una tabla hash de todas las aristas posibles"
+    ],
+    "correctIndex": 1,
+    "explanation": "La lista de adyacencia usa O(V+E), más eficiente que la matriz O(V²) para grafos dispersos.",
+    "source": "software-engineering-guide.md"
+  },
+  {
+    "id": "se-057",
+    "category": "software-engineering",
+    "topic": "Estructuras de datos",
+    "question": "¿Qué estructura auxiliar usa típicamente el recorrido BFS (Breadth-First Search)?",
+    "options": [
+      "Un heap",
+      "Ninguna, es puramente recursivo",
+      "Una cola",
+      "Una pila"
+    ],
+    "correctIndex": 2,
+    "explanation": "BFS usa una cola como estructura auxiliar, lo que permite el recorrido por niveles.",
+    "source": "software-engineering-guide.md"
+  },
+  {
+    "id": "se-058",
+    "category": "software-engineering",
+    "topic": "Estructuras de datos",
+    "question": "¿Qué estructura auxiliar usa típicamente el recorrido DFS (Depth-First Search)?",
+    "options": [
+      "Una cola",
+      "Una pila (o recursión, que usa la pila de llamadas)",
+      "Una tabla hash",
+      "Un heap de prioridad"
+    ],
+    "correctIndex": 1,
+    "explanation": "DFS usa una pila (explícita o mediante la pila de llamadas de la recursión) para explorar completamente una rama antes de retroceder.",
+    "source": "software-engineering-guide.md"
+  },
+  {
+    "id": "se-059",
+    "category": "software-engineering",
+    "topic": "Estructuras de datos",
+    "question": "En una tabla hash, una \"colisión\" ocurre cuando...",
+    "options": [
+      "Dos claves distintas producen el mismo índice de bucket",
+      "El factor de carga de la tabla es cero",
+      "Una clave no tiene ningún valor asociado",
+      "Se usa una función de hash criptográfica"
+    ],
+    "correctIndex": 0,
+    "explanation": "Una colisión ocurre cuando dos claves distintas producen el mismo índice en el arreglo de buckets.",
+    "source": "software-engineering-guide.md"
+  },
+  {
+    "id": "se-060",
+    "category": "software-engineering",
+    "topic": "Estructuras de datos",
+    "question": "¿Cuál es la estrategia de resolución de colisiones donde cada bucket guarda una lista enlazada con todas las entradas que colisionaron ahí?",
+    "options": [
+      "Hashing doble",
+      "Rehashing incremental",
+      "Encadenamiento (chaining)",
+      "Direccionamiento abierto"
+    ],
+    "correctIndex": 2,
+    "explanation": "El encadenamiento (chaining) guarda en cada bucket una lista enlazada de las entradas que colisionaron.",
+    "source": "software-engineering-guide.md"
+  },
+  {
+    "id": "se-061",
+    "category": "software-engineering",
+    "topic": "Estructuras de datos",
+    "question": "En un min-heap, ¿qué garantiza siempre la raíz del árbol?",
+    "options": [
+      "Que es el último elemento insertado",
+      "Que está balanceado por altura como un AVL",
+      "Que es el elemento mínimo de la colección",
+      "Que es el elemento máximo de la colección"
+    ],
+    "correctIndex": 2,
+    "explanation": "Un min-heap garantiza que la raíz siempre sea el elemento mínimo de la colección.",
+    "source": "software-engineering-guide.md"
+  },
+  {
+    "id": "se-062",
+    "category": "software-engineering",
+    "topic": "Estructuras de datos",
+    "question": "Insertar o extraer el mínimo/máximo de un heap tiene complejidad...",
+    "options": [
+      "O(n)",
+      "O(1)",
+      "O(log n)",
+      "O(n log n)"
+    ],
+    "correctIndex": 2,
+    "explanation": "Insertar y extraer el mínimo/máximo de un heap es O(log n); consultarlo sin extraerlo es O(1).",
+    "source": "software-engineering-guide.md"
+  },
+  {
+    "id": "se-063",
+    "category": "software-engineering",
+    "topic": "Algoritmos fundamentales",
+    "question": "¿Qué algoritmo de ordenamiento garantiza O(n log n) tanto en el caso promedio como en el peor caso, a costa de memoria adicional O(n)?",
+    "options": [
+      "Merge sort",
+      "Bubble sort",
+      "Quicksort",
+      "Heapsort"
+    ],
+    "correctIndex": 0,
+    "explanation": "Merge sort garantiza O(n log n) siempre, pero usa memoria adicional O(n). Heapsort también es O(n log n) en el peor caso, pero es in-place (no requiere esa memoria adicional).",
+    "source": "software-engineering-guide.md"
+  },
+  {
+    "id": "se-064",
+    "category": "software-engineering",
+    "topic": "Algoritmos fundamentales",
+    "question": "¿Cuál es el peor caso de complejidad de Quicksort, y cuándo ocurre según la guía?",
+    "options": [
+      "O(n²), aunque es raro en la práctica con un buen pivote",
+      "O(log n), cuando el array ya está ordenado",
+      "O(n log n), siempre garantizado igual que merge sort",
+      "O(n!), en el caso de un pivote fijo"
+    ],
+    "correctIndex": 0,
+    "explanation": "El peor caso de Quicksort es O(n²); es rápido en la práctica y ese peor caso es raro con buen pivote.",
+    "source": "software-engineering-guide.md"
+  },
+  {
+    "id": "se-065",
+    "category": "software-engineering",
+    "topic": "Algoritmos fundamentales",
+    "question": "¿Qué algoritmo de ordenamiento es especialmente eficiente para entradas casi ordenadas o de tamaño pequeño?",
+    "options": [
+      "Insertion sort",
+      "Heapsort",
+      "Selection sort",
+      "Quicksort"
+    ],
+    "correctIndex": 0,
+    "explanation": "Insertion sort es muy eficiente para entradas casi ordenadas o pequeñas, según la guía.",
+    "source": "software-engineering-guide.md"
+  },
+  {
+    "id": "se-066",
+    "category": "software-engineering",
+    "topic": "Algoritmos fundamentales",
+    "question": "Según la tabla de la guía, ¿cuál de los siguientes algoritmos de ordenamiento NO es estable?",
+    "options": [
+      "Quicksort",
+      "Insertion sort",
+      "Bubble sort",
+      "Merge sort"
+    ],
+    "correctIndex": 0,
+    "explanation": "Quicksort no es estable, a diferencia de bubble sort, insertion sort y merge sort.",
+    "source": "software-engineering-guide.md"
+  },
+  {
+    "id": "se-067",
+    "category": "software-engineering",
+    "topic": "Algoritmos fundamentales",
+    "question": "¿Qué ventaja tiene Heapsort frente a Merge sort, según la guía?",
+    "options": [
+      "Tiene mejor complejidad en el peor caso",
+      "Es estable, mientras que Merge sort no lo es",
+      "Es in-place, sin necesitar memoria adicional significativa, a diferencia de Merge sort",
+      "Es más simple de paralelizar"
+    ],
+    "correctIndex": 2,
+    "explanation": "Heapsort es in-place (no necesita memoria adicional significativa); de hecho no es estable, a diferencia de Merge sort.",
+    "source": "software-engineering-guide.md"
+  },
+  {
+    "id": "se-068",
+    "category": "software-engineering",
+    "topic": "Algoritmos fundamentales",
+    "question": "¿Qué requiere obligatoriamente la búsqueda binaria para funcionar de forma correcta?",
+    "options": [
+      "Que la colección no tenga elementos duplicados",
+      "Que el tamaño de la colección sea una potencia de dos",
+      "Que la colección sea una lista enlazada",
+      "Que la colección esté ordenada"
+    ],
+    "correctIndex": 3,
+    "explanation": "La búsqueda binaria requiere que la colección esté ordenada; la búsqueda lineal funciona en cualquier colección.",
+    "source": "software-engineering-guide.md"
+  },
+  {
+    "id": "se-069",
+    "category": "software-engineering",
+    "topic": "Algoritmos fundamentales",
+    "question": "El backtracking se caracteriza por...",
+    "options": [
+      "No poder implementarse de forma recursiva",
+      "Explorar soluciones posibles, retrocediendo tan pronto una decisión resulta inválida, en vez de generar todo y filtrar",
+      "Generar todas las combinaciones posibles primero y filtrarlas después",
+      "Ser siempre de complejidad O(1) independientemente del problema"
+    ],
+    "correctIndex": 1,
+    "explanation": "El backtracking explora soluciones retrocediendo apenas una decisión resulta inválida, en vez de generar todo y filtrar después.",
+    "source": "software-engineering-guide.md"
+  },
+  {
+    "id": "se-070",
+    "category": "software-engineering",
+    "topic": "Algoritmos fundamentales",
+    "question": "¿Qué técnica se aplica en este código y qué mejora de complejidad logra respecto a la versión recursiva ingenua?",
+    "options": [
+      "Backtracking; reduce la complejidad de O(n!) a O(n log n)",
+      "Un algoritmo greedy; garantiza el óptimo local en O(1)",
+      "Memoización (programación dinámica); reduce la complejidad de O(2ⁿ) a O(n)",
+      "Divide y vencerás; no cambia la complejidad, solo el orden de ejecución"
+    ],
+    "correctIndex": 2,
+    "explanation": "Es memoización: guarda resultados de subproblemas ya resueltos, bajando la complejidad de O(2ⁿ) (versión ingenua) a O(n).",
+    "source": "software-engineering-guide.md",
+    "code": "int fibonacciMemo(int n, Map<Integer, Integer> cache) {\n    if (n <= 1) return n;\n    if (cache.containsKey(n)) return cache.get(n);\n    int resultado = fibonacciMemo(n - 1, cache) + fibonacciMemo(n - 2, cache);\n    cache.put(n, resultado);\n    return resultado;\n}",
+    "language": "java"
+  },
+  {
+    "id": "se-071",
+    "category": "software-engineering",
+    "topic": "Algoritmos fundamentales",
+    "question": "¿Por qué el Fibonacci recursivo ingenuo (sin memoización) tiene complejidad O(2ⁿ)?",
+    "options": [
+      "Porque cada llamada recursiva es O(n) por sí misma",
+      "Porque recalcula los mismos subproblemas una y otra vez sin guardar resultados",
+      "Porque internamente usa una tabla hash costosa",
+      "Porque usa un bucle anidado sobre la entrada"
+    ],
+    "correctIndex": 1,
+    "explanation": "Sin memoización, el Fibonacci recursivo recalcula los mismos subproblemas repetidamente, lo que produce O(2ⁿ).",
+    "source": "software-engineering-guide.md"
+  },
+  {
+    "id": "se-072",
+    "category": "software-engineering",
+    "topic": "Algoritmos fundamentales",
+    "question": "Un algoritmo greedy (voraz) toma en cada paso la decisión que...",
+    "options": [
+      "Parece mejor localmente, sin reconsiderarla después, lo cual no siempre produce el óptimo global",
+      "Requiere haber explorado antes todas las combinaciones posibles",
+      "Garantiza siempre el óptimo global, sin excepciones",
+      "Se elige completamente al azar entre las opciones disponibles"
+    ],
+    "correctIndex": 0,
+    "explanation": "Un algoritmo greedy toma la decisión que parece mejor localmente en cada paso, sin reconsiderarla; no siempre produce el óptimo global.",
+    "source": "software-engineering-guide.md"
+  },
+  {
+    "id": "se-073",
+    "category": "software-engineering",
+    "topic": "Algoritmos fundamentales",
+    "question": "Según el ejemplo de dar cambio con denominaciones 1, 5, 10 y 25 tomando siempre la moneda más grande posible, el enfoque greedy...",
+    "options": [
+      "Nunca produce una solución válida con estas denominaciones",
+      "Siempre es óptimo sin importar el conjunto de denominaciones usado",
+      "Funciona de forma óptima con estas denominaciones específicas, pero no lo garantiza con denominaciones arbitrarias",
+      "Requiere backtracking obligatoriamente para funcionar"
+    ],
+    "correctIndex": 2,
+    "explanation": "El enfoque greedy funciona con estas denominaciones específicas, pero no garantiza el óptimo con denominaciones arbitrarias.",
+    "source": "software-engineering-guide.md"
+  },
+  {
+    "id": "se-074",
+    "category": "software-engineering",
+    "topic": "Algoritmos fundamentales",
+    "question": "¿Qué algoritmo de grafos encuentra el camino más corto en un grafo ponderado con pesos no negativos?",
+    "options": [
+      "BFS",
+      "Dijkstra",
+      "Backtracking genérico",
+      "DFS"
+    ],
+    "correctIndex": 1,
+    "explanation": "Dijkstra encuentra el camino más corto en un grafo ponderado con pesos no negativos.",
+    "source": "software-engineering-guide.md"
+  },
+  {
+    "id": "se-075",
+    "category": "software-engineering",
+    "topic": "Algoritmos fundamentales",
+    "question": "¿Qué algoritmo de grafos es adecuado para encontrar el camino más corto en aristas en un grafo NO ponderado?",
+    "options": [
+      "DFS",
+      "BFS",
+      "Un algoritmo greedy de cambio de monedas",
+      "Dijkstra"
+    ],
+    "correctIndex": 1,
+    "explanation": "BFS encuentra el camino más corto en aristas en un grafo no ponderado, recorriendo por niveles.",
+    "source": "software-engineering-guide.md"
+  },
+  {
+    "id": "se-076",
+    "category": "software-engineering",
+    "topic": "Algoritmos fundamentales",
+    "question": "¿Qué estructura de datos permite que este algoritmo procese siempre el nodo con menor distancia acumulada conocida hasta el momento?",
+    "options": [
+      "Una tabla hash ordenada por clave",
+      "Una pila (Stack)",
+      "Una cola simple (FIFO)",
+      "Una cola de prioridad (heap), representada aquí por PriorityQueue"
+    ],
+    "correctIndex": 3,
+    "explanation": "La cola de prioridad (heap) es la que permite procesar siempre el nodo con menor distancia acumulada conocida.",
+    "source": "software-engineering-guide.md",
+    "code": "Map<Nodo, Integer> dijkstra(Grafo grafo, Nodo origen) {\n    Map<Nodo, Integer> distancias = new HashMap<>();\n    PriorityQueue<Nodo> cola = new PriorityQueue<>(Comparator.comparingInt(distancias::get));\n    distancias.put(origen, 0);\n    cola.add(origen);\n    while (!cola.isEmpty()) {\n        Nodo actual = cola.poll();\n        for (Arista arista : grafo.vecinos(actual)) {\n            int nuevaDistancia = distancias.get(actual) + arista.peso();\n            if (nuevaDistancia < distancias.getOrDefault(arista.destino(), Integer.MAX_VALUE)) {\n                distancias.put(arista.destino(), nuevaDistancia);\n                cola.add(arista.destino());\n            }\n        }\n    }\n    return distancias;\n}",
+    "language": "java"
+  },
+  {
+    "id": "se-077",
+    "category": "software-engineering",
+    "topic": "Testing y calidad de software",
+    "question": "Según la pirámide de testing, ¿qué nivel debería concentrar la mayor cantidad de pruebas en un proyecto sano?",
+    "options": [
+      "Unitarias",
+      "Integración",
+      "Aceptación",
+      "End-to-end"
+    ],
+    "correctIndex": 0,
+    "explanation": "La base de la pirámide de testing son las pruebas unitarias: rápidas, aisladas y numerosas.",
+    "source": "software-engineering-guide.md"
+  },
+  {
+    "id": "se-078",
+    "category": "software-engineering",
+    "topic": "Testing y calidad de software",
+    "question": "¿Por qué las pruebas end-to-end (E2E) deberían ser las menos numerosas en la pirámide de testing, según la guía?",
+    "options": [
+      "Porque no aportan ningún valor de confianza al sistema",
+      "Porque no pueden automatizarse en ningún caso",
+      "Porque solo prueban la capa de base de datos",
+      "Porque son lentas y frágiles de mantener, aunque dan alta confianza sobre el flujo completo real"
+    ],
+    "correctIndex": 3,
+    "explanation": "Las E2E son lentas, frágiles y costosas de mantener, aunque dan alta confianza end-to-end; por eso deben ser pocas.",
+    "source": "software-engineering-guide.md"
+  },
+  {
+    "id": "se-079",
+    "category": "software-engineering",
+    "topic": "Testing y calidad de software",
+    "question": "¿Qué tipo de prueba verifica una unidad aislada (una función, método o clase) sin dependencias externas reales?",
+    "options": [
+      "Prueba de aceptación",
+      "Prueba de sistema",
+      "Prueba de integración",
+      "Prueba unitaria"
+    ],
+    "correctIndex": 3,
+    "explanation": "La prueba unitaria verifica una unidad aislada sin dependencias externas reales.",
+    "source": "software-engineering-guide.md"
+  },
+  {
+    "id": "se-080",
+    "category": "software-engineering",
+    "topic": "Testing y calidad de software",
+    "question": "¿Qué tipo de prueba tiene como propósito específico verificar que un cambio nuevo no rompió funcionalidad que ya funcionaba?",
+    "options": [
+      "Prueba de regresión",
+      "Sanity test",
+      "Prueba de estrés",
+      "Smoke test"
+    ],
+    "correctIndex": 0,
+    "explanation": "La prueba de regresión verifica que un cambio nuevo no rompió funcionalidad existente.",
+    "source": "software-engineering-guide.md"
+  },
+  {
+    "id": "se-081",
+    "category": "software-engineering",
+    "topic": "Testing y calidad de software",
+    "question": "Un \"smoke test\" se caracteriza, según la guía, por ser...",
+    "options": [
+      "Un chequeo mínimo y rápido de que \"lo básico funciona\" tras un despliegue",
+      "Una prueba exhaustiva de todos los casos borde tras cada despliegue",
+      "Equivalente exacto a una prueba de aceptación en formato Gherkin",
+      "Una prueba de rendimiento bajo carga máxima"
+    ],
+    "correctIndex": 0,
+    "explanation": "El smoke test es un chequeo mínimo y rápido de que lo básico funciona tras un despliegue, primera línea de defensa.",
+    "source": "software-engineering-guide.md"
+  },
+  {
+    "id": "se-082",
+    "category": "software-engineering",
+    "topic": "Testing y calidad de software",
+    "question": "¿En qué orden ocurre correctamente el ciclo de TDD (Test-Driven Development)?",
+    "options": [
+      "Green, Red, Refactor",
+      "Refactor, Red, Green",
+      "Green, Refactor, Red",
+      "Red, Green, Refactor"
+    ],
+    "correctIndex": 3,
+    "explanation": "El ciclo de TDD es Red (prueba que falla) -> Green (código mínimo para pasar) -> Refactor (mejorar en verde).",
+    "source": "software-engineering-guide.md"
+  },
+  {
+    "id": "se-083",
+    "category": "software-engineering",
+    "topic": "Testing y calidad de software",
+    "question": "En el ciclo de TDD, la fase \"Red\" consiste en...",
+    "options": [
+      "Escribir el código mínimo necesario para que la prueba pase",
+      "Mejorar la estructura del código manteniendo las pruebas en verde",
+      "Escribir una prueba que falla porque el comportamiento aún no existe",
+      "Eliminar las pruebas que ya no aportan valor"
+    ],
+    "correctIndex": 2,
+    "explanation": "Red es escribir una prueba que falla porque el comportamiento todavía no existe.",
+    "source": "software-engineering-guide.md"
+  },
+  {
+    "id": "se-084",
+    "category": "software-engineering",
+    "topic": "Testing y calidad de software",
+    "question": "BDD (Behavior-Driven Development) se distingue de TDD en que...",
+    "options": [
+      "BDD solo se aplica a pruebas de rendimiento",
+      "BDD prohíbe el uso de dobles de prueba",
+      "BDD elimina la necesidad de escribir pruebas automatizadas",
+      "BDD describe el comportamiento esperado en lenguaje natural estructurado (ej. Gherkin), compartido entre negocio y desarrollo"
+    ],
+    "correctIndex": 3,
+    "explanation": "BDD describe el comportamiento esperado en lenguaje natural estructurado, compartido entre negocio y desarrollo.",
+    "source": "software-engineering-guide.md"
+  },
+  {
+    "id": "se-085",
+    "category": "software-engineering",
+    "topic": "Testing y calidad de software",
+    "question": "¿Qué diferencia a un \"stub\" de un \"mock\" como dobles de prueba, según la guía?",
+    "options": [
+      "Son términos sinónimos sin diferencia práctica",
+      "El mock nunca puede devolver un valor, solo verificar llamadas",
+      "El stub devuelve respuestas predefinidas sin lógica real; el mock, además, verifica que se le llamó correctamente (qué método, con qué argumentos, cuántas veces)",
+      "El stub verifica interacciones y el mock solo devuelve respuestas fijas"
+    ],
+    "correctIndex": 2,
+    "explanation": "El stub solo devuelve respuestas predefinidas; el mock además verifica la interacción (llamadas, argumentos, cantidad).",
+    "source": "software-engineering-guide.md"
+  },
+  {
+    "id": "se-086",
+    "category": "software-engineering",
+    "topic": "Testing y calidad de software",
+    "question": "Una \"fake\" en testing es...",
+    "options": [
+      "Un objeto que envuelve uno real y registra cómo se le llamó, sin reemplazar su comportamiento",
+      "Un objeto que solo llena un parámetro requerido, sin usarse realmente en la prueba",
+      "Un objeto que verifica exclusivamente cuántas veces fue invocado un método",
+      "Una implementación real pero simplificada, no apta para producción (ej. una base de datos en memoria)"
+    ],
+    "correctIndex": 3,
+    "explanation": "Un fake es una implementación real pero simplificada, no apta para producción, como una base de datos en memoria. Un objeto que solo llena un parámetro sin usarse es un dummy, y uno que envuelve un objeto real registrando cómo se le llamó es un spy.",
+    "source": "software-engineering-guide.md"
+  },
+  {
+    "id": "se-087",
+    "category": "software-engineering",
+    "topic": "Testing y calidad de software",
+    "question": "¿Por qué gateway se clasifica como un mock y no como un simple stub en este ejemplo?",
+    "options": [
+      "Porque envuelve un objeto real ejecutando su comportamiento verdadero",
+      "Porque el objeto nunca se usa realmente en la prueba",
+      "Porque además de devolver una respuesta predefinida, se verifica explícitamente la interacción con verify()",
+      "Porque gateway es una implementación real simplificada de la pasarela de pago"
+    ],
+    "correctIndex": 2,
+    "explanation": "Se clasifica como mock porque, además de devolver una respuesta predefinida (when/thenReturn), se verifica la interacción con verify().",
+    "source": "software-engineering-guide.md",
+    "code": "PaymentGateway gateway = mock(PaymentGateway.class);\nwhen(gateway.charge(any())).thenReturn(true);\n\norderService.checkout(order, gateway);\n\nverify(gateway, times(1)).charge(order.total());",
+    "language": "java"
+  },
+  {
+    "id": "se-088",
+    "category": "software-engineering",
+    "topic": "Testing y calidad de software",
+    "question": "¿Qué implica realmente un 100% de cobertura de línea (line coverage), según la guía?",
+    "options": [
+      "Que la cobertura de ramas (branch coverage) también es del 100%",
+      "Que todos los casos borde fueron probados exhaustivamente",
+      "Que el sistema está completamente libre de bugs",
+      "Que cada línea se ejecutó al menos una vez, no que su resultado se verificó correctamente con una aserción significativa"
+    ],
+    "correctIndex": 3,
+    "explanation": "Cobertura mide si una línea se ejecutó, no si el resultado se verificó correctamente con una aserción significativa.",
+    "source": "software-engineering-guide.md"
+  },
+  {
+    "id": "se-089",
+    "category": "software-engineering",
+    "topic": "Testing y calidad de software",
+    "question": "Comparando los dos ejemplos de la guía —una prueba que usa un mock de PaymentGateway frente a otra que usa una base de datos real (JdbcOrderRepository)— ¿qué distingue a una prueba unitaria de una de integración?",
+    "options": [
+      "Ambas son idénticas, solo cambia el nombre del método de prueba",
+      "La unitaria aísla la unidad de sus dependencias reales con dobles de prueba; la de integración verifica que componentes reales (ej. base de datos) colaboran correctamente",
+      "La unitaria siempre usa una base de datos real y la de integración nunca",
+      "La de integración no puede usar aserciones, solo verificaciones de mock"
+    ],
+    "correctIndex": 1,
+    "explanation": "La prueba unitaria aísla la unidad con dobles de prueba; la de integración usa componentes reales colaborando entre sí.",
+    "source": "software-engineering-guide.md"
+  },
+  {
+    "id": "se-090",
+    "category": "software-engineering",
+    "topic": "Testing y calidad de software",
+    "question": "En el enfoque de \"caja blanca\" (white-box testing), quien diseña la prueba...",
+    "options": [
+      "Conoce la estructura interna: ramas, rutas y lógica del código fuente",
+      "Solo conoce las entradas y salidas esperadas, sin ver el código",
+      "No tiene ningún conocimiento del sistema bajo prueba",
+      "Conoce únicamente el esquema de la base de datos, no la lógica del servicio"
+    ],
+    "correctIndex": 0,
+    "explanation": "Caja blanca implica conocer la estructura interna: ramas, rutas y lógica del código.",
+    "source": "software-engineering-guide.md"
+  },
+  {
+    "id": "se-091",
+    "category": "software-engineering",
+    "topic": "Testing y calidad de software",
+    "question": "El \"contract testing\" (pruebas de contrato) resuelve principalmente el problema de...",
+    "options": [
+      "Generar automáticamente casos de prueba aleatorios a partir de propiedades",
+      "Medir la cobertura de código de un microservicio",
+      "Verificar la integración entre consumidor y proveedor de una API sin necesitar ambos servicios desplegados simultáneamente",
+      "Detectar mutantes que sobreviven en la suite de pruebas"
+    ],
+    "correctIndex": 2,
+    "explanation": "Contract testing permite que consumidor y proveedor verifiquen un contrato por separado, sin necesitar el otro servicio corriendo.",
+    "source": "software-engineering-guide.md"
+  },
+  {
+    "id": "se-092",
+    "category": "software-engineering",
+    "topic": "Testing y calidad de software",
+    "question": "El \"mutation testing\" introduce pequeños cambios (\"mutantes\") al código de producción con el objetivo de...",
+    "options": [
+      "Medir el rendimiento del sistema bajo carga",
+      "Verificar si la suite de pruebas realmente detecta esos cambios, más allá de lo que mide la cobertura tradicional",
+      "Generar documentación automática de la API",
+      "Sustituir por completo a las pruebas de integración"
+    ],
+    "correctIndex": 1,
+    "explanation": "El mutation testing ataca el punto ciego de la cobertura tradicional: verifica si las pruebas realmente detectan cambios en el comportamiento.",
+    "source": "software-engineering-guide.md"
+  },
+  {
+    "id": "se-093",
+    "category": "software-engineering",
+    "topic": "Testing y calidad de software",
+    "question": "El property-based testing se diferencia de las pruebas tradicionales basadas en casos puntuales en que...",
+    "options": [
+      "Describe propiedades que deben cumplirse para cualquier entrada válida, y la herramienta genera automáticamente muchos casos, incluyendo límites que un humano no pensaría",
+      "No requiere ninguna aserción dentro de la prueba",
+      "Solo puede ejecutarse manualmente, nunca en CI",
+      "Escribe siempre una entrada y una salida esperada fijas"
+    ],
+    "correctIndex": 0,
+    "explanation": "El property-based testing describe propiedades generales y genera automáticamente muchos casos, incluyendo casos límite.",
+    "source": "software-engineering-guide.md"
+  },
+  {
+    "id": "se-094",
+    "category": "software-engineering",
+    "topic": "Testing y calidad de software",
+    "question": "El anti-patrón \"copa de helado\" (ice-cream cone) en testing describe una situación donde...",
+    "options": [
+      "Hay muchas pruebas unitarias rápidas y pocas E2E, tal como recomienda la pirámide",
+      "Hay muchas pruebas E2E lentas y frágiles, y pocas unitarias, invirtiendo la pirámide de testing sana",
+      "No existe ninguna prueba automatizada en el proyecto",
+      "Se usan demasiados mocks en las pruebas unitarias"
+    ],
+    "correctIndex": 1,
+    "explanation": "El anti-patrón 'copa de helado' invierte la pirámide sana: muchas E2E lentas y frágiles, pocas unitarias.",
+    "source": "software-engineering-guide.md"
+  },
+  {
+    "id": "se-095",
+    "category": "software-engineering",
+    "topic": "Control de versiones y flujo colaborativo",
+    "question": "¿Qué estrategia de ramas se caracteriza por ramas de larga vida (develop, release, feature/*, hotfix/*) con un proceso formal de fusión?",
+    "options": [
+      "Scrumban",
+      "Trunk-based development",
+      "GitHub flow",
+      "Git-flow"
+    ],
+    "correctIndex": 3,
+    "explanation": "Git-flow se caracteriza por ramas de larga vida y un proceso formal de fusión.",
+    "source": "software-engineering-guide.md"
+  },
+  {
+    "id": "se-096",
+    "category": "software-engineering",
+    "topic": "Control de versiones y flujo colaborativo",
+    "question": "Trunk-based development se caracteriza por...",
+    "options": [
+      "Reservarse exclusivamente para proyectos con despliegues trimestrales",
+      "No usar ningún sistema de control de versiones",
+      "Integrar a la rama principal frecuentemente (al menos una vez al día), con ramas de vida muy corta",
+      "Ramas de larga vida con procesos formales de fusión antes de integrar"
+    ],
+    "correctIndex": 2,
+    "explanation": "Trunk-based development integra a la rama principal frecuentemente, con ramas de vida muy corta.",
+    "source": "software-engineering-guide.md"
+  },
+  {
+    "id": "se-097",
+    "category": "software-engineering",
+    "topic": "Control de versiones y flujo colaborativo",
+    "question": "Según la guía, ¿qué exige trunk-based development para funcionar bien?",
+    "options": [
+      "Buena cobertura de pruebas automáticas y feature flags para ocultar trabajo incompleto",
+      "Un proceso formal de aprobación en cada rama release",
+      "Ramas de larga vida por cada feature",
+      "Eliminar por completo el proceso de code review"
+    ],
+    "correctIndex": 0,
+    "explanation": "Trunk-based development exige buena cobertura de pruebas automáticas y feature flags para ocultar trabajo incompleto.",
+    "source": "software-engineering-guide.md"
+  },
+  {
+    "id": "se-098",
+    "category": "software-engineering",
+    "topic": "Control de versiones y flujo colaborativo",
+    "question": "GitHub flow se describe en la guía como...",
+    "options": [
+      "Una variante exclusiva para equipos que usan Kanban",
+      "Un modelo sin ninguna rama, todo se commitea directamente a producción",
+      "Una rama principal siempre desplegable, más ramas cortas de feature integradas vía pull request",
+      "Un proceso idéntico a Git-flow, solo con otro nombre"
+    ],
+    "correctIndex": 2,
+    "explanation": "GitHub flow es una rama principal siempre desplegable más ramas cortas de feature con pull request.",
+    "source": "software-engineering-guide.md"
+  },
+  {
+    "id": "se-099",
+    "category": "software-engineering",
+    "topic": "Control de versiones y flujo colaborativo",
+    "question": "¿Cuál es el principal trade-off de Git-flow frente a un flujo más ligero, según la guía?",
+    "options": [
+      "Solo puede usarse en proyectos sin pull requests",
+      "Es incompatible con cualquier tipo de hotfix",
+      "No ofrece ninguna trazabilidad de releases",
+      "Ofrece buena trazabilidad y control de releases, pero resulta más pesado para equipos con despliegue continuo"
+    ],
+    "correctIndex": 3,
+    "explanation": "Git-flow ofrece buena trazabilidad y control de releases, a costa de ser más pesado para despliegue continuo.",
+    "source": "software-engineering-guide.md"
+  },
+  {
+    "id": "se-100",
+    "category": "software-engineering",
+    "topic": "Control de versiones y flujo colaborativo",
+    "question": "Según la lista de aspectos que se revisan en un code review, ¿cuál de las siguientes es una pregunta relevante planteada por la guía?",
+    "options": [
+      "¿El pull request tiene menos de 24 horas de antigüedad?",
+      "¿El nombre de variables/métodos comunica la intención sin necesitar el comentario de al lado?",
+      "¿El autor del cambio usa el mismo editor de código que el revisor?",
+      "¿El commit se realizó dentro del horario laboral estándar?"
+    ],
+    "correctIndex": 1,
+    "explanation": "La guía plantea si el nombre de variables/métodos comunica la intención sin necesitar el comentario de al lado.",
+    "source": "software-engineering-guide.md"
+  },
+  {
+    "id": "se-101",
+    "category": "software-engineering",
+    "topic": "Control de versiones y flujo colaborativo",
+    "question": "Un aspecto explícito que se revisa en un code review, según la guía, es si el cambio...",
+    "options": [
+      "Fue escrito en menos de una hora de trabajo",
+      "Introduce complejidad o abstracción no justificada por el problema actual",
+      "Contiene más de un determinado número fijo de líneas",
+      "Usa tabulaciones en vez de espacios de forma exclusiva"
+    ],
+    "correctIndex": 1,
+    "explanation": "Se revisa si el cambio introduce complejidad o abstracción no justificada por el problema actual.",
+    "source": "software-engineering-guide.md"
+  },
+  {
+    "id": "se-102",
+    "category": "software-engineering",
+    "topic": "Control de versiones y flujo colaborativo",
+    "question": "¿Qué estrategia de ramas encaja mejor con CI/CD continuo, según la guía?",
+    "options": [
+      "Ninguna estrategia de ramas es compatible con CI/CD",
+      "Git-flow, por su control formal de releases",
+      "El modelo Cascada aplicado al control de versiones",
+      "Trunk-based development, por integrar frecuentemente a la rama principal"
+    ],
+    "correctIndex": 3,
+    "explanation": "Trunk-based development encaja mejor con CI/CD continuo, gracias a la integración frecuente a la rama principal.",
+    "source": "software-engineering-guide.md"
+  },
+  {
+    "id": "se-103",
+    "category": "software-engineering",
+    "topic": "DevOps y CI/CD",
+    "question": "Según la guía, ¿qué busca DevOps como cultura y conjunto de prácticas?",
+    "options": [
+      "Reemplazar completamente las metodologías ágiles como Scrum",
+      "Eliminar la necesidad de pruebas automatizadas antes del despliegue",
+      "Acortar el ciclo entre escribir código y tenerlo funcionando de forma confiable en producción, integrando las responsabilidades de Dev y Ops",
+      "Mantener a Dev y Ops como equipos completamente separados con traspasos manuales"
+    ],
+    "correctIndex": 2,
+    "explanation": "DevOps busca acortar el ciclo entre escribir código y tenerlo funcionando en producción, integrando Dev y Ops en vez de separarlos.",
+    "source": "software-engineering-guide.md"
+  },
+  {
+    "id": "se-104",
+    "category": "software-engineering",
+    "topic": "DevOps y CI/CD",
+    "question": "En el acrónimo CALMS de DevOps, la \"M\" (Medición) implica que...",
+    "options": [
+      "Las métricas son opcionales una vez que el equipo alcanza madurez",
+      "Si no se mide (pipeline, sistema, negocio), no se puede mejorar con datos",
+      "Solo se debe medir el rendimiento del código, nunca los procesos",
+      "Solo aplica a organizaciones con más de 100 desarrolladores"
+    ],
+    "correctIndex": 1,
+    "explanation": "La M de Medición implica que si no se mide, no se puede mejorar con datos.",
+    "source": "software-engineering-guide.md"
+  },
+  {
+    "id": "se-105",
+    "category": "software-engineering",
+    "topic": "DevOps y CI/CD",
+    "question": "¿Cuál es el orden típico de las etapas de un pipeline de Integración Continua (CI) según la guía?",
+    "options": [
+      "Empaquetado → commit → análisis estático → build",
+      "Commit → build → pruebas unitarias → análisis estático → empaquetado",
+      "Pruebas → build → despliegue → commit",
+      "Despliegue → build → análisis estático → pruebas"
+    ],
+    "correctIndex": 1,
+    "explanation": "El orden típico es commit → build → pruebas unitarias → análisis estático → empaquetado → artefacto listo.",
+    "source": "software-engineering-guide.md"
+  },
+  {
+    "id": "se-106",
+    "category": "software-engineering",
+    "topic": "DevOps y CI/CD",
+    "question": "¿Qué detecta específicamente la etapa de \"Análisis estático (lint/SAST)\" en un pipeline de CI?",
+    "options": [
+      "Fallos de infraestructura en el entorno de producción",
+      "Únicamente errores de sintaxis o de tipos",
+      "Regresiones de lógica de negocio en tiempo de ejecución",
+      "Problemas de calidad y seguridad revisando el código sin ejecutarlo"
+    ],
+    "correctIndex": 3,
+    "explanation": "El análisis estático revisa el código sin ejecutarlo, detectando problemas de calidad y seguridad (estilo, code smells, vulnerabilidades conocidas).",
+    "source": "software-engineering-guide.md"
+  },
+  {
+    "id": "se-107",
+    "category": "software-engineering",
+    "topic": "DevOps y CI/CD",
+    "question": "¿Cuál es la diferencia clave entre Continuous Delivery y Continuous Deployment?",
+    "options": [
+      "Deployment solo aplica a arquitecturas serverless",
+      "En Delivery el software siempre está en estado desplegable pero el despliegue a producción es una decisión manual; en Deployment cada cambio que pasa el pipeline se despliega automáticamente",
+      "Son términos sinónimos usados indistintamente en la industria",
+      "Delivery no incluye ninguna etapa de pruebas automatizadas"
+    ],
+    "correctIndex": 1,
+    "explanation": "Delivery: el despliegue a producción es una decisión manual. Deployment: cada cambio que pasa el pipeline se despliega automáticamente.",
+    "source": "software-engineering-guide.md"
+  },
+  {
+    "id": "se-108",
+    "category": "software-engineering",
+    "topic": "DevOps y CI/CD",
+    "question": "Si se elimina la línea when: manual de este pipeline, ¿qué representaría ahora el proceso de despliegue?",
+    "options": [
+      "Pasaría de Continuous Delivery a Continuous Deployment",
+      "No cambia nada, ambas configuraciones son equivalentes",
+      "Pasaría de trunk-based development a Git-flow",
+      "Pasaría de Continuous Integration a Continuous Delivery"
+    ],
+    "correctIndex": 0,
+    "explanation": "Sin la condición manual, cada cambio que pasa el pipeline se despliega automáticamente: pasa de Delivery a Deployment.",
+    "source": "software-engineering-guide.md",
+    "code": "pipeline:\n  deploy:\n    script: ./deploy.sh\n    when: manual   # Delivery si es manual; se vuelve Deployment si se quita esta línea",
+    "language": "yaml"
+  },
+  {
+    "id": "se-109",
+    "category": "software-engineering",
+    "topic": "DevOps y CI/CD",
+    "question": "Los \"feature flags\" (feature toggles) permiten principalmente...",
+    "options": [
+      "Revertir automáticamente un despliegue fallido",
+      "Sustituir por completo al versionado semántico",
+      "Activar/desactivar funcionalidad sin volver a desplegar, permitiendo integrar código incompleto a la rama principal sin exponerlo a usuarios",
+      "Reemplazar la necesidad de un pipeline de CI"
+    ],
+    "correctIndex": 2,
+    "explanation": "Los feature flags activan/desactivan funcionalidad sin desplegar de nuevo, clave para trunk-based development. Revertir un despliegue fallido es un rollback.",
+    "source": "software-engineering-guide.md"
+  },
+  {
+    "id": "se-110",
+    "category": "software-engineering",
+    "topic": "DevOps y CI/CD",
+    "question": "En el versionado semántico (SemVer) MAJOR.MINOR.PATCH, un incremento en el número MAJOR indica...",
+    "options": [
+      "Un cambio que rompe la compatibilidad existente",
+      "Un ajuste cosmético sin impacto funcional",
+      "Corrección de bugs sin romper compatibilidad",
+      "Nueva funcionalidad compatible con versiones anteriores"
+    ],
+    "correctIndex": 0,
+    "explanation": "MAJOR rompe compatibilidad; MINOR añade funcionalidad compatible; PATCH corrige bugs sin romper nada.",
+    "source": "software-engineering-guide.md"
+  },
+  {
+    "id": "se-111",
+    "category": "software-engineering",
+    "topic": "DevOps y CI/CD",
+    "question": "¿Cuál de las siguientes NO es una de las cuatro métricas DORA descritas en la guía?",
+    "options": [
+      "Lead time for changes",
+      "Deployment frequency",
+      "Velocity del equipo (story points por sprint)",
+      "Time to restore service (MTTR)"
+    ],
+    "correctIndex": 2,
+    "explanation": "Las cuatro métricas DORA son deployment frequency, lead time for changes, change failure rate y MTTR. Velocity es una métrica de Scrum, no de DORA.",
+    "source": "software-engineering-guide.md"
+  },
+  {
+    "id": "se-112",
+    "category": "software-engineering",
+    "topic": "DevOps y CI/CD",
+    "question": "Según DORA, un equipo de alto desempeño mantiene la \"change failure rate\" en un rango de...",
+    "options": [
+      "Exactamente 0%, sin excepción",
+      "50-70%",
+      "0-15%",
+      "No es una métrica cuantificable"
+    ],
+    "correctIndex": 2,
+    "explanation": "Un equipo de alto desempeño mantiene la change failure rate baja, entre 0-15%.",
+    "source": "software-engineering-guide.md"
+  },
+  {
+    "id": "se-113",
+    "category": "software-engineering",
+    "topic": "DevOps y CI/CD",
+    "question": "En Docker, ¿cuál es la diferencia entre \"imagen\" y \"contenedor\"?",
+    "options": [
+      "La imagen es una plantilla inmutable con todo lo necesario para correr la app; el contenedor es una instancia en ejecución de esa imagen",
+      "Son términos sinónimos sin diferencia práctica",
+      "La imagen solo existe en tiempo de ejecución, el contenedor en tiempo de build",
+      "El contenedor es la plantilla y la imagen es la instancia en ejecución"
+    ],
+    "correctIndex": 0,
+    "explanation": "La imagen es la plantilla inmutable; el contenedor es una instancia en ejecución de esa imagen.",
+    "source": "software-engineering-guide.md"
+  },
+  {
+    "id": "se-114",
+    "category": "software-engineering",
+    "topic": "DevOps y CI/CD",
+    "question": "Este Dockerfile empaqueta la aplicación junto con su entorno exacto de ejecución. ¿Qué problema clásico del desarrollo resuelve este enfoque, según la guía?",
+    "options": [
+      "La complejidad ciclomática del código",
+      "El clásico \"en mi máquina funciona\"",
+      "El problema del diamante en herencia múltiple",
+      "La deuda técnica inconsciente"
+    ],
+    "correctIndex": 1,
+    "explanation": "Los contenedores resuelven el clásico 'en mi máquina funciona', empaquetando la app junto con su entorno exacto de ejecución.",
+    "source": "software-engineering-guide.md",
+    "code": "FROM eclipse-temurin:21-jre\nWORKDIR /app\nCOPY target/app.jar app.jar\nEXPOSE 8080\nENTRYPOINT [\"java\", \"-jar\", \"app.jar\"]",
+    "language": "dockerfile"
+  },
+  {
+    "id": "se-115",
+    "category": "software-engineering",
+    "topic": "DevOps y CI/CD",
+    "question": "En Kubernetes, ¿qué recurso declara cuántas réplicas de un Pod deben existir y gestiona actualizaciones progresivas?",
+    "options": [
+      "Deployment",
+      "ConfigMap",
+      "Secret",
+      "Service"
+    ],
+    "correctIndex": 0,
+    "explanation": "El Deployment declara cuántas réplicas de un Pod deben existir y gestiona actualizaciones progresivas.",
+    "source": "software-engineering-guide.md"
+  },
+  {
+    "id": "se-116",
+    "category": "software-engineering",
+    "topic": "DevOps y CI/CD",
+    "question": "En este manifiesto de Kubernetes, ¿qué controla específicamente el campo replicas: 3?",
+    "options": [
+      "El número de nodos del clúster",
+      "El número de ConfigMaps asociados al Deployment",
+      "El número de Services expuestos hacia el Deployment",
+      "El número de instancias (Pods) que deben mantenerse en ejecución para esta aplicación"
+    ],
+    "correctIndex": 3,
+    "explanation": "replicas: 3 indica cuántas instancias (Pods) del Deployment deben mantenerse en ejecución.",
+    "source": "software-engineering-guide.md",
+    "code": "apiVersion: apps/v1\nkind: Deployment\nmetadata:\n  name: mi-app\nspec:\n  replicas: 3\n  selector:\n    matchLabels: { app: mi-app }",
+    "language": "yaml"
+  },
+  {
+    "id": "se-117",
+    "category": "software-engineering",
+    "topic": "DevOps y CI/CD",
+    "question": "En Kubernetes, ¿qué recurso ofrece un punto de acceso estable (IP/DNS) hacia un conjunto de Pods que pueden cambiar dinámicamente?",
+    "options": [
+      "Secret",
+      "ConfigMap",
+      "Service",
+      "Deployment"
+    ],
+    "correctIndex": 2,
+    "explanation": "El Service ofrece un punto de acceso estable hacia un conjunto de Pods que pueden cambiar dinámicamente.",
+    "source": "software-engineering-guide.md"
+  },
+  {
+    "id": "se-118",
+    "category": "software-engineering",
+    "topic": "DevOps y CI/CD",
+    "question": "Terraform se caracteriza, según la guía, por ser...",
+    "options": [
+      "Imperativo, basado en tareas ejecutadas paso a paso vía SSH",
+      "Exclusivo para infraestructura de AWS",
+      "Un orquestador de contenedores equivalente a Kubernetes",
+      "Declarativo y multi-proveedor (AWS, Azure, GCP, entre otros)"
+    ],
+    "correctIndex": 3,
+    "explanation": "Terraform es declarativo y multi-proveedor (AWS, Azure, GCP...). El enfoque imperativo basado en tareas ejecutadas vía SSH describe a Ansible, no a Terraform.",
+    "source": "software-engineering-guide.md"
+  },
+  {
+    "id": "se-119",
+    "category": "software-engineering",
+    "topic": "DevOps y CI/CD",
+    "question": "¿Cuáles son los tres pilares de la observabilidad según la guía?",
+    "options": [
+      "Dev, Ops, QA",
+      "Logs, métricas, trazas (tracing)",
+      "Build, test, deploy",
+      "CPU, memoria, disco"
+    ],
+    "correctIndex": 1,
+    "explanation": "Los tres pilares de la observabilidad son logs, métricas y trazas (tracing).",
+    "source": "software-engineering-guide.md"
+  },
+  {
+    "id": "se-120",
+    "category": "software-engineering",
+    "topic": "DevOps y CI/CD",
+    "question": "La estrategia de despliegue \"Canary\" se caracteriza por...",
+    "options": [
+      "No requerir ningún tipo de monitoreo adicional",
+      "Dirigir el tráfico nuevo primero a un pequeño porcentaje de usuarios antes de expandirse a todos, requiriendo buena observabilidad",
+      "Cambiar todo el tráfico de golpe entre dos entornos idénticos",
+      "Reemplazar instancias viejas por nuevas de forma gradual sin distinguir usuarios"
+    ],
+    "correctIndex": 1,
+    "explanation": "Canary dirige el tráfico nuevo primero a un pequeño porcentaje de usuarios, requiriendo buena observabilidad para decidir si expandir o revertir. Cambiar todo el tráfico de golpe entre dos entornos idénticos describe blue-green, y reemplazar instancias gradualmente sin distinguir usuarios describe rolling update.",
+    "source": "software-engineering-guide.md"
+  },
+  {
+    "id": "se-121",
+    "category": "software-engineering",
+    "topic": "Procesamiento de datos: OLTP, OLAP, batch y streaming",
+    "question": "OLTP (Online Transaction Processing) se enfoca principalmente en...",
+    "options": [
+      "Generar reportes desnormalizados para analistas de negocio",
+      "Analizar el negocio agregando millones de filas históricas",
+      "Operar el negocio día a día con consultas cortas que tocan pocas filas",
+      "Ejecutar exclusivamente jobs batch nocturnos"
+    ],
+    "correctIndex": 2,
+    "explanation": "OLTP opera el negocio día a día: muchas consultas cortas que tocan pocas filas (insertar/actualizar un pedido, un pago).",
+    "source": "software-engineering-guide.md"
+  },
+  {
+    "id": "se-122",
+    "category": "software-engineering",
+    "topic": "Procesamiento de datos: OLTP, OLAP, batch y streaming",
+    "question": "¿Qué modelo de datos es típico de un sistema OLAP, según la guía?",
+    "options": [
+      "Sin ningún esquema definido, tipo documento",
+      "Normalizado, para evitar duplicación",
+      "Desnormalizado, con esquema estrella/copo de nieve optimizado para lectura agregada",
+      "Idéntico al modelo OLTP, sin diferencias"
+    ],
+    "correctIndex": 2,
+    "explanation": "OLAP usa un modelo desnormalizado, esquema estrella/copo de nieve, optimizado para lectura agregada.",
+    "source": "software-engineering-guide.md"
+  },
+  {
+    "id": "se-123",
+    "category": "software-engineering",
+    "topic": "Procesamiento de datos: OLTP, OLAP, batch y streaming",
+    "question": "Esta consulta, que agrega ventas por región y mes sobre el histórico de pedidos, es representativa de una carga de trabajo...",
+    "options": [
+      "De control de versiones sobre el esquema de datos",
+      "OLAP, porque agrega sobre muchas filas históricas para análisis",
+      "OLTP, porque toca una fila puntual por su ID",
+      "De streaming puro, procesando evento por evento"
+    ],
+    "correctIndex": 1,
+    "explanation": "Es una consulta OLAP: agrega sobre millones de filas históricas, a diferencia de una consulta OLTP que toca una fila puntual.",
+    "source": "software-engineering-guide.md",
+    "code": "SELECT region, DATE_TRUNC('month', fecha) AS mes, SUM(total) AS ventas\nFROM pedidos\nGROUP BY region, mes\nORDER BY mes;",
+    "language": "sql"
+  },
+  {
+    "id": "se-124",
+    "category": "software-engineering",
+    "topic": "Procesamiento de datos: OLTP, OLAP, batch y streaming",
+    "question": "¿Por qué, según la guía, los datos se copian de un sistema OLTP a uno OLAP en vez de analizarlos directamente en la base de producción?",
+    "options": [
+      "Porque la ley prohíbe analizar datos transaccionales",
+      "Para no competir por recursos con las consultas transaccionales del negocio en vivo",
+      "Porque OLAP no puede almacenar datos históricos",
+      "Porque OLTP no admite el lenguaje SQL"
+    ],
+    "correctIndex": 1,
+    "explanation": "Los datos se copian a OLAP para no competir por recursos con las consultas transaccionales del negocio en vivo.",
+    "source": "software-engineering-guide.md"
+  },
+  {
+    "id": "se-125",
+    "category": "software-engineering",
+    "topic": "Procesamiento de datos: OLTP, OLAP, batch y streaming",
+    "question": "El procesamiento streaming se diferencia del batch principalmente en que...",
+    "options": [
+      "Streaming siempre tiene menor complejidad operativa que batch",
+      "Son términos equivalentes para el mismo tipo de procesamiento",
+      "Streaming procesa evento por evento apenas llega, con latencia de milisegundos a segundos; batch procesa datos acumulados en un momento programado",
+      "Batch ofrece menor latencia que streaming en todos los casos"
+    ],
+    "correctIndex": 2,
+    "explanation": "Streaming procesa evento por evento con latencia baja; batch procesa un conjunto grande de datos acumulados en un momento programado. La complejidad operativa de streaming es mayor, no menor.",
+    "source": "software-engineering-guide.md"
+  },
+  {
+    "id": "se-126",
+    "category": "software-engineering",
+    "topic": "Procesamiento de datos: OLTP, OLAP, batch y streaming",
+    "question": "¿Qué técnica ofrece un balance entre la simplicidad del batch y la baja latencia del streaming puro, según la guía?",
+    "options": [
+      "Micro-batching (ej. Spark Streaming procesando mini lotes cada pocos segundos)",
+      "OLAP desnormalizado",
+      "Sharding horizontal",
+      "ETL clásico"
+    ],
+    "correctIndex": 0,
+    "explanation": "El micro-batching da un balance entre la simplicidad del batch y la baja latencia del streaming puro.",
+    "source": "software-engineering-guide.md"
+  },
+  {
+    "id": "se-127",
+    "category": "software-engineering",
+    "topic": "Procesamiento de datos: OLTP, OLAP, batch y streaming",
+    "question": "En el proceso ETL (Extract-Transform-Load), ¿cuándo ocurre la transformación de los datos?",
+    "options": [
+      "Nunca se transforman los datos en un proceso ETL",
+      "Antes de cargarlos, en una zona intermedia, de modo que el destino solo recibe datos ya listos",
+      "Simultáneamente en el origen y el destino",
+      "Después de cargarlos en el destino, usando el poder de cómputo del propio warehouse"
+    ],
+    "correctIndex": 1,
+    "explanation": "En ETL la transformación ocurre antes de cargar, en una zona intermedia; el destino solo recibe datos ya listos.",
+    "source": "software-engineering-guide.md"
+  },
+  {
+    "id": "se-128",
+    "category": "software-engineering",
+    "topic": "Procesamiento de datos: OLTP, OLAP, batch y streaming",
+    "question": "En el proceso ELT (Extract-Load-Transform), ¿dónde ocurre la transformación de los datos?",
+    "options": [
+      "Dentro del propio destino (data warehouse), aprovechando su poder de cómputo, después de cargar los datos crudos",
+      "En un motor de procesamiento intermedio, antes de cargar",
+      "Nunca ocurre transformación en ELT",
+      "Exclusivamente en el sistema OLTP de origen"
+    ],
+    "correctIndex": 0,
+    "explanation": "En ELT la transformación ocurre dentro del propio destino, después de cargar los datos crudos.",
+    "source": "software-engineering-guide.md"
+  },
+  {
+    "id": "se-129",
+    "category": "software-engineering",
+    "topic": "Procesamiento de datos: OLTP, OLAP, batch y streaming",
+    "question": "Según la guía, ¿qué factor popularizó el enfoque ELT frente al ETL tradicional?",
+    "options": [
+      "La eliminación de las herramientas de extracción de datos",
+      "La desaparición de los sistemas OLTP",
+      "Los data warehouses cloud modernos (ej. Snowflake, BigQuery), donde escalar cómputo es barato",
+      "La prohibición legal de mover datos crudos entre sistemas"
+    ],
+    "correctIndex": 2,
+    "explanation": "ELT se popularizó con warehouses cloud modernos donde escalar cómputo es barato.",
+    "source": "software-engineering-guide.md"
+  },
+  {
+    "id": "se-130",
+    "category": "software-engineering",
+    "topic": "Procesamiento de datos: OLTP, OLAP, batch y streaming",
+    "question": "¿En qué se diferencia un \"data lake\" de un \"data warehouse\", según la guía?",
+    "options": [
+      "El data lake almacena datos crudos (estructurados o no) en su formato original y de forma barata; el warehouse almacena datos estructurados y modelados, optimizados para OLAP",
+      "Son términos sinónimos que describen el mismo concepto",
+      "El data warehouse siempre almacena los datos sin ningún tipo de modelado",
+      "El data lake solo admite datos estructurados en tablas relacionales"
+    ],
+    "correctIndex": 0,
+    "explanation": "El data lake almacena datos crudos y baratos en su formato original; el data warehouse almacena datos estructurados y modelados para OLAP.",
+    "source": "software-engineering-guide.md"
+  },
+  {
+    "id": "se-131",
+    "category": "software-engineering",
+    "topic": "Procesamiento de datos: OLTP, OLAP, batch y streaming",
+    "question": "Un \"data lakehouse\", según la guía, combina...",
+    "options": [
+      "Únicamente las capacidades de un data lake tradicional",
+      "Exclusivamente procesamiento OLTP",
+      "El almacenamiento barato de un data lake con las capacidades de gestión/consulta estructurada de un data warehouse",
+      "Solo procesamiento batch, sin soporte de streaming"
+    ],
+    "correctIndex": 2,
+    "explanation": "El data lakehouse combina el almacenamiento barato de un data lake con capacidades de gestión/consulta estructurada de un data warehouse.",
+    "source": "software-engineering-guide.md"
+  },
+  {
+    "id": "se-132",
+    "category": "software-engineering",
+    "topic": "Procesamiento de datos: OLTP, OLAP, batch y streaming",
+    "question": "¿Qué conjunto de herramientas menciona la guía como típico para procesamiento streaming?",
+    "options": [
+      "Kafka, Flink, Kinesis y Spark Streaming",
+      "Hadoop/MapReduce y Airflow",
+      "Informatica y Talend",
+      "Fivetran/Airbyte y dbt"
+    ],
+    "correctIndex": 0,
+    "explanation": "Las herramientas típicas de streaming mencionadas son Kafka, Flink, Kinesis y Spark Streaming.",
+    "source": "software-engineering-guide.md"
+  },
+  {
+    "id": "se-133",
+    "category": "software-engineering",
+    "topic": "Arquitectura de software",
+    "question": "¿Cuál es la principal ventaja de una arquitectura monolítica según la guía?",
+    "options": [
+      "Un cambio pequeño no requiere nunca redesplegar todo el sistema",
+      "Es simple de desarrollar, probar y desplegar al inicio del proyecto",
+      "Ofrece observabilidad distribuida nativa entre sus módulos",
+      "Permite escalar partes específicas de forma independiente"
+    ],
+    "correctIndex": 1,
+    "explanation": "La ventaja principal del monolito es ser simple de desarrollar, probar y desplegar al inicio. Un cambio pequeño SÍ requiere redesplegar todo, y escalar partes específicas es difícil.",
+    "source": "software-engineering-guide.md"
+  },
+  {
+    "id": "se-134",
+    "category": "software-engineering",
+    "topic": "Arquitectura de software",
+    "question": "¿Cuál es la principal desventaja de la arquitectura de microservicios, según la guía?",
+    "options": [
+      "No admite que cada servicio tenga su propia base de datos",
+      "No permite escalar ni desplegar cada servicio de forma independiente",
+      "Complejidad operativa alta: red, consistencia entre servicios y observabilidad distribuida",
+      "Un cambio pequeño obliga siempre a redesplegar todos los servicios"
+    ],
+    "correctIndex": 2,
+    "explanation": "La desventaja principal es la alta complejidad operativa: red, consistencia entre servicios y observabilidad distribuida. Las demás opciones describen rasgos del monolito, no de microservicios.",
+    "source": "software-engineering-guide.md"
+  },
+  {
+    "id": "se-135",
+    "category": "software-engineering",
+    "topic": "Arquitectura de software",
+    "question": "En una arquitectura de microservicios, cada servicio típicamente...",
+    "options": [
+      "Comparte una única base de datos centralizada con todos los demás servicios",
+      "Debe desplegarse siempre junto con todos los demás servicios simultáneamente",
+      "Tiene su propia base de datos, independiente de los demás servicios",
+      "No puede escalar de forma independiente al resto"
+    ],
+    "correctIndex": 2,
+    "explanation": "Cada microservicio tiene su propia base de datos y se escala/despliega de forma independiente.",
+    "source": "software-engineering-guide.md"
+  },
+  {
+    "id": "se-136",
+    "category": "software-engineering",
+    "topic": "Arquitectura de software",
+    "question": "¿Cuál es el riesgo principal de la arquitectura Serverless (FaaS), según la guía?",
+    "options": [
+      "Cold starts, límites de tiempo de ejecución y mayor acoplamiento al proveedor",
+      "Se paga una tarifa fija sin importar el uso real",
+      "No puede escalar automáticamente ante picos de demanda",
+      "Requiere administrar servidores manualmente en todo momento"
+    ],
+    "correctIndex": 0,
+    "explanation": "Los riesgos de Serverless son cold starts, límites de tiempo de ejecución y mayor acoplamiento al proveedor.",
+    "source": "software-engineering-guide.md"
+  },
+  {
+    "id": "se-137",
+    "category": "software-engineering",
+    "topic": "Arquitectura de software",
+    "question": "En la arquitectura en capas (layered), ¿cuál es la regla de dependencia entre capas?",
+    "options": [
+      "Cada capa depende de todas las demás capas por igual",
+      "La capa de base de datos depende directamente de la capa de presentación",
+      "Cada capa solo depende de la capa inmediatamente inferior",
+      "No existe ninguna dependencia formal entre capas"
+    ],
+    "correctIndex": 2,
+    "explanation": "En la arquitectura en capas, cada capa solo depende de la capa inmediatamente inferior.",
+    "source": "software-engineering-guide.md"
+  },
+  {
+    "id": "se-138",
+    "category": "software-engineering",
+    "topic": "Arquitectura de software",
+    "question": "¿Cuál es el riesgo señalado por la guía en la arquitectura en capas si no se disciplina el diseño?",
+    "options": [
+      "Es imposible de implementar en la práctica",
+      "Elimina la necesidad de una capa de presentación",
+      "Obliga siempre a usar microservicios en su lugar",
+      "La lógica de negocio puede terminar acoplada a detalles de la capa de acceso a datos"
+    ],
+    "correctIndex": 3,
+    "explanation": "Sin disciplina, la lógica de negocio puede terminar acoplada a detalles de la capa de datos.",
+    "source": "software-engineering-guide.md"
+  },
+  {
+    "id": "se-139",
+    "category": "software-engineering",
+    "topic": "Arquitectura de software",
+    "question": "¿Cuál es la idea central compartida por la arquitectura Hexagonal, Clean Architecture y Onion Architecture, según la guía?",
+    "options": [
+      "La base de datos es siempre el componente central del diseño",
+      "El núcleo de negocio depende directamente del framework web y de la base de datos concreta",
+      "No debe existir ninguna separación entre lógica de negocio e infraestructura",
+      "El núcleo de negocio no depende de detalles técnicos; esos detalles son adaptadores reemplazables que dependen del núcleo, nunca al revés"
+    ],
+    "correctIndex": 3,
+    "explanation": "La idea central compartida es que el núcleo de negocio no depende de detalles técnicos; los adaptadores dependen del núcleo.",
+    "source": "software-engineering-guide.md"
+  },
+  {
+    "id": "se-140",
+    "category": "software-engineering",
+    "topic": "Arquitectura de software",
+    "question": "En el diagrama de arquitectura hexagonal de la guía, un \"Controlador HTTP\" y un \"Repositorio JDBC\" se consideran...",
+    "options": [
+      "Casos de uso de la lógica de negocio",
+      "Parte del núcleo de dominio, junto a los casos de uso",
+      "Adaptadores (detalles técnicos) que dependen del núcleo a través de puertos",
+      "Puertos de entrada exclusivamente, sin implementación concreta"
+    ],
+    "correctIndex": 2,
+    "explanation": "Son adaptadores (detalles técnicos) que dependen del núcleo a través de puertos, no al revés.",
+    "source": "software-engineering-guide.md"
+  },
+  {
+    "id": "se-141",
+    "category": "software-engineering",
+    "topic": "Arquitectura de software",
+    "question": "Una ventaja concreta de la arquitectura hexagonal mencionada en la guía es que...",
+    "options": [
+      "Requiere una única capa de presentación compartida entre todos los adaptadores",
+      "Elimina por completo la necesidad de escribir pruebas",
+      "Obliga a adoptar microservicios como único estilo de despliegue",
+      "Facilita enormemente el testing, al poder probar el núcleo con dobles de prueba en vez de infraestructura real"
+    ],
+    "correctIndex": 3,
+    "explanation": "La arquitectura hexagonal facilita el testing al permitir probar el núcleo con dobles de prueba en vez de infraestructura real.",
+    "source": "software-engineering-guide.md"
+  },
+  {
+    "id": "se-142",
+    "category": "software-engineering",
+    "topic": "Arquitectura de software",
+    "question": "¿Qué estilo arquitectónico ejecuta código en funciones gestionadas por un proveedor, escalando automáticamente y cobrando solo por uso real?",
+    "options": [
+      "Serverless (FaaS)",
+      "Monolito",
+      "Arquitectura en capas",
+      "Arquitectura hexagonal"
+    ],
+    "correctIndex": 0,
+    "explanation": "Serverless (FaaS) ejecuta funciones gestionadas por un proveedor, escala automáticamente y se paga solo por uso real.",
+    "source": "software-engineering-guide.md"
+  },
+  {
+    "id": "se-143",
+    "category": "software-engineering",
+    "topic": "Seguridad (OWASP)",
+    "question": "¿Qué categoría del OWASP Top 10 ejemplifica que un usuario normal acceda a /admin/usuarios cambiando la URL, sin que el servidor verifique su rol?",
+    "options": [
+      "Security Misconfiguration",
+      "Insecure Design",
+      "Injection",
+      "Broken Access Control"
+    ],
+    "correctIndex": 3,
+    "explanation": "Broken Access Control ejemplifica el acceso a rutas administrativas sin que el servidor verifique el rol del usuario.",
+    "source": "software-engineering-guide.md"
+  },
+  {
+    "id": "se-144",
+    "category": "software-engineering",
+    "topic": "Seguridad (OWASP)",
+    "question": "¿Qué categoría del OWASP Top 10 ejemplifica guardar contraseñas en texto plano o con MD5 sin salt?",
+    "options": [
+      "Broken Access Control",
+      "Software and Data Integrity Failures",
+      "Cryptographic Failures",
+      "Identification and Authentication Failures"
+    ],
+    "correctIndex": 2,
+    "explanation": "Cryptographic Failures ejemplifica el uso de algoritmos criptográficos inadecuados, como MD5 sin salt para contraseñas.",
+    "source": "software-engineering-guide.md"
+  },
+  {
+    "id": "se-145",
+    "category": "software-engineering",
+    "topic": "Seguridad (OWASP)",
+    "question": "¿Qué vulnerabilidad del OWASP Top 10 representa este fragmento?",
+    "options": [
+      "Vulnerable and Outdated Components",
+      "SSRF",
+      "Security Misconfiguration",
+      "Injection (inyección SQL)"
+    ],
+    "correctIndex": 3,
+    "explanation": "Concatenar directamente la entrada del usuario en una consulta SQL es un caso clásico de Injection.",
+    "source": "software-engineering-guide.md",
+    "code": "String sql = \"SELECT * FROM users WHERE name = '\" + nombreUsuario + \"'\";",
+    "language": "java"
+  },
+  {
+    "id": "se-146",
+    "category": "software-engineering",
+    "topic": "Seguridad (OWASP)",
+    "question": "¿Cómo se corrige correctamente la vulnerabilidad de inyección SQL del fragmento anterior, según la guía?",
+    "options": [
+      "Usando una consulta parametrizada con PreparedStatement",
+      "Concatenando el valor del usuario después de sanearlo manualmente con reemplazos de comillas",
+      "Cifrando la consulta completa con AES antes de ejecutarla",
+      "Ocultando el mensaje de error si la consulta falla"
+    ],
+    "correctIndex": 0,
+    "explanation": "La guía corrige la inyección SQL usando una consulta parametrizada con PreparedStatement y setString().",
+    "source": "software-engineering-guide.md",
+    "code": "PreparedStatement stmt = connection.prepareStatement(\n        \"SELECT * FROM users WHERE name = ?\");\nstmt.setString(1, nombreUsuario);",
+    "language": "java"
+  },
+  {
+    "id": "se-147",
+    "category": "software-engineering",
+    "topic": "Seguridad (OWASP)",
+    "question": "¿Qué categoría del OWASP Top 10 ejemplifica un flujo de \"recuperar contraseña\" que no limita los intentos, permitiendo fuerza bruta?",
+    "options": [
+      "Insecure Design",
+      "Broken Access Control",
+      "Injection",
+      "Security Logging and Monitoring Failures"
+    ],
+    "correctIndex": 0,
+    "explanation": "Insecure Design ejemplifica un flujo de recuperación de contraseña sin límite de intentos, permitiendo fuerza bruta.",
+    "source": "software-engineering-guide.md"
+  },
+  {
+    "id": "se-148",
+    "category": "software-engineering",
+    "topic": "Seguridad (OWASP)",
+    "question": "¿Qué categoría del OWASP Top 10 ejemplifica que un servidor exponga el stack trace completo, con rutas internas y versiones, al usuario final en un error?",
+    "options": [
+      "Insecure Design",
+      "Security Misconfiguration",
+      "Cryptographic Failures",
+      "Identification and Authentication Failures"
+    ],
+    "correctIndex": 1,
+    "explanation": "Security Misconfiguration ejemplifica exponer stack traces completos con rutas internas y versiones al usuario final.",
+    "source": "software-engineering-guide.md"
+  },
+  {
+    "id": "se-149",
+    "category": "software-engineering",
+    "topic": "Seguridad (OWASP)",
+    "question": "¿Qué categoría del OWASP Top 10 corresponde a una dependencia con un CVE público conocido que nunca fue actualizada?",
+    "options": [
+      "Software and Data Integrity Failures",
+      "Insecure Design",
+      "Vulnerable and Outdated Components",
+      "SSRF"
+    ],
+    "correctIndex": 2,
+    "explanation": "Vulnerable and Outdated Components corresponde a dependencias con CVEs públicos conocidos nunca actualizadas.",
+    "source": "software-engineering-guide.md"
+  },
+  {
+    "id": "se-150",
+    "category": "software-engineering",
+    "topic": "Seguridad (OWASP)",
+    "question": "¿Qué categoría del OWASP Top 10 corresponde a sesiones que nunca expiran o contraseñas sin política mínima de complejidad?",
+    "options": [
+      "Security Logging and Monitoring Failures",
+      "Identification and Authentication Failures",
+      "Software and Data Integrity Failures",
+      "Broken Access Control"
+    ],
+    "correctIndex": 1,
+    "explanation": "Identification and Authentication Failures corresponde a sesiones que nunca expiran o contraseñas sin política mínima.",
+    "source": "software-engineering-guide.md"
+  },
+  {
+    "id": "se-151",
+    "category": "software-engineering",
+    "topic": "Seguridad (OWASP)",
+    "question": "¿Qué categoría del OWASP Top 10 corresponde a deserializar datos no confiables sin validación, o instalar dependencias desde un origen no verificado?",
+    "options": [
+      "Cryptographic Failures",
+      "SSRF",
+      "Software and Data Integrity Failures",
+      "Injection"
+    ],
+    "correctIndex": 2,
+    "explanation": "Software and Data Integrity Failures corresponde a deserializar datos no confiables o instalar dependencias sin verificar su origen.",
+    "source": "software-engineering-guide.md"
+  },
+  {
+    "id": "se-152",
+    "category": "software-engineering",
+    "topic": "Seguridad (OWASP)",
+    "question": "¿Qué categoría del OWASP Top 10 corresponde a un ataque exitoso que pasa desapercibido durante meses porque no se registran ni alertan los intentos anómalos?",
+    "options": [
+      "Security Misconfiguration",
+      "Insecure Design",
+      "Broken Access Control",
+      "Security Logging and Monitoring Failures"
+    ],
+    "correctIndex": 3,
+    "explanation": "Security Logging and Monitoring Failures corresponde a ataques que pasan desapercibidos por falta de registro y alertas.",
+    "source": "software-engineering-guide.md"
+  },
+  {
+    "id": "se-153",
+    "category": "software-engineering",
+    "topic": "Seguridad (OWASP)",
+    "question": "Server-Side Request Forgery (SSRF) ocurre específicamente cuando...",
+    "options": [
+      "Se usa MD5 sin salt para almacenar contraseñas",
+      "El servidor acepta una URL proporcionada por el usuario y la solicita él mismo, permitiendo alcanzar recursos internos no expuestos",
+      "Un usuario normal accede a rutas administrativas sin autorización",
+      "Un atacante inyecta SQL a través de un formulario web"
+    ],
+    "correctIndex": 1,
+    "explanation": "SSRF ocurre cuando el servidor solicita una URL proporcionada por el usuario, permitiendo alcanzar recursos internos no expuestos.",
+    "source": "software-engineering-guide.md"
+  },
+  {
+    "id": "se-154",
+    "category": "software-engineering",
+    "topic": "Seguridad (OWASP)",
+    "question": "El principio de seguridad \"menor privilegio\" establece que...",
+    "options": [
+      "Los permisos deben revisarse una única vez, al desplegar el sistema",
+      "Solo los administradores del sistema necesitan tener permisos definidos",
+      "Todos los componentes deben tener acceso administrativo por defecto para simplificar el mantenimiento",
+      "Cada componente o usuario debe tener solo los permisos estrictamente necesarios para su función"
+    ],
+    "correctIndex": 3,
+    "explanation": "El principio de menor privilegio establece que cada componente/usuario tiene solo los permisos estrictamente necesarios.",
+    "source": "software-engineering-guide.md"
+  },
+  {
+    "id": "se-155",
+    "category": "software-engineering",
+    "topic": "Seguridad (OWASP)",
+    "question": "La diferencia entre autenticación y autorización, según la guía, es que...",
+    "options": [
+      "Autenticación responde \"¿quién eres?\"; autorización responde \"¿qué tienes permitido hacer?\"",
+      "Ambas son sinónimos que se usan indistintamente",
+      "Autorización ocurre siempre antes que la autenticación en el flujo de login",
+      "Autenticación se refiere a los roles y autorización a las credenciales"
+    ],
+    "correctIndex": 0,
+    "explanation": "Autenticación: ¿quién eres? (login, verificar credenciales). Autorización: ¿qué tienes permitido hacer? (roles, permisos).",
+    "source": "software-engineering-guide.md"
+  },
+  {
+    "id": "se-156",
+    "category": "software-engineering",
+    "topic": "Seguridad (OWASP)",
+    "question": "OAuth2, según la guía, es un protocolo de...",
+    "options": [
+      "Cifrado simétrico para datos en tránsito",
+      "Autenticación pura, que reemplaza directamente al login con contraseña",
+      "Verificación de integridad de archivos descargados",
+      "Autorización delegada, que permite a una aplicación acceder a recursos en nombre de un usuario sin conocer su contraseña"
+    ],
+    "correctIndex": 3,
+    "explanation": "OAuth2 es un protocolo de autorización delegada. OIDC se construye sobre OAuth2 para añadir autenticación estandarizada.",
+    "source": "software-engineering-guide.md"
+  },
+  {
+    "id": "se-157",
+    "category": "software-engineering",
+    "topic": "Seguridad (OWASP)",
+    "question": "¿Cuál es la herramienta correcta para almacenar contraseñas de forma segura, según la guía, y por qué?",
+    "options": [
+      "MD5, porque es una función rápida y ampliamente adoptada",
+      "SHA-256, porque está diseñada específicamente para contraseñas",
+      "SHA-1 con un salt fijo compartido entre todos los usuarios",
+      "bcrypt, Argon2 o scrypt, porque son funciones lentas diseñadas específicamente para ese propósito"
+    ],
+    "correctIndex": 3,
+    "explanation": "bcrypt, Argon2 y scrypt son funciones lentas diseñadas específicamente para contraseñas, a diferencia de MD5/SHA-1 (rápidas, para integridad).",
+    "source": "software-engineering-guide.md"
+  },
+  {
+    "id": "se-158",
+    "category": "software-engineering",
+    "topic": "Seguridad (OWASP)",
+    "question": "¿Qué principio de seguridad ilustra correctamente este fragmento?",
+    "options": [
+      "Defensa en profundidad con múltiples capas de control independientes",
+      "Almacenamiento de contraseñas mediante una función de hash lenta diseñada específicamente para ese propósito",
+      "Cifrado simétrico de datos en tránsito usando TLS",
+      "Autorización delegada mediante OAuth2"
+    ],
+    "correctIndex": 1,
+    "explanation": "El fragmento usa BCrypt, una función de hash lenta diseñada específicamente para almacenar contraseñas de forma segura.",
+    "source": "software-engineering-guide.md",
+    "code": "String hash = BCrypt.hashpw(passwordEnTextoPlano, BCrypt.gensalt());\nboolean coincide = BCrypt.checkpw(passwordIntento, hash);",
+    "language": "java"
+  },
+  {
+    "id": "se-159",
+    "category": "software-engineering",
+    "topic": "Calidad de código y buenas prácticas",
+    "question": "El code smell \"Clase Dios\" (God Class) se refiere a...",
+    "options": [
+      "Una clase con un único método público",
+      "Una clase que concentra demasiadas responsabilidades no relacionadas entre sí",
+      "Una clase que hereda de múltiples interfaces",
+      "Una clase abstracta sin implementación"
+    ],
+    "correctIndex": 1,
+    "explanation": "La Clase Dios concentra demasiadas responsabilidades no relacionadas entre sí.",
+    "source": "software-engineering-guide.md"
+  },
+  {
+    "id": "se-160",
+    "category": "software-engineering",
+    "topic": "Calidad de código y buenas prácticas",
+    "question": "El code smell \"Envidia de características\" (Feature Envy) ocurre cuando...",
+    "options": [
+      "Un método usa más los datos de otra clase que los propios",
+      "Un método recibe demasiados parámetros",
+      "La misma lógica está duplicada en varios lugares del código",
+      "Una clase no implementa ninguna interfaz"
+    ],
+    "correctIndex": 0,
+    "explanation": "Feature Envy ocurre cuando un método usa más los datos de otra clase que los propios.",
+    "source": "software-engineering-guide.md"
+  },
+  {
+    "id": "se-161",
+    "category": "software-engineering",
+    "topic": "Calidad de código y buenas prácticas",
+    "question": "Un número excesivo de parámetros en un método suele ser señal de que...",
+    "options": [
+      "El método probablemente debería recibir un objeto que agrupe esos parámetros",
+      "El método está correctamente diseñado y no requiere cambios",
+      "Falta agregar más comentarios explicativos al método",
+      "El método necesita ser dividido en una clase Dios"
+    ],
+    "correctIndex": 0,
+    "explanation": "Un número excesivo de parámetros suele indicar que el método debería recibir un objeto que los agrupe.",
+    "source": "software-engineering-guide.md"
+  },
+  {
+    "id": "se-162",
+    "category": "software-engineering",
+    "topic": "Calidad de código y buenas prácticas",
+    "question": "El code smell de \"duplicación\" (la misma lógica copiada en varios lugares) viola directamente el principio...",
+    "options": [
+      "DRY (Don't Repeat Yourself)",
+      "YAGNI (You Aren't Gonna Need It)",
+      "Fail securely",
+      "KISS (Keep It Simple, Stupid)"
+    ],
+    "correctIndex": 0,
+    "explanation": "La duplicación de lógica viola directamente el principio DRY (Don't Repeat Yourself).",
+    "source": "software-engineering-guide.md"
+  },
+  {
+    "id": "se-163",
+    "category": "software-engineering",
+    "topic": "Calidad de código y buenas prácticas",
+    "question": "El code smell \"método largo\" se caracteriza, según la guía, por...",
+    "options": [
+      "Un método que solo contiene una línea de código",
+      "Un método que no recibe ningún parámetro",
+      "Un método que hace demasiadas cosas distintas, resultando difícil de nombrar con precisión",
+      "Un método marcado como privado dentro de la clase"
+    ],
+    "correctIndex": 2,
+    "explanation": "El método largo hace demasiadas cosas distintas, siendo difícil de nombrar con precisión.",
+    "source": "software-engineering-guide.md"
+  },
+  {
+    "id": "se-164",
+    "category": "software-engineering",
+    "topic": "Calidad de código y buenas prácticas",
+    "question": "La metáfora financiera de la \"deuda técnica\" implica que...",
+    "options": [
+      "La deuda técnica siempre debe evitarse a cualquier costo, sin excepción",
+      "Solo los proyectos con financiamiento externo pueden acumular deuda técnica",
+      "La deuda técnica desaparece automáticamente con el tiempo sin intervención",
+      "Tomar un atajo de diseño ahora acelera la entrega inmediata, pero genera \"intereses\" en forma de mayor costo de mantenimiento futuro"
+    ],
+    "correctIndex": 3,
+    "explanation": "La metáfora es que un atajo de diseño acelera la entrega ahora, pero genera 'intereses' en forma de mayor costo de mantenimiento futuro.",
+    "source": "software-engineering-guide.md"
+  },
+  {
+    "id": "se-165",
+    "category": "software-engineering",
+    "topic": "Calidad de código y buenas prácticas",
+    "question": "Según la guía, ¿toda deuda técnica es necesariamente una mala decisión de ingeniería?",
+    "options": [
+      "No: tomarla conscientemente para cumplir una fecha crítica, documentándola y planeando pagarla, es una decisión de ingeniería legítima",
+      "Solo es aceptable en proyectos de código abierto",
+      "Sí, siempre debe evitarse sin excepción",
+      "Es aceptable únicamente si el equipo no tiene pruebas automatizadas"
+    ],
+    "correctIndex": 0,
+    "explanation": "No toda deuda técnica es mala: tomarla conscientemente, documentada y con plan de pago, es una decisión legítima.",
+    "source": "software-engineering-guide.md"
+  },
+  {
+    "id": "se-166",
+    "category": "software-engineering",
+    "topic": "Calidad de código y buenas prácticas",
+    "question": "¿Qué tipo de deuda técnica es la realmente problemática, según la guía?",
+    "options": [
+      "Cualquier deuda técnica, sin distinción de tipo",
+      "La deuda tomada conscientemente, documentada y con un plan de pago",
+      "La deuda pagada dentro del mismo sprint en que se contrajo",
+      "La deuda inconsciente o nunca reconocida por el equipo"
+    ],
+    "correctIndex": 3,
+    "explanation": "El problema es la deuda inconsciente o nunca reconocida, no la tomada deliberadamente y documentada.",
+    "source": "software-engineering-guide.md"
+  },
+  {
+    "id": "se-167",
+    "category": "software-engineering",
+    "topic": "Calidad de código y buenas prácticas",
+    "question": "La refactorización se define, según la guía, como...",
+    "options": [
+      "Cambiar la estructura interna del código sin alterar su comportamiento observable",
+      "Agregar nueva funcionalidad visible al sistema",
+      "Escribir documentación técnica del sistema",
+      "Corregir defectos críticos detectados en producción"
+    ],
+    "correctIndex": 0,
+    "explanation": "Refactorizar es cambiar la estructura interna del código sin alterar su comportamiento observable.",
+    "source": "software-engineering-guide.md"
+  },
+  {
+    "id": "se-168",
+    "category": "software-engineering",
+    "topic": "Calidad de código y buenas prácticas",
+    "question": "¿Qué requisito señala la guía como imprescindible para poder refactorizar con confianza?",
+    "options": [
+      "Una red de pruebas confiable que detecte si el comportamiento cambió",
+      "Eliminar todos los comentarios del código antes de empezar",
+      "Migrar primero a una arquitectura de microservicios",
+      "Aprobación previa de un arquitecto senior en cada cambio"
+    ],
+    "correctIndex": 0,
+    "explanation": "Se requiere una red de pruebas confiable; sin ella, refactorizar es indistinguible de romper cosas sin darse cuenta.",
+    "source": "software-engineering-guide.md"
+  },
+  {
+    "id": "se-169",
+    "category": "software-engineering",
+    "topic": "Calidad de código y buenas prácticas",
+    "question": "Sin una red de pruebas confiable, según la guía, \"refactorizar\" resulta...",
+    "options": [
+      "Exactamente igual de seguro que hacerlo con pruebas",
+      "Indistinguible de \"romper cosas y esperar que nadie note\"",
+      "Más rápido, aunque igual de confiable",
+      "Innecesario, porque el compilador detecta cualquier cambio de comportamiento"
+    ],
+    "correctIndex": 1,
+    "explanation": "Sin pruebas, refactorizar es indistinguible de romper cosas y esperar que nadie note.",
+    "source": "software-engineering-guide.md"
+  },
+  {
+    "id": "se-170",
+    "category": "software-engineering",
+    "topic": "Calidad de código y buenas prácticas",
+    "question": "¿Qué code smell ilustra principalmente este método, y cuál sería la mejora sugerida por la guía?",
+    "options": [
+      "Clase Dios; la clase Pedido debería eliminarse por completo",
+      "Número de parámetros excesivo; debería recibir un objeto que agrupe estos datos, como un DatosCliente",
+      "Duplicación; el mismo método existe en otra clase del sistema",
+      "Feature Envy; el método debería moverse a la clase Cliente"
+    ],
+    "correctIndex": 1,
+    "explanation": "El método tiene un número excesivo de parámetros; debería recibir un objeto que agrupe esos datos relacionados.",
+    "source": "software-engineering-guide.md",
+    "code": "class Pedido {\n    void procesar(String nombre, String direccion, String ciudad, String cp,\n                   String pais, String telefono, String email, double total,\n                   String metodoPago, String cuponDescuento) {\n        // ...\n    }\n}",
+    "language": "java"
+  }
+]

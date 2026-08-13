@@ -5,16 +5,50 @@
 
   const ALL_QUESTIONS = Array.isArray(window.QUESTION_BANK) ? window.QUESTION_BANK : [];
 
+  // Metadata visual por categoría. Cualquier categoría presente en el banco que no
+  // aparezca aquí recibe un estilo genérico automáticamente (ver getCategoryMeta).
   const CATEGORY_META = {
-    java: { label: "Java", badgeClass: "badge-java", ring: "ring-orange-400", text: "text-orange-700", bg: "bg-orange-50", border: "border-orange-200" },
-    sql: { label: "SQL", badgeClass: "badge-sql", ring: "ring-blue-400", text: "text-blue-700", bg: "bg-blue-50", border: "border-blue-200" },
-    programacion: { label: "Programación", badgeClass: "badge-programacion", ring: "ring-violet-400", text: "text-violet-700", bg: "bg-violet-50", border: "border-violet-200" },
+    java: { label: "Java", icon: "☕", color: "#f97316" },
+    "java-testing": { label: "Java Testing", icon: "🧪", color: "#d97706" },
+    spring: { label: "Spring", icon: "🍃", color: "#65a30d" },
+    sql: { label: "SQL", icon: "🗄️", color: "#2563eb" },
+    "sql-oracle": { label: "Oracle SQL", icon: "🏛️", color: "#dc2626" },
+    "sql-postgresql": { label: "PostgreSQL", icon: "🐘", color: "#0d9488" },
+    "software-engineering": { label: "Ingeniería de Software", icon: "🧩", color: "#7c3aed" },
+    git: { label: "Git", icon: "🔀", color: "#db2777" },
+    docker: { label: "Docker", icon: "🐳", color: "#0ea5e9" },
   };
+
+  const FALLBACK_PALETTE = ["#0891b2", "#65a30d", "#c026d3", "#ca8a04", "#4f46e5"];
 
   const app = document.getElementById("app");
 
   /** Estado global de la sesión de examen en curso */
   let session = null;
+
+  function getCategoryMeta(category) {
+    if (CATEGORY_META[category]) return CATEGORY_META[category];
+    const idx = Object.keys(CATEGORY_META).length % FALLBACK_PALETTE.length;
+    const meta = { label: category, icon: "📘", color: FALLBACK_PALETTE[idx] };
+    CATEGORY_META[category] = meta;
+    return meta;
+  }
+
+  function orderedCategories(list) {
+    const present = Array.from(new Set(list.map((q) => q.category)));
+    const known = Object.keys(CATEGORY_META).filter((c) => present.includes(c));
+    const unknown = present.filter((c) => !known.includes(c)).sort();
+    return known.concat(unknown);
+  }
+
+  function hexToRgba(hex, alpha) {
+    const clean = hex.replace("#", "");
+    const bigint = parseInt(clean, 16);
+    const r = (bigint >> 16) & 255;
+    const g = (bigint >> 8) & 255;
+    const b = bigint & 255;
+    return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+  }
 
   function shuffle(array) {
     const copy = array.slice();
@@ -26,18 +60,16 @@
   }
 
   function countByCategory(list) {
-    const counts = Object.fromEntries(Object.keys(CATEGORY_META).map((category) => [category, 0]));
-    for (const q of list) {
-      if (counts[q.category] !== undefined) counts[q.category]++;
-    }
+    const counts = {};
+    for (const q of list) counts[q.category] = (counts[q.category] || 0) + 1;
     return counts;
   }
 
   function topicsByCategory(list) {
-    const topics = Object.fromEntries(Object.keys(CATEGORY_META).map((category) => [category, new Map()]));
+    const topics = {};
     for (const question of list) {
+      if (!topics[question.category]) topics[question.category] = new Map();
       const categoryTopics = topics[question.category];
-      if (!categoryTopics) continue;
       const topic = question.topic || "General";
       categoryTopics.set(topic, (categoryTopics.get(topic) || 0) + 1);
     }
@@ -45,7 +77,7 @@
   }
 
   function topicKey(category, topic) {
-    return `${category}\u001f${topic || "General"}`;
+    return `${category}${topic || "General"}`;
   }
 
   function escapeHtml(str) {
@@ -55,34 +87,69 @@
       .replace(/>/g, "&gt;");
   }
 
+  /** Escapa el texto y convierte `código entre backticks` (Markdown inline) en <code> */
+  function renderInlineMarkdown(text) {
+    return String(text)
+      .split(/(`[^`]+`)/g)
+      .map((part) => {
+        if (part.length > 1 && part.startsWith("`") && part.endsWith("`")) {
+          return `<code class="px-1 py-0.5 rounded bg-slate-100 text-slate-800 font-mono-code text-[0.9em] border border-slate-200">${escapeHtml(part.slice(1, -1))}</code>`;
+        }
+        return escapeHtml(part);
+      })
+      .join("");
+  }
+
   /** Renderiza texto de pregunta/opción: si contiene salto de línea, se muestra como bloque de código monoespaciado */
   function renderTextBlock(text) {
-    const safe = escapeHtml(text);
     if (text.includes("\n")) {
-      return `<pre class="code-block font-mono-code mt-2">${safe}</pre>`;
+      return `<pre class="code-block font-mono-code mt-2">${escapeHtml(text)}</pre>`;
     }
-    return `<p class="leading-relaxed">${safe}</p>`;
+    return `<p class="leading-relaxed">${renderInlineMarkdown(text)}</p>`;
   }
 
   function renderInlineOrCode(text) {
-    const safe = escapeHtml(text);
     if (text.includes("\n")) {
-      return `<pre class="code-block font-mono-code text-sm">${safe}</pre>`;
+      return `<pre class="code-block font-mono-code text-sm">${escapeHtml(text)}</pre>`;
     }
-    return safe;
+    return renderInlineMarkdown(text);
   }
 
   function renderQuestionCode(question, compact = false) {
     if (!question.code) return "";
     const language = escapeHtml(question.language || "código");
     return `
-      <div class="question-code rounded-xl overflow-hidden border border-slate-700 ${compact ? "mb-3" : "mb-6"}">
+      <div class="question-code rounded-xl overflow-hidden border border-slate-700/60 ${compact ? "mb-3" : "mb-6"}">
         <div class="bg-slate-800 text-slate-300 px-3 py-1.5 text-[10px] font-bold uppercase tracking-widest flex items-center justify-between">
-          <span>Fragmento de código</span>
+          <span>Fragmento</span>
           <span>${language}</span>
         </div>
         <pre class="font-mono-code bg-slate-950 text-slate-100 overflow-x-auto ${compact ? "text-[11px] p-3" : "text-sm p-4 sm:p-5"} leading-relaxed"><code>${escapeHtml(question.code)}</code></pre>
       </div>`;
+  }
+
+  function categoryBadge(category, extraClass = "") {
+    const meta = getCategoryMeta(category);
+    return `<span class="inline-flex items-center gap-1.5 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wide ${extraClass}" style="background:${meta.color}">
+      <span aria-hidden="true">${meta.icon}</span>${escapeHtml(meta.label)}
+    </span>`;
+  }
+
+  // ---------------------------------------------------------------------
+  // Encabezado: chips de categorías disponibles
+  // ---------------------------------------------------------------------
+  function renderCategoryLegend() {
+    const legend = document.getElementById("category-legend");
+    if (!legend) return;
+    const totals = countByCategory(ALL_QUESTIONS);
+    const categories = orderedCategories(ALL_QUESTIONS);
+    legend.innerHTML = categories.map((cat, i) => {
+      const meta = getCategoryMeta(cat);
+      return `<span class="chip-in flex-shrink-0 inline-flex items-center gap-1.5 text-[11px] sm:text-xs font-semibold text-white/90 px-2.5 py-1 rounded-full border" style="animation-delay:${i * 40}ms; background:${hexToRgba(meta.color, 0.22)}; border-color:${hexToRgba(meta.color, 0.5)}">
+        <span aria-hidden="true">${meta.icon}</span>${escapeHtml(meta.label)}
+        <span class="text-white/60 font-normal">${totals[cat] || 0}</span>
+      </span>`;
+    }).join("");
   }
 
   // ---------------------------------------------------------------------
@@ -91,44 +158,57 @@
   function renderSetupScreen() {
     const totals = countByCategory(ALL_QUESTIONS);
     const topics = topicsByCategory(ALL_QUESTIONS);
+    const categories = orderedCategories(ALL_QUESTIONS);
     const totalAvailable = ALL_QUESTIONS.length;
     const codeAvailable = ALL_QUESTIONS.filter((question) => question.code).length;
     const presets = [10, 20, 30, 50, 100, 200];
 
     app.innerHTML = `
       <div class="glass rounded-2xl shadow-2xl p-6 sm:p-9 pop">
-        <h2 class="text-xl sm:text-2xl font-bold text-slate-800 mb-1">Configura tu simulacro</h2>
-        <p class="text-slate-500 text-sm mb-6">Elige categorías completas o subtemas concretos. Banco disponible: <strong>${totalAvailable}</strong> preguntas, incluidas <strong>${codeAvailable}</strong> de análisis de código.</p>
+        <div class="flex items-start justify-between gap-4 flex-wrap mb-1">
+          <div>
+            <h2 class="text-xl sm:text-2xl font-bold text-slate-800">Configura tu simulacro</h2>
+            <p class="text-slate-500 text-sm mt-1">Elige categorías completas o subtemas concretos.</p>
+          </div>
+          <div class="text-right text-xs sm:text-sm text-slate-500 leading-tight">
+            <span class="block font-extrabold text-slate-800 text-lg">${totalAvailable}</span>
+            preguntas · <strong class="text-slate-700">${codeAvailable}</strong> con código
+          </div>
+        </div>
 
-        <div class="grid md:grid-cols-3 gap-3 mb-4">
-          ${Object.keys(CATEGORY_META).map((cat) => {
-            const meta = CATEGORY_META[cat];
-            const topicEntries = Array.from(topics[cat].entries()).sort((a, b) => a[0].localeCompare(b[0], "es"));
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-3 my-5" id="category-grid">
+          ${categories.map((cat) => {
+            const meta = getCategoryMeta(cat);
+            const topicEntries = Array.from((topics[cat] || new Map()).entries()).sort((a, b) => a[0].localeCompare(b[0], "es"));
+            const soft = hexToRgba(meta.color, 0.08);
+            const border = hexToRgba(meta.color, 0.35);
             return `
-              <div class="border ${meta.border} ${meta.bg} rounded-xl overflow-hidden">
-                <label class="flex items-center gap-3 px-4 py-3 cursor-pointer hover:brightness-95 transition">
-                  <input type="checkbox" class="chk w-4 h-4 cat-checkbox" value="${cat}" checked />
-                  <span class="flex-1">
-                    <span class="block font-semibold ${meta.text}">${meta.label}</span>
-                    <span class="block text-xs text-slate-500">${totals[cat]} preguntas · ${topicEntries.length} temas</span>
+              <div class="cat-card border rounded-xl overflow-hidden" data-cat-card="${cat}" style="border-color:${border}; background:${soft}">
+                <label class="flex items-center gap-3 px-4 py-3 cursor-pointer">
+                  <input type="checkbox" class="chk w-4 h-4 cat-checkbox flex-shrink-0" value="${cat}" checked style="accent-color:${meta.color}" />
+                  <span class="flex-shrink-0 w-9 h-9 rounded-lg flex items-center justify-center text-lg" style="background:${hexToRgba(meta.color, 0.18)}">${meta.icon}</span>
+                  <span class="flex-1 min-w-0">
+                    <span class="block font-semibold text-slate-800 truncate">${escapeHtml(meta.label)}</span>
+                    <span class="block text-xs text-slate-500">${totals[cat] || 0} preguntas · ${topicEntries.length} temas</span>
                   </span>
                 </label>
-                <details class="border-t ${meta.border} bg-white/50">
-                  <summary class="px-4 py-2 text-xs font-semibold ${meta.text} cursor-pointer select-none">
+                <details class="border-t bg-white/60" style="border-color:${border}">
+                  <summary class="px-4 py-2 text-xs font-semibold cursor-pointer select-none flex items-center gap-1.5" style="color:${meta.color}">
+                    <svg class="details-caret w-3 h-3 flex-shrink-0" viewBox="0 0 24 24" fill="currentColor"><path d="M9 6l6 6-6 6z"/></svg>
                     Seleccionar subtemas
                     <span class="font-normal text-slate-500">(<span data-selected-count="${cat}">${topicEntries.length}</span>/${topicEntries.length})</span>
                   </summary>
                   <div class="px-3 pb-3">
                     <div class="flex gap-2 py-2 sticky top-0 bg-white/95 z-10">
-                      <button type="button" class="topic-action flex-1 rounded-md border ${meta.border} bg-white px-2 py-1 text-[10px] font-bold ${meta.text}" data-category="${cat}" data-action="all">Todos</button>
+                      <button type="button" class="topic-action flex-1 rounded-md border bg-white px-2 py-1 text-[10px] font-bold" style="border-color:${border}; color:${meta.color}" data-category="${cat}" data-action="all">Todos</button>
                       <button type="button" class="topic-action flex-1 rounded-md border border-slate-200 bg-white px-2 py-1 text-[10px] font-bold text-slate-500" data-category="${cat}" data-action="none">Ninguno</button>
                     </div>
                     <div class="max-h-52 overflow-y-auto space-y-1 pr-1">
                       ${topicEntries.map(([topic, count]) => `
                         <label class="flex items-start gap-2 rounded-md bg-white/70 px-2 py-1.5 text-[11px] cursor-pointer hover:bg-white">
-                          <input type="checkbox" class="topic-checkbox chk mt-0.5" data-category="${cat}" data-topic="${encodeURIComponent(topic)}" checked />
+                          <input type="checkbox" class="topic-checkbox chk mt-0.5" data-category="${cat}" data-topic="${encodeURIComponent(topic)}" checked style="accent-color:${meta.color}" />
                           <span class="flex-1 text-slate-600">${escapeHtml(topic)}</span>
-                          <span class="font-bold ${meta.text}">${count}</span>
+                          <span class="font-bold" style="color:${meta.color}">${count}</span>
                         </label>`).join("")}
                     </div>
                   </div>
@@ -136,24 +216,24 @@
               </div>`;
           }).join("")}
         </div>
-        <p class="text-xs text-slate-500 mb-6">Marca una categoría completa o abre “Seleccionar subtemas” para practicar contenidos específicos.</p>
+        <p class="text-xs text-slate-500 mb-6">Marca una categoría completa o abre "Seleccionar subtemas" para practicar contenidos específicos.</p>
 
         <div class="mb-6">
           <label class="block text-sm font-semibold text-slate-700 mb-2">Cantidad de preguntas</label>
           <div class="flex flex-wrap gap-2 mb-3" id="preset-buttons">
-            ${presets.map((n) => `<button type="button" data-preset="${n}" class="preset-btn px-4 py-2 rounded-lg border border-slate-300 text-sm font-medium text-slate-600 hover:border-orange-400 hover:text-orange-600 transition">${n}</button>`).join("")}
-            <button type="button" data-preset="all" class="preset-btn px-4 py-2 rounded-lg border border-slate-300 text-sm font-medium text-slate-600 hover:border-orange-400 hover:text-orange-600 transition">Todas</button>
+            ${presets.map((n) => `<button type="button" data-preset="${n}" class="preset-btn px-4 py-2 rounded-lg border border-slate-300 text-sm font-medium text-slate-600 hover:border-blue-400 hover:text-blue-600 transition">${n}</button>`).join("")}
+            <button type="button" data-preset="all" class="preset-btn px-4 py-2 rounded-lg border border-slate-300 text-sm font-medium text-slate-600 hover:border-blue-400 hover:text-blue-600 transition">Todas</button>
           </div>
-          <div class="flex items-center gap-3">
+          <div class="flex items-center gap-3 flex-wrap">
             <input type="number" id="question-count" min="1" max="${totalAvailable}" value="20"
-              class="w-28 border border-slate-300 rounded-lg px-3 py-2 text-slate-800 font-semibold focus:outline-none focus:ring-2 focus:ring-orange-400" />
+              class="w-28 border border-slate-300 rounded-lg px-3 py-2 text-slate-800 font-semibold focus:outline-none focus:ring-2 focus:ring-blue-400" />
             <span class="text-sm text-slate-500">preguntas (máximo <span id="max-count-label">${totalAvailable}</span> según subtemas seleccionados)</span>
           </div>
         </div>
 
         <div id="setup-error" class="hidden text-sm text-red-600 font-medium mb-4"></div>
 
-        <button id="start-btn" class="w-full bg-gradient-to-r from-blue-600 via-orange-500 to-red-600 text-white font-bold text-lg py-3.5 rounded-xl shadow-lg hover:shadow-xl hover:brightness-105 active:scale-[0.99] transition">
+        <button id="start-btn" class="w-full text-white font-bold text-lg py-3.5 rounded-xl shadow-lg hover:brightness-105 active:scale-[0.99] transition" style="background:linear-gradient(90deg,#1d4ed8,#7c3aed 55%,#dc2626)">
           Comenzar simulacro →
         </button>
       </div>
@@ -182,10 +262,12 @@
 
     function syncCategory(category) {
       const categoryCheckbox = categoryCheckboxes.find((checkbox) => checkbox.value === category);
+      const card = document.querySelector(`[data-cat-card="${category}"]`);
       const categoryTopics = topicCheckboxes.filter((checkbox) => checkbox.dataset.category === category);
       const selectedCount = categoryTopics.filter((checkbox) => checkbox.checked).length;
       categoryCheckbox.checked = selectedCount > 0;
       categoryCheckbox.indeterminate = selectedCount > 0 && selectedCount < categoryTopics.length;
+      if (card) card.classList.toggle("is-off", selectedCount === 0);
       const countLabel = document.querySelector(`[data-selected-count="${category}"]`);
       if (countLabel) countLabel.textContent = String(selectedCount);
     }
@@ -254,7 +336,7 @@
       startSession(selectedTopics, requested);
     });
 
-    Object.keys(CATEGORY_META).forEach(syncCategory);
+    categories.forEach(syncCategory);
     refreshMax();
   }
 
@@ -289,7 +371,7 @@
   function renderQuestionScreen() {
     const { questions, currentIndex } = session;
     const q = questions[currentIndex];
-    const meta = CATEGORY_META[q.category] || CATEGORY_META.programacion;
+    const meta = getCategoryMeta(q.category);
     const total = questions.length;
     const progressPct = Math.round((currentIndex / total) * 100);
     const letters = ["A", "B", "C", "D", "E", "F"];
@@ -297,7 +379,7 @@
     app.innerHTML = `
       <div class="glass rounded-2xl shadow-2xl p-6 sm:p-8 fade-in">
         <div class="flex items-center justify-between mb-4 gap-3 flex-wrap">
-          <span class="badge-${q.category} text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wide">${meta.label}</span>
+          ${categoryBadge(q.category)}
           <span class="text-xs text-slate-500 font-medium flex items-center gap-2">
             ${escapeHtml(q.topic || "")}
             ${q.code ? `<span class="rounded-full bg-slate-800 text-white px-2 py-0.5 text-[9px] font-bold uppercase">Código</span>` : ""}
@@ -306,7 +388,7 @@
         </div>
 
         <div class="w-full h-2 bg-slate-200 rounded-full mb-6 overflow-hidden">
-          <div class="progress-fill h-full bg-gradient-to-r from-blue-600 via-orange-500 to-red-600" style="width:${progressPct}%"></div>
+          <div class="progress-fill h-full" style="width:${progressPct}%; background:linear-gradient(90deg,#1d4ed8,#7c3aed,#dc2626)"></div>
         </div>
 
         <div class="mb-6">
@@ -323,7 +405,8 @@
             Puntaje actual: <strong>${session.answers.filter((a) => a.correct).length}</strong> / ${session.answers.length}
           </div>
           <button id="action-btn" disabled
-            class="bg-gradient-to-r from-blue-600 via-orange-500 to-red-600 text-white font-bold px-6 py-3 rounded-xl shadow-lg disabled:opacity-40 disabled:cursor-not-allowed hover:brightness-105 active:scale-[0.98] transition">
+            class="text-white font-bold px-6 py-3 rounded-xl shadow-lg disabled:opacity-40 disabled:cursor-not-allowed hover:brightness-105 active:scale-[0.98] transition"
+            style="background:linear-gradient(90deg,#1d4ed8,#7c3aed 55%,#dc2626)">
             Enviar respuesta
           </button>
         </div>
@@ -337,7 +420,7 @@
     q.options.forEach((opt, idx) => {
       const btn = document.createElement("button");
       btn.type = "button";
-      btn.className = "option-btn w-full text-left border-2 border-slate-200 rounded-xl px-4 py-3 flex items-start gap-3 hover:border-orange-300 hover:bg-orange-50/40";
+      btn.className = "option-btn w-full text-left border-2 border-slate-200 rounded-xl px-4 py-3 flex items-start gap-3 hover:border-blue-300 hover:bg-blue-50/40";
       btn.dataset.index = String(idx);
       btn.innerHTML = `
         <span class="flex-shrink-0 w-7 h-7 rounded-full border-2 border-slate-300 flex items-center justify-center text-xs font-bold text-slate-500 option-letter">${letters[idx]}</span>
@@ -357,10 +440,10 @@
     const buttons = document.querySelectorAll("#options-container .option-btn");
     buttons.forEach((b) => {
       const active = parseInt(b.dataset.index, 10) === idx;
-      b.classList.toggle("border-orange-500", active);
-      b.classList.toggle("bg-orange-50", active);
+      b.classList.toggle("border-blue-500", active);
+      b.classList.toggle("bg-blue-50", active);
       b.classList.toggle("ring-2", active);
-      b.classList.toggle("ring-orange-300", active);
+      b.classList.toggle("ring-blue-300", active);
     });
     document.getElementById("action-btn").disabled = false;
   }
@@ -385,7 +468,7 @@
     buttons.forEach((b) => {
       const idx = parseInt(b.dataset.index, 10);
       b.disabled = true;
-      b.classList.remove("hover:border-orange-300", "hover:bg-orange-50/40");
+      b.classList.remove("hover:border-blue-300", "hover:bg-blue-50/40");
       const letterSpan = b.querySelector(".option-letter");
       if (idx === q.correctIndex) {
         b.classList.add("border-emerald-500", "bg-emerald-50");
@@ -406,7 +489,7 @@
           <span class="text-lg">${correct ? "✓" : "✗"}</span>
           ${correct ? "¡Correcto!" : "Incorrecto"}
         </p>
-        <p class="text-sm text-slate-700 leading-relaxed">${escapeHtml(q.explanation)}</p>
+        <p class="text-sm text-slate-700 leading-relaxed">${renderInlineMarkdown(q.explanation)}</p>
         ${q.source ? `<p class="text-[11px] text-slate-500 mt-3 pt-2 border-t border-slate-200"><strong>Fuente de estudio:</strong> ${escapeHtml(q.source)}</p>` : ""}
       </div>
     `;
@@ -445,6 +528,7 @@
       byCategory[cat].total++;
       if (answers[i].correct) byCategory[cat].correct++;
     });
+    const presentCategories = orderedCategories(questions);
 
     let scoreColor = "text-red-600";
     let scoreMsg = "Sigue practicando — repasa los módulos donde fallaste.";
@@ -466,15 +550,18 @@
         </div>
 
         <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-3 mb-8">
-          ${Object.keys(CATEGORY_META).map((cat) => {
-            const meta = CATEGORY_META[cat];
+          ${presentCategories.map((cat) => {
+            const meta = getCategoryMeta(cat);
             const stats = byCategory[cat];
             if (!stats) return "";
             const catPct = Math.round((stats.correct / stats.total) * 100);
             return `
-              <div class="border ${meta.border} ${meta.bg} rounded-xl p-4 text-center">
-                <p class="text-xs font-bold ${meta.text} uppercase tracking-wide mb-1">${meta.label}</p>
+              <div class="border rounded-xl p-4" style="border-color:${hexToRgba(meta.color, 0.35)}; background:${hexToRgba(meta.color, 0.06)}">
+                <p class="text-xs font-bold uppercase tracking-wide mb-1 flex items-center gap-1.5" style="color:${meta.color}"><span aria-hidden="true">${meta.icon}</span>${escapeHtml(meta.label)}</p>
                 <p class="text-2xl font-extrabold text-slate-800">${catPct}%</p>
+                <div class="w-full h-1.5 bg-slate-200/70 rounded-full mt-2 mb-1.5 overflow-hidden">
+                  <div class="h-full rounded-full" style="width:${catPct}%; background:${meta.color}"></div>
+                </div>
                 <p class="text-xs text-slate-500">${stats.correct} / ${stats.total} correctas</p>
               </div>`;
           }).join("")}
@@ -486,15 +573,15 @@
           <div class="space-y-3 max-h-96 overflow-y-auto pr-1">
             ${missed.map(({ q, a }) => `
               <div class="border border-red-200 bg-red-50/60 rounded-xl p-4">
-                <div class="flex items-center gap-2 mb-2">
-                  <span class="badge-${q.category} text-white text-[10px] font-bold px-2 py-0.5 rounded-full uppercase">${(CATEGORY_META[q.category] || CATEGORY_META.programacion).label}</span>
+                <div class="flex items-center gap-2 mb-2 flex-wrap">
+                  ${categoryBadge(q.category, "text-[10px] px-2 py-0.5")}
                   <span class="text-[11px] text-slate-500">${escapeHtml(q.topic || "")}</span>
                 </div>
                 ${renderQuestionCode(q, true)}
                 <div class="text-sm font-semibold text-slate-800 mb-2">${renderTextBlock(q.question)}</div>
                 <div class="text-xs text-slate-600 mb-2"><strong>Tu respuesta:</strong><div class="mt-1">${a.selectedIndex !== null && a.selectedIndex !== undefined ? renderInlineOrCode(String(q.options[a.selectedIndex])) : "(sin respuesta)"}</div></div>
                 <div class="text-xs text-emerald-700 mb-2"><strong>Correcta:</strong><div class="mt-1">${renderInlineOrCode(String(q.options[q.correctIndex]))}</div></div>
-                <p class="text-xs text-slate-600 bg-white/70 rounded-lg p-2">${escapeHtml(q.explanation)}</p>
+                <p class="text-xs text-slate-600 bg-white/70 rounded-lg p-2">${renderInlineMarkdown(q.explanation)}</p>
               </div>
             `).join("")}
           </div>
@@ -504,10 +591,10 @@
         </div>`}
 
         <div class="flex flex-col sm:flex-row gap-3">
-          <button id="retry-same-btn" class="flex-1 border-2 border-slate-300 text-slate-700 font-bold py-3 rounded-xl hover:border-orange-400 hover:text-orange-600 transition">
+          <button id="retry-same-btn" class="flex-1 border-2 border-slate-300 text-slate-700 font-bold py-3 rounded-xl hover:border-blue-400 hover:text-blue-600 transition">
             Repetir con la misma configuración
           </button>
-          <button id="new-quiz-btn" class="flex-1 bg-gradient-to-r from-blue-600 via-orange-500 to-red-600 text-white font-bold py-3 rounded-xl shadow-lg hover:brightness-105 active:scale-[0.99] transition">
+          <button id="new-quiz-btn" class="flex-1 text-white font-bold py-3 rounded-xl shadow-lg hover:brightness-105 active:scale-[0.99] transition" style="background:linear-gradient(90deg,#1d4ed8,#7c3aed 55%,#dc2626)">
             Nuevo simulacro
           </button>
         </div>
@@ -521,7 +608,7 @@
     document.getElementById("new-quiz-btn").addEventListener("click", renderSetupScreen);
   }
 
-  // Atajos de teclado: 1-4 selecciona opción, Enter envía/avanza
+  // Atajos de teclado: 1-6 selecciona opción, Enter envía/avanza
   document.addEventListener("keydown", (e) => {
     if (!session) return;
     const optionButtons = document.querySelectorAll("#options-container .option-btn");
@@ -545,6 +632,7 @@
         <p class="text-slate-500 text-sm mt-2">Verifica que <span class="font-mono-code">questions.js</span> esté cargado antes de <span class="font-mono-code">app.js</span> y que defina <span class="font-mono-code">window.QUESTION_BANK</span>.</p>
       </div>`;
   } else {
+    renderCategoryLegend();
     renderSetupScreen();
   }
 })();

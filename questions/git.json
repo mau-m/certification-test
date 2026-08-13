@@ -1,0 +1,2357 @@
+[
+  {
+    "id": "git-001",
+    "category": "git",
+    "topic": "Fundamentos de Git y control de versiones",
+    "question": "¿Qué distingue fundamentalmente a Git de un VCS centralizado como Subversion (SVN)?",
+    "options": [
+      "En SVN cada copia local tiene el historial completo; en Git solo el servidor lo tiene",
+      "En Git cada copia local contiene el historial completo; en SVN solo el servidor central lo tiene",
+      "SVN permite trabajar sin conexión a internet y Git requiere estar siempre conectado",
+      "No hay diferencia real de arquitectura; ambos son sistemas distribuidos"
+    ],
+    "correctIndex": 1,
+    "explanation": "Git es distribuido: cada copia local contiene el historial completo. En SVN/CVS (centralizados), solo el servidor tiene el historial completo.",
+    "source": "git-guide.md"
+  },
+  {
+    "id": "git-002",
+    "category": "git",
+    "topic": "Fundamentos de Git y control de versiones",
+    "question": "¿Cuál de las siguientes afirmaciones sobre la relación entre Git y GitHub es correcta?",
+    "options": [
+      "Git es el cliente de línea de comandos exclusivo de GitHub y no funciona con otras plataformas",
+      "Git es la herramienta que gestiona el historial de versiones; GitHub es una plataforma que aloja repositorios Git y añade funciones colaborativas como PRs e Issues",
+      "Git y GitHub son el mismo programa distribuido bajo dos nombres comerciales distintos",
+      "GitHub sustituyó a Git como sistema de control de versiones subyacente"
+    ],
+    "correctIndex": 1,
+    "explanation": "Git es la herramienta (el programa que gestiona el historial); GitHub, GitLab y Bitbucket son plataformas que alojan repos Git y añaden funcionalidades sociales/colaborativas encima.",
+    "source": "git-guide.md"
+  },
+  {
+    "id": "git-003",
+    "category": "git",
+    "topic": "Fundamentos de Git y control de versiones",
+    "question": "¿Qué operaciones de Git requieren conexión a la red, según el modelo distribuido descrito en la guía?",
+    "options": [
+      "Todas, incluidas git commit y git log, porque Git valida cada operación contra el remoto",
+      "Solo git push y git pull, para sincronizar con otros repositorios",
+      "Solo la clonación inicial; después ni siquiera push/pull la requieren",
+      "Ninguna operación de Git requiere red bajo ninguna circunstancia"
+    ],
+    "correctIndex": 1,
+    "explanation": "La guía indica que casi todas las operaciones son locales; solo se necesita red para sincronizar con otros mediante push/pull.",
+    "source": "git-guide.md"
+  },
+  {
+    "id": "git-004",
+    "category": "git",
+    "topic": "Fundamentos de Git y control de versiones",
+    "question": "¿Por qué puedes crear commits y consultar el historial completo de un proyecto estando sin conexión a internet?",
+    "options": [
+      "Porque Git guarda una caché temporal de los últimos commits que expira al reconectarse",
+      "Porque cada copia local del repositorio contiene el historial completo, no solo una referencia parcial al remoto",
+      "Porque Git sincroniza en segundo plano apenas detecta señal, adelantándose a tus acciones",
+      "Porque los commits offline se guardan en un área temporal distinta al historial normal, hasta hacer push"
+    ],
+    "correctIndex": 1,
+    "explanation": "Al ser distribuido, cada copia local ya contiene el historial completo, por lo que operaciones como commit, log o branch no dependen de ningún servidor.",
+    "source": "git-guide.md"
+  },
+  {
+    "id": "git-005",
+    "category": "git",
+    "topic": "Fundamentos de Git y control de versiones",
+    "question": "Según la guía, ¿cuál es la causa más común de los desastres reportados por quienes están aprendiendo Git (\"perdí mi código\", \"el equipo se bloqueó\")?",
+    "options": [
+      "Olvidar ejecutar git push con la frecuencia suficiente",
+      "No entender el modelo mental de los 3 estados y los objetos internos de Git, más que la dificultad de memorizar comandos",
+      "Trabajar sin una interfaz gráfica (GUI) de Git",
+      "No haber configurado alias para los comandos más usados"
+    ],
+    "correctIndex": 1,
+    "explanation": "La guía dedica su sección más extensa al modelo mental precisamente porque, según su diagnóstico, los problemas graves vienen de no entenderlo, no de la dificultad de memorizar comandos.",
+    "source": "git-guide.md"
+  },
+  {
+    "id": "git-006",
+    "category": "git",
+    "topic": "Fundamentos de Git y control de versiones",
+    "question": "¿Cuál de las siguientes es una consecuencia directa de que Git sea un VCS distribuido?",
+    "options": [
+      "No existe un único servidor central obligatorio: cualquier copia puede actuar como referencia",
+      "Todos los desarrolladores deben sincronizar contra el mismo servidor central antes de cada commit",
+      "Solo la persona administradora del repositorio puede ver el historial completo",
+      "El historial completo solo puede reconstruirse combinando fragmentos de todas las copias locales"
+    ],
+    "correctIndex": 0,
+    "explanation": "Al no depender de un servidor central obligatorio, cualquier copia del repositorio (incluida una bare en otro servidor) puede actuar como punto de referencia para sincronizar.",
+    "source": "git-guide.md"
+  },
+  {
+    "id": "git-007",
+    "category": "git",
+    "topic": "Fundamentos de Git y control de versiones",
+    "question": "¿Es posible trabajar profesionalmente con Git sin usar nunca una plataforma como GitHub?",
+    "options": [
+      "No, porque git push requiere autenticarse contra la API de GitHub por diseño",
+      "Sí; por ejemplo, sincronizando repositorios directamente entre servidores propios sin ninguna plataforma social",
+      "No, porque el staging area y el historial dependen de servicios en la nube",
+      "Solo en modo de solo lectura, sin poder crear commits nuevos"
+    ],
+    "correctIndex": 1,
+    "explanation": "Git no depende de ninguna plataforma: se puede sincronizar entre repositorios (incluidos remotos 'bare' propios) sin usar jamás GitHub/GitLab/Bitbucket.",
+    "source": "git-guide.md"
+  },
+  {
+    "id": "git-008",
+    "category": "git",
+    "topic": "Fundamentos de Git y control de versiones",
+    "question": "¿Cuál de las siguientes funcionalidades es propia de plataformas como GitHub/GitLab y NO de Git en sí mismo?",
+    "options": [
+      "El staging area (index)",
+      "Los Pull Requests / Merge Requests",
+      "El objeto commit con múltiples padres",
+      "El comando git merge"
+    ],
+    "correctIndex": 1,
+    "explanation": "La guía aclara que los Pull Requests son una característica de la plataforma, no de Git puro; el staging area, los commits de merge y 'git merge' sí son parte del propio Git.",
+    "source": "git-guide.md"
+  },
+  {
+    "id": "git-009",
+    "category": "git",
+    "topic": "Fundamentos de Git y control de versiones",
+    "question": "¿Por qué la mayoría de las operaciones de Git son notablemente más rápidas que las equivalentes en un VCS centralizado?",
+    "options": [
+      "Porque Git usa un algoritmo de compresión exclusivo que SVN no tiene disponible",
+      "Porque casi todas las operaciones se ejecutan contra el historial local, sin necesidad de ida y vuelta por la red",
+      "Porque Git evita guardar el historial completo y solo conserva referencias livianas",
+      "Porque los repositorios Git son siempre menores en tamaño en disco que los de SVN"
+    ],
+    "correctIndex": 1,
+    "explanation": "La velocidad de Git viene de que casi todas las operaciones (commit, log, diff, branch) son locales y no requieren comunicación de red.",
+    "source": "git-guide.md"
+  },
+  {
+    "id": "git-010",
+    "category": "git",
+    "topic": "Fundamentos de Git y control de versiones",
+    "question": "Un equipo pequeño trabaja hoy directamente sobre un único servidor SVN centralizado y evalúa migrar a Git. ¿Qué capacidad NUEVA gana el equipo, según el modelo descrito en la guía, que no tenía con SVN?",
+    "options": [
+      "Poder versionar archivos de texto, algo que SVN no permitía",
+      "Que cada desarrollador pueda hacer commits, ver el historial completo y crear ramas sin depender de que el servidor esté disponible",
+      "Poder trabajar en equipo, algo imposible en un modelo centralizado",
+      "Que el historial se comparta automáticamente entre todos sin necesidad de push/pull"
+    ],
+    "correctIndex": 1,
+    "explanation": "El cambio clave al migrar de un modelo centralizado a uno distribuido es que cada copia local pasa a tener el historial completo, permitiendo trabajar (commits, log, ramas) sin depender del servidor.",
+    "source": "git-guide.md"
+  },
+  {
+    "id": "git-011",
+    "category": "git",
+    "topic": "Configuración e identidad",
+    "question": "Un desarrollador tiene configurado 'personal@example.com' con --global, y dentro de un repositorio de trabajo ejecuta 'git config user.email trabajo@empresa.com' (sin --global). ¿Qué email quedará registrado en los commits de ESE repositorio?",
+    "options": [
+      "trabajo@empresa.com, porque el valor local tiene precedencia sobre el global",
+      "personal@example.com, porque el valor global siempre tiene precedencia",
+      "Git pedirá elegir uno de los dos en cada commit que se haga",
+      "Ninguno; Git lanzará un error por configuración de email duplicada"
+    ],
+    "correctIndex": 0,
+    "explanation": "Un valor local (sin bandera, o --local) siempre gana sobre uno global, que a su vez gana sobre uno de system.",
+    "source": "git-guide.md"
+  },
+  {
+    "id": "git-012",
+    "category": "git",
+    "topic": "Configuración e identidad",
+    "question": "Si no existe ninguna configuración local en el repositorio actual, ¿en qué archivo busca Git el valor de user.name establecido con --global?",
+    "options": [
+      ".git/config",
+      "~/.gitconfig",
+      "/etc/gitconfig",
+      "~/.git/global.conf"
+    ],
+    "correctIndex": 1,
+    "explanation": "El nivel Global se guarda en ~/.gitconfig y aplica a todos los repositorios del usuario; .git/config es el nivel Local y /etc/gitconfig es System.",
+    "source": "git-guide.md"
+  },
+  {
+    "id": "git-013",
+    "category": "git",
+    "topic": "Configuración e identidad",
+    "question": "¿Qué nivel de configuración de Git tiene la precedencia MÁS BAJA, es decir, se sobreescribe frente a cualquier otro nivel presente?",
+    "options": [
+      "Local",
+      "Global",
+      "System",
+      "Los tres niveles tienen exactamente la misma precedencia"
+    ],
+    "correctIndex": 2,
+    "explanation": "El orden de precedencia es Local > Global > System: un valor de System es el primero en ser sobreescrito si existe el mismo valor en Global o Local.",
+    "source": "git-guide.md"
+  },
+  {
+    "id": "git-014",
+    "category": "git",
+    "topic": "Configuración e identidad",
+    "question": "¿Qué comando elimina por completo un valor de configuración ya establecido, por ejemplo un alias que ya no se usa?",
+    "options": [
+      "git config --remove alias.st",
+      "git config --unset alias.st",
+      "git alias --delete st",
+      "git config --delete-alias st"
+    ],
+    "correctIndex": 1,
+    "explanation": "'git config --unset <clave>' es el comando real para eliminar un valor de configuración existente.",
+    "source": "git-guide.md"
+  },
+  {
+    "id": "git-015",
+    "category": "git",
+    "topic": "Configuración e identidad",
+    "question": "¿Para qué sirve exactamente `git config --global core.editor \"vim\"`?",
+    "options": [
+      "Define el editor de texto que se usará para escribir el código fuente del proyecto",
+      "Define el editor que Git abre para mensajes de commit largos, rebase interactivo y otras entradas de texto",
+      "Cambia el editor usado únicamente al modificar el archivo .gitignore",
+      "Configura el paginador (pager) que usa 'git log' para mostrar resultados largos"
+    ],
+    "correctIndex": 1,
+    "explanation": "core.editor define qué editor abre Git cuando necesita que el usuario escriba texto interactivamente (mensaje de commit, listado de rebase -i, etc.), no el editor del código fuente ni el pager de git log (core.pager).",
+    "source": "git-guide.md"
+  },
+  {
+    "id": "git-016",
+    "category": "git",
+    "topic": "Configuración e identidad",
+    "question": "Después de ejecutar `git config --global alias.st \"status\"`, ¿qué ocurre al escribir 'git st' en OTRO repositorio distinto, del mismo usuario?",
+    "options": [
+      "Falla, porque los alias --global solo funcionan en el repositorio donde se configuraron",
+      "Funciona igual: el alias --global aplica a todos los repositorios de ese usuario en esa máquina",
+      "Funciona, pero solo muestra un resumen distinto al de 'git status' normal",
+      "Requiere volver a ejecutar el mismo 'git config' dentro de ese repositorio"
+    ],
+    "correctIndex": 1,
+    "explanation": "Un alias configurado con --global se guarda en ~/.gitconfig y por lo tanto aplica a todos los repositorios de ese usuario, no solo al repo donde se ejecutó el comando.",
+    "source": "git-guide.md",
+    "code": "git config --global alias.st \"status\"",
+    "language": "bash"
+  },
+  {
+    "id": "git-017",
+    "category": "git",
+    "topic": "Configuración e identidad",
+    "question": "El alias 'undo' se define como `git config --global alias.undo \"reset --soft HEAD~1\"`. Después de ejecutar 'git undo' sobre el último commit, ¿en qué estado quedan los cambios de ese commit?",
+    "options": [
+      "Se pierden por completo, igual que con reset --hard",
+      "Quedan en el working directory como 'modified', sin estar en el staging area",
+      "Quedan en el staging area, listos para volver a comitear con otro mensaje",
+      "Se convierten automáticamente en un stash nuevo"
+    ],
+    "correctIndex": 2,
+    "explanation": "El alias ejecuta 'reset --soft HEAD~1', que deshace el commit pero conserva sus cambios en el staging area (a diferencia de --mixed, que los deja como 'modified', o --hard, que los descarta).",
+    "source": "git-guide.md",
+    "code": "git config --global alias.undo \"reset --soft HEAD~1\"",
+    "language": "bash"
+  },
+  {
+    "id": "git-018",
+    "category": "git",
+    "topic": "Configuración e identidad",
+    "question": "¿Qué comando lista específicamente los alias configurados, filtrando el resto de la configuración?",
+    "options": [
+      "git alias --list",
+      "git config --get-regexp alias",
+      "git config --show alias",
+      "git alias list"
+    ],
+    "correctIndex": 1,
+    "explanation": "'git config --get-regexp alias' filtra la configuración mostrando solo las claves que empiezan con 'alias.'.",
+    "source": "git-guide.md"
+  },
+  {
+    "id": "git-019",
+    "category": "git",
+    "topic": "Configuración e identidad",
+    "question": "Un archivo config.local.yml YA estaba siendo rastreado por Git cuando el equipo decide dejar de versionarlo. Después de agregarlo a .gitignore, ¿por qué 'git status' lo sigue mostrando como modificado en cada cambio?",
+    "options": [
+      "Porque .gitignore no tiene ningún efecto sobre archivos que Git ya estaba rastreando; hace falta 'git rm --cached' primero",
+      "Porque .gitignore solo aplica a partir del siguiente 'git clone' del repositorio",
+      "Porque el archivo debe estar además en .gitattributes para que .gitignore surta efecto",
+      "Porque .gitignore requiere que el archivo tenga permisos de solo lectura"
+    ],
+    "correctIndex": 0,
+    "explanation": ".gitignore no afecta a archivos que ya están rastreados por Git; primero hay que sacarlo del índice con 'git rm --cached' para que la regla de .gitignore empiece a aplicar.",
+    "source": "git-guide.md"
+  },
+  {
+    "id": "git-020",
+    "category": "git",
+    "topic": "Configuración e identidad",
+    "question": "¿Qué efecto tiene exactamente el siguiente comando sobre config.local.yml?",
+    "options": [
+      "Borra el archivo tanto del disco como del historial de commits",
+      "Deja de rastrear el archivo en Git (lo saca del índice), pero NO borra el archivo del disco",
+      "Solo tiene efecto si el archivo ya estaba listado en .gitignore",
+      "Elimina el archivo únicamente de los commits pasados, conservándolo en el commit actual"
+    ],
+    "correctIndex": 1,
+    "explanation": "'git rm --cached' quita el archivo del índice (deja de rastrearse a futuro) pero conserva el archivo físicamente en el working directory, a diferencia de 'git rm' sin --cached.",
+    "source": "git-guide.md",
+    "code": "git rm --cached config.local.yml",
+    "language": "bash"
+  },
+  {
+    "id": "git-021",
+    "category": "git",
+    "topic": "Configuración e identidad",
+    "question": "En un .gitignore que contiene las líneas 'logs/' y '!logs/.gitkeep', ¿qué logra la segunda línea con el prefijo '!'?",
+    "options": [
+      "Ignora también el archivo logs/.gitkeep, reforzando la regla anterior",
+      "Define una excepción: ese archivo específico SÍ debe rastrearse aunque su carpeta esté ignorada",
+      "Es tratada como un comentario sin ningún efecto real",
+      "Ignora todos los archivos llamados .gitkeep en cualquier carpeta del proyecto"
+    ],
+    "correctIndex": 1,
+    "explanation": "El prefijo '!' en .gitignore define una excepción explícita: ese archivo puntual sí se rastrea aunque el patrón anterior ('logs/') ignore toda la carpeta.",
+    "source": "git-guide.md"
+  },
+  {
+    "id": "git-022",
+    "category": "git",
+    "topic": "Configuración e identidad",
+    "question": "¿Para qué sirve configurar `git config --global core.excludesfile ~/.gitignore_global`?",
+    "options": [
+      "Para definir patrones de ignorado específicos de un único repositorio, sobrescribiendo su .gitignore local",
+      "Para definir patrones de ignorado a nivel de usuario (por ejemplo, archivos de editor o del sistema operativo), sin ensuciar el .gitignore de cada proyecto",
+      "Para excluir archivos del staging area automáticamente, sin necesidad de ningún .gitignore",
+      "Para reemplazar por completo el archivo .gitignore del repositorio actual"
+    ],
+    "correctIndex": 1,
+    "explanation": "core.excludesfile apunta a un .gitignore global de usuario, útil para patrones que no dependen del proyecto (como archivos de editor o del SO) y así no mezclarlos con el .gitignore versionado del repo.",
+    "source": "git-guide.md"
+  },
+  {
+    "id": "git-023",
+    "category": "git",
+    "topic": "Modelo de objetos internos",
+    "question": "Git usa 4 tipos de objetos internos. ¿Cuál de las siguientes combinaciones es correcta?",
+    "options": [
+      "blob, tree, commit, tag",
+      "file, folder, commit, branch",
+      "blob, index, commit, ref",
+      "tree, commit, merge, tag"
+    ],
+    "correctIndex": 0,
+    "explanation": "Los 4 tipos de objetos de Git son: blob (contenido de archivo), tree (carpeta), commit (snapshot con padres) y tag (anotado).",
+    "source": "git-guide.md"
+  },
+  {
+    "id": "git-024",
+    "category": "git",
+    "topic": "Modelo de objetos internos",
+    "question": "Dos archivos distintos del mismo repositorio tienen exactamente el mismo contenido. ¿Cuántos objetos blob distintos crea Git para almacenarlos?",
+    "options": [
+      "Dos blobs distintos, uno por cada archivo",
+      "Uno solo, porque el blob se identifica por el hash de su contenido, no por el nombre del archivo",
+      "Ninguno; Git almacena el contenido duplicado directamente en el objeto tree",
+      "Depende de si ambos archivos están en la misma carpeta"
+    ],
+    "correctIndex": 1,
+    "explanation": "Como los objetos se identifican por el hash de su contenido (direccionamiento por contenido), dos archivos con contenido idéntico comparten el mismo blob, sin importar sus nombres o ubicaciones.",
+    "source": "git-guide.md"
+  },
+  {
+    "id": "git-025",
+    "category": "git",
+    "topic": "Modelo de objetos internos",
+    "question": "¿Qué diferencia hay entre lo que guarda un objeto 'blob' y lo que guarda un objeto 'tree'?",
+    "options": [
+      "El blob guarda el contenido de un archivo sin nombre ni metadatos; el tree guarda una lista de blobs/trees con sus nombres y permisos",
+      "El blob guarda la estructura de carpetas; el tree guarda el contenido crudo de los archivos",
+      "Ambos guardan exactamente lo mismo, son sinónimos usados según el contexto",
+      "El blob incluye el nombre del archivo; el tree solo incluye hashes sin ninguna otra información"
+    ],
+    "correctIndex": 0,
+    "explanation": "blob = contenido de un archivo (sin nombre); tree = 'carpeta', o sea la lista de blobs y trees con sus nombres y permisos asociados.",
+    "source": "git-guide.md"
+  },
+  {
+    "id": "git-026",
+    "category": "git",
+    "topic": "Modelo de objetos internos",
+    "question": "Un commit de merge tiene 2 padres. ¿Qué información adicional, respecto a un commit normal de un solo padre, es la única diferencia estructural real?",
+    "options": [
+      "Tiene dos objetos tree distintos, uno por cada rama fusionada",
+      "Tiene dos (o más) punteros a commits padre en vez de uno solo; el resto de campos (tree, autor, mensaje) siguen siendo únicos",
+      "No tiene ningún tree asociado, solo referencias a los padres",
+      "Tiene el doble de blobs que un commit normal, uno por cada rama"
+    ],
+    "correctIndex": 1,
+    "explanation": "Un commit de merge sigue apuntando a un único tree (el snapshot resultante tras resolver el merge) y a un único mensaje/autor; lo que cambia es que tiene más de un padre.",
+    "source": "git-guide.md"
+  },
+  {
+    "id": "git-027",
+    "category": "git",
+    "topic": "Modelo de objetos internos",
+    "question": "¿Cómo identifica Git a cada objeto en su base de datos interna (direccionamiento por contenido)?",
+    "options": [
+      "Por un número secuencial autoincremental asignado al crearse",
+      "Por el hash (SHA-1 o SHA-256) calculado sobre su propio contenido",
+      "Por el nombre y la ruta del archivo asociado",
+      "Por la marca de tiempo (timestamp) de creación del objeto"
+    ],
+    "correctIndex": 1,
+    "explanation": "Git es una base de datos de objetos direccionados por contenido: el identificador de cada objeto es el hash de su propio contenido, por lo que contenido idéntico produce siempre el mismo hash.",
+    "source": "git-guide.md"
+  },
+  {
+    "id": "git-028",
+    "category": "git",
+    "topic": "Modelo de objetos internos",
+    "question": "Según la guía, ¿qué diferencia clave hay entre lo que guarda un commit y lo que guardaría un sistema basado en 'parches' (diffs) acumulados?",
+    "options": [
+      "Un commit guarda solo el diff respecto a su padre, igual que un sistema de parches",
+      "Un commit guarda una foto (snapshot) completa del árbol de archivos en ese momento, aunque Git comprime y evita duplicar contenido idéntico entre commits",
+      "Un commit guarda únicamente los nombres de los archivos que cambiaron, sin su contenido",
+      "Un commit guarda un resumen en texto libre del cambio, sin ninguna referencia al contenido real"
+    ],
+    "correctIndex": 1,
+    "explanation": "La idea clave de la guía es que un commit no guarda un diff: guarda una foto completa del árbol, aunque internamente Git evite duplicar contenido idéntico entre commits distintos (vía blobs compartidos).",
+    "source": "git-guide.md"
+  },
+  {
+    "id": "git-029",
+    "category": "git",
+    "topic": "Modelo de objetos internos",
+    "question": "¿Qué comando muestra el tipo de un objeto de Git (blob, tree, commit o tag) a partir de su hash?",
+    "options": [
+      "git cat-file -t <hash>",
+      "git show --type <hash>",
+      "git object-type <hash>",
+      "git rev-parse --type <hash>"
+    ],
+    "correctIndex": 0,
+    "explanation": "'git cat-file -t <hash>' devuelve el tipo del objeto (blob, tree, commit o tag); 'git rev-parse' resuelve referencias a hashes pero no reporta el tipo de objeto de esta forma.",
+    "source": "git-guide.md"
+  },
+  {
+    "id": "git-030",
+    "category": "git",
+    "topic": "Modelo de objetos internos",
+    "question": "¿Qué diferencia hay entre 'git cat-file -p <hash_de_un_blob>' y 'git cat-file -p <hash_de_un_commit>'?",
+    "options": [
+      "Ambos muestran exactamente lo mismo: el contenido crudo de un archivo",
+      "Sobre un blob muestra el contenido crudo del archivo; sobre un commit muestra tree, parent(s), autor/committer y mensaje",
+      "Sobre un commit muestra el contenido crudo; sobre un blob muestra tree y parent",
+      "'cat-file -p' solo funciona con objetos tree, falla con blobs y commits"
+    ],
+    "correctIndex": 1,
+    "explanation": "'cat-file -p' adapta su salida según el tipo de objeto: para un blob imprime el contenido crudo; para un commit imprime sus metadatos (tree, parent, autor, mensaje).",
+    "source": "git-guide.md"
+  },
+  {
+    "id": "git-031",
+    "category": "git",
+    "topic": "Modelo de objetos internos",
+    "question": "¿Qué es HEAD en el modelo de Git?",
+    "options": [
+      "Un archivo de configuración global equivalente a ~/.gitconfig",
+      "Un puntero que indica en qué rama estás parado (o directamente a un commit, en 'detached HEAD')",
+      "El primer commit creado en el repositorio (la raíz del historial)",
+      "Un alias predefinido y no configurable del comando git log"
+    ],
+    "correctIndex": 1,
+    "explanation": "HEAD es el puntero que indica en qué rama estás parado y, por lo tanto, qué rama recibirá el próximo commit; en detached HEAD apunta directamente a un commit en vez de a una rama.",
+    "source": "git-guide.md"
+  },
+  {
+    "id": "git-032",
+    "category": "git",
+    "topic": "Modelo de objetos internos",
+    "question": "¿Qué es una rama (branch) en el modelo interno de Git, y qué implica eso al hacer 'git branch nueva-rama'?",
+    "options": [
+      "Es una copia completa de todos los archivos del proyecto en otra carpeta oculta",
+      "Es una referencia ligera que contiene el hash del último commit de esa rama; crearla no copia ningún archivo",
+      "Es un objeto de tipo blob especial reservado para metadatos de rama",
+      "Es un archivo de parches (diffs) acumulados desde que la rama se creó"
+    ],
+    "correctIndex": 1,
+    "explanation": "Una rama es solo un puntero (referencia) al último commit de esa línea de trabajo; crear una rama nueva únicamente escribe esa referencia, sin duplicar ningún archivo del proyecto.",
+    "source": "git-guide.md"
+  },
+  {
+    "id": "git-033",
+    "category": "git",
+    "topic": "Modelo de objetos internos",
+    "question": "Justo después de ejecutar 'git branch mi-nueva-rama' (sin cambiarte a ella), ¿qué devuelve 'git rev-parse mi-nueva-rama' comparado con 'git rev-parse main'?",
+    "options": [
+      "Un hash distinto, porque cada rama nace con un commit vacío propio",
+      "Exactamente el mismo hash que main, porque la nueva rama apunta al mismo commit en el que se creó",
+      "Un error, porque la rama todavía no tiene ningún commit asociado",
+      "El hash del primer commit del repositorio, sin importar dónde estuviera parado main"
+    ],
+    "correctIndex": 1,
+    "explanation": "Al crearse, una rama apunta al mismo commit donde estaba HEAD en ese momento; por eso 'git rev-parse mi-nueva-rama' devuelve el mismo hash que main hasta que uno de los dos avance con un commit nuevo.",
+    "source": "git-guide.md"
+  },
+  {
+    "id": "git-034",
+    "category": "git",
+    "topic": "Modelo de objetos internos",
+    "question": "¿Qué significa exactamente estar en 'detached HEAD' tras ejecutar 'git switch --detach <hash>'?",
+    "options": [
+      "Que el repositorio quedó corrupto y requiere 'git fsck' para repararse",
+      "Que HEAD apunta directamente a un commit específico, sin estar parado sobre ninguna rama",
+      "Que se perdió la conexión con el repositorio remoto configurado",
+      "Que todavía no existe ningún commit en el historial del repositorio"
+    ],
+    "correctIndex": 1,
+    "explanation": "'git switch --detach' coloca a HEAD apuntando directo a un commit en vez de a una rama; Git avisa explícitamente 'You are in detached HEAD state'.",
+    "source": "git-guide.md"
+  },
+  {
+    "id": "git-035",
+    "category": "git",
+    "topic": "Modelo de objetos internos",
+    "question": "Estando en 'detached HEAD' sobre un commit viejo, un desarrollador hace un commit nuevo y luego ejecuta 'git switch main' SIN haber creado una rama para conservarlo. Según la guía, ¿qué riesgo corre ese commit nuevo?",
+    "options": [
+      "Se pierde de inmediato sin ninguna posibilidad de recuperación",
+      "Puede quedar 'huérfano' (sin ninguna rama que lo referencie), aunque normalmente sigue siendo recuperable con reflog mientras el objeto exista",
+      "Git rechaza automáticamente el cambio de rama para evitar la pérdida",
+      "El commit se agrega automáticamente al final de main sin ningún aviso"
+    ],
+    "correctIndex": 1,
+    "explanation": "La guía advierte que un commit hecho en detached HEAD, si se abandona sin crear una rama, puede quedar huérfano (inalcanzable desde ninguna rama), aunque suele ser recuperable vía reflog mientras no haya garbage collection.",
+    "source": "git-guide.md",
+    "code": "git switch --detach a1b2c3d\n# ... se hace un commit nuevo aquí ...\ngit switch main   # el commit nuevo queda sin ninguna rama que lo referencie",
+    "language": "bash"
+  },
+  {
+    "id": "git-036",
+    "category": "git",
+    "topic": "Modelo de objetos internos",
+    "question": "¿Qué diferencia estructural hay entre un tag ligero y uno anotado, más allá de que el anotado tenga mensaje?",
+    "options": [
+      "Ambos crean un objeto 'tag' propio en la base de datos de Git, con o sin mensaje",
+      "Solo el tag anotado crea un objeto propio en la base de datos con autor, fecha y mensaje, y puede firmarse con GPG; el ligero es solo un puntero directo al commit",
+      "El tag ligero siempre incluye una firma GPG por defecto, a diferencia del anotado",
+      "Un tag ligero puede apuntar a varios commits a la vez; el anotado solo a uno"
+    ],
+    "correctIndex": 1,
+    "explanation": "El tag anotado es un objeto de tipo tag independiente, con metadatos propios y capacidad de firma; el tag ligero es simplemente una referencia (puntero) directa al commit, sin objeto adicional.",
+    "source": "git-guide.md"
+  },
+  {
+    "id": "git-037",
+    "category": "git",
+    "topic": "Estados, staging area e inspección del historial",
+    "question": "Un archivo fue modificado y luego se ejecutó 'git add archivo.py', pero después se volvió a editar SIN volver a hacer 'git add'. ¿En qué área(s) se encuentran los cambios de ese archivo en ese momento?",
+    "options": [
+      "Solo en el working directory, el staging area quedó vacío para ese archivo",
+      "Parte del contenido está en el staging area (lo agregado) y hay cambios adicionales sin stagear en el working directory",
+      "Todo el contenido pasó automáticamente al staging area con la segunda edición",
+      "Los cambios se perdieron porque editar después de 'add' invalida el staging previo"
+    ],
+    "correctIndex": 1,
+    "explanation": "El staging area conserva una fotografía del momento del 'git add'; ediciones posteriores del mismo archivo generan cambios adicionales no stageados, visibles con 'git diff' (a diferencia de 'git diff --staged').",
+    "source": "git-guide.md"
+  },
+  {
+    "id": "git-038",
+    "category": "git",
+    "topic": "Estados, staging area e inspección del historial",
+    "question": "¿Por qué existe el staging area (index) según la guía, en vez de que 'git commit' capture directamente todo lo modificado en el working directory?",
+    "options": [
+      "Para hacer copias de seguridad automáticas de los archivos antes de comitear",
+      "Para permitir construir un commit a propósito, incluyendo solo parte de los cambios realizados (incluso parte de un mismo archivo)",
+      "Porque Git lo requiere obligatoriamente para poder sincronizar con un remoto",
+      "Para acelerar la operación de 'git clone' en repositorios grandes"
+    ],
+    "correctIndex": 1,
+    "explanation": "El staging area permite construir commits deliberadamente: se puede hacer 'add' de solo algunos cambios (incluso hunks parciales con 'git add -p'), dejando el resto para otro commit sin deshacer nada.",
+    "source": "git-guide.md"
+  },
+  {
+    "id": "git-039",
+    "category": "git",
+    "topic": "Estados, staging area e inspección del historial",
+    "question": "Un archivo está en el staging area tras 'git add'. ¿Qué comando lo devuelve al estado 'modified' en el working directory SIN descartar el contenido de los cambios?",
+    "options": [
+      "git restore archivo.py",
+      "git restore --staged archivo.py",
+      "git reset --hard archivo.py",
+      "git rm --cached archivo.py"
+    ],
+    "correctIndex": 1,
+    "explanation": "'git restore --staged' saca el archivo del índice devolviéndolo a 'modified', conservando el contenido; 'git restore' (sin --staged) descartaría los cambios del working directory, y 'reset --hard' es aún más destructivo.",
+    "source": "git-guide.md"
+  },
+  {
+    "id": "git-040",
+    "category": "git",
+    "topic": "Estados, staging area e inspección del historial",
+    "question": "¿Qué diferencia real hay entre 'git add archivo.py' y 'git add -p archivo.py'?",
+    "options": [
+      "No hay ninguna diferencia; ambas agregan el archivo completo al staging",
+      "'add' agrega el archivo completo tal cual está; 'add -p' permite revisar y elegir hunk por hunk qué partes del archivo agregar",
+      "'add -p' solo funciona con archivos nuevos sin rastrear, nunca con archivos ya rastreados",
+      "'add -p' agrega el archivo pero sin registrar el cambio en el próximo commit"
+    ],
+    "correctIndex": 1,
+    "explanation": "'git add -p' recorre cada bloque de cambios ('hunk') de un archivo y pregunta si se debe incluir en el staging, permitiendo construir commits atómicos incluso dentro de un mismo archivo modificado.",
+    "source": "git-guide.md",
+    "code": "git add -p calculadora.py",
+    "language": "bash"
+  },
+  {
+    "id": "git-041",
+    "category": "git",
+    "topic": "Estados, staging area e inspección del historial",
+    "question": "Según la guía, ¿qué diferencia hay entre 'git add .' y 'git add -A' en un repositorio con archivos rastreados modificados y archivos nuevos sin rastrear?",
+    "options": [
+      "'add -A' agrega solo archivos ya rastreados; 'add .' agrega también los nuevos",
+      "Ambos agregan de forma explícita tanto los cambios en archivos rastreados como los archivos nuevos",
+      "'add .' solo agrega archivos nuevos sin rastrear, ignorando los ya modificados",
+      "'add -A' deshace el staging de todos los archivos en vez de agregarlos"
+    ],
+    "correctIndex": 1,
+    "explanation": "La guía presenta 'git add -A' como la forma más explícita de cubrir tanto lo ya rastreado y modificado como los archivos nuevos, equivalente en la práctica a 'git add .' para este caso.",
+    "source": "git-guide.md"
+  },
+  {
+    "id": "git-042",
+    "category": "git",
+    "topic": "Estados, staging area e inspección del historial",
+    "question": "En la salida de 'git status --short', ¿qué significa el prefijo '??' junto a un nombre de archivo?",
+    "options": [
+      "Que el archivo está modificado pero aún no se agregó al staging",
+      "Que el archivo es nuevo y no está siendo rastreado por Git",
+      "Que el archivo tiene un conflicto de merge sin resolver",
+      "Que el archivo fue eliminado del working directory"
+    ],
+    "correctIndex": 1,
+    "explanation": "'??' marca archivos sin rastrear ('untracked'); 'M' indica modificado y 'A' indica agregado al staging, entre otros códigos de una o dos letras.",
+    "source": "git-guide.md"
+  },
+  {
+    "id": "git-043",
+    "category": "git",
+    "topic": "Estados, staging area e inspección del historial",
+    "question": "¿Qué diferencia exacta hay entre 'git diff' y 'git diff --staged'?",
+    "options": [
+      "Son exactamente equivalentes; --staged solo cambia el formato de salida",
+      "'git diff' compara el working directory contra el índice (cambios sin stagear); 'git diff --staged' compara el índice contra el último commit (lo que entraría al próximo commit)",
+      "'git diff --staged' muestra el historial completo de commits del repositorio",
+      "'git diff' solo puede usarse para comparar dos ramas remotas entre sí"
+    ],
+    "correctIndex": 1,
+    "explanation": "'git diff' muestra lo que cambió en el working directory respecto al índice; 'git diff --staged' (o '--cached') muestra lo que ya está en el índice respecto al último commit.",
+    "source": "git-guide.md"
+  },
+  {
+    "id": "git-044",
+    "category": "git",
+    "topic": "Estados, staging area e inspección del historial",
+    "question": "¿Cuál de los siguientes comandos es equivalente exacto a 'git diff --staged'?",
+    "options": [
+      "git diff --cached",
+      "git diff --index",
+      "git diff --commit",
+      "git diff HEAD --working"
+    ],
+    "correctIndex": 0,
+    "explanation": "'git diff --cached' es sinónimo de 'git diff --staged': ambos comparan el índice contra el último commit.",
+    "source": "git-guide.md"
+  },
+  {
+    "id": "git-045",
+    "category": "git",
+    "topic": "Estados, staging area e inspección del historial",
+    "question": "Un equipo sospecha que la función 'def dividir' fue agregada y luego eliminada varias veces en el historial. ¿Qué comando permite localizar los commits donde CAMBIÓ el número de apariciones de ese texto en el código?",
+    "options": [
+      "git log --grep \"def dividir\"",
+      "git log -S \"def dividir\" --oneline",
+      "git log --author \"def dividir\"",
+      "git log -p --follow \"def dividir\""
+    ],
+    "correctIndex": 1,
+    "explanation": "La opción '-S' ('pickaxe') busca commits donde cambió el número de ocurrencias de una cadena en el CONTENIDO, a diferencia de '--grep', que busca en el mensaje del commit.",
+    "source": "git-guide.md"
+  },
+  {
+    "id": "git-046",
+    "category": "git",
+    "topic": "Estados, staging area e inspección del historial",
+    "question": "¿Qué diferencia hay entre 'git log --stat' y 'git log -p', ambos aplicados sobre el mismo rango de commits?",
+    "options": [
+      "Son idénticos; -p es solo un alias abreviado de --stat",
+      "'--stat' muestra un resumen de archivos cambiados y líneas añadidas/eliminadas; '-p' muestra el diff completo línea por línea de cada commit",
+      "'--stat' muestra el diff completo; '-p' solo el resumen de archivos",
+      "'-p' solo funciona combinado con --oneline, --stat no tiene esa restricción"
+    ],
+    "correctIndex": 1,
+    "explanation": "'--stat' da un resumen (archivos tocados y conteo de líneas); '-p' ('patch') muestra el contenido completo del diff de cada commit.",
+    "source": "git-guide.md"
+  },
+  {
+    "id": "git-047",
+    "category": "git",
+    "topic": "Estados, staging area e inspección del historial",
+    "question": "¿Cuál es el comando MODERNO equivalente a la sintaxis clásica 'git checkout -- calculadora.py' (pre Git 2.23)?",
+    "options": [
+      "git restore --staged calculadora.py",
+      "git restore calculadora.py",
+      "git reset --hard calculadora.py",
+      "git switch calculadora.py"
+    ],
+    "correctIndex": 1,
+    "explanation": "La guía indica que 'git checkout -- archivo' (clásico) equivale a 'git restore archivo': descarta cambios no confirmados del working directory.",
+    "source": "git-guide.md"
+  },
+  {
+    "id": "git-048",
+    "category": "git",
+    "topic": "Estados, staging area e inspección del historial",
+    "question": "¿Cuál es el comando MODERNO equivalente a la sintaxis clásica 'git reset HEAD calculadora.py' (pre Git 2.23)?",
+    "options": [
+      "git restore calculadora.py",
+      "git restore --staged calculadora.py",
+      "git reset --hard HEAD",
+      "git checkout HEAD -- calculadora.py"
+    ],
+    "correctIndex": 1,
+    "explanation": "La guía indica que 'git reset HEAD archivo' (clásico) equivale a 'git restore --staged archivo': saca el archivo del índice conservando sus cambios en el working directory.",
+    "source": "git-guide.md"
+  },
+  {
+    "id": "git-049",
+    "category": "git",
+    "topic": "Estados, staging area e inspección del historial",
+    "question": "¿Qué diferencia hay entre 'git diff main feature/nueva-funcion' y 'git log main..feature/nueva-funcion'?",
+    "options": [
+      "Son exactamente lo mismo, ambos listan los commits de diferencia",
+      "'git diff' muestra las diferencias de CONTENIDO entre las dos puntas; 'git log main..feature' lista los COMMITS que feature tiene y main no",
+      "'git log main..feature/nueva-funcion' muestra el contenido línea por línea, y 'git diff' solo los hashes",
+      "'git diff' solo puede compararse contra HEAD, nunca entre dos ramas arbitrarias"
+    ],
+    "correctIndex": 1,
+    "explanation": "'git diff rama1 rama2' compara el contenido final de los árboles de ambas puntas; 'git log rama1..rama2' lista los commits alcanzables desde rama2 pero no desde rama1.",
+    "source": "git-guide.md"
+  },
+  {
+    "id": "git-050",
+    "category": "git",
+    "topic": "Estados, staging area e inspección del historial",
+    "question": "¿Qué muestra exactamente 'git show <hash>' que NO muestra 'git log <hash> -1'?",
+    "options": [
+      "git show incluye el diff completo introducido por ese commit; 'git log -1' por defecto no lo incluye",
+      "git show solo funciona sobre el commit HEAD, nunca sobre hashes arbitrarios",
+      "'git log -1' siempre incluye el diff completo y git show no",
+      "No hay diferencia entre ambos comandos en ningún caso"
+    ],
+    "correctIndex": 0,
+    "explanation": "'git show <hash>' incluye por defecto el diff completo de ese commit, además de sus metadatos; 'git log' por defecto solo lista metadatos, sin el diff, a menos que se agregue '-p'.",
+    "source": "git-guide.md"
+  },
+  {
+    "id": "git-051",
+    "category": "git",
+    "topic": "Commits: anatomía y buenas prácticas",
+    "question": "¿Cuál de las siguientes NO forma parte de lo que guarda un objeto commit, según la anatomía descrita en la guía?",
+    "options": [
+      "Un hash único identificador de contenido",
+      "El árbol (tree) completo del proyecto en ese momento",
+      "Uno o más padres (0 si es el primer commit, 2+ si es un merge)",
+      "Un diff comprimido respecto al commit padre, como único dato almacenado"
+    ],
+    "correctIndex": 3,
+    "explanation": "Un commit no guarda un diff como dato principal: guarda una foto completa del árbol (tree), además de hash, padres, autor/committer y mensaje.",
+    "source": "git-guide.md"
+  },
+  {
+    "id": "git-052",
+    "category": "git",
+    "topic": "Commits: anatomía y buenas prácticas",
+    "question": "En un repositorio donde un colaborador hizo un rebase sobre commits que originalmente escribió otra persona, ¿qué campo del commit resultante puede diferir del original?",
+    "options": [
+      "El autor y el committer nunca pueden diferir bajo ninguna circunstancia",
+      "El committer puede diferir del autor original, por ejemplo tras un rebase hecho por otra persona",
+      "El hash del commit permanece exactamente igual tras el rebase",
+      "El mensaje del commit se borra automáticamente al rebasear"
+    ],
+    "correctIndex": 1,
+    "explanation": "La guía señala explícitamente que autor y committer pueden diferir; un caso típico es cuando otra persona aplica un rebase sobre commits ajenos, quedando ella como committer.",
+    "source": "git-guide.md"
+  },
+  {
+    "id": "git-053",
+    "category": "git",
+    "topic": "Commits: anatomía y buenas prácticas",
+    "question": "Un desarrollador modificó 'calculadora.py' (ya rastreado) y también creó 'nuevo_modulo.py' (sin rastrear todavía). Ejecuta 'git commit -a -m \"feat: X\"'. ¿Qué queda incluido en ese commit?",
+    "options": [
+      "Ambos archivos: calculadora.py y nuevo_modulo.py",
+      "Solo calculadora.py, porque '-a' equivale a 'git add -u' + commit y NO incluye archivos nuevos sin rastrear",
+      "Solo nuevo_modulo.py, porque '-a' prioriza archivos nuevos",
+      "Ninguno, porque '-a' requiere que el staging area esté vacío de antemano"
+    ],
+    "correctIndex": 1,
+    "explanation": "'-a' hace commit de los cambios en archivos YA rastreados (equivalente a 'git add -u' + commit), pero nunca agrega archivos completamente nuevos y sin rastrear.",
+    "source": "git-guide.md",
+    "code": "git commit -a -m \"feat: X\"",
+    "language": "bash"
+  },
+  {
+    "id": "git-054",
+    "category": "git",
+    "topic": "Commits: anatomía y buenas prácticas",
+    "question": "Según la guía, ¿qué caracteriza a un commit 'atómico'?",
+    "options": [
+      "Que modifique como máximo un solo archivo del proyecto",
+      "Que contenga un único cambio lógico y coherente, describible en una sola frase, y revertible sin arrastrar otras cosas",
+      "Que tenga menos de 10 líneas de diferencia en el diff",
+      "Que no incluya ningún mensaje de commit detallado"
+    ],
+    "correctIndex": 1,
+    "explanation": "Un commit atómico contiene un único cambio lógico coherente: se puede describir en una frase, revertir sin arrastrar cosas no relacionadas, y revisar de forma aislada; puede tocar varios archivos si pertenecen al mismo cambio lógico.",
+    "source": "git-guide.md"
+  },
+  {
+    "id": "git-055",
+    "category": "git",
+    "topic": "Commits: anatomía y buenas prácticas",
+    "question": "Un commit se describe como \"corrige el bug de redondeo Y renombra una variable en otro archivo\". Según la regla práctica de la guía, ¿qué indica el uso de la palabra 'Y' aquí?",
+    "options": [
+      "Que el mensaje está bien redactado y es un ejemplo de buena práctica",
+      "Que probablemente ese trabajo debería dividirse en 2 commits distintos",
+      "Que el commit necesita usar el formato Conventional Commits con scope",
+      "Que se debe usar 'git commit --amend' para separar el trabajo después de comitear"
+    ],
+    "correctIndex": 1,
+    "explanation": "La guía da esta regla práctica: si describir el commit requiere 'y' o 'además', probablemente debería dividirse en varios commits atómicos.",
+    "source": "git-guide.md"
+  },
+  {
+    "id": "git-056",
+    "category": "git",
+    "topic": "Commits: anatomía y buenas prácticas",
+    "question": "En Conventional Commits, ¿qué tipo corresponde a un cambio que mejora el rendimiento del código sin agregar funcionalidad ni corregir un bug?",
+    "options": [
+      "feat",
+      "fix",
+      "perf",
+      "refactor"
+    ],
+    "correctIndex": 2,
+    "explanation": "'perf' se reserva para mejoras de rendimiento; 'refactor' es para reestructurar sin cambiar comportamiento (no necesariamente enfocado en rendimiento), 'feat' es funcionalidad nueva y 'fix' es corrección de bugs.",
+    "source": "git-guide.md"
+  },
+  {
+    "id": "git-057",
+    "category": "git",
+    "topic": "Commits: anatomía y buenas prácticas",
+    "question": "¿Qué diferencia hay entre los tipos 'refactor' y 'style' en Conventional Commits?",
+    "options": [
+      "Son sinónimos intercambiables sin ninguna diferencia real",
+      "'refactor' reestructura la lógica del código sin cambiar su comportamiento; 'style' son cambios de formato (espacios, punto y coma) sin tocar la lógica en absoluto",
+      "'style' se usa para cambios visuales de una interfaz de usuario, nunca para código de backend",
+      "'refactor' solo aplica a archivos de configuración, 'style' a código fuente"
+    ],
+    "correctIndex": 1,
+    "explanation": "'refactor' implica reestructurar código manteniendo el comportamiento; 'style' es exclusivamente formato/espacios/puntuación, sin ningún cambio de lógica.",
+    "source": "git-guide.md"
+  },
+  {
+    "id": "git-058",
+    "category": "git",
+    "topic": "Commits: anatomía y buenas prácticas",
+    "question": "En el siguiente mensaje de commit, ¿qué indica el símbolo '!' inmediatamente después del ámbito 'api'?",
+    "options": [
+      "Que el commit es urgente y debe aplicarse antes que cualquier otro pendiente",
+      "Que el commit introduce un cambio incompatible con versiones anteriores (breaking change)",
+      "Que el commit corrige una vulnerabilidad de seguridad crítica",
+      "Que el commit ya fue firmado digitalmente con GPG"
+    ],
+    "correctIndex": 1,
+    "explanation": "El '!' tras el tipo/ámbito, generalmente acompañado del footer 'BREAKING CHANGE', marca un cambio que rompe compatibilidad hacia atrás.",
+    "source": "git-guide.md",
+    "code": "git commit -m \"feat(api)!: cambiar formato de respuesta a JSON:API\n\nBREAKING CHANGE: los clientes que parseaban el formato anterior deben actualizarse.\"",
+    "language": "bash"
+  },
+  {
+    "id": "git-059",
+    "category": "git",
+    "topic": "Commits: anatomía y buenas prácticas",
+    "question": "Un historial contiene, desde el último release, únicamente commits 'fix' y un 'feat', sin ningún 'BREAKING CHANGE'. Según la convención descrita, ¿qué componente de la versión SemVer debería incrementar una herramienta como semantic-release?",
+    "options": [
+      "El componente MAYOR, porque hay al menos un 'feat'",
+      "El componente MENOR, porque el 'feat' presente sube por encima de los simples 'fix'",
+      "El componente PARCHE únicamente, ignorando el 'feat'",
+      "Ninguno; se requiere intervención manual siempre que haya más de un tipo de commit"
+    ],
+    "correctIndex": 1,
+    "explanation": "La convención mapea fix → patch y feat → minor; como hay un 'feat' sin ningún BREAKING CHANGE, el incremento correspondiente es el componente MENOR (el mayor de los presentes, sin llegar a MAYOR).",
+    "source": "git-guide.md"
+  },
+  {
+    "id": "git-060",
+    "category": "git",
+    "topic": "Commits: anatomía y buenas prácticas",
+    "question": "Un desarrollador olvidó incluir un archivo en el último commit LOCAL (aún no compartido). Ejecuta 'git add archivo_olvidado.py' seguido de 'git commit --amend --no-edit'. ¿Qué resultado obtiene?",
+    "options": [
+      "Se crea un commit nuevo independiente que incluye solo el archivo olvidado",
+      "El archivo se incorpora al commit anterior, que ahora tiene un hash distinto, manteniendo el mensaje original sin cambios",
+      "El mensaje del commit anterior se vacía y hay que reescribirlo manualmente",
+      "El archivo queda en el staging area sin llegar a incluirse en ningún commit"
+    ],
+    "correctIndex": 1,
+    "explanation": "'--amend' reescribe el último commit incorporando lo que esté en staging, generando un hash nuevo (porque cambió el árbol); '--no-edit' evita abrir el editor y conserva el mensaje original.",
+    "source": "git-guide.md"
+  },
+  {
+    "id": "git-061",
+    "category": "git",
+    "topic": "Commits: anatomía y buenas prácticas",
+    "question": "¿Por qué la guía advierte que 'git commit --amend' NO debe usarse sobre un commit que ya se subió con push y que otros colaboradores ya descargaron?",
+    "options": [
+      "Porque técnicamente 'amend' no funciona sobre commits que tienen un remoto configurado",
+      "Porque amend genera un commit con hash distinto; si otros ya tienen el original, un 'push --force' posterior puede hacerlo 'desaparecer' para ellos y generar conflictos confusos",
+      "Porque amend elimina automáticamente el remoto configurado del repositorio",
+      "Porque amend solo puede aplicarse a commits que aún están en el staging area"
+    ],
+    "correctIndex": 1,
+    "explanation": "Como amend reescribe el hash del commit, si ya fue compartido, forzar el push tras el amend puede desincronizar a los colaboradores que ya tenían el commit original, generando historiales divergentes y confusión.",
+    "source": "git-guide.md"
+  },
+  {
+    "id": "git-062",
+    "category": "git",
+    "topic": "Commits: anatomía y buenas prácticas",
+    "question": "¿Qué diferencia hay entre ejecutar 'git commit -m \"mensaje\"' y ejecutar 'git commit' sin ninguna bandera?",
+    "options": [
+      "Son exactamente equivalentes en todos los casos",
+      "'-m' provee el mensaje directamente en la línea de comandos; sin '-m' se abre el editor configurado (core.editor) para escribir título y cuerpo",
+      "'git commit' sin '-m' cancela el commit automáticamente",
+      "'-m' solo funciona si el staging area está vacío"
+    ],
+    "correctIndex": 1,
+    "explanation": "'-m' permite pasar el mensaje inline; sin esa bandera, Git abre el editor definido en core.editor para redactar un mensaje con título, línea en blanco y cuerpo detallado.",
+    "source": "git-guide.md"
+  },
+  {
+    "id": "git-063",
+    "category": "git",
+    "topic": "Ramas y merge",
+    "question": "¿Cuál es el comando MODERNO para crear una rama nueva y cambiarte a ella en un solo paso, y cuál su equivalente clásico (pre Git 2.23)?",
+    "options": [
+      "Moderno: git branch -c nombre / Clásico: git checkout nombre",
+      "Moderno: git switch -c nombre / Clásico: git checkout -b nombre",
+      "Moderno: git checkout -b nombre / Clásico: git switch -c nombre",
+      "Moderno: git switch nombre / Clásico: git branch -b nombre"
+    ],
+    "correctIndex": 1,
+    "explanation": "'git switch -c <rama>' es la forma moderna de crear y cambiar a una rama; su equivalente clásico es 'git checkout -b <rama>'.",
+    "source": "git-guide.md"
+  },
+  {
+    "id": "git-064",
+    "category": "git",
+    "topic": "Ramas y merge",
+    "question": "Una rama 'feature/x' tiene commits que NUNCA se fusionaron a ninguna otra rama. Un desarrollador ejecuta 'git branch -d feature/x'. ¿Qué ocurre?",
+    "options": [
+      "La rama se borra sin advertencia, perdiendo esos commits de forma inmediata",
+      "Git rechaza el borrado porque detecta commits que no están fusionados a otra rama; habría que forzar con -D",
+      "La rama se fusiona automáticamente a main antes de borrarse",
+      "El comando falla siempre que la rama tenga más de un commit, sin importar si están fusionados"
+    ],
+    "correctIndex": 1,
+    "explanation": "'-d' es el borrado 'seguro': falla si detecta commits en esa rama que no están alcanzables desde otra rama, para evitar pérdidas accidentales; '-D' fuerza el borrado igualmente.",
+    "source": "git-guide.md"
+  },
+  {
+    "id": "git-065",
+    "category": "git",
+    "topic": "Ramas y merge",
+    "question": "main está en el commit D. La rama feature nació de main en el commit B y avanzó a C y D sin que main avanzara desde entonces. Al ejecutar 'git switch main; git merge feature', ¿qué tipo de merge realiza Git?",
+    "options": [
+      "Un 3-way merge que crea un commit nuevo con 2 padres",
+      "Un fast-forward: main simplemente mueve su puntero hasta el commit de feature",
+      "Un conflicto garantizado que exige resolución manual",
+      "Un squash merge automático sin preguntar"
+    ],
+    "correctIndex": 1,
+    "explanation": "Como main no avanzó desde que se creó feature, no hay divergencia real: Git puede mover el puntero de main directamente hasta el commit de feature (fast-forward), sin crear un commit de merge.",
+    "source": "git-guide.md"
+  },
+  {
+    "id": "git-066",
+    "category": "git",
+    "topic": "Ramas y merge",
+    "question": "main avanzó con un commit propio DESPUÉS de que se creó la rama feature, y feature también avanzó con commits propios. Al fusionar feature en main con 'git merge feature' (sin --no-ff), ¿qué ocurre?",
+    "options": [
+      "Git realiza igualmente un fast-forward, ignorando el avance de main",
+      "Git crea un commit de merge nuevo, con 2 padres, ya que ambas ramas avanzaron por separado",
+      "El merge falla automáticamente y exige --no-ff de forma obligatoria",
+      "Se produce un squash automático sin preguntar, sin importar la bandera usada"
+    ],
+    "correctIndex": 1,
+    "explanation": "Cuando ambas ramas avanzaron desde que divergieron, un fast-forward ya no es posible: Git crea un commit de merge de 3 vías con 2 padres para combinar ambos historiales.",
+    "source": "git-guide.md"
+  },
+  {
+    "id": "git-067",
+    "category": "git",
+    "topic": "Ramas y merge",
+    "question": "Un equipo usa siempre 'git merge --no-ff feature/x' para integrar a main, incluso cuando un fast-forward habría sido posible. ¿Cuál es la razón práctica de esta política, según la guía?",
+    "options": [
+      "Evitar por completo que se generen commits de merge en el historial",
+      "Dejar rastro explícito en el historial de que existió esa feature branch, aunque técnicamente hubiera bastado un fast-forward",
+      "Forzar que todos los commits de la rama se combinen automáticamente en uno solo",
+      "Hacer que la rama origen se elimine automáticamente al terminar el merge"
+    ],
+    "correctIndex": 1,
+    "explanation": "'--no-ff' fuerza la creación de un commit de merge incluso cuando sería posible un fast-forward, dejando constancia explícita en el grafo de que existió una rama separada.",
+    "source": "git-guide.md"
+  },
+  {
+    "id": "git-068",
+    "category": "git",
+    "topic": "Ramas y merge",
+    "question": "Comparado con un merge normal (con o sin --no-ff), ¿qué diferencia clave tiene 'git merge --squash feature/x' seguido de 'git commit'?",
+    "options": [
+      "Produce igualmente un commit con 2 padres, solo cambia el mensaje por defecto",
+      "Trae todos los commits de la rama como un ÚNICO commit nuevo, y la rama origen NO queda registrada como 'mergeada' (no hay commit con 2 padres)",
+      "Aborta automáticamente el proceso si hay más de un commit en la rama origen",
+      "Elimina automáticamente la rama origen del repositorio remoto"
+    ],
+    "correctIndex": 1,
+    "explanation": "El squash merge condensa todos los commits de la rama en uno solo aplicado sobre la rama actual, sin generar un commit de merge de 2 padres; el historial de commits individuales de esa rama no queda preservado.",
+    "source": "git-guide.md"
+  },
+  {
+    "id": "git-069",
+    "category": "git",
+    "topic": "Ramas y merge",
+    "question": "Durante un merge con conflictos sin resolver todavía, ¿qué diferencia hay entre 'git merge --abort' y resolver los conflictos y luego hacer 'git reset --hard HEAD~1'?",
+    "options": [
+      "Son equivalentes en todos los casos y producen el mismo resultado",
+      "'merge --abort' cancela limpiamente el merge en curso y restaura el estado previo; 'reset --hard HEAD~1' es una operación distinta pensada para deshacer un commit ya hecho, no un merge en curso sin terminar",
+      "'reset --hard HEAD~1' es la única forma correcta de cancelar un merge en curso",
+      "'merge --abort' requiere primero resolver todos los conflictos, a diferencia de reset --hard"
+    ],
+    "correctIndex": 1,
+    "explanation": "'git merge --abort' está diseñado específicamente para cancelar un merge que todavía tiene conflictos sin resolver, devolviendo el repositorio exactamente al estado previo; 'reset --hard' con un commit anterior no es la herramienta pensada para ese escenario y puede no aplicar durante un merge sin commitear.",
+    "source": "git-guide.md"
+  },
+  {
+    "id": "git-070",
+    "category": "git",
+    "topic": "Ramas y merge",
+    "question": "¿Qué diferencia hay entre 'git branch -r' y 'git branch -a'?",
+    "options": [
+      "'-r' lista solo ramas remotas conocidas localmente; '-a' lista tanto locales como remotas",
+      "'-a' lista solo ramas remotas; '-r' lista tanto locales como remotas",
+      "Ambas banderas muestran exactamente el mismo resultado",
+      "'-r' requiere conexión activa al remoto; '-a' funciona siempre sin conexión"
+    ],
+    "correctIndex": 0,
+    "explanation": "'-r' limita el listado a las referencias remotas conocidas (origin/...); '-a' combina locales y remotas en un solo listado.",
+    "source": "git-guide.md"
+  },
+  {
+    "id": "git-071",
+    "category": "git",
+    "topic": "Ramas y merge",
+    "question": "¿Qué diferencia hay entre 'git branch -m viejo nuevo' y borrar 'viejo' con 'git branch -D' para luego crear 'nuevo' desde el mismo commit?",
+    "options": [
+      "Ambas dan exactamente el mismo resultado final, sin ninguna diferencia práctica",
+      "'branch -m' renombra conservando el mismo historial y referencia de forma atómica; el segundo método implica un paso intermedio donde la rama 'viejo' deja de existir, con más riesgo de error",
+      "'branch -D' + crear 'nuevo' es la única forma soportada de renombrar una rama",
+      "'branch -m' solo funciona sobre la rama actualmente activa (HEAD)"
+    ],
+    "correctIndex": 1,
+    "explanation": "'git branch -m' es la operación atómica pensada para renombrar sin pasos intermedios ni riesgo de perder la referencia; borrar y recrear es más propenso a errores y no es la forma recomendada.",
+    "source": "git-guide.md"
+  },
+  {
+    "id": "git-072",
+    "category": "git",
+    "topic": "Ramas y merge",
+    "question": "¿Cuántos padres tiene el commit de merge resultante de fusionar TRES ramas distintas en un único 'git merge rama-b rama-c' ejecutado desde main (merge octopus)?",
+    "options": [
+      "Siempre 2, como cualquier commit de merge",
+      "3 (main más las dos ramas indicadas explícitamente en el comando)",
+      "0, porque un merge de más de 2 ramas no genera commit",
+      "1, porque solo se conserva la línea principal"
+    ],
+    "correctIndex": 1,
+    "explanation": "Un 'octopus merge' (fusionar varias ramas a la vez) produce un commit con tantos padres como puntas se combinaron: la rama actual más cada rama listada en el comando.",
+    "source": "git-guide.md"
+  },
+  {
+    "id": "git-073",
+    "category": "git",
+    "topic": "Ramas y merge",
+    "question": "Se ejecuta 'git switch -c feature/resta' desde main, se hace un commit, y luego 'git switch main; git merge feature/resta'. Inmediatamente después de ese merge, ¿qué comando confirmaría que fue un fast-forward y no un merge de 3 vías?",
+    "options": [
+      "git log --oneline --graph mostrará un commit de merge con 2 padres claramente marcado",
+      "git log --oneline --graph no mostrará ningún commit de merge adicional; main y feature/resta apuntarán exactamente al mismo commit",
+      "git status mostrará un mensaje de conflicto sin resolver",
+      "git diff main feature/resta mostrará diferencias de contenido"
+    ],
+    "correctIndex": 1,
+    "explanation": "En un fast-forward no se crea commit de merge: tras la operación, main queda apuntando exactamente al mismo commit que feature/resta, sin nodos adicionales en el grafo.",
+    "source": "git-guide.md"
+  },
+  {
+    "id": "git-074",
+    "category": "git",
+    "topic": "Ramas y merge",
+    "question": "¿Qué diferencia hay, en el resultado final del árbol de archivos, entre un fast-forward y un 3-way merge cuando ambos integran exactamente los mismos commits?",
+    "options": [
+      "El contenido final de los archivos difiere entre ambos casos",
+      "El contenido final del árbol es el mismo en ambos casos; lo que cambia es la forma del grafo de historial (con o sin commit de merge)",
+      "El fast-forward descarta los cambios de la rama origen, a diferencia del 3-way merge",
+      "El 3-way merge nunca conserva el contenido de la rama origen"
+    ],
+    "correctIndex": 1,
+    "explanation": "Tanto el fast-forward como el 3-way merge producen el mismo contenido final de archivos cuando integran los mismos cambios; la diferencia es puramente de topología del historial (si se crea o no un commit de merge con 2 padres).",
+    "source": "git-guide.md"
+  },
+  {
+    "id": "git-075",
+    "category": "git",
+    "topic": "Ramas y merge",
+    "question": "¿Qué comando permite forzar un commit de merge EXPLÍCITO cuando de otro modo Git habría hecho un fast-forward silencioso?",
+    "options": [
+      "git merge --ff-only rama",
+      "git merge --no-ff rama",
+      "git merge --squash rama",
+      "git merge --abort rama"
+    ],
+    "correctIndex": 1,
+    "explanation": "'--no-ff' obliga a crear un commit de merge incluso si técnicamente bastaría con mover el puntero (fast-forward); '--ff-only' hace justo lo contrario: falla si NO es posible un fast-forward.",
+    "source": "git-guide.md"
+  },
+  {
+    "id": "git-076",
+    "category": "git",
+    "topic": "Resolución de conflictos",
+    "question": "Dos ramas modificaron la MISMA línea de un archivo de forma distinta, y ambas se fusionan contra main en secuencia. ¿Qué determina si ocurre un conflicto al fusionar la segunda rama?",
+    "options": [
+      "Ocurre conflicto solo si se usa 'merge --no-ff' en la segunda fusión",
+      "Ocurre conflicto porque Git no puede decidir automáticamente cuál versión de esa línea debe prevalecer, al haber sido modificada de forma distinta por ambas ramas",
+      "Nunca ocurre conflicto si las dos ramas nacieron del mismo commit base",
+      "Ocurre conflicto únicamente si ambas ramas tienen el mismo número de commits"
+    ],
+    "correctIndex": 1,
+    "explanation": "El conflicto surge cuando Git no puede resolver automáticamente una divergencia real de contenido: ambas ramas cambiaron la misma parte del mismo archivo de manera distinta.",
+    "source": "git-guide.md"
+  },
+  {
+    "id": "git-077",
+    "category": "git",
+    "topic": "Resolución de conflictos",
+    "question": "En el siguiente fragmento con marcadores de conflicto, si el usuario está parado en la rama main y ejecuta 'git merge feature/manejo-errores', ¿qué bloque corresponde a 'tu versión actual'?",
+    "options": [
+      "El bloque entre '=======' y '>>>>>>> feature/manejo-errores'",
+      "El bloque entre '<<<<<<< HEAD' y '======='",
+      "Ambos bloques representan la misma versión, la de main",
+      "Ninguno; ambos bloques pertenecen a feature/manejo-errores"
+    ],
+    "correctIndex": 1,
+    "explanation": "El contenido entre '<<<<<<< HEAD' y '=======' siempre corresponde a la rama en la que estás parado (HEAD) al momento del merge, en este caso main.",
+    "source": "git-guide.md",
+    "code": "def dividir(a, b):\n<<<<<<< HEAD\n    if b == 0:\n        raise ValueError(\"No se puede dividir entre cero\")\n    return a / b\n=======\n    if b == 0:\n        return None\n    return a / b\n>>>>>>> feature/manejo-errores",
+    "language": "text"
+  },
+  {
+    "id": "git-078",
+    "category": "git",
+    "topic": "Resolución de conflictos",
+    "question": "En el mismo fragmento, ¿a qué rama corresponde el contenido delimitado por '=======' y '>>>>>>> feature/manejo-errores'?",
+    "options": [
+      "A la rama en la que está parado el usuario (HEAD)",
+      "A la rama que se está fusionando (feature/manejo-errores), no a la actual",
+      "Al ancestro común entre ambas ramas antes de que divergieran",
+      "A ninguna rama; es código generado automáticamente por Git para resolver el conflicto"
+    ],
+    "correctIndex": 1,
+    "explanation": "El bloque tras '=======' y hasta '>>>>>>> nombre-rama' corresponde siempre al contenido de la rama que se está integrando (la que no es HEAD).",
+    "source": "git-guide.md",
+    "code": "def dividir(a, b):\n<<<<<<< HEAD\n    if b == 0:\n        raise ValueError(\"No se puede dividir entre cero\")\n    return a / b\n=======\n    if b == 0:\n        return None\n    return a / b\n>>>>>>> feature/manejo-errores",
+    "language": "text"
+  },
+  {
+    "id": "git-079",
+    "category": "git",
+    "topic": "Resolución de conflictos",
+    "question": "Tras editar manualmente un archivo en conflicto de un MERGE (no rebase) y borrar los marcadores, ¿cuál es la secuencia correcta para terminar de integrar el cambio?",
+    "options": [
+      "git commit directamente, sin ningún paso adicional previo",
+      "git add <archivo> y luego git commit (Git ya prepara un mensaje de merge por defecto)",
+      "git push y luego git commit",
+      "git merge --continue únicamente, sin usar git add"
+    ],
+    "correctIndex": 1,
+    "explanation": "Tras resolver a mano, se marca el archivo como resuelto con 'git add <archivo>' y se completa el merge con 'git commit'; Git ya sugiere un mensaje de merge por defecto que se puede aceptar o editar.",
+    "source": "git-guide.md"
+  },
+  {
+    "id": "git-080",
+    "category": "git",
+    "topic": "Resolución de conflictos",
+    "question": "Durante un conflicto, ¿qué diferencia exacta hay entre 'git checkout --ours archivo' y 'git checkout --theirs archivo'?",
+    "options": [
+      "'--ours' conserva tu versión actual (la rama en la que estás parado); '--theirs' conserva la versión de la rama que se está fusionando",
+      "'--ours' conserva la versión de la rama que se fusiona; '--theirs' conserva tu versión actual",
+      "Ambas banderas producen exactamente el mismo resultado, solo cambia el nombre",
+      "'--ours' y '--theirs' solo funcionan durante un rebase, nunca durante un merge"
+    ],
+    "correctIndex": 0,
+    "explanation": "'--ours' toma la versión de la rama en la que estás parado; '--theirs' toma la versión de la rama que se está integrando. (Nota: durante un REBASE el significado de 'ours'/'theirs' se invierte respecto al merge.)",
+    "source": "git-guide.md"
+  },
+  {
+    "id": "git-081",
+    "category": "git",
+    "topic": "Resolución de conflictos",
+    "question": "¿Qué información adicional agrega 'git config --global merge.conflictstyle diff3' a los marcadores de un conflicto futuro, respecto al estilo por defecto?",
+    "options": [
+      "Colores adicionales en la terminal, sin cambiar el contenido mostrado",
+      "Una tercera sección ('||||||| base común') con el contenido del ancestro común, antes de que ninguna rama lo tocara",
+      "Resolución automática de los conflictos más simples, sin intervención manual",
+      "Una copia de respaldo automática del archivo en conflicto, en un archivo .orig"
+    ],
+    "correctIndex": 1,
+    "explanation": "El estilo 'diff3' agrega la sección '||||||| base común' mostrando el contenido previo a la divergencia de ambas ramas, dando más contexto para decidir cómo resolver.",
+    "source": "git-guide.md"
+  },
+  {
+    "id": "git-082",
+    "category": "git",
+    "topic": "Resolución de conflictos",
+    "question": "Durante un conflicto producido por un REBASE, tras editar el archivo y ejecutar 'git add', ¿por qué el siguiente paso es 'git rebase --continue' y NO 'git commit' como en un merge?",
+    "options": [
+      "Porque 'git commit' está deshabilitado técnicamente durante cualquier rebase en curso",
+      "Porque el rebase re-aplica el commit original ya corregido; 'rebase --continue' retoma ese proceso automático en vez de crear un commit manual nuevo",
+      "Porque los conflictos de rebase, a diferencia de los de merge, nunca requieren 'git add'",
+      "Porque 'git commit' borraría accidentalmente los commits restantes por aplicar"
+    ],
+    "correctIndex": 1,
+    "explanation": "En un rebase, cada commit original se reaplica uno por uno; tras resolver un conflicto y hacer 'git add', 'rebase --continue' retoma ese commit ya corregido y sigue con los siguientes, sin necesitar un commit manual.",
+    "source": "git-guide.md"
+  },
+  {
+    "id": "git-083",
+    "category": "git",
+    "topic": "Resolución de conflictos",
+    "question": "Un rebase se complicó con varios conflictos consecutivos y el desarrollador quiere volver exactamente al estado anterior a haber iniciado el rebase. ¿Qué comando logra eso de forma segura?",
+    "options": [
+      "git rebase --skip, repetido hasta terminar el rebase",
+      "git rebase --abort",
+      "git reset --hard HEAD, ejecutado varias veces",
+      "git merge --abort"
+    ],
+    "correctIndex": 1,
+    "explanation": "'git rebase --abort' cancela por completo la operación de rebase en curso y restaura el estado exacto anterior a haberla iniciado, sin necesidad de calcular manualmente ningún commit.",
+    "source": "git-guide.md"
+  },
+  {
+    "id": "git-084",
+    "category": "git",
+    "topic": "Resolución de conflictos",
+    "question": "¿Qué diferencia hay entre 'git rebase --skip' y resolver el conflicto normalmente con 'git add' + 'git rebase --continue'?",
+    "options": [
+      "Son equivalentes; --skip simplemente automatiza el 'git add' de todos los archivos",
+      "'--skip' descarta por completo el commit que está causando el conflicto, sin aplicarlo; 'add' + 'continue' aplica ese commit ya corregido",
+      "'--skip' solo puede usarse en el primer commit del rebase, nunca en los siguientes",
+      "'--skip' resuelve automáticamente el conflicto a favor de 'theirs'"
+    ],
+    "correctIndex": 1,
+    "explanation": "'--skip' omite por completo el commit conflictivo (no llega a aplicarse en absoluto), mientras que resolver y continuar sí aplica ese commit con la resolución manual incluida.",
+    "source": "git-guide.md"
+  },
+  {
+    "id": "git-085",
+    "category": "git",
+    "topic": "Resolución de conflictos",
+    "question": "Antes de resolver un conflicto de merge a mano, ¿qué muestra 'git status' respecto al archivo afectado?",
+    "options": [
+      "Lo marca como 'deleted', ocultando su contenido hasta resolverlo",
+      "Lo marca como 'both modified' (modificado por ambas ramas), indicando que requiere resolución manual",
+      "No muestra ninguna diferencia respecto a un archivo modificado normal",
+      "Lo elimina de la lista de archivos rastreados hasta que se resuelva"
+    ],
+    "correctIndex": 1,
+    "explanation": "'git status' identifica explícitamente los archivos en conflicto como 'both modified' (u otras variantes según el tipo de conflicto), señalando que requieren resolución antes de continuar.",
+    "source": "git-guide.md"
+  },
+  {
+    "id": "git-086",
+    "category": "git",
+    "topic": "Deshacer cambios: restore, reset, revert y reflog",
+    "question": "Un archivo tiene cambios sin commitear (ni siquiera en staging). ¿Qué comando los descarta, devolviendo el archivo exactamente al estado del último commit?",
+    "options": [
+      "git restore --staged archivo",
+      "git restore archivo",
+      "git reset --soft archivo",
+      "git revert archivo"
+    ],
+    "correctIndex": 1,
+    "explanation": "'git restore archivo' descarta los cambios del working directory que aún no se comitearon, volviendo al contenido del último commit; '--staged' actúa sobre el índice, no sobre el working directory.",
+    "source": "git-guide.md"
+  },
+  {
+    "id": "git-087",
+    "category": "git",
+    "topic": "Deshacer cambios: restore, reset, revert y reflog",
+    "question": "¿Es reversible ejecutar 'git restore archivo' sobre cambios que nunca llegaron a comitearse ni a stagearse?",
+    "options": [
+      "Sí, siempre existe un comando posterior para recuperar exactamente ese contenido",
+      "No: al no haber pasado nunca por un commit ni por el índice, esos cambios se pierden para siempre",
+      "Solo es reversible si el archivo estaba previamente en el staging area",
+      "Solo es reversible ejecutando 'git reflog' inmediatamente después"
+    ],
+    "correctIndex": 1,
+    "explanation": "A diferencia de un commit (recuperable vía reflog) o del índice, los cambios que nunca se stagearon ni comitearon no dejan ningún rastro en los objetos de Git, por lo que 'git restore' sobre ellos es irreversible.",
+    "source": "git-guide.md"
+  },
+  {
+    "id": "git-088",
+    "category": "git",
+    "topic": "Deshacer cambios: restore, reset, revert y reflog",
+    "question": "¿Cuál de los tres modos de 'git reset' conserva los cambios del commit deshecho DENTRO del staging area, listos para volver a comitear sin tener que hacer 'git add' de nuevo?",
+    "options": [
+      "--hard",
+      "--mixed",
+      "--soft",
+      "--keep"
+    ],
+    "correctIndex": 2,
+    "explanation": "'git reset --soft' mueve el puntero de la rama pero conserva los cambios del commit deshecho ya en el staging area, sin tocar el working directory ni requerir un nuevo 'add'.",
+    "source": "git-guide.md"
+  },
+  {
+    "id": "git-089",
+    "category": "git",
+    "topic": "Deshacer cambios: restore, reset, revert y reflog",
+    "question": "Si se ejecuta 'git reset HEAD~1' SIN ninguna bandera explícita, ¿qué modo aplica Git por defecto y cómo quedan los cambios de ese commit?",
+    "options": [
+      "--soft; quedan en el staging area",
+      "--mixed; quedan en el working directory como 'modified', sin estar en el staging area",
+      "--hard; se descartan por completo",
+      "--keep; se conservan exactamente en el mismo estado que antes del reset"
+    ],
+    "correctIndex": 1,
+    "explanation": "El modo por defecto de 'git reset' es '--mixed': mueve el puntero de la rama y descarta el staging, pero conserva los cambios en los archivos del working directory.",
+    "source": "git-guide.md"
+  },
+  {
+    "id": "git-090",
+    "category": "git",
+    "topic": "Deshacer cambios: restore, reset, revert y reflog",
+    "question": "Un desarrollador ejecuta 'git reset --hard HEAD~2' sin haber anotado el hash anterior. ¿Qué mecanismo local, distinto del historial visible con 'git log', le permite normalmente recuperar el estado previo al reset?",
+    "options": [
+      "git stash list, porque reset guarda automáticamente un stash de seguridad",
+      "git reflog, que registra los movimientos anteriores de HEAD, incluido el estado justo antes del reset",
+      "git fsck --lost-found, que es el único mecanismo posible en este caso",
+      "No existe ningún mecanismo; --hard es siempre irreversible de inmediato"
+    ],
+    "correctIndex": 1,
+    "explanation": "El reflog registra los movimientos de HEAD (incluidos resets); mientras los objetos no hayan sido recolectados como basura, se puede volver al estado previo con algo como 'git reset --hard HEAD@{1}'.",
+    "source": "git-guide.md"
+  },
+  {
+    "id": "git-091",
+    "category": "git",
+    "topic": "Deshacer cambios: restore, reset, revert y reflog",
+    "question": "Según la 'regla práctica' de la guía, si un commit que se quiere deshacer YA fue empujado (push) a un repositorio compartido y otros ya lo descargaron, ¿qué se recomienda usar en vez de 'git reset'?",
+    "options": [
+      "git restore, aplicado sobre el commit específico",
+      "git revert, que crea un commit nuevo con el cambio inverso sin reescribir historia",
+      "git branch -D sobre la rama afectada",
+      "git commit --amend sobre el commit problemático"
+    ],
+    "correctIndex": 1,
+    "explanation": "Sobre historia ya compartida, la guía recomienda 'git revert' en vez de 'reset', porque revert no reescribe ni elimina commits existentes, evitando desincronizar a otros colaboradores.",
+    "source": "git-guide.md"
+  },
+  {
+    "id": "git-092",
+    "category": "git",
+    "topic": "Deshacer cambios: restore, reset, revert y reflog",
+    "question": "¿Por qué 'git reset --hard' sobre un commit ya compartido es más riesgoso que 'git revert' del mismo commit, en términos de sus efectos sobre colaboradores?",
+    "options": [
+      "Porque 'reset --hard' mueve el puntero de la rama a un commit anterior, haciendo que commits ya descargados por otros dejen de ser alcanzables localmente y generando divergencia al sincronizar; 'revert' en cambio solo agrega un commit nuevo",
+      "Porque 'reset --hard' requiere permisos de administrador del repositorio remoto y 'revert' no",
+      "Porque 'reset --hard' borra automáticamente el repositorio .git completo",
+      "No hay diferencia real de riesgo entre ambos comandos"
+    ],
+    "correctIndex": 0,
+    "explanation": "'reset --hard' reescribe a qué commit apunta la rama; si eso ya se compartió, sincronizarlo de nuevo (típicamente con --force) puede hacer que los commits 'desaparezcan' para otros. 'revert' solo añade un commit nuevo, sin tocar los existentes.",
+    "source": "git-guide.md"
+  },
+  {
+    "id": "git-093",
+    "category": "git",
+    "topic": "Deshacer cambios: restore, reset, revert y reflog",
+    "question": "¿Qué NO hace 'git revert', a diferencia de lo que un principiante podría asumir por su nombre?",
+    "options": [
+      "No crea ningún commit nuevo en el historial",
+      "No borra ni modifica el commit original que se está revirtiendo; el commit original sigue existiendo en el historial",
+      "No requiere resolver conflictos bajo ninguna circunstancia",
+      "No puede aplicarse sobre un commit de merge bajo ninguna condición"
+    ],
+    "correctIndex": 1,
+    "explanation": "'git revert' no elimina el commit original: este permanece en el historial. Revert simplemente agrega un commit NUEVO que aplica el cambio inverso; sí puede generar conflictos y sí puede revertir merges (con -m).",
+    "source": "git-guide.md"
+  },
+  {
+    "id": "git-094",
+    "category": "git",
+    "topic": "Deshacer cambios: restore, reset, revert y reflog",
+    "question": "Al revertir un commit de MERGE con 'git revert -m 1 <hash>', ¿qué indica exactamente el número pasado a '-m'?",
+    "options": [
+      "El número de commits que se deben revertir en total",
+      "Cuál de los padres del merge se considera la 'línea principal' que debe conservarse al calcular el cambio inverso",
+      "El número de archivos que participaron en el conflicto original de ese merge",
+      "El índice del commit en la lista devuelta por 'git log'"
+    ],
+    "correctIndex": 1,
+    "explanation": "Como un commit de merge tiene 2+ padres, revert necesita saber cuál de ellos es la línea principal (mainline) respecto a la cual calcular el diff inverso; '-m 1' indica el primer padre listado.",
+    "source": "git-guide.md",
+    "code": "git revert -m 1 <hash_del_merge_commit>",
+    "language": "bash"
+  },
+  {
+    "id": "git-095",
+    "category": "git",
+    "topic": "Deshacer cambios: restore, reset, revert y reflog",
+    "question": "¿Qué tipo de eventos registra 'git reflog', más allá de los commits normales visibles con 'git log --all'?",
+    "options": [
+      "Solo los mensajes de los commits, sin ninguna información adicional",
+      "Los movimientos anteriores de HEAD y otras referencias: switches, commits, resets, rebases y merges, incluidos los que dejan commits inalcanzables",
+      "Únicamente los archivos que fueron eliminados del working directory",
+      "Las credenciales usadas para autenticarse contra remotos"
+    ],
+    "correctIndex": 1,
+    "explanation": "El reflog es un registro local de cómo fueron cambiando HEAD (y otras referencias) en el tiempo, lo que permite ubicar commits que ya no son alcanzables desde ninguna rama visible en el log normal.",
+    "source": "git-guide.md"
+  },
+  {
+    "id": "git-096",
+    "category": "git",
+    "topic": "Deshacer cambios: restore, reset, revert y reflog",
+    "question": "Un colaborador borra por error una rama con 'git branch -D feature/x' antes de fusionarla. ¿Qué secuencia permite recuperarla, asumiendo que el objeto commit todavía existe?",
+    "options": [
+      "git branch -D --undo feature/x",
+      "Localizar el hash del último commit de esa rama con 'git reflog', y luego recrear la rama con 'git branch feature/x <hash>'",
+      "git restore --staged feature/x",
+      "git revert feature/x"
+    ],
+    "correctIndex": 1,
+    "explanation": "El reflog conserva el hash al que apuntaba HEAD (o la referencia) antes del borrado; con ese hash localizado, 'git branch <nombre> <hash>' recrea la rama apuntando al commit correcto.",
+    "source": "git-guide.md"
+  },
+  {
+    "id": "git-097",
+    "category": "git",
+    "topic": "Deshacer cambios: restore, reset, revert y reflog",
+    "question": "Según la guía, ¿por qué el reflog NO debe tratarse como un backup confiable a largo plazo?",
+    "options": [
+      "Porque nunca llega a registrar ninguna operación realmente útil",
+      "Porque su retención es configurable y limitada en el tiempo (entradas alcanzables y no alcanzables caducan con plazos distintos), y la recolección de basura puede eliminar los objetos referenciados",
+      "Porque solo existe dentro de repositorios alojados en GitHub",
+      "Porque requiere conexión a internet activa para poder consultarse"
+    ],
+    "correctIndex": 1,
+    "explanation": "La guía advierte que la caducidad del reflog es configurable (distinta para entradas alcanzables y no alcanzables) y que el garbage collection puede eliminar objetos antes o después, por lo que no sustituye un backup real.",
+    "source": "git-guide.md"
+  },
+  {
+    "id": "git-098",
+    "category": "git",
+    "topic": "Deshacer cambios: restore, reset, revert y reflog",
+    "question": "Dado un archivo con cambios YA en el staging area, ¿qué diferencia práctica hay entre 'git restore --staged archivo' y 'git reset --mixed HEAD -- archivo'?",
+    "options": [
+      "Producen resultados distintos: uno descarta los cambios y el otro los conserva",
+      "En la práctica producen el mismo efecto sobre ese archivo: lo sacan del índice conservando los cambios en el working directory; 'restore --staged' es la forma moderna recomendada",
+      "'reset --mixed' afecta a todos los archivos del repositorio, sin poder limitarse a uno solo",
+      "'restore --staged' mueve el puntero de la rama, a diferencia de 'reset --mixed'"
+    ],
+    "correctIndex": 1,
+    "explanation": "Ambos comandos, aplicados a un archivo específico, sacan ese archivo del índice sin tocar el working directory; 'git restore --staged' es simplemente la sintaxis moderna y más clara para ese caso puntual.",
+    "source": "git-guide.md"
+  },
+  {
+    "id": "git-099",
+    "category": "git",
+    "topic": "Deshacer cambios: restore, reset, revert y reflog",
+    "question": "Un desarrollador necesita dividir el último commit local en dos commits más pequeños, sin perder ningún cambio. ¿Cuál es el primer paso correcto?",
+    "options": [
+      "git revert HEAD, para luego rehacer el trabajo desde cero",
+      "git reset --soft HEAD~1, que deja todos los cambios de ese commit en el staging area listos para reorganizar en varios commits",
+      "git restore --staged, que descarta el commit directamente",
+      "git commit --amend --no-edit, repetido dos veces"
+    ],
+    "correctIndex": 1,
+    "explanation": "'reset --soft HEAD~1' deshace el último commit conservando todo su contenido en el staging area, permitiendo luego usar 'git add -p' o similar para repartirlo en varios commits nuevos.",
+    "source": "git-guide.md"
+  },
+  {
+    "id": "git-100",
+    "category": "git",
+    "topic": "Remotos: fetch, pull y push",
+    "question": "Un desarrollador ejecuta 'git fetch origin' y luego, SIN hacer pull ni merge, corre 'git log main..origin/main --oneline' y ve 3 commits. ¿Qué implica esto sobre el estado de su rama local main?",
+    "options": [
+      "Que su rama main ya incluye esos 3 commits automáticamente, solo falta confirmarlo con status",
+      "Que existen 3 commits nuevos en el remoto que su rama local main todavía NO tiene integrados",
+      "Que su rama local main tiene 3 commits que el remoto todavía no conoce",
+      "Que ocurrió un conflicto que debe resolver antes de seguir trabajando"
+    ],
+    "correctIndex": 1,
+    "explanation": "'fetch' solo actualiza la referencia origin/main sin tocar main local; 'git log main..origin/main' muestra los commits presentes en origin/main pero ausentes todavía en la rama local main.",
+    "source": "git-guide.md"
+  },
+  {
+    "id": "git-101",
+    "category": "git",
+    "topic": "Remotos: fetch, pull y push",
+    "question": "¿Qué es 'git pull' en esencia, en términos de los comandos que combina?",
+    "options": [
+      "Es únicamente un 'git fetch', sin ningún paso adicional",
+      "Es 'git fetch' seguido de 'git merge' (o 'git rebase', según configuración) de la rama remota correspondiente sobre la rama actual",
+      "Es únicamente un 'git merge', asumiendo que ya existe la información remota más reciente",
+      "Es 'git push' seguido automáticamente de 'git fetch'"
+    ],
+    "correctIndex": 1,
+    "explanation": "'git pull' combina 'fetch' (descargar) con la integración inmediata (merge o rebase, según pull.rebase) de la rama remota correspondiente sobre la rama local actual.",
+    "source": "git-guide.md"
+  },
+  {
+    "id": "git-102",
+    "category": "git",
+    "topic": "Remotos: fetch, pull y push",
+    "question": "Un desarrollador no ha hecho fetch en varios días. ¿Qué representa exactamente la referencia 'origin/main' en su copia local en este momento?",
+    "options": [
+      "El estado ACTUAL y en tiempo real de main en el servidor remoto",
+      "La última fotografía de main que su repositorio local conoció, que puede estar desactualizada respecto al servidor real",
+      "Un alias directo de su propia rama main local",
+      "Una copia comprimida de absolutamente todo el contenido histórico del remoto"
+    ],
+    "correctIndex": 1,
+    "explanation": "'origin/main' no se actualiza sola: refleja el último fetch/pull realizado. Si no se ha vuelto a sincronizar, puede estar desactualizada respecto al estado real del servidor.",
+    "source": "git-guide.md"
+  },
+  {
+    "id": "git-103",
+    "category": "git",
+    "topic": "Remotos: fetch, pull y push",
+    "question": "¿Qué diferencia de RESULTADO produce 'git pull --rebase origin main' frente a un 'git pull' normal, cuando existen commits locales y remotos divergentes?",
+    "options": [
+      "'--rebase' descarta silenciosamente los commits locales antes de integrar los remotos",
+      "'--rebase' reaplica los commits locales encima de los últimos commits remotos, evitando un commit de merge adicional y dejando un historial lineal",
+      "'--rebase' crea un commit de merge adicional que el pull normal no crea",
+      "No hay ninguna diferencia de resultado, solo cambia el mensaje mostrado en consola"
+    ],
+    "correctIndex": 1,
+    "explanation": "Con '--rebase', en vez de crear un commit de merge para integrar la divergencia, los commits locales se reaplican sobre la punta actualizada de la rama remota, produciendo un historial lineal.",
+    "source": "git-guide.md"
+  },
+  {
+    "id": "git-104",
+    "category": "git",
+    "topic": "Remotos: fetch, pull y push",
+    "question": "¿Qué configuración logra que TODO 'git pull' futuro use rebase en vez de merge por defecto, sin tener que escribir '--rebase' cada vez?",
+    "options": [
+      "git config --global pull.rebase true",
+      "git config --global merge.rebase true",
+      "git config --global push.rebase true",
+      "git config --global rebase.pull true"
+    ],
+    "correctIndex": 0,
+    "explanation": "'pull.rebase true' es la clave de configuración correcta para que 'git pull' use rebase por defecto en lugar de merge.",
+    "source": "git-guide.md"
+  },
+  {
+    "id": "git-105",
+    "category": "git",
+    "topic": "Remotos: fetch, pull y push",
+    "question": "Un desarrollador hace 'git push origin feature/x' (SIN -u) por primera vez, y luego intenta simplemente 'git push' desde esa misma rama en otro momento. ¿Qué ocurre si nunca se configuró el upstream?",
+    "options": [
+      "Funciona igual, Git infiere automáticamente el destino por el nombre de la rama",
+      "Git puede rechazar el comando o pedir especificar a qué rama remota corresponde, porque no quedó establecida una rama de seguimiento (upstream)",
+      "El segundo push crea automáticamente una rama remota nueva con un nombre distinto",
+      "El segundo push siempre falla de forma silenciosa sin ningún mensaje"
+    ],
+    "correctIndex": 1,
+    "explanation": "Sin '-u' (--set-upstream) en el primer push, no queda establecida la relación de seguimiento entre la rama local y la remota, por lo que un 'git push' posterior sin argumentos puede no saber a dónde enviar los cambios.",
+    "source": "git-guide.md"
+  },
+  {
+    "id": "git-106",
+    "category": "git",
+    "topic": "Remotos: fetch, pull y push",
+    "question": "Dos personas trabajan sobre la misma rama compartida. Una de ellas hizo push de 2 commits nuevos que la otra todavía no descargó. Si la segunda persona ejecuta 'git push --force-with-lease' con cambios propios, ¿qué ocurre?",
+    "options": [
+      "Sobrescribe igualmente el remoto, borrando los 2 commits que no había descargado, igual que --force",
+      "El push falla de forma segura, porque detecta que el remoto cambió desde su última sincronización, evitando sobrescribir esos 2 commits",
+      "El push se combina automáticamente mediante un merge implícito antes de subir",
+      "Se crea automáticamente una rama nueva para evitar el conflicto"
+    ],
+    "correctIndex": 1,
+    "explanation": "'--force-with-lease' verifica que el remoto no haya cambiado desde la última vez que el usuario sincronizó (fetch/pull); si detecta cambios ajenos no descargados, el push falla en vez de sobrescribirlos.",
+    "source": "git-guide.md"
+  },
+  {
+    "id": "git-107",
+    "category": "git",
+    "topic": "Remotos: fetch, pull y push",
+    "question": "¿Cuál es la diferencia de comportamiento entre 'git push --force' y 'git push --force-with-lease' cuando el remoto NO cambió desde el último fetch/pull del usuario?",
+    "options": [
+      "Se comportan de forma distinta incluso en ese caso: force falla y force-with-lease funciona",
+      "Ambos logran el mismo resultado en ese caso: sobrescriben el remoto sin problema, porque no hay cambios ajenos que proteger",
+      "'--force-with-lease' siempre falla la primera vez, sin importar el estado del remoto",
+      "'--force' requiere confirmación manual adicional que '--force-with-lease' no pide"
+    ],
+    "correctIndex": 1,
+    "explanation": "Cuando nadie más cambió el remoto desde la última sincronización del usuario, ambas banderas logran el mismo resultado; la diferencia solo se manifiesta cuando SÍ hay cambios ajenos no descargados, caso en el que --force-with-lease protege y --force no.",
+    "source": "git-guide.md"
+  },
+  {
+    "id": "git-108",
+    "category": "git",
+    "topic": "Remotos: fetch, pull y push",
+    "question": "¿Qué comando elimina una rama llamada 'feature/multiplicacion' del repositorio REMOTO (no solo de la copia local)?",
+    "options": [
+      "git branch -D origin/feature/multiplicacion",
+      "git push origin --delete feature/multiplicacion",
+      "git remote delete feature/multiplicacion",
+      "git branch -D feature/multiplicacion"
+    ],
+    "correctIndex": 1,
+    "explanation": "'git push origin --delete <rama>' elimina la rama en el repositorio remoto; 'git branch -D' solo borra referencias locales, incluida la de seguimiento remoto si se usa con origin/, pero no borra la rama en el servidor.",
+    "source": "git-guide.md"
+  },
+  {
+    "id": "git-109",
+    "category": "git",
+    "topic": "Remotos: fetch, pull y push",
+    "question": "'git status' indica 'Your branch is ahead of origin/main by 2 commits'. ¿Qué comando muestra el CONTENIDO detallado (diff) de esos 2 commits, y no solo sus hashes?",
+    "options": [
+      "git log origin/main..HEAD -p",
+      "git diff --staged",
+      "git fetch --dry-run -p",
+      "git show HEAD@{2}"
+    ],
+    "correctIndex": 0,
+    "explanation": "'git log origin/main..HEAD' limita el rango a los commits de adelanto; agregar '-p' incluye el diff completo de cada uno de esos commits.",
+    "source": "git-guide.md",
+    "code": "git status\n# \"Your branch is ahead of 'origin/main' by 2 commits\"",
+    "language": "bash"
+  },
+  {
+    "id": "git-110",
+    "category": "git",
+    "topic": "Remotos: fetch, pull y push",
+    "question": "Un repositorio tiene configurados dos remotos: 'origin' (el fork propio) y 'upstream' (el proyecto original). ¿Qué comando trae los cambios nuevos de 'upstream' sin tocar todavía la rama local?",
+    "options": [
+      "git pull upstream main",
+      "git fetch upstream",
+      "git push upstream main",
+      "git merge upstream/main"
+    ],
+    "correctIndex": 1,
+    "explanation": "'git fetch upstream' descarga los commits nuevos de ese remoto y actualiza la referencia 'upstream/main', sin integrar nada todavía en la rama local (a diferencia de pull o merge).",
+    "source": "git-guide.md"
+  },
+  {
+    "id": "git-111",
+    "category": "git",
+    "topic": "Flujos de trabajo colaborativos",
+    "question": "Un equipo trabaja directo sobre main, sin ramas, haciendo 'pull' antes de cada 'push'. Según la guía, ¿cuál es la limitación principal de este flujo centralizado simple al crecer el equipo?",
+    "options": [
+      "Es imposible de implementar técnicamente con Git",
+      "No escala bien: sin ramas, es fácil romper main con código a medias, ya que no hay aislamiento entre trabajos en curso",
+      "Requiere obligatoriamente usar Git Flow desde el primer día",
+      "No permite en absoluto hacer commits atómicos"
+    ],
+    "correctIndex": 1,
+    "explanation": "La guía indica que el flujo centralizado simple funciona para equipos muy pequeños, pero no escala porque, sin ramas, es fácil romper main con trabajo incompleto de varias personas a la vez.",
+    "source": "git-guide.md"
+  },
+  {
+    "id": "git-112",
+    "category": "git",
+    "topic": "Flujos de trabajo colaborativos",
+    "question": "En Git Flow, ¿qué rama refleja siempre el código EN PRODUCCIÓN, distinta de la que integra features listas para la siguiente release?",
+    "options": [
+      "develop",
+      "main",
+      "release/*",
+      "feature/*"
+    ],
+    "correctIndex": 1,
+    "explanation": "En Git Flow, 'main' representa siempre el código en producción; 'develop' es la rama de integración de features para la siguiente release.",
+    "source": "git-guide.md"
+  },
+  {
+    "id": "git-113",
+    "category": "git",
+    "topic": "Flujos de trabajo colaborativos",
+    "question": "En Git Flow, una rama 'feature/reportes-pdf' nace y, al terminar, se fusiona nuevamente. ¿Cuáles son esos dos puntos, respectivamente?",
+    "options": [
+      "Nace de main y se fusiona de vuelta a main",
+      "Nace de develop y se fusiona de vuelta a develop",
+      "Nace de release/* y se fusiona de vuelta a hotfix/*",
+      "Nace de main y se fusiona de vuelta a develop"
+    ],
+    "correctIndex": 1,
+    "explanation": "Las ramas feature/* en Git Flow nacen de develop (donde se integran las próximas features) y regresan a develop al finalizar.",
+    "source": "git-guide.md"
+  },
+  {
+    "id": "git-114",
+    "category": "git",
+    "topic": "Flujos de trabajo colaborativos",
+    "question": "En Git Flow, una rama 'hotfix/1.2.1' corrige un bug crítico en producción. ¿De qué rama nace y a cuáles se fusiona al terminar?",
+    "options": [
+      "Nace de develop; se fusiona solo a main",
+      "Nace de main; se fusiona tanto a main como a develop",
+      "Nace de release/*; se fusiona solo a develop",
+      "Nace de feature/*; se fusiona solo a main"
+    ],
+    "correctIndex": 1,
+    "explanation": "Un hotfix nace de main (para poder arreglar producción de inmediato) y, al terminar, se fusiona tanto a main (para que el arreglo quede en producción) como a develop (para no perderlo en la siguiente release).",
+    "source": "git-guide.md"
+  },
+  {
+    "id": "git-115",
+    "category": "git",
+    "topic": "Flujos de trabajo colaborativos",
+    "question": "En Git Flow, ¿qué tipo de cambios están permitidos dentro de una rama 'release/1.2.0' ya creada, según la guía?",
+    "options": [
+      "Nuevas funcionalidades grandes que todavía faltaban terminar",
+      "Solo bug fixes menores de estabilización; nada de features nuevas",
+      "Cambios de arquitectura completos previos al lanzamiento",
+      "Ningún cambio; la rama queda congelada de solo lectura hasta el release"
+    ],
+    "correctIndex": 1,
+    "explanation": "Una vez creada la rama release/*, solo se permiten correcciones menores de estabilización; las features nuevas ya no deberían agregarse ahí.",
+    "source": "git-guide.md"
+  },
+  {
+    "id": "git-116",
+    "category": "git",
+    "topic": "Flujos de trabajo colaborativos",
+    "question": "Un equipo despliega a producción varias veces al día usando CI/CD sólido. Según la guía, ¿por qué NO le conviene adoptar Git Flow completo con develop y release/*?",
+    "options": [
+      "Porque Git Flow es incompatible técnicamente con cualquier pipeline de CI/CD",
+      "Porque Git Flow añade complejidad de ramas de larga duración que un equipo con despliegue continuo normalmente no necesita",
+      "Porque Git Flow prohíbe explícitamente hacer más de un deploy por día",
+      "Porque las ramas release/* no pueden fusionarse nunca a main en Git Flow"
+    ],
+    "correctIndex": 1,
+    "explanation": "La guía señala que Git Flow es apto para releases planeadas y versionado formal, pero añade complejidad de ramas innecesaria para equipos con despliegue continuo, donde GitHub Flow o trunk-based encajan mejor.",
+    "source": "git-guide.md"
+  },
+  {
+    "id": "git-117",
+    "category": "git",
+    "topic": "Flujos de trabajo colaborativos",
+    "question": "¿Qué diferencia estructural clave tiene GitHub Flow respecto a Git Flow?",
+    "options": [
+      "GitHub Flow agrega una rama adicional 'staging' que Git Flow no tiene",
+      "GitHub Flow elimina las ramas develop y release/*: main siempre está lista para desplegarse y cada cambio se integra vía PR tras CI en verde",
+      "GitHub Flow prohíbe usar ramas de feature, a diferencia de Git Flow",
+      "GitHub Flow requiere tags obligatorios antes de cada Pull Request"
+    ],
+    "correctIndex": 1,
+    "explanation": "GitHub Flow es deliberadamente más simple: sin develop ni release/*, con main siempre desplegable y cada cambio integrándose vía PR tras revisión y CI en verde.",
+    "source": "git-guide.md"
+  },
+  {
+    "id": "git-118",
+    "category": "git",
+    "topic": "Flujos de trabajo colaborativos",
+    "question": "¿Qué combinación de prácticas caracteriza a Trunk-Based Development, según la guía?",
+    "options": [
+      "Ramas de larga duración por feature, integradas una vez al mes",
+      "Integración muy frecuente a main con ramas de vida muy corta (horas) o feature flags para código incompleto, apoyado en CI y tests sólidos",
+      "Uso obligatorio de Git Flow con ramas develop y release",
+      "Evitar por completo cualquier tipo de rama, incluidas las de corta duración"
+    ],
+    "correctIndex": 1,
+    "explanation": "Trunk-based development integra a main con muchísima frecuencia usando ramas muy cortas o feature flags para ocultar código incompleto, lo que exige una suite de tests sólida y CI estricto.",
+    "source": "git-guide.md"
+  },
+  {
+    "id": "git-119",
+    "category": "git",
+    "topic": "Flujos de trabajo colaborativos",
+    "question": "¿Por qué Trunk-Based Development exige, según la guía, una suite de tests particularmente sólida y CI estricto?",
+    "options": [
+      "Porque este flujo no permite usar ramas de ningún tipo",
+      "Porque casi no existen ramas de larga duración que sirvan de 'colchón' para atrapar errores antes de que lleguen a main",
+      "Porque los commits nunca pasan por ningún tipo de revisión de código",
+      "Porque main se recrea desde cero todos los días en este flujo"
+    ],
+    "correctIndex": 1,
+    "explanation": "Al integrar tan frecuentemente con ramas tan cortas, no hay ramas de larga duración que amortigüen errores; el CI y los tests son el mecanismo que evita que las regresiones lleguen a producción.",
+    "source": "git-guide.md"
+  },
+  {
+    "id": "git-120",
+    "category": "git",
+    "topic": "Flujos de trabajo colaborativos",
+    "question": "En el Forking Workflow, un colaborador sin permiso de escritura sobre el repositorio original quiere contribuir. ¿Cuál es el primer paso estructural que le permite proponer cambios?",
+    "options": [
+      "Pedir credenciales de escritura directa al mantenedor del proyecto",
+      "Crear un fork: una copia completa del repositorio bajo su propia cuenta, donde sí tiene permisos de escritura",
+      "Clonar directamente el repositorio original y hacer push sin autorización previa",
+      "Crear un tag nuevo sobre el commit más reciente del proyecto original"
+    ],
+    "correctIndex": 1,
+    "explanation": "Un fork es una copia completa del repositorio bajo la cuenta del colaborador; al tener permisos de escritura sobre su propio fork, puede trabajar ahí y proponer los cambios de vuelta vía Pull Request.",
+    "source": "git-guide.md"
+  },
+  {
+    "id": "git-121",
+    "category": "git",
+    "topic": "Flujos de trabajo colaborativos",
+    "question": "En el siguiente bloque de comandos, ejecutado dentro de un fork ya clonado, ¿qué logra específicamente respecto al estado de la rama local main?",
+    "options": [
+      "Publica los cambios locales hacia el repositorio original (upstream)",
+      "Trae los últimos cambios del repositorio original y los integra en la rama local main, manteniendo el fork al día",
+      "Elimina por completo la rama main local y la recrea vacía",
+      "Crea automáticamente un Pull Request hacia el proyecto original"
+    ],
+    "correctIndex": 1,
+    "explanation": "El bloque agrega 'upstream' como remoto adicional, trae sus commits con fetch, y los integra en main local con merge, manteniendo el fork sincronizado con el proyecto original.",
+    "source": "git-guide.md",
+    "code": "git remote add upstream https://github.com/proyecto-original/proyecto.git\ngit fetch upstream\ngit switch main\ngit merge upstream/main",
+    "language": "bash"
+  },
+  {
+    "id": "git-122",
+    "category": "git",
+    "topic": "Flujos de trabajo colaborativos",
+    "question": "En el Forking Workflow, ¿hacia cuál de los dos remotos configurados (origin o upstream) se hace normalmente 'git push' de una rama de trabajo nueva?",
+    "options": [
+      "Hacia 'upstream', el repositorio original del proyecto",
+      "Hacia 'origin', el fork propio del colaborador",
+      "Hacia ambos remotos en la misma operación de push",
+      "Hacia ninguno; se adjunta el diff manualmente en el Pull Request"
+    ],
+    "correctIndex": 1,
+    "explanation": "El colaborador sube su rama de trabajo a 'origin' (su propio fork, donde sí tiene permisos); desde ahí abre un Pull Request hacia 'upstream' (el proyecto original).",
+    "source": "git-guide.md"
+  },
+  {
+    "id": "git-123",
+    "category": "git",
+    "topic": "Flujos de trabajo colaborativos",
+    "question": "Según las buenas prácticas de revisión descritas en la guía, ¿por qué un Pull Request de 2000 líneas es problemático incluso si el código es correcto?",
+    "options": [
+      "Porque GitHub rechaza automáticamente PRs de ese tamaño por límites técnicos",
+      "Porque un PR tan grande casi nunca se revisa a fondo de verdad, a diferencia de uno pequeño y enfocado de unas 50 líneas",
+      "Porque consume cuota de almacenamiento adicional en el repositorio remoto",
+      "Porque obliga a usar 'git merge --squash' de forma obligatoria"
+    ],
+    "correctIndex": 1,
+    "explanation": "La guía señala que el tamaño del PR afecta la calidad real de la revisión: un PR de 50 líneas se revisa a fondo, uno de 2000 casi nunca se revisa bien de verdad, aunque técnicamente el código funcione.",
+    "source": "git-guide.md"
+  },
+  {
+    "id": "git-124",
+    "category": "git",
+    "topic": "Flujos de trabajo colaborativos",
+    "question": "Durante la revisión activa de un Pull Request, un desarrollador responde a cada comentario usando 'git commit --amend' seguido de 'git push --force' repetidamente. ¿Qué problema concreto genera esta práctica, según la guía?",
+    "options": [
+      "Ninguno; es la forma recomendada de mantener el historial limpio durante la revisión",
+      "Dificulta que quien revisa vea exactamente qué cambió desde su último comentario, ya que el historial previo desaparece en cada force push",
+      "Hace que el PR quede automáticamente aprobado sin revisión humana",
+      "Impide que el CI vuelva a ejecutarse sobre los nuevos cambios"
+    ],
+    "correctIndex": 1,
+    "explanation": "La guía recomienda responder con commits nuevos en vez de amend+force constante, porque reescribir el historial en cada iteración complica que el revisor identifique qué cambió desde su comentario anterior.",
+    "source": "git-guide.md"
+  },
+  {
+    "id": "git-125",
+    "category": "git",
+    "topic": "Rebase interactivo, cherry-pick y stash",
+    "question": "Una rama feature tiene 3 commits propios y se ejecuta 'git rebase main' sobre ella. ¿Qué le ocurre exactamente a esos 3 commits?",
+    "options": [
+      "Se combinan automáticamente en un único commit nuevo sobre main",
+      "Se reaplican uno por uno sobre la punta actual de main, generando commits nuevos con el mismo contenido pero hashes distintos",
+      "Se eliminan de feature y permanecen únicamente en main",
+      "Permanecen exactamente iguales, con los mismos hashes, solo cambia su orden"
+    ],
+    "correctIndex": 1,
+    "explanation": "Rebase toma cada commit de la rama y lo reaplica, uno por uno, sobre el nuevo punto base; el contenido final puede ser equivalente pero cada commit se recrea con un padre distinto, por lo que su hash cambia.",
+    "source": "git-guide.md"
+  },
+  {
+    "id": "git-126",
+    "category": "git",
+    "topic": "Rebase interactivo, cherry-pick y stash",
+    "question": "Comparado con integrar la misma divergencia mediante 'git merge', ¿qué diferencia de FORMA tiene el historial resultante de 'git rebase main' desde una rama feature?",
+    "options": [
+      "El rebase agrega más commits de merge que el merge normal",
+      "El rebase produce un historial lineal, sin ningún commit de merge con múltiples padres",
+      "Ambos producen exactamente la misma forma de grafo, solo cambian los mensajes",
+      "El rebase elimina automáticamente los commits de main, dejando solo los de feature"
+    ],
+    "correctIndex": 1,
+    "explanation": "A diferencia de merge (que preserva la topología con un commit de 2 padres), rebase reescribe la rama de forma lineal, sin generar ningún commit de merge.",
+    "source": "git-guide.md"
+  },
+  {
+    "id": "git-127",
+    "category": "git",
+    "topic": "Rebase interactivo, cherry-pick y stash",
+    "question": "Un commit YA fue empujado a una rama compartida y otro colaborador lo descargó. ¿Por qué la 'regla de oro' del rebase desaconseja reescribirlo con 'git rebase' sin coordinación?",
+    "options": [
+      "Porque rebase, a diferencia de merge, nunca puede generar conflictos",
+      "Porque rebase cambia el hash de cada commit reescrito; si el colaborador ya tiene los originales, un push --force posterior generará duplicados y conflictos confusos en su copia",
+      "Porque rebase borra automáticamente la rama remota al ejecutarse",
+      "Porque rebase requiere que el repositorio remoto esté temporalmente offline"
+    ],
+    "correctIndex": 1,
+    "explanation": "Como rebase genera commits nuevos con hashes distintos, si otra persona ya tiene los originales, sincronizar después (normalmente con force) hace que su copia diverja del nuevo historial, generando duplicados y conflictos.",
+    "source": "git-guide.md"
+  },
+  {
+    "id": "git-128",
+    "category": "git",
+    "topic": "Rebase interactivo, cherry-pick y stash",
+    "question": "Durante un 'git rebase' con conflictos consecutivos en varios commits, ¿qué diferencia hay entre usar 'git rebase --skip' en un commit problemático y resolverlo normalmente con 'add' + 'continue'?",
+    "options": [
+      "Son equivalentes; --skip solo automatiza el 'git add' de los archivos en conflicto",
+      "'--skip' descarta ese commit por completo, sin que su contenido llegue a aplicarse; resolver y continuar sí aplica el commit, con la corrección manual incluida",
+      "'--skip' solo puede usarse en el último commit del rebase, nunca en uno intermedio",
+      "'--skip' resuelve automáticamente el conflicto tomando siempre la versión de main"
+    ],
+    "correctIndex": 1,
+    "explanation": "'--skip' omite por completo el commit que causa el conflicto (su contenido no llega a incorporarse), a diferencia de resolver el conflicto y continuar, que sí aplica ese commit ya corregido.",
+    "source": "git-guide.md"
+  },
+  {
+    "id": "git-129",
+    "category": "git",
+    "topic": "Rebase interactivo, cherry-pick y stash",
+    "question": "En el siguiente plan de rebase interactivo, ¿qué resultado final produce al guardar y cerrar el editor?",
+    "options": [
+      "Se generan 3 commits separados, sin ninguna combinación entre ellos",
+      "El segundo y tercer commit se combinan con el primero ('pick'), dejando editar un único mensaje final combinado",
+      "Los 3 commits se eliminan por completo del historial resultante",
+      "Solo se combinan el segundo y el tercero entre sí, el primero queda separado"
+    ],
+    "correctIndex": 1,
+    "explanation": "Las líneas marcadas con 'squash' se combinan con el commit 'pick' inmediatamente anterior; el resultado es un solo commit, y Git permite editar el mensaje final combinado.",
+    "source": "git-guide.md",
+    "code": "pick a1b2c3d feat: agregar función de división\nsquash e4f5g6h fix: typo en mensaje de error\nsquash i7j8k9l fix: otro typo mas",
+    "language": "text"
+  },
+  {
+    "id": "git-130",
+    "category": "git",
+    "topic": "Rebase interactivo, cherry-pick y stash",
+    "question": "En el siguiente plan de rebase interactivo, ¿qué diferencia de resultado hay entre usar 'drop' en la segunda línea y simplemente borrar esa línea del listado?",
+    "options": [
+      "'drop' elimina el commit pero conserva su mensaje en el historial; borrar la línea lo elimina sin dejar rastro alguno",
+      "Ambas acciones producen el mismo resultado: el commit queda eliminado por completo de la historia resultante",
+      "'drop' solo funciona en el primer commit del listado, borrar la línea funciona en cualquiera",
+      "Borrar la línea genera un error de sintaxis; solo 'drop' es válido"
+    ],
+    "correctIndex": 1,
+    "explanation": "La guía indica explícitamente que usar la palabra clave 'drop' o simplemente borrar la línea de ese commit tienen el mismo efecto: el commit se elimina por completo de la historia resultante.",
+    "source": "git-guide.md",
+    "code": "pick a1b2c3d feat: agregar función de división\ndrop e4f5g6h fix: typo en mensaje de error\npick i7j8k9l fix: otro typo mas",
+    "language": "text"
+  },
+  {
+    "id": "git-131",
+    "category": "git",
+    "topic": "Rebase interactivo, cherry-pick y stash",
+    "question": "En rebase interactivo, ¿qué diferencia hay entre las palabras clave 'reword' y 'edit' aplicadas a un mismo commit?",
+    "options": [
+      "Son sinónimos exactos, ambas solo permiten cambiar el mensaje",
+      "'reword' solo permite modificar el mensaje del commit, sin tocar su contenido; 'edit' pausa el rebase en ese punto permitiendo modificar también el contenido (por ejemplo, dividirlo en varios commits)",
+      "'edit' solo permite cambiar el mensaje; 'reword' permite modificar el contenido",
+      "Ambas eliminan el commit original y piden recrearlo desde cero"
+    ],
+    "correctIndex": 1,
+    "explanation": "'reword' deja el contenido intacto y solo reabre el mensaje para editarlo; 'edit' detiene el proceso justo después de aplicar ese commit, permitiendo manipular su contenido (por ejemplo con 'git reset HEAD~1' y volver a comitear en partes).",
+    "source": "git-guide.md"
+  },
+  {
+    "id": "git-132",
+    "category": "git",
+    "topic": "Rebase interactivo, cherry-pick y stash",
+    "question": "¿Qué diferencia hay entre 'git cherry-pick a1b2c3d' y hacer 'git merge' de la rama completa que contiene ese commit?",
+    "options": [
+      "Cherry-pick trae únicamente ese commit puntual a la rama actual; merge trae todos los commits de esa rama completa, incluidos los que no interesan",
+      "Cherry-pick trae toda la rama; merge trae solo el commit indicado",
+      "Ambos comandos producen exactamente el mismo resultado en el árbol final",
+      "Cherry-pick requiere que la rama origen ya esté fusionada previamente con merge"
+    ],
+    "correctIndex": 0,
+    "explanation": "Cherry-pick aplica un commit puntual sobre la rama actual, sin traer el resto del historial de su rama de origen; merge integraría toda la línea de commits de esa rama.",
+    "source": "git-guide.md"
+  },
+  {
+    "id": "git-133",
+    "category": "git",
+    "topic": "Rebase interactivo, cherry-pick y stash",
+    "question": "Un hotfix se aplicó y fusionó en una rama 'release/1.2.1'. El equipo necesita ese mismo arreglo también en 'develop', sin fusionar toda la rama release. ¿Qué comando es el más apropiado?",
+    "options": [
+      "git merge release/1.2.1, ejecutado desde develop",
+      "git cherry-pick <hash_del_commit_del_hotfix>, ejecutado desde develop",
+      "git rebase release/1.2.1, ejecutado desde develop",
+      "git stash apply release/1.2.1"
+    ],
+    "correctIndex": 1,
+    "explanation": "Cherry-pick es la herramienta indicada para traer un commit puntual (como un hotfix) de una rama a otra sin fusionar toda la rama de origen, tal como describe el caso de uso de la guía.",
+    "source": "git-guide.md"
+  },
+  {
+    "id": "git-134",
+    "category": "git",
+    "topic": "Rebase interactivo, cherry-pick y stash",
+    "question": "Si un 'git cherry-pick' produce un conflicto, ¿cuál es la secuencia correcta para resolverlo y continuar?",
+    "options": [
+      "Editar el archivo, ejecutar 'git add <archivo>', y luego 'git cherry-pick --continue'",
+      "Editar el archivo y ejecutar 'git commit' directamente, sin 'git add' previo",
+      "El conflicto se resuelve y aborta automáticamente sin intervención del usuario",
+      "Ejecutar obligatoriamente 'git cherry-pick --skip' para poder continuar"
+    ],
+    "correctIndex": 0,
+    "explanation": "Un conflicto de cherry-pick se resuelve igual que uno de merge: se edita el archivo, se marca como resuelto con 'git add', y se retoma el proceso con 'git cherry-pick --continue'.",
+    "source": "git-guide.md"
+  },
+  {
+    "id": "git-135",
+    "category": "git",
+    "topic": "Rebase interactivo, cherry-pick y stash",
+    "question": "Un desarrollador tiene cambios sin terminar en el working directory y necesita cambiar urgentemente de rama para atender un hotfix. ¿Qué logra 'git stash' en ese momento?",
+    "options": [
+      "Comitea automáticamente los cambios en la rama actual antes de cambiar",
+      "Guarda esos cambios a medias fuera del historial de commits, dejando el working directory limpio para poder cambiar de rama sin comitear nada",
+      "Descarta permanentemente los cambios sin posibilidad de recuperarlos",
+      "Crea automáticamente una rama nueva con esos cambios"
+    ],
+    "correctIndex": 1,
+    "explanation": "'git stash' guarda temporalmente el estado del working directory/staging sin necesidad de crear un commit, dejando todo limpio para poder cambiar de rama y luego recuperar el trabajo con 'stash pop/apply'.",
+    "source": "git-guide.md"
+  },
+  {
+    "id": "git-136",
+    "category": "git",
+    "topic": "Rebase interactivo, cherry-pick y stash",
+    "question": "Después de 'git stash push -m \"WIP: raíz cuadrada\"', un desarrollador ejecuta 'git stash apply stash@{0}' en una rama, y luego quiere aplicar EL MISMO stash también en otra rama distinta. ¿Por qué usó 'apply' en vez de 'pop' la primera vez?",
+    "options": [
+      "Porque 'pop' no permite especificar un stash concreto con la notación stash@{0}",
+      "Porque 'apply' aplica los cambios SIN eliminar el stash de la lista, permitiendo reutilizarlo en otra rama después; 'pop' lo habría borrado tras aplicarlo",
+      "Porque 'apply' es la única forma de aplicar stashes con mensaje personalizado",
+      "No hay ninguna diferencia real entre ambos en este escenario"
+    ],
+    "correctIndex": 1,
+    "explanation": "'apply' aplica el stash conservándolo en la lista, útil precisamente para reutilizarlo en más de una rama; 'pop' lo aplica y además lo elimina de la lista de stashes.",
+    "source": "git-guide.md"
+  },
+  {
+    "id": "git-137",
+    "category": "git",
+    "topic": "Rebase interactivo, cherry-pick y stash",
+    "question": "Por defecto, sin ninguna bandera adicional, ¿'git stash' incluye los archivos NUEVOS que aún no están rastreados (untracked) por Git?",
+    "options": [
+      "Sí, siempre los incluye automáticamente junto con los archivos modificados",
+      "No, los ignora por defecto; hace falta 'git stash push --include-untracked' para incluirlos también",
+      "Solo los incluye si además están declarados en .gitignore",
+      "Solo los incluye si tienen extensión de código fuente reconocida"
+    ],
+    "correctIndex": 1,
+    "explanation": "Por defecto, 'git stash' solo guarda cambios en archivos ya rastreados; los archivos nuevos sin rastrear requieren explícitamente '--include-untracked' (o '-u') para quedar incluidos en el stash.",
+    "source": "git-guide.md"
+  },
+  {
+    "id": "git-138",
+    "category": "git",
+    "topic": "Rebase interactivo, cherry-pick y stash",
+    "question": "¿Qué logra 'git stash branch feature/raiz-cuadrada stash@{0}' que NO logra simplemente 'git stash apply stash@{0}' sobre la rama actual?",
+    "options": [
+      "Ambos comandos son equivalentes en todo sentido",
+      "Crea una rama NUEVA a partir del commit donde se guardó el stash y aplica los cambios ahí, en vez de aplicarlos sobre la rama actual",
+      "Elimina el stash sin llegar a aplicarlo en ningún lado",
+      "Aplica el stash en TODAS las ramas del repositorio simultáneamente"
+    ],
+    "correctIndex": 1,
+    "explanation": "'git stash branch' crea una rama nueva partiendo del commit donde se generó el stash y aplica ahí los cambios guardados, útil cuando ese trabajo merecía tener su propia rama desde el principio.",
+    "source": "git-guide.md"
+  },
+  {
+    "id": "git-139",
+    "category": "git",
+    "topic": "Tags y versionado semántico",
+    "question": "¿Qué diferencia estructural hay entre un tag ligero ('git tag v0.1.0-borrador') y uno anotado ('git tag -a v1.0.0 -m \"...\"')?",
+    "options": [
+      "El tag ligero puede firmarse con GPG y el anotado no",
+      "El tag anotado crea un objeto propio en la base de datos de Git con autor, fecha y mensaje, y puede firmarse; el ligero es solo un puntero directo al commit, sin objeto adicional",
+      "No existe ninguna diferencia real entre ambos más allá del nombre del comando",
+      "El tag ligero requiere obligatoriamente la bandera -m, el anotado no"
+    ],
+    "correctIndex": 1,
+    "explanation": "Los tags anotados son objetos independientes con metadatos propios (y firmables); los ligeros son simplemente una referencia directa al commit, sin objeto adicional en la base de datos.",
+    "source": "git-guide.md"
+  },
+  {
+    "id": "git-140",
+    "category": "git",
+    "topic": "Tags y versionado semántico",
+    "question": "Un equipo necesita marcar una versión publicada de forma que quede registrado quién y cuándo creó el tag, con posibilidad de firma GPG. ¿Qué tipo de tag deberían usar, según la guía?",
+    "options": [
+      "Un tag ligero, por ser más rápido de crear",
+      "Un tag anotado, creado con 'git tag -a'",
+      "Cualquiera de los dos, ya que ambos guardan esos metadatos",
+      "Ninguno; esos metadatos solo pueden obtenerse desde el mensaje del commit"
+    ],
+    "correctIndex": 1,
+    "explanation": "La guía recomienda tags anotados para releases reales precisamente porque guardan metadatos propios (autor, fecha, mensaje) y admiten firma, algo que el tag ligero no ofrece.",
+    "source": "git-guide.md"
+  },
+  {
+    "id": "git-141",
+    "category": "git",
+    "topic": "Tags y versionado semántico",
+    "question": "Un desarrollador crea un tag local con 'git tag -a v1.0.0 -m \"Primera versión estable\"' y luego ejecuta un 'git push' normal (sin argumentos adicionales de tag). ¿El tag queda visible en el remoto?",
+    "options": [
+      "Sí, 'git push' envía automáticamente todos los tags nuevos junto con los commits",
+      "No; por defecto 'git push' NO envía tags, hace falta 'git push origin v1.0.0' o 'git push origin --tags' explícitamente",
+      "Solo si el tag es anotado; los ligeros sí se envían automáticamente",
+      "Solo si el tag apunta exactamente al último commit de la rama actual"
+    ],
+    "correctIndex": 1,
+    "explanation": "La guía aclara que 'git push' por defecto no incluye tags; deben enviarse explícitamente, ya sea uno específico o todos con '--tags'.",
+    "source": "git-guide.md"
+  },
+  {
+    "id": "git-142",
+    "category": "git",
+    "topic": "Tags y versionado semántico",
+    "question": "Un proyecto adopta versionado semántico con formato MAYOR.MENOR.PARCHE. ¿Qué diferencia hay entre incrementar MENOR e incrementar PARCHE?",
+    "options": [
+      "MENOR se usa para corrección de bugs compatibles; PARCHE para nuevas funcionalidades compatibles",
+      "MENOR se usa para nuevas funcionalidades compatibles hacia atrás; PARCHE para corrección de bugs compatibles, sin agregar funcionalidad",
+      "Ambos representan exactamente lo mismo, solo cambia la posición del número",
+      "MENOR solo se incrementa manualmente; PARCHE se incrementa automáticamente siempre"
+    ],
+    "correctIndex": 1,
+    "explanation": "MENOR corresponde a nueva funcionalidad compatible con versiones anteriores (feat); PARCHE corresponde a corrección de bugs compatible (fix), sin agregar funcionalidad nueva.",
+    "source": "git-guide.md"
+  },
+  {
+    "id": "git-143",
+    "category": "git",
+    "topic": "Tags y versionado semántico",
+    "question": "Un historial de commits desde el último release contiene solo 'fix' y 'feat', sin ningún 'BREAKING CHANGE'. Si una herramienta como semantic-release decide automáticamente la siguiente versión, ¿qué componente incrementa?",
+    "options": [
+      "El componente MAYOR, porque hay al menos un cambio funcional nuevo",
+      "El componente MENOR, porque el 'feat' presente pesa más que los 'fix' pero no hay ningún BREAKING CHANGE",
+      "El componente PARCHE únicamente, ignorando el 'feat' por completo",
+      "Ninguno; la herramienta requeriría intervención manual al mezclar tipos"
+    ],
+    "correctIndex": 1,
+    "explanation": "La convención mapea fix → patch y feat → minor; con un feat presente y sin BREAKING CHANGE, el incremento correspondiente es el componente MENOR, el mayor de los tipos presentes.",
+    "source": "git-guide.md"
+  },
+  {
+    "id": "git-144",
+    "category": "git",
+    "topic": "Tags y versionado semántico",
+    "question": "¿Qué secuencia de comandos es necesaria para borrar un tag 'v0.1.0-borrador' tanto de la copia LOCAL como del repositorio REMOTO?",
+    "options": [
+      "git tag -d v0.1.0-borrador, que basta por sí solo para ambos casos",
+      "git tag -d v0.1.0-borrador seguido de git push origin --delete v0.1.0-borrador",
+      "git push origin -d v0.1.0-borrador, que borra automáticamente también la copia local",
+      "git branch -D v0.1.0-borrador"
+    ],
+    "correctIndex": 1,
+    "explanation": "Borrar un tag requiere dos pasos independientes: 'git tag -d' elimina la referencia local, y 'git push origin --delete' elimina la referencia en el remoto; ninguno de los dos hace ambas cosas por sí solo.",
+    "source": "git-guide.md"
+  },
+  {
+    "id": "git-145",
+    "category": "git",
+    "topic": "Tags y versionado semántico",
+    "question": "¿Qué conecta directamente el uso de Conventional Commits (sección 5.3 de la guía) con el versionado semántico?",
+    "options": [
+      "Conventional Commits reemplaza por completo la necesidad de usar tags en el repositorio",
+      "El tipo de cada commit (fix/feat/BREAKING CHANGE) permite decidir automáticamente, con herramientas como semantic-release, el siguiente número de versión SemVer sin intervención humana",
+      "Conventional Commits solo aplica a proyectos que NO usan versionado semántico",
+      "El ámbito (scope) de cada commit determina directamente el número de PARCHE"
+    ],
+    "correctIndex": 1,
+    "explanation": "La guía explica que el tipo de cada Conventional Commit se mapea a un componente de SemVer (fix→patch, feat→minor, BREAKING CHANGE→major), lo que permite automatizar la decisión de versión con herramientas como semantic-release.",
+    "source": "git-guide.md"
+  },
+  {
+    "id": "git-146",
+    "category": "git",
+    "topic": "Herramientas avanzadas: bisect, blame, worktree y hooks",
+    "question": "Un equipo sabe que 'hace 50 commits todo funcionaba' y 'ahora está roto', pero no en qué commit específico se introdujo el bug. ¿Por qué 'git bisect' es más eficiente que revisar los 50 commits uno por uno?",
+    "options": [
+      "Porque bisect revisa todos los commits en paralelo usando varios hilos",
+      "Porque aplica búsqueda binaria: descarta la mitad de los commits candidatos en cada paso, requiriendo del orden de log₂(50) ≈ 6 pasos en vez de 50",
+      "Porque bisect solo revisa los commits que modificaron archivos de test",
+      "Porque bisect omite automáticamente los commits de merge del análisis"
+    ],
+    "correctIndex": 1,
+    "explanation": "La búsqueda binaria de bisect reduce a la mitad el rango de commits candidatos en cada paso, por lo que 50 commits requieren aproximadamente log₂(50) ≈ 6 pasos, en vez de una revisión lineal de los 50.",
+    "source": "git-guide.md"
+  },
+  {
+    "id": "git-147",
+    "category": "git",
+    "topic": "Herramientas avanzadas: bisect, blame, worktree y hooks",
+    "question": "En la siguiente secuencia de comandos, ¿qué le está indicando el usuario a Git sobre el estado del bug?",
+    "options": [
+      "Que el commit actual (HEAD) tiene el bug, y que el commit v1.0.0 (más antiguo) SÍ funcionaba correctamente",
+      "Que el commit v1.0.0 tiene el bug, y que HEAD funciona correctamente",
+      "Que se debe abortar la sesión de bisect porque hay información contradictoria",
+      "Que se debe iniciar automáticamente un 'git bisect run' en vez de continuar manualmente"
+    ],
+    "correctIndex": 0,
+    "explanation": "'git bisect bad' sin argumento marca el commit actual (HEAD) como defectuoso; 'git bisect good v1.0.0' marca ese commit anterior como conocido por funcionar correctamente, estableciendo el rango de búsqueda.",
+    "source": "git-guide.md",
+    "code": "git bisect start\ngit bisect bad\ngit bisect good v1.0.0",
+    "language": "bash"
+  },
+  {
+    "id": "git-148",
+    "category": "git",
+    "topic": "Herramientas avanzadas: bisect, blame, worktree y hooks",
+    "question": "¿Qué diferencia hay entre usar 'git bisect' de forma manual (good/bad en cada paso) y usar 'git bisect run pytest tests/test_calculadora.py'?",
+    "options": [
+      "Son equivalentes; 'run' solo cambia el formato del mensaje mostrado en cada paso",
+      "'run' ejecuta el comando indicado en cada paso automáticamente y decide 'good'/'bad' según su código de salida (0 = bien, distinto de 0 = mal), sin necesitar intervención manual en cada commit",
+      "El modo manual solo funciona con tests escritos en pytest, run funciona con cualquier lenguaje",
+      "'run' requiere que el usuario confirme manualmente el resultado tras cada ejecución del test"
+    ],
+    "correctIndex": 1,
+    "explanation": "'git bisect run' automatiza completamente el proceso: ejecuta el comando dado en cada commit candidato y usa su código de salida para decidir automáticamente good/bad, sin pedir confirmación manual.",
+    "source": "git-guide.md"
+  },
+  {
+    "id": "git-149",
+    "category": "git",
+    "topic": "Herramientas avanzadas: bisect, blame, worktree y hooks",
+    "question": "Al finalizar una sesión de bisect, Git señala 'a1b2c3d is the first bad commit'. ¿Qué comando se debe ejecutar a continuación para volver a la rama de trabajo original, dejando de estar en detached HEAD sobre ese commit?",
+    "options": [
+      "git bisect end",
+      "git bisect reset",
+      "git checkout main manualmente, ya que bisect no ofrece un comando propio para esto",
+      "git bisect stop"
+    ],
+    "correctIndex": 1,
+    "explanation": "'git bisect reset' es el comando específico que termina la sesión de bisect y devuelve el repositorio a la rama en la que se estaba antes de iniciarla.",
+    "source": "git-guide.md"
+  },
+  {
+    "id": "git-150",
+    "category": "git",
+    "topic": "Herramientas avanzadas: bisect, blame, worktree y hooks",
+    "question": "¿Qué diferencia hay entre lo que muestra 'git blame archivo.py' y lo que muestra 'git log -p -- archivo.py'?",
+    "options": [
+      "Son equivalentes: ambos muestran el diff completo de cada commit que tocó el archivo",
+      "'blame' anota cada LÍNEA actual del archivo con el commit y autor responsables de su última modificación; 'log -p' muestra el historial completo de cambios (diffs) sucesivos del archivo",
+      "'blame' solo funciona sobre archivos binarios; 'log -p' solo sobre archivos de texto",
+      "'log -p' anota línea por línea; 'blame' muestra el diff completo de cada commit"
+    ],
+    "correctIndex": 1,
+    "explanation": "'git blame' se centra en el estado ACTUAL del archivo, atribuyendo cada línea a su último commit responsable; 'git log -p' recorre el historial completo mostrando los diffs sucesivos que fue teniendo el archivo.",
+    "source": "git-guide.md"
+  },
+  {
+    "id": "git-151",
+    "category": "git",
+    "topic": "Herramientas avanzadas: bisect, blame, worktree y hooks",
+    "question": "Un archivo fue reformateado por completo con una herramienta automática en un único commit masivo, lo que hace que 'git blame' atribuya casi todas las líneas a ese commit de reformateo en vez de a quien realmente escribió la lógica. ¿Qué opción de blame soluciona este problema?",
+    "options": [
+      "git blame --first-parent archivo.py",
+      "git blame --ignore-rev <hash_del_commit_de_reformateo> archivo.py",
+      "git blame --no-merges archivo.py",
+      "git blame --follow archivo.py"
+    ],
+    "correctIndex": 1,
+    "explanation": "'--ignore-rev' permite que blame pase por alto un commit específico (como uno de reformateo masivo), buscando y mostrando en su lugar el autor del cambio real anterior a ese reformateo.",
+    "source": "git-guide.md"
+  },
+  {
+    "id": "git-152",
+    "category": "git",
+    "topic": "Herramientas avanzadas: bisect, blame, worktree y hooks",
+    "question": "Un desarrollador necesita revisar el código de un Pull Request en una rama distinta SIN interrumpir su trabajo actual en curso (sin usar stash ni cambiar de rama con switch). ¿Qué herramienta de la guía resuelve esto directamente?",
+    "options": [
+      "git stash branch, aplicado sobre la rama del PR",
+      "git worktree add ../revision-pr-42 origin/feature/reportes-pdf, que despacha esa rama en una carpeta nueva sin tocar la carpeta actual",
+      "git clone --depth 1, repetido para cada revisión de PR",
+      "git cherry-pick de todos los commits del PR hacia una rama temporal"
+    ],
+    "correctIndex": 1,
+    "explanation": "'git worktree add' permite tener otra rama activa físicamente en una carpeta distinta, en paralelo, sin necesidad de hacer stash ni cambiar de rama en la carpeta de trabajo actual.",
+    "source": "git-guide.md"
+  },
+  {
+    "id": "git-153",
+    "category": "git",
+    "topic": "Herramientas avanzadas: bisect, blame, worktree y hooks",
+    "question": "Después de terminar de revisar un Pull Request usando un worktree adicional, ¿qué comando elimina limpiamente esa carpeta de trabajo adicional del control de Git?",
+    "options": [
+      "git worktree delete ../revision-pr-42",
+      "git worktree remove ../revision-pr-42",
+      "git worktree drop ../revision-pr-42",
+      "rm -rf ../revision-pr-42, sin ningún comando de Git adicional"
+    ],
+    "correctIndex": 1,
+    "explanation": "'git worktree remove <ruta>' es el comando correcto para retirar limpiamente un worktree que ya no se necesita, dejando el registro interno de Git consistente.",
+    "source": "git-guide.md"
+  },
+  {
+    "id": "git-154",
+    "category": "git",
+    "topic": "Herramientas avanzadas: bisect, blame, worktree y hooks",
+    "question": "Un equipo configura un hook 'pre-commit' que corre un linter, y lo prueba con éxito localmente. Al día siguiente, otro miembro del equipo clona el repositorio y hace un commit con errores de formato que el linter debería haber bloqueado. ¿Cuál es la explicación más probable, según la guía?",
+    "options": [
+      "El hook se ejecutó pero el linter tiene un bug que lo hace fallar silenciosamente",
+      "Los hooks no se comparten vía git push/clone por defecto: viven solo en la copia local .git/hooks/ de cada persona, a menos que se gestionen con una herramienta como pre-commit o husky",
+      "El nuevo colaborador desactivó el hook manualmente antes de comitear",
+      "Los hooks solo aplican a la rama main, no a otras ramas del repositorio"
+    ],
+    "correctIndex": 1,
+    "explanation": "La guía explica que los hooks viven en .git/hooks/ y NO se comparten automáticamente al clonar o hacer push; cada copia local necesita el hook instalado, algo que herramientas como pre-commit o husky automatizan.",
+    "source": "git-guide.md"
+  },
+  {
+    "id": "git-155",
+    "category": "git",
+    "topic": "Herramientas avanzadas: bisect, blame, worktree y hooks",
+    "question": "¿En qué momento del ciclo de vida de un commit se dispara específicamente el hook 'commit-msg', a diferencia de 'pre-commit'?",
+    "options": [
+      "Antes de que exista ningún mensaje, al mismo tiempo que 'pre-commit'",
+      "Después de que el usuario ya escribió el mensaje del commit, permitiendo validar su formato (por ejemplo, que siga Conventional Commits) antes de confirmarlo definitivamente",
+      "Después de que el commit ya quedó guardado de forma permanente en el historial",
+      "Únicamente al hacer 'git push', nunca durante 'git commit'"
+    ],
+    "correctIndex": 1,
+    "explanation": "'commit-msg' se dispara tras escribir el mensaje pero antes de que el commit se confirme definitivamente, siendo el punto típico para validar que el mensaje siga un formato como Conventional Commits.",
+    "source": "git-guide.md"
+  }
+]

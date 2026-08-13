@@ -1,0 +1,1502 @@
+[
+  {
+    "id": "spring-001",
+    "category": "spring",
+    "topic": "Contenedor, beans y Spring Boot",
+    "question": "¿Qué relación describe correctamente Spring Framework y Spring Boot?",
+    "options": [
+      "Boot reemplaza el contenedor de Framework por otro incompatible.",
+      "Boot usa Framework y añade convenciones, auto-configuración, starters y operación.",
+      "Framework solo sirve para testing y Boot para Java.",
+      "Son productos sin relación."
+    ],
+    "correctIndex": 1,
+    "explanation": "Spring Boot construye sobre IoC, MVC, transacciones y demás capacidades de Spring Framework. Reduce configuración inicial y agrega integración operativa, pero no elimina los mecanismos del Framework. Referencia: §1.",
+    "source": "spring-guide.md"
+  },
+  {
+    "id": "spring-002",
+    "category": "spring",
+    "topic": "Contenedor, beans y Spring Boot",
+    "question": "¿Qué expresa Inversion of Control en Spring?",
+    "options": [
+      "Cada clase crea internamente todas sus implementaciones con `new`.",
+      "La base de datos controla el classloader.",
+      "El contenedor participa en crear y ensamblar el grafo según metadatos.",
+      "Todo método se ejecuta en otro hilo."
+    ],
+    "correctIndex": 2,
+    "explanation": "Con DI, los objetos declaran dependencias y el contenedor controla ensamblaje/ciclo. El dominio todavía puede crear objetos normales; no toda construcción se delega necesariamente a Spring. Referencia: §2.1.",
+    "source": "spring-guide.md"
+  },
+  {
+    "id": "spring-003",
+    "category": "spring",
+    "topic": "Contenedor, beans y Spring Boot",
+    "question": "En Spring, un bean es:",
+    "options": [
+      "Cualquier objeto creado en la JVM.",
+      "Únicamente una entidad JPA.",
+      "Un objeto instanciado, ensamblado y administrado por el contenedor.",
+      "Un archivo YAML."
+    ],
+    "correctIndex": 2,
+    "explanation": "Un `new Product()` normal no se vuelve bean por existir. Las definiciones del contexto permiten inyección, lifecycle, postprocesamiento y posibles proxies. Referencia: §2.2.",
+    "source": "spring-guide.md"
+  },
+  {
+    "id": "spring-004",
+    "category": "spring",
+    "topic": "Contenedor, beans y Spring Boot",
+    "question": "¿Qué aporta normalmente `ApplicationContext` sobre las capacidades básicas de `BeanFactory`?",
+    "options": [
+      "Un navegador web.",
+      "Un compilador Java distinto.",
+      "SQL automático para cualquier clase.",
+      "Eventos, recursos, entorno, internacionalización y registro integrado de postprocesadores."
+    ],
+    "correctIndex": 3,
+    "explanation": "`ApplicationContext` es el contenedor usado habitualmente y amplía la fábrica básica. No implica que toda aplicación sea web ni que exista persistencia. Referencia: §2.3.",
+    "source": "spring-guide.md"
+  },
+  {
+    "id": "spring-005",
+    "category": "spring",
+    "topic": "Contenedor, beans y Spring Boot",
+    "question": "¿Por qué se prefiere inyección por constructor para dependencias obligatorias?",
+    "options": [
+      "Oculta el número de dependencias.",
+      "Permite objetos válidos, campos `final`, dependencias visibles y pruebas sin contenedor.",
+      "Hace opcional cualquier colaborador.",
+      "Evita escribir interfaces siempre."
+    ],
+    "correctIndex": 1,
+    "explanation": "El constructor expresa el contrato de creación y expone si una clase depende de demasiado. La inyección no obliga a usar interfaces si no aportan una frontera. Referencia: §2.4.",
+    "source": "spring-guide.md"
+  },
+  {
+    "id": "spring-006",
+    "category": "spring",
+    "topic": "Contenedor, beans y Spring Boot",
+    "question": "Una clase Spring tiene un único constructor. ¿Necesita `@Autowired` en ese constructor?",
+    "options": [
+      "Sí, siempre.",
+      "Solo con `prototype`.",
+      "Solo si los parámetros son interfaces.",
+      "No; Spring lo utiliza implícitamente."
+    ],
+    "correctIndex": 3,
+    "explanation": "Desde generaciones modernas, un único constructor se considera candidato sin anotar. En múltiples constructores puede requerirse desambiguación. Referencia: §2.4.",
+    "source": "spring-guide.md"
+  },
+  {
+    "id": "spring-007",
+    "category": "spring",
+    "topic": "Contenedor, beans y Spring Boot",
+    "question": "¿Qué estereotipo comunica una clase de lógica de aplicación?",
+    "options": [
+      "`@Service`.",
+      "`@Entity` necesariamente.",
+      "`@Bean` sobre la clase.",
+      "`@Profile` sin componente."
+    ],
+    "correctIndex": 0,
+    "explanation": "`@Service` especializa `@Component` y expresa rol. `@Repository` es persistencia y puede participar en traducción de excepciones; `@Controller`/`@RestController` son adaptadores web. Referencia: §3.1.",
+    "source": "spring-guide.md"
+  },
+  {
+    "id": "spring-008",
+    "category": "spring",
+    "topic": "Contenedor, beans y Spring Boot",
+    "question": "`CatalogApplication` está en `com.example.catalog.api`, mientras repositorios están en `com.example.catalog.data`. No se descubren. ¿Cuál causa probable?",
+    "options": [
+      "Maven oculta todos los subpaquetes.",
+      "El escaneo parte del paquete de la aplicación y descendientes, no de su hermano.",
+      "Los repositorios deben vivir en `java.lang`.",
+      "Spring solo escanea clases finales."
+    ],
+    "correctIndex": 1,
+    "explanation": "Colocar la clase principal en el paquete raíz `com.example.catalog` incluye `api` y `data`, o se configura escaneo explícito. Un escaneo demasiado amplio también debe evitarse. Referencia: §3.1.",
+    "source": "spring-guide.md"
+  },
+  {
+    "id": "spring-009",
+    "category": "spring",
+    "topic": "Contenedor, beans y Spring Boot",
+    "question": "¿Cuándo es especialmente apropiado un método `@Bean`?",
+    "options": [
+      "Para crear cada entidad de negocio individual.",
+      "Para registrar una clase de tercero cuya fuente no puede anotarse.",
+      "Para marcar una variable local.",
+      "Para reemplazar el constructor Java."
+    ],
+    "correctIndex": 1,
+    "explanation": "La configuración Java controla construcción de clientes, clocks o librerías externas. Los parámetros del método se resuelven como dependencias. Referencia: §3.2.",
+    "source": "spring-guide.md"
+  },
+  {
+    "id": "spring-010",
+    "category": "spring",
+    "topic": "Contenedor, beans y Spring Boot",
+    "question": "¿Qué diferencia semántica aporta `@Configuration` frente a una clase cualquiera con métodos?",
+    "options": [
+      "Convierte todos sus métodos en endpoints HTTP.",
+      "Declara una fuente de definiciones de beans y habilita procesamiento específico.",
+      "La vuelve una entidad JPA.",
+      "Impide que tenga constructor."
+    ],
+    "correctIndex": 1,
+    "explanation": "Spring procesa métodos `@Bean`; en modo completo puede interceptar llamadas entre ellos para respetar semántica del contenedor. Preferir parámetros explícitos reduce dependencia de esa interceptación. Referencia: §3.2.",
+    "source": "spring-guide.md"
+  },
+  {
+    "id": "spring-011",
+    "category": "spring",
+    "topic": "Contenedor, beans y Spring Boot",
+    "question": "Existen `EmailSender` y `SmsSender` para `NotificationSender`. El servicio necesita email. ¿Qué opción es explícita?",
+    "options": [
+      "`@Qualifier(\"emailSender\") NotificationSender sender`.",
+      "Confiar en el orden alfabético.",
+      "Inyectar `Object`.",
+      "Eliminar una implementación."
+    ],
+    "correctIndex": 0,
+    "explanation": "`@Qualifier` añade significado al punto de inyección. Sin selección, varios candidatos del mismo tipo provocan ambigüedad. Referencia: §4.1.",
+    "source": "spring-guide.md"
+  },
+  {
+    "id": "spring-012",
+    "category": "spring",
+    "topic": "Contenedor, beans y Spring Boot",
+    "question": "¿Qué hace `@Primary`?",
+    "options": [
+      "Aumenta prioridad de hilo.",
+      "Marca el candidato predeterminado cuando hay varios beans compatibles.",
+      "Le asigna clave primaria SQL.",
+      "Vuelve singleton global a la clase."
+    ],
+    "correctIndex": 1,
+    "explanation": "Es útil cuando existe una implementación realmente predeterminada. Un qualifier en el punto de inyección puede expresar una variante concreta. Referencia: §4.1.",
+    "source": "spring-guide.md"
+  },
+  {
+    "id": "spring-013",
+    "category": "spring",
+    "topic": "Contenedor, beans y Spring Boot",
+    "question": "¿Qué recibe un constructor con `List<NotificationSender> senders`?",
+    "options": [
+      "Todas las clases del classpath aunque no sean beans.",
+      "Solo el `@Primary`.",
+      "Una lista siempre vacía.",
+      "Todos los beans compatibles, con un orden que puede controlarse."
+    ],
+    "correctIndex": 3,
+    "explanation": "Spring puede inyectar colecciones/mapas de candidatos, útil para estrategias. La selección de negocio no debería depender accidentalmente de nombres/orden no documentados. Referencia: §4.2.",
+    "source": "spring-guide.md"
+  },
+  {
+    "id": "spring-014",
+    "category": "spring",
+    "topic": "Contenedor, beans y Spring Boot",
+    "question": "¿Qué ofrece `ObjectProvider<T>`?",
+    "options": [
+      "Persistencia automática de `T`.",
+      "Serialización JSON.",
+      "Resolución opcional, diferida o múltiple de beans.",
+      "Ejecución reactiva obligatoria."
+    ],
+    "correctIndex": 2,
+    "explanation": "Puede ser útil para dependencias realmente opcionales o prototypes bajo demanda. Usarlo para ocultar una dependencia obligatoria traslada errores al runtime. Referencia: §4.3 y §5.3.",
+    "source": "spring-guide.md"
+  },
+  {
+    "id": "spring-015",
+    "category": "spring",
+    "topic": "Contenedor, beans y Spring Boot",
+    "question": "¿Cuál desventaja tiene inyección de campo?",
+    "options": [
+      "Obliga a usar XML.",
+      "No funciona en ninguna versión de Spring.",
+      "Oculta dependencias, dificulta construcción directa y evita campos `final` correctamente inicializados.",
+      "Hace pública la dependencia."
+    ],
+    "correctIndex": 2,
+    "explanation": "Aunque el contenedor puede inyectarla, el objeto no declara su contrato de creación y las unitarias requieren reflexión/contexto. Constructor es la opción predeterminada. Referencia: §4.4.",
+    "source": "spring-guide.md"
+  },
+  {
+    "id": "spring-016",
+    "category": "spring",
+    "topic": "Contenedor, beans y Spring Boot",
+    "question": "`OrderService → PaymentService → OrderService` forma un ciclo. ¿Qué respuesta es preferible?",
+    "options": [
+      "Añadir `@Lazy` sin analizar.",
+      "Activar todos los perfiles.",
+      "Revisar responsabilidades y extraer/invertir la colaboración.",
+      "Hacer ambos campos estáticos."
+    ],
+    "correctIndex": 2,
+    "explanation": "Un ciclo suele indicar límites incompletos. `@Lazy` puede retrasar el error, pero no corrige el modelo ni simplifica pruebas. Referencia: §4.5.",
+    "source": "spring-guide.md"
+  },
+  {
+    "id": "spring-017",
+    "category": "spring",
+    "topic": "Contenedor, beans y Spring Boot",
+    "question": "¿En qué orden conceptual ocurre la inicialización de un bean?",
+    "options": [
+      "Proxy → compilar fuente → crear JDK.",
+      "`@PreDestroy` → constructor → inyección.",
+      "Instancia → dependencias → postprocesamiento/init → posible proxy → uso.",
+      "Base de datos → Maven → bean."
+    ],
+    "correctIndex": 2,
+    "explanation": "El orden real incluye callbacks de postprocesadores antes/después. Al cerrar el contexto se invocan callbacks de destrucción en beans elegibles. Referencia: §5.1.",
+    "source": "spring-guide.md"
+  },
+  {
+    "id": "spring-018",
+    "category": "spring",
+    "topic": "Contenedor, beans y Spring Boot",
+    "question": "¿Qué significa scope `singleton` de Spring?",
+    "options": [
+      "Exactamente una instancia en todas las JVM del mundo.",
+      "Una instancia por definición de bean dentro de un `ApplicationContext`.",
+      "Una instancia por petición HTTP.",
+      "Una instancia por hilo."
+    ],
+    "correctIndex": 1,
+    "explanation": "No es el patrón global de JVM. Dos contextos pueden tener instancias distintas y distintos beans pueden usar la misma clase. Referencia: §5.2.",
+    "source": "spring-guide.md"
+  },
+  {
+    "id": "spring-019",
+    "category": "spring",
+    "topic": "Contenedor, beans y Spring Boot",
+    "question": "Un singleton inyecta directamente un bean `prototype`. ¿Cuándo se crea normalmente ese prototype?",
+    "options": [
+      "Uno nuevo en cada llamada de método automáticamente.",
+      "Nunca.",
+      "Al resolver la dependencia del singleton; esa referencia queda reutilizada.",
+      "Uno por thread local."
+    ],
+    "correctIndex": 2,
+    "explanation": "Para obtener uno por uso se necesita `ObjectProvider`, una factory o proxy de scope apropiado. Cambiar scope no cambia mágicamente el punto de resolución. Referencia: §5.3.",
+    "source": "spring-guide.md"
+  },
+  {
+    "id": "spring-020",
+    "category": "spring",
+    "topic": "Contenedor, beans y Spring Boot",
+    "question": "¿Por qué un campo `currentUser` mutable en un `@Service` singleton es peligroso?",
+    "options": [
+      "Varias peticiones pueden leer/escribir la misma instancia concurrentemente.",
+      "Spring clona el campo por petición.",
+      "Java no permite strings en beans.",
+      "Solo afecta a pruebas."
+    ],
+    "correctIndex": 0,
+    "explanation": "Los servicios singleton deben ser sin estado por petición o sincronizar estado compartido legítimo. Variables locales y parámetros son la opción normal. Referencia: §5.3.",
+    "source": "spring-guide.md"
+  },
+  {
+    "id": "spring-021",
+    "category": "spring",
+    "topic": "Contenedor, beans y Spring Boot",
+    "question": "`@SpringBootApplication` combina conceptualmente:",
+    "options": [
+      "Configuración Boot, auto-configuración y component scanning.",
+      "JPA, Kafka y Security obligatoriamente.",
+      "`@Entity`, `@Transactional` y `@Test`.",
+      "Solo un método `main`."
+    ],
+    "correctIndex": 0,
+    "explanation": "Es una anotación compuesta que marca configuración, habilita auto-config y escanea desde su paquete. Las tecnologías se activan al añadir dependencias/configuración, no por la anotación sola. Referencia: §6.3.",
+    "source": "spring-guide.md"
+  },
+  {
+    "id": "spring-022",
+    "category": "spring",
+    "topic": "Contenedor, beans y Spring Boot",
+    "question": "¿Qué es un starter de Spring Boot?",
+    "options": [
+      "Un generador obligatorio de código de negocio.",
+      "Un servidor externo descargado manualmente.",
+      "Un descriptor curado de dependencias para una capacidad.",
+      "Una anotación para entidades."
+    ],
+    "correctIndex": 2,
+    "explanation": "Por ejemplo `spring-boot-starter-webmvc` reúne piezas compatibles para MVC/Tomcat. El BOM/parent administra versiones; el starter no crea endpoints por sí solo. Referencia: §6.1–6.2.",
+    "source": "spring-guide.md"
+  },
+  {
+    "id": "spring-023",
+    "category": "spring",
+    "topic": "Contenedor, beans y Spring Boot",
+    "question": "La auto-configuración decide registrar un bean observando principalmente:",
+    "options": [
+      "Orden de commits Git.",
+      "Nombre del desarrollador.",
+      "Número de líneas de código.",
+      "Classpath, propiedades y beans ya existentes."
+    ],
+    "correctIndex": 3,
+    "explanation": "Condiciones como `@ConditionalOnClass`, `@ConditionalOnProperty` y `@ConditionalOnMissingBean` expresan estas decisiones. Referencia: §6.4.",
+    "source": "spring-guide.md"
+  },
+  {
+    "id": "spring-024",
+    "category": "spring",
+    "topic": "Contenedor, beans y Spring Boot",
+    "question": "¿Qué significa que una auto-configuración haga *back off*?",
+    "options": [
+      "No registra su bean predeterminado cuando el usuario ya proporcionó uno compatible.",
+      "Desactiva Maven.",
+      "Reinicia la aplicación.",
+      "Elimina todos los beans del usuario."
+    ],
+    "correctIndex": 0,
+    "explanation": "Permite sobreescribir comportamiento por composición explícita sin copiar toda la auto-configuración. Debe verificarse la condición exacta del caso. Referencia: §6.4.",
+    "source": "spring-guide.md"
+  },
+  {
+    "id": "spring-025",
+    "category": "spring",
+    "topic": "Contenedor, beans y Spring Boot",
+    "question": "Una auto-configuración esperada no se aplicó. ¿Qué primer diagnóstico es útil?",
+    "options": [
+      "Borrar todos los starters.",
+      "Añadir exclusiones aleatorias.",
+      "Activar `--debug` y revisar el condition evaluation report.",
+      "Cambiar cada bean a prototype."
+    ],
+    "correctIndex": 2,
+    "explanation": "El reporte indica condiciones positivas/negativas: clase ausente, propiedad, bean presente, etc. Permite corregir causa en vez de adivinar. Referencia: §6.4.",
+    "source": "spring-guide.md"
+  },
+  {
+    "id": "spring-026",
+    "category": "spring",
+    "topic": "Configuración, arquitectura y Spring MVC",
+    "question": "Un valor está en `application.yaml`, pero también se pasa `--server.port=9090`. ¿Cuál suele prevalecer?",
+    "options": [
+      "Siempre el YAML empaquetado.",
+      "Ninguno; Boot falla por duplicado.",
+      "El valor menor numéricamente.",
+      "El argumento de línea de comandos."
+    ],
+    "correctIndex": 3,
+    "explanation": "Boot define una precedencia de PropertySources para permitir overrides externos; los argumentos están por encima de config data normal. Comprender el orden evita “valores misteriosos”. Referencia: §7.1.",
+    "source": "spring-guide.md"
+  },
+  {
+    "id": "spring-027",
+    "category": "spring",
+    "topic": "Configuración, arquitectura y Spring MVC",
+    "question": "¿Qué ventaja ofrece `@ConfigurationProperties` sobre muchos `@Value` dispersos?",
+    "options": [
+      "Elimina necesidad de configuración externa.",
+      "Convierte todas las propiedades en secretos.",
+      "Binding tipado, agrupación, conversión, validación y metadatos.",
+      "Solo acepta strings."
+    ],
+    "correctIndex": 2,
+    "explanation": "Puede enlazar `Duration`, URI, enums o estructuras y fallar al arrancar si son inválidas. Un objeto cohesivo también es más fácil de probar. Referencia: §7.2.",
+    "source": "spring-guide.md"
+  },
+  {
+    "id": "spring-028",
+    "category": "spring",
+    "topic": "Configuración, arquitectura y Spring MVC",
+    "question": "¿Para qué sigue siendo razonable `@Value(\"${catalog.banner:Catalog}\")`?",
+    "options": [
+      "Un valor aislado con default sencillo.",
+      "Una configuración jerárquica grande con validación compleja.",
+      "Persistir entidades.",
+      "Reemplazar `@Transactional`."
+    ],
+    "correctIndex": 0,
+    "explanation": "`@Value` es útil para casos puntuales. Cuando varios valores forman un concepto, `@ConfigurationProperties` reduce strings dispersos y mejora validación. Referencia: §7.2.",
+    "source": "spring-guide.md"
+  },
+  {
+    "id": "spring-029",
+    "category": "spring",
+    "topic": "Configuración, arquitectura y Spring MVC",
+    "question": "¿Qué uso correcto tiene `@Profile(\"dev\")`?",
+    "options": [
+      "Cambiar reglas de negocio para cada usuario.",
+      "Registrar una implementación específica solo cuando el perfil `dev` está activo.",
+      "Elegir cada feature flag dinámica.",
+      "Proteger secretos dentro del JAR."
+    ],
+    "correctIndex": 1,
+    "explanation": "Los perfiles expresan grupos ambientales de beans/configuración. Opciones de negocio finas suelen ser propiedades o feature flags, no una explosión de perfiles. Referencia: §7.3.",
+    "source": "spring-guide.md"
+  },
+  {
+    "id": "spring-030",
+    "category": "spring",
+    "topic": "Configuración, arquitectura y Spring MVC",
+    "question": "¿Qué resuelve `spring.config.import=optional:configtree:/run/secrets/`?",
+    "options": [
+      "Cifrar cualquier archivo automáticamente.",
+      "Publicar secretos en Actuator.",
+      "Importar archivos montados como propiedades, útil para secretos/config de plataforma.",
+      "Compilar YAML a bytecode."
+    ],
+    "correctIndex": 2,
+    "explanation": "El nombre del archivo puede formar la clave y el contenido el valor. Spring no cifra por el mero import: permisos, plataforma y exposición siguen siendo responsabilidad operativa. Referencia: §7.4.",
+    "source": "spring-guide.md"
+  },
+  {
+    "id": "spring-031",
+    "category": "spring",
+    "topic": "Configuración, arquitectura y Spring MVC",
+    "question": "¿Qué dependencia respeta una arquitectura orientada hacia el dominio?",
+    "options": [
+      "La entidad HTTP construye el ApplicationContext.",
+      "El dominio importa el controller y `HttpServletRequest`.",
+      "El servicio de aplicación depende de un puerto `ProductRepository`; el adaptador JPA implementa el puerto.",
+      "El repositorio depende del endpoint REST."
+    ],
+    "correctIndex": 2,
+    "explanation": "Las reglas estables conocen contratos, no detalles externos. Los adaptadores web/datos dependen hacia adentro y el ensamblaje Spring conecta. Referencia: §8.",
+    "source": "spring-guide.md"
+  },
+  {
+    "id": "spring-032",
+    "category": "spring",
+    "topic": "Configuración, arquitectura y Spring MVC",
+    "question": "¿Por qué no conviene devolver una entidad JPA directamente desde un controller?",
+    "options": [
+      "Expone estructura interna, relaciones lazy y campos fuera del contrato.",
+      "Porque Java no serializa objetos.",
+      "Porque `@RestController` solo devuelve strings.",
+      "Porque JPA prohíbe getters."
+    ],
+    "correctIndex": 0,
+    "explanation": "Un DTO HTTP desacopla evolución y evita activar carga accidental durante serialización. Entidad, dominio y contrato externo pueden coincidir en ejemplos pequeños, pero tienen razones de cambio diferentes. Referencia: §8.1.",
+    "source": "spring-guide.md"
+  },
+  {
+    "id": "spring-033",
+    "category": "spring",
+    "topic": "Configuración, arquitectura y Spring MVC",
+    "question": "Una invariant “el precio no puede ser negativo” pertenece principalmente a:",
+    "options": [
+      "Un filtro Servlet únicamente.",
+      "El objeto de dominio/caso que controla el precio.",
+      "El archivo `pom.xml`.",
+      "Actuator health."
+    ],
+    "correctIndex": 1,
+    "explanation": "La validación HTTP puede rechazar forma inválida antes, pero la regla debe protegerse donde existe el concepto, también si el caso se invoca por mensajería o batch. Referencia: §8.2 y §10.1.",
+    "source": "spring-guide.md"
+  },
+  {
+    "id": "spring-034",
+    "category": "spring",
+    "topic": "Configuración, arquitectura y Spring MVC",
+    "question": "¿Cuál es el papel principal de `DispatcherServlet`?",
+    "options": [
+      "Proveedor JPA.",
+      "Broker de Kafka.",
+      "Compilador de Java.",
+      "Front controller que delega mapeo, adaptación, conversión y manejo de respuesta/excepción."
+    ],
+    "correctIndex": 3,
+    "explanation": "Centraliza el flujo MVC y usa estrategias como HandlerMapping/HandlerAdapter y resolvers. El método controller no recibe directamente el socket. Referencia: §9.",
+    "source": "spring-guide.md"
+  },
+  {
+    "id": "spring-035",
+    "category": "spring",
+    "topic": "Configuración, arquitectura y Spring MVC",
+    "question": "¿Qué uso corresponde a `@PathVariable` frente a `@RequestParam`?",
+    "options": [
+      "Bean frente a entidad.",
+      "Body JSON frente a header.",
+      "Identidad en la ruta frente a filtros/opciones de consulta.",
+      "Transacción frente a cache."
+    ],
+    "correctIndex": 2,
+    "explanation": "`/products/{id}` identifica un recurso; `?page=2&sort=name` modula la colección. La decisión final sigue diseño HTTP, no solo sintaxis de anotación. Referencia: §9.1.",
+    "source": "spring-guide.md"
+  },
+  {
+    "id": "spring-036",
+    "category": "spring",
+    "topic": "Configuración, arquitectura y Spring MVC",
+    "question": "¿Qué transforma el JSON de un `@RequestBody` en un DTO?",
+    "options": [
+      "`PasswordEncoder`.",
+      "Un `HttpMessageConverter` seleccionado por contenido, normalmente con Jackson en esa configuración.",
+      "Un `PlatformTransactionManager`.",
+      "El GC."
+    ],
+    "correctIndex": 1,
+    "explanation": "La negociación y media type eligen conversor. Un fallo de parse/binding ocurre antes de entrar al método si el cuerpo no puede convertirse. Referencia: §9.1–9.2.",
+    "source": "spring-guide.md"
+  },
+  {
+    "id": "spring-037",
+    "category": "spring",
+    "topic": "Configuración, arquitectura y Spring MVC",
+    "question": "¿Qué mecanismo actúa antes de Spring MVC y es adecuado para correlación o seguridad transversal HTTP?",
+    "options": [
+      "`BeanPostProcessor` por petición.",
+      "`ItemProcessor`.",
+      "`JpaRepository`.",
+      "Servlet Filter."
+    ],
+    "correctIndex": 3,
+    "explanation": "Los filtros envuelven la cadena servlet. Un interceptor conoce handlers MVC; un aspect intercepta llamadas a beans. Elegir el nivel evita huecos o duplicación. Referencia: §9.3.",
+    "source": "spring-guide.md"
+  },
+  {
+    "id": "spring-038",
+    "category": "spring",
+    "topic": "Configuración, arquitectura y Spring MVC",
+    "question": "`@Valid @RequestBody CreateProductRequest` comprueba bien:",
+    "options": [
+      "Restricciones de forma declaradas, como `@NotBlank` y `@Positive`.",
+      "Unicidad concurrente definitiva en la base sin constraint.",
+      "Disponibilidad de un servicio remoto.",
+      "Autorización de usuario automáticamente."
+    ],
+    "correctIndex": 0,
+    "explanation": "Bean Validation valida el objeto recibido. Reglas que dependen de estado deben vivir en aplicación/dominio y reforzarse con constraints/transacciones cuando hay concurrencia. Referencia: §10.1.",
+    "source": "spring-guide.md"
+  },
+  {
+    "id": "spring-039",
+    "category": "spring",
+    "topic": "Configuración, arquitectura y Spring MVC",
+    "question": "¿Qué habilita `@Validated` en un `@Service`?",
+    "options": [
+      "Validación de constraints en parámetros/retornos de métodos interceptados.",
+      "Serialización JSON.",
+      "Scanning JPA.",
+      "Creación de topics Kafka."
+    ],
+    "correctIndex": 0,
+    "explanation": "Es method validation y suele aplicarse mediante infraestructura/proxy. No sustituye invariantes internas ni validación de entrada HTTP. Referencia: §10.1.",
+    "source": "spring-guide.md"
+  },
+  {
+    "id": "spring-040",
+    "category": "spring",
+    "topic": "Configuración, arquitectura y Spring MVC",
+    "question": "Una creación exitosa devuelve `201 Created`. ¿Qué header mejora el contrato?",
+    "options": [
+      "Ningún header puede usarse con 201.",
+      "`WWW-Authenticate` sin autenticación.",
+      "`Location` con URI del nuevo recurso.",
+      "`Content-Encoding: SQL`."
+    ],
+    "correctIndex": 2,
+    "explanation": "`ResponseEntity.created(location)` expresa status y Location; el body puede contener representación. Referencia: §10.1–10.2.",
+    "source": "spring-guide.md"
+  },
+  {
+    "id": "spring-041",
+    "category": "spring",
+    "topic": "Configuración, arquitectura y Spring MVC",
+    "question": "Un usuario autenticado intenta una operación para la que no tiene permiso. ¿Qué estado corresponde normalmente?",
+    "options": [
+      "`404 Created`.",
+      "`401 Unauthorized`.",
+      "`403 Forbidden`.",
+      "`200 OK` con `success=false` siempre."
+    ],
+    "correctIndex": 2,
+    "explanation": "401 indica que falta/fracasa autenticación; 403 que el principal autenticado no está autorizado. Puede existir política de ocultar recursos, pero debe ser deliberada. Referencia: §10.2 y §15.",
+    "source": "spring-guide.md"
+  },
+  {
+    "id": "spring-042",
+    "category": "spring",
+    "topic": "Configuración, arquitectura y Spring MVC",
+    "question": "¿Qué aporta `ProblemDetail`?",
+    "options": [
+      "Un stack trace público obligatorio.",
+      "Un reemplazo de logs.",
+      "Una entidad JPA para todos los errores.",
+      "Un modelo estructurado de errores HTTP alineado con RFC 9457."
+    ],
+    "correctIndex": 3,
+    "explanation": "Puede incluir status, title, detail, type, instance y propiedades. El contenido público debe ser estable y seguro; detalles técnicos se registran aparte. Referencia: §10.3.",
+    "source": "spring-guide.md"
+  },
+  {
+    "id": "spring-043",
+    "category": "spring",
+    "topic": "Configuración, arquitectura y Spring MVC",
+    "question": "¿Qué alcance tiene `@RestControllerAdvice`?",
+    "options": [
+      "Únicamente repositorios.",
+      "Manejo transversal de excepciones/binding para controllers seleccionados.",
+      "Todo método Java de la JVM.",
+      "Migraciones de esquema."
+    ],
+    "correctIndex": 1,
+    "explanation": "Combina advice de controllers y body de respuesta. Permite traducir excepciones de aplicación a contratos HTTP sin contaminar servicios con status codes. Referencia: §10.3.",
+    "source": "spring-guide.md"
+  },
+  {
+    "id": "spring-044",
+    "category": "spring",
+    "topic": "Configuración, arquitectura y Spring MVC",
+    "question": "¿Qué headers participan principalmente en negociación de contenido?",
+    "options": [
+      "Ninguno; siempre es JSON.",
+      "`Accept` para respuesta y `Content-Type` para representación enviada.",
+      "`Location` y `ETag` exclusivamente.",
+      "Solo `Host`."
+    ],
+    "correctIndex": 1,
+    "explanation": "MVC selecciona handler/converter compatibles. Boot suele configurar JSON, pero el protocolo no debe asumirlo sin media types. Referencia: §9.2.",
+    "source": "spring-guide.md"
+  },
+  {
+    "id": "spring-045",
+    "category": "spring",
+    "topic": "Configuración, arquitectura y Spring MVC",
+    "question": "Para evitar duplicar un pago ante reintentos de POST, ¿qué patrón es pertinente?",
+    "options": [
+      "Una clave de idempotencia persistida y asociada al resultado.",
+      "Deshabilitar toda validación.",
+      "Cambiar el método a GET con efectos.",
+      "Confiar en que la red nunca repite."
+    ],
+    "correctIndex": 0,
+    "explanation": "El servidor reconoce reintentos de la misma operación y devuelve/continúa el resultado compatible. Spring no ofrece una anotación universal que resuelva la persistencia y concurrencia del patrón. Referencia: §10.4.",
+    "source": "spring-guide.md"
+  },
+  {
+    "id": "spring-046",
+    "category": "spring",
+    "topic": "Configuración, arquitectura y Spring MVC",
+    "question": "¿Qué propiedad HTTP debe respetar un endpoint GET?",
+    "options": [
+      "Crear siempre un recurso.",
+      "Ser seguro: no producir un cambio de negocio solicitado por la lectura.",
+      "Exigir body de escritura.",
+      "No poder cachearse nunca."
+    ],
+    "correctIndex": 1,
+    "explanation": "Métricas técnicas pueden cambiar, pero un GET no debe usarse para “cancelar” o “pagar”. Seguridad e idempotencia del protocolo permiten clientes, caches y reintentos razonables. Referencia: §10.4.",
+    "source": "spring-guide.md"
+  },
+  {
+    "id": "spring-047",
+    "category": "spring",
+    "topic": "Configuración, arquitectura y Spring MVC",
+    "question": "Una colección puede tener millones de productos. ¿Qué contrato conviene en GET de búsqueda?",
+    "options": [
+      "Paginación/límite y orden determinista.",
+      "Devolver todo siempre.",
+      "Crear un bean por fila singleton.",
+      "Usar `Thread.sleep` para controlar carga."
+    ],
+    "correctIndex": 0,
+    "explanation": "El límite protege memoria/latencia y el orden estable evita duplicados/saltos al navegar. Offset o cursor se eligen según datos y consistencia. Referencia: §9–10 y acceso a datos.",
+    "source": "spring-guide.md"
+  },
+  {
+    "id": "spring-048",
+    "category": "spring",
+    "topic": "Configuración, arquitectura y Spring MVC",
+    "question": "Serializar una relación JPA lazy después de cerrar la transacción puede provocar:",
+    "options": [
+      "Una nueva base de datos.",
+      "Conversión automática a DTO óptimo.",
+      "Compilación fallida siempre.",
+      "Carga inesperada o `LazyInitializationException`, además de N+1."
+    ],
+    "correctIndex": 3,
+    "explanation": "Los DTOs y consultas específicas hacen explícitos los datos requeridos. Mantener sesión abierta hasta la vista puede ocultar consultas y no resuelve el contrato externo. Referencia: §8.1 y §11.4.",
+    "source": "spring-guide.md"
+  },
+  {
+    "id": "spring-049",
+    "category": "spring",
+    "topic": "Configuración, arquitectura y Spring MVC",
+    "question": "`@RestController` equivale conceptualmente a:",
+    "options": [
+      "`@Service` + `@Async`.",
+      "`@Repository` + `@Transactional`.",
+      "`@Controller` + semántica `@ResponseBody` para los handlers.",
+      "`@Configuration` + `@Bean`."
+    ],
+    "correctIndex": 2,
+    "explanation": "El valor devuelto se escribe mediante converters en la respuesta, en vez de interpretarse normalmente como nombre de vista. Referencia: §9.",
+    "source": "spring-guide.md"
+  },
+  {
+    "id": "spring-050",
+    "category": "spring",
+    "topic": "Configuración, arquitectura y Spring MVC",
+    "question": "¿Cuándo resulta útil `ResponseEntity<T>`?",
+    "options": [
+      "Cuando el método necesita controlar status, headers y body.",
+      "Para ejecutar una transacción JPA.",
+      "Para crear un mock.",
+      "Para declarar un bean singleton."
+    ],
+    "correctIndex": 0,
+    "explanation": "Puede devolver 201+Location, 204 sin body u otros contratos. No es obligatorio cuando defaults de status/body ya expresan lo necesario. Referencia: §9–10.",
+    "source": "spring-guide.md"
+  },
+  {
+    "id": "spring-051",
+    "category": "spring",
+    "topic": "Datos, transacciones, AOP e integración",
+    "question": "¿Qué diferencia básica existe entre `JdbcTemplate` y JPA?",
+    "options": [
+      "JdbcTemplate deja SQL/mapeo explícitos; JPA añade contexto de persistencia, entidades y dirty checking.",
+      "JdbcTemplate no usa base de datos.",
+      "JPA solo funciona con MongoDB.",
+      "Ambos generan exactamente el mismo SQL siempre."
+    ],
+    "correctIndex": 0,
+    "explanation": "JDBC ofrece control visible y menos modelo implícito; JPA modela unidad de trabajo y asociaciones. La elección depende de consultas y dominio, no de una jerarquía universal de “mejor”. Referencia: §11.1–11.2.",
+    "source": "spring-guide.md"
+  },
+  {
+    "id": "spring-052",
+    "category": "spring",
+    "topic": "Datos, transacciones, AOP e integración",
+    "question": "Una entidad JPA está `managed` y cambia un campo dentro de transacción. ¿Qué puede ocurrir al commit?",
+    "options": [
+      "El objeto queda inmutable.",
+      "Nada puede persistirse sin serializar JSON.",
+      "Dirty checking detecta el cambio y sincroniza un UPDATE sin llamar `save` otra vez necesariamente.",
+      "Se convierte en bean prototype."
+    ],
+    "correctIndex": 2,
+    "explanation": "El contexto mantiene snapshot/seguimiento y hace flush según reglas. `save` no equivale siempre a SQL inmediato y el commit puede sincronizar cambios pendientes. Referencia: §11.2.",
+    "source": "spring-guide.md"
+  },
+  {
+    "id": "spring-053",
+    "category": "spring",
+    "topic": "Datos, transacciones, AOP e integración",
+    "question": "¿Qué estado JPA tiene una instancia nueva aún no asociada al contexto?",
+    "options": [
+      "Managed.",
+      "Transient.",
+      "Removed.",
+      "Committed."
+    ],
+    "correctIndex": 1,
+    "explanation": "Al persistir puede volverse managed; al salir/cerrar puede quedar detached; `remove` marca eliminación. Estos estados explican dirty checking y lazy loading. Referencia: §11.2.",
+    "source": "spring-guide.md"
+  },
+  {
+    "id": "spring-054",
+    "category": "spring",
+    "topic": "Datos, transacciones, AOP e integración",
+    "question": "¿Cuándo un nombre de query derivada de Spring Data deja de ser buena opción?",
+    "options": [
+      "Cuando acumula muchas condiciones/joins y oculta una consulta compleja.",
+      "Cuando expresa una condición sencilla y legible.",
+      "Cuando devuelve `Page`.",
+      "Cuando el repositorio es una interfaz."
+    ],
+    "correctIndex": 0,
+    "explanation": "Usa `@Query`, Specification, proyección o repositorio personalizado según el caso. La abstracción no debe volver ilegible el contrato ni ocultar rendimiento crítico. Referencia: §11.3.",
+    "source": "spring-guide.md"
+  },
+  {
+    "id": "spring-055",
+    "category": "spring",
+    "topic": "Datos, transacciones, AOP e integración",
+    "question": "Una consulta obtiene 100 órdenes y al acceder a sus líneas lanza 100 consultas adicionales. ¿Qué problema es?",
+    "options": [
+      "CSRF.",
+      "Deadlock Java obligatorio.",
+      "Bean cycle.",
+      "N+1."
+    ],
+    "correctIndex": 3,
+    "explanation": "Una consulta inicial más N cargas por asociación. Soluciones incluyen fetch join, EntityGraph, DTO/proyección o consulta específica; volver todo EAGER no es solución universal. Referencia: §11.4.",
+    "source": "spring-guide.md"
+  },
+  {
+    "id": "spring-056",
+    "category": "spring",
+    "topic": "Datos, transacciones, AOP e integración",
+    "question": "¿Qué demuestra una constraint `UNIQUE(email)` que una validación previa `existsByEmail` no garantiza sola?",
+    "options": [
+      "Que el controller es singleton.",
+      "Arbitraje correcto ante inserciones concurrentes en la base.",
+      "Que no se necesita transacción.",
+      "Que el email existe en Internet."
+    ],
+    "correctIndex": 1,
+    "explanation": "Dos solicitudes pueden pasar el check antes de insertar. La base protege la invariancia concurrente; la aplicación traduce la violación a un error de dominio/HTTP. Referencia: §10.1 y §11.",
+    "source": "spring-guide.md"
+  },
+  {
+    "id": "spring-057",
+    "category": "spring",
+    "topic": "Datos, transacciones, AOP e integración",
+    "question": "¿Por qué no se recomienda `ddl-auto=create` como estrategia de producción?",
+    "options": [
+      "Porque impide unit tests.",
+      "Porque JPA nunca crea tablas.",
+      "Puede recrear/perder esquema y no ofrece evolución versionada revisable.",
+      "Porque obliga a usar Kafka."
+    ],
+    "correctIndex": 2,
+    "explanation": "Herramientas de migración como Flyway/Liquibase registran cambios, orden y compatibilidad. Generación automática sirve en aprendizaje o contextos desechables controlados. Referencia: §11.5.",
+    "source": "spring-guide.md"
+  },
+  {
+    "id": "spring-058",
+    "category": "spring",
+    "topic": "Datos, transacciones, AOP e integración",
+    "question": "¿Dónde se coloca normalmente `@Transactional`?",
+    "options": [
+      "En el límite público del caso de uso que forma una unidad de negocio.",
+      "En cada getter de entidad.",
+      "En el DTO HTTP.",
+      "En `pom.xml`."
+    ],
+    "correctIndex": 0,
+    "explanation": "El servicio de aplicación coordina repositorios bajo una unidad. Poner transacciones demasiado abajo puede fragmentar atomicidad; demasiado amplias retienen recursos durante I/O remoto. Referencia: §12.1.",
+    "source": "spring-guide.md"
+  },
+  {
+    "id": "spring-059",
+    "category": "spring",
+    "topic": "Datos, transacciones, AOP e integración",
+    "question": "¿Qué excepciones provocan rollback por defecto en la demarcación declarativa típica?",
+    "options": [
+      "Ninguna.",
+      "Toda checked exception siempre.",
+      "`RuntimeException` y `Error`.",
+      "Solo `SQLException` checked."
+    ],
+    "correctIndex": 2,
+    "explanation": "Las checked no provocan rollback por defecto; se configura `rollbackFor` si el contrato lo requiere. Capturar y ocultar una runtime puede permitir commit. Referencia: §12.2.",
+    "source": "spring-guide.md"
+  },
+  {
+    "id": "spring-060",
+    "category": "spring",
+    "topic": "Datos, transacciones, AOP e integración",
+    "question": "Un método `@Transactional` público llama a otro método `@Transactional` del mismo objeto mediante `this`. ¿Qué problema aparece?",
+    "options": [
+      "Se inicia obligatoriamente una nueva transacción.",
+      "La llamada interna no cruza el proxy, por lo que la segunda configuración puede no aplicarse.",
+      "Ambos métodos se vuelven privados.",
+      "Spring crea siempre un segundo contexto."
+    ],
+    "correctIndex": 1,
+    "explanation": "La interceptación proxy ocurre cuando un llamador externo usa la referencia proxy. Coloca el límite correcto, extrae otro bean o usa `TransactionTemplate` si necesita control explícito. Referencia: §12.6 y §13.1.",
+    "source": "spring-guide.md"
+  },
+  {
+    "id": "spring-061",
+    "category": "spring",
+    "topic": "Datos, transacciones, AOP e integración",
+    "question": "¿Qué hace propagación `REQUIRED`?",
+    "options": [
+      "Siempre suspende y crea otra.",
+      "Usa la transacción existente o crea una si no hay.",
+      "Prohíbe cualquier transacción.",
+      "Exige una preexistente y falla si no hay."
+    ],
+    "correctIndex": 1,
+    "explanation": "Es la propagación predeterminada. `MANDATORY` exige existente; `REQUIRES_NEW` crea independiente suspendiendo la actual. Referencia: §12.3.",
+    "source": "spring-guide.md"
+  },
+  {
+    "id": "spring-062",
+    "category": "spring",
+    "topic": "Datos, transacciones, AOP e integración",
+    "question": "¿Qué riesgo tiene abusar de `REQUIRES_NEW` dentro de ciclos concurrentes?",
+    "options": [
+      "Puede requerir conexiones adicionales y agotar el pool.",
+      "Convierte SQL en MongoDB.",
+      "Evita todo rollback.",
+      "Hace singleton a cada entidad."
+    ],
+    "correctIndex": 0,
+    "explanation": "La transacción exterior puede retener una conexión mientras la interior pide otra. Además, la independencia de commit quizá contradiga el negocio. Referencia: §12.3.",
+    "source": "spring-guide.md"
+  },
+  {
+    "id": "spring-063",
+    "category": "spring",
+    "topic": "Datos, transacciones, AOP e integración",
+    "question": "`@Transactional(readOnly=true)` significa:",
+    "options": [
+      "Que no se abre transacción.",
+      "Que la base rechaza físicamente cualquier UPDATE en todos los motores.",
+      "Una declaración/pista que puede optimizar, no una barrera universal contra toda escritura.",
+      "Que el método se ejecuta sin proxy."
+    ],
+    "correctIndex": 2,
+    "explanation": "El efecto depende de manager, provider, driver y motor. Comunica intención y puede ajustar flush/conexión, pero la integridad debe depender de permisos/contratos reales. Referencia: §12.5.",
+    "source": "spring-guide.md"
+  },
+  {
+    "id": "spring-064",
+    "category": "spring",
+    "topic": "Datos, transacciones, AOP e integración",
+    "question": "¿Por qué no debe mantenerse una transacción DB abierta durante una llamada HTTP lenta?",
+    "options": [
+      "Porque `@Transactional` deshabilita red.",
+      "Porque HTTP no puede llamarse desde Java.",
+      "Porque toda llamada remota se revierte con la base automáticamente.",
+      "Retiene conexión/locks y amplía contención y tiempo de fallo."
+    ],
+    "correctIndex": 3,
+    "explanation": "Separa consulta/decisión e integra mediante patrones de resiliencia/consistencia. Una transacción local no incluye el servicio remoto y aumenta costo si espera I/O. Referencia: §12.6.",
+    "source": "spring-guide.md"
+  },
+  {
+    "id": "spring-065",
+    "category": "spring",
+    "topic": "Datos, transacciones, AOP e integración",
+    "question": "¿Qué patrón ayuda a publicar un evento durable coherente con un cambio de base local?",
+    "options": [
+      "`@Async` sin persistencia.",
+      "Llamar broker después de commit sin registrar intención.",
+      "Guardar el evento solo en memoria estática.",
+      "Transactional outbox."
+    ],
+    "correctIndex": 3,
+    "explanation": "El cambio y registro outbox se confirman en una transacción; otro proceso publica y marca. Requiere idempotencia porque puede haber entrega repetida. Referencia: §12.6 y §19.2.",
+    "source": "spring-guide.md"
+  },
+  {
+    "id": "spring-066",
+    "category": "spring",
+    "topic": "Datos, transacciones, AOP e integración",
+    "question": "¿Qué mecanismo usa principalmente Spring AOP?",
+    "options": [
+      "Reescribir todas las tablas SQL.",
+      "Un broker externo obligatorio.",
+      "Herencia múltiple de clases Java.",
+      "Proxies que interceptan llamadas a métodos de beans."
+    ],
+    "correctIndex": 3,
+    "explanation": "Puede usar proxies JDK basados en interfaz o proxies de clase. Esto explica auto-invocación, restricciones de métodos final/private e identidad del bean expuesto. Referencia: §13.",
+    "source": "spring-guide.md"
+  },
+  {
+    "id": "spring-067",
+    "category": "spring",
+    "topic": "Datos, transacciones, AOP e integración",
+    "question": "¿Por qué un método `final` limita un proxy basado en clase?",
+    "options": [
+      "No puede sobrescribirse para interceptar la llamada.",
+      "No puede contener bytecode.",
+      "No puede recibir parámetros.",
+      "Se vuelve estático."
+    ],
+    "correctIndex": 0,
+    "explanation": "CGLIB/subclass proxy requiere override. Un proxy JDK intercepta a través de interfaces, pero la llamada debe hacerse mediante el proxy y un método del contrato. Referencia: §13.",
+    "source": "spring-guide.md"
+  },
+  {
+    "id": "spring-068",
+    "category": "spring",
+    "topic": "Datos, transacciones, AOP e integración",
+    "question": "¿Cuál es un uso apropiado de AOP personalizado?",
+    "options": [
+      "Medición uniforme de métodos anotados.",
+      "Ocultar reglas centrales de cálculo que nadie puede localizar.",
+      "Crear entidades fuera del dominio.",
+      "Reemplazar todo control de flujo."
+    ],
+    "correctIndex": 0,
+    "explanation": "Concerns transversales como métricas/auditoría técnica encajan si pointcuts son acotados. La lógica de negocio invisible dificulta lectura y pruebas. Referencia: §13.2.",
+    "source": "spring-guide.md"
+  },
+  {
+    "id": "spring-069",
+    "category": "spring",
+    "topic": "Datos, transacciones, AOP e integración",
+    "question": "¿Qué starter Boot 4 corresponde al cliente HTTP bloqueante moderno?",
+    "options": [
+      "`spring-boot-starter-mockito`.",
+      "`spring-boot-starter-webclient` únicamente.",
+      "`spring-boot-starter-jpa-client`.",
+      "`spring-boot-starter-restclient`."
+    ],
+    "correctIndex": 3,
+    "explanation": "Incluye soporte para `RestClient`/clientes HTTP bloqueantes. `webclient` corresponde al cliente reactivo. La versión exacta debe verificarse en el BOM. Referencia: §14.1.",
+    "source": "spring-guide.md"
+  },
+  {
+    "id": "spring-070",
+    "category": "spring",
+    "topic": "Datos, transacciones, AOP e integración",
+    "question": "Al integrar un API remoto, ¿qué configuración es indispensable aunque el cliente compile?",
+    "options": [
+      "Solo aumentar heap.",
+      "Omitir status HTTP.",
+      "Marcar todos los métodos `synchronized`.",
+      "Timeouts y política explícita de errores/reintentos."
+    ],
+    "correctIndex": 3,
+    "explanation": "Sin límites una dependencia puede consumir hilos/conexiones indefinidamente. Los reintentos solo aplican a fallos transitorios y operaciones seguras/idempotentes, con backoff y límite. Referencia: §14.1.",
+    "source": "spring-guide.md"
+  },
+  {
+    "id": "spring-071",
+    "category": "spring",
+    "topic": "Datos, transacciones, AOP e integración",
+    "question": "¿Cómo se ejecuta por defecto un `@EventListener` de evento de aplicación simple?",
+    "options": [
+      "Siempre después del commit en otro proceso.",
+      "Siempre en Kafka.",
+      "Solo al reiniciar.",
+      "Normalmente de forma síncrona en el hilo publicador."
+    ],
+    "correctIndex": 3,
+    "explanation": "Es comunicación dentro del contexto/proceso. `@Async` cambia ejecución local; `@TransactionalEventListener` coordina fase transaccional, pero ninguno crea durabilidad externa por sí solo. Referencia: §14.2.",
+    "source": "spring-guide.md"
+  },
+  {
+    "id": "spring-072",
+    "category": "spring",
+    "topic": "Datos, transacciones, AOP e integración",
+    "question": "¿Qué problema debe resolver una caché además de añadir `@Cacheable`?",
+    "options": [
+      "TTL/capacidad, claves, invalidez, stampede y comportamiento ante fallo.",
+      "Solo nombre del método.",
+      "La compilación del JDK.",
+      "El formato de Git commits."
+    ],
+    "correctIndex": 0,
+    "explanation": "Una caché introduce consistencia temporal y memoria. `@Cacheable` aplica vía proxy y no convierte la caché en fuente durable. Referencia: §14.3.",
+    "source": "spring-guide.md"
+  },
+  {
+    "id": "spring-073",
+    "category": "spring",
+    "topic": "Datos, transacciones, AOP e integración",
+    "question": "Una aplicación tiene tres réplicas y un método `@Scheduled` por hora. ¿Qué puede ocurrir?",
+    "options": [
+      "Las tres pueden ejecutarlo si no existe coordinación distribuida.",
+      "Spring elige automáticamente un líder global.",
+      "Solo Maven lo ejecuta.",
+      "El método nunca se ejecuta en producción."
+    ],
+    "correctIndex": 0,
+    "explanation": "Scheduling es local al proceso. Para ejecución única se necesita plataforma de jobs, lock/leader o un diseño idempotente según requisito. Referencia: §14.4.",
+    "source": "spring-guide.md"
+  },
+  {
+    "id": "spring-074",
+    "category": "spring",
+    "topic": "Datos, transacciones, AOP e integración",
+    "question": "¿Qué debe configurarse al usar `@Async` en producción?",
+    "options": [
+      "Solo el nombre del método.",
+      "Executor, capacidad/cola, rechazo, contexto y manejo de excepciones.",
+      "Una entidad JPA por thread.",
+      "Un perfil por tarea."
+    ],
+    "correctIndex": 1,
+    "explanation": "La asincronía no elimina capacidad finita. Además aplica limitación de proxy/auto-invocación y las tareas críticas necesitan persistencia/supervisión. Referencia: §14.4.",
+    "source": "spring-guide.md"
+  },
+  {
+    "id": "spring-075",
+    "category": "spring",
+    "topic": "Datos, transacciones, AOP e integración",
+    "question": "Un consumidor Kafka procesa el mismo mensaje dos veces. ¿Qué propiedad debe tener idealmente?",
+    "options": [
+      "Estado solo en memoria sin clave.",
+      "Idempotencia o deduplicación consistente.",
+      "Dependencia del orden global de todos los topics.",
+      "Fallar siempre en el segundo intento."
+    ],
+    "correctIndex": 1,
+    "explanation": "Sistemas de mensajería pueden entregar al menos una vez. Usa identificadores, operaciones condicionales o inbox/deduplicación; los offsets por sí solos no corrigen efectos parciales. Referencia: §19.2.",
+    "source": "spring-guide.md"
+  },
+  {
+    "id": "spring-076",
+    "category": "spring",
+    "topic": "Security, testing, operación y ecosistema",
+    "question": "¿Dónde actúa principalmente Spring Security en una aplicación servlet?",
+    "options": [
+      "Durante compilación Maven exclusivamente.",
+      "En una `SecurityFilterChain` antes de `DispatcherServlet`.",
+      "Después de enviar la respuesta.",
+      "Solo dentro de repositorios JPA."
+    ],
+    "correctIndex": 1,
+    "explanation": "Los filtros cargan/establecen autenticación, manejan excepciones y autorización web antes del controller. La seguridad de método añade otra capa mediante proxies. Referencia: §15.",
+    "source": "spring-guide.md"
+  },
+  {
+    "id": "spring-077",
+    "category": "spring",
+    "topic": "Security, testing, operación y ecosistema",
+    "question": "¿Qué diferencia existe entre autenticación y autorización?",
+    "options": [
+      "GET frente a POST.",
+      "Crear bean frente a destruirlo.",
+      "Identificar al principal frente a decidir qué puede hacer.",
+      "Hash frente a cifrado únicamente."
+    ],
+    "correctIndex": 2,
+    "explanation": "Autenticación produce una identidad/credenciales verificadas; autorización evalúa permisos sobre una acción/recurso. Un usuario autenticado puede recibir 403. Referencia: §15.",
+    "source": "spring-guide.md"
+  },
+  {
+    "id": "spring-078",
+    "category": "spring",
+    "topic": "Security, testing, operación y ecosistema",
+    "question": "¿Por qué no debe almacenarse una contraseña con cifrado reversible?",
+    "options": [
+      "El servidor no necesita recuperar el original; debe verificar con hash adaptativo, salt y costo.",
+      "Porque Spring no acepta strings.",
+      "Porque JWT cifra contraseñas automáticamente.",
+      "Porque toda base aplica hashing por default."
+    ],
+    "correctIndex": 0,
+    "explanation": "`PasswordEncoder` compara hash y permite evolución de algoritmo. Una fuga de clave de cifrado reversible revelaría todas las contraseñas. Referencia: §15.2.",
+    "source": "spring-guide.md"
+  },
+  {
+    "id": "spring-079",
+    "category": "spring",
+    "topic": "Security, testing, operación y ecosistema",
+    "question": "¿Cuándo sigue siendo relevante CSRF?",
+    "options": [
+      "Nunca si se usa Spring.",
+      "Cuando el navegador envía credenciales automáticamente, como cookies de sesión.",
+      "Solo en aplicaciones CLI.",
+      "Solo para consultas SQL."
+    ],
+    "correctIndex": 1,
+    "explanation": "Un sitio atacante puede inducir solicitudes con cookies del usuario. Una API stateless con bearer token no enviado automáticamente tiene otro modelo; deshabilitar CSRF debe seguir ese análisis, no una receta. Referencia: §15.3.",
+    "source": "spring-guide.md"
+  },
+  {
+    "id": "spring-080",
+    "category": "spring",
+    "topic": "Security, testing, operación y ecosistema",
+    "question": "¿Qué resuelve CORS?",
+    "options": [
+      "Una política del navegador sobre solicitudes entre orígenes.",
+      "Autenticar usuarios por sí solo.",
+      "Cifrar tráfico en lugar de TLS.",
+      "Evitar SQL injection automáticamente."
+    ],
+    "correctIndex": 0,
+    "explanation": "CORS no protege clientes no navegador ni sustituye autorización. Define orígenes, métodos, headers y credenciales mínimas. Referencia: §15.3.",
+    "source": "spring-guide.md"
+  },
+  {
+    "id": "spring-081",
+    "category": "spring",
+    "topic": "Security, testing, operación y ecosistema",
+    "question": "¿Qué habilita `@EnableMethodSecurity`?",
+    "options": [
+      "Anotaciones como `@PreAuthorize` en métodos interceptados.",
+      "HTTPS automático sin certificado.",
+      "Migraciones Flyway.",
+      "JUnit Platform."
+    ],
+    "correctIndex": 0,
+    "explanation": "La autorización se aplica al cruzar el proxy del bean. Reglas complejas pueden delegarse en un componente de autorización probado. Referencia: §15.4.",
+    "source": "spring-guide.md"
+  },
+  {
+    "id": "spring-082",
+    "category": "spring",
+    "topic": "Security, testing, operación y ecosistema",
+    "question": "¿Qué principio debe guiar reglas de acceso?",
+    "options": [
+      "Permitir todo y confiar en el frontend.",
+      "Guardar tokens completos en logs.",
+      "Denegar por defecto y otorgar mínimo privilegio.",
+      "Dar rol admin a toda cuenta autenticada."
+    ],
+    "correctIndex": 2,
+    "explanation": "La seguridad del cliente no impide llamadas directas al servidor. Roles/scopes y reglas por recurso deben evaluarse en backend y auditarse sin exponer secretos. Referencia: §15.5.",
+    "source": "spring-guide.md"
+  },
+  {
+    "id": "spring-083",
+    "category": "spring",
+    "topic": "Security, testing, operación y ecosistema",
+    "question": "¿Qué prueba debe preferirse para una regla pura en `ProductService` con dependencias de constructor?",
+    "options": [
+      "Un servidor real y base para cada condición.",
+      "Una unitaria sin arrancar Spring.",
+      "`@SpringBootTest` obligatoriamente.",
+      "Una prueba manual únicamente."
+    ],
+    "correctIndex": 1,
+    "explanation": "Construir servicio y dobles/objetos reales ofrece feedback rápido. El contexto se reserva para wiring, configuración e infraestructura Spring. Referencia: §16.",
+    "source": "spring-guide.md"
+  },
+  {
+    "id": "spring-084",
+    "category": "spring",
+    "topic": "Security, testing, operación y ecosistema",
+    "question": "¿Qué carga `@WebMvcTest(ProductController.class)`?",
+    "options": [
+      "Un navegador remoto.",
+      "Todos los repositorios y brokers reales.",
+      "Ningún componente MVC.",
+      "Un slice MVC limitado: controller e infraestructura web seleccionada, no toda la aplicación."
+    ],
+    "correctIndex": 3,
+    "explanation": "Auto-configura MockMvc y beans web relevantes. Colaboradores del controller se proporcionan/importan explícitamente, por ejemplo con `@MockitoBean` en Spring moderno. Referencia: §16.2.",
+    "source": "spring-guide.md"
+  },
+  {
+    "id": "spring-085",
+    "category": "spring",
+    "topic": "Security, testing, operación y ecosistema",
+    "question": "¿Qué comprueba MockMvc?",
+    "options": [
+      "El socket/TLS real completo.",
+      "El pipeline Spring MVC sin iniciar un servidor HTTP real.",
+      "Solo métodos privados.",
+      "La base PostgreSQL automáticamente."
+    ],
+    "correctIndex": 1,
+    "explanation": "Ejecuta mapping, binding, validation, converters, advice y filtros configurados mediante infraestructura mock servlet. Para protocolo/red real se inicia servidor con puerto aleatorio. Referencia: §16.2.",
+    "source": "spring-guide.md"
+  },
+  {
+    "id": "spring-086",
+    "category": "spring",
+    "topic": "Security, testing, operación y ecosistema",
+    "question": "¿Qué diferencia generacional debe cuidarse al reemplazar un bean por mock en tests Spring?",
+    "options": [
+      "Todos usan `@Mock` de JUnit.",
+      "`@BeanMock` es parte de Java.",
+      "No existe ninguna anotación.",
+      "Framework moderno ofrece `@MockitoBean`; proyectos Boot anteriores usaban `@MockBean`."
+    ],
+    "correctIndex": 3,
+    "explanation": "Consulta la documentación de la versión real. `@MockitoBean` modifica el ApplicationContext; `@Mock` de Mockito por sí solo no reemplaza un bean del contexto. Referencia: §16.2.",
+    "source": "spring-guide.md"
+  },
+  {
+    "id": "spring-087",
+    "category": "spring",
+    "topic": "Security, testing, operación y ecosistema",
+    "question": "¿Qué slice corresponde a repositorios JPA?",
+    "options": [
+      "`@JsonTest` únicamente.",
+      "`@WebMvcTest`.",
+      "`@RestClientTest`.",
+      "`@DataJpaTest`."
+    ],
+    "correctIndex": 3,
+    "explanation": "Configura infraestructura JPA enfocada y transacciones de test según Boot. Para comportamiento específico de PostgreSQL conviene usar ese motor real controlado. Referencia: §16.3.",
+    "source": "spring-guide.md"
+  },
+  {
+    "id": "spring-088",
+    "category": "spring",
+    "topic": "Security, testing, operación y ecosistema",
+    "question": "¿Qué detecta una prueba `@SpringBootTest` de contexto completo que una unitaria no?",
+    "options": [
+      "Ausencia absoluta de vulnerabilidades.",
+      "Wiring, condiciones, configuración y creación real de beans.",
+      "Disponibilidad de producción futura.",
+      "Corrección matemática automática de todas las reglas."
+    ],
+    "correctIndex": 1,
+    "explanation": "Un `contextLoads` detecta configuración rota, pero necesita escenarios adicionales para comportamiento. Es más lento y no reemplaza pruebas unitarias. Referencia: §16.4.",
+    "source": "spring-guide.md"
+  },
+  {
+    "id": "spring-089",
+    "category": "spring",
+    "topic": "Security, testing, operación y ecosistema",
+    "question": "¿Qué hace `@SpringBootTest(webEnvironment = RANDOM_PORT)`?",
+    "options": [
+      "Deshabilita el contexto.",
+      "Usa solo MockMvc sin servidor.",
+      "Inicia un servidor real en un puerto disponible para probar HTTP del proceso.",
+      "Publica a producción."
+    ],
+    "correctIndex": 2,
+    "explanation": "Permite cliente HTTP contra red local y stack del servidor. Dependencias externas aún deben controlarse y la prueba cuesta más que un slice. Referencia: §16.4.",
+    "source": "spring-guide.md"
+  },
+  {
+    "id": "spring-090",
+    "category": "spring",
+    "topic": "Security, testing, operación y ecosistema",
+    "question": "¿Por qué demasiadas combinaciones distintas de properties/mocks ralentizan Spring Test?",
+    "options": [
+      "Java recompila el JDK por cada test.",
+      "Cada propiedad crea una base física obligatoria.",
+      "Mockito descarga Internet.",
+      "Generan claves de contexto diferentes y reducen reutilización del cache."
+    ],
+    "correctIndex": 3,
+    "explanation": "Spring cachea contextos equivalentes. Configuraciones divergentes y `@DirtiesContext` multiplican arranques; estandariza slices y altera solo lo necesario. Referencia: §16.5.",
+    "source": "spring-guide.md"
+  },
+  {
+    "id": "spring-091",
+    "category": "spring",
+    "topic": "Security, testing, operación y ecosistema",
+    "question": "¿Qué dependencia habilita Actuator?",
+    "options": [
+      "`java.management.actuator`.",
+      "`spring-boot-starter-junit`.",
+      "`spring-data-health`.",
+      "`spring-boot-starter-actuator`."
+    ],
+    "correctIndex": 3,
+    "explanation": "Aporta endpoints/capacidades de monitorización según exposición y seguridad configuradas. No todos se publican automáticamente por HTTP. Referencia: §17.",
+    "source": "spring-guide.md"
+  },
+  {
+    "id": "spring-092",
+    "category": "spring",
+    "topic": "Security, testing, operación y ecosistema",
+    "question": "¿Qué endpoints requieren especial protección por posible información sensible?",
+    "options": [
+      "Únicamente endpoints POST de negocio.",
+      "Ninguno; Actuator siempre es público.",
+      "`env`, `heapdump`, `threaddump`, `beans` y similares.",
+      "Solo `/favicon.ico`."
+    ],
+    "correctIndex": 2,
+    "explanation": "Pueden revelar configuración, memoria, clases o secretos. Expón el mínimo, separa puerto/red y autentica/autoriza según riesgo. Referencia: §17.",
+    "source": "spring-guide.md"
+  },
+  {
+    "id": "spring-093",
+    "category": "spring",
+    "topic": "Security, testing, operación y ecosistema",
+    "question": "¿Qué diferencia existe entre liveness y readiness?",
+    "options": [
+      "Ambas deben depender de todos los remotos siempre.",
+      "Son sinónimos exactos.",
+      "Readiness solo mide disco y liveness SQL.",
+      "Liveness indica si reiniciar; readiness si la instancia debe recibir tráfico."
+    ],
+    "correctIndex": 3,
+    "explanation": "Hacer liveness depender de una caída externa puede provocar reinicios masivos. Readiness retira tráfico temporalmente, pero también debe evitar fallos en cascada. Referencia: §17.2.",
+    "source": "spring-guide.md"
+  },
+  {
+    "id": "spring-094",
+    "category": "spring",
+    "topic": "Security, testing, operación y ecosistema",
+    "question": "¿Qué tres señales forman el núcleo de observabilidad descrito?",
+    "options": [
+      "Beans, scopes y profiles.",
+      "Maven, Gradle y Ant.",
+      "GET, POST y DELETE.",
+      "Logs, métricas y traces."
+    ],
+    "correctIndex": 3,
+    "explanation": "Logs explican eventos, métricas tendencias/cantidad y traces el recorrido distribuido. Correlación y cardinalidad controlada son fundamentales. Referencia: §17.1.",
+    "source": "spring-guide.md"
+  },
+  {
+    "id": "spring-095",
+    "category": "spring",
+    "topic": "Security, testing, operación y ecosistema",
+    "question": "¿Por qué no debe usarse un ID de usuario como tag de métrica sin límite?",
+    "options": [
+      "Porque cifra el ID.",
+      "Porque las métricas no aceptan texto nunca.",
+      "Porque impide logs.",
+      "Crea cardinalidad alta y costo/memoria excesivos en el backend."
+    ],
+    "correctIndex": 3,
+    "explanation": "Las dimensiones deben tener conjuntos acotados. IDs individuales pertenecen a logs/traces controlados, no a series temporales ilimitadas. Referencia: §17.1.",
+    "source": "spring-guide.md"
+  },
+  {
+    "id": "spring-096",
+    "category": "spring",
+    "topic": "Security, testing, operación y ecosistema",
+    "question": "¿Qué condición favorece WebFlux?",
+    "options": [
+      "Cálculo CPU-bound que requiere más núcleos mágicamente.",
+      "JDBC bloqueante envuelto en `Mono.just` sobre event loop.",
+      "Cadena no bloqueante de extremo a extremo, streaming y backpressure.",
+      "CRUD pequeño donde el equipo solo domina MVC y no hay necesidad."
+    ],
+    "correctIndex": 2,
+    "explanation": "WebFlux aporta modelo reactivo si clientes/drivers y procesamiento respetan no bloqueo. MVC, incluso con virtual threads, suele ser más simple para APIs bloqueantes. Referencia: §18.",
+    "source": "spring-guide.md"
+  },
+  {
+    "id": "spring-097",
+    "category": "spring",
+    "topic": "Security, testing, operación y ecosistema",
+    "question": "¿Qué representa `Mono<T>`?",
+    "options": [
+      "Un thread dedicado obligatorio.",
+      "Una lista mutable ilimitada.",
+      "Una transacción JPA.",
+      "Cero o un elemento asincrónico/reactivo."
+    ],
+    "correctIndex": 3,
+    "explanation": "`Flux<T>` representa cero a muchos. Son publishers perezosos; no significan por sí solos que la operación interna sea no bloqueante. Referencia: §18.",
+    "source": "spring-guide.md"
+  },
+  {
+    "id": "spring-098",
+    "category": "spring",
+    "topic": "Security, testing, operación y ecosistema",
+    "question": "¿Qué problema específico resuelve Spring Batch mejor que un simple `@Scheduled` largo?",
+    "options": [
+      "Jobs finitos reiniciables, metadatos, steps, chunks, skip/retry y escalado.",
+      "Autenticación OAuth.",
+      "Rendering MVC.",
+      "Component scanning."
+    ],
+    "correctIndex": 0,
+    "explanation": "Batch modela ejecuciones y progreso durable. El scheduler puede disparar un job, pero no aporta por sí solo reinicio y trazabilidad de procesamiento masivo. Referencia: §19.3.",
+    "source": "spring-guide.md"
+  },
+  {
+    "id": "spring-099",
+    "category": "spring",
+    "topic": "Security, testing, operación y ecosistema",
+    "question": "¿Qué objetivo tiene Spring Modulith?",
+    "options": [
+      "Reemplazar JPMS y Maven siempre.",
+      "Ayudar a estructurar/verificar módulos de dominio dentro de una aplicación Boot modular.",
+      "Dividir automáticamente todo en microservicios desplegados.",
+      "Crear modelos de IA."
+    ],
+    "correctIndex": 1,
+    "explanation": "Permite monolito modular, documentación, tests de módulos y eventos. Las fronteras pueden probarse antes de asumir el costo de distribución. Referencia: §19.6.",
+    "source": "spring-guide.md"
+  },
+  {
+    "id": "spring-100",
+    "category": "spring",
+    "topic": "Security, testing, operación y ecosistema",
+    "question": "¿Qué precaución es correcta al adoptar Spring Cloud?",
+    "options": [
+      "Importar un release train compatible con la versión de Boot y no duplicar capacidades de la plataforma sin necesidad.",
+      "Elegir la última versión independiente de cada módulo al azar.",
+      "Asumir que un circuit breaker elimina fallos.",
+      "Convertir toda aplicación en microservicios primero."
+    ],
+    "correctIndex": 0,
+    "explanation": "Spring Cloud coordina proyectos mediante BOM/matriz. Kubernetes u otra plataforma ya puede aportar discovery/config; circuit breakers requieren timeouts, límites y observabilidad y no reemplazan buen diseño. Referencia: §19.7.",
+    "source": "spring-guide.md"
+  }
+]

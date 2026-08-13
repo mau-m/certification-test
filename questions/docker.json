@@ -1,0 +1,2862 @@
+[
+  {
+    "id": "docker-001",
+    "category": "docker",
+    "topic": "Fundamentos y arquitectura de Docker",
+    "question": "Según la guía, ¿qué es exactamente una imagen Docker?",
+    "options": [
+      "Un servicio que almacena y distribuye contenedores",
+      "Una plantilla inmutable compuesta por capas",
+      "Un daemon que administra el ciclo de vida de los contenedores",
+      "Un proceso en ejecución con una capa escribible propia"
+    ],
+    "correctIndex": 1,
+    "explanation": "La guía define la imagen como 'plantilla inmutable, compuesta por capas', mientras que el contenedor es el proceso en ejecución creado a partir de ella.",
+    "source": "docker-guide.md"
+  },
+  {
+    "id": "docker-002",
+    "category": "docker",
+    "topic": "Fundamentos y arquitectura de Docker",
+    "question": "¿Cuál es la diferencia fundamental entre un contenedor y una máquina virtual según la guía?",
+    "options": [
+      "El contenedor comparte el kernel del host y aísla procesos, red y sistema de archivos con mecanismos del kernel; la VM incluye un SO invitado completo",
+      "El contenedor siempre consume más recursos que una VM",
+      "La VM comparte el kernel del host y el contenedor no",
+      "No existe diferencia real, son términos intercambiables"
+    ],
+    "correctIndex": 0,
+    "explanation": "La guía explica que una VM incluye un sistema operativo invitado completo, mientras que un contenedor comparte el kernel del host, por lo que suele iniciar más rápido y consumir menos.",
+    "source": "docker-guide.md"
+  },
+  {
+    "id": "docker-003",
+    "category": "docker",
+    "topic": "Fundamentos y arquitectura de Docker",
+    "question": "En el modelo cliente-daemon de Docker, ¿qué componente construye imágenes, crea redes/volúmenes y administra contenedores?",
+    "options": [
+      "El daemon (dockerd)",
+      "El contexto de Docker",
+      "El cliente (CLI)",
+      "El registro externo"
+    ],
+    "correctIndex": 0,
+    "explanation": "El cliente envía órdenes vía API al daemon (dockerd), que es quien realmente construye imágenes, crea redes y volúmenes, y administra los contenedores.",
+    "source": "docker-guide.md"
+  },
+  {
+    "id": "docker-004",
+    "category": "docker",
+    "topic": "Fundamentos y arquitectura de Docker",
+    "question": "¿Qué consecuencia práctica señala la guía sobre el comando `docker`?",
+    "options": [
+      "`docker` no puede existir si el daemon no está disponible",
+      "Borrar una imagen elimina automáticamente sus volúmenes nombrados",
+      "Toda imagen se considera 'corriendo' aunque no tenga contenedores activos",
+      "El contexto determina contra qué daemon opera la CLI"
+    ],
+    "correctIndex": 3,
+    "explanation": "La guía indica que el contexto determina contra qué daemon opera la CLI; también aclara que `docker` puede existir aunque el daemon no esté disponible, y que borrar un contenedor no borra su imagen ni sus volúmenes.",
+    "source": "docker-guide.md"
+  },
+  {
+    "id": "docker-005",
+    "category": "docker",
+    "topic": "Fundamentos y arquitectura de Docker",
+    "question": "Dos contenedores creados desde la misma imagen, ¿qué comparten y qué NO comparten según la guía?",
+    "options": [
+      "Comparten la capa escribible pero no las capas de solo lectura",
+      "Comparten todo, incluidos los archivos que escriben en tiempo de ejecución",
+      "Comparten las capas de solo lectura, pero tienen capa escribible, identidad y configuración independientes",
+      "No comparten nada entre sí"
+    ],
+    "correctIndex": 2,
+    "explanation": "La guía indica que dos contenedores de una misma imagen comparten las capas de solo lectura, pero tienen identidad, configuración y capa escribible independientes.",
+    "source": "docker-guide.md"
+  },
+  {
+    "id": "docker-006",
+    "category": "docker",
+    "topic": "Fundamentos y arquitectura de Docker",
+    "question": "¿Qué es un 'contexto' en Docker según la sección de arquitectura?",
+    "options": [
+      "Algo que agrupa la dirección y credenciales de un daemon",
+      "El conjunto de variables de entorno de un contenedor",
+      "Un directorio que se envía al daemon durante `docker build`",
+      "Un grupo de reglas de red aplicadas a un contenedor"
+    ],
+    "correctIndex": 0,
+    "explanation": "La guía define el contexto (`docker context`) como lo que agrupa la dirección y credenciales de un daemon; es distinto del 'contexto de build' usado en `docker build`.",
+    "source": "docker-guide.md"
+  },
+  {
+    "id": "docker-007",
+    "category": "docker",
+    "topic": "Fundamentos y arquitectura de Docker",
+    "question": "¿Qué diferencia hay entre un tag y un digest de imagen según el vocabulario esencial de la guía?",
+    "options": [
+      "El tag es un nombre mutable de una versión; el digest es un identificador inmutable del contenido",
+      "El tag es inmutable y el digest es mutable",
+      "El digest solo existe para contenedores, no para imágenes",
+      "Ambos son sinónimos exactos"
+    ],
+    "correctIndex": 0,
+    "explanation": "La guía define el tag como 'nombre mutable de una versión' (ej. 1.4.2) y el digest como 'identificador inmutable del contenido' (ej. sha256:...).",
+    "source": "docker-guide.md"
+  },
+  {
+    "id": "docker-008",
+    "category": "docker",
+    "topic": "Fundamentos y arquitectura de Docker",
+    "question": "¿Qué riesgo señala la guía sobre añadir un usuario al grupo `docker` en Linux?",
+    "options": [
+      "Ese acceso suele ser equivalente a privilegios elevados sobre el host",
+      "Ninguno, es una operación totalmente segura",
+      "Solo afecta a la velocidad de las descargas",
+      "Impide usar `docker context`"
+    ],
+    "correctIndex": 0,
+    "explanation": "La guía advierte que pertenecer al grupo `docker` suele equivaler a privilegios elevados sobre el host, y que Rootless mode reduce parte de ese riesgo.",
+    "source": "docker-guide.md"
+  },
+  {
+    "id": "docker-009",
+    "category": "docker",
+    "topic": "Fundamentos y arquitectura de Docker",
+    "question": "¿Qué es un 'repositorio de imágenes' según el vocabulario de la guía?",
+    "options": [
+      "Una colección de versiones de una imagen, por ejemplo `equipo/api`",
+      "El servicio que almacena y distribuye imágenes, como Docker Hub",
+      "El identificador inmutable del contenido de una imagen",
+      "La definición de una aplicación con varios contenedores"
+    ],
+    "correctIndex": 0,
+    "explanation": "La guía distingue el 'registro' (servicio que almacena y distribuye imágenes) del 'repositorio de imágenes', que es la colección de versiones de una imagen, por ejemplo `equipo/api`.",
+    "source": "docker-guide.md"
+  },
+  {
+    "id": "docker-010",
+    "category": "docker",
+    "topic": "Fundamentos y arquitectura de Docker",
+    "question": "Antes de borrar o desplegar algo, ¿qué recomienda confirmar la guía respecto a los contextos?",
+    "options": [
+      "El número de versión de Docker instalada",
+      "El contexto actual, porque la CLI podría estar apuntando a un servidor remoto",
+      "El tamaño del disco del host",
+      "El nombre de usuario del registro"
+    ],
+    "correctIndex": 1,
+    "explanation": "La guía advierte que es fácil creer que se opera localmente cuando la CLI apunta a un servidor remoto, por lo que conviene confirmar el contexto antes de acciones destructivas o despliegues.",
+    "source": "docker-guide.md"
+  },
+  {
+    "id": "docker-011",
+    "category": "docker",
+    "topic": "Fundamentos y arquitectura de Docker",
+    "question": "Al ejecutar `docker version` el resultado muestra el cliente pero falla la parte del servidor. ¿Qué indica esto según la guía?",
+    "options": [
+      "Que la imagen solicitada no existe en el registro",
+      "Que la CLI está instalada pero el daemon no está iniciado, no es accesible, o se usa el contexto equivocado",
+      "Que se debe reinstalar Docker Desktop obligatoriamente",
+      "Que el usuario no pertenece al grupo docker"
+    ],
+    "correctIndex": 1,
+    "explanation": "La guía explica que si `docker version` muestra el cliente pero falla el servidor, la CLI está instalada pero el daemon no está iniciado, no es accesible, o se está usando el contexto equivocado.",
+    "source": "docker-guide.md"
+  },
+  {
+    "id": "docker-012",
+    "category": "docker",
+    "topic": "Ciclo de vida de contenedores",
+    "question": "En `docker run --rm -it alpine:3.22 sh`, ¿qué logran las banderas `-i` y `-t`?",
+    "options": [
+      "`-i` conserva la entrada estándar y `-t` asigna una terminal",
+      "`-i` asigna una terminal y `-t` conserva la entrada estándar",
+      "Ambas banderas ejecutan el contenedor en segundo plano",
+      "Ambas banderas eliminan el contenedor al finalizar"
+    ],
+    "correctIndex": 0,
+    "explanation": "Según la guía, `-i` conserva la entrada estándar y `-t` asigna una terminal; juntas permiten una sesión interactiva.",
+    "source": "docker-guide.md",
+    "code": "docker run --rm -it alpine:3.22 sh",
+    "language": "bash"
+  },
+  {
+    "id": "docker-013",
+    "category": "docker",
+    "topic": "Ciclo de vida de contenedores",
+    "question": "¿Qué hace la bandera `-d` en `docker run`?",
+    "options": [
+      "Fija el directorio de trabajo",
+      "Elimina el contenedor cuando termina",
+      "Ejecuta el contenedor en segundo plano",
+      "Publica un puerto"
+    ],
+    "correctIndex": 2,
+    "explanation": "`-d` ejecuta el contenedor en segundo plano (modo 'detached'), a diferencia de `-it` que abre una sesión interactiva en primer plano.",
+    "source": "docker-guide.md"
+  },
+  {
+    "id": "docker-014",
+    "category": "docker",
+    "topic": "Ciclo de vida de contenedores",
+    "question": "Dado el comando `docker run -d --name web-demo -p 127.0.0.1:8080:80 nginx:1.28-alpine`, ¿desde dónde será accesible el servicio?",
+    "options": [
+      "Solo desde el propio host, en el puerto 8080",
+      "Desde Internet directamente, sin restricciones",
+      "Desde cualquier interfaz de red del host",
+      "Solo desde otros contenedores en la misma red"
+    ],
+    "correctIndex": 0,
+    "explanation": "`127.0.0.1:8080:80` limita la publicación a la interfaz de loopback del host, por lo que el servicio solo es accesible desde la propia máquina, en el puerto 8080.",
+    "source": "docker-guide.md",
+    "code": "docker run -d --name web-demo -p 127.0.0.1:8080:80 nginx:1.28-alpine",
+    "language": "bash"
+  },
+  {
+    "id": "docker-015",
+    "category": "docker",
+    "topic": "Ciclo de vida de contenedores",
+    "question": "¿Qué hace realmente `docker exec -it web-demo sh` según la guía?",
+    "options": [
+      "Inicia otro proceso dentro de un contenedor que ya está en ejecución",
+      "Guarda los cambios realizados en la imagen original",
+      "Crea un nuevo contenedor a partir de la misma imagen",
+      "Entra al proceso principal del contenedor y permite modificarlo de forma persistente"
+    ],
+    "correctIndex": 0,
+    "explanation": "La guía aclara que `docker exec` inicia OTRO proceso dentro de un contenedor ya en ejecución; no 'entra' al proceso principal ni conserva cambios en la imagen.",
+    "source": "docker-guide.md"
+  },
+  {
+    "id": "docker-016",
+    "category": "docker",
+    "topic": "Ciclo de vida de contenedores",
+    "question": "¿Qué es cierto sobre `docker cp` según la guía?",
+    "options": [
+      "Solo funciona con contenedores detenidos",
+      "Modifica la imagen original de forma permanente",
+      "Es un mecanismo recomendado de despliegue de aplicaciones",
+      "No modifica la imagen y no es un mecanismo de despliegue"
+    ],
+    "correctIndex": 3,
+    "explanation": "La guía es explícita: `docker cp` no modifica la imagen y no es un mecanismo de despliegue; si el archivo es parte de la app, debe agregarse al contexto y reconstruir la imagen.",
+    "source": "docker-guide.md"
+  },
+  {
+    "id": "docker-017",
+    "category": "docker",
+    "topic": "Ciclo de vida de contenedores",
+    "question": "¿Qué diferencia hay entre `docker ps` y `docker ps -a`?",
+    "options": [
+      "`docker ps` muestra todos los contenedores, incluidos los detenidos; `-a` solo los que corren",
+      "`docker ps -a` muestra únicamente las imágenes locales",
+      "`docker ps` muestra solo los contenedores en ejecución; `-a` incluye también los detenidos",
+      "Son exactamente el mismo comando"
+    ],
+    "correctIndex": 2,
+    "explanation": "`docker ps` lista solo los contenedores en ejecución; añadir `-a` incluye también los detenidos.",
+    "source": "docker-guide.md"
+  },
+  {
+    "id": "docker-018",
+    "category": "docker",
+    "topic": "Ciclo de vida de contenedores",
+    "question": "Según el diagrama de estados de la guía, ¿qué transición ocurre al ejecutar `docker rm -f` sobre un contenedor en estado Running?",
+    "options": [
+      "No tiene ningún efecto",
+      "Pasa directamente a Removed",
+      "Pasa a estado Paused",
+      "Pasa primero a Created"
+    ],
+    "correctIndex": 1,
+    "explanation": "El diagrama de estados muestra que `docker rm -f` lleva un contenedor en Running directamente a Removed, forzando su eliminación sin pasar por Exited.",
+    "source": "docker-guide.md"
+  },
+  {
+    "id": "docker-019",
+    "category": "docker",
+    "topic": "Ciclo de vida de contenedores",
+    "question": "¿Cuál es la diferencia entre `docker stop` y `docker kill` según la guía?",
+    "options": [
+      "`docker kill` espera una terminación ordenada y `docker stop` es inmediato",
+      "`docker kill` solo funciona sobre contenedores detenidos",
+      "`docker stop` solicita terminación y espera; `docker kill` envía SIGKILL por defecto y no permite limpieza ordenada",
+      "Ambos comandos hacen exactamente lo mismo"
+    ],
+    "correctIndex": 2,
+    "explanation": "La guía explica que `docker stop` solicita terminación ordenada y espera, mientras que `docker kill` envía SIGKILL por defecto sin limpieza ordenada; debe usarse solo cuando `stop` no funciona.",
+    "source": "docker-guide.md"
+  },
+  {
+    "id": "docker-020",
+    "category": "docker",
+    "topic": "Ciclo de vida de contenedores",
+    "question": "Se ejecuta `docker run --name fallo-demo alpine:3.22 sh -c 'echo preparando; exit 7'`. ¿Qué determina el estado final del contenedor?",
+    "options": [
+      "La versión de la imagen alpine utilizada",
+      "El uso de la bandera --rm",
+      "El código de salida del proceso principal",
+      "El nombre del contenedor"
+    ],
+    "correctIndex": 2,
+    "explanation": "La guía indica que el código de salida del proceso principal determina el estado del contenedor; un contenedor detenido no siempre representa un error (puede ser un trabajo por lotes completado).",
+    "source": "docker-guide.md",
+    "code": "docker run --name fallo-demo alpine:3.22 sh -c 'echo preparando; exit 7'\ndocker inspect fallo-demo --format '{{.State.ExitCode}}'",
+    "language": "bash"
+  },
+  {
+    "id": "docker-021",
+    "category": "docker",
+    "topic": "Ciclo de vida de contenedores",
+    "question": "¿Por qué requiere `docker rm` que el contenedor esté detenido (sin usar `-f`)?",
+    "options": [
+      "Porque eliminar un contenedor en ejecución podría dejar procesos huérfanos sin control explícito",
+      "Porque `docker rm` primero debe reconstruir la imagen",
+      "Porque Docker no permite eliminar contenedores nunca",
+      "No es cierto, `docker rm` siempre funciona sin importar el estado"
+    ],
+    "correctIndex": 0,
+    "explanation": "Según el diagrama de ciclo de vida, `docker rm` opera sobre contenedores en Created o Exited; para eliminar uno en ejecución se necesita `docker rm -f`, que fuerza la parada primero.",
+    "source": "docker-guide.md"
+  },
+  {
+    "id": "docker-022",
+    "category": "docker",
+    "topic": "Ciclo de vida de contenedores",
+    "question": "¿Qué logra la bandera `--rm` en `docker run --rm alpine:3.22 echo hola`?",
+    "options": [
+      "Ejecuta el contenedor en modo interactivo",
+      "Reinicia el contenedor si falla",
+      "Publica el puerto por defecto",
+      "Elimina el contenedor automáticamente cuando termina"
+    ],
+    "correctIndex": 3,
+    "explanation": "`--rm` elimina el contenedor cuando termina de ejecutarse, evitando dejar contenedores detenidos acumulándose.",
+    "source": "docker-guide.md"
+  },
+  {
+    "id": "docker-023",
+    "category": "docker",
+    "topic": "Ciclo de vida de contenedores",
+    "question": "En el comando `docker run --rm --name variables-demo --hostname demo-host -e APP_ENV=development -w /workspace alpine:3.22 sh -c '...'`, ¿qué hace `-w /workspace`?",
+    "options": [
+      "Define una variable de entorno llamada workspace",
+      "Asigna el hostname del contenedor",
+      "Fija el directorio de trabajo para el proceso del contenedor",
+      "Publica el puerto de trabajo 8080"
+    ],
+    "correctIndex": 2,
+    "explanation": "`-w` fija el directorio de trabajo (`WORKDIR` en tiempo de ejecución) dentro del contenedor; el hostname lo define `--hostname`.",
+    "source": "docker-guide.md",
+    "code": "docker run --rm \\\n  --name variables-demo \\\n  --hostname demo-host \\\n  -e APP_ENV=development \\\n  -w /workspace \\\n  alpine:3.22 \\\n  sh -c 'printf \"entorno=%s host=%s directorio=%s\\n\" \"$APP_ENV\" \"$HOSTNAME\" \"$PWD\"'",
+    "language": "bash"
+  },
+  {
+    "id": "docker-024",
+    "category": "docker",
+    "topic": "Ciclo de vida de contenedores",
+    "question": "¿Qué utilidad tiene `docker top web-demo` y `docker port web-demo`?",
+    "options": [
+      "Ambos muestran el historial de capas de la imagen",
+      "Listan los procesos en ejecución del contenedor y los puertos publicados respectivamente",
+      "Ambos comandos eliminan el contenedor",
+      "Sirven para reconstruir la imagen del contenedor"
+    ],
+    "correctIndex": 1,
+    "explanation": "`docker top` lista los procesos que corren dentro del contenedor y `docker port` muestra el mapeo de puertos publicados.",
+    "source": "docker-guide.md"
+  },
+  {
+    "id": "docker-025",
+    "category": "docker",
+    "topic": "Imágenes, tags y registros locales",
+    "question": "Dada la referencia `registry.example.com/equipo/catalogo-api:1.4.2`, ¿qué representa la parte `equipo/catalogo-api`?",
+    "options": [
+      "El registro",
+      "El tag",
+      "El repositorio de imágenes",
+      "El digest"
+    ],
+    "correctIndex": 2,
+    "explanation": "En el formato `registro/repositorio:tag`, `equipo/catalogo-api` corresponde al repositorio de imágenes; `registry.example.com` es el registro y `1.4.2` es el tag.",
+    "source": "docker-guide.md",
+    "code": "registry.example.com/equipo/catalogo-api:1.4.2\n└──── registro ─────┘ └── repositorio ──┘ └tag┘",
+    "language": "text"
+  },
+  {
+    "id": "docker-026",
+    "category": "docker",
+    "topic": "Imágenes, tags y registros locales",
+    "question": "Si se omite el tag al referenciar una imagen, ¿qué asume Docker según la guía, y qué advertencia hace al respecto?",
+    "options": [
+      "Falla siempre y exige especificar un tag",
+      "Asume `latest`, pero aclara que 'latest' no significa la versión cronológicamente más nueva",
+      "Asume `stable`, y que siempre es la versión más segura",
+      "Asume el mismo digest de la última imagen descargada"
+    ],
+    "correctIndex": 1,
+    "explanation": "La guía explica que si se omite el tag normalmente se interpreta `latest`, pero advierte que `latest` no significa 'la versión cronológicamente más nueva': es solo un tag mutable con ese nombre.",
+    "source": "docker-guide.md"
+  },
+  {
+    "id": "docker-027",
+    "category": "docker",
+    "topic": "Imágenes, tags y registros locales",
+    "question": "¿Qué diferencia principal hay entre un tag y un digest de imagen en cuanto a mutabilidad?",
+    "options": [
+      "Ambos son completamente inmutables",
+      "Ambos son completamente mutables",
+      "Un tag es legible y puede apuntar después a otro contenido; un digest identifica contenido inmutable",
+      "Un digest puede cambiar de contenido con el tiempo y un tag no"
+    ],
+    "correctIndex": 2,
+    "explanation": "La guía indica que un tag es legible y puede apuntar después a otro contenido, mientras que un digest identifica contenido inmutable; fijar un digest maximiza reproducibilidad en despliegues sensibles.",
+    "source": "docker-guide.md"
+  },
+  {
+    "id": "docker-028",
+    "category": "docker",
+    "topic": "Imágenes, tags y registros locales",
+    "question": "Al ejecutar `docker tag mi-api:local usuario/mi-api:1.0.0`, ¿qué ocurre realmente?",
+    "options": [
+      "Se crea una copia completa e independiente de la imagen",
+      "Se crea una referencia adicional al mismo contenido, sin duplicar la imagen",
+      "Se elimina el tag `mi-api:local`",
+      "Se sube automáticamente la imagen a un registro remoto"
+    ],
+    "correctIndex": 1,
+    "explanation": "La guía aclara que 'un tag adicional es otra referencia al mismo contenido, no una copia completa'.",
+    "source": "docker-guide.md",
+    "code": "docker tag mi-api:local usuario/mi-api:1.0.0\ndocker image ls usuario/mi-api",
+    "language": "bash"
+  },
+  {
+    "id": "docker-029",
+    "category": "docker",
+    "topic": "Imágenes, tags y registros locales",
+    "question": "¿Qué diferencia hay entre `docker image save`/`docker image load` y `docker export`/`docker import`?",
+    "options": [
+      "Son exactamente equivalentes y pueden usarse indistintamente",
+      "`export`/`import` conserva capas e historial; `save`/`load` no",
+      "`save`/`load` solo funciona con contenedores en ejecución",
+      "`save`/`load` conserva imágenes, tags y capas; `export`/`import` opera sobre el filesystem del contenedor y pierde configuración e historial"
+    ],
+    "correctIndex": 3,
+    "explanation": "La guía distingue que `save`/`load` conserva imágenes, tags y capas, mientras que `export`/`import` opera sobre el filesystem de un contenedor y pierde buena parte de la configuración e historial.",
+    "source": "docker-guide.md",
+    "code": "docker image save -o guia-api.tar guia-api:1.0\ndocker image load -i guia-api.tar",
+    "language": "bash"
+  },
+  {
+    "id": "docker-030",
+    "category": "docker",
+    "topic": "Imágenes, tags y registros locales",
+    "question": "Según la guía, ¿qué se debe preferir al elegir una imagen base?",
+    "options": [
+      "Cualquier imagen con el tag `latest` para tener siempre lo último",
+      "Siempre la imagen más pequeña posible, sin importar otros factores",
+      "Imágenes oficiales o de publicadores verificados, con versiones explícitas y compatibilidad con las dependencias",
+      "Imágenes sin mantenimiento activo, porque cambian menos"
+    ],
+    "correctIndex": 2,
+    "explanation": "La guía recomienda imágenes oficiales o de publicadores verificados, base compatible con las dependencias, versiones explícitas, tamaño adecuado sin sacrificar diagnóstico, y actualizaciones periódicas.",
+    "source": "docker-guide.md"
+  },
+  {
+    "id": "docker-031",
+    "category": "docker",
+    "topic": "Imágenes, tags y registros locales",
+    "question": "¿Qué advertencia hace la guía sobre imágenes base extremadamente mínimas?",
+    "options": [
+      "Nunca deben usarse en producción",
+      "Son siempre más seguras sin excepción",
+      "'Más pequeña' no significa automáticamente 'más segura'; pueden complicar certificados, zonas horarias, bibliotecas nativas y depuración",
+      "No pueden usarse en multi-stage builds"
+    ],
+    "correctIndex": 2,
+    "explanation": "La guía advierte explícitamente que una base extremadamente mínima puede complicar certificados, zonas horarias, bibliotecas nativas y depuración, aunque reduzca el tamaño.",
+    "source": "docker-guide.md"
+  },
+  {
+    "id": "docker-032",
+    "category": "docker",
+    "topic": "Imágenes, tags y registros locales",
+    "question": "¿Qué comando permite ver el historial de capas de una imagen local?",
+    "options": [
+      "docker image ls",
+      "docker image history",
+      "docker image rm",
+      "docker image inspect"
+    ],
+    "correctIndex": 1,
+    "explanation": "`docker image history` muestra el historial de capas de una imagen; `docker image inspect` muestra metadatos detallados en formato JSON.",
+    "source": "docker-guide.md",
+    "code": "docker image history postgres:17-alpine",
+    "language": "bash"
+  },
+  {
+    "id": "docker-033",
+    "category": "docker",
+    "topic": "Imágenes, tags y registros locales",
+    "question": "¿Qué sucede al ejecutar `docker image rm postgres:17-alpine` si existen contenedores detenidos creados a partir de esa imagen?",
+    "options": [
+      "Docker elimina la imagen sin condiciones",
+      "Se eliminan automáticamente también los contenedores asociados",
+      "Se convierte la imagen en un volumen",
+      "Docker normalmente impide eliminarla mientras existan referencias activas (contenedores) que dependan de ella"
+    ],
+    "correctIndex": 3,
+    "explanation": "Al igual que con volúmenes en uso, Docker protege recursos referenciados; una imagen usada por contenedores existentes no puede eliminarse sin antes eliminar esos contenedores o forzar la operación.",
+    "source": "docker-guide.md"
+  },
+  {
+    "id": "docker-034",
+    "category": "docker",
+    "topic": "Imágenes, tags y registros locales",
+    "question": "¿Cuál es un caso de uso apropiado para `docker image save`/`docker image load` según la guía?",
+    "options": [
+      "Modificar el código fuente dentro de una imagen",
+      "Reemplazar por completo el uso de un registro en producción",
+      "Copiar archivos individuales de un contenedor en ejecución",
+      "Transferir imágenes entre máquinas sin usar un registro"
+    ],
+    "correctIndex": 3,
+    "explanation": "La guía presenta `save`/`load` como el mecanismo para transferencia de imágenes sin depender de un registro, útil para respaldar y distribuir imágenes.",
+    "source": "docker-guide.md"
+  },
+  {
+    "id": "docker-035",
+    "category": "docker",
+    "topic": "Dockerfile: instrucciones esenciales",
+    "question": "Según la tabla de instrucciones esenciales, ¿qué hace `FROM` en un Dockerfile?",
+    "options": [
+      "Fija variables persistentes en la imagen",
+      "Selecciona la imagen base e inicia una etapa",
+      "Ejecuta un comando durante el build",
+      "Copia archivos del contexto de build"
+    ],
+    "correctIndex": 1,
+    "explanation": "`FROM` selecciona la imagen base e inicia una etapa; cada nuevo `FROM` en el mismo Dockerfile crea otra etapa (relevante en multi-stage builds).",
+    "source": "docker-guide.md"
+  },
+  {
+    "id": "docker-036",
+    "category": "docker",
+    "topic": "Dockerfile: instrucciones esenciales",
+    "question": "Según la guía, ¿cuándo es preferible `COPY` sobre `ADD`?",
+    "options": [
+      "Nunca; `ADD` siempre es la opción recomendada",
+      "Solo quan se copian archivos comprimidos",
+      "`COPY` y `ADD` son intercambiables sin ninguna diferencia práctica",
+      "Siempre, salvo que se necesiten funciones específicas de `ADD`"
+    ],
+    "correctIndex": 3,
+    "explanation": "La tabla de instrucciones señala que `COPY` es 'preferible a `ADD` salvo funciones específicas'.",
+    "source": "docker-guide.md"
+  },
+  {
+    "id": "docker-037",
+    "category": "docker",
+    "topic": "Dockerfile: instrucciones esenciales",
+    "question": "¿Cuál es la diferencia temporal fundamental entre `RUN` y `CMD`?",
+    "options": [
+      "`CMD` se ejecuta antes que `FROM`",
+      "`RUN` ocurre en tiempo de ejecución; `CMD` ocurre al construir",
+      "Ambas ocurren exactamente en el mismo momento",
+      "`RUN` ocurre al construir la imagen; `CMD` ocurre cada vez que arranca un contenedor"
+    ],
+    "correctIndex": 3,
+    "explanation": "La guía es explícita: 'RUN ocurre al construir. CMD ocurre cada vez que arranca un contenedor.'",
+    "source": "docker-guide.md",
+    "code": "RUN python -m compileall app.py\nCMD [\"python\", \"app.py\"]",
+    "language": "dockerfile"
+  },
+  {
+    "id": "docker-038",
+    "category": "docker",
+    "topic": "Dockerfile: instrucciones esenciales",
+    "question": "¿Qué propósito tiene la instrucción `USER` en un Dockerfile?",
+    "options": [
+      "Ejecuta pruebas de salud del contenedor",
+      "Define variables de entorno persistentes",
+      "Define el usuario de las instrucciones siguientes y del runtime, evitando root si la app no lo necesita",
+      "Documenta el puerto esperado por la aplicación"
+    ],
+    "correctIndex": 2,
+    "explanation": "`USER` fija el usuario para las instrucciones subsecuentes del Dockerfile y para el proceso en tiempo de ejecución; conviene evitar root cuando la aplicación no lo requiere.",
+    "source": "docker-guide.md"
+  },
+  {
+    "id": "docker-039",
+    "category": "docker",
+    "topic": "Dockerfile: instrucciones esenciales",
+    "question": "¿Qué aclara la guía sobre `EXPOSE 8000` en un Dockerfile?",
+    "options": [
+      "Publica automáticamente el puerto 8000 al host",
+      "Documenta el puerto esperado, pero NO publica el puerto (se necesita `-p` en runtime)",
+      "Cambia el puerto en el que escucha el proceso",
+      "Solo funciona dentro de Compose, no con `docker run`"
+    ],
+    "correctIndex": 1,
+    "explanation": "La tabla indica que `EXPOSE` 'documenta el puerto esperado' pero 'no publica el puerto'; la sección 9.2 refuerza que `-p` es lo que crea la publicación real.",
+    "source": "docker-guide.md"
+  },
+  {
+    "id": "docker-040",
+    "category": "docker",
+    "topic": "Dockerfile: instrucciones esenciales",
+    "question": "¿Qué diferencia hay entre `CMD` y `ENTRYPOINT` según la guía?",
+    "options": [
+      "Ambas instrucciones son exactamente equivalentes",
+      "`CMD` solo puede usarse en la forma shell",
+      "`ENTRYPOINT` es un ejecutable principal estable; los argumentos de `docker run` suelen añadirse a él, mientras que `CMD` es el comando o argumentos predeterminados, reemplazable",
+      "`CMD` es el ejecutable principal estable; `ENTRYPOINT` se puede reemplazar fácilmente en `docker run`"
+    ],
+    "correctIndex": 2,
+    "explanation": "Según la tabla: `ENTRYPOINT` es el 'ejecutable principal estable' (los argumentos de `run` se añaden a él) y `CMD` es el 'comando o argumentos predeterminados', que se puede reemplazar en `docker run`.",
+    "source": "docker-guide.md"
+  },
+  {
+    "id": "docker-041",
+    "category": "docker",
+    "topic": "Dockerfile: instrucciones esenciales",
+    "question": "Dado este Dockerfile con `ENTRYPOINT y CMD` combinados, ¿qué imprime `docker run --rm mi-servidor 9000 --directory /public`?",
+    "options": [
+      "Ignora el ENTRYPOINT y ejecuta solo `9000 --directory /public` como comando de shell",
+      "Produce un error porque no se puede combinar ENTRYPOINT y CMD",
+      "Ejecuta `python -m http.server 9000 --directory /public`, sustituyendo los argumentos por defecto de CMD pero conservando ENTRYPOINT",
+      "Ejecuta `python -m http.server 8000 --directory /public` ignorando los argumentos pasados"
+    ],
+    "correctIndex": 2,
+    "explanation": "Al pasar argumentos en `docker run`, estos sustituyen el CMD por defecto (`8000 --directory /public`) pero el ENTRYPOINT se conserva, resultando en `python -m http.server 9000 --directory /public`.",
+    "source": "docker-guide.md",
+    "code": "ENTRYPOINT [\"python\", \"-m\", \"http.server\"]\nCMD [\"8000\", \"--directory\", \"/public\"]",
+    "language": "dockerfile"
+  },
+  {
+    "id": "docker-042",
+    "category": "docker",
+    "topic": "Dockerfile: instrucciones esenciales",
+    "question": "¿Qué logra `docker run --rm --entrypoint sh mi-servidor` respecto al Dockerfile anterior (`ENTRYPOINT [\"python\",\"-m\",\"http.server\"]`)?",
+    "options": [
+      "Solo sustituye el CMD, conservando `python -m http.server` como proceso principal",
+      "No tiene ningún efecto porque ENTRYPOINT no puede sobreescribirse",
+      "Sustituye incluso el ENTRYPOINT, arrancando `sh` en vez de `python -m http.server`, principalmente para diagnóstico",
+      "Elimina la imagen y crea una nueva basada en `sh`"
+    ],
+    "correctIndex": 2,
+    "explanation": "La guía indica que `--entrypoint` sustituye incluso el ENTRYPOINT, principalmente para diagnóstico, a diferencia de pasar argumentos sueltos que solo sustituyen el CMD.",
+    "source": "docker-guide.md",
+    "code": "docker run --rm --entrypoint sh mi-servidor",
+    "language": "bash"
+  },
+  {
+    "id": "docker-043",
+    "category": "docker",
+    "topic": "Dockerfile: instrucciones esenciales",
+    "question": "¿Qué ventaja tiene la forma exec de `CMD` (`CMD [\"python\", \"app.py\"]`) frente a la forma shell (`CMD python app.py`)?",
+    "options": [
+      "La forma exec evita un shell intermedio y suele manejar mejor las señales",
+      "La forma shell siempre es más rápida al iniciar",
+      "No hay ninguna diferencia práctica entre ambas formas",
+      "La forma exec expande automáticamente variables de entorno del shell"
+    ],
+    "correctIndex": 0,
+    "explanation": "La guía explica que la forma exec evita un shell intermedio y suele manejar mejor las señales, aunque no expande variables de shell automáticamente (a diferencia de la forma shell).",
+    "source": "docker-guide.md",
+    "code": "# Forma shell\nCMD python app.py\n\n# Forma exec, recomendada\nCMD [\"python\", \"app.py\"]",
+    "language": "dockerfile"
+  },
+  {
+    "id": "docker-044",
+    "category": "docker",
+    "topic": "Dockerfile: instrucciones esenciales",
+    "question": "Dado el Dockerfile de la sección 6 con `CMD [\"python\", \"app.py\"]`, ¿qué ocurre al ejecutar `docker run guia-api:1.0 sh`?",
+    "options": [
+      "Se ejecuta `python app.py` seguido de `sh`",
+      "Produce un error porque no se puede sustituir CMD",
+      "Se ignora `sh` y se ejecuta el CMD original",
+      "El comando `sh` reemplaza al CMD definido en la imagen"
+    ],
+    "correctIndex": 3,
+    "explanation": "Como no hay `ENTRYPOINT` fijo en ese Dockerfile, cualquier comando pasado a `docker run` reemplaza directamente al `CMD` por defecto; en este caso se ejecuta `sh` en vez de `python app.py`.",
+    "source": "docker-guide.md"
+  },
+  {
+    "id": "docker-045",
+    "category": "docker",
+    "topic": "Dockerfile: instrucciones esenciales",
+    "question": "¿Qué usuario ejecuta el proceso principal en este Dockerfile?",
+    "options": [
+      "www-data",
+      "root (UID 0)",
+      "El usuario del host que ejecuta docker build",
+      "El UID/GID 10001, definido por USER 10001:10001"
+    ],
+    "correctIndex": 3,
+    "explanation": "La instrucción `USER 10001:10001` fija el usuario y grupo con los que se ejecutan las instrucciones posteriores y el proceso en runtime, evitando ejecutar como root.",
+    "source": "docker-guide.md",
+    "code": "# syntax=docker/dockerfile:1\nFROM python:3.13-slim\n\nWORKDIR /app\n\nCOPY --chown=10001:10001 app.py ./\n\nENV APP_ENV=production \\\n    PYTHONUNBUFFERED=1\n\nUSER 10001:10001\n\nEXPOSE 8000\n\nCMD [\"python\", \"app.py\"]",
+    "language": "dockerfile"
+  },
+  {
+    "id": "docker-046",
+    "category": "docker",
+    "topic": "Dockerfile: instrucciones esenciales",
+    "question": "¿Por qué se usa `COPY --chown=10001:10001 app.py ./` en lugar de un `COPY` simple seguido de `RUN chown`?",
+    "options": [
+      "Porque `RUN chown` no existe en Docker",
+      "Porque `--chown` reduce el tamaño de la imagen a la mitad",
+      "Para asignar el propietario del archivo copiado en la misma instrucción, evitando una capa adicional y problemas de permisos con el USER no root definido después",
+      "Porque es obligatorio usar `--chown` en toda instrucción COPY"
+    ],
+    "correctIndex": 2,
+    "explanation": "`COPY --chown` asigna el propietario del archivo en la misma instrucción, lo cual es coherente con ejecutar después el proceso como el usuario no root `10001:10001`.",
+    "source": "docker-guide.md"
+  },
+  {
+    "id": "docker-047",
+    "category": "docker",
+    "topic": "Dockerfile: instrucciones esenciales",
+    "question": "¿Qué propósito tiene el archivo `.dockerignore` en el contexto de build?",
+    "options": [
+      "Define qué contenedores se pueden crear a partir de la imagen",
+      "Sustituye por completo al Dockerfile",
+      "Configura las políticas de reinicio del contenedor",
+      "Reduce el tamaño del contexto, evita invalidar caché y ayuda a no enviar archivos sensibles"
+    ],
+    "correctIndex": 3,
+    "explanation": "La guía indica que `.dockerignore` reduce el tamaño del contexto de build, evita invalidar caché innecesariamente y ayuda a no enviar archivos sensibles al daemon.",
+    "source": "docker-guide.md",
+    "code": ".git\n.gitignore\n__pycache__/\n*.pyc\n.venv/\n.env\ntests/\n*.md",
+    "language": "dockerignore"
+  },
+  {
+    "id": "docker-048",
+    "category": "docker",
+    "topic": "Dockerfile: instrucciones esenciales",
+    "question": "¿Qué representa el `.` al final de `docker build -t guia-api:1.0 .`?",
+    "options": [
+      "Una bandera equivalente a `--no-cache`",
+      "El nombre del Dockerfile a usar",
+      "El contexto de build: los archivos que Docker puede usar durante la construcción",
+      "El tag de la imagen resultante"
+    ],
+    "correctIndex": 2,
+    "explanation": "El punto final es el contexto de build; Docker solo puede usar archivos enviados en ese contexto durante la construcción.",
+    "source": "docker-guide.md",
+    "code": "docker build -t guia-api:1.0 .",
+    "language": "bash"
+  },
+  {
+    "id": "docker-049",
+    "category": "docker",
+    "topic": "Dockerfile: instrucciones esenciales",
+    "question": "¿Qué instrucción de Dockerfile se usa para definir una prueba de salud del contenedor, y qué aclara la guía sobre ella?",
+    "options": [
+      "`HEALTHCHECK`; no reemplaza el monitoreo externo",
+      "`USER`; determina automáticamente el estado de salud",
+      "`ENTRYPOINT`; solo aplica a bases de datos",
+      "`EXPOSE`; reemplaza por completo el monitoreo externo"
+    ],
+    "correctIndex": 0,
+    "explanation": "`HEALTHCHECK` define la prueba de salud del contenedor, pero la guía aclara explícitamente que 'no reemplaza monitoreo externo'.",
+    "source": "docker-guide.md"
+  },
+  {
+    "id": "docker-050",
+    "category": "docker",
+    "topic": "Dockerfile: instrucciones esenciales",
+    "question": "En este fragmento de Dockerfile, ¿qué controla la opción `--start-period=10s`?",
+    "options": [
+      "Un periodo inicial de gracia durante el cual los fallos no cuentan aún para marcar el contenedor como unhealthy",
+      "El tiempo de espera antes de considerar fallida una sola prueba",
+      "El intervalo entre cada ejecución del healthcheck",
+      "El número máximo de reintentos antes de marcar unhealthy"
+    ],
+    "correctIndex": 0,
+    "explanation": "`--start-period` define un periodo de gracia inicial (aquí 10s) para que la aplicación arranque antes de que los fallos del healthcheck cuenten en serio; `--interval` controla la frecuencia y `--retries` el número de fallos consecutivos.",
+    "source": "docker-guide.md",
+    "code": "HEALTHCHECK --interval=30s --timeout=3s --start-period=10s --retries=3 \\\n  CMD [\"python\", \"-c\", \"import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/health/ready')\"]",
+    "language": "dockerfile"
+  },
+  {
+    "id": "docker-051",
+    "category": "docker",
+    "topic": "Dockerfile: instrucciones esenciales",
+    "question": "¿Qué se usa para incluir metadatos no sensibles como versión o fuente del código en una imagen?",
+    "options": [
+      "HEALTHCHECK",
+      "ENV",
+      "ARG",
+      "LABEL"
+    ],
+    "correctIndex": 3,
+    "explanation": "`LABEL` se usa para metadatos no sensibles, por ejemplo siguiendo la convención `org.opencontainers.image.*`; la guía aclara que ayudan a la trazabilidad pero son públicos para quien obtiene la imagen.",
+    "source": "docker-guide.md",
+    "code": "LABEL org.opencontainers.image.title=\"catalogo-api\" \\\n      org.opencontainers.image.version=\"1.4.2\" \\\n      org.opencontainers.image.source=\"https://example.com/equipo/catalogo\"",
+    "language": "dockerfile"
+  },
+  {
+    "id": "docker-052",
+    "category": "docker",
+    "topic": "Dockerfile: instrucciones esenciales",
+    "question": "En la sustitución de configuración en runtime, ¿qué recomienda la guía sobre construir una imagen distinta por entorno?",
+    "options": [
+      "Es obligatorio usar `ARG` para diferenciar entornos en build time",
+      "No construir una imagen distinta por entorno si solo cambia configuración; la misma imagen probada debe poder promoverse entre entornos",
+      "Solo aplica a bases de datos, no a servicios de aplicación",
+      "Es la práctica recomendada: siempre construir una imagen por entorno"
+    ],
+    "correctIndex": 1,
+    "explanation": "La guía indica explícitamente: 'No construyas una imagen distinta por entorno si solo cambia configuración... La misma imagen probada debe poder promoverse entre entornos.'",
+    "source": "docker-guide.md",
+    "code": "docker run --rm -e APP_ENV=staging guia-api:1.0",
+    "language": "bash"
+  },
+  {
+    "id": "docker-053",
+    "category": "docker",
+    "topic": "Dockerfile: instrucciones esenciales",
+    "question": "¿Qué falla de diseño tiene este fragmento de Dockerfile respecto al aprovechamiento de caché?",
+    "options": [
+      "Ninguna; es el orden óptimo recomendado",
+      "Cualquier cambio en el código fuente invalida la instalación de dependencias, porque `COPY . .` ocurre antes de instalar requirements.txt",
+      "`pip install` no puede ejecutarse dentro de un `RUN`",
+      "Falta la instrucción `FROM`"
+    ],
+    "correctIndex": 1,
+    "explanation": "Al copiar todo el código (`COPY . .`) antes de instalar dependencias, cualquier cambio en el código (incluso uno no relacionado con dependencias) invalida la capa de instalación, forzando una reinstalación innecesaria.",
+    "source": "docker-guide.md",
+    "code": "COPY . .\nRUN pip install --no-cache-dir -r requirements.txt",
+    "language": "dockerfile"
+  },
+  {
+    "id": "docker-054",
+    "category": "docker",
+    "topic": "Capas, caché y multi-stage builds",
+    "question": "¿Qué ocurre en la caché de build cuando una instrucción del Dockerfile (o sus entradas) cambia?",
+    "options": [
+      "La caché nunca se invalida automáticamente",
+      "Se reconstruye toda la imagen desde `FROM`, sin excepciones",
+      "Docker reconstruye esa etapa desde esa instrucción hacia abajo",
+      "Solo se invalida esa instrucción, el resto de la imagen se conserva intacta"
+    ],
+    "correctIndex": 2,
+    "explanation": "La guía explica que cada instrucción produce o afecta una capa; si una instrucción o sus entradas cambian, Docker reconstruye esa etapa 'desde allí hacia abajo', es decir, esa capa y todas las siguientes.",
+    "source": "docker-guide.md"
+  },
+  {
+    "id": "docker-055",
+    "category": "docker",
+    "topic": "Capas, caché y multi-stage builds",
+    "question": "¿Cuál es el orden de instrucciones que mejor aprovecha la caché para una aplicación Python con dependencias?",
+    "options": [
+      "RUN pip install -r requirements.txt antes de que exista requirements.txt en la imagen",
+      "COPY . . seguido de RUN pip install -r requirements.txt",
+      "COPY requirements.txt . / RUN pip install --no-cache-dir -r requirements.txt / COPY . .",
+      "El orden de las instrucciones no afecta la caché de ninguna manera"
+    ],
+    "correctIndex": 2,
+    "explanation": "Copiar primero solo el manifiesto de dependencias, instalar, y copiar el resto del código después permite que las dependencias se reinstalen solo cuando cambia `requirements.txt`.",
+    "source": "docker-guide.md",
+    "code": "COPY requirements.txt .\nRUN pip install --no-cache-dir -r requirements.txt\nCOPY . .",
+    "language": "dockerfile"
+  },
+  {
+    "id": "docker-056",
+    "category": "docker",
+    "topic": "Capas, caché y multi-stage builds",
+    "question": "¿Qué garantiza `docker build --no-cache -t guia-api:limpia .` según la guía?",
+    "options": [
+      "Es equivalente a `docker system prune`",
+      "Elimina automáticamente las imágenes intermedias del sistema",
+      "Reejecuta todos los pasos del build, pero NO garantiza descargar una base nueva",
+      "Descarga siempre la última versión de la imagen base"
+    ],
+    "correctIndex": 2,
+    "explanation": "La guía distingue: `--no-cache` reejecuta los pasos pero no garantiza una base nueva; para eso se necesita `--pull`.",
+    "source": "docker-guide.md",
+    "code": "docker build --no-cache -t guia-api:limpia .",
+    "language": "bash"
+  },
+  {
+    "id": "docker-057",
+    "category": "docker",
+    "topic": "Capas, caché y multi-stage builds",
+    "question": "¿Qué hace la bandera `--pull` en `docker build`?",
+    "options": [
+      "Elimina las capas intermedias no usadas tras el build",
+      "Descarga (comprueba) una versión más reciente de la imagen base antes de construir",
+      "Ignora completamente el Dockerfile y usa solo la caché",
+      "Sube la imagen resultante a un registro remoto"
+    ],
+    "correctIndex": 1,
+    "explanation": "`--pull` comprueba si existe una versión más reciente de la imagen base, complementando a `--no-cache` cuando se quiere incorporar parches recientes.",
+    "source": "docker-guide.md",
+    "code": "docker build --pull -t guia-api:base-actualizada .",
+    "language": "bash"
+  },
+  {
+    "id": "docker-058",
+    "category": "docker",
+    "topic": "Capas, caché y multi-stage builds",
+    "question": "¿Cuál es el propósito principal de un multi-stage build según la sección 7.3?",
+    "options": [
+      "Permitir usar dos Dockerfiles distintos a la vez",
+      "Reducir el número de instrucciones `RUN` en el Dockerfile",
+      "Separar las herramientas de compilación del runtime final, para no incluirlas en la imagen de producción",
+      "Evitar el uso de `.dockerignore`"
+    ],
+    "correctIndex": 2,
+    "explanation": "La guía introduce los multi-stage builds explícitamente para 'separar herramientas de compilación del runtime', evitando que el compilador y las fuentes terminen en la imagen final.",
+    "source": "docker-guide.md"
+  },
+  {
+    "id": "docker-059",
+    "category": "docker",
+    "topic": "Capas, caché y multi-stage builds",
+    "question": "En este Dockerfile multi-stage de Go, ¿qué se copia realmente a la etapa `runtime`?",
+    "options": [
+      "Todo el contenido de la etapa `build`, incluidos el compilador y las fuentes",
+      "Únicamente el binario compilado `/out/api`",
+      "La imagen base `golang:1.25-alpine` completa",
+      "El archivo `go.mod` solamente"
+    ],
+    "correctIndex": 1,
+    "explanation": "La instrucción `COPY --from=build /out/api /usr/local/bin/api` copia solo el binario compilado; el compilador, las cachés y el código fuente de la etapa `build` no llegan a la imagen final `runtime`.",
+    "source": "docker-guide.md",
+    "code": "# syntax=docker/dockerfile:1\nFROM golang:1.25-alpine AS build\nWORKDIR /src\nCOPY go.mod ./\nRUN go mod download\nCOPY . .\nRUN CGO_ENABLED=0 go build -o /out/api ./cmd/api\n\nFROM alpine:3.22 AS runtime\nRUN addgroup -S app && adduser -S -G app app\nCOPY --from=build --chown=app:app /out/api /usr/local/bin/api\nUSER app\nEXPOSE 8080\nENTRYPOINT [\"/usr/local/bin/api\"]",
+    "language": "dockerfile"
+  },
+  {
+    "id": "docker-060",
+    "category": "docker",
+    "topic": "Capas, caché y multi-stage builds",
+    "question": "¿Qué logra `docker build --target build -t api-build:debug .` sobre el Dockerfile multi-stage de Go?",
+    "options": [
+      "Elimina la etapa `build` del Dockerfile antes de construir",
+      "Construye la imagen final completa, ignorando el nombre de la etapa",
+      "Construye únicamente hasta la etapa nombrada `build`, útil para depuración, sin llegar a la etapa `runtime`",
+      "Produce un error porque `--target` no es una bandera válida de `docker build`"
+    ],
+    "correctIndex": 2,
+    "explanation": "`--target` permite construir solo hasta la etapa indicada (aquí `build`), lo que sirve para depurar esa etapa de forma aislada sin generar la imagen runtime final.",
+    "source": "docker-guide.md",
+    "code": "docker build --target build -t api-build:debug .\ndocker build -t api:1.0 .",
+    "language": "bash"
+  },
+  {
+    "id": "docker-061",
+    "category": "docker",
+    "topic": "Capas, caché y multi-stage builds",
+    "question": "¿Qué logra `RUN --mount=type=cache,target=/root/.cache/pip pip install -r requirements.txt`?",
+    "options": [
+      "Reutiliza una caché persistente de BuildKit entre builds para acelerar la instalación de paquetes",
+      "Monta un secreto en el sistema de archivos durante esa instrucción",
+      "Publica la caché de pip como volumen del contenedor en runtime",
+      "Desactiva la caché de capas del Dockerfile"
+    ],
+    "correctIndex": 0,
+    "explanation": "El mount `type=cache` de BuildKit permite reutilizar una caché persistente entre ejecuciones de build (por ejemplo, la caché de pip), acelerando instalaciones repetidas sin que forme parte de la imagen final.",
+    "source": "docker-guide.md",
+    "code": "RUN --mount=type=cache,target=/root/.cache/pip \\\n    pip install -r requirements.txt",
+    "language": "dockerfile"
+  },
+  {
+    "id": "docker-062",
+    "category": "docker",
+    "topic": "Capas, caché y multi-stage builds",
+    "question": "¿Qué caracteriza a un secreto de build montado con `RUN --mount=type=secret,id=pip_config,target=/etc/pip.conf`?",
+    "options": [
+      "Queda grabado permanentemente en una capa de la imagen final",
+      "Sustituye a la necesidad de usar la bandera `--secret` en `docker build`",
+      "Existe temporalmente solo para esa instrucción y no debe copiarse ni imprimirse",
+      "Se comparte automáticamente con todas las instrucciones RUN posteriores"
+    ],
+    "correctIndex": 2,
+    "explanation": "La guía es explícita: 'El secreto existe temporalmente para esa instrucción. No lo copies ni lo imprimas.' Además, requiere pasarse con `docker build --secret`.",
+    "source": "docker-guide.md",
+    "code": "RUN --mount=type=secret,id=pip_config,target=/etc/pip.conf \\\n    pip install paquete-privado",
+    "language": "dockerfile"
+  },
+  {
+    "id": "docker-063",
+    "category": "docker",
+    "topic": "Capas, caché y multi-stage builds",
+    "question": "¿Cómo se provee el valor de un secreto de build declarado con `id=pip_config` al ejecutar `docker build`?",
+    "options": [
+      "No requiere ninguna bandera adicional, se detecta automáticamente",
+      "docker build --secret id=pip_config,src=./pip.conf -t mi-api:1.0 .",
+      "docker build --env pip_config=./pip.conf -t mi-api:1.0 .",
+      "docker build --build-arg pip_config=./pip.conf -t mi-api:1.0 ."
+    ],
+    "correctIndex": 1,
+    "explanation": "La bandera `--secret id=<id>,src=<ruta>` en `docker build` es la que provee el contenido del secreto que luego se monta con `RUN --mount=type=secret`.",
+    "source": "docker-guide.md",
+    "code": "docker build --secret id=pip_config,src=./pip.conf -t mi-api:1.0 .",
+    "language": "bash"
+  },
+  {
+    "id": "docker-064",
+    "category": "docker",
+    "topic": "Capas, caché y multi-stage builds",
+    "question": "¿Por qué la guía desaconseja usar `ARG TOKEN=...` o `ENV TOKEN=...` como alternativa a los secretos de build?",
+    "options": [
+      "Porque solo funcionan con BuildKit habilitado",
+      "Porque pueden quedar expuestos en metadatos, capas, cachés o registros de la imagen",
+      "Porque ralentizan significativamente el proceso de build",
+      "Porque ARG y ENV no permiten pasar ningún tipo de valor de texto"
+    ],
+    "correctIndex": 1,
+    "explanation": "La guía advierte que `ARG`/`ENV` no son alternativas seguras porque su contenido puede quedar expuesto en metadatos, capas, cachés o registros, a diferencia de los secretos montados con BuildKit.",
+    "source": "docker-guide.md"
+  },
+  {
+    "id": "docker-065",
+    "category": "docker",
+    "topic": "Capas, caché y multi-stage builds",
+    "question": "En el diagrama de la guía sobre capas, ¿qué invalida específicamente un cambio en `requirements.txt`?",
+    "options": [
+      "Desde `COPY requirements.txt` en adelante, incluyendo instalación y copia de código",
+      "Nada; requirements.txt no forma parte de la imagen",
+      "Únicamente la instrucción `FROM`",
+      "Solo la etapa `COPY código`"
+    ],
+    "correctIndex": 0,
+    "explanation": "Según el diagrama de flujo de la guía, un cambio en `requirements.txt` invalida la capa `COPY requirements.txt` y todo lo que depende de ella hacia abajo (instalación de dependencias y copia del código).",
+    "source": "docker-guide.md",
+    "code": "flowchart TD\n    A[FROM python] --> B[COPY requirements.txt]\n    B --> C[RUN instalar dependencias]\n    C --> D[COPY código]\n    D --> E[Imagen final]\n    Y[Cambio en requirements.txt] -. invalida .-> B",
+    "language": "text"
+  },
+  {
+    "id": "docker-066",
+    "category": "docker",
+    "topic": "Capas, caché y multi-stage builds",
+    "question": "Un equipo reconstruye su imagen con `docker build --no-cache -t app:v2 .` pero la imagen base sigue teniendo vulnerabilidades ya parchadas en una versión más reciente publicada del mismo tag. ¿Qué falta en el comando?",
+    "options": [
+      "Falta la bandera `--pull`, que comprueba una versión más reciente de la imagen base",
+      "Falta ejecutar `docker image rm` antes del build",
+      "Falta usar `docker buildx bake` en vez de `docker build`",
+      "Nada, `--no-cache` ya garantiza obtener la base más reciente"
+    ],
+    "correctIndex": 0,
+    "explanation": "`--no-cache` reejecuta los pasos del Dockerfile pero no garantiza descargar una base nueva; para eso se necesita explícitamente `--pull`.",
+    "source": "docker-guide.md"
+  },
+  {
+    "id": "docker-067",
+    "category": "docker",
+    "topic": "Persistencia: volúmenes, bind mounts y tmpfs",
+    "question": "¿Qué ocurre con la capa escribible de un contenedor cuando este se elimina?",
+    "options": [
+      "Se convierte automáticamente en un volumen nombrado",
+      "Desaparece junto con el contenedor",
+      "Persiste indefinidamente en el sistema de archivos del host",
+      "Se transfiere a la imagen original"
+    ],
+    "correctIndex": 1,
+    "explanation": "La guía indica que la capa escribible 'sobrevive a stop/start, pero desaparece cuando el contenedor se elimina'; por eso los datos importantes deben vivir en almacenamiento con ciclo de vida independiente.",
+    "source": "docker-guide.md"
+  },
+  {
+    "id": "docker-068",
+    "category": "docker",
+    "topic": "Persistencia: volúmenes, bind mounts y tmpfs",
+    "question": "Según la tabla comparativa de la sección 8.1, ¿qué tipo de almacenamiento NO persiste al eliminar el contenedor y además vive en memoria?",
+    "options": [
+      "Volumen nombrado",
+      "Capa escribible administrada por Docker",
+      "Bind mount",
+      "tmpfs"
+    ],
+    "correctIndex": 3,
+    "explanation": "`tmpfs` se administra en memoria del host, no persiste al eliminar el contenedor, y se recomienda para datos sensibles o temporales que no deben ir a disco.",
+    "source": "docker-guide.md"
+  },
+  {
+    "id": "docker-069",
+    "category": "docker",
+    "topic": "Persistencia: volúmenes, bind mounts y tmpfs",
+    "question": "¿Cuál es el uso típico recomendado para un volumen nombrado según la tabla comparativa?",
+    "options": [
+      "Archivos temporales no importantes",
+      "Datos de base de datos, colas y contenido persistente",
+      "Datos sensibles que nunca deben tocar disco",
+      "Código o configuración local que debe verse editable desde el host en tiempo real"
+    ],
+    "correctIndex": 1,
+    "explanation": "Los volúmenes nombrados, administrados por Docker y persistentes, se recomiendan para datos de base de datos, colas y contenido persistente en general.",
+    "source": "docker-guide.md"
+  },
+  {
+    "id": "docker-070",
+    "category": "docker",
+    "topic": "Persistencia: volúmenes, bind mounts y tmpfs",
+    "question": "¿Por qué la guía recomienda `--mount` sobre la sintaxis corta `-v` para especificar volúmenes?",
+    "options": [
+      "Porque `--mount` expresa claramente tipo, origen, destino y opciones",
+      "Porque `-v` solo funciona con bind mounts",
+      "No hay ninguna diferencia funcional documentada",
+      "Porque `-v` fue eliminado de Docker recientemente"
+    ],
+    "correctIndex": 0,
+    "explanation": "La guía indica: 'Se recomienda --mount porque expresa claramente tipo, origen, destino y opciones. La sintaxis corta equivalente es -v notas-data:/data.'",
+    "source": "docker-guide.md",
+    "code": "docker run --rm \\\n  --mount type=volume,source=notas-data,target=/data \\\n  alpine:3.22 sh -c 'date > /data/creado.txt'",
+    "language": "bash"
+  },
+  {
+    "id": "docker-071",
+    "category": "docker",
+    "topic": "Persistencia: volúmenes, bind mounts y tmpfs",
+    "question": "¿Qué sucede si se intenta ejecutar `docker volume rm notas-data` mientras un contenedor sigue usando ese volumen?",
+    "options": [
+      "El volumen se vacía pero conserva su nombre",
+      "Docker no elimina un volumen en uso",
+      "El contenedor que lo usa se detiene automáticamente",
+      "Docker lo elimina de todas formas sin advertencia"
+    ],
+    "correctIndex": 1,
+    "explanation": "La guía indica explícitamente: 'Docker no elimina un volumen en uso.' Aun así recomienda revisar nombre y contenido antes de borrarlo, porque puede destruir datos irrecuperables.",
+    "source": "docker-guide.md"
+  },
+  {
+    "id": "docker-072",
+    "category": "docker",
+    "topic": "Persistencia: volúmenes, bind mounts y tmpfs",
+    "question": "En este comando, ¿qué implica agregar la opción `readonly` al mount de tipo volumen?",
+    "options": [
+      "El contenedor solo puede leer del volumen, sin poder modificar su contenido",
+      "El contenedor puede leer y escribir libremente en /data",
+      "El volumen se elimina automáticamente al terminar el contenedor",
+      "Convierte el volumen en un bind mount"
+    ],
+    "correctIndex": 0,
+    "explanation": "La opción `readonly` en el mount restringe el acceso del contenedor a solo lectura sobre ese volumen, como se ve en el ejemplo que lee `/data/creado.txt` sin poder modificarlo.",
+    "source": "docker-guide.md",
+    "code": "docker run --rm \\\n  --mount type=volume,source=notas-data,target=/data,readonly \\\n  alpine:3.22 cat /data/creado.txt",
+    "language": "bash"
+  },
+  {
+    "id": "docker-073",
+    "category": "docker",
+    "topic": "Persistencia: volúmenes, bind mounts y tmpfs",
+    "question": "¿Qué riesgo señala la guía sobre un bind mount SIN la opción `readonly`?",
+    "options": [
+      "Docker rechaza el comando por seguridad",
+      "El bind mount se convierte automáticamente en volumen nombrado",
+      "El proceso del contenedor puede modificar o borrar archivos del host",
+      "El contenedor no podrá acceder en absoluto a la ruta del host"
+    ],
+    "correctIndex": 2,
+    "explanation": "La guía advierte: 'sin readonly, el proceso puede modificar o borrar archivos del host', por lo que en el ejemplo de compileall se usa `readonly` sobre el bind mount del código fuente.",
+    "source": "docker-guide.md",
+    "code": "docker run --rm \\\n  --mount type=bind,source=\"$PWD\",target=/workspace,readonly \\\n  -w /workspace \\\n  python:3.13-slim \\\n  python -m compileall .",
+    "language": "bash"
+  },
+  {
+    "id": "docker-074",
+    "category": "docker",
+    "topic": "Persistencia: volúmenes, bind mounts y tmpfs",
+    "question": "¿Qué característica distingue a `tmpfs` respecto a volúmenes y bind mounts, según la sección 8.4?",
+    "options": [
+      "Es administrado por el usuario y el sistema operativo del host, igual que un bind mount",
+      "El contenido se pierde al detener el contenedor y no se escribe en almacenamiento persistente del host",
+      "Requiere crearse explícitamente con `docker volume create` primero",
+      "Es lo único que puede montarse en modo lectura y escritura"
+    ],
+    "correctIndex": 1,
+    "explanation": "`tmpfs` vive en memoria: su contenido se pierde al detener el contenedor y nunca se escribe en el almacenamiento persistente del host; tampoco reemplaza una solución formal de secretos.",
+    "source": "docker-guide.md",
+    "code": "docker run --rm \\\n  --mount type=tmpfs,destination=/run/cache,tmpfs-size=64m \\\n  alpine:3.22 sh -c 'echo temporal > /run/cache/estado && cat /run/cache/estado'",
+    "language": "bash"
+  },
+  {
+    "id": "docker-075",
+    "category": "docker",
+    "topic": "Persistencia: volúmenes, bind mounts y tmpfs",
+    "question": "Antes de copiar archivos de un volumen usado por una base de datos activa como respaldo, ¿qué recomienda la guía?",
+    "options": [
+      "Copiar directamente sin ninguna precaución adicional",
+      "Detener la aplicación o ponerla en un estado consistente, y preferir herramientas lógicas de la base de datos o snapshots coordinados",
+      "Usar siempre tmpfs para bases de datos en producción",
+      "Eliminar el volumen y crear uno nuevo antes de cada respaldo"
+    ],
+    "correctIndex": 1,
+    "explanation": "La guía advierte que copiar archivos de una base de datos activa puede producir un respaldo inválido, y recomienda para bases de datos usar sus herramientas lógicas (como pg_dump) o snapshots coordinados.",
+    "source": "docker-guide.md"
+  },
+  {
+    "id": "docker-076",
+    "category": "docker",
+    "topic": "Persistencia: volúmenes, bind mounts y tmpfs",
+    "question": "En los comandos `docker exec postgres-demo pg_dump -U app appdb > appdb.sql` y `docker exec -i postgres-demo psql -U app -d appdb < appdb.sql`, ¿quién procesa los operadores `>` y `<`?",
+    "options": [
+      "El proceso PostgreSQL dentro del contenedor",
+      "El shell del host, no el contenedor",
+      "El registro remoto de imágenes",
+      "El daemon de Docker directamente"
+    ],
+    "correctIndex": 1,
+    "explanation": "La guía aclara: 'Los operadores > y < los procesa el shell del host', por lo que el dump se guarda/lee desde el sistema de archivos del host, no del contenedor.",
+    "source": "docker-guide.md",
+    "code": "docker exec postgres-demo pg_dump -U app appdb > appdb.sql\ndocker exec -i postgres-demo psql -U app -d appdb < appdb.sql",
+    "language": "bash"
+  },
+  {
+    "id": "docker-077",
+    "category": "docker",
+    "topic": "Persistencia: volúmenes, bind mounts y tmpfs",
+    "question": "Para restaurar un backup `.tar.gz` en un volumen nuevo, la guía monta el volumen de destino y el respaldo mediante bind mount. ¿Qué opción debería llevar el bind mount que contiene el backup para evitar modificaciones accidentales?",
+    "options": [
+      "type=tmpfs",
+      "readonly",
+      "type=volume sin especificar source",
+      "--rm"
+    ],
+    "correctIndex": 1,
+    "explanation": "Al montar la carpeta con el archivo de respaldo como bind mount para lectura durante la restauración, se recomienda `readonly` para evitar que el proceso de extracción modifique accidentalmente el backup original.",
+    "source": "docker-guide.md",
+    "code": "docker volume create notas-data-restaurado\ndocker run --rm \\\n  --mount type=volume,source=notas-data-restaurado,target=/target \\\n  --mount type=bind,source=\"$PWD\",target=/backup,readonly \\\n  alpine:3.22 tar -xzf /backup/notas-data.tar.gz -C /target",
+    "language": "bash"
+  },
+  {
+    "id": "docker-078",
+    "category": "docker",
+    "topic": "Persistencia: volúmenes, bind mounts y tmpfs",
+    "question": "¿Qué diferencia clave hay entre quién administra un volumen nombrado y quién administra un bind mount?",
+    "options": [
+      "Ambos los administra exclusivamente el usuario del host",
+      "El volumen nombrado lo administra Docker; el bind mount lo administran el usuario y el sistema operativo del host",
+      "El bind mount lo administra Docker y el volumen nombrado el usuario",
+      "Ambos los administra exclusivamente Docker sin intervención del usuario"
+    ],
+    "correctIndex": 1,
+    "explanation": "Según la tabla comparativa, el volumen nombrado 'lo administra Docker', mientras que el bind mount 'lo administran el usuario y el SO host'.",
+    "source": "docker-guide.md"
+  },
+  {
+    "id": "docker-079",
+    "category": "docker",
+    "topic": "Redes, DNS y publicación de puertos",
+    "question": "Dentro de un contenedor, ¿a qué se refiere `localhost`?",
+    "options": [
+      "A ese mismo contenedor, no al host ni a otro servicio",
+      "A todos los contenedores de la misma red simultáneamente",
+      "Al daemon de Docker",
+      "Al host físico donde corre Docker"
+    ],
+    "correctIndex": 0,
+    "explanation": "La guía es explícita: 'Un contenedor tiene su propia interfaz y espacio de red. localhost dentro de él significa ese mismo contenedor, no el host ni otro servicio.'",
+    "source": "docker-guide.md"
+  },
+  {
+    "id": "docker-080",
+    "category": "docker",
+    "topic": "Redes, DNS y publicación de puertos",
+    "question": "¿Qué beneficio ofrece una red definida por el usuario (`docker network create app-net`) frente a la red `bridge` por defecto?",
+    "options": [
+      "Publica automáticamente todos los puertos de los contenedores conectados",
+      "Elimina la necesidad de usar `-p` incluso para acceso externo",
+      "Ofrece resolución DNS por nombre o alias entre los contenedores conectados a ella",
+      "Cifra automáticamente todo el tráfico entre contenedores conectados a ella"
+    ],
+    "correctIndex": 2,
+    "explanation": "En una red definida por el usuario, Docker ofrece resolución DNS por nombre o alias, permitiendo que un contenedor alcance a otro usando su nombre (ej. `http://web-interno:80`) en lugar de su IP.",
+    "source": "docker-guide.md",
+    "code": "docker network create app-net\ndocker run -d --name web-interno --network app-net nginx:1.28-alpine\ndocker run --rm --network app-net curlimages/curl:8.15.0 http://web-interno:80",
+    "language": "bash"
+  },
+  {
+    "id": "docker-081",
+    "category": "docker",
+    "topic": "Redes, DNS y publicación de puertos",
+    "question": "¿Por qué recomienda la guía usar nombres estables como `db` o `api` en lugar de direcciones IP de contenedor?",
+    "options": [
+      "Porque la IP puede cambiar al recrear el contenedor",
+      "Porque Docker prohíbe técnicamente el uso de IPs",
+      "Porque las IP de contenedor son ilegales de usar",
+      "Porque los nombres son siempre más cortos de escribir"
+    ],
+    "correctIndex": 0,
+    "explanation": "La guía indica que se deben usar nombres estables porque 'la IP puede cambiar al recrearlo', mientras que el nombre del servicio permanece estable vía DNS.",
+    "source": "docker-guide.md"
+  },
+  {
+    "id": "docker-082",
+    "category": "docker",
+    "topic": "Redes, DNS y publicación de puertos",
+    "question": "¿Cuál es la diferencia entre `EXPOSE 80` en un Dockerfile y la bandera `-p` en `docker run`?",
+    "options": [
+      "Son exactamente equivalentes",
+      "`EXPOSE` documenta intención; `-p` crea la publicación real del puerto hacia el host",
+      "`-p` documenta intención; `EXPOSE` crea la publicación real",
+      "`EXPOSE` solo funciona en Windows y `-p` solo en Linux"
+    ],
+    "correctIndex": 1,
+    "explanation": "La guía es clara: 'EXPOSE 80 en un Dockerfile documenta intención. -p crea la publicación real.'",
+    "source": "docker-guide.md"
+  },
+  {
+    "id": "docker-083",
+    "category": "docker",
+    "topic": "Redes, DNS y publicación de puertos",
+    "question": "Comparando `docker run -d --name web-local -p 127.0.0.1:8080:80 nginx:1.28-alpine` con `docker run -d --name web-red -p 8081:80 nginx:1.28-alpine`, ¿qué diferencia de accesibilidad hay?",
+    "options": [
+      "Ambos son accesibles exactamente de la misma forma",
+      "El primero solo es accesible desde el host local; el segundo puede escuchar en todas las interfaces del host",
+      "Ninguno de los dos es accesible desde ningún lugar",
+      "El segundo solo es accesible desde el host local; el primero desde cualquier interfaz"
+    ],
+    "correctIndex": 1,
+    "explanation": "Al especificar `127.0.0.1:` se limita la publicación a la interfaz de loopback; al omitir la IP (`-p 8081:80`), el puerto puede escuchar en todas las interfaces del host, según la guía.",
+    "source": "docker-guide.md",
+    "code": "docker run -d --name web-local -p 127.0.0.1:8080:80 nginx:1.28-alpine\ndocker run -d --name web-red -p 8081:80 nginx:1.28-alpine",
+    "language": "bash"
+  },
+  {
+    "id": "docker-084",
+    "category": "docker",
+    "topic": "Redes, DNS y publicación de puertos",
+    "question": "¿Qué recomienda la guía respecto a publicar el puerto de una base de datos que solo usa otro contenedor de la misma red?",
+    "options": [
+      "Publicarlo siempre por seguridad",
+      "No publicarlo si solo la usa otro contenedor en la misma red",
+      "Publicarlo únicamente en el puerto 5432 por convención",
+      "Publicarlo pero solo desde contenedores privilegiados"
+    ],
+    "correctIndex": 1,
+    "explanation": "La guía indica: 'No publiques una base de datos si solo la usa otro contenedor en la misma red', ya que la comunicación interna no requiere publicación al host.",
+    "source": "docker-guide.md"
+  },
+  {
+    "id": "docker-085",
+    "category": "docker",
+    "topic": "Redes, DNS y publicación de puertos",
+    "question": "¿Cómo puede un contenedor en Linux (Docker Engine, no Desktop) alcanzar un servicio que corre en el host?",
+    "options": [
+      "Agregando explícitamente `--add-host host.docker.internal:host-gateway` y usando ese nombre",
+      "Montando el socket Docker del host",
+      "Usando siempre `localhost` sin configuración adicional",
+      "Es imposible alcanzar el host desde un contenedor en Linux"
+    ],
+    "correctIndex": 0,
+    "explanation": "La guía explica que en Docker Engine para Linux puede añadirse explícitamente `--add-host host.docker.internal:host-gateway`; en Docker Desktop suele proveerse automáticamente.",
+    "source": "docker-guide.md",
+    "code": "docker run --rm \\\n  --add-host host.docker.internal:host-gateway \\\n  curlimages/curl:8.15.0 \\\n  http://host.docker.internal:3000",
+    "language": "bash"
+  },
+  {
+    "id": "docker-086",
+    "category": "docker",
+    "topic": "Redes, DNS y publicación de puertos",
+    "question": "¿Qué comando permite ver, desde dentro de un contenedor, si la resolución DNS de otro servicio en la misma red funciona?",
+    "options": [
+      "docker exec contenedor getent hosts db",
+      "docker image inspect db",
+      "docker volume inspect db",
+      "docker network create db"
+    ],
+    "correctIndex": 0,
+    "explanation": "`docker exec contenedor getent hosts db` consulta la resolución DNS del nombre `db` desde dentro del contenedor, útil para diagnosticar problemas de red entre servicios.",
+    "source": "docker-guide.md",
+    "code": "docker exec contenedor getent hosts db",
+    "language": "bash"
+  },
+  {
+    "id": "docker-087",
+    "category": "docker",
+    "topic": "Redes, DNS y publicación de puertos",
+    "question": "¿Por qué recomienda la guía usar una imagen de diagnóstico temporal conectada a la red, en lugar de instalar herramientas de red en la imagen de la aplicación?",
+    "options": [
+      "Porque las imágenes de diagnóstico no requieren red",
+      "Porque todas las imágenes incluyen automáticamente ping, curl y ss",
+      "Porque no todas las imágenes incluyen herramientas de diagnóstico, y en producción es preferible no inflar la imagen de la aplicación",
+      "Porque está prohibido usar `docker exec` en producción"
+    ],
+    "correctIndex": 2,
+    "explanation": "La guía indica que 'no todas las imágenes incluyen ping, curl, ss o un shell' y que 'en producción es normal usar una imagen de diagnóstico temporal conectada a la misma red, en vez de inflar la imagen de la aplicación'.",
+    "source": "docker-guide.md"
+  },
+  {
+    "id": "docker-088",
+    "category": "docker",
+    "topic": "Redes, DNS y publicación de puertos",
+    "question": "En el punto de control 3, tras ejecutar un Nginx llamado `sitio` sin publicar puertos y consultarlo por nombre desde un contenedor temporal, ¿por qué `curl http://localhost` desde ese contenedor temporal NO consulta a Nginx?",
+    "options": [
+      "Porque `curl` no puede usarse dentro de contenedores",
+      "Porque `localhost` dentro del contenedor temporal se refiere a sí mismo, no al contenedor `sitio`",
+      "Porque Nginx nunca responde a peticiones HTTP",
+      "Porque la red `laboratorio` bloquea el tráfico HTTP"
+    ],
+    "correctIndex": 1,
+    "explanation": "Como cada contenedor tiene su propio espacio de red, `localhost` en el contenedor temporal apunta a sí mismo; para llegar a Nginx debe usarse el nombre del servicio, `sitio`.",
+    "source": "docker-guide.md"
+  },
+  {
+    "id": "docker-089",
+    "category": "docker",
+    "topic": "Redes, DNS y publicación de puertos",
+    "question": "¿Qué diagrama de flujo describe correctamente la ruta de una petición externa hacia un servicio de base de datos interno según la sección 9.1?",
+    "options": [
+      "El navegador accede directamente a `db:5432` sin pasar por el host",
+      "El host publica automáticamente todos los puertos internos de la red",
+      "La base de datos siempre debe estar publicada para que la API la alcance",
+      "El navegador usa `localhost:8080` publicado hacia `api:8000`, que a su vez habla con `db:5432` dentro de la red, sin que `db` esté publicado hacia afuera"
+    ],
+    "correctIndex": 3,
+    "explanation": "El diagrama de la sección 9.1 muestra que el navegador llega por `localhost:8080` (publicado) hasta `api:8000`, y dentro de la red `app-net`, `api` habla con `db:5432` sin que `db` esté publicado directamente hacia el exterior.",
+    "source": "docker-guide.md"
+  },
+  {
+    "id": "docker-090",
+    "category": "docker",
+    "topic": "Redes, DNS y publicación de puertos",
+    "question": "¿Qué comando muestra las redes a las que está conectado un contenedor específico, en formato JSON?",
+    "options": [
+      "docker network create contenedor",
+      "docker port contenedor",
+      "docker inspect contenedor --format '{{json .NetworkSettings.Networks}}'",
+      "docker network ls"
+    ],
+    "correctIndex": 2,
+    "explanation": "`docker inspect contenedor --format '{{json .NetworkSettings.Networks}}'` muestra en JSON las redes a las que está conectado un contenedor, útil para diagnóstico.",
+    "source": "docker-guide.md",
+    "code": "docker inspect contenedor --format '{{json .NetworkSettings.Networks}}'",
+    "language": "bash"
+  },
+  {
+    "id": "docker-091",
+    "category": "docker",
+    "topic": "Docker Compose",
+    "question": "¿Cuál es la diferencia conceptual entre un Dockerfile y un archivo Compose según la guía?",
+    "options": [
+      "Un Dockerfile configura cómo se ejecutan los contenedores; Compose construye la imagen",
+      "Compose reemplaza por completo la necesidad de un Dockerfile en cualquier proyecto",
+      "Un Dockerfile construye una imagen; un Compose file configura cómo se ejecutan uno o varios contenedores",
+      "Son términos sinónimos para el mismo archivo"
+    ],
+    "correctIndex": 2,
+    "explanation": "La guía lo resume así: 'Un Dockerfile construye una imagen; un Compose file configura cómo se ejecutan uno o varios contenedores.'",
+    "source": "docker-guide.md"
+  },
+  {
+    "id": "docker-092",
+    "category": "docker",
+    "topic": "Docker Compose",
+    "question": "Dado este `compose.yaml`, ¿qué hace `docker compose up -d`?",
+    "options": [
+      "Construye la imagen `nginx:1.28-alpine` desde cero obligatoriamente",
+      "Elimina el servicio `web` si ya existía",
+      "Solo valida la sintaxis del archivo sin crear recursos",
+      "Crea y arranca en segundo plano el servicio `web`, publicando el puerto 8080 solo en el host local"
+    ],
+    "correctIndex": 3,
+    "explanation": "`docker compose up -d` crea y arranca los servicios definidos (aquí, `web` basado en la imagen `nginx:1.28-alpine`) en segundo plano, publicando el puerto según `127.0.0.1:8080:80`.",
+    "source": "docker-guide.md",
+    "code": "name: guia-web\n\nservices:\n  web:\n    image: nginx:1.28-alpine\n    ports:\n      - \"127.0.0.1:8080:80\"\n    restart: unless-stopped",
+    "language": "yaml"
+  },
+  {
+    "id": "docker-093",
+    "category": "docker",
+    "topic": "Docker Compose",
+    "question": "¿Qué hace `docker compose config` y por qué la guía recomienda ejecutarlo en local y CI?",
+    "options": [
+      "Resuelve variables, combina archivos y valida la estructura antes de crear recursos",
+      "Reinicia todos los servicios en ejecución",
+      "Elimina todos los contenedores del proyecto",
+      "Publica la imagen resultante en un registro"
+    ],
+    "correctIndex": 0,
+    "explanation": "La guía indica que `docker compose config` 'resuelve variables, combina archivos y valida la estructura antes de crear recursos', por lo que es útil ejecutarlo tanto localmente como en CI antes de aplicar cambios.",
+    "source": "docker-guide.md",
+    "code": "docker compose config",
+    "language": "bash"
+  },
+  {
+    "id": "docker-094",
+    "category": "docker",
+    "topic": "Docker Compose",
+    "question": "¿Qué diferencia hay entre `docker compose exec` y `docker compose run`?",
+    "options": [
+      "`run` usa un contenedor existente; `exec` crea uno puntual",
+      "Ambos comandos son exactamente equivalentes",
+      "`exec` usa un contenedor existente; `run` crea un contenedor puntual con la configuración del servicio",
+      "`exec` solo funciona con servicios detenidos"
+    ],
+    "correctIndex": 2,
+    "explanation": "La guía distingue: 'exec usa un contenedor existente. run crea un contenedor puntual con la configuración del servicio.'",
+    "source": "docker-guide.md",
+    "code": "docker compose exec servicio sh\ndocker compose run --rm servicio comando",
+    "language": "bash"
+  },
+  {
+    "id": "docker-095",
+    "category": "docker",
+    "topic": "Docker Compose",
+    "question": "¿Qué diferencia crítica hay entre `docker compose down` y `docker compose down -v`?",
+    "options": [
+      "`down -v` es más rápido pero hace exactamente lo mismo",
+      "`down` elimina contenedores y la red del proyecto, pero conserva por defecto los volúmenes; `down -v` también elimina los volúmenes declarados",
+      "No hay ninguna diferencia real",
+      "`down` elimina los volúmenes; `down -v` los conserva"
+    ],
+    "correctIndex": 1,
+    "explanation": "Según el diagrama de ciclo de vida de Compose, `down` elimina contenedores y red pero conserva los volúmenes por defecto, mientras que `down -v` también elimina esos volúmenes: la guía advierte no ejecutarlo sobre datos importantes sin confirmar respaldo.",
+    "source": "docker-guide.md"
+  },
+  {
+    "id": "docker-096",
+    "category": "docker",
+    "topic": "Docker Compose",
+    "question": "En este fragmento de Compose con interpolación, si la variable `APP_PORT` no está definida en `.env` ni en el entorno, ¿qué puerto de host se usará?",
+    "options": [
+      "8000, por el valor por defecto `${APP_PORT:-8000}`",
+      "Ninguno; el servicio no se publicará",
+      "Fallará siempre sin un valor por defecto",
+      "80, el puerto interno del contenedor"
+    ],
+    "correctIndex": 0,
+    "explanation": "La sintaxis `${APP_PORT:-8000}` usa 8000 como valor por defecto cuando `APP_PORT` no está definida, tal como explica la sección 10.3 sobre variables e interpolación.",
+    "source": "docker-guide.md",
+    "code": "services:\n  api:\n    image: guia-api:1.0\n    ports:\n      - \"127.0.0.1:${APP_PORT:-8000}:8000\"\n    environment:\n      APP_ENV: \"${APP_ENV:-development}\"",
+    "language": "yaml"
+  },
+  {
+    "id": "docker-097",
+    "category": "docker",
+    "topic": "Docker Compose",
+    "question": "¿Qué advierte la guía sobre usar un archivo `.env` para valores de Compose?",
+    "options": [
+      "Solo puede contener una variable por archivo",
+      "No es automáticamente un mecanismo seguro para secretos; conviene evitar versionarlo si contiene credenciales",
+      "Nunca debe usarse junto con Compose",
+      "Es automáticamente un mecanismo seguro para secretos"
+    ],
+    "correctIndex": 1,
+    "explanation": "La guía indica: 'Un .env no es automáticamente un mecanismo seguro para secretos. Evita versionarlo si contiene credenciales y proporciona .env.example sin valores sensibles.'",
+    "source": "docker-guide.md"
+  },
+  {
+    "id": "docker-098",
+    "category": "docker",
+    "topic": "Docker Compose",
+    "question": "En este fragmento de Compose, ¿qué implica declarar la red `backend` con `internal: true`?",
+    "options": [
+      "Que todos los servicios conectados a `backend` quedan expuestos automáticamente a Internet",
+      "Que aísla el tráfico externo de esa red, aunque no reemplaza autenticación ni controles de la aplicación",
+      "Que el servicio `db` se publica automáticamente en el puerto 5432 del host",
+      "Que la red `backend` se elimina automáticamente al hacer `docker compose down`"
+    ],
+    "correctIndex": 1,
+    "explanation": "La guía explica que la red `backend` interna 'aísla el tráfico externo, pero no reemplaza autenticación ni controles de la aplicación'.",
+    "source": "docker-guide.md",
+    "code": "services:\n  api:\n    build: .\n    networks: [frontend, backend]\n  db:\n    image: postgres:17-alpine\n    volumes:\n      - db-data:/var/lib/postgresql/data\n    networks: [backend]\n\nvolumes:\n  db-data:\n\nnetworks:\n  frontend:\n  backend:\n    internal: true",
+    "language": "yaml"
+  },
+  {
+    "id": "docker-099",
+    "category": "docker",
+    "topic": "Docker Compose",
+    "question": "¿Cómo se levanta un servicio marcado con `profiles: [debug]` que normalmente no arranca con `docker compose up`?",
+    "options": [
+      "docker compose up -d --profile-debug",
+      "docker compose --profile debug up -d",
+      "docker compose debug up -d",
+      "docker compose up -d --include debug"
+    ],
+    "correctIndex": 1,
+    "explanation": "Para incluir servicios de un perfil específico se usa `docker compose --profile <nombre> up -d`, como en `docker compose --profile debug up -d`.",
+    "source": "docker-guide.md",
+    "code": "services:\n  adminer:\n    image: adminer:5\n    profiles: [debug]",
+    "language": "yaml"
+  },
+  {
+    "id": "docker-100",
+    "category": "docker",
+    "topic": "Docker Compose",
+    "question": "¿Qué hace `docker compose -f compose.yaml -f compose.dev.yaml config`?",
+    "options": [
+      "Elimina `compose.yaml` y usa exclusivamente `compose.dev.yaml`",
+      "Construye las imágenes de ambos archivos por separado sin combinarlas",
+      "Ignora `compose.dev.yaml` porque solo se puede usar un archivo `-f` a la vez",
+      "Combina ambos archivos (el segundo actuando como override) y muestra la configuración fusionada resultante"
+    ],
+    "correctIndex": 3,
+    "explanation": "Se pueden combinar varios archivos Compose con múltiples `-f`; el segundo actúa como override del primero. `config` permite revisar siempre la configuración fusionada antes de aplicar cambios.",
+    "source": "docker-guide.md",
+    "code": "docker compose -f compose.yaml -f compose.dev.yaml config\ndocker compose -f compose.yaml -f compose.dev.yaml up -d",
+    "language": "bash"
+  },
+  {
+    "id": "docker-101",
+    "category": "docker",
+    "topic": "Docker Compose",
+    "question": "En el `compose.yaml` del proyecto integrador, el servicio `api` define `DB_HOST: db`. ¿Por qué la API se conecta a `db:5432` y no a `localhost:5432`?",
+    "options": [
+      "Porque `localhost` dentro del contenedor `api` se refiere al propio contenedor `api`, no al servicio `db`",
+      "Porque Compose traduce automáticamente `localhost` al nombre `db`",
+      "Porque `db` es el nombre del host físico donde corre Docker",
+      "Porque PostgreSQL solo acepta conexiones remotas, nunca locales"
+    ],
+    "correctIndex": 0,
+    "explanation": "Cada servicio de Compose corre en su propio contenedor con su propio espacio de red; `localhost` dentro de `api` se refiere a sí mismo, por lo que para alcanzar PostgreSQL se debe usar el nombre de servicio `db`, resoluble por DNS en la red de Compose.",
+    "source": "docker-guide.md"
+  },
+  {
+    "id": "docker-102",
+    "category": "docker",
+    "topic": "Docker Compose",
+    "question": "¿Qué mecanismo evita que la API arranque antes de que PostgreSQL esté listo, en el `compose.yaml` del proyecto integrador?",
+    "options": [
+      "`restart: unless-stopped` en el servicio `api`",
+      "`depends_on: db: condition: service_healthy` en el servicio `api`, junto con el `healthcheck` definido en `db`",
+      "El orden alfabético de los servicios en el archivo YAML",
+      "La instrucción `WORKDIR` del Dockerfile de la API"
+    ],
+    "correctIndex": 1,
+    "explanation": "El servicio `api` declara `depends_on: db: condition: service_healthy`, que espera a que el healthcheck de `db` (basado en `pg_isready`) reporte estado saludable antes de iniciar `api`.",
+    "source": "docker-guide.md",
+    "code": "depends_on:\n  db:\n    condition: service_healthy",
+    "language": "yaml"
+  },
+  {
+    "id": "docker-103",
+    "category": "docker",
+    "topic": "Docker Compose",
+    "question": "En el healthcheck de PostgreSQL `test: [\"CMD-SHELL\", \"pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB\"]`, ¿qué función cumple `$$`?",
+    "options": [
+      "Indica que la variable es opcional",
+      "Es un error de sintaxis que Compose ignora",
+      "Escapa el símbolo de dólar para que la variable se expanda dentro del contenedor, no al procesar el archivo Compose",
+      "Duplica el valor de la variable"
+    ],
+    "correctIndex": 2,
+    "explanation": "La guía explica: 'En YAML de Compose, $$ escapa el dólar para que la variable se expanda dentro del contenedor, no al procesar el archivo.' Así, `$$POSTGRES_USER` se convierte en `$POSTGRES_USER` dentro del contenedor.",
+    "source": "docker-guide.md",
+    "code": "healthcheck:\n  test: [\"CMD-SHELL\", \"pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB\"]\n  interval: 5s\n  timeout: 3s\n  retries: 10\n  start_period: 10s",
+    "language": "yaml"
+  },
+  {
+    "id": "docker-104",
+    "category": "docker",
+    "topic": "Docker Compose",
+    "question": "En el servicio `api` del proyecto integrador se define `read_only: true` junto a `tmpfs: [/tmp]`. ¿Por qué esto no impide que PostgreSQL reciba escrituras de la API?",
+    "options": [
+      "Porque `read_only` se aplica automáticamente a todos los servicios del archivo",
+      "Porque PostgreSQL ignora el parámetro `read_only`",
+      "Porque `read_only` afecta el sistema de archivos del contenedor `api`, no la conexión de red hacia el servicio `db` ni su base de datos",
+      "Porque `read_only` es solo un comentario decorativo sin efecto"
+    ],
+    "correctIndex": 2,
+    "explanation": "`read_only: true` hace de solo lectura el sistema de archivos del contenedor `api` (con `/tmp` como excepción vía tmpfs), pero no limita en absoluto las operaciones de red/SQL que la API realiza contra la base de datos `db`.",
+    "source": "docker-guide.md",
+    "code": "read_only: true\ntmpfs:\n  - /tmp",
+    "language": "yaml"
+  },
+  {
+    "id": "docker-105",
+    "category": "docker",
+    "topic": "Docker Compose",
+    "question": "Tras ejecutar `docker compose down` (sin `-v`) y luego `docker compose up -d --wait` de nuevo en el proyecto integrador, ¿qué sucede con los datos de `visits`?",
+    "options": [
+      "Se conservan solo si se usa `--force-recreate`",
+      "Se pierden porque `down` elimina siempre los volúmenes",
+      "Se conservan, porque el volumen nombrado `db-data` no se elimina con `down` sin `-v`",
+      "Se duplican automáticamente"
+    ],
+    "correctIndex": 2,
+    "explanation": "Como `down` (sin `-v`) conserva por defecto los volúmenes declarados, el volumen nombrado `db-data` con los datos de PostgreSQL sobrevive, y al levantar de nuevo los servicios los datos siguen presentes.",
+    "source": "docker-guide.md"
+  },
+  {
+    "id": "docker-106",
+    "category": "docker",
+    "topic": "Docker Compose",
+    "question": "¿Qué ocurre específicamente con los datos tras ejecutar `docker compose down -v` en el proyecto integrador?",
+    "options": [
+      "Se hace un backup automático antes de eliminar",
+      "Se eliminan también los volúmenes declarados, incluyendo los datos de PostgreSQL en `db-data`",
+      "Solo afecta a la red del proyecto, no a los volúmenes",
+      "Solo se detienen los contenedores, los datos permanecen intactos"
+    ],
+    "correctIndex": 1,
+    "explanation": "`down -v` elimina además los volúmenes declarados, por lo que los datos de PostgreSQL en `db-data` se pierden; la guía advierte no ejecutarlo sobre datos importantes sin confirmar respaldo.",
+    "source": "docker-guide.md",
+    "code": "docker compose down -v",
+    "language": "bash"
+  },
+  {
+    "id": "docker-107",
+    "category": "docker",
+    "topic": "Docker Compose",
+    "question": "¿Cuándo se ejecuta realmente `init.sql` en el servicio `db` del proyecto integrador?",
+    "options": [
+      "Nunca, es solo un archivo de referencia sin efecto",
+      "Cada vez que se ejecuta `docker compose config`",
+      "Cada vez que se reinicia el contenedor `db`",
+      "Solo cuando PostgreSQL inicializa un directorio de datos vacío; cambios posteriores al archivo no se vuelven a aplicar al volumen existente"
+    ],
+    "correctIndex": 3,
+    "explanation": "La guía aclara: 'init.sql se ejecuta cuando PostgreSQL inicializa un directorio de datos vacío. Cambiar ese archivo después no vuelve a aplicarlo al volumen existente; las aplicaciones reales usan una herramienta de migraciones.'",
+    "source": "docker-guide.md"
+  },
+  {
+    "id": "docker-108",
+    "category": "docker",
+    "topic": "Docker Compose",
+    "question": "Se define `secrets` en Compose apuntando a un archivo local con la contraseña de base de datos. ¿Qué aclara la guía sobre este mecanismo en un entorno de desarrollo local?",
+    "options": [
+      "Elimina la necesidad de proteger el archivo fuente",
+      "La aplicación debe leer el archivo indicado; en producción conviene integrar el mecanismo de secretos de la plataforma, ya que Compose local no ofrece una bóveda centralizada",
+      "Solo funciona si el servicio usa la imagen oficial de PostgreSQL",
+      "Convierte automáticamente el archivo del host en una bóveda centralizada de secretos"
+    ],
+    "correctIndex": 1,
+    "explanation": "La guía es clara: 'Compose local no convierte por sí solo un archivo del host en una bóveda centralizada de secretos', y recomienda integrar el mecanismo de la plataforma en producción, protegiendo el archivo fuente.",
+    "source": "docker-guide.md",
+    "code": "services:\n  api:\n    image: mi-api:1.0\n    secrets:\n      - db_password\n    environment:\n      DB_PASSWORD_FILE: /run/secrets/db_password\n\nsecrets:\n  db_password:\n    file: ./secrets/db_password.txt",
+    "language": "yaml"
+  },
+  {
+    "id": "docker-109",
+    "category": "docker",
+    "topic": "Procesos, señales, salud y reinicio",
+    "question": "¿Qué responsabilidades tiene el proceso PID 1 dentro de un contenedor según la sección 12.1?",
+    "options": [
+      "Debe ejecutar siempre un servidor SSH interno",
+      "Debe daemonizarse a sí mismo para sobrevivir reinicios",
+      "Debe escribir logs en stdout/stderr, reaccionar a SIGTERM y terminar ordenadamente, y recoger procesos hijos (o usar un init mínimo)",
+      "Puede ignorar señales de terminación sin ninguna consecuencia"
+    ],
+    "correctIndex": 2,
+    "explanation": "La guía enumera que el PID 1 debe escribir logs en stdout/stderr, reaccionar a SIGTERM y terminar ordenadamente, no depender de SSH ni de un daemonizador interno, y recoger procesos hijos o usar un init mínimo cuando sea necesario.",
+    "source": "docker-guide.md"
+  },
+  {
+    "id": "docker-110",
+    "category": "docker",
+    "topic": "Procesos, señales, salud y reinicio",
+    "question": "¿Qué logra la bandera `--init` en `docker run`, o `init: true` en Compose?",
+    "options": [
+      "Corrige automáticamente una aplicación que ignora señales",
+      "Añade un init mínimo que ayuda a recoger procesos hijos cuando el runtime no lo maneja bien",
+      "Elimina la necesidad de un HEALTHCHECK",
+      "Reinicia el contenedor automáticamente ante cualquier fallo"
+    ],
+    "correctIndex": 1,
+    "explanation": "La guía aclara que `init: true` (o `--init`) 'es útil si el runtime no maneja bien procesos hijos, pero no corrige una aplicación que ignora señales'.",
+    "source": "docker-guide.md",
+    "code": "docker run --init ...",
+    "language": "bash"
+  },
+  {
+    "id": "docker-111",
+    "category": "docker",
+    "topic": "Procesos, señales, salud y reinicio",
+    "question": "¿Qué hace `docker stop --time 20 mi-api`?",
+    "options": [
+      "Envía la señal de parada y espera hasta 20 segundos antes de forzar la salida del proceso",
+      "Reinicia el contenedor cada 20 segundos",
+      "Elimina el contenedor 20 segundos después de detenerlo",
+      "Publica el contenedor en el puerto 20"
+    ],
+    "correctIndex": 0,
+    "explanation": "`--time` ajusta el periodo de espera tras enviar la señal de parada; si el proceso no termina en ese plazo, Docker fuerza su salida.",
+    "source": "docker-guide.md",
+    "code": "docker stop --time 20 mi-api",
+    "language": "bash"
+  },
+  {
+    "id": "docker-112",
+    "category": "docker",
+    "topic": "Procesos, señales, salud y reinicio",
+    "question": "Según la sección 12.3, ¿qué diferencia hay entre 'liveness' y 'readiness'?",
+    "options": [
+      "Son sinónimos exactos sin ninguna diferencia",
+      "Liveness indica que el proceso está vivo; readiness indica que puede atender tráfico y sus dependencias están listas",
+      "Readiness es responsabilidad exclusiva del daemon Docker, no de la aplicación",
+      "Liveness se refiere solo a bases de datos; readiness solo a servidores web"
+    ],
+    "correctIndex": 1,
+    "explanation": "La guía define: 'liveness: el proceso está vivo; readiness: puede atender tráfico y sus dependencias necesarias están listas.'",
+    "source": "docker-guide.md"
+  },
+  {
+    "id": "docker-113",
+    "category": "docker",
+    "topic": "Procesos, señales, salud y reinicio",
+    "question": "¿Qué estados puede reportar un `HEALTHCHECK` de Docker según la guía?",
+    "options": [
+      "`up`, `down` y `paused`",
+      "`starting`, `healthy` o `unhealthy`",
+      "`ok`, `error` y `warning`",
+      "`ready`, `live` y `dead`"
+    ],
+    "correctIndex": 1,
+    "explanation": "La guía indica que el healthcheck de Docker 'ejecuta una prueba y marca starting, healthy o unhealthy'.",
+    "source": "docker-guide.md"
+  },
+  {
+    "id": "docker-114",
+    "category": "docker",
+    "topic": "Procesos, señales, salud y reinicio",
+    "question": "¿Reinicia Docker Engine automáticamente un contenedor solo porque su estado es `unhealthy`?",
+    "options": [
+      "Solo si se usa la política `always`",
+      "No; un orquestador o sistema externo debe decidir qué acción tomar",
+      "Sí, siempre y de forma inmediata",
+      "Solo en Docker Desktop, nunca en Docker Engine para Linux"
+    ],
+    "correctIndex": 1,
+    "explanation": "La guía es explícita: 'Docker Engine no reinicia por sí solo un contenedor únicamente por estar unhealthy. Un orquestador o sistema externo decide qué acción tomar.'",
+    "source": "docker-guide.md"
+  },
+  {
+    "id": "docker-115",
+    "category": "docker",
+    "topic": "Procesos, señales, salud y reinicio",
+    "question": "En Compose, ¿qué controla `depends_on: condition: service_healthy` según la sección 12.3?",
+    "options": [
+      "Publica automáticamente los puertos entre ambos servicios",
+      "Reinicia automáticamente el servicio dependiente si el otro se vuelve unhealthy más tarde",
+      "El orden inicial de arranque, no la recuperación completa durante toda la vida de la aplicación",
+      "Sustituye por completo la necesidad de un HEALTHCHECK"
+    ],
+    "correctIndex": 2,
+    "explanation": "La guía aclara que `depends_on: condition: service_healthy` 'controla el orden inicial, no la recuperación completa durante toda la vida de la aplicación'.",
+    "source": "docker-guide.md"
+  },
+  {
+    "id": "docker-116",
+    "category": "docker",
+    "topic": "Procesos, señales, salud y reinicio",
+    "question": "Según la tabla de políticas de reinicio, ¿qué hace la política `on-failure:5`?",
+    "options": [
+      "Reinicia siempre, sin importar el código de salida, hasta 5 veces por hora",
+      "Reinicia el contenedor ante un código de salida distinto de cero, hasta un máximo de 5 veces",
+      "Es idéntica a `unless-stopped`",
+      "Nunca reinicia el contenedor automáticamente"
+    ],
+    "correctIndex": 1,
+    "explanation": "`on-failure[:N]` reinicia el contenedor 'ante código distinto de cero, opcionalmente hasta N veces'; en este caso, hasta 5 intentos.",
+    "source": "docker-guide.md",
+    "code": "docker update --restart on-failure:5 worker",
+    "language": "bash"
+  },
+  {
+    "id": "docker-117",
+    "category": "docker",
+    "topic": "Procesos, señales, salud y reinicio",
+    "question": "¿Qué diferencia hay entre las políticas `always` y `unless-stopped`?",
+    "options": [
+      "`always` solo aplica a Compose, `unless-stopped` solo a `docker run`",
+      "`unless-stopped` es similar a `always`, salvo cuando el contenedor fue detenido explícitamente",
+      "Son exactamente idénticas en todos los casos",
+      "`always` nunca reinicia, `unless-stopped` siempre reinicia"
+    ],
+    "correctIndex": 1,
+    "explanation": "Según la tabla, `unless-stopped` 'es similar a always, salvo parada explícita', es decir, no reinicia si el usuario detuvo el contenedor deliberadamente.",
+    "source": "docker-guide.md"
+  },
+  {
+    "id": "docker-118",
+    "category": "docker",
+    "topic": "Procesos, señales, salud y reinicio",
+    "question": "Un contenedor con política `on-failure:5` entra en un ciclo constante de reinicios por una contraseña de base de datos incorrecta. ¿Qué recomienda la guía como primer paso?",
+    "options": [
+      "Eliminar el volumen de datos para forzar una reinicialización",
+      "Cambiar la política a `always` para que siga intentando indefinidamente",
+      "Inspeccionar primero `docker ps -a`, el código de salida, el estado OOM y los logs",
+      "Aumentar el límite de reintentos a un número mayor"
+    ],
+    "correctIndex": 2,
+    "explanation": "La guía advierte: 'Un bucle de reinicios no repara una contraseña incorrecta. Primero inspecciona docker ps -a, código de salida, estado OOM y logs.'",
+    "source": "docker-guide.md"
+  },
+  {
+    "id": "docker-119",
+    "category": "docker",
+    "topic": "Procesos, señales, salud y reinicio",
+    "question": "¿Qué comando permite consultar el estado de salud detallado (en JSON) de un contenedor con HEALTHCHECK configurado?",
+    "options": [
+      "docker logs mi-api --health",
+      "docker stats mi-api --health-only",
+      "docker inspect mi-api --format '{{json .State.Health}}'",
+      "docker top mi-api --format health"
+    ],
+    "correctIndex": 2,
+    "explanation": "`docker inspect mi-api --format '{{json .State.Health}}'` muestra el detalle del estado de salud (starting/healthy/unhealthy) y el historial de pruebas del healthcheck.",
+    "source": "docker-guide.md",
+    "code": "docker inspect mi-api --format '{{json .State.Health}}'",
+    "language": "bash"
+  },
+  {
+    "id": "docker-120",
+    "category": "docker",
+    "topic": "Configuración y secretos",
+    "question": "Según la sección 13.1, ¿en cuál de los siguientes lugares NO se deben guardar secretos?",
+    "options": [
+      "Únicamente en variables de entorno inyectadas en runtime mediante un gestor de secretos",
+      "En instrucciones `ENV` o `ARG` del Dockerfile, código, historial Git, nombres/tags/labels, logs, archivos Compose versionados o línea de comandos",
+      "En un servicio dedicado de gestión de secretos de la plataforma",
+      "En variables inyectadas dinámicamente por el orquestador en producción"
+    ],
+    "correctIndex": 1,
+    "explanation": "La guía enumera explícitamente Dockerfile (ENV/ARG), código, historial Git, nombres/tags/labels, logs, archivos Compose versionados y línea de comandos como lugares donde NO deben guardarse secretos.",
+    "source": "docker-guide.md"
+  },
+  {
+    "id": "docker-121",
+    "category": "docker",
+    "topic": "Configuración y secretos",
+    "question": "¿Qué advertencia hace la guía sobre las variables de entorno como mecanismo para pasar configuración sensible?",
+    "options": [
+      "Nunca deben usarse para ningún tipo de configuración",
+      "Solo funcionan dentro de Compose, no con `docker run`",
+      "Son fáciles de usar, pero pueden verse mediante inspección para quien tenga acceso suficiente al daemon",
+      "Son completamente seguras y no pueden inspeccionarse de ninguna forma"
+    ],
+    "correctIndex": 2,
+    "explanation": "La guía indica: 'Las variables de entorno son fáciles de usar, pero pueden verse mediante inspección para quien tenga acceso suficiente al daemon.'",
+    "source": "docker-guide.md"
+  },
+  {
+    "id": "docker-122",
+    "category": "docker",
+    "topic": "Configuración y secretos",
+    "question": "En el patrón de secretos como archivo en Compose, ¿qué variable de entorno típica lee la aplicación para localizar el secreto?",
+    "options": [
+      "DB_PASSWORD directamente con el valor en texto plano",
+      "No se necesita ninguna variable, Docker inyecta el valor automáticamente en el proceso",
+      "Una variable con sufijo `_FILE` (ej. DB_PASSWORD_FILE) que apunta a la ruta del archivo montado",
+      "SECRET_KEY definida en el Dockerfile"
+    ],
+    "correctIndex": 2,
+    "explanation": "El patrón mostrado usa `DB_PASSWORD_FILE: /run/secrets/db_password`; la aplicación lee esa ruta y obtiene el contenido del archivo, como se ve en la función `secret()` de ejemplo en Python.",
+    "source": "docker-guide.md",
+    "code": "def secret(name: str) -> str:\n    file_var = os.getenv(f\"{name}_FILE\")\n    if file_var:\n        return Path(file_var).read_text().strip()\n    return os.environ[name]",
+    "language": "python"
+  },
+  {
+    "id": "docker-123",
+    "category": "docker",
+    "topic": "Configuración y secretos",
+    "question": "¿Qué diferencia hay entre un secreto de build (`RUN --mount=type=secret`) y un secreto de Compose montado como archivo en runtime?",
+    "options": [
+      "Son exactamente el mismo mecanismo aplicado en distinto momento",
+      "El secreto de build persiste en la imagen final; el de Compose no",
+      "El de build solo está disponible temporalmente durante esa instrucción del Dockerfile; el de Compose se monta como archivo accesible mientras el contenedor corre",
+      "Ninguno de los dos puede usarse junto con variables de entorno"
+    ],
+    "correctIndex": 2,
+    "explanation": "El secreto de build 'existe temporalmente para esa instrucción' del Dockerfile, mientras que el de Compose se monta como archivo (ej. `/run/secrets/db_password`) accesible por la aplicación mientras el contenedor está en ejecución.",
+    "source": "docker-guide.md"
+  },
+  {
+    "id": "docker-124",
+    "category": "docker",
+    "topic": "Configuración y secretos",
+    "question": "¿Cómo se provee el contenido de un secreto de build llamado `npmrc` al ejecutar `docker build`?",
+    "options": [
+      "docker build --build-arg npmrc=\"$HOME/.npmrc\" -t frontend:1.0 .",
+      "docker build --env npmrc=\"$HOME/.npmrc\" -t frontend:1.0 .",
+      "No requiere ninguna bandera especial, se detecta automáticamente por convención",
+      "docker build --secret id=npmrc,src=\"$HOME/.npmrc\" -t frontend:1.0 ."
+    ],
+    "correctIndex": 3,
+    "explanation": "La bandera `--secret id=<id>,src=<ruta>` es la forma correcta de proveer el contenido de un secreto de build referenciado por `RUN --mount=type=secret,id=npmrc`.",
+    "source": "docker-guide.md",
+    "code": "RUN --mount=type=secret,id=npmrc,target=/root/.npmrc \\\n    npm ci",
+    "language": "dockerfile"
+  },
+  {
+    "id": "docker-125",
+    "category": "docker",
+    "topic": "Configuración y secretos",
+    "question": "¿Qué recomienda revisar la guía tras usar un secreto de build, respecto a la herramienta que lo consume?",
+    "options": [
+      "Que el registro de build (`--progress=plain`) incluya el contenido del secreto para trazabilidad",
+      "Que el secreto se guarde también como variable ENV por respaldo, en caso de que el mount falle",
+      "Que el secreto se declare también con `ARG` para reutilizarlo en etapas posteriores",
+      "Que la herramienta no copie las credenciales a cachés o artefactos generados"
+    ],
+    "correctIndex": 3,
+    "explanation": "La guía advierte: 'Revisa que la herramienta no copie credenciales a cachés o artefactos.' aunque el mount del secreto en sí sea temporal.",
+    "source": "docker-guide.md"
+  },
+  {
+    "id": "docker-126",
+    "category": "docker",
+    "topic": "Configuración y secretos",
+    "question": "¿Para qué sirve la bandera `--env-file` en `docker run`?",
+    "options": [
+      "Para cargar variables de entorno desde un archivo, en lugar de listarlas todas con `-e`",
+      "Para especificar el volumen donde se guardan los logs",
+      "Para definir el Dockerfile a usar en el build",
+      "Para publicar puertos definidos en un archivo"
+    ],
+    "correctIndex": 0,
+    "explanation": "`--env-file` permite cargar variables de entorno desde un archivo (ej. `./app.env`) en lugar de repetir múltiples banderas `-e`.",
+    "source": "docker-guide.md",
+    "code": "docker run --rm \\\n  -e APP_ENV=production \\\n  -e LOG_LEVEL=info \\\n  --env-file ./app.env \\\n  mi-api:1.0",
+    "language": "bash"
+  },
+  {
+    "id": "docker-127",
+    "category": "docker",
+    "topic": "Configuración y secretos",
+    "question": "¿Qué aclara la guía sobre los `LABEL` de una imagen respecto a datos sensibles?",
+    "options": [
+      "Los labels están cifrados por defecto y son privados",
+      "Los labels solo son visibles para el usuario que construyó la imagen",
+      "Los labels reemplazan la necesidad de un gestor de secretos",
+      "Los labels ayudan con trazabilidad, pero son públicos para quien obtiene la imagen"
+    ],
+    "correctIndex": 3,
+    "explanation": "La guía indica que 'los labels ayudan con trazabilidad, pero son públicos para quien obtiene la imagen', por lo que no deben usarse para datos sensibles.",
+    "source": "docker-guide.md"
+  },
+  {
+    "id": "docker-128",
+    "category": "docker",
+    "topic": "Configuración y secretos",
+    "question": "¿Qué buena práctica recomienda la guía respecto al archivo `.env.example` frente al `.env` real?",
+    "options": [
+      "Eliminar `.env.example` una vez creado el `.env` real",
+      "Versionar siempre el `.env` real junto con las credenciales de producción",
+      "Copiar `.env.example` como `.env` con valores de laboratorio, y no confirmar `.env` en Git",
+      "Usar exactamente los mismos valores en ambos archivos, incluidas contraseñas de producción"
+    ],
+    "correctIndex": 2,
+    "explanation": "La guía recomienda copiar `.env.example` (sin valores sensibles) como `.env` con una contraseña de laboratorio, y advierte explícitamente: 'No confirmes .env en Git.'",
+    "source": "docker-guide.md"
+  },
+  {
+    "id": "docker-129",
+    "category": "docker",
+    "topic": "Configuración y secretos",
+    "question": "¿Por qué `ARG TOKEN=valor` en un Dockerfile no es una alternativa segura para pasar un token durante el build?",
+    "options": [
+      "Porque `ARG` solo está disponible en la primera etapa de un build multi-stage",
+      "Porque `ARG` solo puede usarse junto con `RUN --mount=type=secret`",
+      "Porque el valor de `ARG` se cifra en tránsito pero no en reposo, generando falsa sensación de seguridad",
+      "Porque puede quedar expuesto en metadatos, capas, cachés o registros de la imagen resultante"
+    ],
+    "correctIndex": 3,
+    "explanation": "Al igual que `ENV`, la guía advierte que `ARG` no es un almacén de secretos seguro porque su valor puede quedar expuesto en metadatos, capas, cachés o registros.",
+    "source": "docker-guide.md"
+  },
+  {
+    "id": "docker-130",
+    "category": "docker",
+    "topic": "Configuración y secretos",
+    "question": "Un pipeline de CI necesita autenticarse en un registro sin dejar el token en texto plano dentro de un script versionado. ¿Qué recomienda la guía?",
+    "options": [
+      "Incluir el token como ARG en el Dockerfile",
+      "Guardar el token como LABEL en la imagen final",
+      "Escribir el token directamente en el script de CI versionado",
+      "Enviar el token por entrada estándar a `docker login --password-stdin`"
+    ],
+    "correctIndex": 3,
+    "explanation": "La guía muestra el patrón `printf '%s' \"$REGISTRY_TOKEN\" | docker login registry.example.com --username ci --password-stdin`, evitando tokens literales en scripts o logs.",
+    "source": "docker-guide.md",
+    "code": "printf '%s' \"$REGISTRY_TOKEN\" | \\\n  docker login registry.example.com --username ci --password-stdin",
+    "language": "bash"
+  },
+  {
+    "id": "docker-131",
+    "category": "docker",
+    "topic": "Recursos y observabilidad",
+    "question": "¿Qué ocurre por defecto con los recursos de CPU y memoria de un contenedor si no se establecen límites, según la sección 14.1?",
+    "options": [
+      "Docker asigna automáticamente una cuota fija y equitativa a cada contenedor",
+      "El contenedor se detiene automáticamente tras 60 segundos",
+      "Docker rechaza ejecutar el contenedor sin límites definidos",
+      "El contenedor puede competir por los recursos disponibles del host sin restricción"
+    ],
+    "correctIndex": 3,
+    "explanation": "La guía indica: 'Por defecto, un contenedor puede competir por los recursos disponibles del host.' Por eso recomienda definir límites según mediciones reales, especialmente en entornos compartidos.",
+    "source": "docker-guide.md"
+  },
+  {
+    "id": "docker-132",
+    "category": "docker",
+    "topic": "Recursos y observabilidad",
+    "question": "¿Qué logra esta combinación de banderas en `docker run`?",
+    "options": [
+      "Publica el contenedor en el puerto 512",
+      "Elimina cualquier límite de recursos del contenedor",
+      "Limita el contenedor a 1 CPU, 512 MB de memoria y un máximo de 200 procesos",
+      "Define el usuario y grupo del proceso"
+    ],
+    "correctIndex": 2,
+    "explanation": "`--cpus 1.0` limita a 1 CPU, `--memory 512m` limita la memoria a 512 MB, y `--pids-limit 200` limita el número máximo de procesos/hilos del contenedor.",
+    "source": "docker-guide.md",
+    "code": "docker run --rm \\\n  --cpus 1.0 \\\n  --memory 512m \\\n  --pids-limit 200 \\\n  mi-api:1.0",
+    "language": "bash"
+  },
+  {
+    "id": "docker-133",
+    "category": "docker",
+    "topic": "Recursos y observabilidad",
+    "question": "¿Cuáles son las claves equivalentes en Compose para limitar CPU, memoria y número de procesos de un servicio?",
+    "options": [
+      "`resources.cpu`, `resources.mem`, `resources.pids`",
+      "`limits.cpu`, `limits.memory`, `limits.pids`",
+      "`cpu_limit`, `memory`, `max_pids`",
+      "`cpus`, `mem_limit`, `pids_limit`"
+    ],
+    "correctIndex": 3,
+    "explanation": "El ejemplo de Compose usa directamente las claves `cpus`, `mem_limit` y `pids_limit` al nivel del servicio.",
+    "source": "docker-guide.md",
+    "code": "services:\n  api:\n    image: mi-api:1.0\n    cpus: 1.0\n    mem_limit: 512m\n    pids_limit: 200",
+    "language": "yaml"
+  },
+  {
+    "id": "docker-134",
+    "category": "docker",
+    "topic": "Recursos y observabilidad",
+    "question": "¿Qué advierte la guía sobre `docker stats`?",
+    "options": [
+      "Reemplaza por completo a `docker logs`",
+      "Ayuda a detectar consumo, pero no reemplaza una plataforma histórica de métricas y alertas",
+      "Solo funciona con contenedores detenidos",
+      "Es la única herramienta necesaria para observabilidad en producción"
+    ],
+    "correctIndex": 1,
+    "explanation": "La guía indica que `docker stats` 'ayuda a detectar consumo; no reemplaza una plataforma histórica de métricas y alertas'.",
+    "source": "docker-guide.md",
+    "code": "docker stats\ndocker stats --no-stream",
+    "language": "bash"
+  },
+  {
+    "id": "docker-135",
+    "category": "docker",
+    "topic": "Recursos y observabilidad",
+    "question": "¿Qué debería usar una aplicación contenedorizada para que Docker pueda capturar sus logs mediante un logging driver?",
+    "options": [
+      "Escribir directamente en un archivo dentro del contenedor y nunca en stdout",
+      "Escribir en la salida estándar (stdout) y error estándar (stderr)",
+      "Enviar los logs únicamente por correo electrónico",
+      "Usar exclusivamente una base de datos externa para todo registro"
+    ],
+    "correctIndex": 1,
+    "explanation": "La guía indica: 'Una aplicación contenedorizada debería escribir en stdout/stderr. Docker captura esos streams mediante un logging driver.'",
+    "source": "docker-guide.md"
+  },
+  {
+    "id": "docker-136",
+    "category": "docker",
+    "topic": "Recursos y observabilidad",
+    "question": "¿Qué logran las opciones `--log-opt max-size=10m --log-opt max-file=3` al ejecutar un contenedor?",
+    "options": [
+      "Limitan el tráfico de red del contenedor a 10 MB",
+      "Configuran el límite de memoria del contenedor",
+      "Configuran rotación de logs con el driver json-file: tamaño máximo de 10 MB por archivo y hasta 3 archivos",
+      "Limitan el tamaño máximo de la imagen a 10 MB"
+    ],
+    "correctIndex": 2,
+    "explanation": "Estas opciones configuran la rotación de logs del driver `json-file`: cada archivo de log llega hasta 10 MB antes de rotar, conservando un máximo de 3 archivos.",
+    "source": "docker-guide.md",
+    "code": "docker run -d \\\n  --log-opt max-size=10m \\\n  --log-opt max-file=3 \\\n  --name mi-api mi-api:1.0",
+    "language": "bash"
+  },
+  {
+    "id": "docker-137",
+    "category": "docker",
+    "topic": "Recursos y observabilidad",
+    "question": "¿Qué configuración equivalente de rotación de logs se muestra para Compose?",
+    "options": [
+      "Una clave `resources.logs` con límites de CPU",
+      "No es posible configurar rotación de logs en Compose",
+      "Se configura únicamente a nivel del daemon, nunca por servicio",
+      "Una clave `logging` con `driver: json-file` y `options: max-size/max-file`"
+    ],
+    "correctIndex": 3,
+    "explanation": "El ejemplo de Compose muestra la clave `logging` con `driver: json-file` y las opciones `max-size`/`max-file` al nivel del servicio.",
+    "source": "docker-guide.md",
+    "code": "services:\n  api:\n    image: mi-api:1.0\n    logging:\n      driver: json-file\n      options:\n        max-size: \"10m\"\n        max-file: \"3\"",
+    "language": "yaml"
+  },
+  {
+    "id": "docker-138",
+    "category": "docker",
+    "topic": "Recursos y observabilidad",
+    "question": "¿Qué muestra `docker diff mi-api` y para qué ayuda?",
+    "options": [
+      "Muestra las diferencias entre dos archivos Compose",
+      "Muestra la diferencia entre dos imágenes distintas",
+      "Muestra cambios en la capa escribible, ayudando a descubrir aplicaciones que guardan estado donde no corresponde",
+      "Compara el uso de CPU entre dos contenedores"
+    ],
+    "correctIndex": 2,
+    "explanation": "La guía indica: '`docker diff` muestra cambios en la capa escribible y ayuda a descubrir aplicaciones que guardan estado donde no corresponde.'",
+    "source": "docker-guide.md",
+    "code": "docker diff mi-api",
+    "language": "bash"
+  },
+  {
+    "id": "docker-139",
+    "category": "docker",
+    "topic": "Recursos y observabilidad",
+    "question": "¿Qué información obtiene este comando de inspección?",
+    "options": [
+      "El historial de capas de la imagen",
+      "El tamaño total del volumen usado",
+      "La lista de redes conectadas al contenedor",
+      "El estado del contenedor, su código de salida y si fue terminado por falta de memoria (OOM)"
+    ],
+    "correctIndex": 3,
+    "explanation": "El formato solicita `.State.Status`, `.State.ExitCode` y `.State.OOMKilled`, es decir, estado actual, código de salida y si el contenedor fue terminado por Out-Of-Memory.",
+    "source": "docker-guide.md",
+    "code": "docker inspect mi-api --format \\\n  'estado={{.State.Status}} salida={{.State.ExitCode}} oom={{.State.OOMKilled}}'",
+    "language": "bash"
+  },
+  {
+    "id": "docker-140",
+    "category": "docker",
+    "topic": "Recursos y observabilidad",
+    "question": "¿Qué comando muestra un resumen del espacio en disco usado por imágenes, contenedores, volúmenes y caché de build?",
+    "options": [
+      "docker events",
+      "docker system df",
+      "docker stats",
+      "docker network ls"
+    ],
+    "correctIndex": 1,
+    "explanation": "`docker system df` (y su variante `-v` con más detalle) resume el espacio usado por imágenes, contenedores, volúmenes y caché de build.",
+    "source": "docker-guide.md",
+    "code": "docker system df",
+    "language": "bash"
+  },
+  {
+    "id": "docker-141",
+    "category": "docker",
+    "topic": "Recursos y observabilidad",
+    "question": "¿Qué consecuencia señala la guía sobre no establecer ningún límite de recursos en un entorno compartido?",
+    "options": [
+      "Mejora automáticamente el rendimiento de todos los contenedores",
+      "Permite que un servicio afecte al resto del host",
+      "Reduce el consumo de disco de forma automática",
+      "Docker asigna límites por defecto equivalentes a los de un contenedor con --memory 512m"
+    ],
+    "correctIndex": 1,
+    "explanation": "La guía advierte: 'Un límite demasiado bajo provoca latencia, throttling o terminación por falta de memoria. Uno inexistente permite que un servicio afecte al resto del host.'",
+    "source": "docker-guide.md"
+  },
+  {
+    "id": "docker-142",
+    "category": "docker",
+    "topic": "Seguridad práctica",
+    "question": "¿Cuál de las siguientes NO forma parte de la 'lista mínima para imágenes' de la sección 15.1?",
+    "options": [
+      "Generar y revisar un SBOM cuando el flujo lo permita",
+      "Montar siempre `/var/run/docker.sock` para facilitar el diagnóstico",
+      "Ejecutar como usuario no root",
+      "Usar multi-stage y no instalar herramientas innecesarias"
+    ],
+    "correctIndex": 1,
+    "explanation": "Montar el socket Docker NO aparece en la lista mínima de seguridad para imágenes; de hecho, en la sección 15.2 la guía recomienda evitarlo por defecto en runtime.",
+    "source": "docker-guide.md"
+  },
+  {
+    "id": "docker-143",
+    "category": "docker",
+    "topic": "Seguridad práctica",
+    "question": "¿Qué comandos de Docker Scout se mencionan en la guía para analizar una imagen?",
+    "options": [
+      "docker scan cves y docker scan sbom",
+      "docker security scan y docker security sbom",
+      "docker inspect --scout y docker image --scout",
+      "docker scout cves y docker scout sbom"
+    ],
+    "correctIndex": 3,
+    "explanation": "La guía muestra explícitamente `docker scout cves mi-api:1.0` y `docker scout sbom mi-api:1.0` como comandos para escanear vulnerabilidades y generar el SBOM.",
+    "source": "docker-guide.md",
+    "code": "docker scout cves mi-api:1.0\ndocker scout sbom mi-api:1.0",
+    "language": "bash"
+  },
+  {
+    "id": "docker-144",
+    "category": "docker",
+    "topic": "Seguridad práctica",
+    "question": "En este bloque de banderas de runtime seguro, ¿qué logra `--cap-drop ALL` combinado con `--security-opt no-new-privileges=true`?",
+    "options": [
+      "Elimina todas las capacidades Linux por defecto y evita que el proceso escale privilegios, reduciendo la superficie de ataque",
+      "Otorga todas las capacidades del kernel al contenedor por seguridad",
+      "Permite ejecutar el contenedor en modo privilegiado de forma controlada",
+      "Desactiva por completo el aislamiento de red del contenedor"
+    ],
+    "correctIndex": 0,
+    "explanation": "`--cap-drop ALL` retira todas las capacidades Linux por defecto (se añaden solo las necesarias con `--cap-add`), y `no-new-privileges=true` impide que el proceso escale privilegios, ambas medidas de endurecimiento (hardening).",
+    "source": "docker-guide.md",
+    "code": "docker run --rm \\\n  --read-only \\\n  --tmpfs /tmp:rw,noexec,nosuid,size=64m \\\n  --cap-drop ALL \\\n  --security-opt no-new-privileges=true \\\n  --user 10001:10001 \\\n  --memory 512m \\\n  --cpus 1 \\\n  mi-api:1.0",
+    "language": "bash"
+  },
+  {
+    "id": "docker-145",
+    "category": "docker",
+    "topic": "Seguridad práctica",
+    "question": "Si una aplicación necesita enlazarse a un puerto privilegiado (<1024) sin ejecutar como root, ¿qué recomienda la guía?",
+    "options": [
+      "Ejecutar el contenedor con `--privileged`",
+      "Añadir únicamente la capacidad necesaria, por ejemplo `--cap-add NET_BIND_SERVICE`",
+      "Montar el socket Docker del host",
+      "Deshabilitar seccomp por completo"
+    ],
+    "correctIndex": 1,
+    "explanation": "La guía recomienda 'añadir solo la capacidad que la aplicación demuestre necesitar', dando como ejemplo `--cap-add NET_BIND_SERVICE` para enlazar puertos privilegiados sin ser root.",
+    "source": "docker-guide.md",
+    "code": "--cap-add NET_BIND_SERVICE",
+    "language": "bash"
+  },
+  {
+    "id": "docker-146",
+    "category": "docker",
+    "topic": "Seguridad práctica",
+    "question": "¿Cuál de las siguientes prácticas debe evitarse por defecto según la sección 15.2?",
+    "options": [
+      "Usar `--cap-drop ALL` y añadir capacidades específicas",
+      "Ejecutar `docker run --privileged` de forma rutinaria",
+      "Ejecutar como usuario no root",
+      "Definir límites de CPU y memoria"
+    ],
+    "correctIndex": 1,
+    "explanation": "La guía lista `--privileged`, montar el socket Docker, `--network host`, montar `/`, `/etc`, `/proc` o dispositivos del host, ejecutar como root, publicar puertos innecesarios y deshabilitar seccomp/AppArmor/SELinux como prácticas a evitar por defecto.",
+    "source": "docker-guide.md"
+  },
+  {
+    "id": "docker-147",
+    "category": "docker",
+    "topic": "Seguridad práctica",
+    "question": "¿Por qué se considera al socket Docker (`/var/run/docker.sock`) un recurso de alto riesgo según la sección 15.3?",
+    "options": [
+      "Porque el socket expone directamente las credenciales del registro configurado",
+      "Porque su uso obliga a ejecutar el daemon en modo rootless",
+      "Porque un proceso con acceso al socket puede crear contenedores privilegiados, montar rutas del host y controlar otros contenedores",
+      "Porque solo permite leer logs y métricas de contenedores en modo consulta, sin capacidad de escritura"
+    ],
+    "correctIndex": 2,
+    "explanation": "La guía advierte que el acceso al socket debe tratarse como acceso administrativo, ya que permite crear contenedores privilegiados, montar rutas del host y controlar otros contenedores.",
+    "source": "docker-guide.md"
+  },
+  {
+    "id": "docker-148",
+    "category": "docker",
+    "topic": "Seguridad práctica",
+    "question": "Si una herramienta necesita observar el estado de Docker sin comprometer todo el host, ¿qué alternativa sugiere la guía en vez de montar el socket completo?",
+    "options": [
+      "Montar el socket de todas formas, no hay alternativa",
+      "Ejecutar la herramienta siempre con `--privileged`",
+      "Desactivar por completo la autenticación del daemon",
+      "Evaluar un proxy de autorización o una API limitada"
+    ],
+    "correctIndex": 3,
+    "explanation": "La guía sugiere: 'evalúa un proxy de autorización o una API limitada en vez de montar el socket completo'.",
+    "source": "docker-guide.md"
+  },
+  {
+    "id": "docker-149",
+    "category": "docker",
+    "topic": "Seguridad práctica",
+    "question": "¿Qué es Rootless mode según la sección 15.4?",
+    "options": [
+      "Un modo que ejecuta el daemon y los contenedores sin privilegios root del host",
+      "Un remapeo de identificadores mediante user namespaces, configurado por contenedor con `--userns-remap`",
+      "Un plan de suscripción de Docker Hub que oculta imágenes públicas vulnerables",
+      "Equivalente a definir `USER 10001:10001` en todos los Dockerfiles de la organización"
+    ],
+    "correctIndex": 0,
+    "explanation": "Rootless mode 'ejecuta daemon y contenedores sin privilegios root del host', reduciendo el impacto de ciertas vulnerabilidades. La guía distingue esto explícitamente de la instrucción USER de la imagen y de los user namespaces, que son capas relacionadas pero distintas.",
+    "source": "docker-guide.md"
+  },
+  {
+    "id": "docker-150",
+    "category": "docker",
+    "topic": "Seguridad práctica",
+    "question": "¿Qué tres capas distintas (que pueden complementarse) distingue la guía en la sección 15.4 respecto a 'no ser root'?",
+    "options": [
+      "Firewall del host, antivirus del contenedor, y cifrado de disco",
+      "Solo existe una capa: el usuario definido con USER en el Dockerfile",
+      "SBOM, firma de imágenes, y escaneo de vulnerabilidades",
+      "Usuario no root dentro de la imagen (USER), user namespaces, y daemon rootless"
+    ],
+    "correctIndex": 3,
+    "explanation": "La guía distingue explícitamente: 'usuario no root dentro de la imagen (USER); user namespaces que remapean identificadores; daemon rootless. Son capas distintas y pueden complementarse.'",
+    "source": "docker-guide.md"
+  },
+  {
+    "id": "docker-151",
+    "category": "docker",
+    "topic": "Seguridad práctica",
+    "question": "Según la sección 15.5 sobre firma y procedencia, ¿qué paso se recomienda para el despliegue final en un flujo maduro?",
+    "options": [
+      "Desplegar directamente desde la máquina del desarrollador sin pasar por CI",
+      "Desplegar por digest, en lugar de depender únicamente de un tag mutable",
+      "Omitir el escaneo de vulnerabilidades si el build es rápido",
+      "Desplegar siempre por el tag `latest` para simplificar"
+    ],
+    "correctIndex": 1,
+    "explanation": "Entre los pasos de un flujo maduro, la guía incluye 'despliega por digest' como forma de maximizar la trazabilidad e inmutabilidad de lo desplegado.",
+    "source": "docker-guide.md"
+  },
+  {
+    "id": "docker-152",
+    "category": "docker",
+    "topic": "Seguridad práctica",
+    "question": "¿Qué advierte la guía sobre confiar en una imagen solo porque su tag 'parece oficial'?",
+    "options": [
+      "El propio `docker scout cves` rechaza automáticamente cualquier tag no oficial antes del pull",
+      "No se debe aceptar solo por eso; hay que confirmar repositorio, editor y digest",
+      "Es suficiente si el pull se hizo con `docker pull` en vez de `docker buildx`",
+      "Es suficiente siempre que la imagen provenga de Docker Hub y no de un registro privado"
+    ],
+    "correctIndex": 1,
+    "explanation": "La guía indica: 'No aceptes una imagen únicamente porque su tag \"parece oficial\". Confirma repositorio, editor y digest.'",
+    "source": "docker-guide.md"
+  },
+  {
+    "id": "docker-153",
+    "category": "docker",
+    "topic": "Seguridad práctica",
+    "question": "¿Cuál de estas combinaciones de banderas de runtime corresponde mejor a 'ejecutar con filesystem de solo lectura y un `/tmp` temporal', tal como pide el punto de control 5?",
+    "options": [
+      "--read-only --tmpfs /tmp:rw,noexec,nosuid,size=64m",
+      "--privileged --network host",
+      "--cap-add ALL --user 0:0",
+      "-v /:/host --rm"
+    ],
+    "correctIndex": 0,
+    "explanation": "`--read-only` hace de solo lectura el filesystem raíz del contenedor, y `--tmpfs /tmp:...` provee un `/tmp` escribible en memoria, exactamente el patrón usado en la sección 15.2.",
+    "source": "docker-guide.md",
+    "code": "--read-only --tmpfs /tmp:rw,noexec,nosuid,size=64m",
+    "language": "bash"
+  },
+  {
+    "id": "docker-154",
+    "category": "docker",
+    "topic": "Seguridad práctica",
+    "question": "¿Qué precaución señala la guía sobre deshabilitar seccomp, AppArmor o SELinux?",
+    "options": [
+      "Debe evitarse hacerlo solo para 'hacer que funcione'",
+      "Es una práctica recomendada para acelerar el arranque de contenedores",
+      "Solo aplica a Windows, no a Linux",
+      "No tiene ningún efecto real sobre la seguridad"
+    ],
+    "correctIndex": 0,
+    "explanation": "La lista de prácticas a evitar por defecto incluye 'deshabilitar seccomp, AppArmor o SELinux para hacer que funcione', ya que compromete el aislamiento del contenedor.",
+    "source": "docker-guide.md"
+  },
+  {
+    "id": "docker-155",
+    "category": "docker",
+    "topic": "Registries, publicación y builds multiplataforma",
+    "question": "¿Cuál es la secuencia correcta para publicar una imagen en un registro privado según la sección 16.1?",
+    "options": [
+      "docker login, docker tag, docker push",
+      "docker push, docker tag, docker login",
+      "docker pull, docker login, docker tag",
+      "docker tag, docker push, docker login"
+    ],
+    "correctIndex": 0,
+    "explanation": "El flujo mostrado es: autenticarse con `docker login`, etiquetar la imagen local con el nombre del registro destino (`docker tag`), y luego `docker push` para subirla.",
+    "source": "docker-guide.md",
+    "code": "docker login registry.example.com\ndocker tag mi-api:1.4.2 registry.example.com/equipo/mi-api:1.4.2\ndocker push registry.example.com/equipo/mi-api:1.4.2",
+    "language": "bash"
+  },
+  {
+    "id": "docker-156",
+    "category": "docker",
+    "topic": "Registries, publicación y builds multiplataforma",
+    "question": "¿Por qué la guía recomienda `printf '%s' \"$REGISTRY_TOKEN\" | docker login ... --password-stdin` en vez de pasar el token como argumento?",
+    "options": [
+      "Porque `--password-stdin` es más rápido en todos los casos",
+      "Para evitar que el token quede literal en scripts versionados o visible en el listado de procesos/logs",
+      "Porque `docker login` no acepta contraseñas como argumento en ninguna versión",
+      "Porque reduce el tamaño de la imagen resultante"
+    ],
+    "correctIndex": 1,
+    "explanation": "La guía indica: 'No escribas tokens literales en scripts versionados ni los muestres en logs.' Usar entrada estándar evita que el token quede expuesto en el historial de comandos o en el listado de procesos.",
+    "source": "docker-guide.md"
+  },
+  {
+    "id": "docker-157",
+    "category": "docker",
+    "topic": "Registries, publicación y builds multiplataforma",
+    "question": "Para la versión `1.4.2` de una imagen, ¿qué conjunto de tags ejemplifica la estrategia de la sección 16.2?",
+    "options": [
+      "1.4.2 (release exacto), 1.4 (última corrección compatible), 1 (última mayor compatible), sha-a1b2c3d (trazabilidad al commit)",
+      "Solo `latest`, sin ningún otro tag",
+      "v1, v2, v3 numerados secuencialmente sin relación con la versión real",
+      "Solo el digest sha256, sin tags legibles"
+    ],
+    "correctIndex": 0,
+    "explanation": "La guía muestra exactamente esa estrategia de tags múltiples para una misma versión, cada uno con un propósito distinto de trazabilidad y conveniencia.",
+    "source": "docker-guide.md"
+  },
+  {
+    "id": "docker-158",
+    "category": "docker",
+    "topic": "Registries, publicación y builds multiplataforma",
+    "question": "¿Qué advierte la guía sobre depender únicamente del tag `latest` en producción?",
+    "options": [
+      "No dice qué versión contiene ni garantiza que cambie de forma segura",
+      "Es la práctica más segura y recomendada siempre",
+      "Solo puede usarse en el registro oficial de Docker Hub",
+      "`latest` apunta siempre automáticamente al digest más reciente y seguro"
+    ],
+    "correctIndex": 0,
+    "explanation": "La guía indica: 'Evita depender únicamente de latest; no dice qué versión contiene ni garantiza que cambie de forma segura.'",
+    "source": "docker-guide.md"
+  },
+  {
+    "id": "docker-159",
+    "category": "docker",
+    "topic": "Registries, publicación y builds multiplataforma",
+    "question": "¿Qué comando de Buildx permite construir y publicar una imagen para múltiples arquitecturas en un solo paso?",
+    "options": [
+      "docker buildx build --platform linux/amd64,linux/arm64 --tag ... --push .",
+      "docker image multiplatform --arch amd64,arm64 .",
+      "docker build --platform linux/amd64,linux/arm64 --push .",
+      "docker compose build --platform amd64,arm64"
+    ],
+    "correctIndex": 0,
+    "explanation": "El comando mostrado en la guía es `docker buildx build --platform linux/amd64,linux/arm64 --tag ... --push .`, que construye y publica ambas arquitecturas.",
+    "source": "docker-guide.md",
+    "code": "docker buildx build \\\n  --platform linux/amd64,linux/arm64 \\\n  --tag registry.example.com/equipo/mi-api:1.4.2 \\\n  --push .",
+    "language": "bash"
+  },
+  {
+    "id": "docker-160",
+    "category": "docker",
+    "topic": "Registries, publicación y builds multiplataforma",
+    "question": "Según el diagrama de la sección 16.3, ¿qué estructura recibe el registro al publicar una imagen multiplataforma?",
+    "options": [
+      "Dos registros independientes, uno por arquitectura",
+      "Un manifiesto (índice multi-platform) que apunta a un manifest por cada plataforma, cada uno con sus propias capas",
+      "Un único binario universal compatible con todas las arquitecturas",
+      "Solo una imagen para la arquitectura del host que construyó"
+    ],
+    "correctIndex": 1,
+    "explanation": "El diagrama muestra un 'índice multi-platform' que apunta a manifiestos individuales por plataforma (linux/amd64, linux/arm64), cada uno con sus propias capas.",
+    "source": "docker-guide.md"
+  },
+  {
+    "id": "docker-161",
+    "category": "docker",
+    "topic": "Registries, publicación y builds multiplataforma",
+    "question": "¿Qué advierte la guía sobre la relación entre construir para varias arquitecturas y probarlas?",
+    "options": [
+      "La emulación siempre reemplaza pruebas nativas sin ninguna limitación",
+      "Construir no equivale a probar; se deben ejecutar pruebas por arquitectura nativa o con emulación consciente de sus límites",
+      "Solo es necesario probar en la arquitectura amd64",
+      "Construir equivale automáticamente a haber probado el software en cada arquitectura"
+    ],
+    "correctIndex": 1,
+    "explanation": "La guía es explícita: 'Construir no equivale a probar. Ejecuta pruebas por arquitectura nativa o con emulación consciente de sus límites.'",
+    "source": "docker-guide.md"
+  },
+  {
+    "id": "docker-162",
+    "category": "docker",
+    "topic": "Registries, publicación y builds multiplataforma",
+    "question": "¿Qué logran las banderas `--cache-from` y `--cache-to` en `docker buildx build`?",
+    "options": [
+      "Definen el registro donde se publicará la imagen final",
+      "Eliminan la caché local antes de construir",
+      "Configuran los límites de memoria del build",
+      "Importan y exportan caché de build (por ejemplo, hacia un registro) para reducir tiempos en CI"
+    ],
+    "correctIndex": 3,
+    "explanation": "La guía explica que en CI, BuildKit puede importar (`--cache-from`) y exportar (`--cache-to`) caché, por ejemplo hacia un registro, para reducir tiempos de build entre ejecuciones.",
+    "source": "docker-guide.md",
+    "code": "docker buildx build \\\n  --cache-from type=registry,ref=registry.example.com/equipo/mi-api:buildcache \\\n  --cache-to type=registry,ref=registry.example.com/equipo/mi-api:buildcache,mode=max \\\n  --tag registry.example.com/equipo/mi-api:sha-a1b2c3d \\\n  --push .",
+    "language": "bash"
+  },
+  {
+    "id": "docker-163",
+    "category": "docker",
+    "topic": "Registries, publicación y builds multiplataforma",
+    "question": "¿Qué advertencia hace la guía sobre la caché remota de build?",
+    "options": [
+      "No requiere ninguna precaución especial",
+      "Solo puede usarse con un registro público",
+      "No permitas que secretos terminen en la caché y controla quién puede escribirla",
+      "Reduce automáticamente el tamaño de la imagen final"
+    ],
+    "correctIndex": 2,
+    "explanation": "La guía advierte: 'No permitas que secretos terminen en la caché y controla quién puede escribirla.'",
+    "source": "docker-guide.md"
+  },
+  {
+    "id": "docker-164",
+    "category": "docker",
+    "topic": "Registries, publicación y builds multiplataforma",
+    "question": "En el pipeline mínimo de CI/CD de la sección 17.1, ¿qué paso ocurre inmediatamente después del build de la imagen?",
+    "options": [
+      "Pruebas sobre la imagen",
+      "Despliegue por digest",
+      "Push con tag inmutable",
+      "Observación / rollback"
+    ],
+    "correctIndex": 0,
+    "explanation": "El diagrama del pipeline mínimo sigue el orden: Commit → Pruebas de código → Build de imagen → Pruebas sobre la imagen → SBOM + escaneo → Push con tag inmutable → Despliegue por digest → Healthcheck + smoke test → Observación/rollback.",
+    "source": "docker-guide.md"
+  },
+  {
+    "id": "docker-165",
+    "category": "docker",
+    "topic": "Registries, publicación y builds multiplataforma",
+    "question": "En la secuencia de CI de ejemplo, ¿qué hace `docker scout cves --exit-code --only-severity critical,high \"$IMAGE\"`?",
+    "options": [
+      "Elimina las vulnerabilidades detectadas de la imagen",
+      "Falla el pipeline (mediante el código de salida) si se detectan vulnerabilidades de severidad crítica o alta",
+      "Genera un backup automático del volumen de datos",
+      "Publica la imagen automáticamente si tiene vulnerabilidades críticas"
+    ],
+    "correctIndex": 1,
+    "explanation": "`--exit-code` hace que el comando devuelva un código distinto de cero si encuentra vulnerabilidades de la severidad indicada, permitiendo que el pipeline de CI falle ante ellas.",
+    "source": "docker-guide.md",
+    "code": "IMAGE=\"registry.example.com/equipo/mi-api:sha-${GIT_COMMIT}\"\n\ndocker build --pull --tag \"$IMAGE\" .\ndocker run --rm \"$IMAGE\" python -m unittest\ndocker scout cves --exit-code --only-severity critical,high \"$IMAGE\"\ndocker push \"$IMAGE\"",
+    "language": "bash"
+  },
+  {
+    "id": "docker-166",
+    "category": "docker",
+    "topic": "Registries, publicación y builds multiplataforma",
+    "question": "¿Qué recomienda la guía sobre cómo verificar el digest de una imagen recién publicada en un registro?",
+    "options": [
+      "docker login REGISTRO --format digest",
+      "docker image inspect REGISTRO/REPO:TAG --format '{{json .RepoDigests}}'",
+      "docker push --show-digest REGISTRO/REPO:TAG",
+      "No es posible consultarlo tras el push"
+    ],
+    "correctIndex": 1,
+    "explanation": "La guía muestra `docker image inspect ... --format '{{json .RepoDigests}}'` para conservar/consultar el digest resultante tras publicar una imagen.",
+    "source": "docker-guide.md",
+    "code": "docker image inspect registry.example.com/equipo/mi-api:1.4.2 \\\n  --format '{{json .RepoDigests}}'",
+    "language": "bash"
+  },
+  {
+    "id": "docker-167",
+    "category": "docker",
+    "topic": "Diagnóstico sistemático y producción",
+    "question": "Según el flujo de diagnóstico de la sección 18, ¿cuál es el primer paso al investigar un problema?",
+    "options": [
+      "Revisar directamente el firewall del host",
+      "Reinstalar Docker desde cero",
+      "Ejecutar `docker system prune` para descartar acumulación de recursos",
+      "Confirmar si el contenedor existe; si no, revisar create/up y la configuración"
+    ],
+    "correctIndex": 3,
+    "explanation": "El diagrama de diagnóstico comienza preguntando '¿Existe el contenedor?'; si la respuesta es no, se revisa `create`/`up` y la configuración antes de continuar por la cadena.",
+    "source": "docker-guide.md"
+  },
+  {
+    "id": "docker-168",
+    "category": "docker",
+    "topic": "Diagnóstico sistemático y producción",
+    "question": "Un contenedor sale inmediatamente después de arrancar. ¿Cuál de las siguientes NO es una causa común señalada en la sección 18.1?",
+    "options": [
+      "Una versión desactualizada de docker-compose heredado",
+      "La aplicación escuchó solo en 127.0.0.1 dentro del contenedor",
+      "El proceso principal terminó normalmente",
+      "Comando o argumentos incorrectos"
+    ],
+    "correctIndex": 0,
+    "explanation": "La lista de causas comunes incluye: proceso terminado normalmente, comando/argumentos incorrectos, ejecutable ausente, configuración/secretos faltantes, arquitectura incompatible, OOM, y escuchar solo en loopback; el ejecutable heredado `docker-compose` no aparece como causa de salida inmediata.",
+    "source": "docker-guide.md"
+  },
+  {
+    "id": "docker-169",
+    "category": "docker",
+    "topic": "Diagnóstico sistemático y producción",
+    "question": "El puerto de un contenedor no responde desde el host. Según la sección 18.2, ¿cuál es el orden de verificación recomendado?",
+    "options": [
+      "Firewall primero, luego el proceso, luego el puerto interno",
+      "Reiniciar el daemon Docker como primer paso",
+      "Eliminar el contenedor y crear uno nuevo directamente",
+      "Que el proceso esté vivo; que escuche en 0.0.0.0 (no solo loopback); puerto interno correcto; existencia de -p; conflicto de puerto; firewall/proxy/VM"
+    ],
+    "correctIndex": 3,
+    "explanation": "La guía enumera exactamente ese orden: proceso vivo, escucha en 0.0.0.0/[::], puerto interno correcto, existencia de `-p`, conflicto de puerto, y finalmente firewall/proxy/VM de Docker.",
+    "source": "docker-guide.md"
+  },
+  {
+    "id": "docker-170",
+    "category": "docker",
+    "topic": "Diagnóstico sistemático y producción",
+    "question": "Un servicio de Compose no encuentra a otro por nombre. Según la sección 18.3, ¿qué NO se debe usar para referirse a otro contenedor?",
+    "options": [
+      "El puerto interno del servicio",
+      "`localhost`",
+      "Una red compartida entre ambos servicios",
+      "El nombre de servicio definido en compose.yaml"
+    ],
+    "correctIndex": 1,
+    "explanation": "La guía indica explícitamente: 'no usas localhost para referirte a otro contenedor'; se debe usar el nombre de servicio y el puerto interno, ambos en la misma red.",
+    "source": "docker-guide.md",
+    "code": "docker compose ps\ndocker compose exec api getent hosts db\ndocker network inspect visitas_backend\ndocker compose logs db",
+    "language": "bash"
+  },
+  {
+    "id": "docker-171",
+    "category": "docker",
+    "topic": "Diagnóstico sistemático y producción",
+    "question": "¿Qué se debe revisar cuando el build de Docker parece ignorar cambios o no usar la caché correctamente, según la sección 18.4?",
+    "options": [
+      "Contexto, .dockerignore, orden de COPY, generación de archivos, timestamps y argumentos que invaliden capas",
+      "El nombre del repositorio en el registro remoto",
+      "Solamente la cantidad de RAM disponible en el host",
+      "Únicamente el número de versión de Docker instalada"
+    ],
+    "correctIndex": 0,
+    "explanation": "La guía indica revisar contexto, `.dockerignore`, orden de `COPY`, generación de archivos, timestamps y argumentos que invaliden capas al diagnosticar problemas de caché en el build.",
+    "source": "docker-guide.md",
+    "code": "docker build --progress=plain -t mi-api:debug .\ndocker build --no-cache -t mi-api:debug .\ndocker image history mi-api:debug",
+    "language": "bash"
+  },
+  {
+    "id": "docker-172",
+    "category": "docker",
+    "topic": "Diagnóstico sistemático y producción",
+    "question": "Ante un disco lleno, ¿qué recomienda la guía sobre el uso de comandos `prune`?",
+    "options": [
+      "Los comandos prune nunca eliminan datos, solo archivos temporales del sistema operativo",
+      "Ejecutar siempre `docker system prune -a --volumes` sin revisar nada antes",
+      "Limpiar por objetivo, no por reflejo, y revisar la lista, contexto y backups antes de confirmar",
+      "`docker volume prune` es siempre seguro sin ninguna excepción"
+    ],
+    "correctIndex": 2,
+    "explanation": "La guía advierte: 'Limpia por objetivo, no por reflejo... volume prune y ciertas variantes de system prune pueden borrar datos que esperabas conservar. Revisa la lista, contexto y backups antes de confirmar.'",
+    "source": "docker-guide.md"
+  },
+  {
+    "id": "docker-173",
+    "category": "docker",
+    "topic": "Diagnóstico sistemático y producción",
+    "question": "¿Qué distingue la guía entre `docker container prune`, `docker image prune`, `docker builder prune` y `docker volume prune`?",
+    "options": [
+      "Los cuatro requieren la bandera `-a` para tener algún efecto",
+      "`docker builder prune` elimina también los volúmenes con datos de aplicación, igual que `docker volume prune`",
+      "`docker image prune` sin banderas elimina también las imágenes etiquetadas que sí están en uso",
+      "Cada uno limpia un tipo distinto de recurso no usado: contenedores, imágenes, caché de build y volúmenes respectivamente"
+    ],
+    "correctIndex": 3,
+    "explanation": "Cada comando `prune` está dirigido a un tipo de recurso: contenedores detenidos, imágenes no usadas, caché del builder, y volúmenes sin uso, respectivamente.",
+    "source": "docker-guide.md",
+    "code": "docker container prune\ndocker image prune\ndocker builder prune\ndocker volume prune\ndocker system prune",
+    "language": "bash"
+  },
+  {
+    "id": "docker-174",
+    "category": "docker",
+    "topic": "Diagnóstico sistemático y producción",
+    "question": "Ante problemas de permisos en un volumen o bind mount, ¿qué recomienda la guía en vez de `chmod -R 777`?",
+    "options": [
+      "Eliminar el volumen y no usar volúmenes nunca más",
+      "Solucionar la propiedad y UID/GID de forma deliberada, usando `COPY --chown` en la imagen o una inicialización controlada en el volumen",
+      "Ejecutar el contenedor siempre como root para evitar el problema",
+      "Usar siempre `chmod -R 777` porque es la forma más rápida"
+    ],
+    "correctIndex": 1,
+    "explanation": "La guía indica: 'Soluciona la propiedad y UID/GID de forma deliberada. No uses chmod -R 777. En una imagen, COPY --chown suele ser preferible; en un volumen existente puede requerirse una inicialización controlada.'",
+    "source": "docker-guide.md",
+    "code": "docker inspect mi-api --format '{{json .Mounts}}'\ndocker exec mi-api id\ndocker exec mi-api ls -ld /ruta /ruta/archivo",
+    "language": "bash"
+  },
+  {
+    "id": "docker-175",
+    "category": "docker",
+    "topic": "Diagnóstico sistemático y producción",
+    "question": "Compose parece usar configuración vieja tras un cambio. ¿Qué distingue la guía entre `--build`, `--force-recreate`, `docker compose pull` y `down -v`?",
+    "options": [
+      "`down -v` solo elimina la red del proyecto, nunca los volúmenes",
+      "`docker compose pull` reconstruye la imagen localmente igual que `--build`, sin contactar al registro",
+      "`--build` reconstruye imagen; `--force-recreate` recrea contenedor; `pull` descarga imagen; `down -v` elimina datos (normalmente innecesario y destructivo)",
+      "`--build` recrea el contenedor sin reconstruir la imagen; `--force-recreate` hace lo contrario"
+    ],
+    "correctIndex": 2,
+    "explanation": "La guía distingue explícitamente estas cuatro acciones: reconstruir imagen (`--build`), recrear contenedor (`--force-recreate`), descargar imagen (`docker compose pull`), y eliminar datos (`down -v`, normalmente innecesario y destructivo).",
+    "source": "docker-guide.md"
+  },
+  {
+    "id": "docker-176",
+    "category": "docker",
+    "topic": "Diagnóstico sistemático y producción",
+    "question": "Según la lista de salida a producción de la sección 17.6, ¿qué pregunta corresponde al área 'Datos'?",
+    "options": [
+      "¿Logs, métricas, alertas y correlación?",
+      "¿Base confiable, versión fijada, usuario no root, sin secretos?",
+      "¿Tag inmutable/digest, estrategia de rollback y smoke test?",
+      "¿Volumen apropiado, migraciones, backup y restauración probada?"
+    ],
+    "correctIndex": 3,
+    "explanation": "La fila 'Datos' de la lista de salida a producción pregunta específicamente: '¿volumen apropiado, migraciones, backup y restauración probada?'.",
+    "source": "docker-guide.md"
+  },
+  {
+    "id": "docker-177",
+    "category": "docker",
+    "topic": "Diagnóstico sistemático y producción",
+    "question": "¿Qué advierte la guía sobre un volumen de Docker como mecanismo de backup?",
+    "options": [
+      "Los volúmenes se respaldan automáticamente cada 24 horas",
+      "Un volumen ya es, por sí mismo, un backup completo y suficiente",
+      "Solo los bind mounts requieren backup, los volúmenes nombrados no",
+      "Un volumen no es un backup; se deben definir frecuencia, retención, cifrado, consistencia, responsables y pruebas de restauración"
+    ],
+    "correctIndex": 3,
+    "explanation": "La sección 17.4 es explícita: 'Un volumen no es un backup.' y enumera los elementos que sí conforman una estrategia real de backup y restauración.",
+    "source": "docker-guide.md"
+  },
+  {
+    "id": "docker-178",
+    "category": "docker",
+    "topic": "Diagnóstico sistemático y producción",
+    "question": "¿Qué NO resuelve Compose por sí solo, según la sección 17.5, entre las siguientes opciones?",
+    "options": [
+      "Desarrollo local, integración y demos en un solo host",
+      "Despliegues sencillos en un solo host",
+      "Alta disponibilidad entre hosts y autoscaling distribuido",
+      "Definir servicios, redes y volúmenes de una aplicación"
+    ],
+    "correctIndex": 2,
+    "explanation": "La guía indica que Compose es excelente para desarrollo local, integración, demos y despliegues sencillos en un solo host, pero no ofrece por sí solo alta disponibilidad entre hosts, autoscaling distribuido, ni varias otras capacidades de un orquestador.",
+    "source": "docker-guide.md"
+  },
+  {
+    "id": "docker-179",
+    "category": "docker",
+    "topic": "Diagnóstico sistemático y producción",
+    "question": "Sobre las migraciones de base de datos en despliegues con varias réplicas, ¿qué recomienda la sección 17.3?",
+    "options": [
+      "Usar un trabajo controlado, idempotente y observable, con cambios compatibles hacia delante y atrás cuando haya varias versiones activas",
+      "Ejecutarlas manualmente conectándose por SSH al contenedor en producción",
+      "Nunca automatizar las migraciones bajo ninguna circunstancia",
+      "Ejecutarlas de forma implícita en cada réplica al arrancar"
+    ],
+    "correctIndex": 0,
+    "explanation": "La guía recomienda: 'Usa un trabajo controlado, idempotente y observable antes o durante el despliegue. Diseña cambios compatibles hacia delante y atrás cuando haya varias versiones de la app activas.'",
+    "source": "docker-guide.md"
+  },
+  {
+    "id": "docker-180",
+    "category": "docker",
+    "topic": "Diagnóstico sistemático y producción",
+    "question": "En el diagrama de diagnóstico, si el contenedor está `running` pero NO está `healthy`, ¿cuál es el siguiente paso sugerido?",
+    "options": [
+      "Probar el healthcheck dentro del contenedor",
+      "Publicar el puerto nuevamente con -p",
+      "Eliminar la red del proyecto",
+      "Verificar el proxy y TLS del cliente"
+    ],
+    "correctIndex": 0,
+    "explanation": "Según el flujo del diagrama, si el contenedor está running pero no healthy, el siguiente paso es 'Probar healthcheck dentro'; los pasos de proxy/TLS corresponden a etapas posteriores del diagnóstico.",
+    "source": "docker-guide.md"
+  }
+]

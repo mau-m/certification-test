@@ -1,8 +1,12 @@
-# Guía avanzada de Java
+# Guía incremental de Java y Maven: de cero a experto
 
-> **JVM, administración de memoria, referencias, Garbage Collection, lambdas, Streams, concurrencia, Project Loom, herencia y polimorfismo**
+> **Lenguaje Java, biblioteca estándar, JVM, Maven, diseño, concurrencia y evolución desde Java 8 hasta Java 25**
 
-Esta guía reúne y organiza los temas desarrollados durante la conversación en un solo material de estudio. Está orientada a un desarrollador Java junior que busca comprender el lenguaje a profundidad, trabajar con Java moderno y prepararse para certificaciones de Oracle.
+Esta es la primera de tres guías deliberadamente granulares. Aquí se estudia **Java como lenguaje y plataforma**; Maven solo aparece como herramienta de construcción del proyecto. El testing con JUnit y Mockito vive en [`java-testing-guide.md`](java-testing-guide.md), y Spring en [`spring-guide.md`](spring-guide.md).
+
+**Simulador de certificación:** [`java-maven-questions.md`](java-maven-questions.md) contiene 100 preguntas teóricas y de código con soluciones razonadas.
+
+La explicación parte de cero, pero conserva los detalles de JVM, memoria y concurrencia necesarios para llegar a un nivel avanzado. Cada sección sigue el mismo patrón: **modelo mental → teoría → ejemplo → errores frecuentes → práctica**.
 
 La intención no es memorizar APIs aisladas, sino construir un modelo mental que permita responder tres preguntas:
 
@@ -15,46 +19,69 @@ La intención no es memorizar APIs aisladas, sino construir un modelo mental que
 ## Contenido
 
 1. [Ruta de estudio recomendada](#1-ruta-de-estudio-recomendada)
+   - [Maven: construir y administrar proyectos](#1a-maven-construir-y-administrar-proyectos)
 2. [Arquitectura de la JVM](#2-arquitectura-de-la-jvm)
 3. [Fundamentos del lenguaje](#3-fundamentos-del-lenguaje)
 4. [Programación Orientada a Objetos](#4-programación-orientada-a-objetos)
 5. [Clases, clases abstractas e interfaces](#5-clases-clases-abstractas-e-interfaces)
 6. [Sobrecarga, sobrescritura y despacho dinámico](#6-sobrecarga-sobrescritura-y-despacho-dinámico)
 7. [Inicialización, constructores y herencia](#7-inicialización-constructores-y-herencia)
+   - [Genéricos y borrado de tipos](#7a-genéricos-y-borrado-de-tipos)
+   - [Excepciones y gestión de recursos](#7b-excepciones-y-gestión-de-recursos)
+   - [Anotaciones y reflexión](#7c-anotaciones-y-reflexión)
+   - [APIs esenciales de la biblioteca estándar](#7d-apis-esenciales-de-la-biblioteca-estándar)
+   - [Módulos, JAR y distribución](#7e-módulos-jar-y-distribución)
+   - [Collections Framework](#7f-collections-framework)
 8. [Principios y patrones de diseño](#8-principios-y-patrones-de-diseño)
 9. [Tipos de referencias y `java.lang.ref`](#9-tipos-de-referencias-y-javalangref)
 10. [Garbage Collection](#10-garbage-collection)
 11. [Lambdas e interfaces funcionales](#11-lambdas-e-interfaces-funcionales)
 12. [Streams](#12-streams)
-13. [Java 21–26 y Project Loom](#13-java-2126-y-project-loom)
+13. [Evolución de Java 8 a Java 25 y Project Loom](#13-evolución-de-java-8-a-java-25-y-project-loom)
 14. [Concurrencia y paralelismo](#14-concurrencia-y-paralelismo)
 15. [Preguntas difíciles de certificación](#15-preguntas-difíciles-de-certificación)
 16. [Herramientas de diagnóstico y práctica](#16-herramientas-de-diagnóstico-y-práctica)
 17. [Fuentes oficiales](#17-fuentes-oficiales)
 
+## Límites de esta guía
+
+| Sí pertenece aquí | Se estudia en otra guía |
+|---|---|
+| sintaxis, POO, genéricos y excepciones | JUnit y Mockito |
+| colecciones, lambdas, Streams y `java.time` | Spring Framework y Spring Boot |
+| JVM, memoria, GC y concurrencia | persistencia con Spring Data/JPA |
+| módulos, JAR, herramientas del JDK y Maven | pruebas de Spring, MVC y Security |
+
+Los ejemplos se basan en Java 17 o superior salvo que se marque otra versión. Las características *preview* se identifican expresamente: no deben asumirse estables ni usarse sin `--enable-preview`.
+
 ---
 
 # 1. Ruta de estudio recomendada
 
-Una secuencia útil para estudiar estos temas es:
+Los números de capítulo conservan la organización histórica de la guía; la progresión pedagógica es esta. Sigue los enlaces en orden y no avances de etapa hasta poder explicar el objetivo y modificar los ejemplos sin copiarlos.
 
 ```text
-1. Fundamentos del lenguaje: tipos, variables y buenas prácticas
-2. Programación orientada a objetos: pilares y encapsulamiento
-3. Clases, objetos y referencias
-4. Herencia, interfaces y polimorfismo
-5. Sobrecarga, sobrescritura y resolución de métodos
-6. Principios y patrones de diseño
-7. Bytecode y arquitectura de la JVM
-8. Heap, stack, frames y Garbage Collection
-9. Lambdas e interfaces funcionales
-10. Streams y Collectors
-11. Java Memory Model
-12. Hilos, sincronización y java.util.concurrent
-13. Virtual threads, Scoped Values y Structured Concurrency
-14. Diagnóstico con javap, jcmd, JFR y heap dumps
-15. Preguntas de certificación y ejercicios prácticos
+Etapa 0  herramientas → JDK, javac/java, estructura y Maven
+Etapa 1  lenguaje     → sintaxis, POO, clases, enums, herencia y polimorfismo
+Etapa 2  robustez     → genéricos, excepciones, colecciones y APIs estándar
+Etapa 3  diseño       → composición, SOLID, patrones, anotaciones y módulos
+Etapa 4  funcional    → lambdas, Optional, Streams y Collectors
+Etapa 5  runtime      → bytecode, class loading, memoria, referencias y GC
+Etapa 6  concurrencia → JMM, executors, atomics, virtual threads y Loom
+Etapa 7  dominio      → evolución Java 8 → 17 → 21 → 25
+Etapa 8  maestría     → diagnóstico, práctica y preguntas de certificación
 ```
+
+| Etapa | Capítulos | Evidencia antes de avanzar |
+|---|---|---|
+| 0 | [Maven](#1a-maven-construir-y-administrar-proyectos) y [JDK/JVM/JRE](#21-jvm-jre-y-jdk) | compilar y empaquetar desde terminal |
+| 1 | [Fundamentos](#3-fundamentos-del-lenguaje), [POO](#4-programación-orientada-a-objetos), [clases](#5-clases-clases-abstractas-e-interfaces), [despacho](#6-sobrecarga-sobrescritura-y-despacho-dinámico) e [inicialización](#7-inicialización-constructores-y-herencia) | predecir tipos, construcción y método ejecutado |
+| 2 | [Genéricos](#7a-genéricos-y-borrado-de-tipos), [excepciones](#7b-excepciones-y-gestión-de-recursos), [APIs](#7d-apis-esenciales-de-la-biblioteca-estándar) y [colecciones](#7f-collections-framework) | modelar una API tipada y manejar recursos sin fugas |
+| 3 | [Anotaciones/reflexión](#7c-anotaciones-y-reflexión), [módulos](#7e-módulos-jar-y-distribución) y [diseño](#8-principios-y-patrones-de-diseño) | justificar fronteras y dependencias |
+| 4 | [Lambdas](#11-lambdas-e-interfaces-funcionales) y [Streams](#12-streams) | elegir entre ciclo y pipeline sin efectos ocultos |
+| 5 | [JVM](#2-arquitectura-de-la-jvm), [referencias](#9-tipos-de-referencias-y-javalangref) y [GC](#10-garbage-collection) | relacionar código, bytecode, heap, stack y GC |
+| 6 | [Concurrencia](#14-concurrencia-y-paralelismo) y [Loom](#134-project-loom) | explicar atomicidad, visibilidad y límites de recursos |
+| 7–8 | [Versiones](#13-evolución-de-java-8-a-java-25-y-project-loom), [diagnóstico](#16-herramientas-de-diagnóstico-y-práctica) y [preguntas](#15-preguntas-difíciles-de-certificación) | diagnosticar y explicar, no solo obtener salida correcta |
 
 La idea central que conecta toda la guía es esta:
 
@@ -69,6 +96,275 @@ Código interpretado/JIT
     ↓
 CPU + memoria + hilos + GC
 ```
+
+---
+
+# 1A. Maven: construir y administrar proyectos
+
+Maven no forma parte del lenguaje ni de la JVM. Es una herramienta que convierte la construcción de un proyecto en un proceso **declarativo y repetible**: el archivo `pom.xml` describe qué es el proyecto y Maven decide cómo compilarlo, probarlo y empaquetarlo mediante convenciones y plugins.
+
+## 1A.1 Modelo mental
+
+```mermaid
+flowchart LR
+    P[pom.xml] --> M[Maven]
+    S[src/main/java] --> M
+    T[src/test/java] --> M
+    M --> R[Resuelve dependencias]
+    M --> C[Compila]
+    M --> X[Ejecuta pruebas]
+    M --> J[Empaqueta JAR/WAR]
+    J --> O[target/]
+```
+
+Hay que distinguir cuatro conceptos:
+
+| Concepto | Pregunta que responde | Ejemplo |
+|---|---|---|
+| POM | ¿qué proyecto estoy construyendo? | nombre, versión, dependencias |
+| ciclo de vida | ¿en qué etapa está la construcción? | `compile`, `test`, `package` |
+| plugin | ¿qué herramienta ejecuta el trabajo? | Compiler, Surefire, JAR |
+| dependencia | ¿qué biblioteca usa mi código? | Jackson, SLF4J |
+
+Una dependencia termina en el *classpath* de la aplicación. Un plugin se ejecuta durante el *build*. Confundirlos es uno de los errores más comunes al empezar.
+
+## 1A.2 Estructura convencional
+
+```text
+biblioteca/
+├── pom.xml
+└── src/
+    ├── main/
+    │   ├── java/com/example/App.java
+    │   └── resources/application.properties
+    └── test/
+        ├── java/com/example/AppTest.java
+        └── resources/datos.json
+```
+
+Maven conoce estas rutas por convención. Usarlas reduce configuración y permite que cualquier integrante reconozca el proyecto.
+
+## 1A.3 El POM mínimo
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+                             https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.example</groupId>
+    <artifactId>catalogo</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+    <packaging>jar</packaging>
+
+    <properties>
+        <maven.compiler.release>17</maven.compiler.release>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+</project>
+```
+
+Las coordenadas forman la identidad del artefacto:
+
+```text
+groupId:artifactId:version
+com.example:catalogo:1.0.0-SNAPSHOT
+```
+
+- `groupId` representa organización o dominio invertido.
+- `artifactId` identifica el módulo.
+- `version` permite coexistencia y evolución.
+- `SNAPSHOT` indica una versión aún mutable; una versión publicada sin ese sufijo debe ser inmutable.
+- `packaging` determina el tipo de salida y los objetivos asociados por defecto.
+
+`maven.compiler.release` es preferible a configurar `source` y `target` por separado: pide al compilador tanto la sintaxis como la API pública correspondiente a esa versión de Java.
+
+## 1A.4 Los ciclos de vida
+
+Maven define tres ciclos principales:
+
+- `default`: valida, compila, prueba, empaqueta, verifica, instala y despliega.
+- `clean`: elimina la salida de construcciones anteriores.
+- `site`: genera documentación del proyecto.
+
+Las fases más utilizadas del ciclo `default` son:
+
+```text
+validate → compile → test → package → verify → install → deploy
+```
+
+Cuando se invoca una fase se ejecutan también las anteriores:
+
+```bash
+mvn compile          # valida y compila
+mvn test             # además ejecuta pruebas unitarias
+mvn package          # además crea target/catalogo-1.0.0-SNAPSHOT.jar
+mvn verify           # además aplica verificaciones de calidad/integración
+mvn install          # copia el artefacto al repositorio local
+```
+
+`mvn clean package` solicita dos fases de ciclos diferentes: primero limpia y después construye hasta `package`.
+
+Una **fase** es un punto del ciclo; un **goal** es una operación concreta de un plugin. Por ejemplo:
+
+```bash
+mvn dependency:tree
+```
+
+ejecuta directamente el goal `tree` del plugin `dependency`.
+
+## 1A.5 Dependencias y alcance
+
+```xml
+<dependencies>
+    <dependency>
+        <groupId>com.fasterxml.jackson.core</groupId>
+        <artifactId>jackson-databind</artifactId>
+        <version>2.20.0</version>
+    </dependency>
+</dependencies>
+```
+
+Maven descarga el artefacto y su descriptor desde un repositorio remoto y los conserva en el repositorio local. El código no debe depender de que el IDE haya agregado JAR manualmente.
+
+| Scope | Compilación | Pruebas | Ejecución | Uso típico |
+|---|---:|---:|---:|---|
+| `compile` | sí | sí | sí | biblioteca necesaria siempre |
+| `provided` | sí | sí | no | API aportada por el entorno |
+| `runtime` | no | sí | sí | driver o implementación solo en ejecución |
+| `test` | no | sí | no | JUnit, Mockito y utilidades de prueba |
+
+Los alcances `system` e `import` tienen usos especiales; `system` suele evitarse porque ata el build a una ruta local, mientras que `import` se utiliza desde `dependencyManagement` para importar un BOM.
+
+## 1A.6 Dependencias transitivas y mediación
+
+Si `catalogo` depende de `biblioteca-a` y esta depende de `biblioteca-b`, Maven puede incorporar `biblioteca-b` transitivamente.
+
+```text
+catalogo
+└── biblioteca-a:1.0
+    └── biblioteca-b:2.0
+```
+
+Esto simplifica el consumo, pero también puede introducir conflictos. Maven aplica la regla de la **definición más cercana** en el árbol; cuando dos versiones están a la misma profundidad, suele prevalecer la primera declaración encontrada. Para no depender accidentalmente de esa mediación, declara de forma directa toda biblioteca cuya API use tu código.
+
+Comandos de diagnóstico:
+
+```bash
+mvn dependency:tree
+mvn dependency:analyze
+mvn help:effective-pom
+```
+
+Una exclusión se aplica en la arista exacta que introduce una dependencia no deseada:
+
+```xml
+<dependency>
+    <groupId>com.example</groupId>
+    <artifactId>client-http</artifactId>
+    <version>3.0.0</version>
+    <exclusions>
+        <exclusion>
+            <groupId>commons-logging</groupId>
+            <artifactId>commons-logging</artifactId>
+        </exclusion>
+    </exclusions>
+</dependency>
+```
+
+No conviene llenar el POM de exclusiones sin estudiar antes `dependency:tree`: se podría quitar una biblioteca realmente necesaria en ejecución.
+
+## 1A.7 `dependencyManagement` y BOM
+
+`dependencyManagement` **administra versiones**, pero por sí solo no añade dependencias al módulo:
+
+```xml
+<dependencyManagement>
+    <dependencies>
+        <dependency>
+            <groupId>com.example</groupId>
+            <artifactId>company-bom</artifactId>
+            <version>4.2.0</version>
+            <type>pom</type>
+            <scope>import</scope>
+        </dependency>
+    </dependencies>
+</dependencyManagement>
+```
+
+Un BOM (*Bill of Materials*) alinea versiones compatibles de una familia de bibliotecas. Los módulos consumidores todavía declaran qué dependencias necesitan, pero ya no repiten sus versiones.
+
+## 1A.8 Plugins y configuración reproducible
+
+```xml
+<build>
+    <plugins>
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-compiler-plugin</artifactId>
+            <version>3.14.1</version>
+            <configuration>
+                <release>17</release>
+                <parameters>true</parameters>
+            </configuration>
+        </plugin>
+    </plugins>
+</build>
+```
+
+Buenas prácticas:
+
+- fija las versiones de plugins relevantes;
+- compila siempre desde una copia limpia en integración continua;
+- no publiques artefactos distintos bajo la misma versión final;
+- registra el Maven Wrapper (`mvnw`, `mvnw.cmd`, `.mvn/wrapper`) para fijar la versión de Maven usada por el equipo;
+- ejecuta `./mvnw verify` en el servidor y localmente antes de integrar cambios.
+
+## 1A.9 Herencia y agregación multimódulo
+
+Un POM padre puede centralizar propiedades y configuración. Un POM agregador construye varios módulos en el orden que determina el reactor. Con frecuencia un mismo POM cumple ambos papeles, pero son conceptos distintos.
+
+```text
+tienda/
+├── pom.xml                 ← padre y agregador
+├── tienda-domain/pom.xml
+├── tienda-application/pom.xml
+└── tienda-adapters/pom.xml
+```
+
+```xml
+<packaging>pom</packaging>
+
+<modules>
+    <module>tienda-domain</module>
+    <module>tienda-application</module>
+    <module>tienda-adapters</module>
+</modules>
+```
+
+Un módulo hijo declara el padre:
+
+```xml
+<parent>
+    <groupId>com.example</groupId>
+    <artifactId>tienda-parent</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+</parent>
+```
+
+No hay que crear módulos por cada paquete. Convienen cuando existe una frontera real: ciclo de publicación independiente, dependencias distintas o una regla arquitectónica que el classpath debe hacer cumplir.
+
+## 1A.10 Práctica guiada
+
+1. Crea el POM mínimo y una clase `App`.
+2. Ejecuta `./mvnw clean package` y localiza el JAR en `target/`.
+3. Añade una dependencia y observa su árbol transitivo.
+4. Cambia `maven.compiler.release` por una versión inferior y comprueba qué API deja de compilar.
+5. Divide el proyecto en dos módulos solo después de que una dependencia entre ambos sea clara.
+
+Para aprender a configurar Surefire, Failsafe, JUnit y Mockito continúa en la [guía de testing](java-testing-guide.md). Maven termina aquí como herramienta de construcción; no se mezclará con un framework de aplicación.
 
 ---
 
@@ -1753,6 +2049,68 @@ Tiene su propio `this`, a diferencia de la lambda.
 
 ---
 
+## 5.17 Enums
+
+Un `enum` define un conjunto cerrado de instancias con identidad estable. Es preferible a constantes `int` o `String` porque el compilador restringe los valores válidos.
+
+```java
+enum OrderStatus {
+    CREATED,
+    PAID,
+    SHIPPED,
+    CANCELLED
+}
+
+OrderStatus status = OrderStatus.PAID;
+```
+
+Cada constante es una instancia de la clase enum. Puede tener estado y comportamiento:
+
+```java
+enum Operation {
+    ADD("+") {
+        @Override double apply(double a, double b) { return a + b; }
+    },
+    MULTIPLY("×") {
+        @Override double apply(double a, double b) { return a * b; }
+    };
+
+    private final String symbol;
+
+    Operation(String symbol) {
+        this.symbol = symbol;
+    }
+
+    abstract double apply(double a, double b);
+
+    String symbol() { return symbol; }
+}
+```
+
+APIs importantes:
+
+```java
+OrderStatus parsed = OrderStatus.valueOf("PAID"); // exacto y sensible a mayúsculas
+for (OrderStatus value : OrderStatus.values()) {
+    System.out.println(value.name());
+}
+```
+
+No persistas `ordinal()` como contrato: cambia al reordenar constantes. Persiste un código explícito o el nombre bajo una política de migración. Para colecciones especializadas usa `EnumSet` y `EnumMap`, que aprovechan que el universo de claves es cerrado.
+
+Un `switch` sobre enum puede ser exhaustivo:
+
+```java
+boolean mayCancel(OrderStatus status) {
+    return switch (status) {
+        case CREATED, PAID -> true;
+        case SHIPPED, CANCELLED -> false;
+    };
+}
+```
+
+---
+
 # 6. Sobrecarga, sobrescritura y despacho dinámico
 
 ## 6.1 Tipo de referencia y tipo real
@@ -2328,6 +2686,867 @@ Al leer de `? super Dog`, solo puede asumirse `Object`.
 
 ---
 
+# 7A. Genéricos y borrado de tipos
+
+Los genéricos permiten expresar relaciones entre tipos y hacer que el compilador las verifique. No existen para evitar escribir casts solamente: su propósito principal es trasladar errores de tipos desde ejecución hacia compilación.
+
+## 7A.1 Una clase genérica
+
+Sin genéricos, una caja solo podría guardar `Object`:
+
+```java
+final class RawBox {
+    private Object value;
+
+    void set(Object value) { this.value = value; }
+    Object get() { return value; }
+}
+```
+
+El consumidor debe hacer un cast que puede fallar. Una variable de tipo conecta la entrada con la salida:
+
+```java
+final class Box<T> {
+    private T value;
+
+    void set(T value) { this.value = value; }
+    T get() { return value; }
+}
+
+Box<String> names = new Box<>();
+names.set("Ada");
+String name = names.get();
+```
+
+`T` no significa “cualquier valor en cada llamada”. Significa “un tipo concreto, consistente para esta instancia”. Los nombres habituales son `T` (tipo), `E` (elemento), `K` (clave), `V` (valor) y `R` (resultado), pero pueden usarse nombres descriptivos.
+
+## 7A.2 Métodos genéricos
+
+Un método puede declarar sus propias variables de tipo aunque la clase no sea genérica:
+
+```java
+static <T> T first(List<T> values) {
+    if (values.isEmpty()) {
+        throw new IllegalArgumentException("La lista está vacía");
+    }
+    return values.get(0);
+}
+
+String firstName = first(List.of("Ada", "Linus"));
+```
+
+La declaración `<T>` aparece antes del tipo de retorno. Normalmente el compilador infiere `T`; se puede indicar de manera explícita con `Util.<String>first(...)` cuando la inferencia no basta.
+
+## 7A.3 Límites
+
+Un límite permite usar operaciones de un contrato conocido:
+
+```java
+static <T extends Comparable<? super T>> T max(List<T> values) {
+    return values.stream()
+            .max(Comparator.naturalOrder())
+            .orElseThrow();
+}
+```
+
+`extends` significa “subtipo de” tanto para clases como para interfaces. Puede haber varios límites:
+
+```java
+static <T extends Number & Comparable<T>> boolean positive(T value) {
+    return value.doubleValue() > 0;
+}
+```
+
+Si hay una clase en la intersección debe aparecer primero; después pueden venir interfaces.
+
+## 7A.4 Invariancia y comodines
+
+Aunque `Integer` extiende `Number`, `List<Integer>` no extiende `List<Number>`. Si lo hiciera, alguien podría agregar un `Double` a una lista creada para enteros.
+
+```java
+static double sum(List<? extends Number> numbers) {
+    return numbers.stream().mapToDouble(Number::doubleValue).sum();
+}
+
+sum(List.of(1, 2, 3));
+sum(List.of(1.5, 2.5));
+```
+
+`? extends Number` acepta listas de subtipos y permite leer `Number`, pero no agregar un valor concreto. Para consumir valores se usa un límite inferior:
+
+```java
+static void addDefaults(List<? super Integer> target) {
+    target.add(0);
+    target.add(1);
+}
+```
+
+Esto conduce a PECS:
+
+```text
+¿La estructura produce T?  → ? extends T
+¿La estructura consume T?  → ? super T
+¿Produce y consume T?       → normalmente T exacto
+```
+
+Ejemplo completo:
+
+```java
+static <T> void copy(
+        List<? extends T> source,
+        List<? super T> target) {
+    target.addAll(source);
+}
+
+List<Integer> source = List.of(1, 2);
+List<Number> target = new ArrayList<>();
+copy(source, target);
+```
+
+## 7A.5 Borrado de tipos
+
+Java implementa la mayoría de los genéricos mediante **type erasure**. El compilador verifica los tipos e inserta casts o métodos puente cuando hacen falta; el bytecode no conserva cada argumento de tipo como una clase distinta.
+
+Consecuencias:
+
+```java
+List<String> text = new ArrayList<>();
+List<Integer> numbers = new ArrayList<>();
+
+System.out.println(text.getClass() == numbers.getClass()); // true
+```
+
+Por ello no se permite:
+
+```java
+// new T();
+// new T[10];
+// if (value instanceof List<String>) { }
+// static T shared;
+```
+
+`List<?>` sí es comprobable con `instanceof` porque no afirma cuál es el argumento. Cuando se necesita construir `T`, se recibe una fábrica:
+
+```java
+static <T> T create(Supplier<T> factory) {
+    return factory.get();
+}
+
+Order order = create(Order::new);
+```
+
+## 7A.6 Tipos *raw* y contaminación del heap
+
+Un tipo sin argumento, como `List` en lugar de `List<String>`, existe para compatibilidad con código anterior a Java 5. Pierde comprobaciones:
+
+```java
+List<String> names = new ArrayList<>();
+List raw = names;            // warning
+raw.add(42);                 // heap pollution
+String first = names.get(0); // ClassCastException
+```
+
+No silencies warnings genéricos de manera global. Si una interoperabilidad obliga a un cast no comprobado, confínalo en un método pequeño, valida la precondición y documenta por qué es seguro.
+
+## 7A.7 Checklist
+
+- Usa un parámetro de tipo cuando dos o más posiciones deben conservar una relación.
+- Usa `?` cuando el tipo exacto no interesa.
+- No expongas tipos *raw* en APIs nuevas.
+- Prefiere una colección genérica a un array genérico.
+- Recuerda que `List<Object>` y `List<?>` no son equivalentes: la primera acepta cualquier `Object`; la segunda representa una lista de algún tipo desconocido.
+
+---
+
+# 7B. Excepciones y gestión de recursos
+
+Una excepción representa la interrupción del flujo normal de una operación. El objetivo no es “capturar todo”, sino preservar el contrato: informar un fallo con contexto, recuperarse cuando sea posible y liberar recursos siempre.
+
+## 7B.1 Jerarquía
+
+```text
+Throwable
+├── Error
+│   ├── OutOfMemoryError
+│   └── StackOverflowError
+└── Exception
+    ├── RuntimeException
+    │   ├── IllegalArgumentException
+    │   ├── IllegalStateException
+    │   └── NullPointerException
+    └── IOException, SQLException, ...
+```
+
+- `Error` señala condiciones graves de la JVM o del entorno; normalmente no se captura para continuar como si nada.
+- Una excepción **checked** debe capturarse o declararse con `throws`.
+- `RuntimeException` y sus subclases son **unchecked**.
+
+La diferencia no equivale a “recuperable frente a irrecuperable”. Es una decisión de diseño de API: una checked exception obliga al llamador a reconocer explícitamente ese resultado.
+
+## 7B.2 Lanzar y propagar
+
+```java
+static BigDecimal percentage(BigDecimal total, BigDecimal part) {
+    if (total.signum() == 0) {
+        throw new IllegalArgumentException("total debe ser distinto de cero");
+    }
+    return part.multiply(BigDecimal.valueOf(100))
+            .divide(total, 2, RoundingMode.HALF_UP);
+}
+```
+
+`IllegalArgumentException` comunica que el llamador violó una precondición. `IllegalStateException` comunica que el objeto no se encuentra en un estado que permita la operación.
+
+Una checked exception forma parte de la firma:
+
+```java
+static String load(Path path) throws IOException {
+    return Files.readString(path);
+}
+```
+
+No declares `throws Exception` por comodidad: borra información útil y obliga al consumidor a tratar fallos distintos como si fueran iguales.
+
+## 7B.3 Captura específica y traducción
+
+```java
+try {
+    return Files.readString(configurationPath);
+} catch (NoSuchFileException exception) {
+    throw new ConfigurationException(
+            "No existe la configuración: " + configurationPath,
+            exception);
+} catch (AccessDeniedException exception) {
+    throw new ConfigurationException(
+            "Sin permiso para leer: " + configurationPath,
+            exception);
+}
+```
+
+Las capturas se ordenan de la más específica a la más general. Al traducir una excepción entre capas conserva la causa con el constructor que recibe `cause`; de otro modo se pierde el rastro original.
+
+Una excepción de dominio puede expresar mejor el contrato:
+
+```java
+final class InsufficientBalanceException extends RuntimeException {
+    InsufficientBalanceException(String accountId) {
+        super("Saldo insuficiente en la cuenta " + accountId);
+    }
+}
+```
+
+No uses excepciones para decisiones normales de control de flujo, como terminar un ciclo o comprobar si una clave existe.
+
+## 7B.4 `finally` y `try-with-resources`
+
+`finally` se ejecuta al salir del `try` por retorno o excepción, salvo terminaciones anormales de la JVM. No debe contener un `return`: ocultaría el resultado o la excepción original.
+
+Para recursos que implementan `AutoCloseable`, usa `try-with-resources`:
+
+```java
+static long countLines(Path path) throws IOException {
+    try (Stream<String> lines = Files.lines(path)) {
+        return lines.count();
+    }
+}
+```
+
+Con varios recursos se cierran en orden inverso:
+
+```java
+try (InputStream input = Files.newInputStream(source);
+     OutputStream output = Files.newOutputStream(target)) {
+    input.transferTo(output);
+}
+```
+
+Si el cuerpo y `close()` fallan, la excepción del cuerpo se conserva como principal y la del cierre queda **suprimida**:
+
+```java
+for (Throwable suppressed : exception.getSuppressed()) {
+    System.err.println(suppressed.getMessage());
+}
+```
+
+## 7B.5 Multi-catch y *rethrow*
+
+```java
+try {
+    importData(path);
+} catch (NoSuchFileException | AccessDeniedException exception) {
+    throw new ImportException("No se puede leer el archivo", exception);
+}
+```
+
+Las alternativas de un multi-catch no pueden ser padre e hija entre sí. La variable capturada se trata como efectivamente final.
+
+## 7B.6 Buen contrato de error
+
+Una excepción útil incluye qué operación falló y el identificador necesario para diagnosticarla, pero no secretos. Evita:
+
+```java
+catch (Exception ignored) { }
+```
+
+También evita registrar y volver a lanzar el mismo fallo en cada capa: genera varias entradas idénticas. Una capa traduce o agrega contexto; el límite de la aplicación decide cómo registrarlo y presentarlo.
+
+---
+
+# 7C. Anotaciones y reflexión
+
+Una anotación agrega metadatos estructurados. Por sí sola no ejecuta lógica: una herramienta, el compilador o código reflexivo debe interpretarla.
+
+## 7C.1 Declarar una anotación
+
+```java
+@Target(ElementType.METHOD)
+@Retention(RetentionPolicy.RUNTIME)
+public @interface Retryable {
+    int attempts() default 3;
+    Class<? extends Throwable>[] on() default {IOException.class};
+}
+```
+
+Las meta-anotaciones más importantes son:
+
+| Meta-anotación | Propósito |
+|---|---|
+| `@Target` | restringe dónde puede usarse |
+| `@Retention` | decide si vive en fuente, `.class` o ejecución |
+| `@Documented` | la incluye en Javadoc |
+| `@Inherited` | permite herencia limitada desde una superclase |
+| `@Repeatable` | permite varias instancias en el mismo elemento |
+
+`RetentionPolicy.SOURCE` sirve para herramientas de fuente; `CLASS` queda en bytecode pero no se expone normalmente en reflexión; `RUNTIME` permite leerla durante ejecución.
+
+```java
+@Retryable(attempts = 5, on = {IOException.class})
+public void synchronize() { /* ... */ }
+```
+
+## 7C.2 Reflexión
+
+La reflexión permite inspeccionar tipos cuando el programa ya está ejecutándose:
+
+```java
+Class<?> type = Class.forName("com.example.Customer");
+
+for (Method method : type.getDeclaredMethods()) {
+    System.out.printf("%s -> %s%n",
+            method.getName(),
+            method.getReturnType().getSimpleName());
+}
+```
+
+Leer una anotación:
+
+```java
+Retryable metadata = method.getAnnotation(Retryable.class);
+if (metadata != null) {
+    System.out.println(metadata.attempts());
+}
+```
+
+La reflexión hace posibles contenedores, serializadores y herramientas de prueba, pero cambia fallos de compilación por fallos de ejecución y puede romper encapsulación. Prefiere llamadas tipadas normales cuando el conjunto de clases ya se conoce.
+
+Desde el sistema de módulos, `exports` permite acceso público normal y `opens` habilita reflexión profunda. Abrir todos los paquetes solo para “hacer funcionar” un framework debilita el encapsulamiento; abre únicamente lo requerido.
+
+## 7C.3 Procesamiento en compilación
+
+No todo uso de anotaciones necesita reflexión. Un *annotation processor* puede generar fuente o validar reglas durante `javac`. Esto conserva más errores en compilación y evita parte del costo dinámico. Una anotación, su procesador y el código generado son tres piezas distintas.
+
+---
+
+# 7D. APIs esenciales de la biblioteca estándar
+
+Aprender Java no termina en la sintaxis. La biblioteca estándar evita reinventar fechas, archivos, HTTP, expresiones regulares y aritmética decimal.
+
+## 7D.1 Fecha y hora: `java.time`
+
+La API introducida en Java 8 usa tipos inmutables y distingue conceptos que las APIs antiguas mezclaban:
+
+| Tipo | Representa | Ejemplo |
+|---|---|---|
+| `Instant` | punto global en la línea de tiempo | registro de auditoría |
+| `LocalDate` | fecha sin hora ni zona | cumpleaños |
+| `LocalDateTime` | fecha y hora sin zona | horario local todavía no resuelto |
+| `ZonedDateTime` | fecha, hora y zona geográfica | reunión en Ciudad de México |
+| `Duration` | cantidad basada en segundos | timeout de 30 segundos |
+| `Period` | cantidad basada en años/meses/días | vigencia de 3 meses |
+
+```java
+Instant createdAt = Instant.now();
+LocalDate dueDate = LocalDate.parse("2026-09-30");
+
+ZoneId mexicoCity = ZoneId.of("America/Mexico_City");
+ZonedDateTime local = createdAt.atZone(mexicoCity);
+
+String text = local.format(
+        DateTimeFormatter.ofPattern("uuuu-MM-dd HH:mm VV"));
+```
+
+No conviertas una hora local en instante sin una zona. Los cambios de horario hacen que ciertas horas locales sean ambiguas o inexistentes. Guarda eventos como `Instant` y conserva la zona cuando tenga significado de negocio.
+
+## 7D.2 Archivos y NIO.2
+
+`Path` representa una ruta; `Files` ofrece operaciones sobre el sistema de archivos:
+
+```java
+Path directory = Path.of("data");
+Files.createDirectories(directory);
+
+Path file = directory.resolve("users.txt");
+Files.writeString(file, "Ada%nLinus%n".formatted(),
+        StandardOpenOption.CREATE,
+        StandardOpenOption.TRUNCATE_EXISTING);
+
+List<String> users = Files.readAllLines(file);
+```
+
+Para archivos grandes evita cargar todo en memoria:
+
+```java
+try (Stream<String> lines = Files.lines(file)) {
+    lines.filter(line -> !line.isBlank())
+            .forEach(System.out::println);
+}
+```
+
+La evaluación es perezosa y mantiene el archivo abierto; por eso el stream debe cerrarse.
+
+Recorrer un árbol:
+
+```java
+try (Stream<Path> paths = Files.walk(directory)) {
+    paths.filter(Files::isRegularFile)
+            .forEach(System.out::println);
+}
+```
+
+No construyas rutas concatenando `/` manualmente. `Path.resolve` respeta la plataforma y hace explícita la composición.
+
+## 7D.3 Expresiones regulares
+
+```java
+Pattern email = Pattern.compile(
+        "(?<user>[A-Za-z0-9._%+-]+)@(?<domain>[A-Za-z0-9.-]+)");
+Matcher matcher = email.matcher("ada@example.org");
+
+if (matcher.matches()) {
+    System.out.println(matcher.group("domain"));
+}
+```
+
+`matches()` exige que toda la entrada coincida; `find()` busca ocurrencias. Compila un `Pattern` una vez cuando se reutilice. Una expresión regular puede validar una forma razonable, pero no demuestra que un correo o una URL existan.
+
+## 7D.4 Aritmética decimal
+
+`double` representa punto flotante binario y no es apropiado para importes que requieren reglas decimales exactas:
+
+```java
+System.out.println(0.1 + 0.2); // aproximación binaria
+
+BigDecimal price = new BigDecimal("19.90");
+BigDecimal tax = price.multiply(new BigDecimal("0.16"));
+BigDecimal total = price.add(tax).setScale(2, RoundingMode.HALF_UP);
+```
+
+Construye `BigDecimal` desde texto o `BigDecimal.valueOf(double)`, no desde un literal `double` cuando importa la representación exacta. `equals` compara valor y escala (`2.0` no es igual a `2.00`); `compareTo` compara el valor numérico.
+
+## 7D.5 Cliente HTTP
+
+El cliente estándar moderno soporta HTTP/2 y operaciones síncronas o asíncronas:
+
+```java
+HttpClient client = HttpClient.newBuilder()
+        .connectTimeout(Duration.ofSeconds(3))
+        .build();
+
+HttpRequest request = HttpRequest.newBuilder(URI.create("https://example.org/api"))
+        .timeout(Duration.ofSeconds(5))
+        .header("Accept", "application/json")
+        .GET()
+        .build();
+
+HttpResponse<String> response = client.send(
+        request,
+        HttpResponse.BodyHandlers.ofString());
+
+if (response.statusCode() / 100 != 2) {
+    throw new IllegalStateException("HTTP " + response.statusCode());
+}
+```
+
+Un timeout de conexión no reemplaza el timeout total de la petición. En producción también se decide política de reintentos, límite de respuesta, autenticación y tratamiento de códigos; el cliente no convierte por sí solo JSON en objetos Java.
+
+---
+
+# 7E. Módulos, JAR y distribución
+
+Un paquete organiza nombres y controla acceso. Un módulo, introducido en Java 9, agrupa paquetes y declara dependencias y superficie pública de manera verificable.
+
+## 7E.1 Classpath frente a module path
+
+En el classpath, el código suele vivir en el **unnamed module** y muchos errores de dependencias aparecen al ejecutar. En el module path, cada módulo declara lo que necesita y lo que expone.
+
+```java
+module com.example.catalog {
+    requires java.net.http;
+
+    exports com.example.catalog.api;
+}
+```
+
+```text
+src/
+└── com.example.catalog/
+    ├── module-info.java
+    └── com/example/catalog/api/Catalog.java
+```
+
+- `requires` declara una dependencia legible.
+- `exports` permite que otros módulos usen los tipos públicos de un paquete.
+- un paquete no exportado sigue encapsulado aunque sus clases sean `public`.
+- `opens` habilita reflexión profunda sobre un paquete.
+- `uses` y `provides ... with ...` expresan proveedores de servicios.
+
+Ejemplo de servicio desacoplado:
+
+```java
+module com.example.catalog {
+    exports com.example.catalog.spi;
+    uses com.example.catalog.spi.PriceProvider;
+}
+
+module com.example.pricing {
+    requires com.example.catalog;
+    provides com.example.catalog.spi.PriceProvider
+        with com.example.pricing.DefaultPriceProvider;
+}
+```
+
+El consumidor carga implementaciones con `ServiceLoader`:
+
+```java
+PriceProvider provider = ServiceLoader.load(PriceProvider.class)
+        .findFirst()
+        .orElseThrow();
+```
+
+## 7E.2 Crear y examinar un JAR
+
+Un JAR es un archivo ZIP con clases, recursos y metadatos:
+
+```bash
+javac -d target/classes src/main/java/com/example/App.java
+jar --create --file target/app.jar \
+    --main-class com.example.App \
+    -C target/classes .
+java -jar target/app.jar
+```
+
+Maven automatiza estas operaciones y mantiene estructura y metadatos consistentes. Herramientas útiles del JDK:
+
+```bash
+jar --describe-module --file target/app.jar
+jdeps --print-module-deps target/app.jar
+jlink --add-modules com.example.app \
+      --output target/runtime
+```
+
+`jdeps` analiza dependencias. `jlink` puede crear una imagen de ejecución reducida a partir de módulos, pero no sustituye el empaquetado del código ni convierte automáticamente bibliotecas no modulares en módulos bien diseñados.
+
+## 7E.3 Cuándo modularizar
+
+No necesitas `module-info.java` para aprender Java ni para cada aplicación pequeña. Es útil cuando se busca encapsulamiento fuerte, una imagen de runtime personalizada o fronteras explícitas entre varios componentes. Empieza por paquetes cohesivos y una arquitectura clara; modulariza cuando el beneficio compense la configuración y la interoperabilidad requerida.
+
+---
+
+# 7F. Collections Framework
+
+El Collections Framework ofrece contratos y algoritmos para grupos de objetos. La elección correcta parte de la semántica —orden, duplicados, búsqueda y concurrencia—, no de memorizar nombres de implementaciones.
+
+## 7F.1 Mapa mental
+
+```text
+Iterable
+└── Collection
+    ├── List       orden posicional, duplicados
+    ├── Set        unicidad
+    └── Queue
+        └── Deque  extremos doblemente accesibles
+
+Map                claves asociadas a valores; no extiende Collection
+```
+
+Programar contra la interfaz mantiene libre la implementación:
+
+```java
+List<String> names = new ArrayList<>();
+Set<String> roles = new HashSet<>();
+Map<UUID, User> users = new HashMap<>();
+Deque<Task> pending = new ArrayDeque<>();
+```
+
+No significa ocultar todas las decisiones: si el contrato promete orden de inserción o navegación ordenada, la interfaz o documentación debe expresarlo.
+
+## 7F.2 `List`
+
+Una lista conserva posición y permite duplicados.
+
+```java
+List<String> names = new ArrayList<>();
+names.add("Ada");
+names.add("Linus");
+names.add("Ada");
+
+String second = names.get(1);
+```
+
+| Implementación | Fortaleza | Costo o advertencia |
+|---|---|---|
+| `ArrayList` | acceso por índice y recorrido; opción general | insertar/quitar en medio desplaza elementos |
+| `LinkedList` | implementa `List` y `Deque` | poca localidad de memoria; acceso por índice lineal |
+| `CopyOnWriteArrayList` | muchas lecturas concurrentes con pocas escrituras | cada escritura copia el arreglo |
+
+`ArrayList` suele ser preferible incluso cuando hay algunas inserciones: mide antes de asumir que una lista enlazada será más rápida.
+
+Complejidad promedio orientativa:
+
+| Operación `ArrayList` | Costo |
+|---|---:|
+| `get(index)` | O(1) |
+| agregar al final | O(1) amortizado |
+| insertar/quitar en medio | O(n) |
+| buscar por valor | O(n) |
+
+La notación Big O describe crecimiento, no tiempo exacto; caché de CPU, asignaciones y tamaño real también importan.
+
+## 7F.3 `Set`
+
+Un set modela unicidad:
+
+```java
+Set<String> tags = new HashSet<>();
+tags.add("java");
+tags.add("java");
+System.out.println(tags.size()); // 1
+```
+
+| Implementación | Orden | Uso |
+|---|---|---|
+| `HashSet` | no garantizado | pertenencia rápida general |
+| `LinkedHashSet` | inserción | eliminar duplicados conservando llegada |
+| `TreeSet` | orden natural/Comparator | rango, mínimo, máximo y navegación |
+| `EnumSet` | orden de enum | conjunto compacto de constantes enum |
+
+`TreeSet` considera duplicados según `compare`/`compareTo`, mientras que `HashSet` usa `equals` y `hashCode`. Idealmente ambos criterios deben ser coherentes con la identidad lógica.
+
+```java
+NavigableSet<Integer> scores = new TreeSet<>(List.of(10, 30, 20));
+System.out.println(scores.floor(25));   // 20
+System.out.println(scores.higher(20));  // 30
+```
+
+## 7F.4 `Map`
+
+Un mapa asocia una clave única con un valor:
+
+```java
+Map<String, Integer> stock = new HashMap<>();
+stock.put("keyboard", 4);
+stock.put("mouse", 10);
+
+int keyboards = stock.getOrDefault("keyboard", 0);
+```
+
+| Implementación | Orden | Uso |
+|---|---|---|
+| `HashMap` | no garantizado | búsqueda general O(1) promedio |
+| `LinkedHashMap` | inserción o acceso | orden estable o base de LRU controlado |
+| `TreeMap` | clave ordenada | rangos y navegación |
+| `EnumMap` | orden del enum | claves de un único enum |
+| `ConcurrentHashMap` | no global | accesos concurrentes escalables |
+
+Recorre pares sin buscar de nuevo cada clave:
+
+```java
+for (Map.Entry<String, Integer> entry : stock.entrySet()) {
+    System.out.printf("%s=%d%n", entry.getKey(), entry.getValue());
+}
+```
+
+Operaciones atómicas de intención:
+
+```java
+wordCounts.merge(word, 1, Integer::sum);
+
+List<Order> customerOrders = ordersByCustomer.computeIfAbsent(
+        customerId,
+        ignored -> new ArrayList<>());
+customerOrders.add(order);
+```
+
+Distingue ausencia de clave de valor `null`:
+
+```java
+map.get(key) == null
+```
+
+puede significar ambas cosas en implementaciones que aceptan null. `containsKey` responde la pregunta de pertenencia. Muchas APIs modernas evitan valores null y usan ausencia real u `Optional` en el límite.
+
+### Claves mutables
+
+No modifiques los campos usados por `equals`/`hashCode` mientras un objeto sea clave:
+
+```java
+Map<MutableUser, String> values = new HashMap<>();
+values.put(user, "data");
+user.setEmail("new@example.org");
+// values.get(user) podría no encontrar la entrada en el bucket esperado
+```
+
+Prefiere records u objetos de valor inmutables como claves.
+
+## 7F.5 `Queue` y `Deque`
+
+Las colas modelan trabajo pendiente. Hay pares de operaciones:
+
+| Acción | Excepción si falla | Valor especial si falla |
+|---|---|---|
+| insertar | `add` | `offer` |
+| observar cabeza | `element` | `peek` |
+| retirar cabeza | `remove` | `poll` |
+
+```java
+Queue<Task> tasks = new ArrayDeque<>();
+tasks.offer(first);
+tasks.offer(second);
+Task next = tasks.poll();
+```
+
+`Deque` sirve como cola o pila:
+
+```java
+Deque<String> stack = new ArrayDeque<>();
+stack.push("A");
+stack.push("B");
+System.out.println(stack.pop()); // B
+```
+
+Prefiere `ArrayDeque` a la clase histórica `Stack`. Para prioridades:
+
+```java
+PriorityQueue<Job> jobs = new PriorityQueue<>(
+        Comparator.comparingInt(Job::priority));
+```
+
+Una `PriorityQueue` solo garantiza que la cabeza sea el elemento prioritario; iterarla no produce necesariamente todo en orden.
+
+## 7F.6 Orden natural y `Comparator`
+
+`Comparable<T>` define el orden natural del tipo:
+
+```java
+record Version(int major, int minor) implements Comparable<Version> {
+    @Override
+    public int compareTo(Version other) {
+        int byMajor = Integer.compare(major, other.major);
+        return byMajor != 0 ? byMajor : Integer.compare(minor, other.minor);
+    }
+}
+```
+
+Un `Comparator` define órdenes externos y componibles:
+
+```java
+Comparator<Person> byLastThenFirst = Comparator
+        .comparing(Person::lastName)
+        .thenComparing(Person::firstName)
+        .thenComparing(Person::id);
+
+people.sort(byLastThenFirst);
+```
+
+No restes enteros para comparar (`a - b` puede desbordarse). Usa `Integer.compare`, `Comparator.comparingInt` y sus equivalentes.
+
+## 7F.7 Inmutabilidad y vistas
+
+```java
+List<String> fixed = List.of("A", "B");
+// fixed.add("C"); // UnsupportedOperationException
+```
+
+`List.of`, `Set.of` y `Map.of` crean colecciones no modificables y rechazan null; `Set.of` también rechaza duplicados.
+
+```java
+List<String> snapshot = List.copyOf(source);
+```
+
+`copyOf` crea una colección no modificable que no cambia si luego se modifica `source` (aunque sus elementos aún podrían ser mutables).
+
+En cambio:
+
+```java
+List<String> view = Collections.unmodifiableList(source);
+source.add("C");
+System.out.println(view); // refleja el cambio de source
+```
+
+es una vista no modificable, no una copia profunda.
+
+`Arrays.asList(array)` produce una lista de tamaño fijo respaldada por el array: permite `set`, pero no `add` ni `remove`.
+
+## 7F.8 Iteración y modificación
+
+Modificar estructuralmente una colección durante un for-each puede lanzar `ConcurrentModificationException`:
+
+```java
+Iterator<String> iterator = names.iterator();
+while (iterator.hasNext()) {
+    if (iterator.next().isBlank()) {
+        iterator.remove();
+    }
+}
+```
+
+Para una condición simple:
+
+```java
+names.removeIf(String::isBlank);
+```
+
+Los iteradores *fail-fast* detectan muchos usos incorrectos, pero no son una garantía de sincronización. Una colección normal no se vuelve thread-safe porque “casi nunca” falla. Usa confinamiento, inmutabilidad, locks o colecciones concurrentes según el contrato.
+
+## 7F.9 Selección práctica
+
+```text
+¿Necesitas clave → valor?
+  sí → Map
+
+¿Necesitas unicidad?
+  sí → Set
+
+¿Procesar por prioridad?
+  sí → PriorityQueue
+
+¿Cola o pila por extremos?
+  sí → ArrayDeque
+
+¿Posición y duplicados?
+  sí → ArrayList
+
+¿Orden de inserción importa?
+  → LinkedHashMap / LinkedHashSet
+
+¿Orden y rangos importan?
+  → TreeMap / TreeSet
+```
+
+Ejercicio: modela un índice de usuarios por ID, un conjunto de permisos, una cola de tareas y un ranking. Justifica interfaz, implementación, identidad, orden, mutabilidad y comportamiento concurrente antes de escribir código.
+
+---
+
 # 8. Principios y patrones de diseño
 
 ## 8.1 KISS
@@ -2356,7 +3575,7 @@ double applyDiscount(double price, boolean isMember) {
 }
 ```
 
-Introduce una abstracción cuando el problema la justifica, no de forma anticipada. La sección [7.6](#86-patrones-creacionales) muestra cuándo `DiscountStrategy` sí se vuelve razonable: cuando aparecen varias variantes intercambiables.
+Introduce una abstracción cuando el problema la justifica, no de forma anticipada. La sección [8.5](#85-patrones-creacionales) muestra cuándo `DiscountStrategy` sí se vuelve razonable: cuando aparecen varias variantes intercambiables.
 
 ---
 
@@ -2449,37 +3668,7 @@ class OrderService {
 
 ---
 
-## 8.5 ACID
-
-ACID no es una característica del lenguaje Java, sino un conjunto de garantías que debe ofrecer un sistema transaccional (por ejemplo, una base de datos relacional accedida vía JDBC o JPA).
-
-| Letra | Propiedad | Significado |
-|---|---|---|
-| A | Atomicity | Una transacción se aplica por completo o no se aplica |
-| C | Consistency | La transacción lleva los datos de un estado válido a otro estado válido |
-| I | Isolation | Transacciones concurrentes no interfieren entre sí como si fueran secuenciales |
-| D | Durability | Una vez confirmada (`commit`), la transacción persiste ante fallos posteriores |
-
-```java
-connection.setAutoCommit(false);
-
-try {
-    debit(connection, sourceAccount, amount);
-    credit(connection, targetAccount, amount);
-    connection.commit();
-} catch (SQLException exception) {
-    connection.rollback();
-    throw exception;
-} finally {
-    connection.setAutoCommit(true);
-}
-```
-
-Si `credit` falla después de que `debit` tuvo éxito, el `rollback` deshace ambas operaciones: la transferencia se aplica completa o no se aplica (atomicidad). Frameworks como Spring exponen esto declarativamente con `@Transactional`, pero la garantía subyacente la ofrece el motor de base de datos, no la JVM.
-
----
-
-## 8.6 Patrones creacionales
+## 8.5 Patrones creacionales
 
 ### Singleton
 
@@ -2571,7 +3760,7 @@ Builder resuelve el problema de un constructor con muchos parámetros opcionales
 
 ---
 
-## 8.7 Patrones estructurales
+## 8.6 Patrones estructurales
 
 ### Adapter
 
@@ -2621,7 +3810,7 @@ Ofrece una operación simple (`convert`) sobre un subsistema con varias piezas i
 
 ---
 
-## 8.8 Patrones de comportamiento
+## 8.7 Patrones de comportamiento
 
 ### Strategy
 
@@ -2694,7 +3883,7 @@ abstract class ReportGenerator {
 
 ---
 
-## 8.9 Cuándo no usar un patrón
+## 8.8 Cuándo no usar un patrón
 
 Un patrón resuelve un problema de diseño recurrente; aplicarlo donde no existe ese problema añade indirección sin beneficio.
 
@@ -3139,7 +4328,7 @@ Es un objetivo heurístico, no una garantía.
 - puede sufrir evacuation failure bajo presión;
 - no busca pausas ultrabajas como objetivo principal.
 
-> Nota de actualidad: se discutió hacer G1 el GC predeterminado en todos los entornos mediante JEP 523. A la fecha de esta guía, el JEP seguía en estado **Candidate**, por lo que no debe presentarse como una característica ya entregada de JDK 26. G1 sí continúa siendo el valor predeterminado habitual de HotSpot en entornos server.
+G1 es el recolector predeterminado habitual de HotSpot en configuraciones de servidor, pero una aplicación debe confirmar los flags efectivos de la JVM que realmente ejecuta con `java -XX:+PrintCommandLineFlags -version` o `jcmd <pid> VM.flags`.
 
 ---
 
@@ -3596,7 +4785,7 @@ Predicate<Integer> notPositive = positive.negate();
 ```
 
 ```java
-List<String> values = List.of("", "Java", "", "Spring");
+List<String> values = List.of("", "Java", "", "Kotlin");
 
 List<String> nonEmpty = values.stream()
         .filter(Predicate.not(String::isEmpty))
@@ -4449,9 +5638,19 @@ Prefiere ciclos tradicionales cuando:
 
 ---
 
-# 13. Java 21–26 y Project Loom
+# 13. Evolución de Java 8 a Java 25 y Project Loom
 
-> Estado verificado al **25 de julio de 2026**. Las características preview requieren `--enable-preview` y pueden cambiar en versiones futuras.
+El tutorial histórico de Oracle fue escrito para JDK 8. Sigue siendo una base pedagógica excelente, pero las APIs y reglas actuales deben comprobarse en la documentación de la versión objetivo. Esta tabla ayuda a construir una progresión sin confundir fecha de incorporación con estado actual:
+
+| Versión | Papel en la ruta | Cambios que conviene dominar |
+|---|---|---|
+| Java 8 | gran cambio del modelo cotidiano | lambdas, referencias a métodos, Streams, `Optional`, `java.time`, métodos `default` |
+| Java 9–11 | plataforma modular y nueva cadencia | JPMS, `var`, cliente HTTP estándar, mejoras de colecciones |
+| Java 17 LTS | Java moderno orientado a datos | records, sealed classes, pattern matching para `instanceof` |
+| Java 21 LTS | concurrencia y patrones maduros | virtual threads, record patterns, pattern `switch`, sequenced collections |
+| Java 25 LTS | consolidación de lenguaje y runtime | module imports, archivos fuente compactos, cuerpos de constructor flexibles, Scoped Values |
+
+Una característica *preview* requiere `--enable-preview`, puede cambiar o desaparecer y no debe presentarse como API permanente. Por ejemplo, los *string templates* fueron retirados; no forman parte de Java 25.
 
 ## 13.1 Java 21
 
@@ -4536,28 +5735,7 @@ No implica que todos los objetos se reduzcan en exactamente la misma cantidad en
 
 ---
 
-## 13.4 Java 26
-
-JDK 26 alcanzó disponibilidad general el **17 de marzo de 2026**.
-
-Características relacionadas con esta guía:
-
-- JEP 516: Ahead-of-Time Object Caching with Any GC;
-- JEP 522: mejoras de throughput de G1 reduciendo sincronización;
-- JEP 525: Structured Concurrency, sexta preview;
-- otras mejoras de runtime, seguridad, HTTP y lenguaje.
-
-### AOT Object Caching with Any GC
-
-Extiende el caché AOT para trabajar con cualquier recolector, incluido ZGC. Busca mejorar startup y warmup mediante representaciones de objetos cacheados independientes del formato específico del GC.
-
-### Corrección importante sobre G1
-
-JEP 523 propone hacer G1 predeterminado en todos los entornos, pero seguía como **Candidate** y no aparece en la lista entregada de JDK 26. No debe confundirse con JEP 522, que sí fue entregado en JDK 26 y mejora throughput de G1.
-
----
-
-## 13.5 Project Loom
+## 13.4 Project Loom
 
 Project Loom busca que Java pueda utilizar el modelo sencillo de **un hilo por tarea** para aplicaciones de alta concurrencia, sin asignar necesariamente un hilo costoso del sistema operativo a cada tarea.
 
@@ -4572,7 +5750,7 @@ Project Loom
 
 ---
 
-## 13.6 Platform threads frente a virtual threads
+## 13.5 Platform threads frente a virtual threads
 
 ### Platform thread
 
@@ -4606,7 +5784,7 @@ OS threads
 
 ---
 
-## 13.7 Mount y unmount
+## 13.6 Mount y unmount
 
 Cuando ejecuta código:
 
@@ -4635,7 +5813,7 @@ sin mantener necesariamente ocupado un OS thread durante toda la espera.
 
 ---
 
-## 13.8 Executor por tarea virtual
+## 13.7 Executor por tarea virtual
 
 ```java
 try (ExecutorService executor =
@@ -4660,7 +5838,7 @@ Virtual threads  → crear por tarea y terminar
 
 ---
 
-## 13.9 Cuándo utilizar virtual threads
+## 13.8 Cuándo utilizar virtual threads
 
 Especialmente adecuados para trabajo I/O-bound:
 
@@ -4681,7 +5859,7 @@ CPU-bound  → paralelismo limitado a CPU
 
 ---
 
-## 13.10 Limitar recursos reales
+## 13.9 Limitar recursos reales
 
 Aunque sea posible crear muchos virtual threads, no deben crearse conexiones ilimitadas.
 
@@ -4711,7 +5889,7 @@ El recurso escaso puede ser:
 
 ---
 
-## 13.11 Pinning
+## 13.10 Pinning
 
 Históricamente, un virtual thread podía permanecer fijado a su carrier al bloquear dentro de `synchronized`.
 
@@ -4726,7 +5904,7 @@ Todavía deben evitarse:
 
 ---
 
-## 13.12 ThreadLocal y ScopedValue
+## 13.11 ThreadLocal y ScopedValue
 
 ### ThreadLocal
 
@@ -4782,9 +5960,9 @@ Casos:
 
 ---
 
-## 13.13 Structured Concurrency
+## 13.12 Structured Concurrency
 
-En Java 26 continúa como preview.
+En Java 25 continúa como quinta *preview* mediante JEP 505. Su API puede cambiar o desaparecer; este ejemplo enseña el modelo, no promete compatibilidad binaria futura.
 
 Objetivo: preservar la relación padre-hijo entre tareas.
 
@@ -4797,7 +5975,7 @@ Solicitud
 
 Las subtareas deben terminar, fallar o cancelarse dentro del alcance de la operación padre.
 
-Ejemplo conceptual para Java 26 preview:
+Ejemplo conceptual para Java 25 *preview*:
 
 ```java
 record Profile(User user, List<Order> orders) {}
@@ -4820,7 +5998,7 @@ Profile loadProfile(long id) throws InterruptedException {
 Compilación/ejecución:
 
 ```bash
-javac --release 26 --enable-preview Application.java
+javac --release 25 --enable-preview Application.java
 java --enable-preview Application
 ```
 
@@ -4901,8 +6079,7 @@ Cada hilo tiene su propio:
 | Java 9 | `Flow`, `VarHandle` |
 | Java 21 | Virtual threads finales |
 | Java 24 | Monitores sin pinning normal de virtual threads |
-| Java 25 | Scoped Values finales |
-| Java 26 | Structured Concurrency sexta preview |
+| Java 25 | Scoped Values finales y Structured Concurrency quinta preview |
 
 ---
 
@@ -6500,27 +7677,40 @@ Herramienta especializada para probar comportamientos del Java Memory Model y al
 
 # 17. Fuentes oficiales
 
-La guía se basa principalmente en las especificaciones y documentación oficial del proyecto OpenJDK y Java SE.
+La guía contrasta el enfoque pedagógico de Java 8 con la especificación y las APIs actuales de Java 17 y Java 25. El tutorial de Java indica expresamente que sus ejemplos se escribieron para JDK 8; por eso se usa para fundamentos y no como única autoridad sobre Java moderno.
 
+- [Centro de documentación de Java SE 8](https://docs.oracle.com/javase/8/docs/)
+- [The Java Tutorials — JDK 8](https://docs.oracle.com/javase/tutorial/)
+- [Java Tutorials — genéricos](https://docs.oracle.com/javase/tutorial/java/generics/index.html)
+- [Java Tutorials — excepciones](https://docs.oracle.com/javase/tutorial/essential/exceptions/index.html)
+- [Java Tutorials — Collections Framework](https://docs.oracle.com/javase/tutorial/collections/index.html)
+- [Java Tutorials — Date/Time](https://docs.oracle.com/javase/tutorial/datetime/index.html)
+- [Novedades de Java SE 8](https://www.oracle.com/java/technologies/javase/8-whats-new.html)
+- [Documentación de Java SE 17](https://docs.oracle.com/en/java/javase/17/)
+- [Cambios del lenguaje hasta Java 17](https://docs.oracle.com/en/java/javase/17/language/java-language-changes-release.html)
+- [Documentación de Java SE 25](https://docs.oracle.com/en/java/javase/25/)
+- [Cambios del lenguaje hasta Java 25](https://docs.oracle.com/en/java/javase/25/language/java-language-changes-release.html)
+- [Core Libraries de Java 25](https://docs.oracle.com/en/java/javase/25/core/java-core-libraries1.html)
 - [Java Virtual Machine Specification](https://docs.oracle.com/javase/specs/jvms/se25/html/)
 - [Java Language Specification](https://docs.oracle.com/javase/specs/jls/se25/html/)
 - [Java SE API](https://docs.oracle.com/en/java/javase/25/docs/api/)
+- [Maven — Getting Started](https://maven.apache.org/guides/getting-started/index.html)
+- [Maven — ciclo de vida](https://maven.apache.org/guides/introduction/introduction-to-the-lifecycle.html)
+- [Maven — mecanismo de dependencias](https://maven.apache.org/guides/introduction/introduction-to-dependency-mechanism.html)
+- [Maven — introducción al POM](https://maven.apache.org/guides/introduction/introduction-to-the-pom.html)
 - [OpenJDK JEP Index](https://openjdk.org/jeps/0)
 - [JDK 21](https://openjdk.org/projects/jdk/21/)
 - [JDK 25](https://openjdk.org/projects/jdk/25/)
-- [JDK 26](https://openjdk.org/projects/jdk/26/)
 - [JEP 439: Generational ZGC](https://openjdk.org/jeps/439)
 - [JEP 444: Virtual Threads](https://openjdk.org/jeps/444)
 - [JEP 484: Class-File API](https://openjdk.org/jeps/484)
 - [JEP 485: Stream Gatherers](https://openjdk.org/jeps/485)
 - [JEP 490: Remove Non-Generational ZGC](https://openjdk.org/jeps/490)
 - [JEP 491: Synchronize Virtual Threads without Pinning](https://openjdk.org/jeps/491)
+- [JEP 505: Structured Concurrency (Fifth Preview)](https://openjdk.org/jeps/505)
 - [JEP 506: Scoped Values](https://openjdk.org/jeps/506)
-- [JEP 516: AOT Object Caching with Any GC](https://openjdk.org/jeps/516)
 - [JEP 519: Compact Object Headers](https://openjdk.org/jeps/519)
-- [JEP 522: G1 GC Throughput Improvements](https://openjdk.org/jeps/522)
-- [JEP 523: G1 Default in All Environments — Candidate](https://openjdk.org/jeps/523)
-- [JEP 525: Structured Concurrency, Sixth Preview](https://openjdk.org/jeps/525)
+- [Structured Concurrency en Java 25](https://docs.oracle.com/en/java/javase/25/core/structured-concurrency.html)
 
 ---
 
@@ -6555,7 +7745,7 @@ Abstracta → base parcial con estado
 Interfaz → contrato/capacidad
 
 Principios
-KISS / YAGNI / DRY / SOLID / ACID
+KISS / YAGNI / DRY / SOLID
 
 Resolución
 Campo/static → tipo de referencia

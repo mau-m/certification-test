@@ -3,112 +3,115 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Simulador de Certificación — Java, SQL y Programación</title>
+<title>Simulador de Certificación — Java, SQL, DevOps &amp; Ingeniería de Software</title>
+<meta name="description" content="Banco de preguntas de práctica para certificación técnica: Java, SQL, Oracle SQL, PostgreSQL, Git, Docker e Ingeniería de Software." />
 <script src="https://cdn.tailwindcss.com"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%8E%93%3C/text%3E%3C/svg%3E">
 <style>
   :root {
-    --blue: #1e40af;
-    --blue-light: #2563eb;
-    --orange: #f97316;
-    --red: #dc2626;
+    --ink: #0f172a;
+    --surface: 255, 255, 255;
+    --accent-1: #1d4ed8;
+    --accent-2: #7c3aed;
+    --accent-3: #dc2626;
   }
 
-  html, body {
-    height: 100%;
-  }
+  html, body { height: 100%; }
 
   body {
     font-family: 'Inter', system-ui, sans-serif;
     min-height: 100vh;
-    background: linear-gradient(120deg, #1e3a8a 0%, #1d4ed8 20%, #2563eb 32%, #f97316 50%, #ea580c 58%, #dc2626 78%, #b91c1c 100%);
+    background:
+      radial-gradient(1200px 600px at 8% -10%, rgba(37,99,235,0.55), transparent 60%),
+      radial-gradient(1000px 700px at 100% 0%, rgba(124,58,237,0.45), transparent 55%),
+      radial-gradient(900px 900px at 90% 100%, rgba(220,38,38,0.4), transparent 55%),
+      linear-gradient(160deg, #0b1224 0%, #111a35 35%, #1a1440 65%, #240f2e 100%);
     background-attachment: fixed;
-    background-size: 200% 200%;
-    animation: gradientShift 18s ease infinite;
-  }
-
-  @keyframes gradientShift {
-    0%   { background-position: 0% 50%; }
-    50%  { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
   }
 
   .font-mono-code { font-family: 'JetBrains Mono', ui-monospace, monospace; }
 
   .glass {
-    background: rgba(255, 255, 255, 0.94);
-    backdrop-filter: blur(10px);
+    background: rgba(var(--surface), 0.97);
+    box-shadow: 0 1px 0 rgba(255,255,255,0.6) inset, 0 30px 60px -20px rgba(2, 6, 23, 0.55);
+  }
+
+  .glass-dim {
+    background: rgba(15, 23, 42, 0.35);
+    backdrop-filter: blur(6px);
+    border: 1px solid rgba(255,255,255,0.12);
   }
 
   .code-block {
     white-space: pre-wrap;
     word-break: break-word;
-    background: #0f172a;
+    background: #0b1220;
     color: #e2e8f0;
     border-radius: 0.75rem;
     padding: 1rem 1.1rem;
     font-size: 0.92rem;
-    line-height: 1.55;
+    line-height: 1.6;
   }
 
-  .option-btn {
-    transition: all 0.15s ease;
-  }
-  .option-btn:hover:not(:disabled) {
-    transform: translateY(-1px);
-  }
+  .option-btn { transition: transform 0.12s ease, border-color 0.15s ease, background-color 0.15s ease, box-shadow 0.15s ease; }
+  .option-btn:hover:not(:disabled) { transform: translateY(-1px); }
+  .option-btn:active:not(:disabled) { transform: translateY(0); }
 
-  .progress-fill {
-    transition: width 0.35s ease;
-  }
+  .progress-fill { transition: width 0.4s cubic-bezier(.4,0,.2,1); }
 
-  ::-webkit-scrollbar { width: 10px; }
+  ::-webkit-scrollbar { width: 10px; height: 10px; }
   ::-webkit-scrollbar-track { background: transparent; }
-  ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.35); border-radius: 999px; }
-
-  .badge-java { background: linear-gradient(135deg,#f97316,#ea580c); }
-  .badge-sql { background: linear-gradient(135deg,#2563eb,#1d4ed8); }
-  .badge-programacion { background: linear-gradient(135deg,#7c3aed,#be123c); }
+  ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.25); border-radius: 999px; }
+  ::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.4); }
 
   .fade-in { animation: fadeIn 0.28s ease; }
-  @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(6px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
 
   .pop { animation: pop 0.35s cubic-bezier(.34,1.56,.64,1); }
-  @keyframes pop {
-    0% { transform: scale(0.92); opacity: 0; }
-    100% { transform: scale(1); opacity: 1; }
-  }
+  @keyframes pop { 0% { transform: scale(0.94); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
 
-  input[type="checkbox"].chk {
-    accent-color: #ea580c;
-  }
+  .chip-in { animation: chipIn 0.25s ease backwards; }
+  @keyframes chipIn { from { opacity: 0; transform: scale(0.9); } to { opacity: 1; transform: scale(1); } }
+
+  input[type="checkbox"].chk { accent-color: var(--accent-1); }
+
+  .cat-card { transition: box-shadow 0.15s ease, border-color 0.15s ease, transform 0.15s ease; }
+  .cat-card:hover { transform: translateY(-2px); }
+  .cat-card.is-off { filter: grayscale(0.5); opacity: 0.6; }
+
+  summary::-webkit-details-marker { display: none; }
+  summary { list-style: none; }
+  .details-caret { transition: transform 0.2s ease; }
+  details[open] .details-caret { transform: rotate(90deg); }
+
+  .stat-strip::-webkit-scrollbar { display: none; }
+  .stat-strip { scrollbar-width: none; }
 </style>
 </head>
 <body class="text-slate-800">
 
   <div class="min-h-screen flex flex-col items-center px-4 py-8 sm:py-12">
 
-    <header class="w-full max-w-4xl mb-6 sm:mb-8 text-center">
-      <div class="inline-flex items-center gap-2 bg-white/15 text-white text-xs sm:text-sm font-medium px-3 py-1 rounded-full backdrop-blur-sm border border-white/20 mb-3">
+    <header class="w-full max-w-5xl mb-6 sm:mb-8 text-center">
+      <div class="inline-flex items-center gap-2 bg-white/10 text-white text-xs sm:text-sm font-medium px-3 py-1.5 rounded-full backdrop-blur-sm border border-white/15 mb-4">
         <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-        Banco de preguntas: Java · SQL · Programación
+        Banco de preguntas de práctica técnica
       </div>
-      <h1 class="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white drop-shadow-lg tracking-tight">
+      <h1 class="text-3xl sm:text-4xl md:text-[2.75rem] font-extrabold text-white tracking-tight leading-tight">
         Simulador de Certificación Técnica
       </h1>
-      <p class="text-white/90 mt-2 text-sm sm:text-base max-w-2xl mx-auto">
-        Practica teoría y análisis de código, elige categorías o subtemas específicos y recibe retroalimentación inmediata.
+      <p class="text-white/70 mt-3 text-sm sm:text-base max-w-2xl mx-auto leading-relaxed">
+        Practica teoría y análisis de código/comandos, elige categorías o subtemas específicos y recibe retroalimentación inmediata con explicación.
       </p>
+      <div id="category-legend" class="stat-strip flex items-center justify-center gap-2 mt-5 overflow-x-auto pb-1"></div>
     </header>
 
-    <main id="app" class="w-full max-w-4xl"></main>
+    <main id="app" class="w-full max-w-5xl"></main>
 
-    <footer class="mt-10 text-white/70 text-xs text-center px-4">
-      Contenido basado en las guías de Java, SQL, Git e Ingeniería de Software incluidas en este proyecto.
+    <footer class="mt-10 text-white/50 text-xs text-center px-4 max-w-2xl leading-relaxed">
+      Contenido basado en las guías de Java, Java Testing, Spring, SQL, Oracle SQL, PostgreSQL, Git, Docker e Ingeniería de Software incluidas en este proyecto.
     </footer>
   </div>
 

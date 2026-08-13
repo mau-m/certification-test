@@ -1,0 +1,2888 @@
+[
+  {
+    "id": "oracle-001",
+    "category": "sql-oracle",
+    "topic": "Introducción a SQL y Oracle",
+    "question": "¿Cuáles son los 5 sublenguajes tradicionales en que se divide SQL?",
+    "options": [
+      "DDL, DML, DQL, DCL, TCL",
+      "DDL, DML, DQL, DCL, SQL",
+      "DDL, DML, DCL, TCL, PL/SQL",
+      "DQL, DCL, TCL, DDL, ORM"
+    ],
+    "correctIndex": 0,
+    "explanation": "SQL se divide en Data Definition Language, Data Manipulation Language, Data Query Language, Data Control Language y Transaction Control Language.",
+    "source": "sql-oracle-guide.md"
+  },
+  {
+    "id": "oracle-002",
+    "category": "sql-oracle",
+    "topic": "Introducción a SQL y Oracle",
+    "question": "¿Qué comandos pertenecen al DDL (Data Definition Language)?",
+    "options": [
+      "INSERT, UPDATE, DELETE, MERGE",
+      "SELECT",
+      "CREATE, ALTER, DROP, TRUNCATE, RENAME, COMMENT",
+      "GRANT, REVOKE"
+    ],
+    "correctIndex": 2,
+    "explanation": "El DDL define y modifica la estructura de los objetos: CREATE, ALTER, DROP, TRUNCATE, RENAME y COMMENT.",
+    "source": "sql-oracle-guide.md"
+  },
+  {
+    "id": "oracle-003",
+    "category": "sql-oracle",
+    "topic": "Introducción a SQL y Oracle",
+    "question": "¿Qué comandos pertenecen al DML (Data Manipulation Language)?",
+    "options": [
+      "CREATE, ALTER, DROP",
+      "INSERT, UPDATE, DELETE, MERGE",
+      "GRANT, REVOKE",
+      "COMMIT, ROLLBACK, SAVEPOINT"
+    ],
+    "correctIndex": 1,
+    "explanation": "El DML manipula datos dentro de estructuras ya existentes: INSERT, UPDATE, DELETE y MERGE.",
+    "source": "sql-oracle-guide.md"
+  },
+  {
+    "id": "oracle-004",
+    "category": "sql-oracle",
+    "topic": "Introducción a SQL y Oracle",
+    "question": "¿Qué característica de los comandos DDL en Oracle sorprende a muchos principiantes respecto a las transacciones?",
+    "options": [
+      "Requieren COMMIT manual como cualquier DML",
+      "Hacen COMMIT automático (implícito), tanto de sí mismos como de cualquier transacción DML pendiente antes de ejecutarse",
+      "Se pueden revertir siempre con ROLLBACK",
+      "Solo hacen COMMIT automático de sí mismos, sin afectar ninguna transacción DML que estuviera pendiente antes"
+    ],
+    "correctIndex": 1,
+    "explanation": "En Oracle, CREATE TABLE y otros comandos DDL confirman automáticamente (COMMIT implícito) tanto de sí mismos como de cualquier DML pendiente.",
+    "source": "sql-oracle-guide.md"
+  },
+  {
+    "id": "oracle-005",
+    "category": "sql-oracle",
+    "topic": "Introducción a SQL y Oracle",
+    "question": "¿Qué operador de conjuntos usa Oracle en lugar del EXCEPT de otros motores?",
+    "options": [
+      "DIFFERENCE",
+      "MINUS",
+      "NOT IN",
+      "EXCLUDE"
+    ],
+    "correctIndex": 1,
+    "explanation": "Oracle usa el operador MINUS en vez de EXCEPT para obtener las filas de la primera consulta que no están en la segunda.",
+    "source": "sql-oracle-guide.md"
+  },
+  {
+    "id": "oracle-006",
+    "category": "sql-oracle",
+    "topic": "Introducción a SQL y Oracle",
+    "question": "¿Qué mecanismo usa Oracle en lugar de AUTO_INCREMENT (antes de la llegada de las columnas IDENTITY en 12c)?",
+    "options": [
+      "SEQUENCE",
+      "SERIAL",
+      "AUTOINDEX",
+      "ROWID automático"
+    ],
+    "correctIndex": 0,
+    "explanation": "Oracle no tiene AUTO_INCREMENT; usa objetos SEQUENCE independientes de la tabla, o columnas IDENTITY desde la versión 12c.",
+    "source": "sql-oracle-guide.md"
+  },
+  {
+    "id": "oracle-007",
+    "category": "sql-oracle",
+    "topic": "Introducción a SQL y Oracle",
+    "question": "¿Cuál es la forma moderna (Oracle 12c+) de restringir el número de filas devueltas por una consulta, en lugar de LIMIT?",
+    "options": [
+      "TOP n",
+      "ROWNUM = n",
+      "FETCH FIRST n ROWS ONLY",
+      "MAX ROWS n"
+    ],
+    "correctIndex": 2,
+    "explanation": "Oracle no tiene LIMIT; desde la versión 12c se usa la cláusula FETCH FIRST n ROWS ONLY (antes se usaba ROWNUM).",
+    "source": "sql-oracle-guide.md"
+  },
+  {
+    "id": "oracle-008",
+    "category": "sql-oracle",
+    "topic": "Introducción a SQL y Oracle",
+    "question": "En Oracle, ¿qué relación existe entre un usuario de la base de datos y un schema?",
+    "options": [
+      "Un usuario puede acceder a muchos schemas independientes de su nombre",
+      "Cada usuario de base de datos es, a la vez, un schema",
+      "Los schemas y los usuarios son conceptos completamente independientes",
+      "Solo el usuario SYSTEM puede tener un schema"
+    ],
+    "correctIndex": 1,
+    "explanation": "A diferencia de PostgreSQL/MySQL, en Oracle cada usuario ES un schema: los objetos que crea viven bajo su propio nombre de schema.",
+    "source": "sql-oracle-guide.md"
+  },
+  {
+    "id": "oracle-009",
+    "category": "sql-oracle",
+    "topic": "Arquitectura de Oracle",
+    "question": "¿Qué es la 'instancia' de Oracle?",
+    "options": [
+      "El conjunto físico de archivos en disco (datafiles, control files, redo logs)",
+      "Los procesos en memoria (SGA, PGA, procesos en background) que permiten acceder a la base de datos",
+      "Un esquema de usuario específico",
+      "Un tablespace por defecto"
+    ],
+    "correctIndex": 1,
+    "explanation": "La instancia son los procesos en memoria que permiten acceder a la base de datos; la base de datos es el conjunto físico de archivos en disco.",
+    "source": "sql-oracle-guide.md"
+  },
+  {
+    "id": "oracle-010",
+    "category": "sql-oracle",
+    "topic": "Arquitectura de Oracle",
+    "question": "¿Cuál de las siguientes afirmaciones describe correctamente la relación entre 'instancia' y 'base de datos' en Oracle?",
+    "options": [
+      "Son sinónimos; ambos términos se usan indistintamente en la documentación de Oracle",
+      "La base de datos son los archivos físicos en disco; la instancia son los procesos en memoria que dan acceso a ella, por eso te conectas a un servicio identificado por SID o Service Name",
+      "La instancia contiene los archivos físicos, y la base de datos es el conjunto de procesos en memoria que la gestionan",
+      "Una instancia solo puede existir si la base de datos está en modo NOARCHIVELOG"
+    ],
+    "correctIndex": 1,
+    "explanation": "La base de datos es el conjunto físico de archivos en disco; la instancia son los procesos en memoria (SGA, PGA, background) que dan acceso a ella. Por eso te conectas a un servicio, no directamente a 'un puerto y una base'.",
+    "source": "sql-oracle-guide.md"
+  },
+  {
+    "id": "oracle-011",
+    "category": "sql-oracle",
+    "topic": "Arquitectura de Oracle",
+    "question": "¿Qué es un tablespace en Oracle?",
+    "options": [
+      "Un privilegio de sistema otorgado a un usuario",
+      "Una unidad lógica de almacenamiento que agrupa los archivos físicos donde se guardan los datos de tablas e índices",
+      "Un tipo de índice especial para tablas grandes",
+      "El nombre técnico de una tabla temporal"
+    ],
+    "correctIndex": 1,
+    "explanation": "Un tablespace es una unidad lógica de almacenamiento; cada tabla se asigna, explícita o implícitamente, a uno.",
+    "source": "sql-oracle-guide.md"
+  },
+  {
+    "id": "oracle-012",
+    "category": "sql-oracle",
+    "topic": "Arquitectura de Oracle",
+    "question": "¿Cuál de los siguientes tablespaces contiene los metadatos internos de Oracle (diccionario de datos) y en el que NUNCA se deben crear objetos propios?",
+    "options": [
+      "USERS",
+      "SYSTEM",
+      "TEMP",
+      "UNDO"
+    ],
+    "correctIndex": 1,
+    "explanation": "SYSTEM almacena los metadatos internos de Oracle (diccionario de datos); no se deben crear objetos propios de aplicación ahí.",
+    "source": "sql-oracle-guide.md"
+  },
+  {
+    "id": "oracle-013",
+    "category": "sql-oracle",
+    "topic": "Arquitectura de Oracle",
+    "question": "¿Qué tablespace se usa para operaciones temporales como ordenamientos y joins grandes?",
+    "options": [
+      "SYSAUX",
+      "UNDO",
+      "TEMP",
+      "USERS"
+    ],
+    "correctIndex": 2,
+    "explanation": "TEMP se usa para operaciones temporales como ordenamientos (ORDER BY) y joins grandes que no caben en memoria.",
+    "source": "sql-oracle-guide.md"
+  },
+  {
+    "id": "oracle-014",
+    "category": "sql-oracle",
+    "topic": "Arquitectura de Oracle",
+    "question": "¿Qué tablespace almacena la información necesaria para deshacer (rollback) transacciones no confirmadas?",
+    "options": [
+      "UNDO",
+      "SYSAUX",
+      "TEMP",
+      "SYSTEM"
+    ],
+    "correctIndex": 0,
+    "explanation": "UNDO almacena la información que permite deshacer transacciones no confirmadas.",
+    "source": "sql-oracle-guide.md"
+  },
+  {
+    "id": "oracle-015",
+    "category": "sql-oracle",
+    "topic": "Arquitectura de Oracle",
+    "question": "Si el usuario RRHH crea una tabla EMPLEADOS, ¿cuál es el nombre completo (calificado) del objeto resultante?",
+    "options": [
+      "EMPLEADOS.RRHH",
+      "RRHH.EMPLEADOS",
+      "RRHH::EMPLEADOS",
+      "EMPLEADOS (sin prefijo, porque el schema es implícito)"
+    ],
+    "correctIndex": 1,
+    "explanation": "Como cada usuario es a la vez un schema, el nombre completo del objeto es RRHH.EMPLEADOS.",
+    "source": "sql-oracle-guide.md"
+  },
+  {
+    "id": "oracle-016",
+    "category": "sql-oracle",
+    "topic": "Arquitectura de Oracle",
+    "question": "Desde Oracle 12c, ¿qué es un CDB en la arquitectura multitenant?",
+    "options": [
+      "Una base de datos 'contenedora' que puede alojar varias bases de datos 'conectables' (PDB)",
+      "Una base de datos 'conectable' que vive dentro de un PDB y hereda su configuración",
+      "El nombre del proceso encargado de las copias de seguridad",
+      "Un sinónimo para el tablespace SYSTEM"
+    ],
+    "correctIndex": 0,
+    "explanation": "Un CDB (Container Database) puede alojar varias PDB (Pluggable Databases), cada una aislada como si fuera independiente. La opción B invierte la relación real.",
+    "source": "sql-oracle-guide.md"
+  },
+  {
+    "id": "oracle-017",
+    "category": "sql-oracle",
+    "topic": "Arquitectura de Oracle",
+    "question": "¿Qué es un PDB (Pluggable Database)?",
+    "options": [
+      "Un privilegio de sistema para crear bases de datos",
+      "Una base de datos 'conectable' alojada dentro de un CDB, aislada como si fuera independiente",
+      "El CDB raíz que aloja las demás bases de datos conectables",
+      "Un rol predefinido de administración"
+    ],
+    "correctIndex": 1,
+    "explanation": "Un PDB es una base de datos conectable dentro de un CDB, típicamente llamada FREEPDB1 o XEPDB1 en imágenes de Docker. La opción C invierte la relación: es el CDB el que aloja a los PDB, no al revés.",
+    "source": "sql-oracle-guide.md"
+  },
+  {
+    "id": "oracle-018",
+    "category": "sql-oracle",
+    "topic": "Arquitectura de Oracle",
+    "question": "Al conectarte a una imagen de Oracle en Docker con arquitectura multitenant, ¿contra qué te conectas normalmente?",
+    "options": [
+      "Contra el CDB raíz directamente",
+      "Contra el PDB (por ejemplo FREEPDB1 o XEPDB1), no contra el CDB raíz",
+      "Contra el tablespace SYSTEM",
+      "Contra ambos simultáneamente, sin distinción"
+    ],
+    "correctIndex": 1,
+    "explanation": "Normalmente te conectas contra el PDB, la base de datos conectable, y no contra el CDB raíz.",
+    "source": "sql-oracle-guide.md"
+  },
+  {
+    "id": "oracle-019",
+    "category": "sql-oracle",
+    "topic": "Tipos de datos en Oracle",
+    "question": "¿Cuál es 'el tipo numérico universal' de Oracle, usado para enteros, decimales y dinero?",
+    "options": [
+      "INTEGER",
+      "NUMBER(p,s)",
+      "BINARY_DOUBLE",
+      "FLOAT"
+    ],
+    "correctIndex": 1,
+    "explanation": "NUMBER(p,s) es el tipo numérico universal de Oracle: se usa para enteros, decimales, dinero, prácticamente todo.",
+    "source": "sql-oracle-guide.md"
+  },
+  {
+    "id": "oracle-020",
+    "category": "sql-oracle",
+    "topic": "Tipos de datos en Oracle",
+    "question": "En una columna declarada como NUMBER(5,2), ¿qué representan el 5 y el 2 respectivamente?",
+    "options": [
+      "5 = cantidad de decimales, 2 = precisión total",
+      "5 = precisión total de dígitos, 2 = escala (decimales)",
+      "5 = tamaño en bytes, 2 = versión del tipo",
+      "5 = valor mínimo, 2 = valor máximo"
+    ],
+    "correctIndex": 1,
+    "explanation": "El primer número es la precisión total (p), el segundo es la escala o cantidad de decimales (s).",
+    "source": "sql-oracle-guide.md"
+  },
+  {
+    "id": "oracle-021",
+    "category": "sql-oracle",
+    "topic": "Tipos de datos en Oracle",
+    "question": "¿Qué ocurre al ejecutar este INSERT?",
+    "code": "CREATE TABLE demo_numeros (\n    id      NUMBER(6)   PRIMARY KEY,\n    salario NUMBER(8,2)\n);\n\nINSERT INTO demo_numeros (id, salario) VALUES (1, 123456.789);",
+    "language": "sql",
+    "options": [
+      "Se inserta correctamente, porque NUMBER(8,2) permite hasta 8 dígitos en la parte entera además de los 2 decimales",
+      "Lanza el error ORA-01438 porque el valor supera la precisión especificada para la columna",
+      "Se inserta correctamente, redondeando a 123456.79",
+      "Se trunca automáticamente a 999999.99 sin lanzar error"
+    ],
+    "correctIndex": 1,
+    "explanation": "salario es NUMBER(8,2): máximo 999999.99 (6 enteros + 2 decimales). El valor 123456.789 supera esa precisión y produce ORA-01438.",
+    "source": "sql-oracle-guide.md"
+  },
+  {
+    "id": "oracle-022",
+    "category": "sql-oracle",
+    "topic": "Tipos de datos en Oracle",
+    "question": "¿Qué valor devuelve la consulta SELECT?",
+    "code": "-- porcentaje está declarado como NUMBER(5,4)\nINSERT INTO demo_numeros (id, porcentaje) VALUES (2, 0.12345);\nSELECT porcentaje FROM demo_numeros WHERE id = 2;",
+    "language": "sql",
+    "options": [
+      "0.1234 (trunca)",
+      "0.1235 (redondea)",
+      "0.12345 (sin cambios)",
+      "Error de precisión"
+    ],
+    "correctIndex": 1,
+    "explanation": "Oracle redondea al insertar en la escala definida, no trunca: 0.12345 se guarda como 0.1235.",
+    "source": "sql-oracle-guide.md"
+  },
+  {
+    "id": "oracle-023",
+    "category": "sql-oracle",
+    "topic": "Tipos de datos en Oracle",
+    "question": "¿Qué valor devuelve la consulta, dado que la columna tiene escala negativa (-3)?",
+    "code": "-- poblacion está declarada como NUMBER(12,-3)\nINSERT INTO demo_numeros (id, poblacion) VALUES (3, 1234567);\nSELECT poblacion FROM demo_numeros WHERE id = 3;",
+    "language": "sql",
+    "options": [
+      "1234567 (sin cambios)",
+      "1234000",
+      "1235000",
+      "1230000"
+    ],
+    "correctIndex": 2,
+    "explanation": "NUMBER(12,-3) redondea a la unidad de mil: 1234567 se guarda como 1235000.",
+    "source": "sql-oracle-guide.md"
+  },
+  {
+    "id": "oracle-024",
+    "category": "sql-oracle",
+    "topic": "Tipos de datos en Oracle",
+    "question": "¿Qué tipo de dato representa un punto flotante IEEE 754 de 32 bits, más rápido que NUMBER para cálculos científicos?",
+    "options": [
+      "BINARY_DOUBLE",
+      "FLOAT(p)",
+      "BINARY_FLOAT",
+      "NUMBER(32)"
+    ],
+    "correctIndex": 2,
+    "explanation": "BINARY_FLOAT es un punto flotante IEEE 754 de 32 bits; BINARY_DOUBLE es la versión de 64 bits.",
+    "source": "sql-oracle-guide.md"
+  },
+  {
+    "id": "oracle-025",
+    "category": "sql-oracle",
+    "topic": "Tipos de datos en Oracle",
+    "question": "¿Cuál es el tipo de texto recomendado para usar por defecto en el 95% de los casos en Oracle?",
+    "options": [
+      "CHAR(n)",
+      "LONG",
+      "VARCHAR2(n)",
+      "NCHAR(n)"
+    ],
+    "correctIndex": 2,
+    "explanation": "VARCHAR2(n) es texto de longitud variable y es el tipo recomendado por defecto para casi todos los casos.",
+    "source": "sql-oracle-guide.md"
+  },
+  {
+    "id": "oracle-026",
+    "category": "sql-oracle",
+    "topic": "Tipos de datos en Oracle",
+    "question": "¿Qué devuelve esta consulta?",
+    "code": "CREATE TABLE demo_texto (\n    codigo CHAR(5),\n    nombre VARCHAR2(50)\n);\nINSERT INTO demo_texto (codigo, nombre) VALUES ('AB', 'Ana');\n\nSELECT LENGTH(codigo) AS largo_char, LENGTH(nombre) AS largo_varchar2\nFROM demo_texto;",
+    "language": "sql",
+    "options": [
+      "largo_char = 2, largo_varchar2 = 3",
+      "largo_char = 5, largo_varchar2 = 3",
+      "largo_char = 5, largo_varchar2 = 5",
+      "Error: CHAR y VARCHAR2 no se pueden comparar con LENGTH"
+    ],
+    "correctIndex": 1,
+    "explanation": "CHAR(5) rellena con espacios hasta ocupar 5 caracteres, por lo que LENGTH(codigo) es 5; VARCHAR2 solo ocupa lo escrito, LENGTH(nombre) es 3.",
+    "source": "sql-oracle-guide.md"
+  },
+  {
+    "id": "oracle-027",
+    "category": "sql-oracle",
+    "topic": "Tipos de datos en Oracle",
+    "question": "¿Por qué esta consulta SÍ encuentra la fila, a pesar de que codigo se almacena internamente como 'AB   ' (con espacios de relleno)?",
+    "code": "-- codigo está declarado como CHAR(5) y contiene 'AB' (almacenado como 'AB   ')\nSELECT * FROM demo_texto WHERE codigo = 'AB';",
+    "language": "sql",
+    "options": [
+      "Porque Oracle ignora los espacios en cualquier comparación de texto",
+      "Porque Oracle compara con 'blank-padding' al usar CHAR: rellena el literal más corto con espacios antes de comparar",
+      "Porque CHAR(5) trunca automáticamente el valor a 2 caracteres antes de guardarlo",
+      "La consulta en realidad no encuentra ninguna fila"
+    ],
+    "correctIndex": 1,
+    "explanation": "Al comparar valores CHAR, Oracle aplica blank-padding (rellena con espacios el más corto) antes de comparar, por lo que 'AB' coincide con 'AB   '.",
+    "source": "sql-oracle-guide.md"
+  },
+  {
+    "id": "oracle-028",
+    "category": "sql-oracle",
+    "topic": "Tipos de datos en Oracle",
+    "question": "¿Cuál es la diferencia principal entre CLOB y BLOB?",
+    "options": [
+      "CLOB almacena texto de gran tamaño; BLOB almacena datos binarios grandes",
+      "CLOB es para números grandes; BLOB es para texto grande",
+      "No hay diferencia, son sinónimos",
+      "CLOB solo funciona en PL/SQL; BLOB solo en SQL puro"
+    ],
+    "correctIndex": 0,
+    "explanation": "CLOB (Character Large Object) almacena texto de gran tamaño; BLOB (Binary Large Object) almacena datos binarios grandes como imágenes o PDFs.",
+    "source": "sql-oracle-guide.md"
+  },
+  {
+    "id": "oracle-029",
+    "category": "sql-oracle",
+    "topic": "Tipos de datos en Oracle",
+    "question": "¿Cuál es el predecesor obsoleto de CLOB que debe evitarse en código nuevo y solo aparece en sistemas legados?",
+    "options": [
+      "RAW",
+      "LONG",
+      "BFILE",
+      "NVARCHAR2"
+    ],
+    "correctIndex": 1,
+    "explanation": "LONG es el predecesor obsoleto de CLOB; se recomienda evitarlo en código nuevo.",
+    "source": "sql-oracle-guide.md"
+  },
+  {
+    "id": "oracle-030",
+    "category": "sql-oracle",
+    "topic": "Tipos de datos en Oracle",
+    "question": "A diferencia de otros motores de bases de datos, el tipo DATE en Oracle...",
+    "options": [
+      "solo almacena la fecha, nunca la hora",
+      "siempre incluye hora (día, mes, año, hora, minuto, segundo), con precisión de segundos",
+      "almacena la fecha como texto plano",
+      "requiere siempre especificar una zona horaria"
+    ],
+    "correctIndex": 1,
+    "explanation": "DATE en Oracle siempre incluye tiempo (con precisión de segundos), a diferencia de otros motores donde DATE es solo la fecha.",
+    "source": "sql-oracle-guide.md"
+  },
+  {
+    "id": "oracle-031",
+    "category": "sql-oracle",
+    "topic": "Tipos de datos en Oracle",
+    "question": "¿En qué se diferencian principalmente los resultados de SYSDATE y SYSTIMESTAMP?",
+    "code": "SELECT SYSDATE, SYSTIMESTAMP FROM dual;",
+    "language": "sql",
+    "options": [
+      "SYSDATE solo devuelve la hora, SYSTIMESTAMP solo la fecha",
+      "SYSTIMESTAMP incluye fracciones de segundo y zona horaria; SYSDATE solo tiene precisión de segundo",
+      "Son exactamente iguales, solo cambia el formato de salida por defecto",
+      "SYSDATE requiere permisos especiales; SYSTIMESTAMP no"
+    ],
+    "correctIndex": 1,
+    "explanation": "SYSDATE tiene precisión de segundo; SYSTIMESTAMP agrega fracciones de segundo y el offset de zona horaria de la sesión.",
+    "source": "sql-oracle-guide.md"
+  },
+  {
+    "id": "oracle-032",
+    "category": "sql-oracle",
+    "topic": "Tipos de datos en Oracle",
+    "question": "¿Qué tipo de dato representa un intervalo de tiempo expresado en años y meses (para diferencias de fecha, no fechas absolutas)?",
+    "options": [
+      "INTERVAL DAY TO SECOND",
+      "TIMESTAMP WITH TIME ZONE",
+      "INTERVAL YEAR TO MONTH",
+      "DATE"
+    ],
+    "correctIndex": 2,
+    "explanation": "INTERVAL YEAR TO MONTH expresa un intervalo en años y meses; INTERVAL DAY TO SECOND lo expresa en días, horas, minutos y segundos.",
+    "source": "sql-oracle-guide.md"
+  },
+  {
+    "id": "oracle-033",
+    "category": "sql-oracle",
+    "topic": "Tipos de datos en Oracle",
+    "question": "¿Cuál es el límite práctico de tamaño de un RAW en una columna de tabla, que obliga a usar BLOB para archivos grandes?",
+    "options": [
+      "2000 bytes en tabla (32767 en PL/SQL)",
+      "4 GB en tabla",
+      "255 bytes en tabla",
+      "No tiene límite práctico"
+    ],
+    "correctIndex": 0,
+    "explanation": "RAW tiene un límite práctico de 2000 bytes en tabla (32767 en PL/SQL); para archivos reales se necesita BLOB, que soporta hasta 4 GB.",
+    "source": "sql-oracle-guide.md"
+  },
+  {
+    "id": "oracle-034",
+    "category": "sql-oracle",
+    "topic": "Tipos de datos en Oracle",
+    "question": "¿Qué tipo de dato Oracle representa una referencia (puntero) a un archivo binario almacenado fuera de la base de datos, en el sistema de archivos del servidor?",
+    "options": [
+      "BLOB",
+      "RAW",
+      "BFILE",
+      "LONG RAW"
+    ],
+    "correctIndex": 2,
+    "explanation": "BFILE es una referencia a un archivo externo al servidor de base de datos, mientras que BLOB almacena el binario dentro de la base.",
+    "source": "sql-oracle-guide.md"
+  },
+  {
+    "id": "oracle-035",
+    "category": "sql-oracle",
+    "topic": "Tipos de datos en Oracle",
+    "question": "Dado que BOOLEAN solo existe en PL/SQL (no como tipo de columna de tabla en SQL puro), ¿cómo se representa convencionalmente un valor booleano en una tabla?",
+    "options": [
+      "Con el tipo BOOL nativo",
+      "Con NUMBER(1) (0/1) o CHAR(1) ('S'/'N', 'Y'/'N')",
+      "Con VARCHAR2(10) obligatoriamente",
+      "No es posible representar booleanos en tablas de Oracle"
+    ],
+    "correctIndex": 1,
+    "explanation": "Para booleanos en tablas se usa convencionalmente NUMBER(1) con valores 0/1, o CHAR(1) con 'S'/'N' o 'Y'/'N'.",
+    "source": "sql-oracle-guide.md"
+  },
+  {
+    "id": "oracle-036",
+    "category": "sql-oracle",
+    "topic": "Tipos de datos en Oracle",
+    "question": "¿Qué es el ROWID de una fila en Oracle?",
+    "options": [
+      "Un contador secuencial visible que empieza en 1 para cada tabla",
+      "El identificador físico único e interno de cada fila (su 'dirección' física)",
+      "Un alias del valor de la clave primaria",
+      "Una columna que el usuario debe declarar explícitamente"
+    ],
+    "correctIndex": 1,
+    "explanation": "ROWID es el identificador físico único e interno de cada fila, usado internamente para acceso directo O(1), por ejemplo por los índices.",
+    "source": "sql-oracle-guide.md"
+  },
+  {
+    "id": "oracle-037",
+    "category": "sql-oracle",
+    "topic": "Formatos y funciones de conversión",
+    "question": "¿Para qué sirven los 'modelos de formato' como 'YYYY-MM-DD' en Oracle?",
+    "options": [
+      "Para definir el tipo de dato de una columna",
+      "Para convertir entre el formato binario interno de fechas/números y el texto legible (TO_CHAR), o interpretar texto como fecha/número (TO_DATE, TO_NUMBER)",
+      "Para crear índices basados en función",
+      "Son exclusivos de PL/SQL y no se usan en SQL puro"
+    ],
+    "correctIndex": 1,
+    "explanation": "Oracle guarda fechas y números en formato binario interno; los modelos de formato solo importan al convertir hacia o desde texto legible.",
+    "source": "sql-oracle-guide.md"
+  },
+  {
+    "id": "oracle-038",
+    "category": "sql-oracle",
+    "topic": "Formatos y funciones de conversión",
+    "question": "¿Cuál es la diferencia principal entre los elementos de formato YY y RR al interpretar años de dos dígitos?",
+    "options": [
+      "YY interpreta los siglos con una regla de 'pivote' más segura; RR siempre asume el siglo actual",
+      "RR interpreta los siglos con una regla de 'pivote' más segura; YY siempre asume el siglo actual",
+      "YY solo funciona con TO_CHAR, RR solo con TO_DATE",
+      "RR requiere 4 dígitos obligatoriamente en el texto de entrada"
+    ],
+    "correctIndex": 1,
+    "explanation": "RR interpreta el siglo de forma más 'inteligente' con una regla de pivote en 50; YY simplemente asume el siglo actual de la sesión.",
+    "source": "sql-oracle-guide.md"
+  },
+  {
+    "id": "oracle-039",
+    "category": "sql-oracle",
+    "topic": "Formatos y funciones de conversión",
+    "question": "Asumiendo que el siglo actual es 20xx, ¿qué año interpreta cada expresión respectivamente?",
+    "code": "SELECT TO_DATE('15/03/70', 'DD/MM/RR') AS con_rr,\n       TO_DATE('15/03/70', 'DD/MM/YY') AS con_yy\nFROM dual;",
+    "language": "sql",
+    "options": [
+      "con_rr interpreta 2070; con_yy interpreta 1970",
+      "con_rr interpreta 1970; con_yy interpreta 2070",
+      "Ambas interpretan 1970",
+      "Ambas interpretan 2070"
+    ],
+    "correctIndex": 1,
+    "explanation": "RR aplica la regla de pivote y da 1970; YY simplemente usa el siglo actual (20xx), dando 2070.",
+    "source": "sql-oracle-guide.md"
+  },
+  {
+    "id": "oracle-040",
+    "category": "sql-oracle",
+    "topic": "Formatos y funciones de conversión",
+    "question": "¿Por qué se considera riesgoso este uso de TO_DATE sin especificar el formato explícitamente?",
+    "code": "SELECT TO_DATE('2026-07-14') FROM dual;",
+    "language": "sql",
+    "options": [
+      "Porque TO_DATE sin formato siempre lanza un error",
+      "Porque depende del NLS_DATE_FORMAT configurado en la sesión, y puede interpretarse distinto en otro entorno",
+      "Porque TO_DATE requiere al menos 3 argumentos siempre",
+      "No es riesgoso, es la forma recomendada"
+    ],
+    "correctIndex": 1,
+    "explanation": "Sin una máscara de formato explícita, la interpretación depende del NLS_DATE_FORMAT de la sesión, lo cual puede fallar silenciosamente en otro entorno.",
+    "source": "sql-oracle-guide.md"
+  },
+  {
+    "id": "oracle-041",
+    "category": "sql-oracle",
+    "topic": "Formatos y funciones de conversión",
+    "question": "¿Qué hace el modificador FM en el modelo de formato numérico?",
+    "code": "SELECT TO_CHAR(7, '9999')   AS sin_fm,\n       TO_CHAR(7, 'FM9999') AS con_fm\nFROM dual;",
+    "language": "sql",
+    "options": [
+      "Fuerza notación científica",
+      "Quita los espacios/ceros de relleno sobrantes del resultado",
+      "Convierte el número a formato de moneda automáticamente",
+      "Redondea el número a 2 decimales"
+    ],
+    "correctIndex": 1,
+    "explanation": "FM (fill mode) elimina los espacios o ceros de relleno sobrantes: sin_fm da '   7' (con espacios), con_fm da '7'.",
+    "source": "sql-oracle-guide.md"
+  },
+  {
+    "id": "oracle-042",
+    "category": "sql-oracle",
+    "topic": "Formatos y funciones de conversión",
+    "question": "¿Qué produce el elemento de formato PR aplicado a un número negativo?",
+    "code": "SELECT TO_CHAR(-1234.5, '9999.99PR') AS formato_contable FROM dual;",
+    "language": "sql",
+    "options": [
+      "Muestra el número negativo entre corchetes angulares '< >' (formato contable)",
+      "Antepone un signo '-' explícito",
+      "Coloca el signo negativo al final del número",
+      "Elimina el signo, mostrando el valor absoluto"
+    ],
+    "correctIndex": 0,
+    "explanation": "PR muestra los negativos entre '< >' como en el formato contable: -1234.5 se muestra como '<1234.50>'.",
+    "source": "sql-oracle-guide.md"
+  },
+  {
+    "id": "oracle-043",
+    "category": "sql-oracle",
+    "topic": "Formatos y funciones de conversión",
+    "question": "¿Qué elemento de formato numérico coloca el signo negativo al final del número en vez de al principio?",
+    "options": [
+      "S",
+      "PR",
+      "MI",
+      "FM"
+    ],
+    "correctIndex": 2,
+    "explanation": "MI coloca el signo negativo al final si aplica, por ejemplo '1234.50-'.",
+    "source": "sql-oracle-guide.md"
+  },
+  {
+    "id": "oracle-044",
+    "category": "sql-oracle",
+    "topic": "Formatos y funciones de conversión",
+    "question": "¿Cuál es la buena práctica recomendada al comparar fechas en una cláusula WHERE?",
+    "options": [
+      "Comparar siempre la fecha como texto plano, ej. WHERE fecha = '2026-07-14'",
+      "Nunca comparar fechas como texto; usar siempre TO_DATE(...) o literales DATE '2026-07-14'",
+      "Usar siempre TO_CHAR(fecha) = '2026-07-14'",
+      "Comparar siempre con BETWEEN dos literales de texto sin convertirlos con TO_DATE"
+    ],
+    "correctIndex": 1,
+    "explanation": "Comparar fechas como texto depende del NLS_DATE_FORMAT de la sesión y puede fallar silenciosamente; se recomienda TO_DATE o literales DATE.",
+    "source": "sql-oracle-guide.md"
+  },
+  {
+    "id": "oracle-045",
+    "category": "sql-oracle",
+    "topic": "Formatos y funciones de conversión",
+    "question": "¿Qué ventaja tienen los literales ANSI como DATE '2026-07-14' o TIMESTAMP '2026-07-14 10:00:00' frente a comparar con un string simple?",
+    "options": [
+      "Son más rápidos de escribir, nada más",
+      "Son independientes de la configuración NLS de la sesión",
+      "Permiten omitir la zona horaria siempre",
+      "Solo funcionan dentro de PL/SQL"
+    ],
+    "correctIndex": 1,
+    "explanation": "Los literales ANSI son constantes independientes del NLS de la sesión, a diferencia de comparar con un string que depende de NLS_DATE_FORMAT.",
+    "source": "sql-oracle-guide.md"
+  },
+  {
+    "id": "oracle-046",
+    "category": "sql-oracle",
+    "topic": "Formatos y funciones de conversión",
+    "question": "¿Qué logra la sentencia ALTER SESSION antes del SELECT?",
+    "code": "ALTER SESSION SET NLS_DATE_FORMAT = 'YYYY-MM-DD HH24:MI:SS';\nSELECT SYSDATE FROM dual;",
+    "language": "sql",
+    "options": [
+      "Cambia permanentemente el formato de fecha de toda la base de datos, para todas las sesiones futuras",
+      "Cambia el formato de fecha por defecto usado al mostrar fechas durante esa sesión",
+      "Cambia el formato de fecha únicamente para la tabla que se consulte a continuación",
+      "No tiene efecto sobre SYSDATE, solo sobre columnas DATE almacenadas"
+    ],
+    "correctIndex": 1,
+    "explanation": "ALTER SESSION SET NLS_DATE_FORMAT cambia el formato por defecto solo para la sesión actual, útil para no repetir TO_CHAR en cada consulta.",
+    "source": "sql-oracle-guide.md"
+  },
+  {
+    "id": "oracle-047",
+    "category": "sql-oracle",
+    "topic": "Formatos y funciones de conversión",
+    "question": "¿Qué elemento del modelo de formato agrega el signo de moneda en este ejemplo?",
+    "code": "SELECT TO_CHAR(1234567.5, '$999,999,999.99') AS con_dolar FROM dual;",
+    "language": "sql",
+    "options": [
+      "L",
+      "$",
+      "PR",
+      "EEEE"
+    ],
+    "correctIndex": 1,
+    "explanation": "El símbolo $ en el modelo de formato antepone el signo de dólar; L usaría el símbolo de moneda local según NLS_TERRITORY.",
+    "source": "sql-oracle-guide.md"
+  },
+  {
+    "id": "oracle-048",
+    "category": "sql-oracle",
+    "topic": "Formatos y funciones de conversión",
+    "question": "¿Qué representa el elemento de formato HH24 en un modelo de fecha?",
+    "options": [
+      "La hora en formato 12 horas",
+      "La hora en formato 24 horas (00-23)",
+      "Los minutos (00-59)",
+      "Las fracciones de segundo"
+    ],
+    "correctIndex": 1,
+    "explanation": "HH24 representa la hora en formato de 24 horas; HH/HH12 representan la hora en formato de 12 horas.",
+    "source": "sql-oracle-guide.md"
+  },
+  {
+    "id": "oracle-049",
+    "category": "sql-oracle",
+    "topic": "Formatos y funciones de conversión",
+    "question": "¿Qué elemento del modelo de formato numérico produce notación científica?",
+    "options": [
+      "FM",
+      "PR",
+      "EEEE",
+      "MI"
+    ],
+    "correctIndex": 2,
+    "explanation": "EEEE produce notación científica, por ejemplo '1.2345E+03'.",
+    "source": "sql-oracle-guide.md"
+  },
+  {
+    "id": "oracle-050",
+    "category": "sql-oracle",
+    "topic": "Formatos y funciones de conversión",
+    "question": "¿Qué resultado NUMBER produce esta expresión?",
+    "code": "SELECT TO_NUMBER('1.234,56', '9G999D99', 'NLS_NUMERIC_CHARACTERS = '',.''') AS numero\nFROM dual;",
+    "language": "sql",
+    "options": [
+      "1234.56",
+      "1.23456",
+      "123456",
+      "Error de conversión"
+    ],
+    "correctIndex": 0,
+    "explanation": "El parámetro NLS_NUMERIC_CHARACTERS indica que ',' es el separador decimal y '.' es el separador de miles (convención europea), por lo que el resultado es 1234.56.",
+    "source": "sql-oracle-guide.md"
+  },
+  {
+    "id": "oracle-051",
+    "category": "sql-oracle",
+    "topic": "DDL — Data Definition Language",
+    "question": "¿Qué hace esta sentencia CTAS (CREATE TABLE ... AS SELECT)?",
+    "code": "CREATE TABLE empleados_backup AS\nSELECT * FROM empleados WHERE 1 = 0;",
+    "language": "sql",
+    "options": [
+      "Crea una tabla con la misma estructura que empleados, copiando también todas las filas",
+      "Crea una tabla con la misma estructura que empleados, pero sin copiar ninguna fila (WHERE 1=0 nunca es verdadero)",
+      "Falla porque WHERE 1=0 no es una condición válida en CTAS",
+      "Crea una vista, no una tabla"
+    ],
+    "correctIndex": 1,
+    "explanation": "WHERE 1 = 0 nunca se cumple, por lo que la tabla se crea con la estructura de empleados pero sin ninguna fila.",
+    "source": "sql-oracle-guide.md"
+  },
+  {
+    "id": "oracle-052",
+    "category": "sql-oracle",
+    "topic": "DDL — Data Definition Language",
+    "question": "¿Qué diferencia hay entre ON COMMIT DELETE ROWS (usada aquí) y la variante ON COMMIT PRESERVE ROWS?",
+    "code": "CREATE GLOBAL TEMPORARY TABLE tmp_reporte (\n    id_empleado NUMBER,\n    total_horas NUMBER\n) ON COMMIT DELETE ROWS;",
+    "language": "sql",
+    "options": [
+      "Son sinónimos exactos",
+      "DELETE ROWS borra los datos automáticamente al hacer COMMIT; PRESERVE ROWS los mantiene hasta el fin de la sesión",
+      "DELETE ROWS borra la estructura de la tabla al hacer COMMIT",
+      "PRESERVE ROWS borra los datos al final de cada sentencia DML, no solo al hacer COMMIT"
+    ],
+    "correctIndex": 1,
+    "explanation": "ON COMMIT DELETE ROWS borra los datos al confirmar; ON COMMIT PRESERVE ROWS los conserva hasta que termine la sesión.",
+    "source": "sql-oracle-guide.md"
+  },
+  {
+    "id": "oracle-053",
+    "category": "sql-oracle",
+    "topic": "DDL — Data Definition Language",
+    "question": "¿Qué hace esta sentencia?",
+    "code": "ALTER TABLE empleados RENAME COLUMN telefono TO telefono_contacto;",
+    "language": "sql",
+    "options": [
+      "Elimina la columna telefono",
+      "Renombra la columna telefono a telefono_contacto en la tabla empleados",
+      "Crea una nueva columna llamada telefono_contacto además de telefono",
+      "Renombra la tabla empleados completa"
+    ],
+    "correctIndex": 1,
+    "explanation": "ALTER TABLE ... RENAME COLUMN a TO b renombra únicamente esa columna, conservando sus datos.",
+    "source": "sql-oracle-guide.md"
+  },
+  {
+    "id": "oracle-054",
+    "category": "sql-oracle",
+    "topic": "DDL — Data Definition Language",
+    "question": "Comparando DELETE, TRUNCATE y DROP sobre una tabla, ¿cuál de las siguientes afirmaciones es correcta?",
+    "options": [
+      "TRUNCATE borra todos los datos pero no la estructura, no dispara triggers y no se puede revertir con ROLLBACK",
+      "DELETE es DDL y hace COMMIT automático",
+      "DROP TABLE conserva la estructura pero borra todos los datos",
+      "TRUNCATE se puede revertir siempre con ROLLBACK"
+    ],
+    "correctIndex": 0,
+    "explanation": "TRUNCATE TABLE es DDL: borra todas las filas de golpe, no borra la estructura, no dispara triggers, y no se puede revertir con ROLLBACK.",
+    "source": "sql-oracle-guide.md"
+  },
+  {
+    "id": "oracle-055",
+    "category": "sql-oracle",
+    "topic": "DDL — Data Definition Language",
+    "question": "¿Qué comando permite recuperar una tabla recién borrada mientras sigue en la 'papelera de reciclaje' de Oracle?",
+    "options": [
+      "RESTORE TABLE",
+      "FLASHBACK TABLE ... TO BEFORE DROP",
+      "UNDROP TABLE",
+      "RECOVER TABLE"
+    ],
+    "correctIndex": 1,
+    "explanation": "FLASHBACK TABLE ... TO BEFORE DROP recupera una tabla borrada mientras siga disponible en la papelera de reciclaje.",
+    "source": "sql-oracle-guide.md"
+  },
+  {
+    "id": "oracle-056",
+    "category": "sql-oracle",
+    "topic": "DDL — Data Definition Language",
+    "question": "¿En qué se diferencia esta sentencia de un DROP TABLE normal (sin PURGE)?",
+    "code": "DROP TABLE empleados_backup PURGE;",
+    "language": "sql",
+    "options": [
+      "PURGE hace que la tabla se pueda recuperar más fácilmente después",
+      "Borra la tabla definitivamente, sin pasar por la papelera de reciclaje",
+      "PURGE solo borra los índices, no la tabla",
+      "No hay ninguna diferencia funcional"
+    ],
+    "correctIndex": 1,
+    "explanation": "DROP TABLE ... PURGE borra la tabla de forma definitiva, evitando que pase por la papelera de reciclaje (no se puede recuperar con FLASHBACK).",
+    "source": "sql-oracle-guide.md"
+  },
+  {
+    "id": "oracle-057",
+    "category": "sql-oracle",
+    "topic": "DDL — Data Definition Language",
+    "question": "¿Qué combinación de restricciones conforma conceptualmente una PRIMARY KEY?",
+    "options": [
+      "UNIQUE + CHECK",
+      "NOT NULL + UNIQUE",
+      "FOREIGN KEY + DEFAULT",
+      "CHECK + DEFAULT"
+    ],
+    "correctIndex": 1,
+    "explanation": "PRIMARY KEY combina NOT NULL (no puede quedar vacía) y UNIQUE (no se puede repetir): identifica de forma única cada fila.",
+    "source": "sql-oracle-guide.md"
+  },
+  {
+    "id": "oracle-058",
+    "category": "sql-oracle",
+    "topic": "DDL — Data Definition Language",
+    "question": "Si se borra un departamento referenciado por algunos empleados, ¿qué ocurre con esos empleados según esta definición?",
+    "code": "CREATE TABLE empleados (\n    id_empleado     NUMBER(6) PRIMARY KEY,\n    nombres         VARCHAR2(50) NOT NULL,\n    id_departamento NUMBER(4),\n    CONSTRAINT fk_emp_departamento\n        FOREIGN KEY (id_departamento) REFERENCES departamentos (id_departamento)\n        ON DELETE SET NULL\n);",
+    "language": "sql",
+    "options": [
+      "Se borran automáticamente junto con el departamento",
+      "El borrado del departamento falla mientras existan empleados asociados",
+      "Su columna id_departamento queda en NULL, pero el empleado no se borra",
+      "No pasa nada, la restricción se ignora"
+    ],
+    "correctIndex": 2,
+    "explanation": "ON DELETE SET NULL hace que, al borrar el departamento padre, la columna id_departamento de los empleados relacionados quede en NULL.",
+    "source": "sql-oracle-guide.md"
+  },
+  {
+    "id": "oracle-059",
+    "category": "sql-oracle",
+    "topic": "DDL — Data Definition Language",
+    "question": "¿Cuál es el comportamiento por defecto de una FOREIGN KEY cuando NO se especifica ninguna cláusula ON DELETE?",
+    "options": [
+      "CASCADE: borra automáticamente los hijos",
+      "SET NULL: deja la FK en NULL",
+      "RESTRICT (implícito): no permite borrar el padre si tiene hijos relacionados",
+      "Ignora la integridad referencial"
+    ],
+    "correctIndex": 2,
+    "explanation": "Sin ON DELETE explícito, el comportamiento por defecto es no dejar borrar el padre si tiene hijos (RESTRICT).",
+    "source": "sql-oracle-guide.md"
+  },
+  {
+    "id": "oracle-060",
+    "category": "sql-oracle",
+    "topic": "DDL — Data Definition Language",
+    "question": "¿Para qué sirve una restricción CHECK?",
+    "options": [
+      "Para garantizar que el valor exista como clave en otra tabla",
+      "Para validar que el valor cumpla una condición lógica arbitraria",
+      "Para generar automáticamente un valor por defecto",
+      "Para evitar duplicados en una columna"
+    ],
+    "correctIndex": 1,
+    "explanation": "CHECK garantiza que el valor cumpla una condición lógica arbitraria, como salario_maximo >= salario_minimo.",
+    "source": "sql-oracle-guide.md"
+  },
+  {
+    "id": "oracle-061",
+    "category": "sql-oracle",
+    "topic": "DDL — Data Definition Language",
+    "question": "¿Cuál de las siguientes NO es técnicamente una restricción de integridad, aunque se declara junto a ellas?",
+    "options": [
+      "NOT NULL",
+      "UNIQUE",
+      "DEFAULT",
+      "CHECK"
+    ],
+    "correctIndex": 2,
+    "explanation": "DEFAULT asigna un valor automático si no se especifica uno al insertar, pero técnicamente no es una restricción de integridad.",
+    "source": "sql-oracle-guide.md"
+  },
+  {
+    "id": "oracle-062",
+    "category": "sql-oracle",
+    "topic": "DDL — Data Definition Language",
+    "question": "¿Qué tipo de relación establece esta restricción?",
+    "code": "ALTER TABLE empleados ADD CONSTRAINT fk_emp_jefe\n    FOREIGN KEY (id_jefe) REFERENCES empleados (id_empleado);",
+    "language": "sql",
+    "options": [
+      "Una relación N:M mediante tabla intermedia",
+      "Una auto-referencia: la columna id_jefe de empleados apunta a la propia tabla empleados",
+      "Una relación con la tabla departamentos",
+      "Un índice único sobre id_jefe"
+    ],
+    "correctIndex": 1,
+    "explanation": "Esta FK auto-referenciada es clave para modelar jerarquías: cada empleado puede tener como jefe a otro empleado de la misma tabla.",
+    "source": "sql-oracle-guide.md"
+  },
+  {
+    "id": "oracle-063",
+    "category": "sql-oracle",
+    "topic": "DDL — Data Definition Language",
+    "question": "¿Qué comando de Oracle permite documentar el propósito de una tabla o columna dentro del propio diccionario de datos?",
+    "options": [
+      "DESCRIBE",
+      "COMMENT ON TABLE / COMMENT ON COLUMN",
+      "ANNOTATE",
+      "DOC ON TABLE"
+    ],
+    "correctIndex": 1,
+    "explanation": "COMMENT ON TABLE ... IS '...' y COMMENT ON COLUMN ... IS '...' documentan objetos, consultables luego en user_tab_comments/user_col_comments.",
+    "source": "sql-oracle-guide.md"
+  },
+  {
+    "id": "oracle-064",
+    "category": "sql-oracle",
+    "topic": "DDL — Data Definition Language",
+    "question": "¿Cómo se elimina un comentario previamente asignado con COMMENT ON TABLE?",
+    "options": [
+      "Con DROP COMMENT ON TABLE",
+      "Asignando un string vacío ('') como nuevo comentario",
+      "No es posible eliminar comentarios en Oracle",
+      "Ejecutando TRUNCATE COMMENTS"
+    ],
+    "correctIndex": 1,
+    "explanation": "Para borrar un comentario se vuelve a ejecutar COMMENT ON TABLE ... IS ''; con un string vacío.",
+    "source": "sql-oracle-guide.md"
+  },
+  {
+    "id": "oracle-065",
+    "category": "sql-oracle",
+    "topic": "DDL — Data Definition Language",
+    "question": "¿Por qué es necesario el GRANT CREATE SESSION después de crear el usuario?",
+    "code": "CREATE USER rrhh IDENTIFIED BY \"Password123#\"\n    DEFAULT TABLESPACE users\n    TEMPORARY TABLESPACE temp\n    QUOTA UNLIMITED ON users;\n\nGRANT CREATE SESSION, RESOURCE TO rrhh;",
+    "language": "sql",
+    "options": [
+      "Porque crear un usuario no le otorga automáticamente el privilegio de conectarse a la base de datos",
+      "Porque CREATE USER no es válido sin un GRANT posterior",
+      "Solo es necesario si el usuario no tiene tablespace asignado",
+      "GRANT CREATE SESSION crea la contraseña del usuario"
+    ],
+    "correctIndex": 0,
+    "explanation": "CREATE USER solo crea la cuenta; hay que otorgar explícitamente CREATE SESSION para que pueda conectarse, y RESOURCE para crear objetos propios.",
+    "source": "sql-oracle-guide.md"
+  },
+  {
+    "id": "oracle-066",
+    "category": "sql-oracle",
+    "topic": "DDL — Data Definition Language",
+    "question": "¿Qué hace la cláusula CASCADE en este DROP USER?",
+    "code": "DROP USER app_user CASCADE;",
+    "language": "sql",
+    "options": [
+      "Solo bloquea al usuario sin borrarlo",
+      "Borra el usuario y también todos los objetos que le pertenecen",
+      "Transfiere los objetos del usuario a SYSTEM antes de borrarlo",
+      "Impide borrar el usuario si tiene objetos propios"
+    ],
+    "correctIndex": 1,
+    "explanation": "CASCADE borra el usuario junto con todos los objetos (tablas, vistas, etc.) que le pertenecen.",
+    "source": "sql-oracle-guide.md"
+  },
+  {
+    "id": "oracle-067",
+    "category": "sql-oracle",
+    "topic": "DML — Data Manipulation Language",
+    "question": "¿Qué diferencia hay entre DDL y DML respecto a la confirmación automática de cambios?",
+    "options": [
+      "DDL hace COMMIT automático; los cambios de DML quedan pendientes de COMMIT explícito",
+      "DML hace COMMIT automático; DDL requiere COMMIT explícito",
+      "Ambos requieren COMMIT explícito siempre",
+      "Ninguno de los dos requiere COMMIT"
+    ],
+    "correctIndex": 0,
+    "explanation": "Los comandos DDL confirman automáticamente; los cambios DML quedan pendientes hasta un COMMIT (o se deshacen con ROLLBACK).",
+    "source": "sql-oracle-guide.md"
+  },
+  {
+    "id": "oracle-068",
+    "category": "sql-oracle",
+    "topic": "DML — Data Manipulation Language",
+    "question": "¿Qué permite hacer la sentencia INSERT ALL?",
+    "code": "INSERT ALL\n    INTO empleados_backup VALUES (id_empleado, nombres, apellidos, email, telefono, fecha_contratacion, salario, id_puesto, id_departamento, id_jefe)\n    INTO empleados_ti VALUES (id_empleado, nombres, apellidos, email, telefono, fecha_contratacion, salario, id_puesto, id_departamento, id_jefe)\nSELECT * FROM empleados WHERE id_departamento = 10;",
+    "language": "sql",
+    "options": [
+      "Insertar el resultado de una única consulta en varias tablas a la vez",
+      "Insertar todas las columnas de una tabla sin especificar nombres",
+      "Insertar condicionalmente una fila solo si todavía no existe, evitando duplicados (como MERGE)",
+      "Ejecutar varias sentencias INSERT dentro de una misma transacción con un solo COMMIT final"
+    ],
+    "correctIndex": 0,
+    "explanation": "INSERT ALL permite insertar el resultado de una sola consulta origen en varias tablas destino en una sola sentencia; no es un mecanismo de UPSERT (eso es MERGE).",
+    "source": "sql-oracle-guide.md"
+  },
+  {
+    "id": "oracle-069",
+    "category": "sql-oracle",
+    "topic": "DML — Data Manipulation Language",
+    "question": "¿Qué genera seq_empleados.NEXTVAL en este INSERT?",
+    "code": "INSERT INTO empleados (id_empleado, nombres, apellidos, email, fecha_contratacion, id_departamento)\nVALUES (seq_empleados.NEXTVAL, 'Luis', 'Pérez', 'luis.perez@empresa.com', SYSDATE, 10);",
+    "language": "sql",
+    "options": [
+      "El último valor generado anteriormente en la sesión",
+      "El siguiente valor de la secuencia seq_empleados",
+      "Un número aleatorio",
+      "El máximo id_empleado actual más 1, calculado con una subconsulta"
+    ],
+    "correctIndex": 1,
+    "explanation": "NEXTVAL avanza la secuencia y devuelve su siguiente valor; CURRVAL devolvería el último valor ya generado en la sesión.",
+    "source": "sql-oracle-guide.md"
+  },
+  {
+    "id": "oracle-070",
+    "category": "sql-oracle",
+    "topic": "DML — Data Manipulation Language",
+    "question": "¿Qué hace este UPDATE?",
+    "code": "UPDATE empleados e\nSET salario = (SELECT salario_maximo FROM puestos p WHERE p.id_puesto = e.id_puesto)\nWHERE salario > (SELECT salario_maximo FROM puestos p WHERE p.id_puesto = e.id_puesto);",
+    "language": "sql",
+    "options": [
+      "Sube el salario de todos los empleados al salario_maximo de su puesto, sin excepción",
+      "Ajusta el salario solo de quienes ganan más que el salario_maximo de su puesto, dejándolo igual a ese máximo",
+      "Elimina a los empleados que ganan más que el salario_maximo de su puesto",
+      "Falla porque no se puede usar una subconsulta en SET"
+    ],
+    "correctIndex": 1,
+    "explanation": "El WHERE filtra solo a los empleados cuyo salario supera el salario_maximo de su puesto, y el SET los ajusta a ese máximo.",
+    "source": "sql-oracle-guide.md"
+  },
+  {
+    "id": "oracle-071",
+    "category": "sql-oracle",
+    "topic": "DML — Data Manipulation Language",
+    "question": "¿Qué riesgo tiene ejecutar este UPDATE sin cláusula WHERE?",
+    "code": "UPDATE empleados SET salario = salario * 1.05;",
+    "language": "sql",
+    "options": [
+      "Ninguno, Oracle exige WHERE obligatoriamente en un UPDATE",
+      "Modifica el salario de TODAS las filas de la tabla, no solo un subconjunto esperado",
+      "Solo afecta a la primera fila de la tabla",
+      "Lanza un error de sintaxis"
+    ],
+    "correctIndex": 1,
+    "explanation": "Sin WHERE, un UPDATE afecta a todas las filas de la tabla; siempre conviene revisar con un SELECT usando el mismo WHERE antes de un UPDATE masivo.",
+    "source": "sql-oracle-guide.md"
+  },
+  {
+    "id": "oracle-072",
+    "category": "sql-oracle",
+    "topic": "DML — Data Manipulation Language",
+    "question": "Al borrar filas relacionadas por integridad referencial (FK sin ON DELETE CASCADE), ¿en qué orden deben ejecutarse los DELETE?",
+    "options": [
+      "Primero la tabla padre, luego la tabla hija",
+      "Primero la tabla hija (ej. empleado_proyecto), luego la tabla padre (empleados)",
+      "El orden no importa nunca",
+      "Ambas tablas deben borrarse en la misma sentencia DELETE"
+    ],
+    "correctIndex": 1,
+    "explanation": "Para respetar la integridad referencial hay que borrar primero los registros hijos y después el padre, evitando violar la FK.",
+    "source": "sql-oracle-guide.md"
+  },
+  {
+    "id": "oracle-073",
+    "category": "sql-oracle",
+    "topic": "DML — Data Manipulation Language",
+    "question": "¿Qué diferencia de rendimiento y reversibilidad hay entre DELETE FROM tabla y TRUNCATE TABLE para vaciarla por completo?",
+    "options": [
+      "Ambos son igual de rápidos y reversibles",
+      "DELETE registra cada fila en el log de redo/undo (más lento, reversible con ROLLBACK); TRUNCATE es DDL, libera espacio de inmediato y no es reversible",
+      "TRUNCATE es más lento porque dispara triggers por cada fila",
+      "DELETE no se puede revertir, pero TRUNCATE sí"
+    ],
+    "correctIndex": 1,
+    "explanation": "DELETE es DML reversible pero más lento (registra fila por fila); TRUNCATE es DDL, mucho más rápido, pero no reversible.",
+    "source": "sql-oracle-guide.md"
+  },
+  {
+    "id": "oracle-074",
+    "category": "sql-oracle",
+    "topic": "DML — Data Manipulation Language",
+    "question": "¿Para qué se usa principalmente la sentencia MERGE en Oracle?",
+    "options": [
+      "Para combinar dos tablas en una sola de forma permanente",
+      "Para sincronizar una tabla destino contra una tabla origen: insertar si no existe, actualizar si ya existe ('UPSERT')",
+      "Para crear vistas materializadas",
+      "Para revertir cambios de una transacción anterior"
+    ],
+    "correctIndex": 1,
+    "explanation": "MERGE es la herramienta de Oracle para sincronizar (UPSERT) una tabla destino a partir de una tabla origen, típico en cargas ETL.",
+    "source": "sql-oracle-guide.md"
+  },
+  {
+    "id": "oracle-075",
+    "category": "sql-oracle",
+    "topic": "DML — Data Manipulation Language",
+    "question": "Si un id_empleado de cambios_salario NO existe en empleados, ¿qué hace este MERGE?",
+    "code": "MERGE INTO empleados e\nUSING cambios_salario c\nON (e.id_empleado = c.id_empleado)\nWHEN MATCHED THEN\n    UPDATE SET e.salario = c.nuevo_salario\nWHEN NOT MATCHED THEN\n    INSERT (id_empleado, nombres, apellidos, email, fecha_contratacion, salario, id_departamento)\n    VALUES (c.id_empleado, c.nombres, c.apellidos, c.email, SYSDATE, c.nuevo_salario, c.id_departamento);",
+    "language": "sql",
+    "options": [
+      "No hace nada con esa fila",
+      "Actualiza una fila aleatoria de empleados",
+      "Inserta una nueva fila en empleados con los datos de esa fila de cambios_salario",
+      "Lanza un error porque no hay coincidencia"
+    ],
+    "correctIndex": 2,
+    "explanation": "La rama WHEN NOT MATCHED THEN INSERT se ejecuta cuando no hay coincidencia, insertando una nueva fila en empleados.",
+    "source": "sql-oracle-guide.md"
+  },
+  {
+    "id": "oracle-076",
+    "category": "sql-oracle",
+    "topic": "DML — Data Manipulation Language",
+    "question": "Según la convención usada en este MERGE, ¿qué implica que c.nuevo_salario valga -1 para un empleado que ya existe en ambas tablas?",
+    "code": "MERGE INTO empleados e\nUSING cambios_salario c ON (e.id_empleado = c.id_empleado)\nWHEN MATCHED THEN\n    UPDATE SET e.salario = c.nuevo_salario\n    WHERE c.nuevo_salario > 0\n    DELETE WHERE c.nuevo_salario = -1\nWHEN NOT MATCHED THEN\n    INSERT (id_empleado, salario) VALUES (c.id_empleado, c.nuevo_salario);",
+    "language": "sql",
+    "options": [
+      "Se ignora esa fila por completo",
+      "Se actualiza el salario del empleado a -1",
+      "Se borra la fila coincidente de empleados (convención: -1 indica 'dar de baja')",
+      "Se inserta una nueva fila duplicada"
+    ],
+    "correctIndex": 2,
+    "explanation": "La cláusula DELETE WHERE c.nuevo_salario = -1 borra la fila coincidente cuando el valor es -1, usado como convención de baja.",
+    "source": "sql-oracle-guide.md"
+  },
+  {
+    "id": "oracle-077",
+    "category": "sql-oracle",
+    "topic": "DML — Data Manipulation Language",
+    "question": "Si la tabla empleados también tiene columnas salario e id_puesto que no se mencionan aquí, ¿qué ocurre con ellas?",
+    "code": "INSERT INTO empleados (id_empleado, nombres, apellidos, email, fecha_contratacion, id_departamento)\nVALUES (100, 'Ana', 'García', 'ana.garcia@empresa.com', SYSDATE, 10);",
+    "language": "sql",
+    "options": [
+      "El INSERT falla porque faltan columnas obligatorias",
+      "Quedan con su valor DEFAULT si lo tienen, o NULL si no lo tienen",
+      "Se rellenan automáticamente con 0",
+      "Deben especificarse explícitamente como NULL en la lista VALUES, o el INSERT falla"
+    ],
+    "correctIndex": 1,
+    "explanation": "Las columnas omitidas en un INSERT parcial toman su valor DEFAULT si está definido, o quedan en NULL.",
+    "source": "sql-oracle-guide.md"
+  },
+  {
+    "id": "oracle-078",
+    "category": "sql-oracle",
+    "topic": "DML — Data Manipulation Language",
+    "question": "En una sentencia MERGE, ¿qué cláusula indica qué hacer cuando una fila de la tabla origen NO tiene coincidencia en la tabla destino?",
+    "options": [
+      "WHEN MATCHED THEN",
+      "WHEN NOT MATCHED THEN",
+      "ON NO MATCH",
+      "ELSE INSERT"
+    ],
+    "correctIndex": 1,
+    "explanation": "WHEN NOT MATCHED THEN define la acción (normalmente INSERT) cuando no hay coincidencia según la condición del ON.",
+    "source": "sql-oracle-guide.md"
+  },
+  {
+    "id": "oracle-079",
+    "category": "sql-oracle",
+    "topic": "DML — Data Manipulation Language",
+    "question": "¿Qué hace esta sentencia?",
+    "code": "DELETE FROM empleados\nWHERE id_departamento IN (SELECT id_departamento FROM departamentos WHERE ubicacion = 'Sucursal Cerrada');",
+    "language": "sql",
+    "options": [
+      "Borra todos los departamentos ubicados en 'Sucursal Cerrada'",
+      "Borra todos los empleados cuyo departamento está ubicado en 'Sucursal Cerrada'",
+      "Actualiza la ubicación de los empleados",
+      "No hace nada porque falta un JOIN explícito"
+    ],
+    "correctIndex": 1,
+    "explanation": "La subconsulta obtiene los id_departamento de sucursales cerradas, y el DELETE externo borra los empleados que pertenecen a esos departamentos.",
+    "source": "sql-oracle-guide.md"
+  },
+  {
+    "id": "oracle-080",
+    "category": "sql-oracle",
+    "topic": "DML — Data Manipulation Language",
+    "question": "¿Cuál es la forma correcta de insertar en una tabla ya existente copiando el resultado de una consulta?",
+    "options": [
+      "INSERT INTO tabla SELECT ... FROM otra_tabla;",
+      "INSERT INTO tabla AS SELECT ... FROM otra_tabla;",
+      "COPY INTO tabla FROM (SELECT ...);",
+      "MERGE tabla FROM otra_tabla;"
+    ],
+    "correctIndex": 0,
+    "explanation": "INSERT INTO tabla SELECT ... FROM otra_tabla inserta el resultado de la consulta en la tabla destino, sin necesidad de VALUES.",
+    "source": "sql-oracle-guide.md"
+  },
+  {
+    "id": "oracle-081",
+    "category": "sql-oracle",
+    "topic": "DQL: SELECT, JOIN y subconsultas",
+    "question": "¿Cuál es el orden lógico de evaluación de una sentencia SELECT completa?",
+    "options": [
+      "SELECT → FROM → WHERE → GROUP BY → HAVING → ORDER BY",
+      "FROM → WHERE → GROUP BY → HAVING → SELECT → ORDER BY → FETCH",
+      "WHERE → FROM → SELECT → GROUP BY → ORDER BY",
+      "FROM → SELECT → WHERE → ORDER BY → GROUP BY"
+    ],
+    "correctIndex": 1,
+    "explanation": "El orden lógico es FROM → WHERE → GROUP BY → HAVING → SELECT → ORDER BY → FETCH, aunque se escriba en otro orden en el texto de la consulta.",
+    "source": "sql-oracle-guide.md"
+  },
+  {
+    "id": "oracle-082",
+    "category": "sql-oracle",
+    "topic": "DQL: SELECT, JOIN y subconsultas",
+    "question": "¿Por qué no se puede usar un alias definido en la cláusula SELECT dentro del WHERE de la misma consulta?",
+    "options": [
+      "Porque los alias solo funcionan con GROUP BY",
+      "Porque WHERE se evalúa antes que SELECT en el orden lógico, y el alias todavía no existe en ese punto",
+      "Porque los alias de columna solo están disponibles dentro de subconsultas, nunca en la consulta principal",
+      "Sí se puede, no hay ninguna restricción"
+    ],
+    "correctIndex": 1,
+    "explanation": "Como WHERE se evalúa antes que SELECT, un alias definido en SELECT no existe todavía cuando se evalúa WHERE (pero sí en ORDER BY, que se evalúa después).",
+    "source": "sql-oracle-guide.md"
+  },
+  {
+    "id": "oracle-083",
+    "category": "sql-oracle",
+    "topic": "DQL: SELECT, JOIN y subconsultas",
+    "question": "¿Por qué es necesario envolver la consulta ordenada en una subconsulta antes de filtrar con ROWNUM <= 5?",
+    "code": "SELECT * FROM (\n    SELECT nombres, salario FROM empleados ORDER BY salario DESC\n)\nWHERE ROWNUM <= 5;",
+    "language": "sql",
+    "options": [
+      "Porque ROWNUM no puede usarse nunca en un WHERE",
+      "Porque ROWNUM se asigna antes de aplicar el ORDER BY si se usa directamente en el WHERE externo",
+      "Porque es un requisito de sintaxis sin motivo lógico",
+      "Porque ORDER BY no se puede combinar con ROWNUM en ningún caso"
+    ],
+    "correctIndex": 1,
+    "explanation": "ROWNUM se numera según el orden de recuperación de filas, que ocurre antes del ORDER BY si se filtra directamente; por eso se ordena primero en una subconsulta y luego se filtra por ROWNUM.",
+    "source": "sql-oracle-guide.md"
+  },
+  {
+    "id": "oracle-084",
+    "category": "sql-oracle",
+    "topic": "DQL: SELECT, JOIN y subconsultas",
+    "question": "¿Qué problema tiene esta condición del WHERE?",
+    "code": "SELECT * FROM empleados WHERE id_jefe = NULL;",
+    "language": "sql",
+    "options": [
+      "Es correcta y devuelve los empleados sin jefe",
+      "NULL nunca se compara con =, por lo que esta consulta nunca devuelve filas; debería usarse IS NULL",
+      "Lanza un error de sintaxis",
+      "Devuelve todas las filas de la tabla, incluidas las que tienen jefe"
+    ],
+    "correctIndex": 1,
+    "explanation": "NULL no se compara con el operador =; hay que usar WHERE id_jefe IS NULL para obtener las filas sin jefe asignado.",
+    "source": "sql-oracle-guide.md"
+  },
+  {
+    "id": "oracle-085",
+    "category": "sql-oracle",
+    "topic": "DQL: SELECT, JOIN y subconsultas",
+    "question": "¿Qué nombres coinciden con este patrón LIKE?",
+    "code": "SELECT * FROM empleados WHERE nombres LIKE '_na';",
+    "language": "sql",
+    "options": [
+      "Cualquier nombre que contenga 'na' en cualquier posición",
+      "Nombres de exactamente 3 caracteres que terminan en 'na', como 'Ana' o 'Ina'",
+      "Nombres que empiezan con 'na'",
+      "Solo el nombre exacto 'na'"
+    ],
+    "correctIndex": 1,
+    "explanation": "El comodín '_' coincide con exactamente un carácter, por lo que '_na' coincide con nombres de 3 letras que terminan en 'na'.",
+    "source": "sql-oracle-guide.md"
+  },
+  {
+    "id": "oracle-086",
+    "category": "sql-oracle",
+    "topic": "DQL: SELECT, JOIN y subconsultas",
+    "question": "¿Qué diferencia hay entre WHERE y HAVING en una consulta con GROUP BY?",
+    "options": [
+      "Son intercambiables, no hay diferencia",
+      "WHERE filtra filas individuales antes de agrupar; HAVING filtra los grupos ya calculados",
+      "HAVING filtra filas individuales; WHERE filtra grupos",
+      "WHERE solo puede usarse con funciones de agregación"
+    ],
+    "correctIndex": 1,
+    "explanation": "WHERE se aplica sobre filas individuales antes del GROUP BY; HAVING se aplica sobre los grupos ya calculados, típicamente con funciones de agregación.",
+    "source": "sql-oracle-guide.md"
+  },
+  {
+    "id": "oracle-087",
+    "category": "sql-oracle",
+    "topic": "DQL: SELECT, JOIN y subconsultas",
+    "question": "¿Qué agrega ROLLUP al resultado de un GROUP BY normal de estas dos columnas?",
+    "code": "SELECT id_departamento, id_puesto, COUNT(*) AS total, SUM(salario) AS suma\nFROM empleados\nGROUP BY ROLLUP(id_departamento, id_puesto);",
+    "language": "sql",
+    "options": [
+      "Nada adicional, es idéntico a GROUP BY normal",
+      "Subtotales automáticos por cada nivel de agrupación, además de un gran total general",
+      "Elimina las filas con valores repetidos",
+      "Ordena el resultado de forma descendente automáticamente"
+    ],
+    "correctIndex": 1,
+    "explanation": "ROLLUP genera subtotales por departamento y un gran total general, además del detalle por departamento y puesto.",
+    "source": "sql-oracle-guide.md"
+  },
+  {
+    "id": "oracle-088",
+    "category": "sql-oracle",
+    "topic": "DQL: SELECT, JOIN y subconsultas",
+    "question": "¿Qué tipo de JOIN devuelve todas las filas de ambas tablas, coincidan o no?",
+    "options": [
+      "INNER JOIN",
+      "LEFT JOIN",
+      "FULL OUTER JOIN",
+      "CROSS JOIN"
+    ],
+    "correctIndex": 2,
+    "explanation": "FULL OUTER JOIN devuelve todas las filas de ambas tablas, con NULL donde no hay coincidencia.",
+    "source": "sql-oracle-guide.md"
+  },
+  {
+    "id": "oracle-089",
+    "category": "sql-oracle",
+    "topic": "DQL: SELECT, JOIN y subconsultas",
+    "question": "Si un empleado tiene id_departamento en NULL, ¿qué aparece en el resultado para ese empleado?",
+    "code": "SELECT e.nombres, d.nombre_departamento\nFROM empleados e\nLEFT JOIN departamentos d ON e.id_departamento = d.id_departamento;",
+    "language": "sql",
+    "options": [
+      "El empleado no aparece en el resultado",
+      "El empleado sí aparece en el resultado, con nombre_departamento en NULL",
+      "La consulta lanza un error",
+      "Se muestra un nombre_departamento vacío en lugar de NULL"
+    ],
+    "correctIndex": 1,
+    "explanation": "LEFT JOIN conserva todas las filas de la tabla izquierda (empleados); si no hay coincidencia, las columnas de la derecha quedan en NULL.",
+    "source": "sql-oracle-guide.md"
+  },
+  {
+    "id": "oracle-090",
+    "category": "sql-oracle",
+    "topic": "DQL: SELECT, JOIN y subconsultas",
+    "question": "¿Qué técnica de JOIN se está usando en esta consulta?",
+    "code": "SELECT emp.nombres AS empleado, jefe.nombres AS jefe\nFROM empleados emp\nLEFT JOIN empleados jefe ON emp.id_jefe = jefe.id_empleado;",
+    "language": "sql",
+    "options": [
+      "CROSS JOIN",
+      "Self join: la tabla empleados se une consigo misma",
+      "JOIN con tabla intermedia N:M",
+      "FULL OUTER JOIN entre tres tablas"
+    ],
+    "correctIndex": 1,
+    "explanation": "Es un self join: la tabla empleados aparece dos veces con alias distintos (emp y jefe) para relacionar cada empleado con su jefe.",
+    "source": "sql-oracle-guide.md"
+  },
+  {
+    "id": "oracle-091",
+    "category": "sql-oracle",
+    "topic": "DQL: SELECT, JOIN y subconsultas",
+    "question": "¿Por qué se recomienda evitar esta sintaxis en código nuevo?",
+    "code": "-- Sintaxis antigua Oracle:\nSELECT e.nombres, d.nombre_departamento\nFROM empleados e, departamentos d\nWHERE e.id_departamento = d.id_departamento;",
+    "language": "sql",
+    "options": [
+      "Porque no es válida en Oracle 19c o superior",
+      "Porque es un join implícito en el WHERE, menos claro que la sintaxis ANSI JOIN ... ON",
+      "Porque siempre produce un producto cartesiano",
+      "Porque no permite usar alias de tabla"
+    ],
+    "correctIndex": 1,
+    "explanation": "Esta es la sintaxis antigua de join implícito; se recomienda la sintaxis ANSI moderna (JOIN ... ON) por ser más clara y menos propensa a errores como olvidar la condición.",
+    "source": "sql-oracle-guide.md"
+  },
+  {
+    "id": "oracle-092",
+    "category": "sql-oracle",
+    "topic": "DQL: SELECT, JOIN y subconsultas",
+    "question": "¿Qué devuelve esta consulta?",
+    "code": "SELECT e.nombres\nFROM empleados e\nWHERE NOT EXISTS (SELECT 1 FROM empleado_proyecto ep WHERE ep.id_empleado = e.id_empleado);",
+    "language": "sql",
+    "options": [
+      "Los nombres de los empleados que SÍ tienen al menos un proyecto asignado",
+      "Los nombres de los empleados que NO tienen ningún proyecto asignado",
+      "Todos los empleados, sin excepción",
+      "Los nombres de los proyectos sin empleados asignados"
+    ],
+    "correctIndex": 1,
+    "explanation": "NOT EXISTS devuelve las filas externas para las que la subconsulta correlacionada no encuentra ninguna coincidencia: empleados sin proyectos.",
+    "source": "sql-oracle-guide.md"
+  },
+  {
+    "id": "oracle-093",
+    "category": "sql-oracle",
+    "topic": "DQL: SELECT, JOIN y subconsultas",
+    "question": "¿Cuál es la 'trampa' clásica de usar NOT IN con una subconsulta cuya columna puede contener valores NULL?",
+    "options": [
+      "NOT IN convierte automáticamente los valores NULL en 0 antes de comparar, evitando el problema",
+      "Si la subconsulta devuelve al menos un NULL, NOT IN no devuelve ninguna fila; se recomienda NOT EXISTS en ese caso",
+      "NOT IN ignora automáticamente los valores NULL sin problema",
+      "No existe ninguna trampa, NOT IN y NOT EXISTS son siempre equivalentes"
+    ],
+    "correctIndex": 1,
+    "explanation": "Si la subconsulta de un NOT IN devuelve algún NULL, la condición completa nunca es verdadera, por lo que la consulta no devuelve filas; NOT EXISTS evita este problema.",
+    "source": "sql-oracle-guide.md"
+  },
+  {
+    "id": "oracle-094",
+    "category": "sql-oracle",
+    "topic": "DQL: SELECT, JOIN y subconsultas",
+    "question": "¿Qué tipo de subconsulta es esta y qué obtiene la consulta completa?",
+    "code": "SELECT e.nombres, e.salario\nFROM empleados e\nWHERE e.salario > (\n    SELECT AVG(e2.salario) FROM empleados e2 WHERE e2.id_departamento = e.id_departamento\n);",
+    "language": "sql",
+    "options": [
+      "Una subconsulta no correlacionada; obtiene empleados que ganan más que el promedio general de la empresa",
+      "Una subconsulta correlacionada; obtiene empleados que ganan más que el promedio de salario de su propio departamento",
+      "Una subconsulta escalar en el SELECT; no se puede usar en WHERE",
+      "Una subconsulta en el FROM (tabla derivada)"
+    ],
+    "correctIndex": 1,
+    "explanation": "Es correlacionada porque referencia e.id_departamento de la consulta externa; obtiene empleados que ganan más que el promedio de SU propio departamento.",
+    "source": "sql-oracle-guide.md"
+  },
+  {
+    "id": "oracle-095",
+    "category": "sql-oracle",
+    "topic": "DQL: SELECT, JOIN y subconsultas",
+    "question": "¿Qué diferencia hay entre una subconsulta no correlacionada y una correlacionada?",
+    "options": [
+      "La no correlacionada requiere JOIN; la correlacionada no",
+      "La no correlacionada se ejecuta una sola vez de forma independiente; la correlacionada se re-ejecuta por cada fila de la consulta externa porque referencia columnas de esta",
+      "Son términos equivalentes en Oracle",
+      "La correlacionada solo puede usarse en el FROM"
+    ],
+    "correctIndex": 1,
+    "explanation": "Una subconsulta correlacionada depende de valores de la fila externa y se reevalúa por cada una; una no correlacionada se calcula una sola vez.",
+    "source": "sql-oracle-guide.md"
+  },
+  {
+    "id": "oracle-096",
+    "category": "sql-oracle",
+    "topic": "DQL: SELECT, JOIN y subconsultas",
+    "question": "¿Qué es 'resumen_departamento' en esta consulta?",
+    "code": "WITH resumen_departamento AS (\n    SELECT id_departamento, COUNT(*) AS total, AVG(salario) AS promedio\n    FROM empleados\n    GROUP BY id_departamento\n)\nSELECT d.nombre_departamento, r.total, r.promedio\nFROM resumen_departamento r\nJOIN departamentos d ON d.id_departamento = r.id_departamento;",
+    "language": "sql",
+    "options": [
+      "Una vista física almacenada en el diccionario de datos",
+      "Una Common Table Expression (CTE) definida con WITH: una subconsulta con nombre reutilizable en el resto de la sentencia",
+      "Un sinónimo de la tabla departamentos",
+      "Una tabla temporal creada implícitamente y persistida entre sesiones"
+    ],
+    "correctIndex": 1,
+    "explanation": "WITH nombre AS (...) define una CTE: una subconsulta con nombre que se puede referenciar como si fuera una tabla dentro de la misma sentencia.",
+    "source": "sql-oracle-guide.md"
+  },
+  {
+    "id": "oracle-097",
+    "category": "sql-oracle",
+    "topic": "DQL: SELECT, JOIN y subconsultas",
+    "question": "¿Qué representa esta CTE?",
+    "code": "WITH jerarquia (id_empleado, nombres, id_jefe, nivel) AS (\n    SELECT id_empleado, nombres, id_jefe, 0\n    FROM empleados WHERE id_jefe IS NULL\n    UNION ALL\n    SELECT e.id_empleado, e.nombres, e.id_jefe, j.nivel + 1\n    FROM empleados e\n    JOIN jerarquia j ON e.id_jefe = j.id_empleado\n)\nSELECT * FROM jerarquia ORDER BY nivel;",
+    "language": "sql",
+    "options": [
+      "Una CTE recursiva, alternativa moderna a CONNECT BY, que recorre la jerarquía de empleados desde la raíz hacia abajo",
+      "Una CTE no recursiva que simplemente reordena las filas según el valor de id_jefe",
+      "Un error de sintaxis, porque una CTE no puede referenciarse a sí misma",
+      "El equivalente exacto de CONNECT BY, pero limitado a recorrer un único nivel de profundidad"
+    ],
+    "correctIndex": 0,
+    "explanation": "La CTE se referencia a sí misma (jerarquia) dentro de la parte UNION ALL, lo que la hace recursiva: una alternativa moderna a CONNECT BY.",
+    "source": "sql-oracle-guide.md"
+  },
+  {
+    "id": "oracle-098",
+    "category": "sql-oracle",
+    "topic": "DQL: SELECT, JOIN y subconsultas",
+    "question": "¿Qué devuelve esta consulta?",
+    "code": "SELECT nombres, salario FROM empleados\nORDER BY salario DESC\nFETCH FIRST 5 ROWS ONLY;",
+    "language": "sql",
+    "options": [
+      "Los 5 empleados con el salario MÁS BAJO",
+      "Los 5 empleados con el salario MÁS ALTO",
+      "Los primeros 5 empleados insertados en la tabla, sin importar el salario",
+      "Un error, porque FETCH FIRST no existe en Oracle"
+    ],
+    "correctIndex": 1,
+    "explanation": "El ORDER BY salario DESC ordena de mayor a menor, y FETCH FIRST 5 ROWS ONLY toma las primeras 5 filas de ese resultado ya ordenado.",
+    "source": "sql-oracle-guide.md"
+  },
+  {
+    "id": "oracle-099",
+    "category": "sql-oracle",
+    "topic": "Funciones analíticas (window functions)",
+    "question": "Si dos empleados del mismo departamento están empatados en el salario más alto, ¿qué diferencia habrá entre RANK y DENSE_RANK para el siguiente empleado en ese departamento?",
+    "code": "SELECT nombres, salario, id_departamento,\n       RANK()       OVER (PARTITION BY id_departamento ORDER BY salario DESC) AS rango,\n       DENSE_RANK() OVER (PARTITION BY id_departamento ORDER BY salario DESC) AS rango_denso\nFROM empleados;",
+    "language": "sql",
+    "options": [
+      "No hay ninguna diferencia entre ambas funciones",
+      "RANK dejará un hueco en la numeración (pasará de 1,1 a 3); DENSE_RANK seguirá consecutivo (1,1 a 2)",
+      "DENSE_RANK dejará el hueco; RANK será siempre consecutivo",
+      "Ambas asignarán exactamente el mismo número a los empatados, y ninguna dejará huecos en la numeración siguiente"
+    ],
+    "correctIndex": 1,
+    "explanation": "RANK deja 'huecos' en la numeración tras un empate; DENSE_RANK no deja huecos y continúa con el siguiente número consecutivo.",
+    "source": "sql-oracle-guide.md"
+  },
+  {
+    "id": "oracle-100",
+    "category": "sql-oracle",
+    "topic": "Funciones analíticas (window functions)",
+    "question": "¿Qué hace la cláusula PARTITION BY dentro de una función de ventana?",
+    "options": [
+      "Elimina las filas duplicadas del resultado",
+      "Divide el conjunto de filas en grupos, y la función se calcula de forma independiente dentro de cada grupo, sin colapsar el resultado como GROUP BY",
+      "Ordena físicamente la tabla en disco",
+      "Crea una partición física de la tabla"
+    ],
+    "correctIndex": 1,
+    "explanation": "PARTITION BY agrupa lógicamente las filas para el cálculo de la función de ventana, pero el resultado conserva una fila por cada fila original.",
+    "source": "sql-oracle-guide.md"
+  },
+  {
+    "id": "oracle-101",
+    "category": "sql-oracle",
+    "topic": "Funciones analíticas (window functions)",
+    "question": "¿Qué calcula la columna nomina_acumulada?",
+    "code": "SELECT nombres, fecha_contratacion, salario,\n       SUM(salario) OVER (ORDER BY fecha_contratacion) AS nomina_acumulada\nFROM empleados;",
+    "language": "sql",
+    "options": [
+      "El salario promedio de todos los empleados",
+      "Un total acumulado (running total) de salario ordenado por fecha de contratación",
+      "El salario máximo histórico",
+      "La diferencia entre el salario actual y el anterior"
+    ],
+    "correctIndex": 1,
+    "explanation": "SUM(salario) OVER (ORDER BY fecha_contratacion), sin PARTITION BY, calcula un total acumulado fila a fila según el orden indicado.",
+    "source": "sql-oracle-guide.md"
+  },
+  {
+    "id": "oracle-102",
+    "category": "sql-oracle",
+    "topic": "Funciones analíticas (window functions)",
+    "question": "¿Para qué sirven las funciones de ventana LAG y LEAD?",
+    "options": [
+      "Para calcular el promedio y la suma de una partición",
+      "Para comparar el valor de una fila con el de la fila anterior (LAG) o siguiente (LEAD) según un orden dado",
+      "Para eliminar filas duplicadas de un resultado",
+      "Para convertir una fecha a otro formato"
+    ],
+    "correctIndex": 1,
+    "explanation": "LAG accede al valor de una fila anterior y LEAD al de una fila posterior, dentro de un orden definido por ORDER BY en la ventana.",
+    "source": "sql-oracle-guide.md"
+  },
+  {
+    "id": "oracle-103",
+    "category": "sql-oracle",
+    "topic": "Funciones analíticas (window functions)",
+    "question": "¿Qué calcula RATIO_TO_REPORT(salario) OVER (PARTITION BY id_departamento)?",
+    "code": "SELECT id_departamento, nombres, salario,\n       ROUND(RATIO_TO_REPORT(salario) OVER (PARTITION BY id_departamento) * 100, 2) AS pct_del_departamento\nFROM empleados;",
+    "language": "sql",
+    "options": [
+      "La proporción (ratio) que representa el salario de cada empleado respecto al total de salarios de su departamento",
+      "La diferencia entre el salario del empleado y el promedio de la empresa",
+      "El número de empleados de cada departamento",
+      "El salario máximo de cada departamento"
+    ],
+    "correctIndex": 0,
+    "explanation": "RATIO_TO_REPORT calcula la proporción que representa cada valor respecto al total de su partición (aquí, cada departamento).",
+    "source": "sql-oracle-guide.md"
+  },
+  {
+    "id": "oracle-104",
+    "category": "sql-oracle",
+    "topic": "Funciones analíticas (window functions)",
+    "question": "¿Qué tipo de cálculo realiza esta consulta?",
+    "code": "SELECT nombres, fecha_contratacion, salario,\n       AVG(salario) OVER (ORDER BY fecha_contratacion ROWS BETWEEN 2 PRECEDING AND CURRENT ROW) AS promedio_movil_3\nFROM empleados;",
+    "language": "sql",
+    "options": [
+      "El promedio general de todos los salarios",
+      "Un promedio móvil de 3 filas (la actual y las 2 anteriores), usando un marco explícito ROWS BETWEEN",
+      "El promedio acumulado desde el inicio hasta la fila actual",
+      "El promedio de solo las 2 filas siguientes"
+    ],
+    "correctIndex": 1,
+    "explanation": "ROWS BETWEEN 2 PRECEDING AND CURRENT ROW define un marco de 3 filas (2 anteriores + la actual) sobre el cual se calcula el promedio.",
+    "source": "sql-oracle-guide.md"
+  },
+  {
+    "id": "oracle-105",
+    "category": "sql-oracle",
+    "topic": "Funciones analíticas (window functions)",
+    "question": "¿Cuál es la diferencia principal entre una función de ventana (window function) y GROUP BY?",
+    "options": [
+      "No hay diferencia, son sinónimos",
+      "La función de ventana calcula un valor por cada fila sin colapsar el resultado; GROUP BY agrupa y reduce el número de filas devueltas",
+      "Las funciones de ventana requieren siempre una cláusula GROUP BY explícita en la misma consulta para poder usarse",
+      "Las funciones de ventana no admiten ORDER BY"
+    ],
+    "correctIndex": 1,
+    "explanation": "Las funciones de ventana (OVER) calculan valores considerando un conjunto de filas relacionadas, pero mantienen una fila de salida por cada fila de entrada, a diferencia de GROUP BY.",
+    "source": "sql-oracle-guide.md"
+  },
+  {
+    "id": "oracle-106",
+    "category": "sql-oracle",
+    "topic": "Funciones analíticas (window functions)",
+    "question": "¿Qué función de ventana asigna un número secuencial único a cada fila dentro de su partición, sin dejar huecos ni repetir valores incluso en caso de empate?",
+    "options": [
+      "RANK()",
+      "DENSE_RANK()",
+      "ROW_NUMBER()",
+      "RATIO_TO_REPORT()"
+    ],
+    "correctIndex": 2,
+    "explanation": "ROW_NUMBER() siempre asigna un número consecutivo distinto por fila, incluso si hay empates en el criterio de ORDER BY.",
+    "source": "sql-oracle-guide.md"
+  },
+  {
+    "id": "oracle-107",
+    "category": "sql-oracle",
+    "topic": "Funciones analíticas (window functions)",
+    "question": "¿Qué obtiene esta consulta?",
+    "code": "WITH ranking AS (\n    SELECT nombres, salario, id_departamento,\n           RANK() OVER (PARTITION BY id_departamento ORDER BY salario DESC) AS puesto\n    FROM empleados\n)\nSELECT * FROM ranking WHERE puesto = 1;",
+    "language": "sql",
+    "options": [
+      "El empleado con el salario más bajo de toda la empresa",
+      "El empleado (o empleados, en caso de empate) con el salario más alto de cada departamento",
+      "El primer empleado contratado en cada departamento",
+      "Todos los empleados ordenados por salario"
+    ],
+    "correctIndex": 1,
+    "explanation": "RANK() con PARTITION BY id_departamento asigna puesto = 1 al empleado mejor pagado de cada departamento (o a todos los empatados en el primer lugar).",
+    "source": "sql-oracle-guide.md"
+  },
+  {
+    "id": "oracle-108",
+    "category": "sql-oracle",
+    "topic": "Funciones analíticas (window functions)",
+    "question": "¿Por qué generalmente no se puede filtrar directamente con `WHERE RANK() OVER (...) = 1` en la misma consulta donde se calcula esa función de ventana?",
+    "options": [
+      "Porque WHERE solo puede evaluar columnas físicas de la tabla, nunca el resultado de ninguna función calculada en el SELECT",
+      "Porque las funciones de ventana se evalúan después de WHERE en el orden lógico de ejecución, por lo que hay que envolver la consulta en una subconsulta o CTE para filtrar sobre su resultado",
+      "Porque RANK() solo puede usarse en el ORDER BY",
+      "Sí se puede hacer directamente sin ninguna restricción"
+    ],
+    "correctIndex": 1,
+    "explanation": "Como WHERE se evalúa antes que SELECT (donde se calculan las funciones de ventana), hay que envolver la consulta con la función de ventana en una subconsulta o CTE y filtrar en el nivel externo.",
+    "source": "sql-oracle-guide.md"
+  },
+  {
+    "id": "oracle-109",
+    "category": "sql-oracle",
+    "topic": "Consultas jerárquicas CONNECT BY",
+    "question": "¿Qué indica la cláusula START WITH id_jefe IS NULL en esta consulta jerárquica?",
+    "code": "SELECT LPAD(' ', 2 * (LEVEL - 1)) || nombres AS organigrama, LEVEL\nFROM empleados\nSTART WITH id_jefe IS NULL\nCONNECT BY PRIOR id_empleado = id_jefe;",
+    "language": "sql",
+    "options": [
+      "Que se debe ignorar cualquier fila sin jefe",
+      "Define la(s) fila(s) raíz de la jerarquía: los empleados que no tienen jefe",
+      "Ordena el resultado alfabéticamente",
+      "Limita la consulta a un solo nivel de profundidad"
+    ],
+    "correctIndex": 1,
+    "explanation": "START WITH determina el punto de partida (raíz) de la jerarquía; aquí son los empleados sin jefe asignado (los de más alto nivel).",
+    "source": "sql-oracle-guide.md"
+  },
+  {
+    "id": "oracle-110",
+    "category": "sql-oracle",
+    "topic": "Consultas jerárquicas CONNECT BY",
+    "question": "En `CONNECT BY PRIOR id_empleado = id_jefe`, ¿qué relación describe PRIOR?",
+    "options": [
+      "Que el id_jefe de la fila padre debe coincidir con el id_empleado de la fila actual",
+      "Que el id_empleado de la fila 'padre' (anterior) debe coincidir con el id_jefe de la fila actual, recorriendo la jerarquía hacia abajo",
+      "Compara el nivel de la fila actual con el de su padre para detectar y romper bucles infinitos",
+      "Limita la profundidad máxima de la jerarquía al valor devuelto por LEVEL"
+    ],
+    "correctIndex": 1,
+    "explanation": "PRIOR se refiere a la fila 'padre' en el paso anterior de la recursión; aquí conecta el id_empleado del padre con el id_jefe del hijo actual, bajando en la jerarquía.",
+    "source": "sql-oracle-guide.md"
+  },
+  {
+    "id": "oracle-111",
+    "category": "sql-oracle",
+    "topic": "Consultas jerárquicas CONNECT BY",
+    "question": "¿Qué pseudo-columna indica el nivel de profundidad de una fila dentro de la jerarquía, empezando en 1 para la raíz?",
+    "options": [
+      "ROWNUM",
+      "LEVEL",
+      "DEPTH",
+      "RANK"
+    ],
+    "correctIndex": 1,
+    "explanation": "LEVEL es una pseudo-columna exclusiva de las consultas CONNECT BY que indica la profundidad de cada fila en la jerarquía.",
+    "source": "sql-oracle-guide.md"
+  },
+  {
+    "id": "oracle-112",
+    "category": "sql-oracle",
+    "topic": "Consultas jerárquicas CONNECT BY",
+    "question": "¿En qué dirección recorre la jerarquía esta consulta, comparada con `CONNECT BY PRIOR id_empleado = id_jefe`?",
+    "code": "SELECT nombres, LEVEL\nFROM empleados\nSTART WITH id_empleado = 105\nCONNECT BY id_empleado = PRIOR id_jefe;",
+    "language": "sql",
+    "options": [
+      "Recorre exactamente en la misma dirección, hacia los subordinados",
+      "Recorre hacia arriba: desde el empleado 105 hacia sus jefes sucesivos, en vez de hacia sus subordinados",
+      "No tiene ninguna dirección definida",
+      "Solo devuelve al propio empleado 105, sin recorrer nada más"
+    ],
+    "correctIndex": 1,
+    "explanation": "Al invertir PRIOR (id_empleado = PRIOR id_jefe) la consulta sube en la jerarquía: desde un empleado hacia sus jefes sucesivos.",
+    "source": "sql-oracle-guide.md"
+  },
+  {
+    "id": "oracle-113",
+    "category": "sql-oracle",
+    "topic": "Consultas jerárquicas CONNECT BY",
+    "question": "¿Para qué sirve la función SYS_CONNECT_BY_PATH?",
+    "options": [
+      "Para calcular el nivel numérico de una fila",
+      "Para construir, como texto, la ruta completa desde la raíz hasta la fila actual dentro de la jerarquía",
+      "Para eliminar ramas completas de la jerarquía",
+      "Para invertir el orden de recorrido de la jerarquía"
+    ],
+    "correctIndex": 1,
+    "explanation": "SYS_CONNECT_BY_PATH(columna, separador) concatena los valores de la columna de todos los ancestros hasta la fila actual, formando una ruta de texto.",
+    "source": "sql-oracle-guide.md"
+  },
+  {
+    "id": "oracle-114",
+    "category": "sql-oracle",
+    "topic": "Consultas jerárquicas CONNECT BY",
+    "question": "¿Qué tipo de valor produce SYS_CONNECT_BY_PATH(nombres, ' > ') para un empleado de tercer nivel de jerarquía?",
+    "code": "SELECT id_empleado, SYS_CONNECT_BY_PATH(nombres, ' > ') AS ruta_jerarquica\nFROM empleados\nSTART WITH id_jefe IS NULL\nCONNECT BY PRIOR id_empleado = id_jefe;",
+    "language": "sql",
+    "options": [
+      "Solo el nombre del empleado, sin ningún separador",
+      "El nivel numérico del empleado (un número)",
+      "Una cadena de texto con los nombres de todos los ancestros hasta la raíz, separados por ' > '",
+      "Un array con los id de todos los ancestros"
+    ],
+    "correctIndex": 2,
+    "explanation": "SYS_CONNECT_BY_PATH concatena el valor de la columna indicada para cada nivel de la ruta desde la raíz hasta la fila actual, separados por el delimitador dado.",
+    "source": "sql-oracle-guide.md"
+  },
+  {
+    "id": "oracle-115",
+    "category": "sql-oracle",
+    "topic": "Consultas jerárquicas CONNECT BY",
+    "question": "¿Qué hace CONNECT_BY_ROOT aplicado a una columna dentro de una consulta jerárquica?",
+    "options": [
+      "Devuelve el valor de esa columna correspondiente a la fila raíz de la rama a la que pertenece la fila actual",
+      "Devuelve el valor de la columna de la fila inmediatamente inferior",
+      "Elimina la fila raíz del resultado",
+      "Cuenta cuántas ramas tiene la jerarquía"
+    ],
+    "correctIndex": 0,
+    "explanation": "CONNECT_BY_ROOT permite obtener, en cualquier fila de la jerarquía, el valor correspondiente a la raíz de su rama, sin necesidad de cortar ramas completas al filtrar.",
+    "source": "sql-oracle-guide.md"
+  },
+  {
+    "id": "oracle-116",
+    "category": "sql-oracle",
+    "topic": "Consultas jerárquicas CONNECT BY",
+    "question": "¿Qué alternativa moderna (no exclusiva de Oracle) existe para recorrer jerarquías, además de CONNECT BY?",
+    "options": [
+      "Un CTE recursivo (WITH ... UNION ALL con referencia recursiva a sí mismo)",
+      "El operador MINUS",
+      "La función DECODE",
+      "Las funciones de agregación con ROLLUP"
+    ],
+    "correctIndex": 0,
+    "explanation": "Un CTE recursivo definido con WITH y UNION ALL (donde la CTE se referencia a sí misma) es la alternativa moderna y estándar a CONNECT BY.",
+    "source": "sql-oracle-guide.md"
+  },
+  {
+    "id": "oracle-117",
+    "category": "sql-oracle",
+    "topic": "Consultas jerárquicas CONNECT BY",
+    "question": "En una consulta CONNECT BY, ¿para qué se usa típicamente `LPAD(' ', 2 * (LEVEL - 1)) || nombres`?",
+    "options": [
+      "Para calcular el salario acumulado de cada nivel",
+      "Para generar una indentación visual (sangría) que refleje el nivel jerárquico de cada fila, simulando un organigrama",
+      "Para ordenar alfabéticamente los nombres",
+      "Para contar cuántos hijos tiene cada fila"
+    ],
+    "correctIndex": 1,
+    "explanation": "LPAD agrega espacios proporcionales al LEVEL antes del nombre, generando una sangría visual típica de un organigrama en texto plano.",
+    "source": "sql-oracle-guide.md"
+  },
+  {
+    "id": "oracle-118",
+    "category": "sql-oracle",
+    "topic": "Consultas jerárquicas CONNECT BY",
+    "question": "¿Qué cláusula/palabra clave de Oracle es exclusiva de su sintaxis jerárquica y no forma parte del estándar SQL genérico?",
+    "options": [
+      "JOIN",
+      "GROUP BY",
+      "CONNECT BY",
+      "UNION ALL"
+    ],
+    "correctIndex": 2,
+    "explanation": "CONNECT BY (junto con START WITH, PRIOR, LEVEL) es sintaxis jerárquica propia de Oracle; otros motores usan CTE recursivos en su lugar.",
+    "source": "sql-oracle-guide.md"
+  },
+  {
+    "id": "oracle-119",
+    "category": "sql-oracle",
+    "topic": "Operadores de conjuntos y funciones escalares",
+    "question": "¿Qué diferencia hay entre UNION y UNION ALL?",
+    "options": [
+      "UNION elimina filas duplicadas del resultado combinado; UNION ALL las conserva (y es más rápido)",
+      "UNION ALL elimina duplicados; UNION los conserva",
+      "Son exactamente equivalentes en rendimiento y resultado",
+      "UNION solo funciona con columnas numéricas"
+    ],
+    "correctIndex": 0,
+    "explanation": "UNION combina y elimina duplicados (requiere una comparación adicional); UNION ALL simplemente concatena los resultados, sin eliminar duplicados, por lo que es más rápido.",
+    "source": "sql-oracle-guide.md"
+  },
+  {
+    "id": "oracle-120",
+    "category": "sql-oracle",
+    "topic": "Operadores de conjuntos y funciones escalares",
+    "question": "¿Qué operador de conjuntos usa Oracle, en vez del EXCEPT de otros motores, para obtener las filas del primer resultado que no están en el segundo?",
+    "options": [
+      "DIFFERENCE",
+      "MINUS",
+      "NOT IN",
+      "SUBTRACT"
+    ],
+    "correctIndex": 1,
+    "explanation": "Oracle usa MINUS en lugar de EXCEPT para esta operación de conjuntos.",
+    "source": "sql-oracle-guide.md"
+  },
+  {
+    "id": "oracle-121",
+    "category": "sql-oracle",
+    "topic": "Operadores de conjuntos y funciones escalares",
+    "question": "¿Qué devuelve el operador INTERSECT?",
+    "options": [
+      "Todas las filas de ambas consultas combinadas",
+      "Solo las filas presentes en AMBOS resultados de las consultas combinadas",
+      "Solo las filas presentes en la primera consulta pero no en la segunda",
+      "Las filas que están duplicadas dentro de una misma consulta"
+    ],
+    "correctIndex": 1,
+    "explanation": "INTERSECT devuelve únicamente las filas que aparecen en ambos resultados combinados.",
+    "source": "sql-oracle-guide.md"
+  },
+  {
+    "id": "oracle-122",
+    "category": "sql-oracle",
+    "topic": "Operadores de conjuntos y funciones escalares",
+    "question": "¿Qué requisito deben cumplir dos consultas para poder combinarse con un operador de conjuntos (UNION, INTERSECT, MINUS)?",
+    "options": [
+      "Deben devolver exactamente el mismo número de filas en ambos resultados",
+      "Deben devolver el mismo número de columnas, con tipos de datos compatibles entre sí",
+      "Deben tener exactamente los mismos alias de columna",
+      "El nombre de cada columna debe coincidir literalmente entre ambas consultas"
+    ],
+    "correctIndex": 1,
+    "explanation": "La regla de oro de los operadores de conjuntos es que ambas consultas devuelvan el mismo número de columnas con tipos compatibles.",
+    "source": "sql-oracle-guide.md"
+  },
+  {
+    "id": "oracle-123",
+    "category": "sql-oracle",
+    "topic": "Operadores de conjuntos y funciones escalares",
+    "question": "¿Qué hace INITCAP sobre un texto?",
+    "code": "SELECT UPPER(nombres), LOWER(apellidos), INITCAP(nombres), SUBSTR(nombres, 1, 3)\nFROM empleados;",
+    "language": "sql",
+    "options": [
+      "Convierte todo el texto a mayúsculas",
+      "Pone en mayúscula la primera letra de cada palabra y el resto en minúscula",
+      "Elimina los espacios al inicio y al final del texto",
+      "Devuelve solo los primeros 3 caracteres"
+    ],
+    "correctIndex": 1,
+    "explanation": "INITCAP capitaliza la primera letra de cada palabra, dejando el resto en minúsculas (ej. 'ana garcía' → 'Ana García').",
+    "source": "sql-oracle-guide.md"
+  },
+  {
+    "id": "oracle-124",
+    "category": "sql-oracle",
+    "topic": "Operadores de conjuntos y funciones escalares",
+    "question": "¿Qué valores devuelven con_round y con_trunc respectivamente para un salario de 45800?",
+    "code": "-- Para un salario de 45800\nSELECT ROUND(salario, -3) AS con_round, TRUNC(salario, -3) AS con_trunc FROM empleados;",
+    "language": "sql",
+    "options": [
+      "con_round = 45000, con_trunc = 46000",
+      "con_round = 46000, con_trunc = 45000",
+      "Ambos devuelven 45000",
+      "Ambos devuelven 46000"
+    ],
+    "correctIndex": 1,
+    "explanation": "ROUND redondea a la unidad de mil más cercana (45800 → 46000); TRUNC simplemente corta sin redondear (45800 → 45000).",
+    "source": "sql-oracle-guide.md"
+  },
+  {
+    "id": "oracle-125",
+    "category": "sql-oracle",
+    "topic": "Operadores de conjuntos y funciones escalares",
+    "question": "¿Qué diferencia hay entre NVL y NVL2?",
+    "code": "SELECT nombres,\n       NVL(telefono, 'Sin teléfono') AS telefono_o_default,\n       NVL2(telefono, 'Tiene teléfono', 'No tiene') AS estado_contacto\nFROM empleados;",
+    "language": "sql",
+    "options": [
+      "Son exactamente iguales, solo cambia el nombre",
+      "NVL devuelve un valor de reemplazo solo si la expresión es NULL; NVL2 devuelve un valor distinto según si la expresión ES o NO ES NULL",
+      "NVL2 solo funciona con números; NVL solo con texto",
+      "NVL requiere exactamente 3 argumentos; NVL2 solo 2"
+    ],
+    "correctIndex": 1,
+    "explanation": "NVL(expr, reemplazo) sustituye NULL por un único valor; NVL2(expr, valor_si_no_null, valor_si_null) permite dos resultados distintos según el caso.",
+    "source": "sql-oracle-guide.md"
+  },
+  {
+    "id": "oracle-126",
+    "category": "sql-oracle",
+    "topic": "Operadores de conjuntos y funciones escalares",
+    "question": "¿Qué hace la función `COALESCE(telefono, email, 'Sin datos de contacto')`?",
+    "options": [
+      "Concatena telefono, email y el texto en una sola cadena",
+      "Devuelve el primer valor no NULL de la lista, en orden, o el último valor si todos son NULL",
+      "Compara telefono con email y devuelve TRUE o FALSE",
+      "Solo funciona si telefono y email son del mismo tipo de dato exacto"
+    ],
+    "correctIndex": 1,
+    "explanation": "COALESCE devuelve el primer argumento no NULL de la lista, evaluados en orden.",
+    "source": "sql-oracle-guide.md"
+  },
+  {
+    "id": "oracle-127",
+    "category": "sql-oracle",
+    "topic": "Operadores de conjuntos y funciones escalares",
+    "question": "¿Qué categoria_salarial recibe un empleado con salario = 30000?",
+    "code": "SELECT nombres, salario,\n       CASE\n           WHEN salario >= 60000 THEN 'Alto'\n           WHEN salario >= 30000 THEN 'Medio'\n           ELSE 'Bajo'\n       END AS categoria_salarial\nFROM empleados;",
+    "language": "sql",
+    "options": [
+      "'Alto'",
+      "'Medio'",
+      "'Bajo'",
+      "NULL"
+    ],
+    "correctIndex": 1,
+    "explanation": "30000 no cumple >= 60000, pero sí cumple >= 30000, por lo que cae en la rama 'Medio'.",
+    "source": "sql-oracle-guide.md"
+  },
+  {
+    "id": "oracle-128",
+    "category": "sql-oracle",
+    "topic": "Operadores de conjuntos y funciones escalares",
+    "question": "¿Qué hace esta función DECODE?",
+    "code": "SELECT DECODE(id_departamento, 10, 'Tecnología', 20, 'Ventas', 'Otro') AS depto_legible\nFROM empleados;",
+    "language": "sql",
+    "options": [
+      "Compara id_departamento contra una lista de valores y devuelve el resultado asociado al primero que coincida, o 'Otro' si ninguno coincide",
+      "Descodifica una columna cifrada",
+      "Convierte id_departamento a texto en formato binario",
+      "Es idéntica a NVL, solo con distinto nombre"
+    ],
+    "correctIndex": 0,
+    "explanation": "DECODE(expr, valor1, resultado1, valor2, resultado2, ..., default) compara por igualdad y devuelve el resultado asociado o el valor por defecto.",
+    "source": "sql-oracle-guide.md"
+  },
+  {
+    "id": "oracle-129",
+    "category": "sql-oracle",
+    "topic": "Operadores de conjuntos y funciones escalares",
+    "question": "¿Qué operador se usa en Oracle SQL para concatenar cadenas de texto?",
+    "options": [
+      "+",
+      "&",
+      "||",
+      "CONCAT_ALL"
+    ],
+    "correctIndex": 2,
+    "explanation": "Oracle usa el operador || para concatenar texto, por ejemplo: nombres || ' ' || apellidos.",
+    "source": "sql-oracle-guide.md"
+  },
+  {
+    "id": "oracle-130",
+    "category": "sql-oracle",
+    "topic": "Operadores de conjuntos y funciones escalares",
+    "question": "¿Qué diferencia hay entre CASE y DECODE como estructuras condicionales en Oracle SQL?",
+    "options": [
+      "Son exactamente equivalentes en todos los casos",
+      "CASE admite condiciones lógicas arbitrarias (rangos, comparaciones complejas); DECODE solo compara igualdad de valores exactos",
+      "DECODE admite rangos; CASE solo compara igualdad",
+      "CASE no puede usarse dentro de un SELECT"
+    ],
+    "correctIndex": 1,
+    "explanation": "CASE WHEN admite cualquier condición lógica (>=, BETWEEN, etc.); DECODE solo compara el valor de una expresión contra valores exactos.",
+    "source": "sql-oracle-guide.md"
+  },
+  {
+    "id": "oracle-131",
+    "category": "sql-oracle",
+    "topic": "DCL: privilegios y roles",
+    "question": "¿Qué diferencia hay entre un privilegio de sistema y un privilegio de objeto?",
+    "options": [
+      "El de sistema controla acciones a nivel de toda la base de datos (ej. CREATE TABLE); el de objeto controla acciones sobre un objeto específico (ej. SELECT sobre una tabla)",
+      "Son sinónimos, no hay diferencia real",
+      "El de objeto siempre incluye al de sistema",
+      "Un privilegio de objeto solo es válido si se otorga junto con WITH GRANT OPTION"
+    ],
+    "correctIndex": 0,
+    "explanation": "Privilegios de sistema (CREATE SESSION, CREATE TABLE, CREATE USER) actúan a nivel de base de datos; privilegios de objeto (SELECT, INSERT, EXECUTE) actúan sobre un objeto concreto.",
+    "source": "sql-oracle-guide.md"
+  },
+  {
+    "id": "oracle-132",
+    "category": "sql-oracle",
+    "topic": "DCL: privilegios y roles",
+    "question": "¿A quién afecta este otorgamiento cuando el destinatario es PUBLIC?",
+    "code": "GRANT SELECT ON rrhh.empleados TO PUBLIC;",
+    "language": "sql",
+    "options": [
+      "Solo al usuario SYSTEM",
+      "A todos los usuarios de la base de datos",
+      "Solo a los usuarios que ya tienen algún privilegio sobre rrhh.empleados",
+      "A nadie, PUBLIC es un marcador reservado sin efecto"
+    ],
+    "correctIndex": 1,
+    "explanation": "PUBLIC representa a todos los usuarios de la base de datos; otorgar un privilegio a PUBLIC lo hace disponible para cualquiera.",
+    "source": "sql-oracle-guide.md"
+  },
+  {
+    "id": "oracle-133",
+    "category": "sql-oracle",
+    "topic": "DCL: privilegios y roles",
+    "question": "¿Qué hace la cláusula WITH GRANT OPTION en este GRANT?",
+    "code": "GRANT SELECT ON rrhh.empleados TO lider_equipo WITH GRANT OPTION;",
+    "language": "sql",
+    "options": [
+      "Hace que el privilegio expire automáticamente en 30 días",
+      "Permite que lider_equipo, a su vez, otorgue ese mismo privilegio a otros usuarios",
+      "Restringe el privilegio solo a horario laboral",
+      "Otorga automáticamente el privilegio también a PUBLIC"
+    ],
+    "correctIndex": 1,
+    "explanation": "WITH GRANT OPTION permite que el usuario que recibe el privilegio pueda propagarlo, otorgándolo también a otros usuarios.",
+    "source": "sql-oracle-guide.md"
+  },
+  {
+    "id": "oracle-134",
+    "category": "sql-oracle",
+    "topic": "DCL: privilegios y roles",
+    "question": "¿Para qué sirve crear un ROLE en Oracle?",
+    "options": [
+      "Para definir un nuevo tipo de dato",
+      "Para agrupar varios privilegios y asignarlos en bloque a uno o más usuarios",
+      "Para crear una vista materializada",
+      "Para reemplazar el uso de tablespaces"
+    ],
+    "correctIndex": 1,
+    "explanation": "Un ROLE agrupa privilegios que luego se otorgan como un solo bloque a los usuarios que lo necesiten.",
+    "source": "sql-oracle-guide.md"
+  },
+  {
+    "id": "oracle-135",
+    "category": "sql-oracle",
+    "topic": "DCL: privilegios y roles",
+    "question": "Después de ejecutar estas sentencias, ¿qué privilegios tienen analista_junior y analista_senior?",
+    "code": "CREATE ROLE rol_analista;\nGRANT SELECT ON rrhh.empleados TO rol_analista;\nGRANT SELECT ON rrhh.departamentos TO rol_analista;\nGRANT rol_analista TO analista_junior, analista_senior;",
+    "language": "sql",
+    "options": [
+      "Ninguno, porque los roles no otorgan privilegios directamente",
+      "SELECT sobre rrhh.empleados y rrhh.departamentos, obtenidos indirectamente a través del rol rol_analista",
+      "Todos los privilegios de administrador",
+      "Solo el privilegio CREATE SESSION"
+    ],
+    "correctIndex": 1,
+    "explanation": "Al otorgar el rol rol_analista a ambos usuarios, heredan todos los privilegios que ese rol tiene asignados (SELECT sobre las dos tablas).",
+    "source": "sql-oracle-guide.md"
+  },
+  {
+    "id": "oracle-136",
+    "category": "sql-oracle",
+    "topic": "DCL: privilegios y roles",
+    "question": "¿Qué otorga típicamente el rol predefinido RESOURCE en Oracle?",
+    "options": [
+      "Privilegios totales de administrador",
+      "Privilegios para crear objetos propios como tablas y secuencias",
+      "Solo el privilegio de conectarse (CREATE SESSION)",
+      "Acceso de solo lectura a todas las tablas del sistema"
+    ],
+    "correctIndex": 1,
+    "explanation": "RESOURCE otorga privilegios para crear objetos propios (tablas, secuencias, etc.); CONNECT otorga privilegios básicos para conectarse.",
+    "source": "sql-oracle-guide.md"
+  },
+  {
+    "id": "oracle-137",
+    "category": "sql-oracle",
+    "topic": "DCL: privilegios y roles",
+    "question": "¿Por qué la guía recomienda usar este GRANT con muchísimo cuidado?",
+    "code": "GRANT DBA TO admin_user;",
+    "language": "sql",
+    "options": [
+      "Porque el rol DBA otorga privilegios totales de administrador sobre toda la base de datos",
+      "Porque DBA es un rol obsoleto sin ningún efecto real",
+      "Porque solo puede otorgarse una vez por base de datos",
+      "Porque requiere reiniciar la instancia después de ejecutarlo"
+    ],
+    "correctIndex": 0,
+    "explanation": "El rol DBA otorga privilegios totales de administrador, por lo que debe asignarse con extrema cautela.",
+    "source": "sql-oracle-guide.md"
+  },
+  {
+    "id": "oracle-138",
+    "category": "sql-oracle",
+    "topic": "DCL: privilegios y roles",
+    "question": "¿Qué vista del diccionario de datos muestra los privilegios de objeto otorgados AL usuario actual?",
+    "options": [
+      "user_sys_privs",
+      "user_tab_privs",
+      "dba_tab_privs",
+      "role_tab_privs"
+    ],
+    "correctIndex": 1,
+    "explanation": "user_tab_privs muestra los privilegios de objeto otorgados al usuario actual; user_sys_privs muestra los privilegios de sistema.",
+    "source": "sql-oracle-guide.md"
+  },
+  {
+    "id": "oracle-139",
+    "category": "sql-oracle",
+    "topic": "DCL: privilegios y roles",
+    "question": "¿Qué comando revoca un privilegio previamente otorgado con GRANT?",
+    "options": [
+      "DENY",
+      "REVOKE",
+      "DROP GRANT",
+      "UNGRANT"
+    ],
+    "correctIndex": 1,
+    "explanation": "REVOKE es el comando DCL que retira privilegios previamente otorgados, ya sea a un usuario o a un rol.",
+    "source": "sql-oracle-guide.md"
+  },
+  {
+    "id": "oracle-140",
+    "category": "sql-oracle",
+    "topic": "DCL: privilegios y roles",
+    "question": "¿Qué efecto tiene esta sentencia sobre analista_junior?",
+    "code": "REVOKE rol_analista FROM analista_junior;",
+    "language": "sql",
+    "options": [
+      "Se elimina la cuenta de analista_junior por completo",
+      "Pierde todos los privilegios que había recibido indirectamente a través del rol rol_analista",
+      "El rol rol_analista se elimina de la base de datos",
+      "No tiene ningún efecto porque los roles no se pueden revocar"
+    ],
+    "correctIndex": 1,
+    "explanation": "REVOKE rol FROM usuario quita el rol del usuario, y con él, todos los privilegios que recibía a través de ese rol.",
+    "source": "sql-oracle-guide.md"
+  },
+  {
+    "id": "oracle-141",
+    "category": "sql-oracle",
+    "topic": "TCL: control de transacciones",
+    "question": "¿Qué es una transacción en el contexto de TCL?",
+    "options": [
+      "Una sola sentencia SELECT",
+      "Un conjunto de una o más sentencias DML que se ejecutan como una unidad atómica: se aplican todas o ninguna",
+      "Cualquier sentencia DDL ejecutada en la base de datos",
+      "Un objeto físico dentro de un tablespace"
+    ],
+    "correctIndex": 1,
+    "explanation": "Una transacción agrupa una o más sentencias DML como una unidad atómica: o se confirman todas con COMMIT, o se deshacen todas con ROLLBACK.",
+    "source": "sql-oracle-guide.md"
+  },
+  {
+    "id": "oracle-142",
+    "category": "sql-oracle",
+    "topic": "TCL: control de transacciones",
+    "question": "Después de ejecutar este bloque, ¿el ROLLBACK final deshace el UPDATE anterior?",
+    "code": "UPDATE empleados SET salario = 99999 WHERE id_empleado = 100;\nCREATE TABLE tabla_cualquiera (x NUMBER);\nROLLBACK;",
+    "language": "sql",
+    "options": [
+      "Sí, ROLLBACK siempre deshace cualquier cambio pendiente",
+      "No, porque el CREATE TABLE (DDL) hizo COMMIT automático e implícito del UPDATE antes de ejecutarse",
+      "No, porque ROLLBACK solo puede deshacer sentencias DDL, nunca sentencias DML como UPDATE",
+      "Depende de si se ejecutó SET AUTOCOMMIT OFF antes"
+    ],
+    "correctIndex": 1,
+    "explanation": "Como CREATE TABLE es DDL, confirma automáticamente cualquier transacción DML pendiente antes de ejecutarse; el UPDATE queda comprometido y el ROLLBACK ya no puede revertirlo.",
+    "source": "sql-oracle-guide.md"
+  },
+  {
+    "id": "oracle-143",
+    "category": "sql-oracle",
+    "topic": "TCL: control de transacciones",
+    "question": "¿Qué deshace este ROLLBACK?",
+    "code": "INSERT INTO departamentos VALUES (80, 'Marketing', 'Guadalajara');\nUPDATE empleados SET id_departamento = 80 WHERE id_empleado = 101;\nROLLBACK;",
+    "language": "sql",
+    "options": [
+      "Solo el UPDATE, porque es la última sentencia ejecutada",
+      "Solo el INSERT",
+      "Ambas operaciones, el INSERT y el UPDATE, porque el ROLLBACK afecta a toda la transacción pendiente de la sesión",
+      "Ninguna de las dos, porque faltó un COMMIT previo para que ROLLBACK tenga efecto"
+    ],
+    "correctIndex": 2,
+    "explanation": "ROLLBACK afecta a toda la transacción pendiente de la sesión, no solo a la última sentencia; deshace tanto el INSERT como el UPDATE.",
+    "source": "sql-oracle-guide.md"
+  },
+  {
+    "id": "oracle-144",
+    "category": "sql-oracle",
+    "topic": "TCL: control de transacciones",
+    "question": "¿Qué cambios quedan finalmente confirmados con este COMMIT?",
+    "code": "UPDATE empleados SET salario = salario * 1.1 WHERE id_departamento = 10;\nSAVEPOINT despues_de_aumento;\n\nDELETE FROM empleados WHERE id_departamento = 10 AND salario > 100000;\nROLLBACK TO SAVEPOINT despues_de_aumento;\n\nCOMMIT;",
+    "language": "sql",
+    "options": [
+      "Solo el DELETE",
+      "Solo el UPDATE; el DELETE se deshace por el ROLLBACK TO SAVEPOINT",
+      "Ambos, el UPDATE y el DELETE",
+      "Ninguno, porque ROLLBACK TO SAVEPOINT deshace toda la transacción"
+    ],
+    "correctIndex": 1,
+    "explanation": "ROLLBACK TO SAVEPOINT despues_de_aumento deshace únicamente lo ejecutado después de ese savepoint (el DELETE), conservando el UPDATE previo; luego el COMMIT confirma lo que queda.",
+    "source": "sql-oracle-guide.md"
+  },
+  {
+    "id": "oracle-145",
+    "category": "sql-oracle",
+    "topic": "TCL: control de transacciones",
+    "question": "¿Qué ocurre cuando se reutiliza el mismo nombre de SAVEPOINT dos veces en la misma transacción?",
+    "code": "UPDATE empleados SET salario = 40000 WHERE id_empleado = 100;\nSAVEPOINT punto_control;\n\nUPDATE empleados SET salario = 45000 WHERE id_empleado = 101;\nSAVEPOINT punto_control;\n\nROLLBACK TO SAVEPOINT punto_control;",
+    "language": "sql",
+    "options": [
+      "Oracle lanza un error porque no se puede repetir un nombre de savepoint",
+      "El nombre pasa a apuntar al segundo SAVEPOINT, por lo que ROLLBACK TO solo deshace lo posterior a ese segundo punto",
+      "Se crean dos savepoints independientes con el mismo nombre",
+      "El primer SAVEPOINT tiene siempre prioridad sobre el segundo"
+    ],
+    "correctIndex": 1,
+    "explanation": "Al reutilizar el nombre, 'punto_control' se mueve al segundo SAVEPOINT; el ROLLBACK TO solo deshace lo ejecutado después de ese segundo punto de control.",
+    "source": "sql-oracle-guide.md"
+  },
+  {
+    "id": "oracle-146",
+    "category": "sql-oracle",
+    "topic": "TCL: control de transacciones",
+    "question": "¿Qué efecto tiene RELEASE SAVEPOINT sobre un punto de control?",
+    "options": [
+      "Ejecuta inmediatamente un ROLLBACK hasta ese savepoint",
+      "Libera el savepoint, de modo que ya no se puede hacer ROLLBACK TO ese nombre después de eso",
+      "Confirma (COMMIT) toda la transacción",
+      "Crea un nuevo savepoint con el mismo nombre"
+    ],
+    "correctIndex": 1,
+    "explanation": "RELEASE SAVEPOINT libera el punto de control indicado; a partir de ese momento ya no se puede usar ROLLBACK TO ese savepoint.",
+    "source": "sql-oracle-guide.md"
+  },
+  {
+    "id": "oracle-147",
+    "category": "sql-oracle",
+    "topic": "TCL: control de transacciones",
+    "question": "¿Qué garantiza SET TRANSACTION READ ONLY durante el resto de la transacción?",
+    "code": "SET TRANSACTION READ ONLY;\nSELECT COUNT(*) FROM empleados;\nSELECT SUM(salario) FROM empleados;\nCOMMIT;",
+    "language": "sql",
+    "options": [
+      "Que ninguna otra sesión pueda leer la tabla empleados mientras dure",
+      "Que todas las consultas dentro de esa transacción ven una foto (snapshot) consistente de los datos, sin cambios de otras transacciones concurrentes",
+      "Que las consultas se ejecuten más rápido automáticamente",
+      "Que se bloqueen todas las filas de la tabla empleados"
+    ],
+    "correctIndex": 1,
+    "explanation": "Una transacción READ ONLY garantiza un snapshot consistente durante toda su duración, aunque otras transacciones modifiquen los datos mientras tanto.",
+    "source": "sql-oracle-guide.md"
+  },
+  {
+    "id": "oracle-148",
+    "category": "sql-oracle",
+    "topic": "TCL: control de transacciones",
+    "question": "¿Qué hace `SET TRANSACTION ISOLATION LEVEL SERIALIZABLE;` respecto al nivel por defecto READ COMMITTED?",
+    "options": [
+      "Permite lecturas sucias (dirty reads) que READ COMMITTED no permite",
+      "Hace que la transacción falle si otra transacción concurrente modifica las mismas filas que esta también intenta modificar, en vez de simplemente esperarlas",
+      "Hace que la transacción espere automáticamente a que la otra transacción concurrente termine, igual que READ COMMITTED",
+      "Es exactamente equivalente a READ COMMITTED, solo cambia el nombre"
+    ],
+    "correctIndex": 1,
+    "explanation": "SERIALIZABLE es más estricto: si hay conflicto con otra transacción concurrente sobre las mismas filas, la transacción falla en vez de esperar.",
+    "source": "sql-oracle-guide.md"
+  },
+  {
+    "id": "oracle-149",
+    "category": "sql-oracle",
+    "topic": "TCL: control de transacciones",
+    "question": "¿Qué implica tener AUTOCOMMIT ON activo en una herramienta cliente como SQL*Plus?",
+    "code": "-- En SQL*Plus:\nSET AUTOCOMMIT ON;",
+    "language": "sql",
+    "options": [
+      "Cada sentencia DML hace COMMIT automático inmediatamente después de ejecutarse",
+      "Ya no es posible usar ROLLBACK en ningún caso desde ese momento",
+      "Los comandos DDL dejan de hacer COMMIT automático",
+      "Es el comportamiento recomendado y por defecto en Oracle"
+    ],
+    "correctIndex": 0,
+    "explanation": "Con AUTOCOMMIT ON, cada sentencia DML se confirma automáticamente apenas se ejecuta, lo cual hay que usar con cuidado.",
+    "source": "sql-oracle-guide.md"
+  },
+  {
+    "id": "oracle-150",
+    "category": "sql-oracle",
+    "topic": "TCL: control de transacciones",
+    "question": "¿Cuál es el comportamiento recomendado y por defecto respecto a AUTOCOMMIT en herramientas cliente de Oracle?",
+    "options": [
+      "AUTOCOMMIT ON, para no olvidar confirmar los cambios",
+      "AUTOCOMMIT OFF: el desarrollador decide explícitamente cuándo confirmar los cambios",
+      "No existe la opción AUTOCOMMIT en Oracle",
+      "Depende únicamente del tipo de tabla, no es configurable"
+    ],
+    "correctIndex": 1,
+    "explanation": "El comportamiento por defecto y recomendado es AUTOCOMMIT OFF, dejando que el desarrollador decida cuándo hacer COMMIT o ROLLBACK explícitamente.",
+    "source": "sql-oracle-guide.md"
+  },
+  {
+    "id": "oracle-151",
+    "category": "sql-oracle",
+    "topic": "Índices, vistas, secuencias y diccionario de datos",
+    "question": "¿Qué estructura de datos usa típicamente un índice en Oracle para localizar filas sin recorrer la tabla completa?",
+    "options": [
+      "Una tabla hash",
+      "Un árbol B-tree",
+      "Una lista enlazada",
+      "Un arreglo ordenado en memoria únicamente"
+    ],
+    "correctIndex": 1,
+    "explanation": "Un índice es generalmente un árbol B-tree que permite localizar filas sin hacer un full table scan.",
+    "source": "sql-oracle-guide.md"
+  },
+  {
+    "id": "oracle-152",
+    "category": "sql-oracle",
+    "topic": "Índices, vistas, secuencias y diccionario de datos",
+    "question": "¿Para qué tipo de consulta es más útil este índice compuesto?",
+    "code": "CREATE INDEX idx_empleados_depto_salario ON empleados (id_departamento, salario);",
+    "language": "sql",
+    "options": [
+      "Para consultas que filtran solo por salario, sin id_departamento",
+      "Para consultas que filtran por id_departamento (la primera columna del índice), opcionalmente combinado con salario",
+      "Solo es útil para consultas de agregación con SUM",
+      "No tiene ninguna utilidad práctica sobre un índice simple"
+    ],
+    "correctIndex": 1,
+    "explanation": "En un índice compuesto el orden de las columnas importa: es más eficaz cuando el filtro incluye la primera columna del índice (id_departamento).",
+    "source": "sql-oracle-guide.md"
+  },
+  {
+    "id": "oracle-153",
+    "category": "sql-oracle",
+    "topic": "Índices, vistas, secuencias y diccionario de datos",
+    "question": "¿Qué tipo de consulta puede aprovechar este índice basado en función?",
+    "code": "CREATE INDEX idx_empleados_email_lower ON empleados (LOWER(email));",
+    "language": "sql",
+    "options": [
+      "WHERE email = 'ana@empresa.com' (comparación exacta sin LOWER)",
+      "WHERE LOWER(email) = 'ana.garcia@empresa.com' (búsquedas case-insensitive)",
+      "ORDER BY email DESC únicamente",
+      "Ningún tipo de consulta, los índices basados en función no existen en Oracle"
+    ],
+    "correctIndex": 1,
+    "explanation": "Un índice basado en función permite que consultas que aplican esa misma función en el WHERE (aquí, LOWER(email)) puedan usar el índice.",
+    "source": "sql-oracle-guide.md"
+  },
+  {
+    "id": "oracle-154",
+    "category": "sql-oracle",
+    "topic": "Índices, vistas, secuencias y diccionario de datos",
+    "question": "¿En qué casos NO conviene crear un índice, según buenas prácticas generales?",
+    "options": [
+      "En columnas con muy pocos valores distintos, tablas muy pequeñas, o columnas que casi nunca se filtran",
+      "En columnas usadas frecuentemente en JOIN",
+      "En la clave primaria de una tabla grande",
+      "En columnas con muchos valores distintos y consultadas frecuentemente"
+    ],
+    "correctIndex": 0,
+    "explanation": "Indexar columnas con pocos valores distintos, tablas pequeñas, o columnas rara vez filtradas desperdicia espacio y ralentiza INSERT/UPDATE/DELETE sin beneficio real.",
+    "source": "sql-oracle-guide.md"
+  },
+  {
+    "id": "oracle-155",
+    "category": "sql-oracle",
+    "topic": "Índices, vistas, secuencias y diccionario de datos",
+    "question": "¿Qué es una vista (VIEW) en Oracle?",
+    "options": [
+      "Una copia física independiente de una tabla",
+      "Una consulta guardada que se comporta como una tabla virtual",
+      "Un tipo de índice especial",
+      "Un privilegio de sistema"
+    ],
+    "correctIndex": 1,
+    "explanation": "Una vista es una consulta guardada bajo un nombre; se comporta como una tabla virtual pero no almacena datos propios (salvo las materializadas).",
+    "source": "sql-oracle-guide.md"
+  },
+  {
+    "id": "oracle-156",
+    "category": "sql-oracle",
+    "topic": "Índices, vistas, secuencias y diccionario de datos",
+    "question": "¿Qué evita agregar la cláusula WITH READ ONLY a la definición de esta vista?",
+    "code": "CREATE VIEW vw_reporte_nomina AS\nSELECT id_departamento, SUM(salario) AS nomina_total\nFROM empleados\nGROUP BY id_departamento\nWITH READ ONLY;",
+    "language": "sql",
+    "options": [
+      "Que la vista se pueda consultar con SELECT",
+      "Que alguien intente modificar datos (INSERT/UPDATE/DELETE) 'a través' de la vista",
+      "Que la vista aparezca en el diccionario de datos",
+      "Que se pueda hacer DROP VIEW sobre ella"
+    ],
+    "correctIndex": 1,
+    "explanation": "WITH READ ONLY impide cualquier intento de modificación de datos a través de la vista, dejándola disponible solo para consulta.",
+    "source": "sql-oracle-guide.md"
+  },
+  {
+    "id": "oracle-157",
+    "category": "sql-oracle",
+    "topic": "Índices, vistas, secuencias y diccionario de datos",
+    "question": "¿En qué se diferencia una vista materializada (MATERIALIZED VIEW) de una vista normal?",
+    "options": [
+      "No hay ninguna diferencia real, solo de nombre",
+      "La vista materializada guarda físicamente el resultado de la consulta; la vista normal solo guarda la definición y se recalcula en cada consulta",
+      "Las vistas materializadas no pueden usar GROUP BY",
+      "Las vistas normales ocupan más espacio en disco que las materializadas"
+    ],
+    "correctIndex": 1,
+    "explanation": "Una vista materializada almacena físicamente los datos (útil para reportes pesados); una vista normal solo guarda la consulta y se ejecuta cada vez que se consulta.",
+    "source": "sql-oracle-guide.md"
+  },
+  {
+    "id": "oracle-158",
+    "category": "sql-oracle",
+    "topic": "Índices, vistas, secuencias y diccionario de datos",
+    "question": "¿Qué hace este bloque PL/SQL?",
+    "code": "BEGIN\n    DBMS_MVIEW.REFRESH('MV_NOMINA_DEPARTAMENTO');\nEND;\n/",
+    "language": "sql",
+    "options": [
+      "Crea una nueva vista materializada llamada MV_NOMINA_DEPARTAMENTO",
+      "Refresca manualmente los datos almacenados de la vista materializada MV_NOMINA_DEPARTAMENTO",
+      "Borra la vista materializada",
+      "Convierte una vista normal en materializada"
+    ],
+    "correctIndex": 1,
+    "explanation": "DBMS_MVIEW.REFRESH actualiza manualmente el contenido almacenado de una vista materializada para reflejar los cambios en los datos base.",
+    "source": "sql-oracle-guide.md"
+  },
+  {
+    "id": "oracle-159",
+    "category": "sql-oracle",
+    "topic": "Índices, vistas, secuencias y diccionario de datos",
+    "question": "¿Por qué Oracle usa objetos SEQUENCE en vez de un tipo de columna AUTO_INCREMENT nativo (previo a las columnas IDENTITY de 12c)?",
+    "options": [
+      "Porque las secuencias son más lentas y por eso se prefieren para pruebas",
+      "Porque Oracle no tenía un tipo de columna con auto-incremento; la secuencia es un objeto independiente de la tabla que genera valores únicos",
+      "Porque AUTO_INCREMENT no es compatible con NUMBER",
+      "Porque las secuencias solo funcionan dentro de PL/SQL, nunca en SQL puro"
+    ],
+    "correctIndex": 1,
+    "explanation": "Antes de las columnas IDENTITY, Oracle no tenía auto-incremento nativo; una SEQUENCE es un objeto de base de datos independiente que genera valores únicos consultados con NEXTVAL/CURRVAL.",
+    "source": "sql-oracle-guide.md"
+  },
+  {
+    "id": "oracle-160",
+    "category": "sql-oracle",
+    "topic": "Índices, vistas, secuencias y diccionario de datos",
+    "question": "¿Qué hace la cláusula CYCLE en esta secuencia?",
+    "code": "CREATE SEQUENCE seq_tickets\n    START WITH 1\n    INCREMENT BY 1\n    MAXVALUE 999999\n    CYCLE\n    CACHE 20;",
+    "language": "sql",
+    "options": [
+      "Hace que la secuencia genere siempre el mismo valor",
+      "Hace que, al llegar al valor máximo, la secuencia vuelva a empezar desde el mínimo en vez de fallar",
+      "Reinicia la secuencia cada vez que se hace COMMIT",
+      "Impide que la secuencia se use más de una vez por sesión"
+    ],
+    "correctIndex": 1,
+    "explanation": "CYCLE hace que, al alcanzar MAXVALUE, la secuencia reinicie desde el valor mínimo en vez de generar un error.",
+    "source": "sql-oracle-guide.md"
+  },
+  {
+    "id": "oracle-161",
+    "category": "sql-oracle",
+    "topic": "Índices, vistas, secuencias y diccionario de datos",
+    "question": "¿Cuál es la diferencia entre GENERATED ALWAYS AS IDENTITY y GENERATED BY DEFAULT AS IDENTITY en una columna?",
+    "options": [
+      "Son exactamente equivalentes",
+      "ALWAYS no permite insertar un valor manual para esa columna; BY DEFAULT sí permite insertar un valor manual si hace falta",
+      "BY DEFAULT no genera valores automáticos nunca",
+      "ALWAYS solo funciona con NUMBER; BY DEFAULT con cualquier tipo"
+    ],
+    "correctIndex": 1,
+    "explanation": "GENERATED ALWAYS AS IDENTITY obliga a usar el valor generado automáticamente; GENERATED BY DEFAULT AS IDENTITY permite especificar un valor manual cuando sea necesario (ej. datos migrados).",
+    "source": "sql-oracle-guide.md"
+  },
+  {
+    "id": "oracle-162",
+    "category": "sql-oracle",
+    "topic": "Índices, vistas, secuencias y diccionario de datos",
+    "question": "¿Para qué sirve un SYNONYM en Oracle?",
+    "options": [
+      "Para crear una copia física de una tabla",
+      "Para crear un alias (nombre alternativo) hacia otro objeto, propio o de otro schema, incluso de forma pública para todos los usuarios",
+      "Para definir restricciones CHECK reutilizables",
+      "Para versionar cambios de estructura de una tabla"
+    ],
+    "correctIndex": 1,
+    "explanation": "CREATE SYNONYM crea un alias corto o alternativo hacia otro objeto; puede ser privado, apuntar a otro schema, o público (visible para todos).",
+    "source": "sql-oracle-guide.md"
+  },
+  {
+    "id": "oracle-163",
+    "category": "sql-oracle",
+    "topic": "Índices, vistas, secuencias y diccionario de datos",
+    "question": "¿Cuál es la diferencia entre las vistas del diccionario de datos con prefijo USER_*, ALL_* y DBA_*?",
+    "options": [
+      "USER_* muestra todos los objetos de la base; DBA_* solo los propios",
+      "USER_* muestra objetos propios; ALL_* muestra objetos propios más aquellos a los que se tiene acceso otorgado; DBA_* muestra todos los objetos de la base y requiere privilegios de administrador",
+      "Los tres prefijos son sinónimos exactos",
+      "ALL_* solo existe para tablas, no para otros objetos"
+    ],
+    "correctIndex": 1,
+    "explanation": "USER_* limita el alcance al propio schema; ALL_* añade objetos con privilegios otorgados; DBA_* muestra todo el catálogo, requiriendo privilegios de administrador.",
+    "source": "sql-oracle-guide.md"
+  },
+  {
+    "id": "oracle-164",
+    "category": "sql-oracle",
+    "topic": "Índices, vistas, secuencias y diccionario de datos",
+    "question": "En el resultado de user_constraints, ¿qué significa que constraint_type valga 'R'?",
+    "code": "SELECT constraint_name, constraint_type, search_condition\nFROM user_constraints\nWHERE table_name = 'EMPLEADOS';\n-- constraint_type: P=Primary Key, R=Foreign Key (References), U=Unique, C=Check",
+    "language": "sql",
+    "options": [
+      "Que es una restricción PRIMARY KEY",
+      "Que es una restricción FOREIGN KEY (References)",
+      "Que es una restricción CHECK",
+      "Que es una restricción UNIQUE"
+    ],
+    "correctIndex": 1,
+    "explanation": "En user_constraints, 'R' corresponde a Foreign Key (References); 'P' es Primary Key, 'U' es Unique y 'C' es Check.",
+    "source": "sql-oracle-guide.md"
+  },
+  {
+    "id": "oracle-165",
+    "category": "sql-oracle",
+    "topic": "PL/SQL: bloques, procedimientos y funciones",
+    "question": "¿Qué es PL/SQL?",
+    "options": [
+      "Un motor de base de datos alternativo a Oracle",
+      "El lenguaje procedural propio de Oracle que extiende SQL con variables, control de flujo y estructuras reutilizables",
+      "Un tipo de índice especializado",
+      "Un sinónimo de SQL estándar sin diferencias"
+    ],
+    "correctIndex": 1,
+    "explanation": "PL/SQL es el lenguaje procedural embebido de Oracle, que añade variables, IF, LOOP y estructuras reutilizables sobre el SQL base.",
+    "source": "sql-oracle-guide.md"
+  },
+  {
+    "id": "oracle-166",
+    "category": "sql-oracle",
+    "topic": "PL/SQL: bloques, procedimientos y funciones",
+    "question": "¿Cuál es la unidad más básica de PL/SQL, que no requiere declararse con un nombre ni guardarse en la base de datos?",
+    "options": [
+      "El paquete (PACKAGE)",
+      "El bloque anónimo (BEGIN ... END;)",
+      "El trigger",
+      "La vista materializada"
+    ],
+    "correctIndex": 1,
+    "explanation": "El bloque anónimo, delimitado por BEGIN ... END;, es la unidad más básica de PL/SQL y se puede ejecutar directamente sin guardarse como objeto de base de datos.",
+    "source": "sql-oracle-guide.md"
+  },
+  {
+    "id": "oracle-167",
+    "category": "sql-oracle",
+    "topic": "PL/SQL: bloques, procedimientos y funciones",
+    "question": "¿Qué hace DBMS_OUTPUT.PUT_LINE en este bloque?",
+    "code": "BEGIN\n    DBMS_OUTPUT.PUT_LINE('Empleados totales: ' || (SELECT COUNT(*) FROM empleados));\nEND;\n/",
+    "language": "sql",
+    "options": [
+      "Inserta una fila en una tabla de log",
+      "Imprime una línea de texto en la salida de la sesión (usado típicamente para depuración)",
+      "Lanza una excepción personalizada",
+      "Crea una nueva tabla llamada empleados_totales"
+    ],
+    "correctIndex": 1,
+    "explanation": "DBMS_OUTPUT.PUT_LINE escribe una línea de texto en el buffer de salida de la sesión, comúnmente usado para depurar bloques PL/SQL.",
+    "source": "sql-oracle-guide.md"
+  },
+  {
+    "id": "oracle-168",
+    "category": "sql-oracle",
+    "topic": "PL/SQL: bloques, procedimientos y funciones",
+    "question": "¿Qué significa el modo de parámetro IN en p_id_departamento y p_porcentaje?",
+    "code": "CREATE OR REPLACE PROCEDURE aumentar_salario (\n    p_id_departamento IN NUMBER,\n    p_porcentaje      IN NUMBER\n) IS\nBEGIN\n    UPDATE empleados\n    SET salario = salario * (1 + p_porcentaje / 100)\n    WHERE id_departamento = p_id_departamento;\n\n    COMMIT;\nEND;\n/",
+    "language": "sql",
+    "options": [
+      "Que el procedimiento puede modificar libremente el valor dentro del cuerpo, pero el cambio nunca se refleja en quien llamó al procedimiento",
+      "Que el procedimiento solo puede leer el valor recibido; no puede devolver un valor modificado a través de ese parámetro",
+      "Que el parámetro es obligatorio solo en la primera llamada",
+      "Que el parámetro debe ser siempre de tipo NUMBER"
+    ],
+    "correctIndex": 1,
+    "explanation": "Los parámetros IN son de solo lectura dentro del procedimiento; para devolver valores modificados se usarían parámetros OUT o IN OUT.",
+    "source": "sql-oracle-guide.md"
+  },
+  {
+    "id": "oracle-169",
+    "category": "sql-oracle",
+    "topic": "PL/SQL: bloques, procedimientos y funciones",
+    "question": "¿Cuál es la diferencia principal entre un procedimiento (PROCEDURE) y una función (FUNCTION) en PL/SQL?",
+    "options": [
+      "No hay ninguna diferencia, son sinónimos",
+      "Una función siempre devuelve un valor con RETURN y puede usarse dentro de una expresión SQL; un procedimiento no devuelve un valor de esa forma",
+      "Un procedimiento siempre devuelve un valor; una función nunca",
+      "Las funciones no pueden recibir parámetros"
+    ],
+    "correctIndex": 1,
+    "explanation": "Una FUNCTION declara un tipo de RETURN y devuelve un valor utilizable en una expresión SQL (ej. SELECT funcion(...) FROM dual); un PROCEDURE se ejecuta como una sentencia, sin devolver un valor de esa forma.",
+    "source": "sql-oracle-guide.md"
+  },
+  {
+    "id": "oracle-170",
+    "category": "sql-oracle",
+    "topic": "PL/SQL: bloques, procedimientos y funciones",
+    "question": "¿Por qué se usa NVL(SUM(salario), 0) en vez de solo SUM(salario)?",
+    "code": "CREATE OR REPLACE FUNCTION nomina_total_departamento (p_id_departamento IN NUMBER)\nRETURN NUMBER IS\n    v_total NUMBER;\nBEGIN\n    SELECT NVL(SUM(salario), 0) INTO v_total\n    FROM empleados\n    WHERE id_departamento = p_id_departamento;\n\n    RETURN v_total;\nEND;\n/",
+    "language": "sql",
+    "options": [
+      "Porque SUM siempre requiere un segundo argumento en PL/SQL",
+      "Porque SUM devuelve NULL si no hay ninguna fila que coincida con el WHERE, y NVL asegura que v_total sea 0 en ese caso en vez de NULL",
+      "Porque NVL mejora el rendimiento de la consulta",
+      "No hay ninguna razón real, es solo estilo"
+    ],
+    "correctIndex": 1,
+    "explanation": "SUM sobre un conjunto vacío devuelve NULL; NVL(..., 0) garantiza que la función devuelva 0 en vez de NULL cuando el departamento no tiene empleados.",
+    "source": "sql-oracle-guide.md"
+  },
+  {
+    "id": "oracle-171",
+    "category": "sql-oracle",
+    "topic": "PL/SQL: bloques, procedimientos y funciones",
+    "question": "¿Qué hace la sintaxis `SELECT ... INTO variable FROM ...` dentro de un bloque PL/SQL?",
+    "options": [
+      "Inserta el resultado de la consulta en una nueva tabla",
+      "Ejecuta una consulta que debe devolver exactamente una fila y almacena su resultado en la variable indicada",
+      "Convierte automáticamente el resultado en un cursor",
+      "Solo funciona con funciones de agregación"
+    ],
+    "correctIndex": 1,
+    "explanation": "SELECT ... INTO asigna el resultado de una consulta de una sola fila a una o más variables PL/SQL; si devuelve más o menos de una fila, lanza una excepción.",
+    "source": "sql-oracle-guide.md"
+  },
+  {
+    "id": "oracle-172",
+    "category": "sql-oracle",
+    "topic": "PL/SQL: bloques, procedimientos y funciones",
+    "question": "¿Cuándo se ejecuta este trigger?",
+    "code": "CREATE OR REPLACE TRIGGER trg_auditoria_salario\nAFTER UPDATE OF salario ON empleados\nFOR EACH ROW\nBEGIN\n    INSERT INTO auditoria_salarios (id_empleado, salario_anterior, salario_nuevo)\n    VALUES (:OLD.id_empleado, :OLD.salario, :NEW.salario);\nEND;\n/",
+    "language": "sql",
+    "options": [
+      "Antes de que se actualice cualquier columna de empleados",
+      "Después de que se actualice la columna salario de la tabla empleados, una vez por cada fila afectada",
+      "Solo una vez, sin importar cuántas filas fueron afectadas",
+      "Cuando se elimina un empleado"
+    ],
+    "correctIndex": 1,
+    "explanation": "AFTER UPDATE OF salario ON empleados FOR EACH ROW dispara el trigger después de cada actualización de la columna salario, una vez por fila afectada.",
+    "source": "sql-oracle-guide.md"
+  },
+  {
+    "id": "oracle-173",
+    "category": "sql-oracle",
+    "topic": "PL/SQL: bloques, procedimientos y funciones",
+    "question": "¿Qué representan los calificadores :OLD y :NEW dentro de un trigger FOR EACH ROW?",
+    "options": [
+      "El nombre de la tabla antes y después del cambio",
+      ":OLD contiene los valores de la fila antes del cambio y :NEW los valores después del cambio",
+      "Son sinónimos, ambos representan el mismo valor",
+      "Solo existen en triggers de tipo BEFORE DELETE"
+    ],
+    "correctIndex": 1,
+    "explanation": ":OLD referencia los valores de la fila antes de la operación DML, y :NEW los valores después, disponibles dentro de un trigger FOR EACH ROW.",
+    "source": "sql-oracle-guide.md"
+  },
+  {
+    "id": "oracle-174",
+    "category": "sql-oracle",
+    "topic": "PL/SQL: bloques, procedimientos y funciones",
+    "question": "¿Qué diferencia hay entre un trigger BEFORE y uno AFTER respecto al momento en que se ejecutan sobre la operación DML que los dispara?",
+    "options": [
+      "No hay diferencia, ambos se ejecutan en el mismo momento",
+      "BEFORE se ejecuta antes de que la operación DML se aplique realmente; AFTER se ejecuta después de que ya se aplicó",
+      "AFTER siempre se ejecuta antes que BEFORE",
+      "BEFORE solo puede usarse con INSERT; AFTER solo con UPDATE"
+    ],
+    "correctIndex": 1,
+    "explanation": "Un trigger BEFORE se dispara antes de aplicar el cambio (útil para validar o modificar valores antes de guardarlos); AFTER se dispara una vez ya aplicado (útil para auditoría).",
+    "source": "sql-oracle-guide.md"
+  },
+  {
+    "id": "oracle-175",
+    "category": "sql-oracle",
+    "topic": "PL/SQL: bloques, procedimientos y funciones",
+    "question": "¿Qué agrupa un PACKAGE en PL/SQL?",
+    "options": [
+      "Solo tablas y vistas relacionadas",
+      "Procedimientos, funciones y otros elementos relacionados, organizados en una especificación (interfaz pública) y un cuerpo (implementación)",
+      "Únicamente triggers de auditoría",
+      "Roles y privilegios de un usuario"
+    ],
+    "correctIndex": 1,
+    "explanation": "Un PACKAGE agrupa procedimientos y funciones relacionadas en dos partes: la especificación (PACKAGE) declara la interfaz pública, y el PACKAGE BODY implementa el código.",
+    "source": "sql-oracle-guide.md"
+  },
+  {
+    "id": "oracle-176",
+    "category": "sql-oracle",
+    "topic": "PL/SQL: bloques, procedimientos y funciones",
+    "question": "¿Qué es exactamente lo que se está creando con esta sentencia?",
+    "code": "CREATE OR REPLACE PACKAGE pkg_rrhh AS\n    PROCEDURE aumentar_salario(p_id_departamento NUMBER, p_porcentaje NUMBER);\n    FUNCTION nomina_total(p_id_departamento NUMBER) RETURN NUMBER;\nEND pkg_rrhh;\n/",
+    "language": "sql",
+    "options": [
+      "La implementación completa del procedimiento y la función",
+      "La especificación (spec) del paquete pkg_rrhh, que declara la interfaz pública sin implementar el código",
+      "Un trigger asociado al paquete",
+      "Una tabla llamada pkg_rrhh"
+    ],
+    "correctIndex": 1,
+    "explanation": "Esto es solo la especificación del paquete: declara qué procedimientos y funciones expone públicamente, sin incluir su implementación (eso va en el PACKAGE BODY).",
+    "source": "sql-oracle-guide.md"
+  },
+  {
+    "id": "oracle-177",
+    "category": "sql-oracle",
+    "topic": "PL/SQL: bloques, procedimientos y funciones",
+    "question": "¿En qué parte de un PACKAGE va el código real (la implementación) de los procedimientos y funciones declarados en la especificación?",
+    "options": [
+      "En el PACKAGE BODY",
+      "En la especificación (PACKAGE), junto a las declaraciones",
+      "En un procedimiento standalone fuera del paquete, referenciado por nombre",
+      "En un trigger asociado al paquete"
+    ],
+    "correctIndex": 0,
+    "explanation": "El PACKAGE BODY contiene la implementación real del código; la especificación (PACKAGE) solo declara la interfaz pública, sin código ejecutable.",
+    "source": "sql-oracle-guide.md"
+  },
+  {
+    "id": "oracle-178",
+    "category": "sql-oracle",
+    "topic": "PL/SQL: bloques, procedimientos y funciones",
+    "question": "¿Qué comprueba la condición `IF SQL%ROWCOUNT = 0`, evaluada justo después del UPDATE?",
+    "code": "CREATE OR REPLACE PROCEDURE cambiar_departamento (\n    p_id_empleado           IN NUMBER,\n    p_id_departamento_nuevo IN NUMBER,\n    p_id_departamento_viejo IN NUMBER\n) IS\nBEGIN\n    DELETE FROM empleado_proyecto\n    WHERE id_empleado = p_id_empleado\n      AND id_proyecto IN (SELECT id_proyecto FROM proyectos WHERE id_departamento = p_id_departamento_viejo);\n\n    UPDATE empleados\n    SET id_departamento = p_id_departamento_nuevo\n    WHERE id_empleado = p_id_empleado;\n\n    IF SQL%ROWCOUNT = 0 THEN\n        RAISE_APPLICATION_ERROR(-20001, 'No se encontró el empleado indicado');\n    END IF;\n\n    COMMIT;\nEXCEPTION\n    WHEN OTHERS THEN\n        ROLLBACK;\n        RAISE;\nEND;\n/",
+    "language": "sql",
+    "options": [
+      "Si el DELETE anterior no afectó ninguna fila",
+      "Si el UPDATE anterior no afectó ninguna fila, es decir, si el empleado indicado no existía",
+      "Si la tabla empleados está vacía",
+      "Si ocurrió algún error de sintaxis en el procedimiento"
+    ],
+    "correctIndex": 1,
+    "explanation": "SQL%ROWCOUNT refleja el número de filas afectadas por la última sentencia DML implícita (aquí, el UPDATE); si es 0, el empleado indicado no existía.",
+    "source": "sql-oracle-guide.md"
+  },
+  {
+    "id": "oracle-179",
+    "category": "sql-oracle",
+    "topic": "PL/SQL: bloques, procedimientos y funciones",
+    "question": "En el procedimiento cambiar_departamento, ¿qué hace el bloque `EXCEPTION WHEN OTHERS THEN ROLLBACK; RAISE;`?",
+    "options": [
+      "Ignora silenciosamente cualquier error y continúa la ejecución",
+      "Captura cualquier excepción no manejada específicamente, deshace todos los cambios de la transacción con ROLLBACK, y vuelve a lanzar el mismo error para que quien llamó al procedimiento se entere",
+      "Confirma los cambios realizados hasta el momento del error",
+      "Solo captura errores de tipo NO_DATA_FOUND"
+    ],
+    "correctIndex": 1,
+    "explanation": "WHEN OTHERS captura cualquier excepción no capturada antes; ROLLBACK deshace los cambios pendientes y RAISE relanza el mismo error hacia quien invocó el procedimiento.",
+    "source": "sql-oracle-guide.md"
+  },
+  {
+    "id": "oracle-180",
+    "category": "sql-oracle",
+    "topic": "PL/SQL: bloques, procedimientos y funciones",
+    "question": "¿Qué hace la llamada RAISE_APPLICATION_ERROR(-20001, 'No se encontró el empleado indicado')?",
+    "options": [
+      "Registra un mensaje informativo sin detener la ejecución",
+      "Lanza un error personalizado definido por el desarrollador, con un código entre -20000 y -20999 y un mensaje propio",
+      "Reinicia la transacción actual",
+      "Solo funciona dentro de un trigger, no en un procedimiento"
+    ],
+    "correctIndex": 1,
+    "explanation": "RAISE_APPLICATION_ERROR permite lanzar errores personalizados con un código en el rango reservado -20000 a -20999 y un mensaje definido por el desarrollador.",
+    "source": "sql-oracle-guide.md"
+  },
+  {
+    "id": "oracle-181",
+    "category": "sql-oracle",
+    "topic": "PL/SQL: bloques, procedimientos y funciones",
+    "question": "¿Por qué el procedimiento cambiar_departamento agrupa el DELETE y el UPDATE dentro del mismo bloque, con un único COMMIT y manejo de excepciones?",
+    "options": [
+      "Por una convención de estilo sin efecto real en el comportamiento",
+      "Para garantizar que ambas operaciones se traten como una única unidad atómica: si algo falla, ningún cambio parcial queda aplicado",
+      "Porque Oracle no permite más de una sentencia DML por procedimiento",
+      "Para mejorar el rendimiento evitando el uso de índices"
+    ],
+    "correctIndex": 1,
+    "explanation": "Agrupar las operaciones con manejo de excepciones y un solo COMMIT/ROLLBACK asegura atomicidad: o se aplican ambos cambios, o ninguno, ante cualquier fallo.",
+    "source": "sql-oracle-guide.md"
+  },
+  {
+    "id": "oracle-182",
+    "category": "sql-oracle",
+    "topic": "PL/SQL: bloques, procedimientos y funciones",
+    "question": "¿Qué está ocurriendo en este bloque PL/SQL?",
+    "code": "BEGIN\n    aumentar_salario(10, 5);\nEND;\n/",
+    "language": "sql",
+    "options": [
+      "Se está definiendo el procedimiento aumentar_salario por primera vez",
+      "Se está invocando (ejecutando) el procedimiento aumentar_salario ya creado, pasándole los parámetros 10 y 5",
+      "Se está eliminando el procedimiento aumentar_salario",
+      "Es un bloque inválido porque los procedimientos no se pueden llamar desde un BEGIN...END"
+    ],
+    "correctIndex": 1,
+    "explanation": "Dentro de un bloque anónimo BEGIN...END, se invoca al procedimiento ya creado como una sentencia, pasando los argumentos posicionales correspondientes a sus parámetros IN.",
+    "source": "sql-oracle-guide.md"
+  }
+]
